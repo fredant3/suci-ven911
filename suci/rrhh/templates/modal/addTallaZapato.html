@@ -1,0 +1,24 @@
+<div id="addTallaZapato" class="modal">
+    <div class="modal-content">
+        <span class="close" style="margin-top: -10px;">&times;</span>
+        <div class="modal-header">
+            <h2>Agregar Talla Zapato</h2>
+        </div>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Talla Zapato</label>
+                    <br>
+                    <input type="text" class="form-group" name="{{ form.talla_zapato.name}}" value=""
+                        placeholder="Ingrese una talla">
+                </div>
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="enviar" class="btn" style="width: 90px;">
+            </div>
+        </form>
+    </div>
+</div>

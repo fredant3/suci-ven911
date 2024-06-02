@@ -1,0 +1,155 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+
+{% block title %}Redes Sociales{% endblock %}
+
+<!-- ========s======= Items del Menu ================ -->
+{% block menuItems %}
+{% include "gc/menu-items.html" %}
+{% endblock %}
+
+<!-- ========================= Menú usuario ==================== -->
+{% block mainContentHeaderTitle %}Redes Sociales{% endblock %}
+
+<!-- =========== Formulario de Busqueda =========  -->
+{% block seacrhForm %}
+<form method="GET" action="{% url 'gc-filter-social-media-account' accion='consultar' %}">
+  <div class="searh--box">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" name="search" placeholder="Buscar">
+    <button type="submit" class="btn">Consultar</button>
+    <button type="button" class="btn"
+      onclick="location.href=`{% url 'gc-listing-social-media-account' %}`">Limpiar</button>
+  </div>
+</form>
+{% endblock %}
+
+<!-- =========== Botones de acciones adicionales =========  -->
+{% block additionalButtons %}
+<button data-gc-sma-add class="bt">Agregar</button>
+{% endblock %}
+
+<!-- =========== Paginador =========  -->
+{% block paginate %}
+<center>
+  <section class="ulpgcds-pager">
+    <ul class="ulpgcds-pager-ul">
+      {%if proyectoo.has_previous %} {# whether the previous page exists #}
+      <li class="ulpgcds-pageritem ulpgcds-pageritem--prev">
+        <a class="pagination__link" href="?page={{proyectoo.previous_page_number}}"
+          title="Ir a la página anterior"><span class="visually-hidden">Anterior</span></a>
+      </li>
+      {% endif %}
+
+      {% for i in proyectoo.paginator.page_range %}
+      {% if proyectoo.number == i %}
+      <li class="ulpgcds-pageritem ulpgcds-pageritem--is-active">
+        <a class="pagination__link" href="?page={{proyectoo.number}}">{{ i }}</a>
+      </li>
+      {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+
+      {%if proyectoo.has_next %} {# whether the next page exists #}
+      <li class="ulpgcds-pageritem ulpgcds-pageritem--next">
+        <a class="pagination__link" href="?page={{proyectoo.next_page_number}}" title="Ir a la página siguiente">
+          <span class="visually-hidden">Siguiente</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </section>
+</center>
+{% endblock %}
+
+{% block content %}
+<!-- ===================== Tablas ====================  -->
+<div class="tabular--wrapper" style="margin-top: 10px; padding-top: 10px;">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Red Social</th>
+          <th>Usuario</th>
+          <th>Direccion Web</th>
+          <th>Seguidores</th>
+          <th>Quien administra la red</th>
+          <th>Publicaciones</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for socialMedia in socialMediaAccount %}
+        <tr>
+          <td><strong>{{ socialMedia.id }}</strong></td>
+          <td>{{ socialMedia.platform }}</td>
+          <td>{{ socialMedia.username }}</td>
+          <td>{{ socialMedia.url }}</td>
+          <td>{{ socialMedia.followers }}</td>
+          <td>{{ socialMedia.responsible }}</td>
+          <td>{{ socialMedia.publications }}</td>
+          <td>
+            <a href="#" data-gc-sma-id="{{ socialMedia.id }}" data-gc-sma="{{ socialMedia }}" class="btn-update"
+              style="color: black;">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </a>&nbsp;&nbsp;&nbsp;
+
+            <a href="#" id="myBtnn2{{ socialMedia.id }}" style="color: black;"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+<!-- =========== Modal =========  -->
+{% block extraContent %}
+{% include "gc/modal-form.html" %}
+{% endblock %}
+
+<!-- <div id="myModall2{{ archivo.id }}" class="modal">
+    <div class="modal-content">
+      <span class="closee2{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
+      <div class="modal-header">
+        <form action="proyecto/delete/{{ archivo.id }}" method="POST">
+          {% csrf_token %}
+          <br>
+          <div align="center">
+            <h2>¿Estás seguro de eliminar esta Red Social?</h2>
+          </div>
+          <br><br>
+          <div align="center">
+            <input type="submit" class="bnt" value="Eliminar" style="width: 90px;">
+          </div>
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <script>
+    var modall2{{ archivo.id }} = document.getElementById("myModall2{{ archivo.id }}");
+    var btnn2{{ archivo.id }} = document.getElementById("myBtnn2{{ archivo.id }}");
+    var spann2{{ archivo.id }} = document.getElementsByClassName("closee2{{ archivo.id }}")[0];
+                      btnn2{ { archivo.id } }.onclick = function () {
+                          modall2{ { archivo.id } }.style.visibility = "visible";
+                          modall2{ { archivo.id } }.style.opacity = 1;
+    }
+
+                      spann2{ { archivo.id } }.onclick = function () {
+                          modall2{ { archivo.id } }.style.visibility = "hidden";
+                          modall2{ { archivo.id } }.style.opacity = 0;
+    }
+
+    window.onclick = function (event) {
+      if (event.target == modall{ { archivo.id } }) {
+                              modall2{ { archivo.id } }.style.visibility = "hidden";
+                              modall2{ { archivo.id } }.style.opacity = 0;
+      }
+    }
+  </script> -->

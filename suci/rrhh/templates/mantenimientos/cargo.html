@@ -1,0 +1,84 @@
+{% extends "mantenimientos/base.html" %}
+
+{% block title %} S.U.C.I | Mantenimiento/Cargo {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="main--content">
+    <div class="header--wrapper">
+        <div class="header--title">
+            <h2>Mantenimiento /<small> Cargo </small></h2>
+        </div>
+        <div class="user--info">
+            <div class="searh--box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar" />
+            </div>
+            <img src="{% static 'img/ven911.jpg' %}">
+            <h2 class="title">V{{request.user.username}}</h2>
+        </div>
+    </div>
+
+    <div align="right" style="margin-right: 100px; margin-bottom: -10px;">
+        <button id="myBtnAddCargo" class="btn">Agregar</button>
+    </div>
+
+
+    <div class="tabular--wrapper">
+        <h3 class="main--title">Recientes</h3>
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cargo</th>
+                        <th>Estatus</th>
+                        <th>Acciones</th>
+                    </tr>
+                <tbody>
+                    {% for mantCargo in cargo %}
+                    <tr>
+                        <td>{{ mantCargo.cargo }}</td>
+                        <td>Activo</td>
+                        <td><i class="fa-solid fa-trash-can"></i></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!--    INCLUYE MODAL PARA AGREGAR, MODIFICAR, ELIMINAR PERSONAL     -->
+    {% include "modal/addCargo.html" %}
+
+
+    <script>
+
+        //  JAVASCRIPT PARA ADD CARGO
+        var modal = document.getElementById("addcargo");
+        var btn = document.getElementById("myBtnAddCargo");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () {
+            modal.style.visibility = "visible";
+            modal.style.opacity = 1;
+        }
+
+        span.onclick = function () {
+            modal.style.visibility = "hidden";
+            modal.style.opacity = 0;
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.visibility = "hidden";
+                modal.style.opacity = 0;
+            }
+        }
+
+    </script>
+
+
+
+    {% endblock %}

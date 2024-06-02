@@ -1,0 +1,416 @@
+<div id="addpersonal" class="modal">
+    <div class="modal-content">
+        <span class="close" style="margin-top: -10px;">&times;</span>
+        <div class="modal-header">
+            <h2>Agregar Personal</h2>
+        </div>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Nombre</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form.name.html_name}}"
+                        placeholder="Ingrese el nombre" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Apellido</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form.apellido.html_name}}"
+                        placeholder="Ingrese el apellido" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Nacionailidad</label>
+                    <select class='form-control' name="{{form.nacionalidad.html_name}}" required>
+                        <option value="">Seleccione una nacionalidad</option>
+                        {% for nacionalidad in nacionalidades %}
+                        <option value="{{ nacionalidad.nacionalidad }}">{{ nacionalidad.nacionalidad }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Cédula</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form.cedula.html_name}}"
+                        placeholder="Ingrese la cédula" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Sexo</label>
+                    <select class='form-control' name="{{form.sexo.html_name}}" required>
+                        <option value="">Seleccione un sexo </option>
+                        {% for sexo in sexos %}
+                        <option value="{{ sexo.sexo }}">{{ sexo.sexo }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>fecha_nac</label>
+                    <br>
+                    <input type="date" class="form-control" name="{{form.fecha_nac.html_name}}"
+                        placeholder="Ingrese la fecha de nacimiento" required>
+                </div>
+            </div>
+
+            <div class="form-items">
+                <label>Edad</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.edad.html_name}}" placeholder="Ingrese la edad"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Telefono</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form.telefono.html_name}}"
+                        placeholder="Ingrese su telefono" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Estado Civil</label>
+                    <select class='form-control' name="{{form.estado_civil.html_name}}" required>
+                        <option value="">Seleccione un Estado Civil</option>
+                        {% for estado in estados %}
+                        <option value="{{ estado.estado_civil }}">{{ estado.estado_civil }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-items">
+                <label>Conyugue</label>
+                <select class='form-control' id="conyugue" name="{{form.conyugue.html_name}}" onchange="MostrarConyugue();">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+            <div class="form-items" id="conyugue1" style="display: none;">
+                <label>Cédula Conyugue</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.cedula_conyugue.html_name}}"
+                    placeholder="Ingrese las edades" required>
+            </div>
+
+            <div class="form-items">
+                <label>Tipo de Sangre</label>
+                <select class='form-control' name="{{form.tipo_sangre.html_name}}">
+                    <option value="">Seleccione un Tipo de Sangre</option>
+                    {% for sangre in sangres %}
+                    <option value="{{ sangre.tipo_sangre }}">{{ sangre.tipo_sangre }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>Discapacitado</label>
+                <select class='form-control' name="{{form.discapacitado.html_name}}">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>Talla de Camisa</label>
+                <select class='form-control' name="{{form.talla_camisa.html_name}}">
+                    <option value="">Seleccione una talla de camisa</option>
+                    {% for tallaCamisa in talla_camisa %}
+                    <option value="{{ tallaCamisa.talla_camisa }}">{{ tallaCamisa.talla_camisa }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>Talla de Pantalón</label>
+                <select class='form-control' name="{{form.talla_pantalon.html_name}}">
+                    <option value="">Seleccione una talla de pantalon</option>
+                    {% for tallaPantalon in talla_pantalon %}
+                    <option value="{{ tallaPantalon.talla_pantalon }}">{{ tallaPantalon.talla_pantalon }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>Talla de Zapatos</label>
+                <select class='form-control' name="{{form.talla_zapato.html_name}}">
+                    <option value="">Seleccione una talla de pantalon</option>
+                    {% for tallaZapatos in talla_zapato %}
+                    <option value="{{ tallaZapatos.talla_zapato }}">{{ tallaZapatos.talla_zapato }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>Dirección</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.direccion.html_name}}"
+                    placeholder="Ingrese la dirección" required>
+            </div>
+            <div class="form-items">
+                <label>Número de Cuenta</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.nro_cuenta.html_name}}"
+                    placeholder="Ingrese el número de cuenta" required>
+            </div>
+            <div class="form-items">
+                <label>Correo Electrónico</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.email.html_name}}"
+                    placeholder="Ingrese el correo electrónico" required>
+            </div>
+            <div class="form-items">
+                <label>Grado de Instrucción</label>
+                <select class='form-control' name="{{form.grado_instruccion.html_name}}">
+                    <option value="">Seleccione un grado de instrucción</option>
+                    {% for gradoInstruccion in grado_instruccion %}
+                    <option value="{{ gradoInstruccion.grado_instruccion }}">{{ gradoInstruccion.grado_instruccion }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>¿Estudia actualmente?</label>
+                <select class='form-control' name="{{form.estudias.html_name}}">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>Comisión de Servicio</label>
+                <select class='form-control' name="{{form.comision_servicio.html_name}}">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>PNB</label>
+                <select class='form-control' name="{{form.pnb.html_name}}">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Tipo Personal</label>
+                    <select class='form-control' name="{{form.tipo_personal.html_name}}">
+                        <option value="">Seleccione un tipo de personal</option>
+                        {% for tipoPersonal in tipo_personal %}
+                        <option value="{{ tipoPersonal.tipo_personal }}">{{ tipoPersonal.tipo_personal }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Cargo</label>
+                    <select class='form-control' name="{{form.cargo.html_name}}">
+                        <option value="">Seleccione el cargo</option>
+                        {% for cargo in cargos %}
+                        <option value="{{ cargo.cargo }}">{{ cargo.cargo }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-items">
+                <label>Fecha de ingreso al 911</label>
+                <br>
+                <input type="date" class="form-control" name="{{form.fecha_ingreso_911.html_name}}"
+                    placeholder="Ingrese la fecha de ingreso al VEN911" required>
+            </div>
+            <div class="form-items">
+                <label>Fecha de Ingreso en la APN</label>
+                <br>
+                <input type="date" class="form-control" name="{{form.fecha_ingreso_apn.html_name}}"
+                    placeholder="Ingrese la fecha de ingreso en la APN" required>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label>Contratos</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form.contratos.html_name}}"
+                        placeholder="Ingrese si posee contratos" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Departamento</label>
+                    <select class='form-control' name="{{form.departamento.html_name}}">
+                        <option value="">Seleccione el departamento</option>
+                        {% for departamento in departamentos %}
+                        <option value="{{ departamento.departamento }}">{{ departamento.departamento }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-items">
+                <label>Niños menores de 12 años</label>
+                <select class="form-control" id="hijos" name="{{form.niño_menor_12_name}}" onchange="MostrarEdades1();">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="form-items" id="edades1" style="display: none;">
+                <label>Edades</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.edades1.html_name}}"
+                    placeholder="Ingrese las edades" required>
+            </div>
+
+
+            <div class="form-items">
+                <label>Hijos de 13 a 18 Años</label>
+                <select class='form-control'id="hijos2" name="{{form.hijos_13_18.html_name}}" onchange="MostrarEdades2();">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="fform-items" id="edades2" style="display: none;">
+                <label>Edades</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.edades2.html_name}}"
+                    placeholder="Ingrese las edades" required>
+            </div>
+
+            <div class="form-items">
+                <label>Niñas menores de 12 años</label>
+                <select class="form-control" id="hijos3" name="{{form.niña_menor_12_name}}" onchange="MostrarEdades3();">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+
+            <div class="form-items" id="edades3" style="display: none;">
+                <label>Edades</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.edades3.html_name}}"
+                    placeholder="Ingrese las edades" required>
+            </div>
+
+            <div class="form-items">
+                <label>Hijos con Discapacidad</label>
+                <select class='form-control' id="hijos4" name="{{form.hijos_discapacidad.html_name}}" onchange="MostrarEdades4();">
+                    <option value="true">SI</option>
+                    <option value="false" selected>NO</option>
+                </select>
+            </div>
+            <div class="form-items" id="edades4" style="display: none;">
+                <label>Edades</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.edades4.html_name}}"
+                    placeholder="Ingrese las edades" required>
+            </div>
+
+            <div class="form-items">
+                <label>Departamento</label>
+                <select class='form-control' name="{{form.sede.html_name}}">
+                    <option value="">Seleccione una sede</option>
+                    {% for sede in sedes %}
+                    <option value="{{ sede.sede }}">{{ sede.sede }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-items">
+                <label>FASMIJ</label>
+                <select class='form-control' name="{{form.fasmij.html_name}}">
+                    <option value="true" selected>SI</option>
+                    <option value="false">NO</option>
+                </select>
+            </div>
+            <div class="form-items" >
+                <label>Parentezco 1</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.parentezco1.html_name}}"
+                    placeholder="Parentezco" required>
+            </div>
+            <div class="form-items" >
+                <label>Beneficiario 1</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.beneficiario1.html_name}}"
+                    placeholder="Beneficiario" required>
+            </div>
+            <div class="form-items" >
+                <label>Cedula  1</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.cedula1.html_name}}"
+                    placeholder="Cedula" required>
+            </div>
+            <div class="form-items" >
+                <label>Direccion 1</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.direccion1.html_name}}"
+                    placeholder="Direccion" required>
+            </div>
+
+            <div class="form-items" >
+                <label>Parentezco 2</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.parentezco2.html_name}}"
+                    placeholder="Parentezco" required>
+            </div>
+            <div class="form-items" >
+                <label>Beneficiario 2</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.beneficiario2.html_name}}"
+                    placeholder="Beneficiario" required>
+            </div>
+            <div class="form-items" >
+                <label>Cedula  2</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.cedula2.html_name}}"
+                    placeholder="Cedula" required>
+            </div>
+            <div class="form-items" >
+                <label>Direccion 2</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.direccion2.html_name}}"
+                    placeholder="Direccion" required>
+            </div>
+
+            <div class="form-items" >
+                <label>Parentezco 3</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.parentezco3.html_name}}"
+                    placeholder="Parentezco" required>
+            </div>
+            <div class="form-items" >
+                <label>Beneficiario 3</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.beneficiario3.html_name}}"
+                    placeholder="Beneficiario" required>
+            </div>
+            <div class="form-items" >
+                <label>Cedula  3</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.cedula3.html_name}}"
+                    placeholder="Cedula" required>
+            </div>
+            <div class="form-items">
+                <label>Direccion 3</label>
+                <br>
+                <input type="text" class="form-control" name="{{form.direccion3.html_name}}"
+                    placeholder="Direccion" required>
+            </div>
+            <br>
+            <div align="center">
+                <input type="submit" class="btn" value="Enviar" style="width: 90px;">
+            </div>
+        </form>
+    </div>
+</div>

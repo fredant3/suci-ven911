@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<!-- ======================= Cabecera ================== -->
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Departamentos</title>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="icon" type="image/x-icon" href="{% static '/img/favicon.icon' %}">
+</head>
+<body>
+<!-- ======================= Menú Principal ================== -->
+<div class="sidebar">
+    <div class="logo"></div>
+    <ul class="menu">
+        <li class="active">
+            <a href="#">
+                <img style="width:20px; height: 30px;" src="{% static '/img/favicon.png' %}">
+                <span class="title">S.U.C.I</span>
+            </a>
+        </li>
+        <li>
+            <a href="../usuarios">
+                <i class="fa-solid fa-user"></i>
+                <span>Usuarios</span>
+            </a>
+        </li>
+        <li>
+            <a href="../departamentos">
+                <i class="fa-solid fa-house-circle-check"></i>
+                <span>Departamentos</span>
+            </a>
+        </li>
+        <li>
+            <a href="../sedes">
+                <i class="fa-solid fa-building-user"></i>
+                <span>Sedes</span>
+            </a>
+        </li>
+        <li class="logout.new">
+            <a href="../modulos">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Volver</span>
+            </a>
+        </li> 
+        <li class="logout" style="background: none;">
+            <a href="{% url 'logout' %}">
+                <label class="switch" for="checkbox">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="slider">
+                        <path
+                        d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V256c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM143.5 120.6c13.6-11.3 15.4-31.5 4.1-45.1s-31.5-15.4-45.1-4.1C49.7 115.4 16 181.8 16 256c0 132.5 107.5 240 240 240s240-107.5 240-240c0-74.2-33.8-140.6-86.6-184.6c-13.6-11.3-33.8-9.4-45.1 4.1s-9.4 33.8 4.1 45.1c38.9 32.3 63.5 81 63.5 135.4c0 97.2-78.8 176-176 176s-176-78.8-176-176c0-54.4 24.7-103.1 63.5-135.4z"
+                        ></path>
+                    </svg>
+                </label>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- ==================== Menú de usuario =================== -->
+<div class="main--content">
+    <div class="header--wrapper">
+        <div class="header--title">
+        <h2>Departamentos</h2>
+    </div>
+    <div class="user--info">
+        <img src="{% static 'img/ven911.jpg' %}">
+        <h2 class="title">V{{request.user.username}}</h2>
+    </div>
+</div>
+<!-- =========== Botones =========  -->
+<div class="tabular--wrapper">
+    <h3 class="main--title"></h3>
+    <div class="user--info">
+        <form id="formConsulta" method="GET" action="{% url 'departamentos_consultar' accion='consultar' %}">
+            <div class="searh--box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="nombredir" id="inputnombredir" placeholder="Buscar">
+                <button type="submit" class="btn">Consultar</button>
+                <button type="button" class="btn" onclick="location.href='{% url 'asignacion' %}'">Limpiar</button>      
+            </div>
+        </form>
+        <button id="myBtn" class="bt">Agregar</button>
+<!-- ======================= Paginator ======================  -->
+<center>
+    <section class="ulpgcds-pager">
+        <ul class="ulpgcds-pager-ul">
+            {%if departamentosp.has_previous %} {# whether the previous page exists #}
+                <li class="ulpgcds-pageritem ulpgcds-pageritem--prev">
+                    <a class="pagination__link" href="?page={{departamentosp.previous_page_number}}" title="Ir a la página anterior"><span class="visually-hidden">Anterior</span></a>
+                </li>
+            {% endif %}
+            {% for i in departamentosp.paginator.page_range %}
+                {% if departamentosp.number == i %}
+                    <li class="ulpgcds-pageritem ulpgcds-pageritem--is-active">
+                        <a class="pagination__link" href="?page={{departamentosp.number}}">{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {%if departamentosp.has_next %} {# whether the next page exists #}
+                <li class="ulpgcds-pageritem ulpgcds-pageritem--next">
+                    <a class="pagination__link" href="?page={{departamentosp.next_page_number}}" title="Ir a la página siguiente">
+                        <span class="visually-hidden">Siguiente</span>
+                    </a>
+                </li>
+            {% endif %}
+            </ul>
+            </section>
+        </center>
+    </div>
+</div>
+<!-- ======================= Formulario======================  -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" style="margin-top: -10px;">&times;</span>
+        <div class="modal-header">
+            <h2>Agregar Departamento</h2>
+        </div>
+        <br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="form-items">
+                    <label>Departamento</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form6.departamento.html_name}}" placeholder="Ingrese el departamento" required>
+                </div>
+                <div class="form-items">
+                    <label>Estado</label>
+                    <br>
+                    <input type="text" class="form-control" name="{{form6.estado.html_name}}" placeholder="Ingrese el estado" required>
+                </div>
+            </div>
+            <br>
+            <div align="center">
+                <input type="submit" class="bnt" value="Enviar" style="width: 90px;">
+            </div>
+        </form>
+    </div>
+</div>
+<!-- ===================== Tabla ====================  -->
+<div class="tabular--wrapper" style="margin-top: 10px; padding-top: 10px;">
+    <div class="table-container">            
+        <table>
+            <thead>
+                <tr>
+                    <th>Departamento</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                <tbody>
+                    {% for archivo in departamentosp %}
+                        <tr>
+                            <td>{{ archivo.departamento }}</td>
+                            <td>{{ archivo.estado }}</td>
+                            <td>
+                                <a href="#" id="myBtnn3{{ archivo.id }}" style="color: black;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a href="#" id="myBtnn4{{ archivo.id }}" style="color: black;"><i class="fa-solid fa-trash"></i></a>  
+                                <div id="myModall3{{ archivo.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <span class="closee3{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
+                                        <div class="modal-header">
+                                            <h2>Modificar departamento</h2>
+                                        </div>
+                                        <br>
+                                        <form method="POST" action="departamentos/update/{{ archivo.pk }}"enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <div class="form-items">
+                                                    <label>Departamento</label>
+                                                    <br>
+                                                    <input type="text" class="form-control" name="{{ formdp.departamento.html_name }}" placeholder="Ingrese el departamento" value="{{ archivo.departamento }}" required>
+                                                </div>
+                                                <div class="form-items">
+                                                    <label>Estado</label>
+                                                    <br>
+                                                    <input type="text" class="form-control" name="{{ formdp.estado.html_name }}" placeholder="Ingrese el estado" value="{{ archivo.estado }}" required>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div align="center">
+                                                <input type="submit" class="bnt" value="Enviar" style="width: 90px;">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <script>
+                                    var modall3{{ archivo.id }} = document.getElementById("myModall3{{ archivo.id }}");
+                                    var btnn3{{ archivo.id }} = document.getElementById("myBtnn3{{ archivo.id }}");
+                                    var spann3{{ archivo.id }} = document.getElementsByClassName("closee3{{ archivo.id }}")[0];
+                                    btnn3{{ archivo.id }}.onclick = function() {
+                                        modall3{{ archivo.id }}.style.visibility = "visible";
+                                        modall3{{ archivo.id }}.style.opacity = 1;
+                                    }
+                                
+                                    spann3{{ archivo.id }}.onclick = function() {
+                                        modall3{{ archivo.id }}.style.visibility = "hidden";
+                                        modall3{{ archivo.id }}.style.opacity = 0;
+                                    }
+                                
+                                    window.onclick = function(event) {
+                                        if (event.target == modall3{{ archivo.id }}) {
+                                            modall3{{ archivo.id }}.style.visibility = "hidden";
+                                            modall3{{ archivo.id }}.style.opacity = 0;
+                                        }
+                                    }
+                                </script>
+                                <div id="myModall4{{ archivo.id }}" class="modal">
+                                    <div class="modal-content">
+                                        <span class="closee4{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
+                                        <div class="modal-header">
+                                            <form action="departamentos/delete/{{ archivo.id }}" method="POST">
+                                                {% csrf_token %}
+                                                <br>
+                                                <div align="center">
+                                                    <h2>¿Estás seguro de eliminar este registro?</h2>
+                                                </div>
+                                                <br><br>
+                                                <div align="center">
+                                                <input type="submit" class="bnt" value="Enviar" style="width: 90px;">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <script>
+                                    var modall4{{ archivo.id }} = document.getElementById("myModall4{{ archivo.id }}");
+                                    var btnn4{{ archivo.id }} = document.getElementById("myBtnn4{{ archivo.id }}");
+                                    var spann4{{ archivo.id }} = document.getElementsByClassName("closee4{{ archivo.id }}")[0];
+                                    btnn4{{ archivo.id }}.onclick = function() {
+                                        modall4{{ archivo.id }}.style.visibility = "visible";
+                                        modall4{{ archivo.id }}.style.opacity = 1;
+                                    }
+                                
+                                    spann4{{ archivo.id }}.onclick = function() {
+                                        modall4{{ archivo.id }}.style.visibility = "hidden";
+                                        modall4{{ archivo.id }}.style.opacity = 0;
+                                    }
+                                
+                                    window.onclick = function(event) {
+                                        if (event.target == modall3{{ archivo.id }}) {
+                                            modall4{{ archivo.id }}.style.visibility = "hidden";
+                                            modall4{{ archivo.id }}.style.opacity = 0;
+                                        }
+                                    }
+                                </script>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+</div>
+<!-- =========== Scripts =========  -->
+<script src="{% static '/js/main.js' %}"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+        modal.style.visibility = "visible";
+        modal.style.opacity = 1;
+    }
+
+    span.onclick = function() {
+        modal.style.visibility = "hidden";
+        modal.style.opacity = 0;
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.visibility = "hidden";
+            modal.style.opacity = 0;
+        }
+    }
+
+</script>
+
+<div class="modal fade" id="editcontactm" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" align="center">
+                <div class="modalexcla2"><p class="modalbut2">🗸</p></div>
+                <h2 class="modaltext">Registro editado exitosamente.</h2>
+                <br>
+                <button type="button" class="bnt" id="closeModal1" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var modalttes = document.getElementById("editcontactm");
+    var url = window.location.href;
+    var closeModal1 = document.getElementById("closeModal1");
+
+    function mostrarModalSegunURL() {
+        if (url.includes("#updatesuccess")) {
+            modalttes.style.visibility = "visible";
+            modalttes.style.opacity = 1;
+        }
+    }
+    window.onload = mostrarModalSegunURL;
+
+    closeModal1.onclick = function() {
+        modalttes.style.visibility = "hidden";
+        modalttes.style.opacity = 0;
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modalttes) {
+            modalttes.style.visibility = "hidden";
+            modalttes.style.opacity = 0;
+        }
+    }
+</script>
+
+<div class="modal fade" id="delcontact-sm" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" align="center">
+                <div class="modalexcla2"><p class="modalbut2">🗸</p></div>
+                <h2 class="modaltext">Registro eliminado exitosamente.</h2>
+                <br>
+                <button type="button" class="btn" id="closeModal3" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var modaldelete = document.getElementById("delcontact-sm");
+    var urlde = window.location.href;
+    var closeModal3 = document.getElementById("closeModal3");
+
+    function mostrarModalTercerURL() {
+        if (urlde.includes("#deletesuccess")) {
+            modaldelete.style.visibility = "visible";
+            modaldelete.style.opacity = 1;
+        }
+    }
+    window.onload = mostrarModalTercerURL;
+
+    closeModal3.onclick = function() {
+        modaldelete.style.visibility = "hidden";
+        modaldelete.style.opacity = 0;
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modaldelete) {
+            modaldelete.style.visibility = "hidden";
+            modaldelete.style.opacity = 0;
+        }
+    }
+</script>
+
+<div class="modal fade" id="addcontact-sm" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" align="center">
+                <div class="modalexcla2"><p class="modalbut2">🗸</p></div>
+                <h2 class="modaltext">Registro agregado exitosamente.</h2>
+                <br>
+                <button type="button" class="btn" id="closeModalss" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var modaladd = document.getElementById("addcontact-sm");
+    var urladd = window.location.href;
+    var closeModalss = document.getElementById("closeModalss");
+
+    function mostrarModalCuarrURL() {
+        if (urladd.includes("#addsuccess")) {
+            modaladd.style.visibility = "visible";
+            modaladd.style.opacity = 1;
+        }
+    }
+    window.onload = mostrarModalCuarrURL;
+
+    closeModalss.onclick = function() {
+        modaladd.style.visibility = "hidden";
+        modaladd.style.opacity = 0;
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modaladd) {
+            modaladd.style.visibility = "hidden";
+            modaladd.style.opacity = 0;
+        }
+    }
+</script>
+</body>
+</html>

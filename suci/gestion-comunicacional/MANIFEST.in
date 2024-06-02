@@ -1,0 +1,4 @@
+include LICENSE
+include README.rst
+recursive-include gestion-comunicacional/static *
+recursive-include gestion-comunicacional/templates *

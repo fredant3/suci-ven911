@@ -1,0 +1,256 @@
+{% extends "suciApp/base.html" %}
+
+{% block title %} S.U.C.I | Ingreso Personal {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="main--content">
+    <div class="header--wrapper">
+        <div class="header--title">
+            <h2>Gestión Humana /<small> Personal Retirado</small></h2>
+        </div>
+        <div class="user--info">
+            <div class="searh--box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar" />
+            </div>
+            <img src="{% static 'img/ven911.jpg' %}">
+            <h2 class="title">V{{request.user.username}}</h2>
+        </div>
+    </div>
+
+    <div align="right" style="margin-right: 100px; margin-bottom: -10px;">
+        <button type="button" class="btn" onclick="location.href='{% url 'descargar-excel-retirados' %}'">Descargar Excel Retirados</button>
+        <button id="myBtnAdd" class="btn">Agregar</button>
+    </div>
+
+
+    <div class="tabular--wrapper">
+        <h3 class="main--title">Recientes</h3>
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Estatus</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Nacionalidad</th>
+                        <th>Sexo</th>
+                        <th>Edad</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Cargo</th>
+                        <th>Acciones</th>
+                    </tr>
+                <tbody>
+                    {% for personal in personales %}
+                    <tr>
+                        <td>{{ personal.estatus }}</td>
+                        <td>{{ personal.nombres }}</td>
+                        <td>{{ personal.apellidos }}</td>
+                        <td>{{ personal.cedula }}</td>
+                        <td>{{ personal.nacionalidad }}</td>
+                        <td>{{ personal.sexo }}</td>
+                        <td>{{ personal.edad }}</td>
+                        <td>{{ personal.telefono }}</td>
+                        <td>{{ personal.email }}</td>
+                        <td>{{ personal.cargo }}</td>
+                        <td>
+                            <a href="#" title="Editar" id="myBtnUpd" data-toggle="modal" data-id='{{ personal.id }}'
+                                data-nombre='{{ personal.nombres }}' data-apellido='{{ personal.apellidos }}'
+                                data-cedula='{{ personal.cedula }}' data-sexo='{{ personal.sexo }}'
+                                data-fechanacimiento='{{ personal.fecha_nac }}' data-edad='{{ personal.edad }}'
+                                data-telefono='{{ personal.telefono }}' data-estado='{{ personal.estado_civil }}'
+                                data-conyugue='{{ personal.conyugue }}' data-ciconyugue='{{ personal.cedula_conyugue }}'
+                                data-sangre='{{ personal.tipo_sangre }}'
+                                data-discapacitado='{{ personal.discapacitado }}'
+                                data-talla_camisa='{{ personal.talla_camisa }}'
+                                data-talla_pantalon='{{ personal.talla_pantalon }}'
+                                data-talla_zapato='{{ personal.talla_zapato }}' data-fasmij='{{ personal.fasmij }}'
+                                data-direccion='{{ personal.direccion }}' data-nro_cuenta='{{ personal.nro_cuenta }}'
+                                data-email='{{ personal.email }}'
+                                data-grado_instruccion='{{ personal.grado_instruccion }}'
+                                data-estudia='{{ personal.estudia }}'
+                                data-comision_servicio='{{ personal.comision_servicio }}' data-pnb='{{ personal.pnb }}'
+                                data-tipo_personal='{{ personal.tipo_personal }}' data-cargo='{{ personal.cargo }}'
+                                data-fecha_ingreso_911='{{ personal.fecha_ingreso_911 }}'
+                                data-fecha_ingreso_apn='{{ personal.fecha_ingreso_apn }}'
+                                data-contratos='{{ personal.contratos }}'
+                                data-departamento='{{ personal.departamento }}'
+                                data-niño_menor_12='{{ personal.niño_menor_12 }}' data-edades1='{{ personal.edades1 }}'
+                                data-hijos_13_18='{{ personal.hijos_13_18 }}' data-edades2='{{ personal.edades2 }}'
+                                data-niña_menor_12='{{ personal.niña_menor_12 }}' data-edades3='{{ personal.edades3 }}'
+                                data-hijos_discapacidad='{{ personal.hijos_discapacidad }}'
+                                data-edades4='{{ personal.edades4 }}' data-sede='{{ personal.sede }}'
+                                data-nacionalidad='{{ personal.nacionalidad }}' class="btn-editar"
+                                style="color: black;">
+                                <ion-icon name="create-outline" style="font-size: 22px;"></ion-icon>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!--    INCLUYE MODAL PARA AGREGAR, MODIFICAR, ELIMINAR PERSONAL     -->
+    {% include "modal/addPersonal.html" %}
+    {% include "modal/updPersonal.html" %}
+    {% include "modal/delPersonal.html" %}
+
+    <script>
+
+        //  JAVASCRIPT PARA ADD PERSONAL
+        var modal = document.getElementById("addpersonal");
+        var btn = document.getElementById("myBtnAdd");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () {
+            modal.style.visibility = "visible";
+            modal.style.opacity = 1;
+        }
+
+        span.onclick = function () {
+            modal.style.visibility = "hidden";
+            modal.style.opacity = 0;
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.visibility = "hidden";
+                modal.style.opacity = 0;
+            }
+        }
+
+        //  JAVASCRIPT PARA UPDATE PERSONAL
+
+        $('.table-bordered').on('click', '.btn-editar', function (e) {
+            e.preventDefault();
+            let id_persona = $(this).data('id');
+            let nombre = $(this).data('nombre');
+            let apellido = $(this).data('apellido');
+            let cedula = $(this).data('cedula');
+            let sexo = $(this).data('sexo');
+            let nacimiento = $(this).data('fechanacimiento');
+            let edad = $(this).data('edad');
+            let telefono = $(this).data('telefono');
+            let estado = $(this).data('estado');
+            let conyugue = $(this).data('conyugue');
+            let ciconyugue = $(this).data('ciconyugue');
+            if (ciconyugue == "None") {
+                ciconyugue = "";
+            }
+            let sangre = $(this).data('sangre');
+            let discapacitado = $(this).data('discapacitado');
+            let talla_camisa = $(this).data('talla_camisa');
+            let talla_pantalon = $(this).data('talla_pantalon');
+            let talla_zapato = $(this).data('talla_zapato');
+            let fasmij = $(this).data('fasmij');
+            let direccion = $(this).data('direccion');
+            let nro_cuenta = $(this).data('nro_cuenta');
+            let email = $(this).data('email');
+            let grado_instruccion = $(this).data('grado_instruccion');
+            let estudia = $(this).data('estudia');
+            let comision_servicio = $(this).data('comision_servicio');
+            let pnb = $(this).data('pnb');
+            let tipo_personal = $(this).data('tipo_personal');
+            let cargo = $(this).data('cargo');
+            let fecha_ingreso_911 = $(this).data('fecha_ingreso_911');
+            let fecha_ingreso_apn = $(this).data('fecha_ingreso_apn');
+            let contratos = $(this).data('contratos');
+            let departamento = $(this).data('departamento');
+            let niño_menor_12 = $(this).data('niño_menor_12');
+            let edades1 = $(this).data('edades1');
+            let hijos_13_18 = $(this).data('hijos_13_18');
+            let edades2 = $(this).data('edades2');
+            let niña_menor_12 = $(this).data('niña_menor_12');
+            let edades3 = $(this).data('edades3');
+            let hijos_discapacidad = $(this).data('hijos_discapacidad');
+            let edades4 = $(this).data('edades4');
+            let sede = $(this).data('sede');
+            let nacionalidad = $(this).data('nacionalidad');
+            $('#id_persona').val(id_persona);
+            $('#nombre').val(nombre);
+            $('#apellido').val(apellido);
+            $('#cedula').val(cedula);
+            $('#sexo').val(sexo);
+            $('#nacimiento').val(nacimiento);
+            $('#edad').val(edad);
+            $('#telefono').val(telefono);
+            $('#estado').val(estado);
+            $('#conyugue').val(conyugue);
+            $('#ciconyugue').val(ciconyugue);
+            $('#sangre').val(sangre);
+            $('#discapacitado').val(discapacitado);
+            $('#talla_camisa').val(talla_camisa);
+            $('#talla_pantalon').val(talla_pantalon);
+            $('#talla_zapato').val(talla_zapato);
+            $('#fasmij').val(fasmij);
+            $('#direccion').val(direccion);
+            $('#nro_cuenta').val(nro_cuenta);
+            $('#email').val(email);
+            $('#grado_instruccion').val(grado_instruccion);
+            $('#estudia').val(estudia);
+            $('#comision_servicio').val(comision_servicio);
+            $('#pnb').val(pnb);
+            $('#tipo_personal').val(tipo_personal);
+            $('#cargo').val(cargo);
+            $('#fecha_ingreso_911').val(fecha_ingreso_911);
+            $('#fecha_ingreso_apn').val(fecha_ingreso_apn);
+            $('#contratos').val(contratos);
+            $('#departamento').val(departamento);
+            $('#niño_menor_12').val(niño_menor_12);
+            $('#edades1').val(edades1);
+            $('#hijos_13_18').val(hijos_13_18);
+            $('#edades2').val(edades2);
+            $('#niña_menor_12').val(niña_menor_12);
+            $('#edades3').val(edades3);
+            $('#hijos_discapacidad').val(hijos_discapacidad);
+            $('#edades4').val(edades4);
+            $('#sede').val(sede);
+            $('#nacionalidad').val(nacionalidad);
+            // $('#modal-editar').modal('show');
+        });
+
+        //  JAVASCRIPT PARA UPDATE PERSONAL
+        var modal1 = document.getElementById("modal-editar");
+        var btn1 = document.getElementById("myBtnUpd");
+        var span1 = document.getElementsByClassName("close2")[0];
+        btn1.onclick = function () {
+            modal1.style.visibility = "visible";
+            modal1.style.opacity = 1;
+        }
+
+        span1.onclick = function () {
+            modal1.style.visibility = "hidden";
+            modal1.style.opacity = 0;
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.opacity = 0;
+            }
+        }
+
+
+        $('#modal-editar').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var codigo = button.data('codigo'); // Extract info from data-* 
+            var nombre = button.data('nombre'); // Extract info from data-* attributes
+
+            var modal = $(this)
+            modal.find('.modal-body #mod_codigo').val(codigo);
+            modal.find('.modal-body #mod_nombre').val(nombre);
+
+        })
+
+    </script>
+    <script src="{% static 'js/personal.js' %}"></script> 
+
+
+
+    {% endblock %}
