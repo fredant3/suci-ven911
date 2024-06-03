@@ -24,3 +24,6 @@ class SocialMediaAccountEntity(models.Model):
 
     class Meta:
         db_table = "social_media_accounts"
+        verbose_name = "Red social"
+        verbose_name_plural = "Redes sociales"
+        ordering = ["platform"]

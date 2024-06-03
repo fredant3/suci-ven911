@@ -21,3 +21,6 @@ class SocialActivityEntity(models.Model):
 
     def __str__(self):
         return f"{self.activity_type} on {self.date}"
+
+    # class Meta:
+    #     db_table = "social_activities"

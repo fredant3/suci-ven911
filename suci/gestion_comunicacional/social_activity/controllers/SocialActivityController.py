@@ -8,17 +8,17 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from gestion_comunicacional.social_media.services.SocialMediaAccountService import (
-    SocialMediaAccountService,
+from gestion_comunicacional.social_activity.services.SocialActivityService import (
+    SocialActivityService,
 )
 
 
-class ListSocialMediaAccount(LoginRequiredMixin, ListView):
+class ListSocialActivity(LoginRequiredMixin, ListView):
     login_url = "login"
-    template_name = "gc/social-media-account.html"
+    template_name = "gc/social-activity.html"
 
     def __init__(self):
-        self.service = SocialMediaAccountService()
+        self.service = SocialActivityService()
 
     def get(self, request):
         page = request.GET.get("page") or 1
@@ -32,12 +32,12 @@ class ListSocialMediaAccount(LoginRequiredMixin, ListView):
         return render(request, self.template_name, {"entities": entities})
 
 
-class CreateSocialMediaAccount(LoginRequiredMixin, CreateView):
+class CreateSocialActivity(LoginRequiredMixin, CreateView):
     login_url = "login"
-    template_name = "gc/social-media-account.html"
+    template_name = "gc/social-activity.html"
 
     def __init__(self):
-        self.service = SocialMediaAccountService()
+        self.service = SocialActivityService()
 
     def post(self, request):
         entity = self.service.creator(request.POST)
@@ -45,12 +45,12 @@ class CreateSocialMediaAccount(LoginRequiredMixin, CreateView):
         return render(request, self.template_name, {"entity": entity})
 
 
-class ReadSocialMediaAccount(LoginRequiredMixin, DetailView):
+class ReadSocialActivity(LoginRequiredMixin, DetailView):
     login_url = "login"
-    template_name = "gc/social-media-account.html"
+    template_name = "gc/social-activity.html"
 
     def __init__(self):
-        self.service = SocialMediaAccountService()
+        self.service = SocialActivityService()
 
     def get(self, request, pk):
         entity = self.service.getById(pk)
@@ -61,12 +61,12 @@ class ReadSocialMediaAccount(LoginRequiredMixin, DetailView):
         return render(request, self.template_name, {"entity": entity})
 
 
-class UpdateSocialMediaAccount(LoginRequiredMixin, UpdateView):
+class UpdateSocialActivity(LoginRequiredMixin, UpdateView):
     login_url = "login"
-    template_name = "gc/social-media-account.html"
+    template_name = "gc/social-activity.html"
 
     def __init__(self):
-        self.service = SocialMediaAccountService()
+        self.service = SocialActivityService()
 
     def post(self, request, pk):
         entity = self.service.updater(request.PUT, pk)
@@ -74,12 +74,12 @@ class UpdateSocialMediaAccount(LoginRequiredMixin, UpdateView):
         return render(request, self.template_name, {"entity": entity})
 
 
-class DeleteSocialMediaAccount(LoginRequiredMixin, DeleteView):
+class DeleteSocialActivity(LoginRequiredMixin, DeleteView):
     login_url = "login"
-    template_name = "gc/social-media-account.html"
+    template_name = "gc/social-activity.html"
 
     def __init__(self):
-        self.service = SocialMediaAccountService()
+        self.service = SocialActivityService()
 
     def post(self, request, pk):
         entity = self.service.destroyer(pk)
