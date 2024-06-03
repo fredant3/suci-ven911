@@ -2,7 +2,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from . import SocialMediaAccountController, views
+from . import views
+from .social_media.controllers.SocialMediaAccountController import (
+    SocialMediaAccountController,
+)
 
 socialMediaAccountController = SocialMediaAccountController()
 
@@ -15,22 +18,27 @@ urlpatterns = [
     ),
     path(
         "social-media-account/<str:accion>",
-        views.listingSocialMediaAccount,
+        socialMediaAccountController.listing,
         name="gc-filter-social-media-account",
     ),
     path(
+        "social-media-account/crear",
+        socialMediaAccountController.create,
+        name="gc-create-social-media-account",
+    ),
+    path(
         "social-media-account/detalle/<int:id>",
-        views.readerSocialMediaAccount,
+        socialMediaAccountController.read,
         name="gc-reader-social-media-account",
     ),
     path(
         "social-media-account/actualizar/<int:id>",
-        views.updaterSocialMediaAccount,
+        socialMediaAccountController.update,
         name="gc-updater-social-media-account",
     ),
     path(
         "social-media-account/eliminar/<int:id>",
-        views.destroyerSocialMediaAccount,
+        socialMediaAccountController.delete,
         name="gc-destroyer-social-media-account",
     ),
 ]
