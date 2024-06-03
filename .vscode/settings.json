@@ -1,13 +1,16 @@
 {
   "[python]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "isort.args":["--profile", "black"],
-    "diffEditor.ignoreTrimWhitespace": false,
-    "editor.formatOnType": true,
-    "editor.wordBasedSuggestions": "off"
+  },
+  "isort.args": [
+    "--profile",
+    "black"
+  ],
+  "[html]": {
+    "editor.formatOnSave": true
   }
 }

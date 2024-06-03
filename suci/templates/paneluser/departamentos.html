@@ -8,10 +8,10 @@
 {% block seacrhForm %}
 <form id="formConsulta" method="GET" action="{% url 'departamentos_consultar' accion='consultar' %}">
   <div class="searh--box">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" name="nombredir" id="inputnombredir" placeholder="Buscar">
-      <button type="submit" class="btn">Consultar</button>
-      <button type="button" class="btn" onclick="location.href='{% url 'asignacion' %}'">Limpiar</button>      
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" name="nombredir" id="inputnombredir" placeholder="Buscar">
+    <button type="submit" class="btn">Consultar</button>
+    <button type="button" class="btn" onclick="location.href='{% url 'asignacion' %}'">Limpiar</button>
   </div>
 </form>
 {% endblock %}
@@ -25,31 +25,32 @@
 {% block paginate %}
 <center>
   <section class="ulpgcds-pager">
-      <ul class="ulpgcds-pager-ul">
-          {%if departamentosp.has_previous %} {# whether the previous page exists #}
-              <li class="ulpgcds-pageritem ulpgcds-pageritem--prev">
-                  <a class="pagination__link" href="?page={{departamentosp.previous_page_number}}" title="Ir a la página anterior"><span class="visually-hidden">Anterior</span></a>
-              </li>
-          {% endif %}
-          {% for i in departamentosp.paginator.page_range %}
-              {% if departamentosp.number == i %}
-                  <li class="ulpgcds-pageritem ulpgcds-pageritem--is-active">
-                      <a class="pagination__link" href="?page={{departamentosp.number}}">{{ i }}</a>
-                  </li>
-              {% else %}
-                  <li><a href="?page={{ i }}">{{ i }}</a></li>
-              {% endif %}
-          {% endfor %}
-          {%if departamentosp.has_next %} {# whether the next page exists #}
-              <li class="ulpgcds-pageritem ulpgcds-pageritem--next">
-                  <a class="pagination__link" href="?page={{departamentosp.next_page_number}}" title="Ir a la página siguiente">
-                      <span class="visually-hidden">Siguiente</span>
-                  </a>
-              </li>
-          {% endif %}
-          </ul>
-          </section>
-      </center>
+    <ul class="ulpgcds-pager-ul">
+      {%if departamentosp.has_previous %} {# whether the previous page exists #}
+      <li class="ulpgcds-pageritem ulpgcds-pageritem--prev">
+        <a class="pagination__link" href="?page={{departamentosp.previous_page_number}}"
+          title="Ir a la página anterior"><span class="visually-hidden">Anterior</span></a>
+      </li>
+      {% endif %}
+      {% for i in departamentosp.paginator.page_range %}
+      {% if departamentosp.number == i %}
+      <li class="ulpgcds-pageritem ulpgcds-pageritem--is-active">
+        <a class="pagination__link" href="?page={{departamentosp.number}}">{{ i }}</a>
+      </li>
+      {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+      {%if departamentosp.has_next %} {# whether the next page exists #}
+      <li class="ulpgcds-pageritem ulpgcds-pageritem--next">
+        <a class="pagination__link" href="?page={{departamentosp.next_page_number}}" title="Ir a la página siguiente">
+          <span class="visually-hidden">Siguiente</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </section>
+</center>
 {% endblock %}
 
 {% block content %}
@@ -59,85 +60,40 @@
     <table>
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Fecha</th>
-          <th>Usuario</th>
-          <th>Archivo</th>
-          <th>Progreso</th>
+          <th>Departamento</th>
           <th>Estado</th>
           <th>Acciones</th>
         </tr>
       <tbody>
-        {% for archivo in reglamentoss %}
+        {% for archivo in departamentosp %}
         <tr>
-          <td>{{ archivo.name }}</td>
-          <td>{{ archivo.date }}</td>
-          <td>{{ archivo.user }}</td>
-          <td>
-            <a href="../media/{{ archivo.file }}" style="color: black;">
-              <i class="fa-solid fa-eye"></i>
-            </a>
-          </td>
-          <td>{{ archivo.progre }}</td>
-          <td>
-            {% if archivo.estado == True %}
-            Publicado
-            {% elif archivo.estado == False%}
-            No Publicado
-            {% endif %}
-          </td>
+          <td>{{ archivo.departamento }}</td>
+          <td>{{ archivo.estado }}</td>
           <td>
             <a href="#" id="myBtnn3{{ archivo.id }}" style="color: black;"><i class="fa-solid fa-pen-to-square"></i></a>
             &nbsp;&nbsp;&nbsp;
-            <a href="#" id="myBtnn4{{ archivo.id }}" style="color: black;"><i class="fa-regular fa-file"></i></a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="#" id="myBtnn2{{ archivo.id }}" style="color: black;"><i class="fa-solid fa-trash"></i></a>
-            &nbsp;&nbsp;&nbsp;
-            {% if archivo.estado == False %}
-            <a href="#" id="myBtnni55{{ archivo.id }}" style="color: black;"><i class="fa-solid fa-check"></i></a>
-            {% elif archivo.estado == True %}
-            <a href="#" id="myBtnni66{{ archivo.id }}" style="color: black;"><i
-                class="fa-regular fa-circle-xmark"></i></a>
-            {% endif %}
+            <a href="#" id="myBtnn4{{ archivo.id }}" style="color: black;"><i class="fa-solid fa-trash"></i></a>
             <div id="myModall3{{ archivo.id }}" class="modal">
               <div class="modal-content">
                 <span class="closee3{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
                 <div class="modal-header">
-                  <h2>Modificar Reglamento</h2>
+                  <h2>Modificar departamento</h2>
                 </div>
                 <br>
-                <form method="POST" action="reglamentos/update/{{ archivo.pk }}">
+                <form method="POST" action="departamentos/update/{{ archivo.pk }}" enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="form-group">
                     <div class="form-items">
-                      <label>Nombre</label>
+                      <label>Departamento</label>
                       <br>
-                      <input type="text" class="form-control" name="{{ former.name.html_name }}"
-                        placeholder="Ingrese el nombre" value="{{ archivo.name }}" required>
+                      <input type="text" class="form-control" name="{{ formdp.departamento.html_name }}"
+                        placeholder="Ingrese el departamento" value="{{ archivo.departamento }}" required>
                     </div>
                     <div class="form-items">
-                      <label>Usuario</label>
+                      <label>Estado</label>
                       <br>
-                      <input type="number" class="form-control" name="{{ former.user.html_name }}"
-                        placeholder="Ingrese el usuario" value="{{ archivo.user }}" required>
-                    </div>
-                    <div class="form-items">
-                      <label>Fecha</label>
-                      <br>
-                      <input type="date" class="form-control" name="{{ former.date.html_name }}"
-                        value="{{ archivo.date|date:" Y-m-d" }}" placeholder="Ingrese la fecha" required>
-                    </div>
-                    <div class="form-items">
-                      <label>Progreso</label>
-                      <br>
-                      <select name="{{ former.progre.html_name }}" class="form-control">
-                        <option value="{{ archivo.progre }}">{{ archivo.progre }}</option>
-                        <option value="10%">10%</option>
-                        <option value="20%">30%</option>
-                        <option value="50%">50%</option>
-                        <option value="80%">80%</option>
-                        <option value="100%">100%</option>
-                      </select>
+                      <input type="text" class="form-control" name="{{ formdp.estado.html_name }}"
+                        placeholder="Ingrese el estado" value="{{ archivo.estado }}" required>
                     </div>
                   </div>
                   <br>
@@ -151,20 +107,20 @@
               var modall3{{ archivo.id }} = document.getElementById("myModall3{{ archivo.id }}");
               var btnn3{{ archivo.id }} = document.getElementById("myBtnn3{{ archivo.id }}");
               var spann3{{ archivo.id }} = document.getElementsByClassName("closee3{{ archivo.id }}")[0];
-                                  btnn3{ { archivo.id } }.onclick = function () {
-                                      modall3{ { archivo.id } }.style.visibility = "visible";
-                                      modall3{ { archivo.id } }.style.opacity = 1;
+                                btnn3{ { archivo.id } }.onclick = function () {
+                                    modall3{ { archivo.id } }.style.visibility = "visible";
+                                    modall3{ { archivo.id } }.style.opacity = 1;
               }
-                              
-                                  spann3{ { archivo.id } }.onclick = function () {
-                                      modall3{ { archivo.id } }.style.visibility = "hidden";
-                                      modall3{ { archivo.id } }.style.opacity = 0;
+                            
+                                spann3{ { archivo.id } }.onclick = function () {
+                                    modall3{ { archivo.id } }.style.visibility = "hidden";
+                                    modall3{ { archivo.id } }.style.opacity = 0;
               }
 
               window.onclick = function (event) {
                 if (event.target == modall3{ { archivo.id } }) {
-                                          modall3{ { archivo.id } }.style.visibility = "hidden";
-                                          modall3{ { archivo.id } }.style.opacity = 0;
+                                        modall3{ { archivo.id } }.style.visibility = "hidden";
+                                        modall3{ { archivo.id } }.style.opacity = 0;
                 }
               }
             </script>
@@ -172,52 +128,7 @@
               <div class="modal-content">
                 <span class="closee4{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
                 <div class="modal-header">
-                  <h2>Modificar Archivo</h2>
-                </div>
-                <br>
-                <form method="POST" action="reglamentos/updatef/{{ archivo.pk }}" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <div class="form-group">
-                    <div class="form-items" style="width: 100%;">
-                      <label>Archivo</label>
-                      <br>
-                      <input type="file" class="form-control" name="{{ formerf.file.html_name }}"
-                        placeholder="Ingrese el archivo" required>
-                    </div>
-                  </div>
-                  <br>
-                  <div align="center">
-                    <input type="submit" class="bnt" value="Enviar" style="width: 90px;">
-                  </div>
-                </form>
-              </div>
-            </div>
-            <script>
-              var modall4{{ archivo.id }} = document.getElementById("myModall4{{ archivo.id }}");
-              var btnn4{{ archivo.id }} = document.getElementById("myBtnn4{{ archivo.id }}");
-              var spann4{{ archivo.id }} = document.getElementsByClassName("closee4{{ archivo.id }}")[0];
-                                  btnn4{ { archivo.id } }.onclick = function () {
-                                      modall4{ { archivo.id } }.style.visibility = "visible";
-                                      modall4{ { archivo.id } }.style.opacity = 1;
-              }
-                              
-                                  spann4{ { archivo.id } }.onclick = function () {
-                                      modall4{ { archivo.id } }.style.visibility = "hidden";
-                                      modall4{ { archivo.id } }.style.opacity = 0;
-              }
-
-              window.onclick = function (event) {
-                if (event.target == modall3{ { archivo.id } }) {
-                                          modall4{ { archivo.id } }.style.visibility = "hidden";
-                                          modall4{ { archivo.id } }.style.opacity = 0;
-                }
-              }
-            </script>
-            <div id="myModall2{{ archivo.id }}" class="modal">
-              <div class="modal-content">
-                <span class="closee2{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
-                <div class="modal-header">
-                  <form action="reglamentos/delete/{{ archivo.id }}" method="POST">
+                  <form action="departamentos/delete/{{ archivo.id }}" method="POST">
                     {% csrf_token %}
                     <br>
                     <div align="center">
@@ -225,117 +136,32 @@
                     </div>
                     <br><br>
                     <div align="center">
-                      <input type="submit" class="bnt" value="Eliminar" style="width: 90px;">
+                      <input type="submit" class="bnt" value="Enviar" style="width: 90px;">
                     </div>
                   </form>
                 </div>
-                <br>
               </div>
-            </div>
-            <script>
-              var modall2{{ archivo.id }} = document.getElementById("myModall2{{ archivo.id }}");
-              var btnn2{{ archivo.id }} = document.getElementById("myBtnn2{{ archivo.id }}");
-              var spann2{{ archivo.id }} = document.getElementsByClassName("closee2{{ archivo.id }}")[0];
-                                  btnn2{ { archivo.id } }.onclick = function () {
-                                      modall2{ { archivo.id } }.style.visibility = "visible";
-                                      modall2{ { archivo.id } }.style.opacity = 1;
-              }
-          
-                                  spann2{ { archivo.id } }.onclick = function () {
-                                      modall2{ { archivo.id } }.style.visibility = "hidden";
-                                      modall2{ { archivo.id } }.style.opacity = 0;
-              }
-
-              window.onclick = function (event) {
-                if (event.target == modall{ { archivo.id } }) {
-                                          modall2{ { archivo.id } }.style.visibility = "hidden";
-                                          modall2{ { archivo.id } }.style.opacity = 0;
+              <script>
+                var modall4{{ archivo.id }} = document.getElementById("myModall4{{ archivo.id }}");
+                var btnn4{{ archivo.id }} = document.getElementById("myBtnn4{{ archivo.id }}");
+                var spann4{{ archivo.id }} = document.getElementsByClassName("closee4{{ archivo.id }}")[0];
+                                btnn4{ { archivo.id } }.onclick = function () {
+                                    modall4{ { archivo.id } }.style.visibility = "visible";
+                                    modall4{ { archivo.id } }.style.opacity = 1;
                 }
-              }
-            </script>
-            {% if archivo.estado == False %}
-            <div id="myModalli55{{ archivo.id }}" class="modal">
-              <div class="modal-content">
-                <span class="closeei55{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
-                <div class="modal-header">
-                  <form action="reglamentos/pubublicar_reg/{{ archivo.id }}" method="POST">
-                    {% csrf_token %}
-                    <br>
-                    <div align="center">
-                      <h2>¿Estás seguro de publicar este reglamento?</h2>
-                    </div>
-                    <br><br>
-                    <div align="center">
-                      <input type="submit" class="bnt" value="Cambiar" style="width: 90px;">
-                    </div>
-                  </form>
-                </div>
-                <br>
-              </div>
-            </div>
-            <script>
-              var modalli55{{ archivo.id }} = document.getElementById("myModalli55{{ archivo.id }}");
-              var btnni55{{ archivo.id }} = document.getElementById("myBtnni55{{ archivo.id }}");
-              var spanni55{{ archivo.id }} = document.getElementsByClassName("closeei55{{ archivo.id }}")[0];
-                                      btnni55{ { archivo.id } }.onclick = function () {
-                                          modalli55{ { archivo.id } }.style.visibility = "visible";
-                                          modalli55{ { archivo.id } }.style.opacity = 1;
-              }
-      
-                                      spanni55{ { archivo.id } }.onclick = function () {
-                                          modalli55{ { archivo.id } }.style.visibility = "hidden";
-                                          modalli55{ { archivo.id } }.style.opacity = 0;
-              }
-
-              window.onclick = function (event) {
-                if (event.target == modalli55{ { archivo.id } }) {
-                                              modalli55{ { archivo.id } }.style.visibility = "hidden";
-                                              modalli55{ { archivo.id } }.style.opacity = 0;
+                            
+                                spann4{ { archivo.id } }.onclick = function () {
+                                    modall4{ { archivo.id } }.style.visibility = "hidden";
+                                    modall4{ { archivo.id } }.style.opacity = 0;
                 }
-              }
-            </script>
-            {% elif archivo.estado == True %}
-            <div id="myModalli66{{ archivo.id }}" class="modal">
-              <div class="modal-content">
-                <span class="closeei66{{ archivo.id }} close" style="margin-top: -10px;">&times;</span>
-                <div class="modal-header">
-                  <form action="reglamentos/despubublicar_reg/{{ archivo.id }}" method="POST">
-                    {% csrf_token %}
-                    <br>
-                    <div align="center">
-                      <h2>¿Estás seguro de ocultar este reglamento?</h2>
-                    </div>
-                    <br><br>
-                    <div align="center">
-                      <input type="submit" class="bnt" value="Cambiar" style="width: 90px;">
-                    </div>
-                  </form>
-                </div>
-                <br>
-              </div>
-            </div>
-            <script>
-              var modalli66{{ archivo.id }} = document.getElementById("myModalli66{{ archivo.id }}");
-              var btnni66{{ archivo.id }} = document.getElementById("myBtnni66{{ archivo.id }}");
-              var spanni66{{ archivo.id }} = document.getElementsByClassName("closeei66{{ archivo.id }}")[0];
-                                      btnni66{ { archivo.id } }.onclick = function () {
-                                          modalli66{ { archivo.id } }.style.visibility = "visible";
-                                          modalli66{ { archivo.id } }.style.opacity = 1;
-              }
-      
-                                      spanni66{ { archivo.id } }.onclick = function () {
-                                          modalli66{ { archivo.id } }.style.visibility = "hidden";
-                                          modalli66{ { archivo.id } }.style.opacity = 0;
-              }
 
-              window.onclick = function (event) {
-                if (event.target == modalli66{ { archivo.id } }) {
-                                              modalli66{ { archivo.id } }.style.visibility = "hidden";
-                                              modalli66{ { archivo.id } }.style.opacity = 0;
+                window.onclick = function (event) {
+                  if (event.target == modall3{ { archivo.id } }) {
+                                        modall4{ { archivo.id } }.style.visibility = "hidden";
+                                        modall4{ { archivo.id } }.style.opacity = 0;
+                  }
                 }
-              }
-            </script>
-            {% endif %}
+              </script>
           </td>
         </tr>
         {% endfor %}
