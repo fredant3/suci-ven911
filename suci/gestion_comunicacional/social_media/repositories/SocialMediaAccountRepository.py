@@ -1,5 +1,9 @@
-from entities.SocialMediaAccountEntity import SocialMediaAccountEntity
-from forms.SocialMediaAccountForm import SocialMediaAccountForm
+from gestion_comunicacional.social_media.entities.SocialMediaAccountEntity import (
+    SocialMediaAccountEntity,
+)
+from gestion_comunicacional.social_media.forms.SocialMediaAccountForm import (
+    SocialMediaAccountForm,
+)
 
 
 class SocialMediaAccountRepository:

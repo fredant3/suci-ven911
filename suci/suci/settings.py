@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "rrhh",
     "emergencia",
     "potencia",
-    "gestion-comunicacional",
+    "gestion_comunicacional",
 ]
 
 MIDDLEWARE = [

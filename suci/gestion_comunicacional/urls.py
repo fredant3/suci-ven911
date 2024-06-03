@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-
-from . import views
-from .social_media.controllers.SocialMediaAccountController import (
+from gestion_comunicacional.social_media.controllers.SocialMediaAccountController import (
     SocialMediaAccountController,
 )
+
+from . import views
 
 socialMediaAccountController = SocialMediaAccountController()
 

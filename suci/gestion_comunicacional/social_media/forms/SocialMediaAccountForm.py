@@ -1,5 +1,7 @@
 from django.forms import ModelForm
-from entities.SocialMediaAccountEntity import SocialMediaAccountEntity
+from gestion_comunicacional.social_media.entities.SocialMediaAccountEntity import (
+    SocialMediaAccountEntity,
+)
 
 
 class SocialMediaAccountForm(ModelForm):

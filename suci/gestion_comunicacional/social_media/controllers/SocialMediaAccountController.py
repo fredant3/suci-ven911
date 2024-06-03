@@ -1,16 +1,18 @@
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseNotAllowed
-from django.shortcuts import redirect, render
-from services.SocialMediaAccountService import SocialMediaAccountService
+from django.shortcuts import render
+from gestion_comunicacional.social_media.services.SocialMediaAccountService import (
+    SocialMediaAccountService,
+)
 
 
 class SocialMediaAccountController:
     def __init__(self):
         self.service = SocialMediaAccountService()
 
-    @login_required(login_url="login")
+    # @login_required(login_url="login")
     def listing(self, request):
-        page = request.GET.get("page")
+        page = request.GET.get("page") or 1
         search = None
 
         if "search" in request.GET:
@@ -18,9 +20,9 @@ class SocialMediaAccountController:
 
         entities = self.service.getAll(page, search)
 
-        return render(request, "gc/social-media-account.html", entities)
+        return render(request, "gc/social-media-account.html", {"data": entities})
 
-    @login_required(login_url="login")
+    # @login_required(login_url="login")
     def create(self, request):
         if request.method not in ["POST"]:
             raise HttpResponseNotAllowed(["POST"])
@@ -29,7 +31,7 @@ class SocialMediaAccountController:
 
         return render(request, "gc/social-media-account.html", entity)
 
-    @login_required(login_url="login")
+    # @login_required(login_url="login")
     def read(self, request, id):
         if request.method not in ["GET"]:
             raise HttpResponseNotAllowed(["GET"])
@@ -41,7 +43,7 @@ class SocialMediaAccountController:
 
         return render(request, "gc/social-media-account.html", entity)
 
-    @login_required(login_url="login")
+    # @login_required(login_url="login")
     def update(self, request, id):
         if request.method not in ["PUT"]:
             raise HttpResponseNotAllowed(["PUT"])
@@ -50,7 +52,7 @@ class SocialMediaAccountController:
 
         return render(request, "gc/social-media-account.html", entity)
 
-    @login_required(login_url="login")
+    # @login_required(login_url="login")
     def delete(self, request, id):
         if request.method not in ["DELETE"]:
             raise HttpResponseNotAllowed(["DELETE"])

@@ -108,5 +108,5 @@ python manage.py makemigrations
 ```
 ### Packaging the Gestion Comunicacional Module
 ```
-python ./gestion-comunicacional/setup.py sdist 
+python ./gestion_comunicacional/setup.py sdist 
 ```

@@ -21,3 +21,6 @@ class SocialMediaAccountEntity(models.Model):
 
     def __str__(self):
         return f"{self.platform} - {self.username}"
+
+    class Meta:
+        db_table = "social_media_accounts"
