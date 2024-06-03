@@ -8,6 +8,7 @@ urlpatterns = [
     path("", InfoController.as_view(), name="gc-index"),
     path("social-media/", include("gestion_comunicacional.social_media.urls")),
     path("social-activity/", include("gestion_comunicacional.social_activity.urls")),
+    path("equipament/", include("gestion_comunicacional.equipament.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

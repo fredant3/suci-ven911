@@ -33,5 +33,8 @@ class SocialMediaPostEntity(models.Model):
     def __str__(self):
         return f"{self.post_type} - {self.status}"
 
-    # class Meta:
-    #     db_table = "social_media_posts"
+    class Meta:
+        db_table = "social_media_posts"
+        verbose_name = "Publicacion de red social"
+        verbose_name_plural = "Publicaciones de redes sociales"
+        ordering = ["account"]

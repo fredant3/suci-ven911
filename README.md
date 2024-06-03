@@ -67,7 +67,7 @@ python manage.py migrate
 ## Paso 8
 #### Crear un superusuario
 ```
-python manage.py createsuperuser --user=26530315 --email=superuser@mail.com --pass=asdzxc
+python manage.py createsuperuser --user=26530315 --email=superuser@mail.com
 ```
 #### Ejemplo: usuario de prueba
 ```

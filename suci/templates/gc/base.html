@@ -1,0 +1,35 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+
+{% block title %}Gestion Comunicacional{% endblock %}
+
+<!-- ========s======= Items del Menu ================ -->
+{% block menuItems %}
+<li class="active">
+  <a href="{% url 'gc-index' %}">
+    <i class="fa-solid fa-house"></i>
+    <span>Inicio</span>
+  </a>
+</li>
+
+<li>
+  <a href="{% url 'gc-listing-social-media-account' %}">
+    <i class="fa-solid fa-clone"></i>
+    <span>Redes Sociales</span>
+  </a>
+</li>
+
+<li>
+  <a href="{% url 'gc-listing-social-activity' %}">
+    <i class="fa-solid fa-clone"></i>
+    <span>Actividades Sociales</span>
+  </a>
+</li>
+
+<li>
+  <a href="{% url 'gc-listing-equipament' %}">
+    <i class="fa-solid fa-clone"></i>
+    <span>Equipos solicitados</span>
+  </a>
+</li>
+{% endblock %}

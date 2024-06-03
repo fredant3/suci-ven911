@@ -7,11 +7,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>S.U.C.I - {% block title %}Módulos{% endblock %}</title>
+  <title>Gestion Comunicacional</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="{% static '/img/favicon.icon' %}">
-  {% block addCss %}{% endblock %}
 </head>
 
 <body>
@@ -21,24 +20,43 @@
 
     <ul class="menu">
       <li>
-        <a href="{% url 'modulos' %}">
+        <a href="#">
           <img style="width:20px; height: 30px;" src="{% static 'img/favicon.png' %}">
           </span>
           <span class="title">S.U.C.I</span>
         </a>
       </li>
 
-      <!-- <li class="active">
-        <a href="{% url 'modulos' %}">
+      <li class="active">
+        <a href="{% url 'gc-index' %}">
           <i class="fa-solid fa-house"></i>
           <span>Inicio</span>
         </a>
-      </li> -->
+      </li>
 
-      {% block menuItems %}{% endblock %}
+      <li>
+        <a href="{% url 'gc-listing-social-media-account' %}">
+          <i class="fa-solid fa-clone"></i>
+          <span>Redes Sociales</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'gc-listing-social-activity' %}">
+          <i class="fa-solid fa-clone"></i>
+          <span>Actividades Sociales</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'gc-listing-equipament' %}">
+          <i class="fa-solid fa-clone"></i>
+          <span>Equipos solicitados</span>
+        </a>
+      </li>
 
       <li class="logout.new">
-        <a href="{% url 'modulos' %}">
+        <a href="../modulos">
           <i class="fa-solid fa-arrow-left"></i>
           <span>Volver</span>
         </a>
@@ -62,7 +80,7 @@
   <div class="main--content">
     <div class="header--wrapper">
       <div class="header--title">
-        <h2>{% block mainContentHeaderTitle %}Inicio{% endblock %}</h2>
+        <h2>Inicio</h2>
       </div>
 
       <div class="user--info">
@@ -70,30 +88,10 @@
         <h2 class="title">V{{request.user.username}}</h2>
       </div>
     </div>
-
-    <!-- =========== Barra-Area de Busqueda y Botones Adicionales =========  -->
-    <div class="tabular--wrapper">
-      <h3 class="main--title"></h3>
-
-      {% block infoCards %}{% endblock %}
-
-      <div class="user--info">
-        {% block seacrhForm %}{% endblock %}
-
-        {% block additionalButtons %}{% endblock %}
-
-        {% block paginate %}{% endblock %}
-      </div>
-    </div>
-
-    {% block content %}{% endblock %}
   </div>
-
-  {% block extraContent %}{% endblock %}
 
   <!-- =========== Scripts =========  -->
   <script src="{% static 'js/main.js' %}"></script>
-  {% block addScript %}{% endblock %}
 </body>
 
 </html>
