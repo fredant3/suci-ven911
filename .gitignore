@@ -149,7 +149,7 @@ noxfile_config.json
 *.temp
 
 # IDE files
-.vscode/
+# .vscode/
 .idea/
 
 # Local configuration files

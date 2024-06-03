@@ -1,4 +1,4 @@
-<h1 style="display: flex; align-items: center; justify-content: center; gap: 25px;">
+<h1 align="center" style="display: flex; align-items: center; justify-content: center; gap: 25px;">
   <img src="./suci/templates/static/img/logo.png" width="60" alt="S.U.C.I Logo">
   <i>(S.U.C.I)</i>
 </h1>
