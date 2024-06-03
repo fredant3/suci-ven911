@@ -2,7 +2,7 @@
 {% load static %}
 
 <!-- ========================= Menú usuario ==================== -->
-{% block mainContentHeaderTitle %}Reglamentos{% endblock %}
+{% block mainContentHeaderTitle %}Departamentos{% endblock %}
 
 <!-- =========== Formulario de Busqueda =========  -->
 {% block seacrhForm %}
@@ -18,7 +18,7 @@
 
 <!-- =========== Botones de acciones adicionales =========  -->
 {% block additionalButtons %}
-<button data-add class="bt">Agregar</button>
+<button data-btn-add class="bt">Agregar</button>
 {% endblock %}
 
 <!-- =========== Paginador =========  -->
@@ -174,5 +174,5 @@
 
 <!-- =========== Modal =========  -->
 {% block extraContent %}
-{% include "organizacion/modal-reglamento-form.html" %}
+{% include "organizacion/modal-departamento-form.html" %}
 {% endblock %}

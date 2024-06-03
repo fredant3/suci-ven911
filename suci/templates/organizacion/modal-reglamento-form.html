@@ -1,8 +1,8 @@
 {% load static %}
-{% include "utils/modal-header.html" %}
+{% include "utils/modal/modal-header.html" %}
 
 <!-- =========== Contenido del Modal =========  -->
-<form data-gc-form>
+<form data-form>
   {% csrf_token %}
 
   <div class="form-group">
@@ -52,7 +52,7 @@
   </div>
 </form>
 
-{% include "utils/modal-footer.html" %}
+{% include "utils/modal/modal-footer.html" %}
 
 <!-- =========== Scripts =========  -->
 <script src="{% static 'js/organizacion/content-reglamento-modal.js' %}"></script>
