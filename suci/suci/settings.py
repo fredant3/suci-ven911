@@ -11,9 +11,18 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import random
+import string
 from pathlib import Path
 
 from dotenv import load_dotenv
+
+from .template import THEME_LAYOUT_DIR, THEME_VARIABLES
+
+# Template Settings
+# ------------------------------------------------------------------------------
+THEME_LAYOUT_DIR = THEME_LAYOUT_DIR
+THEME_VARIABLES = THEME_VARIABLES
 
 load_dotenv()  # take environment variables from .env.
 
@@ -26,14 +35,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-es2o2vw6!e=(qld@oa0tz#*pqlp&h9#5^d4rs0mq-%=94-ak45'
-SECRET_KEY = os.environ.get("SECRET_KEY", default="django-insecure-t#&s(2=)83@)v9@8$5eok0)e@r$zzz3m4nw*3^1e9(*e0oloef")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    SECRET_KEY = "".join(random.choice(string.ascii_lowercase) for i in range(32))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.environ.get("DEBUG", "True").lower() in ["True", "true", "yes", "1"]
+DEBUG = os.environ.get("DEBUG", "True").lower() in ["true", "yes", "1"]
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -45,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'index',
 ]
 
 MIDDLEWARE = [
@@ -61,15 +72,22 @@ ROOT_URLCONF = 'suci.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+            "libraries": {
+                "theme": "templates.sneat.tags.theme",
+            },
+            "builtins": [
+                "django.templatetags.static",
+                "templates.sneat.tags.theme",
             ],
         },
     },
@@ -136,6 +154,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates", "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

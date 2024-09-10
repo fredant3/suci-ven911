@@ -1,0 +1,61 @@
+{% extends layout_path %}
+
+{% load static %}
+
+{% block title %}{% get_theme_variables titlePage %}{% endblock %}
+
+{% block breadcrumbs %}
+<span class="text-muted fw-light">
+  <a href="{{ indexUrl }}" class="text-muted fw-light">{% get_theme_variables module %}</a> /
+</span>
+<span class="">{% get_theme_variables submodule %}</span>
+{% endblock %}
+
+{% block btnAdd %}
+<a href="{{ createUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>{% get_theme_variables createBtn %}
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive text-nowrap">
+      <table id="data-table" class="table table-striped"">
+        <thead>
+          <tr>
+            {% block thead %}
+              {% for column in heads %}
+                <th>{{ column.title }}</th>
+              {% endfor %}
+            {% endblock %}
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block vendor_css %}
+<link rel="stylesheet" href="{% static 'vendor/libs/data-tables/css/dataTables.bootstrap5.css' %}">
+{% endblock %}
+
+{% block vendor_js %}
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.js' %}"></script>
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.bootstrap5.js' %}"></script>
+{% endblock %}
+
+{% block page_js %}
+<script src="{% static 'js/data-table.js' %}"></script>
+<script>
+$(document).ready(function () {
+  const url = "{{ listUrl }}"
+  const updateUrl = "{{ updateUrl }}"
+  const deleteUrl = "{{ deleteUrl }}"
+  const columns =  {{ columns|safe }}
+  setTBody({url, columns, updateUrl, deleteUrl});
+});
+</script>
+{% endblock %}
