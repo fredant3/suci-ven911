@@ -7,7 +7,7 @@ from templates.sneat.helpers.theme import TemplateHelper
 
 def logoutUser(request):
     logout(request)
-    return HttpResponseRedirect("index:auth:login")
+    return HttpResponseRedirect("users:auth:login")
 
 
 class AuthView(TemplateView):

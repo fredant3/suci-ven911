@@ -21,13 +21,14 @@ Inicar Sesion
           <!-- Logo -->
           <div class="app-brand justify-content-center">
             <a href="{% url 'index:modules:module' %}" class="app-brand-link gap-2">
-              <span class="app-brand-logo demo">{% include 'sneat/layout/partials/menu/vertical/logo.html' with width=25
-                %}</span>
+              <span class="app-brand-logo demo">
+                {% include 'sneat/layout/partials/menu/vertical/logo.html' with width=25 %}
+              </span>
               <span class="app-brand-text demo text-body fw-bold">{% get_theme_variables 'template_name' %}</span>
             </a>
           </div>
           <!-- /Logo -->
-          <h4 class="mb-2">¡Bienvenidos a{% get_theme_variables 'template_name' %}! 👋</h4>
+          <h4 class="mb-2">¡Bienvenidos a {% get_theme_variables 'template_name' %}! 👋</h4>
           <p class="mb-4">Inicie sesión en su cuenta</p>
 
           <form id="formAuthentication" class="mb-3" method="POST">
@@ -51,7 +52,7 @@ Inicar Sesion
             <div class="mb-3 form-password-toggle">
               <div class="d-flex justify-content-between">
                 <label class="form-label" for="password">Contraseña</label>
-                <a href="{% url 'index:auth:forgot-password' %}"><small>¿Has olvidado tu contraseña?</small></a>
+                <a href="{% url 'users:auth:forgot-password' %}"><small>¿Has olvidado tu contraseña?</small></a>
               </div>
 
               <div class="input-group input-group-merge">
@@ -76,7 +77,7 @@ Inicar Sesion
 
           <p class="text-center">
             <span>¿Nuevo en nuestra plataforma?</span>
-            <a href="{% url 'index:auth:register' %}"><span>Crea una cuenta</span></a>
+            <a href="{% url 'users:auth:register' %}"><span>Crea una cuenta</span></a>
           </p>
         </div>
       </div>
@@ -85,3 +86,7 @@ Inicar Sesion
   </div>
 </div>
 {% endblock %}
+
+{% block page_js %}
+
+{% endblock page_js %}

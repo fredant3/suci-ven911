@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
 from django.urls import path, reverse_lazy
-from index.authentication.controllers.controller import AuthView
-from index.authentication.controllers.LoginController import LoginController
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from users.authentication.controllers.controller import AuthView
+from users.authentication.controllers.LoginController import LoginController
 
 urlpatterns = [
+    # FRONTEND
     path(
         "login",
         LoginController.as_view(template_name="public/authentication/login.html"),
@@ -25,4 +27,8 @@ urlpatterns = [
         AuthView.as_view(template_name="public/authentication/register.html"),
         name="register",
     ),
+    
+    # API
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 ]

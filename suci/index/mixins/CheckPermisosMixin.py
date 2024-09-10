@@ -15,7 +15,7 @@ class CheckPermisosMixin(object):
 
     def get_url_redirect(self):
         if self.url_redirect is None:
-            return reverse_lazy("auth:login")
+            return reverse_lazy("users:auth:login")
         return self.url_redirect
 
     def dispatch(self, request, *args, **kwargs):

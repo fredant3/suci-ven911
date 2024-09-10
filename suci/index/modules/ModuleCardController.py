@@ -5,7 +5,7 @@ from templates.sneat import TemplateLayout
 
 class ModuleCard(TemplateView):
 # class ModuleCard(LoginRequiredMixin, TemplateView):
-    login_url = "index:auth:login"
+    login_url = "users:auth:login"
     template_name = "public/modules/index.html"
 
     def get_context_data(self, **kwargs):

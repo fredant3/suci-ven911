@@ -2,9 +2,9 @@ from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from index.authentication.forms.LoginForm import LoginForm
 from templates.sneat import TemplateLayout
 from templates.sneat.helpers.theme import TemplateHelper
+from users.authentication.forms.LoginForm import LoginForm
 
 
 class LoginController(LoginView):
