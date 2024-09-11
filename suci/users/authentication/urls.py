@@ -27,8 +27,7 @@ urlpatterns = [
         AuthView.as_view(template_name="public/authentication/register.html"),
         name="register",
     ),
-    
     # API
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+    path("api/login", TokenObtainPairView.as_view(), name="api_login"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

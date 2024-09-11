@@ -32,7 +32,6 @@ Inicar Sesion
           <p class="mb-4">Inicie sesión en su cuenta</p>
 
           <form id="formAuthentication" class="mb-3" method="POST">
-            {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}" />
 
             <div class="mb-3">
@@ -88,5 +87,30 @@ Inicar Sesion
 {% endblock %}
 
 {% block page_js %}
+<script>
+  console.info('HOLA')
+  const form = document.getElementById('formAuthentication')
+  form.addEventListener('submit', login)
 
-{% endblock page_js %}
+  function login(event) {
+    event.preventDefault()
+
+    const formData = new FormData(form)
+    const formJson = JSON.stringify(Object.fromEntries(formData.entries()))
+
+    console.log(formJson); // Output: JSON object representing form data
+
+
+    fetch('{% url uri_api_login %}', {
+      method: "POST",
+      body: formJson,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'X-CSRFToken': '{{ csrf_token }}'
+      }
+    })
+      .then(response => response.json())
+      .then(json => console.log(json));
+  }
+</script>
+{% endblock %}

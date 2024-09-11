@@ -13,7 +13,10 @@ class LoginController(LoginView):
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
-        context.update({"layout_path": TemplateHelper.set_layout("layout_blank.html", context)})
+        context["uri_api_login"] = "users:auth:api_login"
+        context.update(
+            {"layout_path": TemplateHelper.set_layout("layout_blank.html", context)}
+        )
         return context
 
     def dispatch(self, request, *args, **kwargs):
