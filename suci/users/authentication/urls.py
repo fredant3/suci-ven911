@@ -29,5 +29,5 @@ urlpatterns = [
     ),
     # API
     path("api/login", TokenObtainPairView.as_view(), name="api_login"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="api_token_refresh"),
 ]

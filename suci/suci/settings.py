@@ -166,6 +166,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates", "static")]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+LOGIN_URL = "auth/login"
+LOGIN_REDIRECT_URL = "dashboard"
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
