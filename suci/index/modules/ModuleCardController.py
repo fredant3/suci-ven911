@@ -3,8 +3,8 @@ from django.views.generic import TemplateView
 from templates.sneat import TemplateLayout
 
 
-class ModuleCard(TemplateView):
-# class ModuleCard(LoginRequiredMixin, TemplateView):
+# class ModuleCard(viewsets.ModelViewSet):
+class ModuleCard(LoginRequiredMixin, TemplateView):
     login_url = "users:auth:login"
     template_name = "public/modules/index.html"
 
@@ -16,7 +16,11 @@ class ModuleCard(TemplateView):
                 "url": "gc:info",
                 "image": "img/gestion_administrativa.png",
             },
-            {"title": "Emergencias", "url": "eme:list-emergency", "image": "img/cuadrantes_de_paz.png"},
+            {
+                "title": "Emergencias",
+                "url": "eme:list-emergency",
+                "image": "img/cuadrantes_de_paz.png",
+            },
             # {"title": "Gestión Administrativa", "url": "gc:info", "image": "img/gestion_administrativa.png"},
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             # {"title": "Gestión Humana", "url": "gc:info", "image": "img/gestion_humana.png"},

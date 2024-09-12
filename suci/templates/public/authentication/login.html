@@ -32,18 +32,18 @@ Inicar Sesion
           <p class="mb-4">Inicie sesión en su cuenta</p>
 
           <form id="formAuthentication" class="mb-3" method="POST">
-            <input type="hidden" name="next" value="{{ next }}" />
+            {% if form.error_messages %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              {% for error in form.get_invalid_login_error %}
+              <strong>Advertencia:</strong> {{ error }}
+              {% endfor %}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            {% csrf_token %}
 
             <div class="mb-3">
-              {% if form.error_messages %}
-              <div class="alert alert-danger alert-dismissible" role="alert">
-                {% for error in form.get_invalid_login_error %}
-                <strong>Advertencia:</strong> {{ error }}
-                {% endfor %}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              {% endif %}
-
               <label for="username" class="form-label">Cédula de Identidad</label>
               {{ form.username }}
             </div>
@@ -106,7 +106,6 @@ Inicar Sesion
       body: formJson,
       headers: {
         "Content-type": "application/json; charset=UTF-8",
-        'X-CSRFToken': '{{ csrf_token }}'
       }
     })
       .then(response => response.json())
