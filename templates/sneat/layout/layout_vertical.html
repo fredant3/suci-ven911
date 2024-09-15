@@ -32,8 +32,9 @@
             <div class="d-inline-flex w-100 justify-content-between mb-4">
               <h4 class="py-2 my-0">
                 <span class="text-muted fw-light">
-                  <a href="{% url 'modules:index' %}" class="text-muted fw-light">{% get_theme_variables
-                    'template_name' %}</a> /
+                  <a href="{% url 'modules:index' %}" class="text-muted fw-light">
+                    {% get_theme_variables 'template_name' %}
+                  </a> /
                 </span>
 
                 {% block breadcrumbs %}{% endblock %}
