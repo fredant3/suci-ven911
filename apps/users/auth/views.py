@@ -1,8 +1,9 @@
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
+from rest_framework_simplejwt.views import TokenObtainPairView
 from users.auth.forms import LoginForm
 
 from templates.sneat import TemplateLayout
@@ -18,13 +19,14 @@ class AuthView(TemplateView):
         return context
 
 
-class LoginController(LoginView):
+class LoginView(LoginView):
     form_class = LoginForm
     next_page = reverse_lazy("modules:index")
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
-        context["uri_api_login"] = "auth:api_login"
+        context["uri_api_login"] = "api_auth:login"
+        context["successful_redirection"] = self.next_page
         context.update(
             {"layout_path": TemplateHelper.set_layout("layout_blank.html", context)},
         )
@@ -34,8 +36,24 @@ class LoginController(LoginView):
         if request.user.is_authenticated:
             return HttpResponseRedirect(self.get_success_url())
         else:
-            return super(LoginController, self).dispatch(request, *args, **kwargs)
+            return super(LoginView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         login(self.request, form.get_user())
         return HttpResponseRedirect(self.get_success_url())
+
+
+class LoginApiView(TokenObtainPairView):
+    form_class = LoginForm
+
+    def post(self, request, *args, **kwargs):
+        loginApi = super().post(request, *args, **kwargs)
+
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+
+        return loginApi
