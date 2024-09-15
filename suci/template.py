@@ -17,6 +17,7 @@ THEME_VARIABLES = {
     "changelog": "https://github.com/erickjpl/suci-ven911/blob/main/CHANGELOG.md",
     "git_repository": "https://github.com/erickjpl/suci-ven911",
     "license_url": "https://github.com/erickjpl/suci-ven911/blob/main/README.md",
+    "breadcrumbs_dashboard_modules_index": "SUCI",
 }
 
 # ! Don't change THEME_LAYOUT_DIR unless it's required

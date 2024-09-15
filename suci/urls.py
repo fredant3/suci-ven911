@@ -22,7 +22,11 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path("admin", admin.site.urls),
     path("", include(("apps.users.auth.urls", "auth"))),
-    path("api", include(("apps.users.auth.urls_apis", "api_auth"))),
+    path("api/auth", include(("apps.users.auth.urls_apis", "api_auth"))),
     path("dashboard", include(("apps.dashboard.modules.urls", "modules"))),
+    path("denuncias", include(("apps.asesoria.denuncias.urls", "denuncias"))),
+    path(
+        "api/denuncias", include(("apps.asesoria.denuncias.urls_apis", "api_denuncias"))
+    ),
     path("", RedirectView.as_view(url="dashboard", permanent=True)),
 ]

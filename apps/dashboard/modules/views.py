@@ -12,9 +12,14 @@ class Modules(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["modules"] = [
+            # {
+            #     "title": "Admin",
+            #     "url": "modules:index",
+            #     "image": "img/gestion_administrativa.png",
+            # },
             {
-                "title": "Admin",
-                "url": "modules:index",
+                "title": "Asesoría Jurídica",
+                "url": "denuncias:list",
                 "image": "img/gestion_administrativa.png",
             },
             # {
