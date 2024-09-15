@@ -16,8 +16,8 @@ from helpers.ControllerMixin import (
 
 from templates.sneat import TemplateLayout
 
-from .forms import DenunciaForm
-from .services import DenunciaService
+from ..forms import DenunciaForm
+from ..services import DenunciaService
 
 
 class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -32,7 +32,7 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Denuncias"
-        context["createBtn"] = "Crear"
+        context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("denuncias:create")
         context["listApiUrl"] = reverse_lazy("api_denuncias:list")
         context["updateUrl"] = reverse_lazy("denuncias:update", args=[0])
@@ -121,7 +121,7 @@ class DenunciaListApiView(ListController, CheckPermisosMixin):
 
 class DenunciaCreateApiView(CreateController):
     form_class = DenunciaForm
-    template_name = "gc/social-media/accounts/create.html"
+    template_name = "sneat/layout/partials/form/layout.html"
 
     def __init__(self):
         self.service = SocialMediaAccountService()

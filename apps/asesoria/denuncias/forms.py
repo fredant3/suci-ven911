@@ -20,6 +20,4 @@ class DenunciaForm(forms.ModelForm):
             "cedula_denunciado",
             "motivo",
             "zona",
-            "fecha_denuncia",
-            "fecha_incidente",
         ]
