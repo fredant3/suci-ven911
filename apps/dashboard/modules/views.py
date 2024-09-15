@@ -4,8 +4,6 @@ from django.views.generic import TemplateView
 
 from templates.sneat import TemplateLayout
 
-# Create your views here.
-
 
 class Modules(LoginRequiredMixin, TemplateView):
     login_url = "auth:login"
@@ -15,7 +13,7 @@ class Modules(LoginRequiredMixin, TemplateView):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["modules"] = [
             {
-                "title": "Gestión Comunicacional",
+                "title": "Admin",
                 "url": "modules:index",
                 "image": "img/gestion_administrativa.png",
             },
