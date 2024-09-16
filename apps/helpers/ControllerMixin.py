@@ -38,6 +38,7 @@ class ListController(LoginRequiredMixin, ListView):
 
 class CreateController(LoginRequiredMixin, CreateView):
     def post(self, request, *arg, **kwargs):
+        print("HOLA")
         if (
             request.method == "POST"
             and request.headers.get("X-Requested-With") == "XMLHttpRequest"

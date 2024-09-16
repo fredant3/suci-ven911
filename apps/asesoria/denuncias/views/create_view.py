@@ -1,6 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
@@ -13,6 +11,7 @@ from ..services import DenunciaService
 
 
 class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+    login_url = "auth:login"
     permission_required = ""
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
@@ -33,26 +32,7 @@ class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 class DenunciaCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
-    template_name = "sneat/layout/partials/form/layout.html"
+    form_class = DenunciaForm
 
     def __init__(self):
         self.service = DenunciaService()
-
-    # def get_queryset(self):
-    #     # self.kwargs['page']
-    #     page = self.request.GET.get("page") or 1
-    #     search = self.request.GET.get("search") or None
-
-    #     return self.service.getAll(page, search)
-
-    # def get(self, request, *args, **kwargs):
-    #     if request.headers.get("x-requested-with") == "XMLHttpRequest":
-    #         data = {}
-    #         try:
-    #             data = self.get_queryset()
-    #         except Exception as e:
-    #             data["error"] = str(e)
-    #         return JsonResponse(data, safe=False)
-
-    #     context = self.get_context_data(**kwargs)
-    #     return render(request, self.template_name, context)

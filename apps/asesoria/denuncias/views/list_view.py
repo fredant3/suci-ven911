@@ -99,9 +99,6 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
-            {
-                "title": "Acciones",
-            },
         ]
 
 

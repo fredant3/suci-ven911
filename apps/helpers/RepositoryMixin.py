@@ -19,6 +19,7 @@ class Repository:
         return entity
 
     def create(self, data):
+        print(data)
         data = {k: v for k, v in data.items() if k != "csrfmiddlewaretoken"}
         entity = self.entity(**data)
         entity.save()

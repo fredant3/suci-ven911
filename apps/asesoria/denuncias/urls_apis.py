@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views.create_view import DenunciaCreateView
+from .views.create_view import DenunciaCreateApiView
 from .views.list_view import DenunciaListApiView
 
 urlpatterns = [
@@ -11,7 +11,7 @@ urlpatterns = [
     ),
     path(
         "create",
-        DenunciaCreateView.as_view(),
+        DenunciaCreateApiView.as_view(),
         name="create",
     ),
 ]
