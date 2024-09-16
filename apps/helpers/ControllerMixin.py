@@ -38,7 +38,6 @@ class ListController(LoginRequiredMixin, ListView):
 
 class CreateController(LoginRequiredMixin, CreateView):
     def post(self, request, *arg, **kwargs):
-        print("HOLA")
         if (
             request.method == "POST"
             and request.headers.get("X-Requested-With") == "XMLHttpRequest"
@@ -54,6 +53,7 @@ class CreateController(LoginRequiredMixin, CreateView):
 
 
 class UpdateController(LoginRequiredMixin, UpdateView):
+    http_method_names = ["get", "post", "put"]
     redirect_not_found = None
 
     def get_url_redirect(self):
@@ -73,6 +73,7 @@ class UpdateController(LoginRequiredMixin, UpdateView):
 
     def get_object(self, **kwargs):
         pk = self.kwargs.get("pk")
+        print("get_object", pk)
 
         if pk:
             try:
@@ -83,6 +84,7 @@ class UpdateController(LoginRequiredMixin, UpdateView):
                 print(f"REDIRECT ObjectDoesNotExist {ObjectDoesNotExist}")
                 error(self.request, "El recurso no se ha encontrado")
         else:
+            print("pk vacio")
             error(self.request, "No se proporcionó ningún recurso válido")
 
     def get_form(self):

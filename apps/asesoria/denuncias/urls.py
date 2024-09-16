@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views.create_view import DenunciaCreateView
 from .views.list_view import DenunciaListView
+from .views.update_view import DenunciaUpdateView
 
 urlpatterns = [
     path(
@@ -21,7 +22,7 @@ urlpatterns = [
     ),
     path(
         "<int:pk>/update",
-        DenunciaListView.as_view(),
+        DenunciaUpdateView.as_view(),
         name="update",
     ),
     path(

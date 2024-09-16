@@ -9,7 +9,7 @@ class Repository:
         return self.entity.objects.filter(criteria).values(*select)
 
     def getById(self, id, select):
-        entity = self.entity.objects.get(pk=id).values(*select)
+        entity = self.entity.objects.get(pk=id)
 
         if entity is None:
             raise ObjectDoesNotExist(

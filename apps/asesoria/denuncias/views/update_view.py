@@ -1,16 +1,17 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
-from helpers.ControllerMixin import CreateController
+from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
 from ..forms import DenunciaForm
+from ..models import Denuncia
 from ..services import DenunciaService
 
 
-class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+class DenunciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
@@ -21,15 +22,21 @@ class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Denuncias"
-        context["titleForm"] = "Añadir una denuncia nueva"
-        context["tag"] = "Registrar"
+        context["titleForm"] = "Actualizar denuncia"
+        context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("denuncias:list")
-        context["urlForm"] = reverse_lazy("api_denuncias:create")
-        context["methodForm"] = "POST"
+        context["urlForm"] = reverse_lazy(
+            "api_denuncias:update", args=[self.kwargs.get("pk")]
+        )
+        context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
 
+    def get_queryset(self):
+        id = self.kwargs.get("pk")
+        return Denuncia.objects.filter(pk=id)
 
-class DenunciaCreateApiView(CreateController, CheckPermisosMixin):
+
+class DenunciaUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = ""
     form_class = DenunciaForm
 
