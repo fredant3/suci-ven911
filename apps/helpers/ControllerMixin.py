@@ -73,7 +73,6 @@ class UpdateController(LoginRequiredMixin, UpdateView):
 
     def get_object(self, **kwargs):
         pk = self.kwargs.get("pk")
-        print("get_object", pk)
 
         if pk:
             try:

@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views.create_view import DenunciaCreateView
+from .views.delete_view import DenunciaDeleteView
 from .views.list_view import DenunciaListView
 from .views.update_view import DenunciaUpdateView
 
@@ -16,7 +17,7 @@ urlpatterns = [
         name="create",
     ),
     path(
-        "read",
+        "<int:pk>/read",
         DenunciaListView.as_view(),
         name="read",
     ),
@@ -27,7 +28,7 @@ urlpatterns = [
     ),
     path(
         "<int:pk>/delete",
-        DenunciaListView.as_view(),
+        DenunciaDeleteView.as_view(),
         name="delete",
     ),
     # path('denuncias/', views.denuncia, name="denuncia"),

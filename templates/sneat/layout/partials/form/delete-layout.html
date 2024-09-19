@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-  {% get_theme_variables titlePage %}
+  {{ titlePage }}
 {% endblock %}
 
 {% block breadcrumbs %}
-  <span class="text-muted fw-light"><a href="{{ indexUrl }}" class="text-muted fw-light">{% get_theme_variables module %}</a> /</span>
-  <span class="text-muted fw-light"><a href="{{ listUrl }}" class="text-muted fw-light">{% get_theme_variables submodule %}</a> /</span>
+  <span class="text-muted fw-light"><a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /</span>
+  <span class="text-muted fw-light"><a href="{{ listUrl }}" class="text-muted fw-light">{{ submodule }}</a> /</span>
   <span class="">{{ tag }}</span>
 {% endblock %}
 
@@ -16,7 +16,7 @@
     <div class="col-xl">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">{% get_theme_variables titleForm %}</h5>
+          <h5 class="mb-0">{{ titleForm }}</h5>
           <small class="text-muted float-end">{{ tag }}</small>
         </div>
 
@@ -49,7 +49,7 @@
   <script src="{% static 'js/ajax-setup.js' %}"></script>
   <script>
     const url = '{{ urlDelete }}'
-    const submodule = '{% get_theme_variables submodule %}'
+    const submodule = '{{ submodule }}'
     
     document.querySelector('[data-btn-delete]').addEventListener('click', () => {
       $.ajax({
