@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     "apps.dashboard",
     # "apps.administracion",
     "apps.asesoria",
+    # "apps.biblioteca",
+    "apps.organizacion",
 ]
 
 MIDDLEWARE = [

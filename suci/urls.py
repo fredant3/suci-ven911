@@ -25,5 +25,7 @@ urlpatterns = [
     path("api/auth/", include(("apps.users.auth.urls_apis", "api_auth"))),
     path("dashboard/", include(("apps.dashboard.modules.urls", "modules"))),
     path("asesoria-juridica/", include(("apps.asesoria.urls"))),
+    # path("biblioteca/", include(("apps.biblioteca.urls"))),
+    path("organizacion/", include(("apps.organizacion.urls"))),
     path("", RedirectView.as_view(url="dashboard", permanent=True)),
 ]
