@@ -33,7 +33,11 @@ class Modules(LoginRequiredMixin, TemplateView):
             # {"title": "Tecnología Comunicación e Información", "url": "gc:info", "image": "img/tecnologia.png"},
             # {"title": "Unidad de Respuesta Inmediata", "url": "gc:info", "image": "img/ambulancia.png"},
             # {"title": "Potencia", "url": "gc:info", "image": "img/incidente.png"},
-            # {"title": "Organización", "url": "gc:info", "image": "img/organizacion.png"},
+            {
+                "title": "Organización",
+                "url": "organizacion",
+                "image": "img/organizacion.png",
+            },
             # {"title": "Presupuesto", "url": "gc:info", "image": "img/presupuesto.png"},
             # {"title": "Planificación", "url": "gc:info", "image": "img/planificacion.png"},
             # {"title": "Seguridad Integral", "url": "gc:info", "image": "img/seguridad.png"},

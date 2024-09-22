@@ -17,32 +17,34 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
     },
     // columns: columns,
     columns: getColumns(columns),
-    columnDefs: [
-      {
-        targets: [-1],
-        class: "text-center",
-        orderable: false,
-        render: function (data, type, row) {
-          let buttons = `
-            <a href="${updateUrl.replace(
-            "0",
-            row.id
-          )}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
-            <a href="${deleteUrl.replace(
-            "0",
-            row.id
-          )}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
-          `;
-          return buttons;
-        },
-      },
-    ],
+    columnDefs: getcolumnDefs(updateUrl, deleteUrl),
     initComplete: function (settings, json) {
       // console.info('Datos cargados.', { settings, json })
     },
     language: language,
   });
 };
+
+function getcolumnDefs (updateUrl, deleteUrl) {
+  if (updateUrl && deleteUrl) {
+    return [
+      {
+        targets: [-1],
+        class: "text-center",
+        orderable: false,
+        render: function (data, type, row) {
+          let buttons = `
+            <a href="${updateUrl.replace("0",row.id)}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
+            <a href="${deleteUrl.replace("0",row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
+          `;
+          return buttons;
+        },
+      },
+    ]
+  }  
+
+  return []
+}
 
 function getColumns (stringColumns) {
   if (typeof stringColumns === "string")

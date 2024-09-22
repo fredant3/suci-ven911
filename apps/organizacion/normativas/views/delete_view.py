@@ -6,12 +6,12 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReglamentoForm
-from ..models import Reglamento
-from ..services import ReglamentoService
+from ..forms import NormativaForm
+from ..models import Normativa
+from ..services import NormativaService
 
 
-class ReglamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
+class NormativaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
     permission_required = ""
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
@@ -20,23 +20,23 @@ class ReglamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Organizacion"
         context["indexUrl"] = reverse_lazy("organizacion")
         context["module"] = "Organizacion"
-        context["submodule"] = "Reglamentos"
-        context["titleForm"] = "Eliminar reglamento"
+        context["submodule"] = "Normativas"
+        context["titleForm"] = "Eliminar normativa"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("reglamentos:list")
+        context["listUrl"] = reverse_lazy("normativas:list")
         context["urlDelete"] = reverse_lazy(
-            "api_reglamentos:delete", args=[self.kwargs.get("pk")]
+            "api_normativas:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Reglamento.objects.filter(pk=id)
+        return Normativa.objects.filter(pk=id)
 
 
-class ReglamentoDeleteApiView(DeleteController, CheckPermisosMixin):
+class NormativaDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = ""
-    form_class = ReglamentoForm
+    form_class = NormativaForm
 
     def __init__(self):
-        self.service = ReglamentoService()
+        self.service = NormativaService()

@@ -6,13 +6,13 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReglamentoForm
-from ..services import ReglamentoService
+from ..forms import NormativaForm
+from ..services import NormativaService
 
 
-class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+class NormativaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
-    form_class = ReglamentoForm
+    form_class = NormativaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -20,18 +20,18 @@ class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titlePage"] = "Organizacion"
         context["indexUrl"] = reverse_lazy("organizacion")
         context["module"] = "Organizacion"
-        context["submodule"] = "Reglamentos"
-        context["titleForm"] = "Añadir un reglamento"
+        context["submodule"] = "Normativas"
+        context["titleForm"] = "Añadir un normativa"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("reglamentos:list")
-        context["urlForm"] = reverse_lazy("api_reglamentos:create")
+        context["listUrl"] = reverse_lazy("normativas:list")
+        context["urlForm"] = reverse_lazy("api_normativas:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
 
-class ReglamentoCreateApiView(CreateController, CheckPermisosMixin):
+class NormativaCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
-    form_class = ReglamentoForm
+    form_class = NormativaForm
 
     def __init__(self):
-        self.service = ReglamentoService()
+        self.service = NormativaService()

@@ -46,7 +46,15 @@ class CreateController(LoginRequiredMixin, CreateView):
                 self.service.creator(self.get_form(), request)
                 return JsonResponse({"message": "Se ha registrado con éxito."})
             except ValidationError as e:
-                return JsonResponse({"errors": json.loads(e.message.replace("'", '"'))})
+                return JsonResponse(
+                    {
+                        "errors": (
+                            json.loads(e.message.replace("'", '"'))
+                            if isinstance(e.message, str)
+                            else e.message
+                        )
+                    }
+                )
 
     class Meta:
         abstract = True

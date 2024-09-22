@@ -21,7 +21,7 @@
         </div>
 
         <div class="card-body">
-          <form id="form" novalidate>
+          <form id="form" novalidate enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for field in form %}
@@ -63,13 +63,26 @@
     $('form').on('submit', function (event) {
       event.preventDefault()
     
-      const data = $(this).serializeArray()
-      $.ajax({
+      let setup = {
         url: url,
         type: method,
-        data: data,
         dataType: 'json'
-      })
+      }
+
+      if ($(this).find('input[type="file"]').length) {
+        data = new FormData(this);
+        setup = { ...setup, data, processData: false, contentType: false }
+      } else {
+        data = $(this).serializeArray()
+        setup = { ...setup, data }
+      }
+
+      console.info({data})
+      console.info({setup})
+      console.info('FormData', new FormData(this))
+      console.info('serializeArray', $(this).serializeArray())
+
+      $.ajax(setup)
         .done(function (data) {
           if (data.hasOwnProperty('errors')) {
             toastError(submodule, 'Ha ocurrido un error..!')

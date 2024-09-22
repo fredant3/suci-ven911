@@ -9,10 +9,10 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import ReglamentoService
+from ..services import NormativaService
 
 
-class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
@@ -23,12 +23,12 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Organizacion"
         context["indexUrl"] = reverse_lazy("organizacion")
         context["module"] = "Organizacion"
-        context["submodule"] = "Reglamentos"
+        context["submodule"] = "Normativas"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("reglamentos:create")
-        context["listApiUrl"] = reverse_lazy("api_reglamentos:list")
-        context["updateUrl"] = reverse_lazy("reglamentos:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("reglamentos:delete", args=[0])
+        context["createUrl"] = reverse_lazy("normativas:create")
+        context["listApiUrl"] = reverse_lazy("api_normativas:list")
+        context["updateUrl"] = reverse_lazy("normativas:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("normativas:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -45,7 +45,7 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "name",
                 "name": "name",
-                "title": "Nombre de Reglamento",
+                "title": "Nombre de Normativa",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -80,8 +80,8 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class ReglamentoListApiView(ListController, CheckPermisosMixin):
+class NormativaListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):
-        self.service = ReglamentoService()
+        self.service = NormativaService()

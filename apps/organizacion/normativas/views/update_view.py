@@ -6,14 +6,14 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReglamentoForm
-from ..models import Reglamento
-from ..services import ReglamentoService
+from ..forms import NormativaForm
+from ..models import Normativa
+from ..services import NormativaService
 
 
-class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
-    form_class = ReglamentoForm
+    form_class = NormativaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -21,24 +21,24 @@ class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Organizacion"
         context["indexUrl"] = reverse_lazy("organizacion")
         context["module"] = "Organizacion"
-        context["submodule"] = "Reglamentos"
-        context["titleForm"] = "Actualizar reglamento"
+        context["submodule"] = "Normativas"
+        context["titleForm"] = "Actualizar normativa"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("reglamentos:list")
+        context["listUrl"] = reverse_lazy("normativas:list")
         context["urlForm"] = reverse_lazy(
-            "api_reglamentos:update", args=[self.kwargs.get("pk")]
+            "api_normativas:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Reglamento.objects.filter(pk=id)
+        return Normativa.objects.filter(pk=id)
 
 
-class ReglamentoUpdateApiView(UpdateController, CheckPermisosMixin):
+class NormativaUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = ""
-    form_class = ReglamentoForm
+    form_class = NormativaForm
 
     def __init__(self):
-        self.service = ReglamentoService()
+        self.service = NormativaService()

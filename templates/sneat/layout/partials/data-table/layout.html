@@ -15,9 +15,11 @@
 <a href="{{ createUrl }}" class="btn btn-outline-primary">
   <span class="tf-icons bx bx-plus me-1"></span>{{ createBtn }}
 </a>
+{% if exportExcelUrl %}
 <a href="{{ exportExcelUrl }}" class="btn btn-outline-primary">
   <span class="tf-icons bx bx-plus me-1"></span>Exportar a Excel
 </a>
+{% endif %}
 {% endblock %}
 
 {% block content %}

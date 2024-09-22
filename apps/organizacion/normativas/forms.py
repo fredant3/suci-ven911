@@ -1,10 +1,10 @@
 from django import forms
 from django.forms.fields import DateTimeInput
 
-from .models import Reglamento
+from .models import Normativa
 
 
-class ReglamentoForm(forms.ModelForm):
+class NormativaForm(forms.ModelForm):
     estado = forms.BooleanField(
         required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
     )
@@ -14,7 +14,7 @@ class ReglamentoForm(forms.ModelForm):
         return estado if estado is not None else False
 
     class Meta:
-        model = Reglamento
+        model = Normativa
         fields = [
             "name",
             "file",
