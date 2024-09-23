@@ -2,11 +2,16 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 class Repository:
-    def getAll(self, select):
-        return self.entity.objects.all().values(*select)
+    def getAll(self, select, orderBy, orderAsc):
+        orderBy = orderBy if orderBy else "id"
+        order = orderBy if orderAsc == "asc" else "-" + orderBy
+        return self.entity.objects.all().order_by(order).values(*select)
 
-    def getFilter(self, criteria, select):
-        return self.entity.objects.filter(criteria).values(*select)
+    def getFilter(self, criteria, select, orderBy, orderAsc):
+        orderBy = orderBy if orderBy else "id"
+        order = orderBy if orderAsc == "asc" else "-" + orderBy
+
+        return self.entity.objects.filter(criteria).order_by(order).values(*select)
 
     def getById(self, id, select):
         # entity = self.entity.objects.get(pk=id).values(*select)

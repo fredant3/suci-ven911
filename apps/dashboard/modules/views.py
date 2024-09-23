@@ -22,6 +22,11 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "denuncias:list",
                 "image": "img/gestion_administrativa.png",
             },
+            {
+                "title": "Biblioteca de Manuales",
+                "url": "bibliotecas",
+                "image": "img/biblioteca.png",
+            },
             # {
             #     "title": "Emergencias",
             #     "url": "eme:list-emergency",
@@ -41,7 +46,6 @@ class Modules(LoginRequiredMixin, TemplateView):
             # {"title": "Presupuesto", "url": "gc:info", "image": "img/presupuesto.png"},
             # {"title": "Planificación", "url": "gc:info", "image": "img/planificacion.png"},
             # {"title": "Seguridad Integral", "url": "gc:info", "image": "img/seguridad.png"},
-            # {"title": "Biblioteca de Manuales", "url": "gc:info", "image": "img/biblioteca.png"},
             # {"title": "Admin", "url": "gc:info", "image": "img/admin.png"},
         ]
         return context

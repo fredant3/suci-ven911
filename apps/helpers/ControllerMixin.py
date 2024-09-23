@@ -13,7 +13,7 @@ class ListController(LoginRequiredMixin, ListView):
     def get_queryset(self):
         draw = int(self.request.GET.get("draw")) if self.request.GET.get("draw") else 1
         start = (
-            int(self.request.GET.get("start")) if self.request.GET.get("start") else 1
+            int(self.request.GET.get("start")) if self.request.GET.get("start") else 0
         )
         length = (
             int(self.request.GET.get("length"))
@@ -22,7 +22,10 @@ class ListController(LoginRequiredMixin, ListView):
         )
         search = self.request.GET.get("search[value]") or None
 
-        return self.service.getAll(draw, start, length, search)
+        orderBy = self.request.GET.get("order[0][name]") or None
+        orderAsc = self.request.GET.get("order[0][dir]") or None
+
+        return self.service.getAll(draw, start, length, search, orderBy, orderAsc)
 
     def get(self, request, *args, **kwargs):
         data = {}

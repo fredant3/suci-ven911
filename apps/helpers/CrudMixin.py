@@ -4,11 +4,13 @@ from .ServiceUtilMixin import ServiceUtilMixin
 
 
 class CrudService(ServiceUtilMixin):
-    def getAll(self, draw, start, length, search=None, select=("")):
+    def getAll(
+        self, draw, start, length, search=None, orderBy=None, orderAsc=None, select=("")
+    ):
         if search is None:
-            entities = self.repository.getAll(select)
+            entities = self.repository.getAll(select, orderBy, orderAsc)
         else:
-            entities = self.repository.getFilter(search, select)
+            entities = self.repository.getFilter(search, select, orderBy, orderAsc)
 
         return self.response(entities, start, length, draw)
 

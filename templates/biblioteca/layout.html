@@ -1,0 +1,106 @@
+{% extends layout_path %}
+
+{% load static %}
+
+{% block title %}{{ titlePage }}{% endblock %}
+
+{% block breadcrumbs %}<span class="">{{ module }}</span>{% endblock %}
+
+{% block content %}
+  <div class="flex-column w-100 border rounded biblioteca-wrapper">
+    <div id="cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
+    
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation">
+        <ul class="pagination mb-2">
+          <li class="page-item prev">
+            <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left bx-sm"></i></a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0);">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0);">2</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="javascript:void(0);">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0);">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0);">5</a>
+          </li>
+          <li class="page-item next">
+            <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right bx-sm"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+{% endblock %}
+
+{% block page_css %}
+{{ block.super }}
+
+<style>
+  .biblioteca-wrapper{
+    min-height: 275px;
+    background-color: #f0f2f4;
+  }
+  .bibliotecas{
+    max-width: 250px;
+    min-width: 215px;
+  }
+  .img-fluid-custom {
+      width: 50px;
+  }
+  .pagination > .page-item {
+    height: 41px;
+  }
+  .pagination > .page-item > .page-link {
+    height: 100%;
+    line-height: inherit;
+
+  }
+</style>
+{% endblock %}
+
+{% block page_js %}
+<script src="{% static 'js/ajax-setup.js' %}"></script>
+<script>
+$(document).ready(function () {
+  $('#cards').empty();
+  
+  ["{{ normativaListApiUrl }}","{{ reglamentoListApiUrl }}"].forEach(url => {
+    $.ajax({
+      url: `${url}?length=5&order[0][name]=date&order[0][dir]=desc`,
+      type: 'GET',
+      dataType: 'json'
+    })
+      .done(function (data) {
+        $.each(data.entities, function(index, card) {
+          const cardHtml = `<div class="col-auto">
+            <div class="card h-100 align-items-center bibliotecas">
+              <div class="card-body align-self-start">
+                <h5 class="card-title">${card.name}</h5>
+                <h6 class="card-subtitle text-uppercase">${url.replaceAll('/', '').replace('organizacionapi', '')}</h6>
+              </div>
+              <img class="img-fluid img-fluid-custom" src="{% static 'img/book.svg' %}" alt="Card image cap" />
+              <div class="card-body d-flex flex-column w-100">
+                <p class="card-text text-center">${card.date}</p>
+                <a href="javascript:void(0);" class="card-link text-end">Descargar</a>
+              </div>
+            </div>
+          </div>`
+
+          $('#cards').append(cardHtml);
+        })
+
+        console.info(Math.round(data.recordsTotal))
+      })
+      .fail((jqXHR, textStatus, errorThrown) => console.error)
+  })
+});
+</script>
+{% endblock %}

@@ -9,9 +9,4 @@ urlpatterns = [
         NormativaListView.as_view(),
         name="list",
     ),
-    path(
-        "<int:pk>/read",
-        DenunciaListView.as_view(),
-        name="read",
-    ),
 ]

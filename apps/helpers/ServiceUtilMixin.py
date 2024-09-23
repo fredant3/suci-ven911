@@ -25,7 +25,8 @@ class ServiceUtilMixin:
     def response(self, entities, start, length, draw):
         response = {}
         data = []
-        for item in self.paginate(entities, start, length, draw):
+        payload = self.paginate(entities, start, length, draw)
+        for item in payload:
             data.append(item)
 
         records_total = entities.count()
@@ -34,6 +35,7 @@ class ServiceUtilMixin:
         response["entities"] = data
         response["recordsTotal"] = records_total
         response["recordsFiltered"] = records_total
+        response["recordsFiltereds"] = payload.count()
         return response
 
     class Meta:
