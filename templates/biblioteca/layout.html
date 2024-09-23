@@ -7,43 +7,7 @@
 {% block breadcrumbs %}<span class="">{{ module }}</span>{% endblock %}
 
 {% block content %}
-  <div class="border rounded biblioteca-wrapper">
-    <h5 class="card-title text-uppercase py-2 px-5">Normativas</h5>
-
-    <div id="normativas-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
-    
-    {% comment %} <div class="d-flex justify-content-center">
-      <nav aria-label="Page navigation">
-        <ul class="pagination mb-2">
-          <li class="page-item prev">
-            <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left bx-sm"></i></a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0);">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0);">2</a>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="javascript:void(0);">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0);">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0);">5</a>
-          </li>
-          <li class="page-item next">
-            <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right bx-sm"></i></a>
-          </li>
-        </ul>
-      </nav>
-    </div> {% endcomment %}
-  </div>
-  <div class="border rounded biblioteca-wrapper my-2">
-    <h5 class="card-title text-uppercase py-2 px-5">reglamentos</h5>
-    <div id="reglamentos-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
-  </div>
+  <div id="biblioteca-wrapper"></div>
 {% endblock %}
 
 {% block page_css %}
@@ -80,20 +44,36 @@
 $(document).ready(function () {
   $('#normativas-cards').empty();
   $('#reglamentos-cards').empty();
+
+  const submodules = JSON.parse('{{ submodules|escapejs }}')
   
-  ["{{ normativaListApiUrl }}","{{ reglamentoListApiUrl }}"].forEach(url => {
+  submodules.forEach(submodule => {
+    const url = `${submodule.api}?length=3&order[0][name]=date&order[0][dir]=desc`
+    const modules = submodule.url
+    const submoduleName = submodule.name.toLowerCase()
+
     $.ajax({
-      url: `${url}?length=3&order[0][name]=date&order[0][dir]=desc`,
+      url,
       type: 'GET',
       dataType: 'json'
     })
       .done(function (data) {
+        $('#biblioteca-wrapper').append(`
+          <div class="border rounded biblioteca-wrapper my-1">
+            <div class="d-flex align-items-center">
+              <h5 class="card-title text-uppercase py-2 px-5">${submoduleName}</h5>
+              <a href="${modules}" class="card-link text-end">Ver Todo</a>
+            </div>
+            <div id="${submoduleName}-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
+          </div>
+        `)
+        
         $.each(data.entities, function(index, card) {
           const cardHtml = `<div class="col-auto">
             <div class="card h-100 align-items-center bibliotecas">
               <div class="card-body align-self-start">
                 <h5 class="card-title">${card.name}</h5>
-                <h6 class="card-subtitle text-uppercase">${url.replaceAll('/', '').replace('organizacionapi', '')}</h6>
+                <h6 class="card-subtitle text-uppercase">${submoduleName}</h6>
               </div>
               <img class="img-fluid img-fluid-custom" src="{% static 'img/book.svg' %}" alt="Card image cap" />
               <div class="card-body d-flex flex-column w-100">
@@ -103,16 +83,15 @@ $(document).ready(function () {
             </div>
           </div>`
 
-          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).append(cardHtml);
+          $(`#${submoduleName}-cards`).append(cardHtml);
         })
 
         if (data.error || !data.entities.length) {
-          console.info('Hola')
-          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).removeClass('justify-content-between');
-          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).addClass('justify-content-center h-228 align-content-center');
+          $(`#${submoduleName}-cards`).removeClass('justify-content-between');
+          $(`#${submoduleName}-cards`).addClass('justify-content-center h-228 align-content-center');
           const cardHtml = `<h6 class="card-subtitle text-uppercase">No hay informacion para mostrar.</h6>`
 
-          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).append(cardHtml);
+          $(`#${submoduleName}-cards`).append(cardHtml);
         }
       })
       .fail((jqXHR, textStatus, errorThrown) => console.error)

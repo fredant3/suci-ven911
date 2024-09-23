@@ -18,6 +18,18 @@ class BibliotecatView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Biblioteca"
         context["module"] = "Biblioteca"
-        context["normativaListApiUrl"] = reverse_lazy("api_normativas:list")
-        context["reglamentoListApiUrl"] = reverse_lazy("api_reglamentos:list")
+        context["submodules"] = json.dumps(
+            (
+                {
+                    "url": str(reverse_lazy("normativas:list")),
+                    "api": str(reverse_lazy("api_normativas:list")),
+                    "name": "Normativas",
+                },
+                {
+                    "url": str(reverse_lazy("reglamentos:list")),
+                    "api": str(reverse_lazy("api_reglamentos:list")),
+                    "name": "Reglamentos",
+                },
+            )
+        )
         return TemplateLayout.init(self, context)
