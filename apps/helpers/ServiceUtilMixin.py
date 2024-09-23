@@ -35,7 +35,6 @@ class ServiceUtilMixin:
         response["entities"] = data
         response["recordsTotal"] = records_total
         response["recordsFiltered"] = records_total
-        response["recordsFiltereds"] = payload.count()
         return response
 
     class Meta:

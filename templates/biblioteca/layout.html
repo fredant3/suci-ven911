@@ -7,10 +7,12 @@
 {% block breadcrumbs %}<span class="">{{ module }}</span>{% endblock %}
 
 {% block content %}
-  <div class="flex-column w-100 border rounded biblioteca-wrapper">
-    <div id="cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
+  <div class="border rounded biblioteca-wrapper">
+    <h5 class="card-title text-uppercase py-2 px-5">Normativas</h5>
+
+    <div id="normativas-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
     
-    <div class="d-flex justify-content-center">
+    {% comment %} <div class="d-flex justify-content-center">
       <nav aria-label="Page navigation">
         <ul class="pagination mb-2">
           <li class="page-item prev">
@@ -36,7 +38,11 @@
           </li>
         </ul>
       </nav>
-    </div>
+    </div> {% endcomment %}
+  </div>
+  <div class="border rounded biblioteca-wrapper my-2">
+    <h5 class="card-title text-uppercase py-2 px-5">reglamentos</h5>
+    <div id="reglamentos-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
   </div>
 {% endblock %}
 
@@ -61,7 +67,9 @@
   .pagination > .page-item > .page-link {
     height: 100%;
     line-height: inherit;
-
+  }
+  .h-228 {
+    height: 228px;
   }
 </style>
 {% endblock %}
@@ -70,11 +78,12 @@
 <script src="{% static 'js/ajax-setup.js' %}"></script>
 <script>
 $(document).ready(function () {
-  $('#cards').empty();
+  $('#normativas-cards').empty();
+  $('#reglamentos-cards').empty();
   
   ["{{ normativaListApiUrl }}","{{ reglamentoListApiUrl }}"].forEach(url => {
     $.ajax({
-      url: `${url}?length=5&order[0][name]=date&order[0][dir]=desc`,
+      url: `${url}?length=3&order[0][name]=date&order[0][dir]=desc`,
       type: 'GET',
       dataType: 'json'
     })
@@ -94,10 +103,17 @@ $(document).ready(function () {
             </div>
           </div>`
 
-          $('#cards').append(cardHtml);
+          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).append(cardHtml);
         })
 
-        console.info(Math.round(data.recordsTotal))
+        if (data.error || !data.entities.length) {
+          console.info('Hola')
+          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).removeClass('justify-content-between');
+          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).addClass('justify-content-center h-228 align-content-center');
+          const cardHtml = `<h6 class="card-subtitle text-uppercase">No hay informacion para mostrar.</h6>`
+
+          $(`#${url.replaceAll('/', '').replace('organizacionapi', '')}-cards`).append(cardHtml);
+        }
       })
       .fail((jqXHR, textStatus, errorThrown) => console.error)
   })
