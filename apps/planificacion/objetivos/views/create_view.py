@@ -1,0 +1,37 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from helpers.CheckPermisosMixin import CheckPermisosMixin
+from helpers.ControllerMixin import CreateController
+
+from templates.sneat import TemplateLayout
+
+from ..forms import ObjetivoForm
+from ..services import ObjetivoService
+
+
+class ObjetivoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+    permission_required = ""
+    form_class = ObjetivoForm
+    template_name = "sneat/layout/partials/form/layout.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titlePage"] = "Planificación"
+        context["indexUrl"] = reverse_lazy("modules:index")
+        context["module"] = "Planificación"
+        context["submodule"] = "Objetivos"
+        context["titleForm"] = "Añadir un objetivo"
+        context["tag"] = "Registrar"
+        context["listUrl"] = reverse_lazy("objetivos:list")
+        context["urlForm"] = reverse_lazy("api_objetivos:create")
+        context["methodForm"] = "POST"
+        return TemplateLayout.init(self, context)
+
+
+class ObjetivoCreateApiView(CreateController, CheckPermisosMixin):
+    permission_required = ""
+    form_class = ObjetivoForm
+
+    def __init__(self):
+        self.service = ObjetivoService()

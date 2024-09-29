@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "apps.biblioteca",
     "apps.organizacion",
     "apps.emergencia",
+    "apps.planificacion",
 ]
 
 MIDDLEWARE = [

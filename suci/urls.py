@@ -28,5 +28,6 @@ urlpatterns = [
     path("biblioteca/", include(("apps.biblioteca.urls"))),
     path("organizacion/", include(("apps.organizacion.urls"))),
     path("emergencia/", include(("apps.emergencia.urls"))),
+    path("planificacion/", include(("apps.planificacion.urls"))),
     path("", RedirectView.as_view(url="dashboard", permanent=True)),
 ]

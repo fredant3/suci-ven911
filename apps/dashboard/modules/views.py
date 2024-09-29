@@ -32,6 +32,11 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "emergencias:list",
                 "image": "img/cuadrantes_de_paz.png",
             },
+            {
+                "title": "Planificación",
+                "url": "planificacion",
+                "image": "img/planificacion.png",
+            },
             # {"title": "Gestión Administrativa", "url": "gc:info", "image": "img/gestion_administrativa.png"},
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             # {"title": "Gestión Humana", "url": "gc:info", "image": "img/gestion_humana.png"},
@@ -44,7 +49,6 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/organizacion.png",
             },
             # {"title": "Presupuesto", "url": "gc:info", "image": "img/presupuesto.png"},
-            # {"title": "Planificación", "url": "gc:info", "image": "img/planificacion.png"},
             # {"title": "Seguridad Integral", "url": "gc:info", "image": "img/seguridad.png"},
             # {"title": "Admin", "url": "gc:info", "image": "img/admin.png"},
         ]

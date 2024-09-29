@@ -1,0 +1,37 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from helpers.CheckPermisosMixin import CheckPermisosMixin
+from helpers.ControllerMixin import CreateController
+
+from templates.sneat import TemplateLayout
+
+from ..forms import TransporteForm
+from ..services import TransporteService
+
+
+class TransporteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+    permission_required = ""
+    form_class = TransporteForm
+    template_name = "sneat/layout/partials/form/layout.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titlePage"] = "Planificación"
+        context["indexUrl"] = reverse_lazy("modules:index")
+        context["module"] = "Planificación"
+        context["submodule"] = "Transportes"
+        context["titleForm"] = "Añadir una transporte"
+        context["tag"] = "Registrar"
+        context["listUrl"] = reverse_lazy("transportes:list")
+        context["urlForm"] = reverse_lazy("api_transportes:create")
+        context["methodForm"] = "POST"
+        return TemplateLayout.init(self, context)
+
+
+class TransporteCreateApiView(CreateController, CheckPermisosMixin):
+    permission_required = ""
+    form_class = TransporteForm
+
+    def __init__(self):
+        self.service = TransporteService()
