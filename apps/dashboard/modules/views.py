@@ -27,11 +27,11 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "bibliotecas",
                 "image": "img/biblioteca.png",
             },
-            # {
-            #     "title": "Emergencias",
-            #     "url": "eme:list-emergency",
-            #     "image": "img/cuadrantes_de_paz.png",
-            # },
+            {
+                "title": "Emergencias",
+                "url": "emergencias:list",
+                "image": "img/cuadrantes_de_paz.png",
+            },
             # {"title": "Gestión Administrativa", "url": "gc:info", "image": "img/gestion_administrativa.png"},
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             # {"title": "Gestión Humana", "url": "gc:info", "image": "img/gestion_humana.png"},
