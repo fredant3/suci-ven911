@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "apps.organizacion",
     "apps.emergencia",
     "apps.planificacion",
+    "apps.potencia",
 ]
 
 MIDDLEWARE = [

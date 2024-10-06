@@ -1,4 +1,4 @@
-from apps.users.auth.models import User
+from apps.administracion.asignacion import Asignacion
 
 __all__ = [
     "Asignacion",
