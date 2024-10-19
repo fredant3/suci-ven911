@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     "apps.helpers",
     "apps.users",
     "apps.dashboard",
-    # "apps.administracion",
+    "apps.administracion",
     "apps.asesoria",
     "apps.biblioteca",
     "apps.organizacion",

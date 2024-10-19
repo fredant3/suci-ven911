@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps.administracion.cupaz.models import CuadrantePaz
+
 NACIONALIDAD_CHOICES = (
     ("ve", "Venezolano"),
     ("ex", "Extranjero"),
