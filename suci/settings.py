@@ -63,10 +63,13 @@ INSTALLED_APPS = [
     "apps.administracion",
     "apps.asesoria",
     "apps.biblioteca",
-    "apps.organizacion",
     "apps.emergencia",
+    "apps.organizacion",
     "apps.planificacion",
     "apps.potencia",
+    "apps.presupuesto",
+    "apps.rrhh",
+    "apps.seguridad",
 ]
 
 MIDDLEWARE = [

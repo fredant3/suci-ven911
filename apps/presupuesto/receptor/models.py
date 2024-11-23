@@ -36,5 +36,5 @@ class Receptor(BaseModel):
         return "{0} {1}".format(self.partidar, self.generalr)
 
     class Meta:
-        verbose_name = "accion"
-        verbose_name_plural = "acciones"
+        verbose_name = "Receptor"
+        verbose_name_plural = "Receptores"

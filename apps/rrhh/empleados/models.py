@@ -1,8 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-
-from apps.helpers.models import (
+from helpers.models import (
     ESTADO_CIVIL_CHOICES,
     GENERO_CHOICES,
     NACIONALIDAD_CHOICES,
@@ -22,18 +21,17 @@ class Empleado(BaseModel):
     estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
     nombres = models.CharField(max_length=90)
     apellidos = models.CharField(max_length=90)
-    nacionalidad = models.ForeignKey(max_length=2, choices=NACIONALIDAD_CHOICES)
+    nacionalidad = models.CharField(max_length=2, choices=NACIONALIDAD_CHOICES)
     cedula = models.IntegerField()
-    sexo = models.ForeignKey(max_length=1, choices=GENERO_CHOICES)
+    sexo = models.CharField(max_length=1, choices=GENERO_CHOICES)
     fecha_nacimiento = models.DateField()
-    estado_civil = models.ForeignKey(max_length=1, choices=ESTADO_CIVIL_CHOICES)
-    tipo_sangre = models.ForeignKey(max_length=3, choices=TIPO_SANGRE_CHOICES)
+    estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
+    tipo_sangre = models.CharField(max_length=3, choices=TIPO_SANGRE_CHOICES)
     email = models.EmailField(blank=True, null=True)
     telefono = models.CharField(max_length=12)
     direccion = models.CharField(max_length=180)
-    estudias = models.BooleanField()
+    estudia = models.BooleanField()
     discapacitado = models.BooleanField()
-    direccion = models.CharField(max_length=60)
     contratos = models.IntegerField()
 
     def toJSON(self):

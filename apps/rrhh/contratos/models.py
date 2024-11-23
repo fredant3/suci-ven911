@@ -1,12 +1,11 @@
+from administracion.departamentos.models import Departamento
+from administracion.sedes.models import Sede
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-
-from apps.administracion.departamentos.models import Departamento
-from apps.administracion.sedes.models import Sede
-from apps.rrhh.cargos.models import Cargo
-from apps.rrhh.empleados.models import Empleado
-from apps.rrhh.tipos_empleados.models import TipoEmpleado
+from rrhh.cargos.models import Cargo
+from rrhh.empleados.models import Empleado
+from rrhh.tipos_empleados.models import TipoEmpleado
 
 TIPO_CONTRATOS_CHOICES = (
     ("pasante", "Pasante"),

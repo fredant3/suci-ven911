@@ -21,7 +21,7 @@ ESTATUS_CHOICES = (
 
 
 class TipoSueldo(BaseModel):
-    tipo = models.CharField(max_length=15, choices=TIPO_CHOICES)
+    tipo = models.CharField(max_length=21, choices=TIPO_CHOICES)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     descripcion = models.CharField(max_length=50, blank=True, null=True)
     estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)

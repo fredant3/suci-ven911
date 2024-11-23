@@ -30,5 +30,5 @@ class Proyecto(BaseModel):
         return self.nombrep
 
     class Meta:
-        verbose_name = "accion"
-        verbose_name_plural = "acciones"
+        verbose_name = "Proyecto"
+        verbose_name_plural = "Proyectos"

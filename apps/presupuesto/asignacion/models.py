@@ -16,5 +16,5 @@ class Asignacion(BaseModel):
         return self.numpartida
 
     class Meta:
-        verbose_name = "accion"
-        verbose_name_plural = "acciones"
+        verbose_name = "Asignacion"
+        verbose_name_plural = "Asignaciones"

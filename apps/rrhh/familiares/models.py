@@ -1,9 +1,8 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-
-from apps.helpers.models import ESTADO_CIVIL_CHOICES, GENERO_CHOICES
-from apps.rrhh.empleados.models import Empleado
+from helpers.models import ESTADO_CIVIL_CHOICES, GENERO_CHOICES
+from rrhh.empleados.models import Empleado
 
 PARENTEZCO = (
     ("hermano", "Hermana|Hermano"),
@@ -29,8 +28,8 @@ class Familiar(BaseModel):
     apellidos = models.CharField(max_length=90)
     cedula = models.IntegerField(null=True, blank=True)
     fecha_nacimiento = models.DateField()
-    sexo = models.ForeignKey(max_length=1, choices=GENERO_CHOICES)
-    estado_civil = models.ForeignKey(max_length=1, choices=ESTADO_CIVIL_CHOICES)
+    sexo = models.CharField(max_length=1, choices=GENERO_CHOICES)
+    estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     observacion = models.CharField(max_length=150, blank=True, null=True)
 

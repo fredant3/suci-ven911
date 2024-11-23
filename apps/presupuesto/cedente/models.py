@@ -24,5 +24,5 @@ class Cedente(BaseModel):
         return "{0} {1}".format(self.partidac, self.generalc)
 
     class Meta:
-        verbose_name = "accion"
-        verbose_name_plural = "acciones"
+        verbose_name = "Cedente"
+        verbose_name_plural = "Cedentes"
