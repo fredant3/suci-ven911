@@ -1,6 +1,5 @@
 from django import forms
-
-from .models import Actividad
+from planificacion.actividades.models import Actividad
 
 
 class ActividadForm(forms.ModelForm):

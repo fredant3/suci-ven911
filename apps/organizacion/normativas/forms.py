@@ -1,7 +1,6 @@
 from django import forms
 from django.forms.fields import DateTimeInput
-
-from .models import Normativa
+from organizacion.normativas.models import Normativa
 
 
 class NormativaForm(forms.ModelForm):

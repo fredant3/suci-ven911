@@ -1,20 +1,19 @@
 from django import forms
 from django.forms.fields import DateTimeInput
-
-from .models import Llamada
+from planificacion.llamadas.models import Llamada
 
 
 class LlamadaForm(forms.ModelForm):
     class Meta:
         model = Llamada
         fields = (
-            "estado",
-            "mes",
-            "informativa",
-            "falsa",
-            "realesno",
-            "realesf",
-            "videop",
+            # "estado",
+            # "mes",
+            # "informativa",
+            # "falsa",
+            # "realesno",
+            # "realesf",
+            # "videop",
         )
         exclude = [
             "created_at",

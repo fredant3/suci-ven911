@@ -1,7 +1,6 @@
 from django import forms
 from django.forms.fields import DateTimeInput
-
-from .models import Objetivo
+from planificacion.objetivos.models import Objetivo
 
 
 class ObjetivoForm(forms.ModelForm):

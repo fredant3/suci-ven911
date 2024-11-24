@@ -1,9 +1,8 @@
 from django.urls import path
-
-from .views.create_view import TransporteCreateApiView
-from .views.delete_view import TransporteDeleteApiView
-from .views.list_view import TransporteListApiView
-from .views.update_view import TransporteUpdateApiView
+from planificacion.transportes.views.create_view import TransporteCreateApiView
+from planificacion.transportes.views.delete_view import TransporteDeleteApiView
+from planificacion.transportes.views.list_view import TransporteListApiView
+from planificacion.transportes.views.update_view import TransporteUpdateApiView
 
 urlpatterns = [
     path(

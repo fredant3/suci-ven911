@@ -7,49 +7,29 @@ from django.utils.timezone import get_current_timezone
 
 class BaseModelManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().exclude(deleted=True)
+        # return super().get_queryset().exclude(deleted=True)
+        pass
 
 
 class BaseModel(models.Model):
     objects = BaseModelManager()
 
-    created_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        verbose_name="Creado por",
-        on_delete=models.CASCADE,
-        related_name="%(class)s_created",
-    )
+    created_by = models.CharField(verbose_name="Creado por", max_length=6)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
-    updated_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        verbose_name="Actualizado por",
-        on_delete=models.CASCADE,
-        related_name="%(class)s_updated",
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Actualizado el",
-    )
-    deleted = models.BooleanField(default=False, verbose_name="Está eliminado")
-    deleted_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        verbose_name="Eliminado por",
-        on_delete=models.CASCADE,
-        related_name="%(class)s_delete",
-        null=True,
-        blank=True,
+    updated_by = models.CharField(verbose_name="Actualizado por", max_length=6)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Actualizado el")
+    deleted_by = models.CharField(
+        verbose_name="Eliminado por", max_length=6, null=True, blank=True
     )
     deleted_at = models.DateTimeField(
-        verbose_name="Eliminado el",
-        null=True,
-        blank=True,
+        verbose_name="Eliminado el", null=True, blank=True
     )
 
     def all(self):
-        return self.exclude(deleted=True)
+        # return self.exclude(deleted=True)
+        pass
 
     def delete(self):
-        self.deleted = True
         self.deleted_at = datetime.now(tz=get_current_timezone())
         self.save()
 

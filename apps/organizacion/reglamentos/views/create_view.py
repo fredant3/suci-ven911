@@ -3,11 +3,10 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
+from organizacion.reglamentos.forms import ReglamentoForm
+from organizacion.reglamentos.services import ReglamentoService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import ReglamentoForm
-from ..services import ReglamentoService
 
 
 class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

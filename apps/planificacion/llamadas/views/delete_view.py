@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
+from planificacion.llamadas.forms import LlamadaForm
+from planificacion.llamadas.models import Llamada
+from planificacion.llamadas.services import LlamadaService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import LlamadaForm
-from ..models import Llamada
-from ..services import LlamadaService
 
 
 class LlamadaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

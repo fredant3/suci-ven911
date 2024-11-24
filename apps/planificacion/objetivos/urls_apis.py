@@ -1,9 +1,8 @@
 from django.urls import path
-
-from .views.create_view import ObjetivoCreateApiView
-from .views.delete_view import ObjetivoDeleteApiView
-from .views.list_view import ObjetivoListApiView
-from .views.update_view import ObjetivoUpdateApiView
+from planificacion.objetivos.views.create_view import ObjetivoCreateApiView
+from planificacion.objetivos.views.delete_view import ObjetivoDeleteApiView
+from planificacion.objetivos.views.list_view import ObjetivoListApiView
+from planificacion.objetivos.views.update_view import ObjetivoUpdateApiView
 
 urlpatterns = [
     path(

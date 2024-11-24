@@ -1,12 +1,16 @@
 from django import forms
-
-from .models import Transporte
+from planificacion.transportes.models import Transporte
 
 
 class TransporteForm(forms.ModelForm):
     class Meta:
         model = Transporte
-        fields = ("estado", "mes", "transporte", "cantidad")
+        fields = (
+            # "estado",
+            # "mes",
+            # "transporte",
+            # "cantidad",
+        )
         exclude = [
             "created_at",
             "created_by",

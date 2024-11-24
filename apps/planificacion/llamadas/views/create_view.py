@@ -3,11 +3,10 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
+from planificacion.llamadas.forms import LlamadaForm
+from planificacion.llamadas.services import LlamadaService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import LlamadaForm
-from ..services import LlamadaService
 
 
 class LlamadaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

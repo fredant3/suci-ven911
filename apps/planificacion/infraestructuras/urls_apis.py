@@ -1,9 +1,14 @@
 from django.urls import path
-
-from .views.create_view import InfraestructuraCreateApiView
-from .views.delete_view import InfraestructuraDeleteApiView
-from .views.list_view import InfraestructuraListApiView
-from .views.update_view import InfraestructuraUpdateApiView
+from planificacion.infraestructuras.views.create_view import (
+    InfraestructuraCreateApiView,
+)
+from planificacion.infraestructuras.views.delete_view import (
+    InfraestructuraDeleteApiView,
+)
+from planificacion.infraestructuras.views.list_view import InfraestructuraListApiView
+from planificacion.infraestructuras.views.update_view import (
+    InfraestructuraUpdateApiView,
+)
 
 urlpatterns = [
     path(

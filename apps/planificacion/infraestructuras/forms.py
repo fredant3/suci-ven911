@@ -1,12 +1,16 @@
 from django import forms
-
-from .models import Infraestructura
+from planificacion.infraestructuras.models import Infraestructura
 
 
 class InfraestructuraForm(forms.ModelForm):
     class Meta:
         model = Infraestructura
-        fields = ("estado", "mes", "infraestructura", "cantidad")
+        fields = (
+            # "estado",
+            # "mes",
+            # "infraestructura",
+            # "cantidad",
+        )
         exclude = [
             "created_at",
             "created_by",

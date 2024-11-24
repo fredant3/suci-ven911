@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
+from planificacion.transportes.forms import TransporteForm
+from planificacion.transportes.models import Transporte
+from planificacion.transportes.services import TransporteService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import TransporteForm
-from ..models import Transporte
-from ..services import TransporteService
 
 
 class TransporteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

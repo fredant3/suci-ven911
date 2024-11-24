@@ -1,7 +1,6 @@
 from django import forms
 from django.forms.fields import DateTimeInput
-
-from .models import Reglamento
+from organizacion.reglamentos.models import Reglamento
 
 
 class ReglamentoForm(forms.ModelForm):

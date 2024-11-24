@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
+from planificacion.infraestructuras.forms import InfraestructuraForm
+from planificacion.infraestructuras.models import Infraestructura
+from planificacion.infraestructuras.services import InfraestructuraService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import InfraestructuraForm
-from ..models import Infraestructura
-from ..services import InfraestructuraService
 
 
 class InfraestructuraDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

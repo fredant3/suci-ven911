@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
+from organizacion.normativas.forms import NormativaForm
+from organizacion.normativas.models import Normativa
+from organizacion.normativas.services import NormativaService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import NormativaForm
-from ..models import Normativa
-from ..services import NormativaService
 
 
 class NormativaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

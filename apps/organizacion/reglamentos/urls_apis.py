@@ -1,9 +1,8 @@
 from django.urls import path
-
-from .views.create_view import ReglamentoCreateApiView
-from .views.delete_view import ReglamentoDeleteApiView
-from .views.list_view import ReglamentoListApiView
-from .views.update_view import ReglamentoUpdateApiView
+from organizacion.reglamentos.views.create_view import ReglamentoCreateApiView
+from organizacion.reglamentos.views.delete_view import ReglamentoDeleteApiView
+from organizacion.reglamentos.views.list_view import ReglamentoListApiView
+from organizacion.reglamentos.views.update_view import ReglamentoUpdateApiView
 
 urlpatterns = [
     path(

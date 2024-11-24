@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
+from planificacion.objetivos.forms import ObjetivoForm
+from planificacion.objetivos.models import Objetivo
+from planificacion.objetivos.services import ObjetivoService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import ObjetivoForm
-from ..models import Objetivo
-from ..services import ObjetivoService
 
 
 class ObjetivoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
