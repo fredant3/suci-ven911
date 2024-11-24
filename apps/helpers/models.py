@@ -1,4 +1,4 @@
-from administracion.cupaz.models import CuadrantePaz
+# from administracion.cupaz.models import CuadrantePaz
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
@@ -62,7 +62,7 @@ class Parroquia(BaseModel):
     nombre = models.CharField(max_length=255)
     id_estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
     id_municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
-    id_cuadrante_paz = models.ForeignKey(CuadrantePaz, on_delete=models.CASCADE)
+    # id_cuadrante_paz = models.ForeignKey(CuadrantePaz, on_delete=models.CASCADE)
 
     def toJSON(self):
         return model_to_dict(self)
