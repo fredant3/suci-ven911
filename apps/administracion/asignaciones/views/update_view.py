@@ -35,7 +35,7 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         return Asignacion.objects.filter(pk=id)
 
 
-class DenunciaUpdateApiView(UpdateController, CheckPermisosMixin):
+class AsignacionUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = ""
     form_class = AsignacionForm
 

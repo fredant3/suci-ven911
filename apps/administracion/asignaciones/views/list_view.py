@@ -94,7 +94,7 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class DenunciaListApiView(ListController, CheckPermisosMixin):
+class AsignacionListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):

@@ -33,7 +33,7 @@ class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         return Asignacion.objects.filter(pk=id)
 
 
-class DenunciaDeleteApiView(DeleteController, CheckPermisosMixin):
+class AsignacionDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = ""
     form_class = AsignacionForm
 
