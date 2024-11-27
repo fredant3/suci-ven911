@@ -1,0 +1,41 @@
+from administracion.inventario.forms import ArticuloForm
+from administracion.inventario.models import Articulo
+from administracion.inventario.services import InventarioService
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import DeleteView
+from helpers.CheckPermisosMixin import CheckPermisosMixin
+from helpers.ControllerMixin import DeleteController
+
+from templates.sneat import TemplateLayout
+
+
+class ArticuloDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
+    permission_required = ""
+    template_name = "sneat/layout/partials/form/delete-layout.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titlePage"] = "Administrasion"
+        context["indexUrl"] = reverse_lazy("modules:index")
+        context["module"] = "inventario"
+        context["submodule"] = "Articulo"
+        context["titleForm"] = "Eliminar Articulo"
+        context["tag"] = "Eliminar"
+        context["listUrl"] = reverse_lazy("Articulo:list")
+        context["urlDelete"] = reverse_lazy(
+            "api_articulo:delete", args=[self.kwargs.get("pk")]
+        )
+        return TemplateLayout.init(self, context)
+
+    def get_queryset(self):
+        id = self.kwargs.get("pk")
+        return Articulo.objects.filter(pk=id)
+
+
+class AveriaDeleteApiView(DeleteController, CheckPermisosMixin):
+    permission_required = ""
+    form_class = ArticuloForm
+
+    def __init__(self):
+        self.service = InventarioService()
