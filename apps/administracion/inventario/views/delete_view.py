@@ -22,9 +22,9 @@ class ArticuloDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Articulo"
         context["titleForm"] = "Eliminar Articulo"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("Articulo:list")
+        context["listUrl"] = reverse_lazy("articulos:list")
         context["urlDelete"] = reverse_lazy(
-            "api_articulo:delete", args=[self.kwargs.get("pk")]
+            "api_articulos:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 

@@ -24,11 +24,10 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["module"] = "Administracion"
         context["submodule"] = "Averia"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("averia:create")
-        context["listApiUrl"] = reverse_lazy("api_averia:list")
-        context["updateUrl"] = reverse_lazy("averia:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("averia:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_averia:export_excel")
+        context["createUrl"] = reverse_lazy("averias:create")
+        context["listApiUrl"] = reverse_lazy("api_averias:list")
+        context["updateUrl"] = reverse_lazy("averias:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("averias:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

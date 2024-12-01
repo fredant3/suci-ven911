@@ -10,7 +10,7 @@ from helpers.ControllerMixin import UpdateController
 from templates.sneat import TemplateLayout
 
 
-class InventarioUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+class ArticuloUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = ArticuloForm
     template_name = "sneat/layout/partials/form/layout.html"
@@ -23,9 +23,9 @@ class InventarioUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["submodule"] = "Articulo"
         context["titleForm"] = "Actualizar"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("articulo:list")
+        context["listUrl"] = reverse_lazy("articulos:list")
         context["urlForm"] = reverse_lazy(
-            "api_articulo:update", args=[self.kwargs.get("pk")]
+            "api_articulos:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)

@@ -24,11 +24,15 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["module"] = "Inventario"
         context["submodule"] = "Artiulo"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("Artiulo:create")
-        context["listApiUrl"] = reverse_lazy("api_Artiulo:list")
-        context["updateUrl"] = reverse_lazy("Artiulo:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("Artiulo:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_Artiulo:export_excel")
+        context["createUrl"] = reverse_lazy(
+            "articulos:create", kwargs={"type": "tecnologia"}
+        )
+        context["createUrl"] = reverse_lazy(
+            "articulos:create", kwargs={"type": "tecnologia"}
+        )
+        context["listApiUrl"] = reverse_lazy("api_articulos:list")
+        context["updateUrl"] = reverse_lazy("articulos:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("articulos:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

@@ -7,7 +7,7 @@ from django.urls import path
 urlpatterns = [
     path(
         "",
-        AveriaCreateView.as_view(),
+        AveriaListView.as_view(),
         name="list",
     ),
     path(
