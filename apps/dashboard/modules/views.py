@@ -37,7 +37,11 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "planificacion",
                 "image": "img/planificacion.png",
             },
-            # {"title": "Gestión Administrativa", "url": "gc:info", "image": "img/gestion_administrativa.png"},
+            {
+                "title": "Gestión Administrativa",
+                "url": "asgnaciones:list",
+                "image": "img/gestion_administrativa.png",
+            },
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             # {"title": "Gestión Humana", "url": "gc:info", "image": "img/gestion_humana.png"},
             # {"title": "Tecnología Comunicación e Información", "url": "gc:info", "image": "img/tecnologia.png"},

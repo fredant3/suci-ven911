@@ -1,5 +1,5 @@
-from administracion.averia.services import AveriaService
 from administracion.averia.forms import AveriaForm
+from administracion.averia.services import AveriaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -22,13 +22,13 @@ class AveriaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["submodule"] = "Averia"
         context["titleForm"] = "Añadir una Averia"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("Averia:list")
-        context["urlForm"] = reverse_lazy("api_averia:create")
+        context["listUrl"] = reverse_lazy("averias:list")
+        context["urlForm"] = reverse_lazy("api_averias:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
 
-class AsignacionCreateApiView(CreateController, CheckPermisosMixin):
+class AveriaCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
     form_class = AveriaForm
 

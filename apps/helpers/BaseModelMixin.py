@@ -1,18 +1,17 @@
 from datetime import datetime
 
-from django.conf import settings
+# from django.conf import settings
 from django.db import models
 from django.utils.timezone import get_current_timezone
 
-
-class BaseModelManager(models.Manager):
-    def get_queryset(self):
-        # return super().get_queryset().exclude(deleted=True)
-        pass
+# class BaseModelManager(models.Manager):
+#     def get_queryset(self):
+#         # return super().get_queryset().exclude(deleted=True)
+#         pass
 
 
 class BaseModel(models.Model):
-    objects = BaseModelManager()
+    # objects = BaseModelManager()
 
     created_by = models.CharField(verbose_name="Creado por", max_length=6)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")

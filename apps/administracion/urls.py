@@ -2,11 +2,19 @@ from django.urls import include, path
 
 urlpatterns = [
     path(
-        "administracion/",
-        include(("apps.administracion.asgnaciones.urls", "asgnaciones")),
+        "asgnaciones/",
+        include(("apps.administracion.asignaciones.urls", "asgnaciones")),
     ),
     path(
-        "api/administracion/",
-        include(("apps.administracion.asgnaciones.urls_apis", "api_asgnaciones")),
+        "api/asgnaciones/",
+        include(("apps.administracion.asignaciones.urls_apis", "api_asgnaciones")),
+    ),
+    path(
+        "averias/",
+        include(("apps.administracion.averia.urls", "averias")),
+    ),
+    path(
+        "api/averias/",
+        include(("apps.administracion.averia.urls_apis", "api_averias")),
     ),
 ]

@@ -24,6 +24,7 @@ urlpatterns = [
     path("", include(("apps.users.auth.urls", "auth"))),
     path("api/auth/", include(("apps.users.auth.urls_apis", "api_auth"))),
     path("dashboard/", include(("apps.dashboard.modules.urls", "modules"))),
+    path("gestion-administrativa/", include(("apps.administracion.urls"))),
     path("asesoria-juridica/", include(("apps.asesoria.urls"))),
     path("biblioteca/", include(("apps.biblioteca.urls"))),
     path("organizacion/", include(("apps.organizacion.urls"))),

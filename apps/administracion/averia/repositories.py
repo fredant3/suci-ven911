@@ -2,6 +2,6 @@ from administracion.averia.models import Averia
 from helpers.RepositoryMixin import Repository
 
 
-class AveriasRepository(Repository):
+class AveriaRepository(Repository):
     def __init__(self):
         self.entity = Averia

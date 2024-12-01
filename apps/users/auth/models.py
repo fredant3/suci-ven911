@@ -14,7 +14,7 @@ class UserManager(BaseUserManager):
             raise ValueError("La cédula de identidad es requerida")
         user = self.model(username=username, dni=dni, **extra_fields)
         user.set_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
 
     def create_superuser(self, username, dni, password):
@@ -22,7 +22,7 @@ class UserManager(BaseUserManager):
         user.is_staff = True
         user.is_active = True
         user.is_superuser = True
-        user.save(using=self._db)
+        user.save()
         return user
 
 
