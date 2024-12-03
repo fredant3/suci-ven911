@@ -1,17 +1,17 @@
 from administracion.inventario.views.create_view import ArticuloCreateView
 from administracion.inventario.views.delete_view import ArticuloDeleteView
-from administracion.inventario.views.list_view import ArticuloListView
+from administracion.inventario.views.list_view import ArticuloListApiView
 from administracion.inventario.views.update_view import ArticuloUpdateView
 from django.urls import path
 
 urlpatterns = [
     path(
         "",
-        ArticuloListView.as_view(),
+        ArticuloListApiView.as_view(),
         name="list",
     ),
     path(
-        "create/<str:type>",
+        "create/<str:type>/",
         ArticuloCreateView.as_view(),
         name="create",
     ),

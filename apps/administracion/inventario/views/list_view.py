@@ -23,17 +23,19 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Inventario"
         context["submodule"] = "Artiulo"
-        context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy(
-            "articulos:create", kwargs={"type": "tecnologia"}
-        )
-        context["createUrl"] = reverse_lazy(
-            "articulos:create", kwargs={"type": "tecnologia"}
-        )
+        context["createUrl"] = reverse_lazy("articulos:create", args=[0])
         context["listApiUrl"] = reverse_lazy("api_articulos:list")
         context["updateUrl"] = reverse_lazy("articulos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("articulos:delete", args=[0])
         context["heads"] = columns
+        context["isSelect"] = True
+        context["selectTitle"] = "Añadir articulo"
+        context["selectOptions"] = (
+            ("tecnologia", "Tecnologia"),
+            ("consumible", "Consumible"),
+            ("mobiliario", "Mobiliario"),
+            ("vehiculo", "Vehiculo"),
+        )
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
 
@@ -47,32 +49,18 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "problema",
-                "name": "problema",
-                "title": "Problema",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "tipo_Articulo",
-                "name": "tipo_Articulo",
+                "data": "marca",
+                "name": "marca",
                 "title": "Tipo de Articulo",
                 "orderable": "true",
                 "searchable": "false",
             },
             {
-                "data": "departamento",
-                "name": "departamento",
-                "title": "Departamento",
+                "data": "modelo",
+                "name": "modelo",
+                "title": "Modelo",
                 "orderable": "false",
                 "searchable": "false",
-            },
-            {
-                "data": "ubicacion",
-                "name": "ubicacion",
-                "title": "Ubicación",
-                "orderable": "false",
-                "searchable": "true",
             },
             {
                 "data": "serial",
@@ -82,16 +70,9 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "codigo_bn",
-                "name": "codigo_bn",
-                "title": "Código BN",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "user",
-                "name": "creadopor",
-                "title": "Creado por",
+                "data": "cantidad_combustible",
+                "name": "cantidad_combustible",
+                "title": "Cantidad",
                 "orderable": "false",
                 "searchable": "false",
             },

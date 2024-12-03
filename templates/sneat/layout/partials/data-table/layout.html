@@ -12,9 +12,21 @@
 {% endblock %}
 
 {% block btnAdd %}
+{% if isSelect %}
+<div class="mb-4">
+  <select class="form-select" id="select-options">
+    <option selected>{{ selectTitle }}</option>
+    {% for value, label in selectOptions %}
+      <option value="{{ value }}">{{ label }}</option>
+    {% endfor %}
+  </select>
+</div>
+{% else %}
 <a href="{{ createUrl }}" class="btn btn-outline-primary">
   <span class="tf-icons bx bx-plus me-1"></span>{{ createBtn }}
 </a>
+{% endif %}
+
 {% if exportExcelUrl %}
 <a href="{{ exportExcelUrl }}" class="btn btn-outline-primary">
   <span class="tf-icons bx bx-plus me-1"></span>Exportar a Excel
@@ -56,6 +68,12 @@
 <script src="{% static 'js/data-table.js' %}"></script>
 <script>
 $(document).ready(function () {
+  $('#select-options').change(function() {
+    const createUrl = "{{ createUrl }}"
+    let valorSeleccionado = $(this).val();
+    window.location.href = createUrl.replace("0", valorSeleccionado);
+  });
+
   const url = "{{ listApiUrl }}"
   const updateUrl = "{{ updateUrl }}"
   const deleteUrl = "{{ deleteUrl }}"

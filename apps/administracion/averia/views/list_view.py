@@ -21,7 +21,7 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Administracion"
+        context["module"] = "Averia"
         context["submodule"] = "Averia"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("averias:create")

@@ -28,7 +28,10 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def define_type_form(self):
         tipo = self.kwargs.get("type")
-        return self.tipos.get(tipo, None)
+        isType = self.tipos.get(tipo, None)
+        if isType is None:
+            raise Exception("Tipo de articulo no encontrado")
+        return isType
 
     def get_context_data(self, **kwargs):
         self.form_class = self.define_type_form()
@@ -40,7 +43,9 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titleForm"] = "Añadir una Articulo"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("articulos:list")
-        context["urlForm"] = reverse_lazy("api_articulos:create")
+        context["urlForm"] = reverse_lazy(
+            "api_articulos:create", args=[self.kwargs.get("type")]
+        )
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
