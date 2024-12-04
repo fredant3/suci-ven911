@@ -26,6 +26,7 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
 };
 
 function getcolumnDefs (updateUrl, deleteUrl) {
+	console.log(updateUrl,deleteUrl)
   if (updateUrl && deleteUrl) {
     return [
       {

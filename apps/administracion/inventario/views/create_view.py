@@ -18,7 +18,7 @@ from templates.sneat import TemplateLayout
 class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     template_name = "sneat/layout/partials/form/layout.html"
-
+    form_class = TecnologiaForm
     tipos = {
         "tecnologia": TecnologiaForm,
         "consumible": ConsumibleForm,
@@ -50,7 +50,7 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         return TemplateLayout.init(self, context)
 
 
-class AsignacionCreateApiView(CreateController, CheckPermisosMixin):
+class ArtiluloCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
     form_class = ArticuloForm
 

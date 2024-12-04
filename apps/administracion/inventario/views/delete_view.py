@@ -33,7 +33,7 @@ class ArticuloDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         return Articulo.objects.filter(pk=id)
 
 
-class AveriaDeleteApiView(DeleteController, CheckPermisosMixin):
+class ArticuloDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = ""
     form_class = ArticuloForm
 

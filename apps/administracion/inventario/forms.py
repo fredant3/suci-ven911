@@ -16,7 +16,7 @@ class ArticuloForm(forms.ModelForm):
             "cantidad",
             "condicion",
             "fecha_adq",
-            "tipo_articulo",
+            # "tipo_articulo",
         ]
         labels = {
             "descripcion": "Descripción",
