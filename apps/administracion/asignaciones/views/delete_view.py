@@ -22,9 +22,9 @@ class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Asignacion"
         context["titleForm"] = "Eliminar asignacion"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("asignacion:list")
+        context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlDelete"] = reverse_lazy(
-            "api_asignacion:delete", args=[self.kwargs.get("pk")]
+            "api_asignaciones:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 

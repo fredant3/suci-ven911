@@ -5,7 +5,7 @@ from administracion.inventario.forms import (
     TecnologiaForm,
     VehiculoForm,
 )
-from administracion.inventario.services import InventarioService
+from administracion.inventario.services import ArticuloService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -55,4 +55,4 @@ class ArtiluloCreateApiView(CreateController, CheckPermisosMixin):
     form_class = ArticuloForm
 
     def __init__(self):
-        self.service = InventarioService()
+        self.service = ArticuloService()

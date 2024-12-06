@@ -22,9 +22,9 @@ class AveriaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Averia"
         context["titleForm"] = "Eliminar Averia"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("averia:list")
+        context["listUrl"] = reverse_lazy("averias:list")
         context["urlDelete"] = reverse_lazy(
-            "api_asignacion:delete", args=[self.kwargs.get("pk")]
+            "api_averias:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 

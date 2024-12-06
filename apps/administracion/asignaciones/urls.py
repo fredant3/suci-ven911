@@ -1,33 +1,33 @@
-from administracion.averia.views.create_view import AveriaCreateView
-from administracion.averia.views.delete_view import AveriaDeleteView
-from administracion.averia.views.list_view import AveriaListView
-from administracion.averia.views.update_view import AveriaUpdateView
+from administracion.asignaciones.views.create_view import AsignacionCreateView
+from administracion.asignaciones.views.delete_view import AsignacionDeleteView
+from administracion.asignaciones.views.list_view import AsignacionListView
+from administracion.asignaciones.views.update_view import AsignacionUpdateView
 from django.urls import path
 
 urlpatterns = [
     path(
         "",
-        AveriaListView.as_view(),
+        AsignacionListView.as_view(),
         name="list",
     ),
     path(
         "create",
-        AveriaCreateView.as_view(),
+        AsignacionCreateView.as_view(),
         name="create",
     ),
     path(
         "<int:pk>/read",
-        AveriaListView.as_view(),
+        AsignacionListView.as_view(),
         name="read",
     ),
     path(
         "<int:pk>/update",
-        AveriaUpdateView.as_view(),
+        AsignacionUpdateView.as_view(),
         name="update",
     ),
     path(
         "<int:pk>/delete",
-        AveriaDeleteView.as_view(),
+        AsignacionDeleteView.as_view(),
         name="delete",
     ),
 ]

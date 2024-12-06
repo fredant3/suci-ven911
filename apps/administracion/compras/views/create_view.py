@@ -28,7 +28,7 @@ class CompraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         return TemplateLayout.init(self, context)
 
 
-class AsignacionCreateApiView(CreateController, CheckPermisosMixin):
+class ComprasCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
     form_class = CompraForm
 

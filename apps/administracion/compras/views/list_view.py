@@ -11,7 +11,7 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 
-class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
@@ -94,7 +94,7 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class AveriaListApiView(ListController, CheckPermisosMixin):
+class ComprasListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):

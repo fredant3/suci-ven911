@@ -1,6 +1,6 @@
 import json
 
-from administracion.inventario.services import InventarioService
+from administracion.inventario.services import ArticuloService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -83,4 +83,4 @@ class ArticuloListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):
-        self.service = InventarioService()
+        self.service = ArticuloService()

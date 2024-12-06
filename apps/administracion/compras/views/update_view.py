@@ -23,9 +23,9 @@ class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["submodule"] = "compra"
         context["titleForm"] = "Actualizar"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("compra:list")
+        context["listUrl"] = reverse_lazy("compras:list")
         context["urlForm"] = reverse_lazy(
-            "api_compra:update", args=[self.kwargs.get("pk")]
+            "api_compras:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
@@ -35,7 +35,7 @@ class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         return Compra.objects.filter(pk=id)
 
 
-class AveriaUpdateApiView(UpdateController, CheckPermisosMixin):
+class ComprasUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = ""
     form_class = CompraForm
 

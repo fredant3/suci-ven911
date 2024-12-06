@@ -1,4 +1,5 @@
 from administracion.asignaciones.models import Asignacion
+from administracion.inventario.models import Articulo
 from django import forms
 
 

@@ -1,12 +1,12 @@
-from administracion.inventario.repositories import InventarioRepository
+from administracion.inventario.repositories import ArticuloRepository
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from helpers.CrudMixin import CrudService
 
 
-class InventarioService(CrudService):
+class ArticuloService(CrudService):
     def __init__(self):
-        self.repository = InventarioRepository()
+        self.repository = ArticuloRepository()
 
     def prepare_data(self, request):
         data = request.POST.copy()

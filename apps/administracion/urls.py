@@ -25,4 +25,12 @@ urlpatterns = [
         "api/articulos/",
         include(("apps.administracion.inventario.urls_apis", "api_articulos")),
     ),
+    path(
+        "compras/",
+        include(("apps.administracion.compras.urls", "compras")),
+    ),
+    path(
+        "api/compras/",
+        include(("apps.administracion.compras.urls_apis", "api_compras")),
+    ),
 ]
