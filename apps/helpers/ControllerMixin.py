@@ -46,7 +46,7 @@ class CreateController(LoginRequiredMixin, CreateView):
             and request.headers.get("X-Requested-With") == "XMLHttpRequest"
         ):
             try:
-                self.service.creator(self.get_form(), request)
+                self.service.creator(self.get_form(), request, *arg, **kwargs)
                 return JsonResponse({"message": "Se ha registrado con éxito."})
             except ValidationError as e:
                 return JsonResponse(

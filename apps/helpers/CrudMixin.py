@@ -14,8 +14,8 @@ class CrudService(ServiceUtilMixin):
 
         return self.response(entities, start, length, draw)
 
-    def creator(self, form, request):
-        data = self.prepare_data(request)
+    def creator(self, form, request, *arg, **kwargs):
+        data = self.prepare_data(request, *arg, **kwargs)
         if form.is_valid():
             form.clean()
             return self.repository.create(data)

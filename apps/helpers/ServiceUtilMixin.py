@@ -2,7 +2,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 class ServiceUtilMixin:
-    def prepare_data(self, request):
+    def prepare_data(self, request, *arg, **kwargs):
         data = request.POST.copy()
         user = request.user
         if data.get("id") is None:

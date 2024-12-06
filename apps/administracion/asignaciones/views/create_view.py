@@ -1,5 +1,5 @@
+from administracion.asignaciones.forms import AsignacionForm
 from administracion.asignaciones.services import AsignacionService
-from asignaciones.forms import AsignacionForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView

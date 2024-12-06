@@ -29,7 +29,7 @@ class ArticuloForm(forms.ModelForm):
             "cantidad": "Cantidad",
             "condicion": "Condición",
             "fecha_adq": "Fecha de adquisición",
-            "tipo_articulo": "Tipo de artículo",
+            # "tipo_articulo": "Tipo de artículo",
         }
         widgets = {
             "fecha_adq": forms.DateInput(
