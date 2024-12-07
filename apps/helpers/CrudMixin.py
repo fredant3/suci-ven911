@@ -28,7 +28,6 @@ class CrudService(ServiceUtilMixin):
             raise "La cuenta de la red social no se ha encontrada"
 
     def updater(self, entity, payload):
-        print(payload.is_valid())
         if payload.is_valid():
             payload.clean()
             return self.repository.update(entity, payload)

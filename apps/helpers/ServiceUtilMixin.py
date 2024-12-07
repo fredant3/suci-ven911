@@ -6,8 +6,8 @@ class ServiceUtilMixin:
         data = request.POST.copy()
         user = request.user
         if data.get("id") is None:
-            data["created_by"] = user
-        data["updated_by"] = user
+            data["created_by"] = user.username
+        data["updated_by"] = user.username
         return data
 
     def paginate(self, data, start, length, draw):

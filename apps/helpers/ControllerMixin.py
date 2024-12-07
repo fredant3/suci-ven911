@@ -94,7 +94,6 @@ class UpdateController(LoginRequiredMixin, UpdateView):
                 print(f"REDIRECT ObjectDoesNotExist {ObjectDoesNotExist}")
                 error(self.request, "El recurso no se ha encontrado")
         else:
-            print("pk vacio")
             error(self.request, "No se proporcionó ningún recurso válido")
 
     def get_form(self):

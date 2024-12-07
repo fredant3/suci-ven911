@@ -7,7 +7,7 @@ class Repository:
         order = orderBy if orderAsc == "asc" else "-" + orderBy
         return self.entity.objects.all().order_by(order).values(*select)
 
-    def getFilter(self, criteria, select, orderBy, orderAsc):
+    def getFilter(self, criteria, select="", orderBy="id", orderAsc="-"):
         orderBy = orderBy if orderBy else "id"
         order = orderBy if orderAsc == "asc" else "-" + orderBy
 
@@ -25,9 +25,13 @@ class Repository:
         return entity
 
     def create(self, data):
-        print(data)
         data = {k: v for k, v in data.items() if k != "csrfmiddlewaretoken"}
+        print("**********************************")
+        print("REPO CREATE **********************************")
+        print(data)
         entity = self.entity(**data)
+        print(entity)
+        print("**********************************")
         entity.save()
         return entity
 
