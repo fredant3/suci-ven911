@@ -2,12 +2,12 @@ from django.urls import include, path
 
 urlpatterns = [
     path(
-        "asgnaciones/",
-        include(("apps.administracion.asignaciones.urls", "asgnaciones")),
+        "asignaciones/",
+        include(("apps.administracion.asignaciones.urls", "asignaciones")),
     ),
     path(
-        "api/asgnaciones/",
-        include(("apps.administracion.asignaciones.urls_apis", "api_asgnaciones")),
+        "api/asignaciones/",
+        include(("apps.administracion.asignaciones.urls_apis", "api_asignaciones")),
     ),
     path(
         "averias/",
