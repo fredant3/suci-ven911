@@ -25,7 +25,7 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submodule"] = "Asignacion"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("asignaciones:create")
-        context["listApiUrl"] = reverse_lazy("asignaciones:list")
+        context["listApiUrl"] = reverse_lazy("api_asignaciones:list")
         context["updateUrl"] = reverse_lazy("asignaciones:update", args=[0])
         context["deleteUrl"] = reverse_lazy("asignaciones:delete", args=[0])
         context["heads"] = columns
