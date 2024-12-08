@@ -32,7 +32,7 @@
     </li>
 
     <li class="menu-header small text-uppercase">
-      Probando
+      Administracion
     </li>
 
     {% comment %} <li
@@ -44,60 +44,39 @@
     </li> {% endcomment %}
 
     <!-- Gestion Comunicacional -->
-    <li class="menu-item {% if 'gc' in request.resolver_match.namespaces %}active open{% endif %}">
+    <li class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div class="text-truncate" data-i18n="Layouts">
-          Probando
+          Modulos 
         </div>
       </a>
       <ul class="menu-sub">
         <li
-          class="menu-item {% if 'gc' in request.resolver_match.namespaces and 'info' == request.resolver_match.url_name %}active{% endif %}">
-          <a href="{% url 'modules:index' %}" class="menu-link">
+          class="menu-item {% if 'administracion' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'asignaciones:list' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Inicio</div>
           </a>
         </li>
         <li
-          class="menu-item {% if 'gc' in request.resolver_match.namespaces and 'sm' in request.resolver_match.namespaces and 'listing-account' == request.resolver_match.url_name %}active{% endif %}">
+          class="menu-item {% if 'asignaciones' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'asignaciones:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Asignaciones</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'averias' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'modules:index' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without navbar">
-              Probando
+              Averias
             </div>
           </a>
         </li>
         <li
-          class="menu-item {% if 'gc' in request.resolver_match.namespaces and 'sa' in request.resolver_match.namespaces and 'listing-activity' == request.resolver_match.url_name %}active{% endif %}">
+          class="menu-item {% if 'articulos' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'modules:index' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Container">
-              Probando
-            </div>
-          </a>
-        </li>
-        <li
-          class="menu-item {% if 'gc' in request.resolver_match.namespaces and 'eq' in request.resolver_match.namespaces and 'listing-equipments' == request.resolver_match.url_name %}active{% endif %}">
-          <a href="{% url 'modules:index' %}" class="menu-link">
-            <div class="text-truncate" data-i18n="Fluid">
-              Probando
-            </div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="menu-item {% if 'eme' in request.resolver_match.namespaces %}active open{% endif %}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div class="text-truncate" data-i18n="Layouts">
-          Probando
-        </div>
-      </a>
-      <ul class="menu-sub">
-        <li
-          class="menu-item {% if 'eme' in request.resolver_match.namespaces and 'list-emergency' == request.resolver_match.url_name %}active{% endif %}">
-          <a href="{% url 'modules:index' %}" class="menu-link">
-            <div class="text-truncate" data-i18n="Without navbar">
-              Probando
+              Inventario
             </div>
           </a>
         </li>

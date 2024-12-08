@@ -7,6 +7,17 @@ from helpers.CrudMixin import CrudService
 
 
 class AsignacionService(CrudService):
+    select = (
+        "id",
+        "articulo__serial",
+        "sede__sede",
+        "departamento__nombre",
+        "cantidad",
+        "descripcion",
+        "observaciones",
+        "created_by",
+    )
+
     def __init__(self):
         self.repository = AsignacionRepository()
         self.repositoryArticle = ArticuloRepository()
@@ -22,15 +33,9 @@ class AsignacionService(CrudService):
     def search_departamento(self, departamentoId):
         return self.repositoryDepartamento.getById(departamentoId)
 
-    def prepare_data(self, request, *arg, **kwargs):
-        data = request.POST.copy()
-        data["articulo"] = self.search_article(data.get("articulo"))
-        data["sede"] = self.search_sede(data.get("sede"))
-        data["departamento"] = self.search_departamento(data.get("departamento"))
+    def relationship(self, payload, *arg, **kwargs):
+        payload["articulo"] = self.search_article(payload.get("articulo"))
+        payload["sede"] = self.search_sede(payload.get("sede"))
+        payload["departamento"] = self.search_departamento(payload.get("departamento"))
 
-        user = request.user
-        if data.get("id") is None:
-            data["created_by"] = user.username
-        data["updated_by"] = user.username
-
-        return data
+        return payload

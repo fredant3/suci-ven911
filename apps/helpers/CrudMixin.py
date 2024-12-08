@@ -4,9 +4,12 @@ from .ServiceUtilMixin import ServiceUtilMixin
 
 
 class CrudService(ServiceUtilMixin):
+    select = ""
+
     def getAll(
         self, draw, start, length, search=None, orderBy=None, orderAsc=None, select=("")
     ):
+        select = select if select else self.select
         if search is None:
             entities = self.repository.getAll(select, orderBy, orderAsc)
         else:

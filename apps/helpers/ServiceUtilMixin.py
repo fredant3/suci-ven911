@@ -2,13 +2,18 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 class ServiceUtilMixin:
+    def relationship(self, payload, *arg, **kwargs):
+        return payload
+
     def prepare_data(self, request, *arg, **kwargs):
         data = request.POST.copy()
+
         user = request.user
         if data.get("id") is None:
             data["created_by"] = user.username
         data["updated_by"] = user.username
-        return data
+
+        return self.relationship(data, *arg, **kwargs)
 
     def paginate(self, data, start, length, draw):
         entities = data[start : start + length]
