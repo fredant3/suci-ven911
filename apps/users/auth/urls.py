@@ -1,13 +1,13 @@
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
 from django.urls import path, reverse_lazy
-from users.auth.views import AuthView, LoginView
+from users.auth.views import AuthView, LoginFrontendView
 
 urlpatterns = [
     # FRONTEND
     path(
         "login",
-        LoginView.as_view(template_name="public/auth/login.html"),
+        LoginFrontendView.as_view(template_name="public/auth/login.html"),
         name="login",
     ),
     path(

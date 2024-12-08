@@ -33,12 +33,7 @@ Inicar Sesion
 
           <form id="formAuthentication" class="mb-3" method="POST">
             {% if form.error_messages %}
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              {% for error in form.get_invalid_login_error %}
-              <strong>Advertencia:</strong> {{ error }}
-              {% endfor %}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <div data-error></div>
             {% endif %}
 
             {% csrf_token %}
@@ -106,6 +101,10 @@ Inicar Sesion
       .fail(({status, responseJSON}, textStatus) => {
         if (status==401)
           toastError('Login', 'Credenciales incorrectas.', '')
+          $('[data-error]').html(`<div class="alert alert-danger alert-dismissible" role="alert">
+            <strong>Advertencia:</strong> <p>Por favor, introduzca un username y clave correctos. Observe que ambos campos pueden ser sensibles a mayúsculas.</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>`)
           {% comment %} toastError('Login', responseJSON.detail, '') {% endcomment %}
       })
   })  

@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -19,7 +18,7 @@ class AuthView(TemplateView):
         return context
 
 
-class LoginView(LoginView):
+class LoginFrontendView(LoginView):
     form_class = LoginForm
     next_page = reverse_lazy("modules:index")
 
@@ -31,16 +30,6 @@ class LoginView(LoginView):
             {"layout_path": TemplateHelper.set_layout("layout_blank.html", context)},
         )
         return context
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return super(LoginView, self).dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        login(self.request, form.get_user())
-        return HttpResponseRedirect(self.get_success_url())
 
 
 class LoginApiView(TokenObtainPairView):

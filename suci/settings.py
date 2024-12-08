@@ -212,5 +212,5 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = "users.User"
-LOGIN_URL = "login"
+LOGIN_URL = "auth:login"
 LOGIN_REDIRECT_URL = "dashboard"
