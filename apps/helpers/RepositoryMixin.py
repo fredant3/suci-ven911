@@ -13,7 +13,7 @@ class Repository:
 
         return self.entity.objects.filter(criteria).order_by(order).values(*select)
 
-    def getById(self, id, select):
+    def getById(self, id, select=""):
         # entity = self.entity.objects.get(pk=id).values(*select)
         entity = self.entity.objects.get(pk=id)
 
@@ -26,12 +26,7 @@ class Repository:
 
     def create(self, data):
         data = {k: v for k, v in data.items() if k != "csrfmiddlewaretoken"}
-        print("**********************************")
-        print("REPO CREATE **********************************")
-        print(data)
         entity = self.entity(**data)
-        print(entity)
-        print("**********************************")
         entity.save()
         return entity
 
