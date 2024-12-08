@@ -88,7 +88,7 @@ class UpdateController(LoginRequiredMixin, UpdateView):
         if pk:
             try:
                 data = self.service.reader(pk)
-                data.updated_by = self.request.user
+                data.updated_by = self.request.user.username
                 return data
             except ObjectDoesNotExist:
                 print(f"REDIRECT ObjectDoesNotExist {ObjectDoesNotExist}")
@@ -135,8 +135,8 @@ class DeleteController(LoginRequiredMixin, DeleteView):
         if pk:
             try:
                 data = self.service.reader(pk)
-                data.updated_by = self.request.user
-                data.deleted_by = self.request.user
+                data.updated_by = self.request.user.username
+                data.deleted_by = self.request.user.username
                 return data
             except ObjectDoesNotExist:
                 error(self.request, "El recurso no se ha encontrado")

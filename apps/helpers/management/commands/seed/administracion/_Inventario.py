@@ -29,7 +29,7 @@ class ArticuloProvider(faker.providers.BaseProvider):
 
 
 class ArticleFake:
-    def type_article(self):
+    def type_article():
         tiposArticulos = TipoArticulo.objects.all()
 
         if tiposArticulos.count() > 0:

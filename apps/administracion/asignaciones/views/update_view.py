@@ -18,7 +18,7 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
         context["submodule"] = "Asignacion"
         context["titleForm"] = "Actualizar"

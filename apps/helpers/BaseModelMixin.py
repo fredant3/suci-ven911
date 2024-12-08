@@ -4,15 +4,16 @@ from datetime import datetime
 from django.db import models
 from django.utils.timezone import get_current_timezone
 
-# class BaseModelManager(models.Manager):
-#     def get_queryset(self):
-#         # return super().get_queryset().exclude(deleted=True)
-#         pass
+
+class BaseModelManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().exclude(deleted_at__isnull=False)
+
+    def all_with_deleted(self):
+        return super().get_queryset()
 
 
 class BaseModel(models.Model):
-    # objects = BaseModelManager()
-
     created_by = models.CharField(verbose_name="Creado por", max_length=6)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
     updated_by = models.CharField(verbose_name="Actualizado por", max_length=6)
@@ -24,11 +25,12 @@ class BaseModel(models.Model):
         verbose_name="Eliminado el", null=True, blank=True
     )
 
-    def all(self):
-        # return self.exclude(deleted=True)
-        pass
+    objects = BaseModelManager()
 
     def delete(self):
+        print("******************************")
+        print("base modal delete")
+        print("******************************")
         self.deleted_at = datetime.now(tz=get_current_timezone())
         self.save()
 

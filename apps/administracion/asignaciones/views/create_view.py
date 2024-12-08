@@ -17,7 +17,7 @@ class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Asignaciones"
         context["submodule"] = "Asignaciones"
         context["titleForm"] = "Añadir una asignacion"

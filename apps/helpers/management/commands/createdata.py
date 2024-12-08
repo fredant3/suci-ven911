@@ -14,12 +14,12 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker("es_ES")
 
-        # admin = UserFaker.admin_user()
-        # guest = UserFaker.guest_user()
-        # other = UserFaker.other_user()
-        #
-        # ArticleFake.type_article()
-        # ArticleFake.article(fake)
+        admin = UserFaker.admin_user()
+        guest = UserFaker.guest_user()
+        other = UserFaker.other_user()
 
-        # SedesFaker.add_sedes(fake)
+        ArticleFake.type_article()
+        ArticleFake.article(fake)
+
+        SedesFaker.add_sedes(fake)
         DepartamentoFaker.add_departamentos(fake)
