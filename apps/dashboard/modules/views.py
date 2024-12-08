@@ -39,7 +39,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Gestión Administrativa",
-                "url": "asignaciones:list",
+                "url": "administracion",
                 "image": "img/gestion_administrativa.png",
             },
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
