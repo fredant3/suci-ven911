@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from users.auth.models import User
+
 
 tipo_considcion = (("N", "Nuevo"), ("U", "Usado"), ("D", "Deteriorado"))
 
