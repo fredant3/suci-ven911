@@ -1,0 +1,37 @@
+{% extends layout_path %}
+
+{% load static %}
+
+{% block title %}{{ titlePage }}{% endblock %}
+
+{% block breadcrumbs %}
+<span class="">{{ module }}</span>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    Cooming Soon
+    <h1>{{ submodule }}</h1>
+  </div>
+  <div class="card-body">
+    Sub Modulos
+    <div class="">
+      {% for name, link in submoduleList %}
+        <a href="{{ link }}" class="btn btn-outline-primary">
+          <span class="tf-icons bx bx-plus me-1"></span>{{ name }}
+        </a>
+      {% endfor %}
+      </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block vendor_css %}
+<link rel="stylesheet" href="{% static 'vendor/libs/data-tables/css/dataTables.bootstrap5.css' %}">
+{% endblock %}
+
+{% block vendor_js %}
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.js' %}"></script>
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.bootstrap5.js' %}"></script>
+{% endblock %}

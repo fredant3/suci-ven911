@@ -17,8 +17,8 @@ class AveriaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asignaciones"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administracion"
         context["submodule"] = "Averia"
         context["titleForm"] = "Añadir una Averia"
         context["tag"] = "Registrar"

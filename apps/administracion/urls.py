@@ -1,6 +1,12 @@
+from administracion.views import AdministracionView
 from django.urls import include, path
 
 urlpatterns = [
+    path(
+        "",
+        AdministracionView.as_view(),
+        name="administracion",
+    ),
     path(
         "asignaciones/",
         include(("apps.administracion.asignaciones.urls", "asignaciones")),
