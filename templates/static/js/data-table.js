@@ -26,7 +26,7 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
 };
 
 function getcolumnDefs (updateUrl, deleteUrl) {
-	console.log(updateUrl,deleteUrl)
+  console.info("HOLS")
   if (updateUrl && deleteUrl) {
     return [
       {
@@ -34,6 +34,8 @@ function getcolumnDefs (updateUrl, deleteUrl) {
         class: "text-center",
         orderable: false,
         render: function (data, type, row) {
+          console.info("HOLS")
+          console.info({row})
           let buttons = `
             <a href="${updateUrl.replace("0",row.id)}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
             <a href="${deleteUrl.replace("0",row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>

@@ -73,10 +73,8 @@ $(document).ready(function () {
     let valorSeleccionado = $(this).val();
     window.location.href = createUrl.replace("0", valorSeleccionado);
   });
-console.log('wewae')
 const url = "{{ listApiUrl }}"
 const updateUrl = "{{ updateUrl }}"
-console.log(updateUrl)
 const deleteUrl = "{{ deleteUrl }}"
   const columns =  {{ columns|safe }}
   setTBody({url, columns, updateUrl, deleteUrl});

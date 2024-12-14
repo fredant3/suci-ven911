@@ -6,6 +6,14 @@ from helpers.CrudMixin import CrudService
 
 
 class ArticuloService(CrudService):
+    select = (
+        "id",
+        "tipo_articulo__nombre",
+        "marca",
+        "modelo",
+        "fecha_adq",
+    )
+
     def __init__(self):
         self.repository = ArticuloRepository()
         self.repositoryTypeArticle = TipoArticuloRepository()

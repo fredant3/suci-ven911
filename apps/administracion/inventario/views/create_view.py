@@ -1,10 +1,5 @@
-from administracion.inventario.forms import (
-    ArticuloForm,
-    ConsumibleForm,
-    MobiliarioForm,
-    TecnologiaForm,
-    VehiculoForm,
-)
+from administracion.inventario.forms import ArticuloForm
+from administracion.inventario.helper import define_type_form
 from administracion.inventario.services import ArticuloService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -18,29 +13,16 @@ from templates.sneat import TemplateLayout
 class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     template_name = "sneat/layout/partials/form/layout.html"
-    form_class = TecnologiaForm
-    tipos = {
-        "tecnologia": TecnologiaForm,
-        "consumible": ConsumibleForm,
-        "mobiliario": MobiliarioForm,
-        "vehiculo": VehiculoForm,
-    }
-
-    def define_type_form(self):
-        tipo = self.kwargs.get("type")
-        isType = self.tipos.get(tipo, None)
-        if isType is None:
-            raise Exception("Tipo de articulo no encontrado")
-        return isType
+    form_class = ArticuloForm
 
     def get_context_data(self, **kwargs):
-        self.form_class = self.define_type_form()
+        self.form_class = define_type_form(self.kwargs)
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
         context["submodule"] = "Articulo"
-        context["titleForm"] = "Añadir una Articulo"
+        context["titleForm"] = f"Añadir articulo tipo {self.kwargs.get("type")}"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("articulos:list")
         context["urlForm"] = reverse_lazy(
@@ -53,27 +35,10 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 class ArtiluloCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
     form_class = ArticuloForm
-    tipos = {
-        "tecnologia": TecnologiaForm,
-        "consumible": ConsumibleForm,
-        "mobiliario": MobiliarioForm,
-        "vehiculo": VehiculoForm,
-    }
-
-    def define_type_form(self):
-        tipo = self.kwargs.get("type")
-        isType = self.tipos.get(tipo, None)
-        if isType is None:
-            raise Exception("Tipo de articulo no encontrado")
-        return isType
 
     def __init__(self):
         self.service = ArticuloService()
 
     def get_form_class(self):
-        self.form_class = self.define_type_form()
-        print("------------------------------------")
-        print(self.form_class)
-        print(self.kwargs.get("type"))
-        print("------------------------------------")
+        self.form_class = define_type_form(self.kwargs)
         return self.form_class

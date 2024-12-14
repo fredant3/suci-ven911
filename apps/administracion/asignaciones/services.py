@@ -2,7 +2,6 @@ from administracion.asignaciones.repositories import AsignacionRepository
 from administracion.departamentos.repositories import DepartamentoRepository
 from administracion.inventario.repositories import ArticuloRepository
 from administracion.sedes.repositories import SedeRepository
-from django.db.models import Q
 from helpers.CrudMixin import CrudService
 
 
