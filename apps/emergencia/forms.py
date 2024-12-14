@@ -8,14 +8,14 @@ class EmergenciaForm(forms.ModelForm):
         fields = [
             "denunciante",
             "telefono_denunciante",
-            # "id_estado", # TODO: Revisar este campo
-            # "id_municipio",
-            # "id_parroquia",
-            # "id_incidencia",
-            # "direccion_incidencia",
-            # "id_organismo",
-            # "observaciones",
-            # "datecompleted",
+            "id_estado",
+            "id_municipio",
+            "id_parroquia",
+            "id_incidencia",
+            "direccion_incidencia",
+            "id_organismo",
+            "observaciones",
+            "datecompleted",
         ]
         exclude = [
             "created_at",

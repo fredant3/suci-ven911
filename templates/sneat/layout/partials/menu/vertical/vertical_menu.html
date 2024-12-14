@@ -35,21 +35,11 @@
       Administracion
     </li>
 
-    {% comment %} <li
-      class="menu-item {% if 'gc' in request.resolver_match.namespaces and 'info' == request.resolver_match.url_name %}active{% endif %}">
-      <a href="{% url 'modules:index' %}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-envelope"></i>
-        <div class="text-truncate" data-i18n="Email">Inicio</div>
-      </a>
-    </li> {% endcomment %}
+    <li class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'compras' in request.resolver_match.namespaces or 'departamentos' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces or 'sedes' in request.resolver_match.namespaces %}active open{% endif %}">
 
-    <!-- Gestion Comunicacional -->
-    <li class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div class="text-truncate" data-i18n="Layouts">
-          Modulos 
-        </div>
+        <div class="text-truncate" data-i18n="Layouts">Modulos </div>
       </a>
       <ul class="menu-sub">
         <li
@@ -67,20 +57,45 @@
         <li
           class="menu-item {% if 'averias' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'modules:index' %}" class="menu-link">
-            <div class="text-truncate" data-i18n="Without navbar">
-              Averias
-            </div>
+            <div class="text-truncate" data-i18n="Without navbar">Averias</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'compras' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'modules:index' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without navbar">Compras</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'departamentos' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'modules:index' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without navbar">Departamentos</div>
           </a>
         </li>
         <li
           class="menu-item {% if 'articulos' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'modules:index' %}" class="menu-link">
-            <div class="text-truncate" data-i18n="Container">
-              Inventario
-            </div>
+            <div class="text-truncate" data-i18n="Container">Inventario</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'sedes' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'modules:index' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Container">Sedes</div>
           </a>
         </li>
       </ul>
+    </li>
+
+    <li class="menu-header small text-uppercase">
+      Emergencias
+    </li>
+
+    <li class="menu-item {% if 'emergencias' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+      <a href="{% url 'emergencias:list' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope"></i>
+        <div class="text-truncate" data-i18n="Email">Inicio</div>
+      </a>
     </li>
   </ul>
 </aside>

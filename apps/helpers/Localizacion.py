@@ -1,0 +1,7 @@
+ESTADO = []
+
+CIUDAD = ()
+
+MUNICIPIO = ()
+
+PARROQUIA = ()
