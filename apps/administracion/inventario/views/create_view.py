@@ -53,6 +53,27 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 class ArtiluloCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
     form_class = ArticuloForm
+    tipos = {
+        "tecnologia": TecnologiaForm,
+        "consumible": ConsumibleForm,
+        "mobiliario": MobiliarioForm,
+        "vehiculo": VehiculoForm,
+    }
+
+    def define_type_form(self):
+        tipo = self.kwargs.get("type")
+        isType = self.tipos.get(tipo, None)
+        if isType is None:
+            raise Exception("Tipo de articulo no encontrado")
+        return isType
 
     def __init__(self):
         self.service = ArticuloService()
+
+    def get_form_class(self):
+        self.form_class = self.define_type_form()
+        print("------------------------------------")
+        print(self.form_class)
+        print(self.kwargs.get("type"))
+        print("------------------------------------")
+        return self.form_class

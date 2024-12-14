@@ -43,6 +43,7 @@ class TecnologiaForm(forms.ModelForm):
     class Meta:
         model = Articulo
         fields = [
+            "descripcion",
             "marca",
             "modelo",
             "serial",
@@ -52,6 +53,7 @@ class TecnologiaForm(forms.ModelForm):
             "fecha_adq",
         ]
         labels = {
+            "descripcion": "Descripción",
             "marca": "Marca",
             "modelo": "Modelo",
             "serial": "Serial",
@@ -71,8 +73,9 @@ class TecnologiaForm(forms.ModelForm):
 class ConsumibleForm(forms.ModelForm):
     class Meta:
         model = Articulo
-        fields = ["marca", "serial", "cantidad", "fecha_adq"]
+        fields = ["descripcion", "marca", "serial", "cantidad", "fecha_adq"]
         labels = {
+            "descripcion": "Descripción",
             "marca": "Marca",
             "serial": "Serial",
             "cantidad": "Cantidad",
@@ -90,6 +93,7 @@ class MobiliarioForm(forms.ModelForm):
     class Meta:
         model = Articulo
         fields = [
+            "descripcion",
             "serial",
             "codigo_bn",
             "cantidad",
@@ -97,6 +101,7 @@ class MobiliarioForm(forms.ModelForm):
             "fecha_adq",
         ]
         labels = {
+            "descripcion": "Descripción",
             "serial": "Serial",
             "codigo_bn": "Código BN",
             "cantidad": "Cantidad",
@@ -115,6 +120,7 @@ class VehiculoForm(forms.ModelForm):
     class Meta:
         model = Articulo
         fields = [
+            "descripcion",
             "marca",
             "modelo",
             "placa",
@@ -125,6 +131,7 @@ class VehiculoForm(forms.ModelForm):
             "fecha_adq",
         ]
         labels = {
+            "descripcion": "Descripción",
             "marca": "Marca",
             "modelo": "Modelo",
             "placa": "Placa",
