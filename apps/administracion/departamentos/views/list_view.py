@@ -1,5 +1,6 @@
 import json
 
+from administracion.departamentos.services import DepartamentoService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -9,10 +10,8 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import SedeService
 
-
-class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class DepartamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
@@ -23,12 +22,12 @@ class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
-        context["submodule"] = "Sedes"
+        context["submodule"] = "Departamento"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("sedes:create")
-        context["listApiUrl"] = reverse_lazy("api_sedes:list")
-        context["updateUrl"] = reverse_lazy("sedes:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("sedes:delete", args=[0])
+        context["createUrl"] = reverse_lazy("departamentos:create")
+        context["listApiUrl"] = reverse_lazy("api_departamentos:list")
+        context["updateUrl"] = reverse_lazy("departamentos:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("departamentos:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -38,29 +37,22 @@ class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "ID",
+                "title": "#",
+                "orderable": "true",
+                "searchable": "false",
+            },
+            {
+                "data": "nombre",
+                "name": "nombre",
+                "title": "Nombre",
                 "orderable": "true",
                 "searchable": "true",
-            },
-            {
-                "data": "sede",
-                "name": "sede",
-                "title": "Sede",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
-                "orderable": "false",
-                "searchable": "false",
             },
         ]
 
 
-class SedeListApiView(ListController, CheckPermisosMixin):
+class DepartamentoListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):
-        self.service = SedeService()
+        self.service = DepartamentoService()

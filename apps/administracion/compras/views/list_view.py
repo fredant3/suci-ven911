@@ -13,22 +13,21 @@ from templates.sneat import TemplateLayout
 
 class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
-    url_redirect = reverse_lazy("modules:index")
+    url_redirect = reverse_lazy("administracion")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
         context["submodule"] = "Compra"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("compra:create")
-        context["listApiUrl"] = reverse_lazy("api_compra:list")
-        context["updateUrl"] = reverse_lazy("compra:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("compra:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_compra:export_excel")
+        context["createUrl"] = reverse_lazy("compras:create")
+        context["listApiUrl"] = reverse_lazy("api_compras:list")
+        context["updateUrl"] = reverse_lazy("compras:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("compras:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -94,7 +93,7 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class ComprasListApiView(ListController, CheckPermisosMixin):
+class CompraListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):

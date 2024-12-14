@@ -19,14 +19,13 @@ class AdministracionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Administracion"
-        context["submodule"] = "Asignacion"
+        context["submodule"] = "Dashboard Administracion"
         context["submoduleList"] = (
             ("Asignaciones", reverse_lazy("asignaciones:list")),
             ("Averia", reverse_lazy("averias:list")),
-            ("Asignaciones", reverse_lazy("asignaciones:list")),
             ("Compras", reverse_lazy("compras:list")),
-            # ("Departamentos", reverse_lazy("departamentos:list")),
+            ("Departamentos", reverse_lazy("departamentos:list")),
             ("Inventario", reverse_lazy("articulos:list")),
-            # ("Sedes", reverse_lazy("sedes:list")),
+            ("Sedes", reverse_lazy("sedes:list")),
         )
         return TemplateLayout.init(self, context)

@@ -1,5 +1,5 @@
-from administracion.compras.forms import CompraForm
-from administracion.compras.services import CompraService
+from administracion.departamentos.forms import DepartamentoForm
+from administracion.departamentos.services import DepartamentoService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -9,9 +9,9 @@ from helpers.ControllerMixin import CreateController
 from templates.sneat import TemplateLayout
 
 
-class CompraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+class DepartamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
-    form_class = CompraForm
+    form_class = DepartamentoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -19,18 +19,18 @@ class CompraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
-        context["submodule"] = "Compras"
-        context["titleForm"] = "Añadir una compra"
+        context["submodule"] = "Departamentos"
+        context["titleForm"] = "Añadir un departamento"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("compras:list")
-        context["urlForm"] = reverse_lazy("api_compras:create")
+        context["listUrl"] = reverse_lazy("departamentos:list")
+        context["urlForm"] = reverse_lazy("api_departamentos:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
 
-class CompraCreateApiView(CreateController, CheckPermisosMixin):
+class DepartamentoCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = ""
-    form_class = CompraForm
+    form_class = DepartamentoForm
 
     def __init__(self):
-        self.service = CompraService()
+        self.service = DepartamentoService()

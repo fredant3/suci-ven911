@@ -24,6 +24,22 @@ urlpatterns = [
         include(("apps.administracion.averia.urls_apis", "api_averias")),
     ),
     path(
+        "compras/",
+        include(("apps.administracion.compras.urls", "compras")),
+    ),
+    path(
+        "api/compras/",
+        include(("apps.administracion.compras.urls_apis", "api_compras")),
+    ),
+    path(
+        "departamentos/",
+        include(("apps.administracion.departamentos.urls", "departamentos")),
+    ),
+    path(
+        "api/departamentos/",
+        include(("apps.administracion.departamentos.urls_apis", "api_departamentos")),
+    ),
+    path(
         "articulos/",
         include(("apps.administracion.inventario.urls", "articulos")),
     ),
@@ -32,11 +48,11 @@ urlpatterns = [
         include(("apps.administracion.inventario.urls_apis", "api_articulos")),
     ),
     path(
-        "compras/",
-        include(("apps.administracion.compras.urls", "compras")),
+        "sedes/",
+        include(("apps.administracion.sedes.urls", "sedes")),
     ),
     path(
-        "api/compras/",
-        include(("apps.administracion.compras.urls_apis", "api_compras")),
+        "api/sedes/",
+        include(("apps.administracion.sedes.urls_apis", "api_sedes")),
     ),
 ]

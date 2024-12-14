@@ -1,9 +1,8 @@
+from administracion.sedes.views.create_view import SedeCreateView
+from administracion.sedes.views.delete_view import SedeDeleteView
+from administracion.sedes.views.list_view import SedeListView
+from administracion.sedes.views.update_view import SedeUpdateView
 from django.urls import path
-
-from .views.create_view import SedeCreateView
-from .views.delete_view import SedeDeleteView
-from .views.list_view import SedeListView
-from .views.update_view import SedeUpdateView
 
 urlpatterns = [
     path(

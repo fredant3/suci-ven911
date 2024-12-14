@@ -17,9 +17,9 @@ class SedeCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Administracion"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administracion"
         context["submodule"] = "Sedes"
         context["titleForm"] = "Añadir una sede"
         context["tag"] = "Registrar"

@@ -37,8 +37,8 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         self.form_class = self.define_type_form()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Inventario"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administracion"
         context["submodule"] = "Articulo"
         context["titleForm"] = "Añadir una Articulo"
         context["tag"] = "Registrar"

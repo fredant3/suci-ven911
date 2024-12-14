@@ -1,6 +1,6 @@
-from administracion.inventario.forms import ArticuloForm
-from administracion.inventario.models import Articulo
-from administracion.inventario.services import ArticuloService
+from administracion.departamentos.forms import DepartamentoForm
+from administracion.departamentos.models import Departamento
+from administracion.departamentos.services import DepartamentoService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
@@ -10,32 +10,32 @@ from helpers.ControllerMixin import DeleteController
 from templates.sneat import TemplateLayout
 
 
-class ArticuloDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
+class DepartamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
     permission_required = ""
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administrasion"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Articulo"
-        context["titleForm"] = "Eliminar Articulo"
+        context["module"] = "Administrasion"
+        context["submodule"] = "Departamentos"
+        context["titleForm"] = "Eliminar departamento"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("articulos:list")
+        context["listUrl"] = reverse_lazy("departamentos:list")
         context["urlDelete"] = reverse_lazy(
-            "api_articulos:delete", args=[self.kwargs.get("pk")]
+            "api_departamentos:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Articulo.objects.filter(pk=id)
+        return Departamento.objects.filter(pk=id)
 
 
-class ArticuloDeleteApiView(DeleteController, CheckPermisosMixin):
+class DepartamentoDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = ""
-    form_class = ArticuloForm
+    form_class = DepartamentoForm
 
     def __init__(self):
-        self.service = ArticuloService()
+        self.service = DepartamentoService()

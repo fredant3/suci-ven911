@@ -11,7 +11,7 @@ urlpatterns = [
         name="list",
     ),
     path(
-        "create/<str:type>/",
+        "create",
         CompraCreateView.as_view(),
         name="create",
     ),
