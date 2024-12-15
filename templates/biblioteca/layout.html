@@ -4,7 +4,16 @@
 
 {% block title %}{{ titlePage }}{% endblock %}
 
-{% block breadcrumbs %}<span class="">{{ module }}</span>{% endblock %}
+{% block breadcrumbs %}
+{% if submodule %}
+<span class="text-muted fw-light">
+  <a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /
+</span>
+<span class="">{{ submodule }}</span>
+{% else %}
+<span class="">{{ module }}</span>
+{% endif %}
+{% endblock %}
 
 {% block content %}
   <div id="biblioteca-wrapper"></div>
@@ -48,7 +57,7 @@ $(document).ready(function () {
   const submodules = JSON.parse('{{ submodules|escapejs }}')
   
   submodules.forEach(submodule => {
-    const url = `${submodule.api}?length=3&order[0][name]=date&order[0][dir]=desc`
+    const url = submodule.api
     const modules = submodule.url
     const submoduleName = submodule.name.toLowerCase()
 
@@ -62,7 +71,7 @@ $(document).ready(function () {
           <div class="border rounded biblioteca-wrapper my-1">
             <div class="d-flex align-items-center">
               <h5 class="card-title text-uppercase py-2 px-5">${submoduleName}</h5>
-              <a href="${modules}" class="card-link text-end">Ver Todo</a>
+              ${modules ? `<a href="${modules}" class="card-link text-end">Ver Todo</a>` : ''}
             </div>
             <div id="${submoduleName}-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
           </div>

@@ -20,13 +20,13 @@ class BibliotecatView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submodules"] = json.dumps(
             (
                 {
-                    "url": str(reverse_lazy("normativas:list")),
-                    "api": str(reverse_lazy("api_normativas:list")),
+                    "url": str(reverse_lazy("biblioteca_normativas:list")),
+                    "api": f"{reverse_lazy("api_biblioteca_normativas:list")}?length=3&order[0][name]=date&order[0][dir]=desc",
                     "name": "Normativas",
                 },
                 {
-                    "url": str(reverse_lazy("reglamentos:list")),
-                    "api": str(reverse_lazy("api_reglamentos:list")),
+                    "url": str(reverse_lazy("biblioteca_reglamentos:list")),
+                    "api": f"{reverse_lazy("api_biblioteca_reglamentos:list")}?length=3&order[0][name]=date&order[0][dir]=desc",
                     "name": "Reglamentos",
                 },
             )
