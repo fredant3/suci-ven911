@@ -166,3 +166,4 @@ noxfile_config.json
 *.swp
 *.swo
 *.swn
+*.todo
