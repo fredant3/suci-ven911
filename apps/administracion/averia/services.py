@@ -1,5 +1,4 @@
 from administracion.averia.repositories import AveriaRepository
-from django.db.models import Q
 from helpers.CrudMixin import CrudService
 
 

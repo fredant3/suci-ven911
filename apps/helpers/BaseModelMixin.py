@@ -28,9 +28,6 @@ class BaseModel(models.Model):
     objects = BaseModelManager()
 
     def delete(self):
-        print("******************************")
-        print("base modal delete")
-        print("******************************")
         self.deleted_at = datetime.now(tz=get_current_timezone())
         self.save()
 

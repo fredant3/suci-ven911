@@ -23,6 +23,7 @@ class IncidenciaService(CrudService):
         self.repositoryDepartamento = DepartamentoRepository()
         self.repositoryTipoIncidencia = TipoIncidenciaRepository()
 
+    # BEGIN Create
     def search_sede(self, id):
         return self.repositorySede.getById(id)
 
@@ -40,3 +41,5 @@ class IncidenciaService(CrudService):
         )
 
         return payload
+
+    # END Create
