@@ -1,6 +1,5 @@
 from django import forms
-
-from .models import Incidencia
+from potencia.incidencias.models import Incidencia
 
 
 class IncidenciaForm(forms.ModelForm):
@@ -10,10 +9,9 @@ class IncidenciaForm(forms.ModelForm):
             "estado",
             "sede",
             "departamento",
-            "tipoincidencia",
-            "usuario",
+            "tipo_incidencia",
             "observaciones",
-            "tiposolicitud",
+            "tipo_solicitud",
         )
         exclude = [
             "created_at",

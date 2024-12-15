@@ -1,13 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-
-
-class Incidencia(models.Model):
-    tipo = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.tipo
+from potencia.incidencias.models import TipoIncidencia
 
 
 class OrganismoCompetente(models.Model):
@@ -23,7 +17,7 @@ class Emergencia(BaseModel):
     estado = models.CharField("Estado", max_length=90)
     municipio = models.CharField("Municipio", max_length=90)
     parroquia = models.CharField("Parroquia", max_length=90)
-    id_incidencia = models.ForeignKey(Incidencia, on_delete=models.CASCADE)
+    id_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
     id_organismo = models.ForeignKey(OrganismoCompetente, on_delete=models.CASCADE)
     direccion_incidencia = models.TextField(blank=True)
     observaciones = models.TextField(blank=True)

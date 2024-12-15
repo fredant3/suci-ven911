@@ -1,6 +1,10 @@
 from helpers.RepositoryMixin import Repository
+from potencia.incidencias.models import Incidencia, TipoIncidencia
 
-from .models import Incidencia
+
+class TipoIncidenciaRepository(Repository):
+    def __init__(self):
+        self.entity = TipoIncidencia
 
 
 class IncidenciaRepository(Repository):

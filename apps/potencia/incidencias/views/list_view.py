@@ -6,10 +6,9 @@ from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
+from potencia.incidencias.services import IncidenciaService
 
 from templates.sneat import TemplateLayout
-
-from ..services import IncidenciaService
 
 
 class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -38,23 +37,9 @@ class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "ID",
+                "title": "#",
                 "orderable": "true",
                 "searchable": "true",
-            },
-            {
-                "data": "tiposolicitud",
-                "name": "tiposolicitud",
-                "title": "Tipo de Solicitud",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "usuario",
-                "name": "usuario",
-                "title": "Usuario",
-                "orderable": "false",
-                "searchable": "false",
             },
             {
                 "data": "estado",
@@ -64,30 +49,30 @@ class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "sede",
-                "name": "sede",
+                "data": "tipo_solicitud",
+                "name": "tipo_solicitud",
+                "title": "Tipo de Solicitud",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "sede__sede",
+                "name": "sede__sede",
                 "title": "Sede",
                 "orderable": "false",
                 "searchable": "true",
             },
             {
-                "data": "departamento",
-                "name": "departamento",
+                "data": "departamento__nombre",
+                "name": "departamento__nombre",
                 "title": "Departamento",
                 "orderable": "false",
                 "searchable": "true",
             },
             {
-                "data": "tipoincidencia",
-                "name": "tipoincidencia",
+                "data": "tipo_incidencia__tipo",
+                "name": "tipo_incidencia__tipo",
                 "title": "Tipo de Incidencia",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "observaciones",
-                "name": "observaciones",
-                "title": "Observaciones",
                 "orderable": "false",
                 "searchable": "true",
             },

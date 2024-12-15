@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
+from potencia.incidencias.forms import IncidenciaForm
+from potencia.incidencias.models import Incidencia
+from potencia.incidencias.services import IncidenciaService
 
 from templates.sneat import TemplateLayout
-
-from ..forms import IncidenciaForm
-from ..models import Incidencia
-from ..services import IncidenciaService
 
 
 class IncidenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

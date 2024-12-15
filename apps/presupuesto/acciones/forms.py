@@ -1,6 +1,5 @@
 from django import forms
-
-from .models import Accion
+from presupuesto.models import Accion
 
 # from django.forms.fields import DateTimeInput
 

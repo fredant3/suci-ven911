@@ -12,8 +12,10 @@ ESTATUS_CHOICES = (
 
 
 class Sueldo(BaseModel):
+    tipo_sueldo = models.ForeignKey(TipoSueldo, on_delete=models.CASCADE)
     estatus = models.CharField(max_length=10, choices=ESTATUS_CHOICES)
     fecha_pago = models.DateField()
+    indexado = models.BooleanField(default=False)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
 
@@ -29,10 +31,9 @@ class Sueldo(BaseModel):
 
 
 class SueldoDetalle(BaseModel):
-    tipo_sueldo = models.ForeignKey(TipoSueldo, on_delete=models.CASCADE)
+    sueldo = models.ForeignKey(Sueldo, on_delete=models.CASCADE)
     fecha_pago = models.DateField()
     monto = models.DecimalField(max_digits=10, decimal_places=2)
-    sueldo = models.ForeignKey(Sueldo, on_delete=models.CASCADE)
 
     def toJSON(self):
         return model_to_dict(self)

@@ -110,3 +110,25 @@ python manage.py makemigrations
 ```
 python ./gestion_comunicacional/setup.py sdist 
 ```
+
+__Eliminar las carpetas migraciones (PowerShell)__
+```
+Get-ChildItem -Recurse -Directory -Filter "migrations" | Remove-Item -Recurse -Force
+```
+
+__Migraciones__
+```
+python manage.py makemigrations helpers
+python manage.py makemigrations users
+python manage.py makemigrations dashboard
+python manage.py makemigrations administracion
+python manage.py makemigrations asesoria
+python manage.py makemigrations biblioteca
+python manage.py makemigrations emergencia
+python manage.py makemigrations organizacion
+python manage.py makemigrations planificacion
+python manage.py makemigrations potencia
+python manage.py makemigrations presupuesto
+python manage.py makemigrations rrhh
+python manage.py makemigrations seguridad
+```
