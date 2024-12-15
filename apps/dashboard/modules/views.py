@@ -33,7 +33,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/cuadrantes_de_paz.png",
             },
             {
-                "title": "Planificación - 1",
+                "title": "Planificación",
                 "url": "planificacion",
                 "image": "img/planificacion.png",
             },
