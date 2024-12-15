@@ -1,6 +1,4 @@
-import random
 
-import faker.providers
 from administracion.departamentos.models import Departamento
 
 

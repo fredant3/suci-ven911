@@ -15,9 +15,9 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker("es_ES")
 
-        admin = UserFaker.admin_user()
-        guest = UserFaker.guest_user()
-        other = UserFaker.other_user()
+        UserFaker.admin_user()
+        UserFaker.guest_user()
+        UserFaker.other_user()
 
         ArticleFake.type_article()
         ArticleFake.article(fake)

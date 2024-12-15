@@ -1,7 +1,7 @@
 import random
 
 import faker.providers
-from administracion.averia.models import Averia, TipoAveria
+from administracion.averia.models import TipoAveria
 
 TIPOS_DE_AVERIA = ["BUENO", "DEFECTUOSO", "EN REPARACION"]
 

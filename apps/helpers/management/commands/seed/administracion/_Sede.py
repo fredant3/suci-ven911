@@ -1,4 +1,3 @@
-import random
 
 import faker.providers
 from administracion.sedes.models import Sede
