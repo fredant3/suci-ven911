@@ -1,7 +1,6 @@
+from asesoria.filmicos.models import RegistroFilmico
 from django import forms
 from django.forms.fields import DateTimeInput
-
-from .models import RegistroFilmico
 
 
 class RegistroFilmicoForm(forms.ModelForm):

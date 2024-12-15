@@ -1,6 +1,5 @@
+from asesoria.filmicos.models import RegistroFilmico
 from helpers.RepositoryMixin import Repository
-
-from .models import RegistroFilmico
 
 
 class RegistroFilmicoRepository(Repository):

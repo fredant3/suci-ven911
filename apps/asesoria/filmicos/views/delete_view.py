@@ -1,3 +1,5 @@
+from asesoria.filmicos.models import RegistroFilmico
+from asesoria.filmicos.services import RegistroFilmicoService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
@@ -5,9 +7,6 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
-
-from ..models import RegistroFilmico
-from ..services import RegistroFilmicoService
 
 
 class RegistroFilmicoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

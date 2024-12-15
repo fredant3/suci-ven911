@@ -5,12 +5,12 @@ from helpers.BaseModelMixin import BaseModel
 
 class RegistroFilmico(BaseModel):
     estatus = models.CharField(max_length=50, blank=True, null=True)
-    direccion = models.CharField(
-        max_length=150, blank=True, null=True, verbose_name="Dirección"
-    )
     camara = models.CharField(max_length=50, blank=True, null=True)
     motivo_solicitud = models.CharField(max_length=400)
     ente_solicita = models.CharField(max_length=50, blank=True, null=True)
+    direccion = models.CharField(
+        max_length=150, blank=True, null=True, verbose_name="Dirección"
+    )
     fecha_solicitud = models.DateField(blank=True, null=True)
     fecha_culminacion = models.DateField(blank=True, null=True)
 

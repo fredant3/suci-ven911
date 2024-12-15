@@ -1,3 +1,6 @@
+from asesoria.denuncias.forms import DenunciaForm
+from asesoria.denuncias.models import Denuncia
+from asesoria.denuncias.services import DenunciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
@@ -5,10 +8,6 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
-
-from ..forms import DenunciaForm
-from ..models import Denuncia
-from ..services import DenunciaService
 
 
 class DenunciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

@@ -1,3 +1,5 @@
+from asesoria.denuncias.forms import DenunciaForm
+from asesoria.denuncias.services import DenunciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -5,9 +7,6 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
-
-from ..forms import DenunciaForm
-from ..services import DenunciaService
 
 
 class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -21,7 +20,7 @@ class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Denuncias"
-        context["titleForm"] = "Añadir una denuncia nueva"
+        context["titleForm"] = "Añadir denuncia"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("denuncias:list")
         context["urlForm"] = reverse_lazy("api_denuncias:create")

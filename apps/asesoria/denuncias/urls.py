@@ -1,9 +1,8 @@
+from asesoria.denuncias.views.create_view import DenunciaCreateView
+from asesoria.denuncias.views.delete_view import DenunciaDeleteView
+from asesoria.denuncias.views.list_view import DenunciaListView
+from asesoria.denuncias.views.update_view import DenunciaUpdateView
 from django.urls import path
-
-from .views.create_view import DenunciaCreateView
-from .views.delete_view import DenunciaDeleteView
-from .views.list_view import DenunciaListView
-from .views.update_view import DenunciaUpdateView
 
 urlpatterns = [
     path(

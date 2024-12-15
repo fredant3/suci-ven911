@@ -2,8 +2,31 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 class ServiceUtilMixin:
+    def change_key_create(self, fields, data):
+        payload = {}
+
+        for field, key in fields:
+            if field not in data:
+                payload[field] = data[key]
+
+        return payload
+
+    def change_key_update(self, fields, data):
+        for field, key in fields:
+            if field not in data.fields:
+                data.fields[field] = data.fields[key]
+                data.cleaned_data[field] = data.cleaned_data[key]
+
+        return data
+
     def relationship(self, payload, *arg, **kwargs):
         return payload
+
+    def before_create(self, data):
+        return data
+
+    def before_update(self, entity, data):
+        pass
 
     def prepare_data(self, request, *arg, **kwargs):
         data = request.POST.copy()

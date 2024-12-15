@@ -1,3 +1,6 @@
+from asesoria.filmicos.forms import RegistroFilmicoForm
+from asesoria.filmicos.models import RegistroFilmico
+from asesoria.filmicos.services import RegistroFilmicoService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
@@ -5,10 +8,6 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
-
-from ..forms import RegistroFilmicoForm
-from ..models import RegistroFilmico
-from ..services import RegistroFilmicoService
 
 
 class RegistroFilmicoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):

@@ -1,24 +1,54 @@
-from django import forms
+from asesoria.denuncias.models import Denuncia
+from django.forms import CharField, EmailField, ModelForm
 from django.forms.fields import DateTimeInput
 
-from .models import Denuncia
 
+class DenunciaForm(ModelForm):
+    nombres_denunciante = CharField(max_length=120, label="Nombre del denunciante")
+    apellidos_denunciante = CharField(max_length=120, label="Apellido del denunciante")
+    cedula_denunciante = CharField(max_length=12, label="Cédula del denunciante")
+    telefono_denunciante = CharField(max_length=15, label="Teléfono del denunciante")
+    email_denunciante = EmailField(
+        max_length=60, required=False, label="Correo electrónico del denunciante"
+    )
+    direccion_denunciante = CharField(max_length=180, label="Dirección del denunciante")
 
-class DenunciaForm(forms.ModelForm):
+    nombres_denunciado = CharField(
+        max_length=120, required=False, label="Nombre del denunciado"
+    )
+    apellidos_denunciado = CharField(
+        max_length=120, required=False, label="Apellido del denunciado"
+    )
+    cedula_denunciado = CharField(
+        max_length=12, required=False, label="Cédula del denunciado"
+    )
+    telefono_denunciado = CharField(
+        max_length=15, required=False, label="Teléfono del denunciado"
+    )
+    email_denunciado = EmailField(
+        max_length=60, required=False, label="Correo electrónico del denunciado"
+    )
+    direccion_denunciado = CharField(
+        max_length=180, required=False, label="Dirección del denunciado"
+    )
+
     class Meta:
         model = Denuncia
         fields = [
-            "estatus",
-            "ente",
-            "nombres_d",
-            "apellidos_d",
-            "cedula_d",
-            "telefono",
-            "email",
-            "direccion_d",
+            "nombres_denunciante",
+            "apellidos_denunciante",
+            "cedula_denunciante",
+            "telefono_denunciante",
+            "email_denunciante",
+            "direccion_denunciante",
             "nombres_denunciado",
             "apellidos_denunciado",
             "cedula_denunciado",
+            "telefono_denunciado",
+            "email_denunciado",
+            "direccion_denunciado",
+            "estatus",
+            "ente",
             "motivo",
             "zona",
             "fecha_denuncia",

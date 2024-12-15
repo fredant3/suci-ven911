@@ -1,5 +1,6 @@
 import json
 
+from asesoria.denuncias.services import DenunciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -8,8 +9,6 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
-
-from ..services import DenunciaService
 
 
 class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -39,7 +38,7 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "ID",
+                "title": "#",
                 "orderable": "true",
                 "searchable": "true",
             },
@@ -51,51 +50,30 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "nombres_d",
-                "name": "nombres_d",
-                "title": "Nombre del Denunciante",
+                "data": "ente",
+                "name": "ente",
+                "title": "Ente",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "apellidos_d",
-                "name": "apellidos_d",
-                "title": "Apellido del Denunciante",
+                "data": "denunciante_nombre",
+                "name": "denunciante_nombre",
+                "title": "Denunciante",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "cedula_d",
-                "name": "cedula_d",
-                "title": "Cédula del Denunciante",
+                "data": "denunciado_nombre",
+                "name": "denunciado_nombre",
+                "title": "Denunciado",
                 "orderable": "false",
-                "searchable": "true",
+                "searchable": "false",
             },
             {
                 "data": "fecha_denuncia",
                 "name": "fecha_denuncia",
                 "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "telefono",
-                "name": "telefono",
-                "title": "Teléfono",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "email",
-                "name": "email",
-                "title": "Correo",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "motivo",
-                "name": "motivo",
-                "title": "Motivo",
                 "orderable": "false",
                 "searchable": "false",
             },

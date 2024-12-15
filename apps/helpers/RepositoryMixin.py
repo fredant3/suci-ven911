@@ -2,16 +2,20 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 class Repository:
+    def after_get_all(self, entities):
+        return entities
+
     def getAll(self, select, orderBy, orderAsc):
         orderBy = orderBy if orderBy else "id"
         order = orderBy if orderAsc == "asc" else "-" + orderBy
-        return self.entity.objects.all().order_by(order).values(*select)
+        entities = self.entity.objects.all().order_by(order).values(*select)
+        return self.after_get_all(entities)
 
     def getFilter(self, criteria, select="", orderBy="id", orderAsc="-"):
         orderBy = orderBy if orderBy else "id"
         order = orderBy if orderAsc == "asc" else "-" + orderBy
-
-        return self.entity.objects.filter(criteria).order_by(order).values(*select)
+        entities = self.entity.objects.filter(criteria).order_by(order).values(*select)
+        return self.after_get_all(entities)
 
     def getById(self, id, select=""):
         # entity = self.entity.objects.get(pk=id).values(*select)
@@ -31,6 +35,7 @@ class Repository:
         return entity
 
     def update(self, entity, payload):
+        print(entity)
         for field in payload.fields:
             if hasattr(entity, field):
                 setattr(entity, field, payload.cleaned_data[field])

@@ -1,6 +1,5 @@
+from asesoria.filmicos.repositories import RegistroFilmicoRepository
 from helpers.CrudMixin import CrudService
-
-from .repositories import RegistroFilmicoRepository
 
 
 class RegistroFilmicoService(CrudService):

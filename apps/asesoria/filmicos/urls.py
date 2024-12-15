@@ -1,9 +1,8 @@
+from asesoria.filmicos.views.create_view import RegistroFilmicoCreateView
+from asesoria.filmicos.views.delete_view import RegistroFilmicoDeleteView
+from asesoria.filmicos.views.list_view import RegistroFilmicoListView
+from asesoria.filmicos.views.update_view import RegistroFilmicoUpdateView
 from django.urls import path
-
-from .views.create_view import RegistroFilmicoCreateView
-from .views.delete_view import RegistroFilmicoDeleteView
-from .views.list_view import RegistroFilmicoListView
-from .views.update_view import RegistroFilmicoUpdateView
 
 urlpatterns = [
     path(

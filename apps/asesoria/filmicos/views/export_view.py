@@ -1,13 +1,12 @@
 from io import BytesIO
 
+from asesoria.filmicos.models import RegistroFilmico
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-
-from ..models import RegistroFilmico
 
 
 class RegistroFilmicoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
