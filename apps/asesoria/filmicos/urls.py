@@ -5,29 +5,9 @@ from asesoria.filmicos.views.update_view import RegistroFilmicoUpdateView
 from django.urls import path
 
 urlpatterns = [
-    path(
-        "",
-        RegistroFilmicoListView.as_view(),
-        name="list",
-    ),
-    path(
-        "create",
-        RegistroFilmicoCreateView.as_view(),
-        name="create",
-    ),
-    path(
-        "<int:pk>/read",
-        RegistroFilmicoListView.as_view(),
-        name="read",
-    ),
-    path(
-        "<int:pk>/update",
-        RegistroFilmicoUpdateView.as_view(),
-        name="update",
-    ),
-    path(
-        "<int:pk>/delete",
-        RegistroFilmicoDeleteView.as_view(),
-        name="delete",
-    ),
+    path("", RegistroFilmicoListView.as_view(), name="list"),
+    path("create", RegistroFilmicoCreateView.as_view(), name="create"),
+    path("<int:pk>/read", RegistroFilmicoListView.as_view(), name="read"),
+    path("<int:pk>/update", RegistroFilmicoUpdateView.as_view(), name="update"),
+    path("<int:pk>/delete", RegistroFilmicoDeleteView.as_view(), name="delete"),
 ]
