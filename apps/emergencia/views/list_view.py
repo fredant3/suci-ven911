@@ -38,37 +38,30 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "Denunciante",
+                "title": "#",
                 "orderable": "true",
                 "searchable": "true",
             },
             {
                 "data": "denunciante",
-                "name": "estatus",
+                "name": "denunciante",
                 "title": "Denunciante",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
                 "data": "telefono_denunciante",
-                "name": "nombres_d",
+                "name": "telefono_denunciante",
                 "title": "Telefono",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "datecompleted",
-                "name": "apellidos_d",
-                "title": "Completado",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "created_by",
-                "name": "cedula_d",
+                "name": "created_by",
                 "title": "Creado por",
                 "orderable": "false",
-                "searchable": "true",
+                "searchable": "false",
             },
         ]
 

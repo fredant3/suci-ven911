@@ -6,10 +6,9 @@ from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
+from organizacion.normativas.services import NormativaService
 
 from templates.sneat import TemplateLayout
-
-from ..services import NormativaService
 
 
 class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -38,21 +37,14 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "ID",
+                "title": "#",
                 "orderable": "true",
                 "searchable": "true",
             },
             {
                 "data": "name",
                 "name": "name",
-                "title": "Nombre de Normativa",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "user",
-                "name": "user",
-                "title": "Usuario",
+                "title": "Normativa",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -73,7 +65,7 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "estado",
                 "name": "estado",
-                "title": "Estado",
+                "title": "Estatus",
                 "orderable": "false",
                 "searchable": "false",
             },

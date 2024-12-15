@@ -1,17 +1,16 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.models import Estado
 
 
 class Incidencia(BaseModel):
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
-    sede = models.CharField(max_length=300)
-    departamento = models.CharField(max_length=300)
-    tipoincidencia = models.CharField(verbose_name="Tipo Incidencia", max_length=300)
-    usuario = models.CharField(max_length=300)
-    observaciones = models.CharField(max_length=300)
-    tiposolicitud = models.CharField(max_length=350, verbose_name="Tipo Solicitud")
+    estado = models.CharField("Estado", max_length=120)
+    sede = models.CharField(max_length=120)
+    departamento = models.CharField(max_length=120)
+    tipoincidencia = models.CharField("Tipo Incidencia", max_length=180)
+    usuario = models.CharField(max_length=90)
+    observaciones = models.CharField(max_length=200)
+    tiposolicitud = models.CharField(max_length=80, verbose_name="Tipo Solicitud")
 
     def toJSON(self):
         return model_to_dict(self)

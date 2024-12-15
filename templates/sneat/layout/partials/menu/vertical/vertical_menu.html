@@ -97,5 +97,31 @@
         <div class="text-truncate" data-i18n="Email">Inicio</div>
       </a>
     </li>
+
+    <li class="menu-header small text-uppercase">
+      Organizacion
+    </li>
+
+    <li class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'compras' in request.resolver_match.namespaces or 'departamentos' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces or 'sedes' in request.resolver_match.namespaces %}active open{% endif %}">
+
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div class="text-truncate" data-i18n="Layouts">Modulos </div>
+      </a>
+      <ul class="menu-sub">
+        <li
+          class="menu-item {% if 'administracion' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'administracion' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Inicio</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'asignaciones' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'asignaciones:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Asignaciones</div>
+          </a>
+        </li>
+      </ul>
+    </li>
   </ul>
 </aside>

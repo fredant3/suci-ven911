@@ -1,13 +1,11 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.models import Estado
 
 
 class Infraestructura(BaseModel):
     mes = models.CharField(max_length=64, verbose_name="Mes:", default="")
-    # estado = models.CharField(max_length=64, verbose_name="Estado:", default="")
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
+    estado = models.CharField(max_length=120, verbose_name="Estado:")
     infraestructura = models.CharField(
         max_length=64, verbose_name="Infraestrutuctura:", default=""
     )

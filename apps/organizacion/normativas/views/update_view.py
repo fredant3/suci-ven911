@@ -33,7 +33,8 @@ class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Normativa.objects.filter(pk=id)
+        model = Normativa.objects.filter(pk=id)
+        return model
 
 
 class NormativaUpdateApiView(UpdateController, CheckPermisosMixin):

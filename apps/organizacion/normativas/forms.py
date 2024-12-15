@@ -17,7 +17,6 @@ class NormativaForm(forms.ModelForm):
         fields = [
             "name",
             "file",
-            "user",
             "date",
             "progre",
             "estado",
@@ -27,7 +26,6 @@ class NormativaForm(forms.ModelForm):
             "created_by",
             "updated_at",
             "updated_by",
-            "deleted",
             "deleted_at",
             "deleted_by",
         ]

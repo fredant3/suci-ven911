@@ -1,7 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.models import Estado, Municipio, Parroquia
 
 
 class Incidencia(models.Model):
@@ -21,12 +20,12 @@ class OrganismoCompetente(models.Model):
 class Emergencia(BaseModel):
     denunciante = models.CharField(max_length=255)
     telefono_denunciante = models.CharField(max_length=255, blank=True)
-    id_estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
-    id_municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
-    id_parroquia = models.ForeignKey(Parroquia, on_delete=models.CASCADE)
+    estado = models.CharField("Estado", max_length=90)
+    municipio = models.CharField("Municipio", max_length=90)
+    parroquia = models.CharField("Parroquia", max_length=90)
     id_incidencia = models.ForeignKey(Incidencia, on_delete=models.CASCADE)
-    direccion_incidencia = models.TextField(blank=True)
     id_organismo = models.ForeignKey(OrganismoCompetente, on_delete=models.CASCADE)
+    direccion_incidencia = models.TextField(blank=True)
     observaciones = models.TextField(blank=True)
     # Localizacion_sede soon
     datecompleted = models.DateTimeField(null=True, blank=True)
@@ -35,7 +34,7 @@ class Emergencia(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.denunciante + " by-" + self.created_by.username
+        return self.denunciante + " by-" + self.created_by
 
     class Meta:
         verbose_name = "emergencia"
