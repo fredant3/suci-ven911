@@ -16,18 +16,17 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     form_class = ArticuloForm
 
     def get_context_data(self, **kwargs):
+        type = self.kwargs.get("type") if self.kwargs.get("type") is not None else ""
         self.form_class = define_type_form(self.kwargs)
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
         context["submodule"] = "Articulo"
-        context["titleForm"] = "Añadir articulo tipo"
+        context["titleForm"] = "Añadir articulo tipo {0}".format(type)
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("articulos:list")
-        context["urlForm"] = reverse_lazy(
-            "api_articulos:create", args=[self.kwargs.get("type")]
-        )
+        context["urlForm"] = reverse_lazy("api_articulos:create", args=[type])
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
