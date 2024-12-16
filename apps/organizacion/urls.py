@@ -1,13 +1,9 @@
 from django.urls import include, path
 
-from .views import OrganizacionView
+from organizacion.views import OrganizacionView
 
 urlpatterns = [
-    path(
-        "",
-        OrganizacionView.as_view(),
-        name="organizacion",
-    ),
+    path("", OrganizacionView.as_view(), name="organizacion"),
     path(
         "reglamentos/", include(("apps.organizacion.reglamentos.urls", "reglamentos"))
     ),

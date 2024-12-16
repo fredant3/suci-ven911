@@ -6,6 +6,9 @@ from .ServiceUtilMixin import ServiceUtilMixin
 class CrudService(ServiceUtilMixin):
     select = ""
 
+    def criteria(self, search):
+        return search
+
     def getAll(
         self, draw, start, length, search=None, orderBy=None, orderAsc=None, select=("")
     ):
@@ -13,6 +16,7 @@ class CrudService(ServiceUtilMixin):
         if search is None:
             entities = self.repository.getAll(select, orderBy, orderAsc)
         else:
+            search = self.criteria(search)
             entities = self.repository.getFilter(search, select, orderBy, orderAsc)
 
         return self.response(entities, start, length, draw)

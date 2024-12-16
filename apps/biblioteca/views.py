@@ -21,7 +21,7 @@ class BibliotecatView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             (
                 {
                     "url": str(reverse_lazy("biblioteca_normativas:list")),
-                    "api": f"{reverse_lazy("api_biblioteca_normativas:list")}?length=3&order[0][name]=date&order[0][dir]=desc",
+                    "api": f"{reverse_lazy("api_biblioteca_normativas:list")}?length=3&order[0][name]=date&order[0][dir]=desc&search[0][estado]=1",
                     "name": "Normativas",
                 },
                 {

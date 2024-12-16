@@ -113,7 +113,7 @@
     </li>
 
     <li class="menu-header small text-uppercase">
-      Boblioteca
+      Biblioteca
     </li>
 
     <li class="menu-item {% if 'bibliotecas' == request.resolver_match.url_name or 'biblioteca_normativas' in request.resolver_match.namespaces or 'biblioteca_reglamentos' in request.resolver_match.namespaces %}active open{% endif %}">
@@ -158,25 +158,31 @@
       Organizacion
     </li>
 
-    {% comment %} <li class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'compras' in request.resolver_match.namespaces or 'departamentos' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces or 'sedes' in request.resolver_match.namespaces %}active open{% endif %}">
+    <li class="menu-item {% if 'organizacion' == request.resolver_match.url_name or 'normativas' in request.resolver_match.namespaces or 'reglamentos' %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div class="text-truncate" data-i18n="Layouts">Modulos </div>
       </a>
       <ul class="menu-sub">
         <li
-          class="menu-item {% if 'administracion' == request.resolver_match.url_name %}active{% endif %}">
-          <a href="{% url 'administracion' %}" class="menu-link">
+          class="menu-item {% if 'organizacion' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'organizacion' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Inicio</div>
           </a>
         </li>
         <li
-          class="menu-item {% if 'asignaciones' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
-          <a href="{% url 'asignaciones:list' %}" class="menu-link">
-            <div class="text-truncate" data-i18n="Without menu">Asignaciones</div>
+          class="menu-item {% if 'reglamentos' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'reglamentos:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Reglamentos</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'normativas' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'normativas:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Normativas</div>
           </a>
         </li>
       </ul>
-    </li> {% endcomment %}
+    </li>
   </ul>
 </aside>
