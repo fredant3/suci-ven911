@@ -42,7 +42,11 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/gestion_administrativa.png",
             },
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
-            # {"title": "Gestión Humana", "url": "gc:info", "image": "img/gestion_humana.png"},
+            {
+                "title": "Gestión Humana",
+                "url": "cargos:list",
+                "image": "img/gestion_humana.png",
+            },
             # {"title": "Tecnología Comunicación e Información", "url": "gc:info", "image": "img/tecnologia.png"},
             # {"title": "Unidad de Respuesta Inmediata", "url": "gc:info", "image": "img/ambulancia.png"},
             # {"title": "Potencia", "url": "gc:info", "image": "img/incidente.png"},

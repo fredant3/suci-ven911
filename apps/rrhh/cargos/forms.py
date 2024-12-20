@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Cargo
+from rrhh.cargos.models import Cargo
 
 
 class CargoForm(forms.ModelForm):

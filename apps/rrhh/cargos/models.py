@@ -21,5 +21,5 @@ class Cargo(BaseModel):
         return self.cargo
 
     class Meta:
-        verbose_name = "cargo"
-        verbose_name_plural = "cargos"
+        verbose_name = "Cargo"
+        verbose_name_plural = "Cargos"

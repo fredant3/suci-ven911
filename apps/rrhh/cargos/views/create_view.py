@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CargoForm
-from ..services import CargoService
+from rrhh.cargos.forms import CargoForm
+from rrhh.cargos.services import CargoService
 
 
 class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

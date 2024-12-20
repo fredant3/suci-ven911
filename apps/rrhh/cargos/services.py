@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import CargoRepository
+from rrhh.cargos.repositories import CargoRepository
 
 
 class CargoService(CrudService):

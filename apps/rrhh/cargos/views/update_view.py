@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CargoForm
-from ..models import Cargo
-from ..services import CargoService
+from rrhh.cargos.forms import CargoForm
+from rrhh.cargos.models import Cargo
+from rrhh.cargos.services import CargoService
 
 
 class CargoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
