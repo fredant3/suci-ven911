@@ -15,7 +15,6 @@ class Sueldo(BaseModel):
     tipo_sueldo = models.ForeignKey(TipoSueldo, on_delete=models.CASCADE)
     estatus = models.CharField(max_length=10, choices=ESTATUS_CHOICES)
     fecha_pago = models.DateField()
-    indexado = models.BooleanField(default=False)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
 
@@ -30,7 +29,7 @@ class Sueldo(BaseModel):
         verbose_name_plural = "sueldos"
 
 
-class SueldoDetalle(BaseModel):
+class SueldoEmpleado(BaseModel):
     sueldo = models.ForeignKey(Sueldo, on_delete=models.CASCADE)
     fecha_pago = models.DateField()
     monto = models.DecimalField(max_digits=10, decimal_places=2)
