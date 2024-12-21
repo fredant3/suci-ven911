@@ -16,7 +16,6 @@ TIPO_CHOICES = (
 ESTATUS_CHOICES = (
     ("act", "Activo"),
     ("sup", "Suspendido"),
-    ("des", "Desactivado"),
 )
 
 
@@ -30,7 +29,7 @@ class TipoSueldo(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.tipo_personal
+        return self.tipo
 
     class Meta:
         verbose_name = "tipo de empleado"

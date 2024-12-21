@@ -46,7 +46,7 @@ class Cuenta(BaseModel):
     banco = models.CharField(max_length=4, choices=TIPO_BANCO_CHOICES)
     tipo = models.CharField(max_length=3, choices=TIPO_CUEMTA_CHOICES)
     numero_cuenta = models.CharField(max_length=30)
-    cedula = models.IntegerField()
+    # cedula = models.IntegerField()
     pago_movil = models.BooleanField()
     telefono = models.CharField(max_length=12)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
