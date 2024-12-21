@@ -1,3 +1,3 @@
-from potencia.incidencias.models import Incidencia
+from potencia.incidencias.models import Incidencia, TipoIncidencia
 
-__all__ = ["Incidencia"]
+__all__ = ["Incidencia", "TipoIncidencia"]
