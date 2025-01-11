@@ -90,7 +90,6 @@ class UpdateController(LoginRequiredMixin, UpdateView):
                 data.updated_by = self.request.user.username
                 return data
             except ObjectDoesNotExist:
-                print(f"REDIRECT ObjectDoesNotExist {ObjectDoesNotExist}")
                 error(self.request, "El recurso no se ha encontrado")
         else:
             error(self.request, "No se proporcionó ningún recurso válido")

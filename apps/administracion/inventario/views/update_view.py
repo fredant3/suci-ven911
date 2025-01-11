@@ -17,7 +17,6 @@ class ArticuloUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
-        print(self.kwargs)
         self.form_class = define_type_form(self.kwargs)
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Administracion"
