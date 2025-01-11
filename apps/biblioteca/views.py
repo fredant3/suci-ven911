@@ -21,14 +21,18 @@ class BibliotecatView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             (
                 {
                     "url": str(reverse_lazy("biblioteca_normativas:list")),
-                    # "api": f"{reverse_lazy("api_biblioteca_normativas:list")}?length=3&order[0][name]=date&order[0][dir]=desc&search[0][estado]=1",
-                    "api": "",
+                    "api": "{0}?length=3&order[0][name]=date&order[0][dir]=desc&search[0][estado]=1".format(
+                        str(reverse_lazy("api_biblioteca_normativas:list"))
+                    ),
+                    # "api": "",
                     "name": "Normativas",
                 },
                 {
                     "url": str(reverse_lazy("biblioteca_reglamentos:list")),
-                    # "api": f"{reverse_lazy("api_biblioteca_reglamentos:list")}?length=3&order[0][name]=date&order[0][dir]=desc",
-                    "api": "",
+                    "api": "{0}?length=3&order[0][name]=date&order[0][dir]=desc".format(
+                        str(reverse_lazy("api_biblioteca_reglamentos:list"))
+                    ),
+                    # "api": "",
                     "name": "Reglamentos",
                 },
             )

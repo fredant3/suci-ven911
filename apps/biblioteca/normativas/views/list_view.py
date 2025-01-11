@@ -2,7 +2,6 @@ import json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
@@ -26,8 +25,10 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submodules"] = json.dumps(
             (
                 {
-                    # "api": f"{reverse_lazy("api_biblioteca_normativas:list")}?length=3&order[0][name]=date&order[0][dir]=desc&search[value]=(estado=1)",
-                    "api": "",
+                    "api": "{0}?length=3&order[0][name]=date&order[0][dir]=desc&search[value]=(estado=1)".format(
+                        str(reverse_lazy("api_biblioteca_normativas:list"))
+                    ),
+                    # "api": "",
                     "name": "Normativas",
                 },
             )
