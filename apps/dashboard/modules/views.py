@@ -18,7 +18,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             # },
             {
                 "title": "Asesoría Jurídica",
-                "url": "denuncias:list",
+                "url": "asesoria",
                 "image": "img/gestion_administrativa.png",
             },
             {

@@ -70,7 +70,6 @@
       }
 
       if ($(this).find('input[type="file"]').length) {
-        console.info(this)
         data = new FormData(this);
         setup = { ...setup, data, processData: false, contentType: false }
       } else {

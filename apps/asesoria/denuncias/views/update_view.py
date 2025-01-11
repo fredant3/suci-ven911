@@ -18,7 +18,7 @@ class DenunciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Denuncias"
         context["titleForm"] = "Actualizar denuncia"
