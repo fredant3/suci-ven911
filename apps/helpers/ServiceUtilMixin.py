@@ -22,6 +22,9 @@ class ServiceUtilMixin:
     def relationship(self, payload, *arg, **kwargs):
         return payload
 
+    def media(self, data):
+        pass
+
     def before_create(self, data):
         return data
 

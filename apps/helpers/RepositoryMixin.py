@@ -1,4 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
+import os
+from pathlib import Path
 
 
 class Repository:
@@ -28,6 +30,36 @@ class Repository:
 
         return entity
 
+    def media(self, file):
+        path = self.media_folder(file)
+        self.seve_media(path, file)
+
+    def media_folder(self, file):
+        file_extension = Path(file.name).suffix.lower()
+
+        if file_extension in [".jpg", ".png", ".gif", ".bmp"]:
+            folder = "images"
+        elif file_extension == ".pdf":
+            folder = "pdfs"
+        elif file_extension in [".mp4", ".avi", ".mov", ".mkv"]:
+            folder = "videos"
+        else:
+            raise ObjectDoesNotExist(
+                "El archivo %s, tiene un formato no soportado: ." % file.name
+            )
+
+        return self.ensure_folder(folder, file)
+
+    def ensure_folder(self, folder, file):
+        file_path = os.path.join("media", folder, file.name)
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        return file_path
+
+    def seve_media(self, path, file):
+        with open(path, "wb+") as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
     def create(self, data):
         data = {k: v for k, v in data.items() if k != "csrfmiddlewaretoken"}
         entity = self.entity(**data)
@@ -35,7 +67,6 @@ class Repository:
         return entity
 
     def update(self, entity, payload):
-        print(entity)
         for field in payload.fields:
             if hasattr(entity, field):
                 setattr(entity, field, payload.cleaned_data[field])

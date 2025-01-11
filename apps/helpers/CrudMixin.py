@@ -26,14 +26,13 @@ class CrudService(ServiceUtilMixin):
         if form.is_valid():
             form.clean()
             data = self.before_create(data)
-            return self.repository.create(data)
+            created = self.repository.create(data)
+            self.media(request.FILES)
+            return created
         raise ValidationError(form.errors.as_json())
 
     def reader(self, id, select=("")):
-        try:
-            return self.repository.getById(id, select)
-        except:
-            raise "La cuenta de la red social no se ha encontrada"
+        return self.repository.getById(id, select)
 
     def updater(self, entity, payload):
         if payload.is_valid():
