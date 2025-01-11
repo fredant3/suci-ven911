@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 import os
+from django.conf import settings
 from pathlib import Path
 
 
@@ -30,11 +31,12 @@ class Repository:
 
         return entity
 
-    def media(self, file):
-        path = self.media_folder(file)
+    def media(self, file, custom_folder):
+        path = self.media_folder(file, custom_folder)
         self.seve_media(path, file)
+        return path
 
-    def media_folder(self, file):
+    def media_folder(self, file, custom_folder):
         file_extension = Path(file.name).suffix.lower()
 
         if file_extension in [".jpg", ".png", ".gif", ".bmp"]:
@@ -48,10 +50,16 @@ class Repository:
                 "El archivo %s, tiene un formato no soportado: ." % file.name
             )
 
-        return self.ensure_folder(folder, file)
+        return self.ensure_folder(folder, file, custom_folder)
 
-    def ensure_folder(self, folder, file):
-        file_path = os.path.join("media", folder, file.name)
+    def ensure_folder(self, folder, file, custom_folder):
+        if custom_folder:
+            file_path = os.path.join(
+                settings.MEDIA_ROOT, custom_folder, folder, file.name
+            )
+        else:
+            file_path = os.path.join(settings.MEDIA_ROOT, folder, file.name)
+
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         return file_path
 
@@ -59,6 +67,10 @@ class Repository:
         with open(path, "wb+") as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
+
+    def remove_media(self, file_path):
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
     def create(self, data):
         data = {k: v for k, v in data.items() if k != "csrfmiddlewaretoken"}

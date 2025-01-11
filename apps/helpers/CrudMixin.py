@@ -26,9 +26,8 @@ class CrudService(ServiceUtilMixin):
         if form.is_valid():
             form.clean()
             data = self.before_create(data)
-            created = self.repository.create(data)
-            self.media(request.FILES)
-            return created
+            data = self.media(data, request.FILES)
+            return self.repository.create(data)
         raise ValidationError(form.errors.as_json())
 
     def reader(self, id, select=("")):
@@ -42,6 +41,7 @@ class CrudService(ServiceUtilMixin):
         raise ValidationError(payload.errors.as_json())
 
     def destroyer(self, payload):
+        self.remove_media(payload)
         return self.repository.delete(payload)
 
     class Meta:
