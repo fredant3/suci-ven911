@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Cedente
+from presupuesto.cedente.models import Cedente
 
 
 class CedenteForm(forms.ModelForm):

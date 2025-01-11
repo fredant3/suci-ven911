@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Receptor
+from presupuesto.receptor.models import Receptor
 
 
 class ReceptorForm(forms.ModelForm):

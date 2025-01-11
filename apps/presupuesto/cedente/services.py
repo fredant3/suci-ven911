@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import CedenteRepository
+from presupuesto.cedente.repositories import CedenteRepository
 
 
 class CedenteService(CrudService):

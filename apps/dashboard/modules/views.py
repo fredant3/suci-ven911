@@ -37,6 +37,11 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/planificacion.png",
             },
             {
+                "title": "Presupuestos",
+                "url": "presupuesto",
+                "image": "img/presupuesto.png",
+            },
+            {
                 "title": "Gestión Administrativa",
                 "url": "administracion",
                 "image": "img/gestion_administrativa.png",

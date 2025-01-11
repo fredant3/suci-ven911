@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import AsignacionService
+from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -44,29 +44,29 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "nombredir",
-                "name": "nombredir",
+                "departamento": "nombredir",
+                "departamento": "nombredir",
                 "title": "Nombre de la dirección",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "presuasig",
-                "name": "presuasig",
+                "data": "presupuesto",
+                "name": "presupuesto",
                 "title": "Presupuesto asignado",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "objeanual",
-                "name": "objeanual",
+                "data": "objetivo",
+                "name": "objetivo",
                 "title": "Objetivo general anual",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "numpartida",
-                "name": "numpartida",
+                "data": "numero_partida",
+                "name": "numero_partida",
                 "title": "Número de partida",
                 "orderable": "false",
                 "searchable": "true",

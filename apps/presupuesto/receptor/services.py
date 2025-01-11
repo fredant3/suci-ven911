@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import ReceptorRepository
+from presupuesto.receptor.repositories import ReceptorRepository
 
 
 class ReceptorService(CrudService):

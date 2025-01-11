@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AsignacionForm
-from ..services import AsignacionService
+from presupuesto.asignacion.forms import AsignacionForm
+from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

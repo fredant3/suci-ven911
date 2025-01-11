@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Proyecto
+from presupuesto.proyecto.models import Proyecto
 
 
 class ProyectoRepository(Repository):

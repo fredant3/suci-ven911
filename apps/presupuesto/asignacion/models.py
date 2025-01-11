@@ -4,16 +4,16 @@ from helpers.BaseModelMixin import BaseModel
 
 
 class Asignacion(BaseModel):
-    nombredir = models.CharField(max_length=64, verbose_name="Nombre de la dirección:")
-    presuasig = models.CharField(max_length=64, verbose_name="Presupuesto asignado:")
-    objeanual = models.CharField(max_length=64, verbose_name="Objetivo general anual:")
-    numpartida = models.CharField(max_length=10, verbose_name="Número de partida:")
+    departamento = models.CharField("Nombre de la dirección:", max_length=64)
+    presupuesto = models.CharField("Presupuesto asignado:", max_length=64)
+    objetivo = models.CharField("Objetivo general anual:", max_length=64)
+    numero_partida = models.CharField("Número de partida:", max_length=10)
 
     def toJSON(self):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.numpartida
+        return self.numero_partida
 
     class Meta:
         verbose_name = "Asignacion"

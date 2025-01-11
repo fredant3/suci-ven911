@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ProyectoForm
-from ..models import Proyecto
-from ..services import ProyectoService
+from presupuesto.proyecto.forms import ProyectoForm
+from presupuesto.proyecto.models import Proyecto
+from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):

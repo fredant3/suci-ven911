@@ -1,25 +1,22 @@
 from django import forms
 from presupuesto.models import Accion
 
-# from django.forms.fields import DateTimeInput
+from django.forms.fields import DateTimeInput
 
 
 class AccionForm(forms.ModelForm):
-    fechai = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
-    fechac = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
-
     class Meta:
         model = Accion
         fields = (
-            "nombrep",
-            "fechai",
-            "fechac",
-            "situacionp",
-            "montoproyecto",
-            "responsableg",
-            "responsablet",
-            "responsabler",
-            "responsablea",
+            "proyecto",
+            "fecha_inicio",
+            "fecha_culminacion",
+            "situacion_presupuestaria",
+            "monto",
+            "responsable_gerente",
+            "responsable_tecnico",
+            "responsable_registrador",
+            "responsable_administrativo",
             "estatus",
         )
         exclude = [
@@ -32,6 +29,6 @@ class AccionForm(forms.ModelForm):
             "deleted_by",
         ]
         widgets = {
-            # "fechai": DateTimeInput(attrs={"type": "date"}),
-            # "fechac": DateTimeInput(attrs={"type": "date"}),
+            "fecha_inicio": DateTimeInput(attrs={"type": "date"}),
+            "fecha_culminacion": DateTimeInput(attrs={"type": "date"}),
         }

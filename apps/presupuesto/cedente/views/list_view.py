@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import CedenteService
+from presupuesto.cedente.services import CedenteService
 
 
 class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):

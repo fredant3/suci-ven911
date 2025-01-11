@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CedenteForm
-from ..models import Cedente
-from ..services import CedenteService
+from presupuesto.cedente.forms import CedenteForm
+from presupuesto.cedente.models import Cedente
+from presupuesto.cedente.services import CedenteService
 
 
 class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):

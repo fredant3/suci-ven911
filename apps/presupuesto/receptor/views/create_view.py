@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReceptorForm
-from ..services import ReceptorService
+from presupuesto.receptor.forms import ReceptorForm
+from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

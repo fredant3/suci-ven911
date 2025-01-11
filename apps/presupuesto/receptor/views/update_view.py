@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReceptorForm
-from ..models import Receptor
-from ..services import ReceptorService
+from presupuesto.receptor.forms import ReceptorForm
+from presupuesto.receptor.models import Receptor
+from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):

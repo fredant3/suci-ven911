@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Proyecto
+from presupuesto.proyecto.models import Proyecto
 
 
 class ProyectoForm(forms.ModelForm):

@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AsignacionForm
-from ..models import Asignacion
-from ..services import AsignacionService
+from presupuesto.asignacion.forms import AsignacionForm
+from presupuesto.asignacion.models import Asignacion
+from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):

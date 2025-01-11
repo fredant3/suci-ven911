@@ -30,6 +30,7 @@ urlpatterns = [
     path("organizacion/", include(("apps.organizacion.urls"))),
     path("emergencia/", include(("apps.emergencia.urls"))),
     path("planificacion/", include(("apps.planificacion.urls"))),
+    path("presupuesto/", include(("apps.presupuesto.urls"))),
     path("potencia/", include(("apps.potencia.urls"))),
     path("gestion-humana/", include(("apps.rrhh.urls"))),
     path("", RedirectView.as_view(url="dashboard", permanent=True)),

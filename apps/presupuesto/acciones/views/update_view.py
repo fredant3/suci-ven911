@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AccionForm
-from ..models import Accion
-from ..services import AccionService
+from presupuesto.acciones.forms import AccionForm
+from presupuesto.acciones.models import Accion
+from presupuesto.acciones.services import AccionService
 
 
 class AccionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):

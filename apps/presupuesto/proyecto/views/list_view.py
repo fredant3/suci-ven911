@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import ProyectoService
+from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):

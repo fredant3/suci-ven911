@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import ReceptorService
+from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
