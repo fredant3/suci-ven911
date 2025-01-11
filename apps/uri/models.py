@@ -1,3 +1,3 @@
-from potencia.incidencias.models import Incidencia
+from uri.models import uri
 
-__all__ = ["Incidencia"]
+__all__ = ["uri"]
