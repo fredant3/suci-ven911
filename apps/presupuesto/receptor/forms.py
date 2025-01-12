@@ -1,14 +1,8 @@
-from django import forms
-
 from presupuesto.receptor.models import Receptor
+from helpers.FormBase import FormBase
 
 
-class ReceptorForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(ReceptorForm, self).__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update({"class": "form-control"})
-
+class ReceptorForm(FormBase):
     class Meta:
         model = Receptor
         fields = (
