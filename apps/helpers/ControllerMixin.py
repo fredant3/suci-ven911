@@ -74,7 +74,7 @@ class UpdateController(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.object = self.get_object()
-        except Exception as e:
+        except Exception:
             return HttpResponseRedirect(self.get_url_redirect())
 
         if self.request.method.upper() == "PUT":

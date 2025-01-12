@@ -27,7 +27,7 @@ class FormBase(forms.ModelForm):
     def create_date_field(field_name):
         return forms.DateField(
             widget=forms.TextInput(attrs={"type": "date"}),
-            input_formats=["%d/%m/%Y"],
+            # input_formats=["%d/%m/%Y"],
             error_messages={"invalid": "Ingrese la fecha en el formato DD/MM/YYYY."},
             label=field_name.capitalize(),
         )
@@ -36,7 +36,7 @@ class FormBase(forms.ModelForm):
     def create_time_field(field_name):
         return forms.TimeField(
             widget=forms.TextInput(attrs={"type": "time"}),
-            input_formats=["%H:%M"],
+            # input_formats=["%H:%M"],
             error_messages={"invalid": "Ingrese la hora en el formato HH:MM."},
             label=field_name.capitalize(),
         )

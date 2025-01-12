@@ -5,7 +5,7 @@ from helpers.FormBase import FormBase
 
 class NormativaForm(FormBase):
     estado = forms.BooleanField(
-        required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
+        widget=forms.CheckboxInput(attrs={"value": "True"}), required=False
     )
 
     def clean_estado(self):
@@ -13,6 +13,13 @@ class NormativaForm(FormBase):
         return estado if estado is not None else False
 
     date = FormBase.create_date_field("date")
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
+
+        if instance:
+            self.fields.pop("file")
 
     class Meta:
         model = Normativa

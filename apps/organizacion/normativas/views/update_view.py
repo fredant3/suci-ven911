@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import NormativaForm
-from ..models import Normativa
-from ..services import NormativaService
+from organizacion.normativas.forms import NormativaForm
+from organizacion.normativas.models import Normativa
+from organizacion.normativas.services import NormativaService
 
 
 class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
