@@ -1,6 +1,8 @@
 from django.urls import include, path
+from apps.rrhh.views import GestionHumanaView
 
 urlpatterns = [
+    path("", GestionHumanaView.as_view(), name="gestion_humana"),
     path("cargos/", include(("apps.rrhh.cargos.urls", "cargos"))),
     path(
         "api/cargos/",

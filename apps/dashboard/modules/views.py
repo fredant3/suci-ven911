@@ -49,7 +49,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             {
                 "title": "Gestión Humana",
-                "url": "cargos:list",
+                "url": "gestion_humana",
                 "image": "img/gestion_humana.png",
             },
             # {"title": "Tecnología Comunicación e Información", "url": "gc:info", "image": "img/tecnologia.png"},

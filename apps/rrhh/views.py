@@ -1,19 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
-from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from rrhh.cargos.forms import CargoForm
-from rrhh.cargos.services import CargoService
 
-
-class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+class GestionHumanaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
-    form_class = CargoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    url_redirect = reverse_lazy("modules:index")
+    template_name = "widzard/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -28,10 +24,10 @@ class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
+        context = super().get_context_data(**kwargs)
+        context["titlePage"] = "Gestion Humana"
+        context["indexUrl"] = reverse_lazy("modules:index")
+        context["module"] = "Gestion Humana"
+        context["submodule"] = "Dashboard Gestion Humana"
 
-class CargoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
-    form_class = CargoForm
-
-    def __init__(self):
-        self.service = CargoService()
+        return TemplateLayout.init(self, context)
