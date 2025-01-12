@@ -1,8 +1,9 @@
 from django import forms
 from planificacion.infraestructuras.models import Infraestructura
+from helpers.FormBase import FormBase
 
 
-class InfraestructuraForm(forms.ModelForm):
+class InfraestructuraForm(FormBase):
     class Meta:
         model = Infraestructura
         fields = (

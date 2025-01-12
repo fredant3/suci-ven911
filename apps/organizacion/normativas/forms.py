@@ -1,9 +1,10 @@
 from django import forms
 from django.forms.fields import DateTimeInput
 from organizacion.normativas.models import Normativa
+from helpers.FormBase import FormBase
 
 
-class NormativaForm(forms.ModelForm):
+class NormativaForm(FormBase):
     estado = forms.BooleanField(
         required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
     )
@@ -11,6 +12,8 @@ class NormativaForm(forms.ModelForm):
     def clean_estado(self):
         estado = self.cleaned_data.get("estado")
         return estado if estado is not None else False
+
+    date = FormBase.create_date_field("date")
 
     class Meta:
         model = Normativa
@@ -29,6 +32,3 @@ class NormativaForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "date": DateTimeInput(attrs={"type": "date"}),
-        }

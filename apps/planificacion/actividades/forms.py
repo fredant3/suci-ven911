@@ -1,10 +1,11 @@
 from django import forms
 from planificacion.actividades.models import Actividad
+from helpers.FormBase import FormBase
 
 
-class ActividadForm(forms.ModelForm):
-    fechai = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
-    fechaf = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
+class ActividadForm(FormBase):
+    fechai = FormBase.create_date_field("date")
+    fechaf = FormBase.create_date_field("date")
 
     class Meta:
         model = Actividad

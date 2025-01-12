@@ -1,9 +1,10 @@
 from django import forms
 
 from .models import Empleado
+from helpers.FormBase import FormBase
 
 
-class EmpleadoForm(forms.ModelForm):
+class EmpleadoForm(FormBase):
     class Meta:
         model = Empleado
         fields = (

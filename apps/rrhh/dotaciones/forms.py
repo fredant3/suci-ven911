@@ -1,9 +1,10 @@
 from django import forms
 
 from .models import Dotacion
+from helpers.FormBase import FormBase
 
 
-class DotacionForm(forms.ModelForm):
+class DotacionForm(FormBase):
     class Meta:
         model = Dotacion
         fields = (

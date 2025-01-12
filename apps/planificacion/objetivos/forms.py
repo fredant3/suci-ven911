@@ -1,9 +1,13 @@
 from django import forms
 from django.forms.fields import DateTimeInput
 from planificacion.objetivos.models import Objetivo
+from helpers.FormBase import FormBase
 
 
-class ObjetivoForm(forms.ModelForm):
+class ObjetivoForm(FormBase):
+    fechai = FormBase.create_date_field("fechai")
+    fechaf = FormBase.create_date_field("fechaf")
+
     class Meta:
         model = Objetivo
         fields = (
@@ -21,7 +25,3 @@ class ObjetivoForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "fechai": DateTimeInput(attrs={"type": "date"}),
-            "fechaf": DateTimeInput(attrs={"type": "date"}),
-        }

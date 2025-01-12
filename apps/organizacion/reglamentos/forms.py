@@ -1,12 +1,15 @@
 from django import forms
 from django.forms.fields import DateTimeInput
 from organizacion.reglamentos.models import Reglamento
+from helpers.FormBase import FormBase
 
 
-class ReglamentoForm(forms.ModelForm):
+class ReglamentoForm(FormBase):
     estado = forms.BooleanField(
         required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
     )
+
+    date = FormBase.create_date_field("date")
 
     def clean_estado(self):
         estado = self.cleaned_data.get("estado")
@@ -29,6 +32,3 @@ class ReglamentoForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "date": DateTimeInput(attrs={"type": "date"}),
-        }

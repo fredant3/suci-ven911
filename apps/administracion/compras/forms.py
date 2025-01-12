@@ -1,8 +1,8 @@
 from administracion.compras.model import Compra
-from django import forms
+from helpers.FormBase import FormBase
 
 
-class CompraForm(forms.ModelForm):
+class CompraForm(FormBase):
     class Meta:
         model = Compra
         fields = ["articulo", "n_orden", "valor_bs"]

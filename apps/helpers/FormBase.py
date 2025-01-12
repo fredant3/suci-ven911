@@ -5,16 +5,38 @@ class FormBase(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs.update({"class": "form-control"})
+            # Verificar si el widget es un Select
+            if isinstance(field.widget, forms.Select):
+                field.widget.attrs.update({"class": "input__select"})
+            # Verificar si el widget es un Input (TextInput, NumberInput, etc.)
+            elif isinstance(
+                field.widget, (forms.TextInput, forms.NumberInput, forms.EmailInput)
+            ):
+                field.widget.attrs.update({"class": "input__input"})
+            # Si deseas incluir Textarea
+            elif isinstance(field.widget, forms.Textarea):
+                field.widget.attrs.update({"class": "input__textarea"})
+            # Verificar si el widget es un FileField
+            elif isinstance(field.widget, forms.FileInput):
+                field.widget.attrs.update({"class": "input__file"})
+            # Verificar si el widget es un CheckboxInput
+            elif isinstance(field.widget, forms.CheckboxInput):
+                field.widget.attrs.update({"class": "input__checkbox"})
 
-        # TODO: Validar si el input es un select agrgar esta clase (form-select)
-        # TODO: si es un input agregar la clase (form-control)
-        # TODO: investigar como poner en el label la clase (text-end)
-
+    @staticmethod
     def create_date_field(field_name):
         return forms.DateField(
             widget=forms.TextInput(attrs={"type": "date"}),
             input_formats=["%d/%m/%Y"],
             error_messages={"invalid": "Ingrese la fecha en el formato DD/MM/YYYY."},
+            label=field_name.capitalize(),
+        )
+
+    @staticmethod
+    def create_time_field(field_name):
+        return forms.TimeField(
+            widget=forms.TextInput(attrs={"type": "time"}),
+            input_formats=["%H:%M"],
+            error_messages={"invalid": "Ingrese la hora en el formato HH:MM."},
             label=field_name.capitalize(),
         )

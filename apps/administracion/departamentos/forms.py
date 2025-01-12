@@ -1,8 +1,8 @@
 from administracion.departamentos.models import Departamento
-from django import forms
+from helpers.FormBase import FormBase
 
 
-class DepartamentoForm(forms.ModelForm):
+class DepartamentoForm(FormBase):
     class Meta:
         model = Departamento
         fields = [

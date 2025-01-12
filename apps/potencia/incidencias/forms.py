@@ -1,8 +1,9 @@
 from django import forms
 from potencia.incidencias.models import Incidencia
+from helpers.FormBase import FormBase
 
 
-class IncidenciaForm(forms.ModelForm):
+class IncidenciaForm(FormBase):
     class Meta:
         model = Incidencia
         fields = (

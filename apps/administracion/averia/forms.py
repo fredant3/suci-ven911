@@ -1,8 +1,8 @@
 from administracion.averia.models import Averia
-from django import forms
+from helpers.FormBase import FormBase
 
 
-class AveriaForm(forms.ModelForm):
+class AveriaForm(FormBase):
     class Meta:
         model = Averia
         fields = [

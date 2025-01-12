@@ -1,9 +1,10 @@
 from django import forms
 
 from presupuesto.cedente.models import Cedente
+from helpers.FormBase import FormBase
 
 
-class CedenteForm(forms.ModelForm):
+class CedenteForm(FormBase):
     class Meta:
         model = Cedente
         fields = (

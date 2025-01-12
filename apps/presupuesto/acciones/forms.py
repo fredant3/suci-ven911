@@ -2,9 +2,13 @@ from django import forms
 from presupuesto.models import Accion
 
 from django.forms.fields import DateTimeInput
+from helpers.FormBase import FormBase
 
 
-class AccionForm(forms.ModelForm):
+class AccionForm(FormBase):
+    fecha_inicio = FormBase.create_date_field("fecha_inicio")
+    fecha_culminacion = FormBase.create_date_field("fecha_culminacion")
+
     class Meta:
         model = Accion
         fields = (
@@ -28,7 +32,3 @@ class AccionForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "fecha_inicio": DateTimeInput(attrs={"type": "date"}),
-            "fecha_culminacion": DateTimeInput(attrs={"type": "date"}),
-        }

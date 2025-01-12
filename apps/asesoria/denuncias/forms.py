@@ -1,9 +1,10 @@
 from asesoria.denuncias.models import Denuncia
-from django.forms import CharField, EmailField, ModelForm
+from django.forms import CharField, EmailField
 from django.forms.fields import DateTimeInput
+from helpers.FormBase import FormBase
 
 
-class DenunciaForm(ModelForm):
+class DenunciaForm(FormBase):
     nombres_denunciante = CharField(max_length=120, label="Nombre del denunciante")
     apellidos_denunciante = CharField(max_length=120, label="Apellido del denunciante")
     cedula_denunciante = CharField(max_length=12, label="Cédula del denunciante")
@@ -31,6 +32,9 @@ class DenunciaForm(ModelForm):
     direccion_denunciado = CharField(
         max_length=180, required=False, label="Dirección del denunciado"
     )
+
+    fecha_denuncia = FormBase.create_date_field("fecha_denuncia")
+    fecha_incidente = FormBase.create_date_field("fecha_incidente")
 
     class Meta:
         model = Denuncia
@@ -63,7 +67,3 @@ class DenunciaForm(ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "fecha_denuncia": DateTimeInput(attrs={"type": "date"}),
-            "fecha_incidente": DateTimeInput(attrs={"type": "date"}),
-        }
