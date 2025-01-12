@@ -102,7 +102,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: #333;
+	color: #fdfdfd;
 	font-weight: bold;
 }
 .input__file::before {
@@ -116,6 +116,7 @@
 	transform: translateY(-50%);
 	display: grid;
 	align-items: center;
+	color: #fdfdfd;
 }
 
 .input__checkbox{
