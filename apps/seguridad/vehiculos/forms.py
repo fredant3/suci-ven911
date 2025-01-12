@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Vehiculo
+from seguridad.vehiculos.models import Vehiculo
 
 
 class VehiculoForm(forms.ModelForm):

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Salida
+from seguridad.salidas.models import Salida
 
 
 class SalidaForm(forms.ModelForm):

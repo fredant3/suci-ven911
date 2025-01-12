@@ -11,11 +11,6 @@ class Modules(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["modules"] = [
-            # {
-            #     "title": "Admin",
-            #     "url": "modules:index",
-            #     "image": "img/gestion_administrativa.png",
-            # },
             {
                 "title": "Asesoría Jurídica",
                 "url": "asesoria",
@@ -46,12 +41,12 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "administracion",
                 "image": "img/gestion_administrativa.png",
             },
-            # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             {
                 "title": "Gestión Humana",
                 "url": "gestion_humana",
                 "image": "img/gestion_humana.png",
             },
+            # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             # {"title": "Tecnología Comunicación e Información", "url": "gc:info", "image": "img/tecnologia.png"},
             # {"title": "Unidad de Respuesta Inmediata", "url": "gc:info", "image": "img/ambulancia.png"},
             # {"title": "Potencia", "url": "gc:info", "image": "img/incidente.png"},
@@ -60,8 +55,10 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "organizacion",
                 "image": "img/organizacion.png",
             },
-            # {"title": "Presupuesto", "url": "gc:info", "image": "img/presupuesto.png"},
-            # {"title": "Seguridad Integral", "url": "gc:info", "image": "img/seguridad.png"},
-            # {"title": "Admin", "url": "gc:info", "image": "img/admin.png"},
+            {
+                "title": "Seguridad Integral",
+                "url": "seguridad",
+                "image": "img/seguridad.png",
+            },
         ]
         return context

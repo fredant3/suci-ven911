@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Gestion
+from seguridad.gestiones.models import Gestion
 
 
 class GestionForm(forms.ModelForm):

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Entrada
+from seguridad.entradas.models import Entrada
 
 
 class EntradaForm(forms.ModelForm):
