@@ -39,7 +39,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	border-radius: 5px;
+	border-radius: 0.3125em;
 	border: 0.0625em solid var(--corlo);
 	padding-left: 0.5em;
 }
@@ -50,7 +50,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	border-radius: 5px;
+	border-radius: 0.3125em;
 	border: 0.0625em solid var(--corlo);
 	appearance: none;
 	padding-left: 0.5em;
@@ -70,7 +70,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	border-radius: 5px;
+	border-radius: 0.3125em;
 	border: 0.0625em solid var(--corlo);
 	resize: vertical;
 	padding: 0.5em;
@@ -84,7 +84,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	border-radius: 5px;
+	border-radius: 0.3125em;
 	border: 0.0625em solid var(--corlo);
 	padding-left: 0.5em;
 	position: relative;
@@ -112,7 +112,7 @@
 	position: absolute;
 	z-index: 1;
 	top: 50%;
-	right: 40px;
+	right: 2.5em;
 	transform: translateY(-50%);
 	display: grid;
 	align-items: center;
