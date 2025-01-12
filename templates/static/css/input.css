@@ -102,6 +102,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: #333;
+	font-weight: bold;
 }
 .input__file::before {
 	content: url(./../img/add.svg);
