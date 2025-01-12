@@ -14,14 +14,14 @@ from presupuesto.receptor.services import ReceptorService
 
 class ReceptorListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
-    url_redirect = reverse_lazy("modules:index")
+    url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Receptores"
         context["createBtn"] = "Añadir"
@@ -44,72 +44,79 @@ class ReceptorListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "nombrep",
-                "name": "nombrep",
-                "title": "Nombre",
+                "data": "partidar",
+                "name": "partidar",
+                "title": "Partida",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fechai",
-                "name": "fechai",
-                "title": "Inicio",
+                "data": "generalr",
+                "name": "generalr",
+                "title": "General",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fechac",
-                "name": "fechac",
-                "title": "Culminación",
+                "data": "espefr",
+                "name": "espefr",
+                "title": "Específicaciones",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "situacionp",
-                "name": "situacionp",
-                "title": "Situación Presupuestaria",
+                "data": "subespefr",
+                "name": "subespefr",
+                "title": "Sub-Especialidad",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "montoReceptor",
-                "name": "montoReceptor",
-                "title": "Monto Total del Receptor",
+                "data": "denomr",
+                "name": "denomr",
+                "title": "Denomincación",
                 "orderable": "false",
                 "searchable": "true",
             },
             {
-                "data": "responsableg",
-                "name": "responsableg",
-                "title": "Gerente Responsable",
+                "data": "presuacorr",
+                "name": "presuacorr",
+                "title": "Presupuesto acordado",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsablet",
-                "name": "responsablet",
-                "title": "Técnico Responsable",
+                "data": "caufechar",
+                "name": "caufechar",
+                "title": "Causado a la fecha",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsabler",
-                "name": "responsabler",
-                "title": "Registrador Responsable",
+                "data": "dispr",
+                "name": "dispr",
+                "title": "Disponible a causar",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsablea",
-                "name": "responsablea",
-                "title": "Responsable Administrativo",
+                "data": "montocr",
+                "name": "montocr",
+                "title": "Monto a ceder",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
+                "data": "saldofr",
+                "name": "saldofr",
+                "title": "Saldo final",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "direccionr",
+                "name": "direccionr",
+                "title": "Dirección cedente",
                 "orderable": "false",
                 "searchable": "false",
             },

@@ -23,7 +23,7 @@ class ServiceUtilMixin:
         return payload
 
     def media(self, data, file):
-        pass
+        return data
 
     def remove_media(self, data):
         pass

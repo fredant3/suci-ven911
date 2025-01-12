@@ -15,11 +15,11 @@ TIPOS_DE_SUELDOS = [
 
 class TipoSueldoFake:
     def tipos_sueldos(faker):
-        for tipo_sueldo in TIPOS_DE_SUELDOS:
-            model = TipoSueldo.objects.create(
-                tipo=tipo_sueldo,
-                monto=faker.pricetag(),
-                descripcion=faker.texts(nb_texts=2),
-                estatus=random.choice(["act", "sup"]),
-            )
-            print(f"Tipo de sueldo {model.tipo} registrado")
+        # for tipo_sueldo in TIPOS_DE_SUELDOS:
+        #     model = TipoSueldo.objects.create(
+        #         tipo=tipo_sueldo,
+        #         monto=faker.pricetag(),
+        #         descripcion=faker.texts(nb_texts=2),
+        #         estatus=random.choice(["act", "sup"]),
+        #     )
+        #     print(f"Tipo de sueldo {model.tipo} registrado")

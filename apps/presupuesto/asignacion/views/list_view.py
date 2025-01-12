@@ -14,14 +14,14 @@ from presupuesto.asignacion.services import AsignacionService
 
 class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
-    url_redirect = reverse_lazy("modules:index")
+    url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Asignaciones"
         context["createBtn"] = "Añadir"
