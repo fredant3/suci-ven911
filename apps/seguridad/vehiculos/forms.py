@@ -1,7 +1,5 @@
-from django import forms
-
-from .models import Vehiculo
 from helpers.FormBase import FormBase
+from seguridad.vehiculos.models import Vehiculo
 
 
 class VehiculoForm(FormBase):

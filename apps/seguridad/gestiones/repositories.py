@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Gestion
+from seguridad.gestiones.models import Gestion
 
 
 class GestionRepository(Repository):

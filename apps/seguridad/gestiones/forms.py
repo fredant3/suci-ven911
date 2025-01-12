@@ -1,7 +1,5 @@
-from django import forms
-
-from .models import Gestion
 from helpers.FormBase import FormBase
+from seguridad.gestiones.models import Gestion
 
 
 class GestionForm(FormBase):

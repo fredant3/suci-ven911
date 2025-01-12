@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import EntradaForm
-from ..models import Entrada
-from ..services import EntradaService
+from seguridad.entradas.forms import EntradaForm
+from seguridad.entradas.models import Entrada
+from seguridad.entradas.services import EntradaService
 
 
 class EntradaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
@@ -19,8 +19,8 @@ class EntradaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Entradas"
         context["titleForm"] = "Actualizar entrada"
         context["tag"] = "Editar"

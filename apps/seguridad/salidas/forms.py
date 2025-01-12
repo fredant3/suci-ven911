@@ -1,7 +1,5 @@
-from django import forms
-
-from .models import Salida
 from helpers.FormBase import FormBase
+from seguridad.salidas.models import Salida
 
 
 class SalidaForm(FormBase):

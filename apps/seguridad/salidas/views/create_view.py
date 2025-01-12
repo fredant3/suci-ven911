@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import SalidaForm
-from ..services import SalidaService
+from seguridad.salidas.forms import SalidaForm
+from seguridad.salidas.services import SalidaService
 
 
 class SalidaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -18,8 +18,8 @@ class SalidaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Salidas"
         context["titleForm"] = "Añadir una salida nueva"
         context["tag"] = "Registrar"

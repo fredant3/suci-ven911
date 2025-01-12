@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import VehiculoForm
-from ..services import VehiculoService
+from seguridad.vehiculos.forms import VehiculoForm
+from seguridad.vehiculos.services import VehiculoService
 
 
 class VehiculoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -18,8 +18,8 @@ class VehiculoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Vehiculos"
         context["titleForm"] = "Añadir una vehiculo nueva"
         context["tag"] = "Registrar"

@@ -11,57 +11,75 @@ class Modules(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["modules"] = [
-            # {
-            #     "title": "Admin",
-            #     "url": "modules:index",
-            #     "image": "img/gestion_administrativa.png",
-            # },
+            {
+                "title": "Operaciones Cuadrantes de Paz (Pendiente)",
+                "url": "asesoria",
+                "image": "img/modules/cuadrantes_de_paz.png",
+            },
             {
                 "title": "Asesoría Jurídica",
                 "url": "asesoria",
-                "image": "img/gestion_administrativa.png",
+                "image": "img/modules/asesoria_juridica.png",
             },
             {
-                "title": "Biblioteca de Manuales",
-                "url": "bibliotecas",
-                "image": "img/biblioteca.png",
-            },
-            {
-                "title": "Emergencias",
-                "url": "emergencias:list",
-                "image": "img/cuadrantes_de_paz.png",
-            },
-            {
-                "title": "Planificación",
-                "url": "planificacion",
-                "image": "img/planificacion.png",
-            },
-            {
-                "title": "Presupuestos",
-                "url": "presupuesto",
-                "image": "img/presupuesto.png",
+                "title": "Gestión Humana (Pendiente)",
+                "url": "gestion_humana",
+                "image": "img/modules/gestion_humana.png",
             },
             {
                 "title": "Gestión Administrativa",
                 "url": "administracion",
-                "image": "img/gestion_administrativa.png",
+                "image": "img/modules/gestion_administrativa.png",
             },
-            # {"title": "Operaciones Cuadrantes de Paz", "url": "gc:info", "image": "img/cuadrantes_de_paz.png"},
             {
-                "title": "Gestión Humana",
-                "url": "cargos:list",
-                "image": "img/gestion_humana.png",
+                "title": "Unidad de Respuesta Inmediata (Pendiente)",
+                "url": "asesoria",
+                "image": "img/modules/ambulancia.png",
             },
-            # {"title": "Tecnología Comunicación e Información", "url": "gc:info", "image": "img/tecnologia.png"},
-            # {"title": "Unidad de Respuesta Inmediata", "url": "gc:info", "image": "img/ambulancia.png"},
-            # {"title": "Potencia", "url": "gc:info", "image": "img/incidente.png"},
             {
-                "title": "Organización",
+                "title": "Potencia",
+                "url": "incidencias:list",
+                "image": "img/modules/incidente.png",
+            },
+            {
+                "title": "Organización (---)",
                 "url": "organizacion",
-                "image": "img/organizacion.png",
+                "image": "img/modules/organizacion.png",
             },
-            # {"title": "Presupuesto", "url": "gc:info", "image": "img/presupuesto.png"},
-            # {"title": "Seguridad Integral", "url": "gc:info", "image": "img/seguridad.png"},
-            # {"title": "Admin", "url": "gc:info", "image": "img/admin.png"},
+            {
+                "title": "Presupuestos",
+                "url": "presupuesto",
+                "image": "img/modules/presupuesto.png",
+            },
+            {
+                "title": "Planificación",
+                "url": "planificacion",
+                "image": "img/modules/planificacion.png",
+            },
+            {
+                "title": "Protección y Seguridad Integral",
+                "url": "seguridad",
+                "image": "img/modules/seguridad.png",
+            },
+            {
+                "title": "Biblioteca de Manuales (---)",
+                "url": "bibliotecas",
+                "image": "img/modules/biblioteca.png",
+            },
+            {
+                "title": "Emergencias",
+                "url": "emergencias:list",
+                "image": "img/modules/ambulancia.png",
+            },
+            {
+                "title": "Tecnología Comunicación e Información (Pendiente)",
+                "url": "asesoria",
+                "image": "img/modules/tecnologia.png",
+            },
+            {
+                "title": "Permisos y Usuarios (Pendiente)",
+                "url": "asesoria",
+                "image": "img/modules/admin.png",
+            },
         ]
         return context
