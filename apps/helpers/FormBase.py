@@ -10,3 +10,11 @@ class FormBase(forms.ModelForm):
         # TODO: Validar si el input es un select agrgar esta clase (form-select)
         # TODO: si es un input agregar la clase (form-control)
         # TODO: investigar como poner en el label la clase (text-end)
+
+    def create_date_field(field_name):
+        return forms.DateField(
+            widget=forms.TextInput(attrs={"type": "date"}),
+            input_formats=["%d/%m/%Y"],
+            error_messages={"invalid": "Ingrese la fecha en el formato DD/MM/YYYY."},
+            label=field_name.capitalize(),
+        )
