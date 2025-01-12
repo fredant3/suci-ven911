@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from .views import PlanificacionView
+from planificacion.views import PlanificacionView
 
 urlpatterns = [
     path(
