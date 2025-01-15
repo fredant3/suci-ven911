@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 from potencia.incidencias.models import TipoIncidencia
 
 
@@ -14,9 +14,11 @@ class OrganismoCompetente(models.Model):
 class Emergencia(BaseModel):
     denunciante = models.CharField(max_length=255)
     telefono_denunciante = models.CharField(max_length=255, blank=True)
-    estado = models.CharField("Estado", max_length=90)
-    municipio = models.CharField("Municipio", max_length=90)
-    parroquia = models.CharField("Parroquia", max_length=90)
+    estado = models.CharField(
+        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
+    )
+    municipio = models.CharField("Municipio", name="municipio", max_length=90)
+    parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
     id_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
     id_organismo = models.ForeignKey(OrganismoCompetente, on_delete=models.CASCADE)
     direccion_incidencia = models.TextField(blank=True)

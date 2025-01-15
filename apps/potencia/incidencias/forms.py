@@ -1,4 +1,3 @@
-from django import forms
 from potencia.incidencias.models import Incidencia
 from helpers.FormBase import FormBase
 

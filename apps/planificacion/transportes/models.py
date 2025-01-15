@@ -1,11 +1,13 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 
 
 class Transporte(BaseModel):
     mes = models.CharField(max_length=64, verbose_name="Mes:", default="")
-    estado = models.CharField("Estado", max_length=120)
+    estado = models.CharField(
+        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
+    )
     transporte = models.CharField(max_length=64, verbose_name="Transporte:", default="")
     cantidad = models.CharField(max_length=64, verbose_name="Cantidad:", default="")
 

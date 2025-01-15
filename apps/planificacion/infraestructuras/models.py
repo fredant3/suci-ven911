@@ -1,11 +1,13 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 
 
 class Infraestructura(BaseModel):
     mes = models.CharField(max_length=64, verbose_name="Mes:", default="")
-    estado = models.CharField(max_length=120, verbose_name="Estado:")
+    estado = models.CharField(
+        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
+    )
     infraestructura = models.CharField(
         max_length=64, verbose_name="Infraestrutuctura:", default=""
     )
