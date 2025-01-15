@@ -85,9 +85,10 @@
 <script src="{% static 'js/data-table.js' %}"></script>
 <script>
 $(document).ready(function () {
-  const url = "{{ listApiUrl }}"  
+  const url = "{{ listApiUrl }}"
   const columns =  {{ columns|safe }}
-  setTBody({url, columns});
+  const withActions = "{{ withActions }}"
+  setTBody({url, columns, withActions});
 });
 </script>
 {% endblock %}

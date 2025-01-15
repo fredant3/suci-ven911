@@ -22,6 +22,7 @@ class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Organizaciones"
         context["module"] = "Organizacion"
         context["listApiUrl"] = reverse_lazy("api_organizacion")
+        context["withActions"] = False
         context["cards"] = self.getCards()
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
