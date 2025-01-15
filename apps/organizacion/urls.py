@@ -1,9 +1,10 @@
 from django.urls import include, path
 
-from organizacion.views import OrganizacionView
+from organizacion.views import OrganizacionView, OrganizacionApiView
 
 urlpatterns = [
     path("", OrganizacionView.as_view(), name="organizacion"),
+    path("api/organizacion", OrganizacionApiView.as_view(), name="api_organizacion"),
     path(
         "reglamentos/", include(("apps.organizacion.reglamentos.urls", "reglamentos"))
     ),

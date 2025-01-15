@@ -1,12 +1,14 @@
 import json
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
-
 from templates.sneat import TemplateLayout
+from helpers.ControllerMixin import ListController
+from organizacion.services import OrganizacionService
+from organizacion.normativas.models import Normativa
+from organizacion.reglamentos.models import Reglamento
 
 
 class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -19,7 +21,7 @@ class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Organizaciones"
         context["module"] = "Organizacion"
-        context["listApiUrl"] = reverse_lazy("api_reglamentos:list")
+        context["listApiUrl"] = reverse_lazy("api_organizacion")
         context["cards"] = self.getCards()
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
@@ -28,34 +30,47 @@ class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def getCards(self):
         return [
             {
-                "title": "Total de Informes",
-                "subtitle": "Tipo de Informe",
-                "info": "Normativas",
-                "detail": "32",
+                "title": "Archivos de tipos",
+                "subtitle": "Normativas",
                 "href": reverse_lazy("normativas:list"),
+                "body": [
+                    {
+                        "title": "Activos",
+                        "info": "Normativas para biblioteca",
+                        "detail": Normativa.objects.filter(estado=True).count(),
+                    },
+                    {
+                        "title": "Archivos de tipo",
+                        "info": "Normativas para uso interno",
+                        "detail": Normativa.objects.all().count(),
+                    },
+                ],
             },
             {
-                "title": "Total de Informes",
-                "subtitle": "Tipo de Informe",
-                "info": "Reglamentos",
-                "detail": "32",
+                "title": "Archivos de tipos",
+                "subtitle": "Reglamentos",
                 "href": reverse_lazy("reglamentos:list"),
+                "body": [
+                    {
+                        "title": "Activos",
+                        "info": "Reglamentos para biblioteca",
+                        "detail": Reglamento.objects.filter(estado=True).count(),
+                    },
+                    {
+                        "title": "Total de archivos",
+                        "info": "Reglamentos para uso interno",
+                        "detail": Reglamento.objects.all().count(),
+                    },
+                ],
             },
         ]
 
     def getColumns(self):
         return [
             {
-                "data": "id",
-                "name": "id",
-                "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
                 "data": "name",
                 "name": "name",
-                "title": "Nombre de Reglamento",
+                "title": "Nombre del Archivo",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -67,25 +82,11 @@ class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "user",
-                "name": "user",
-                "title": "Usuario",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "date",
                 "name": "date",
                 "title": "Fecha",
                 "orderable": "false",
                 "searchable": "true",
-            },
-            {
-                "data": "progre",
-                "name": "progre",
-                "title": "Progreso",
-                "orderable": "false",
-                "searchable": "false",
             },
             {
                 "data": "estado",
@@ -95,3 +96,10 @@ class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
         ]
+
+
+class OrganizacionApiView(ListController, CheckPermisosMixin):
+    permission_required = ""
+
+    def __init__(self):
+        self.service = OrganizacionService()
