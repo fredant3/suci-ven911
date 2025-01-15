@@ -25,14 +25,16 @@ function form_errors(errors) {
   );
 
   const estadoSelect = document.getElementById('id_estado');
-  estadoSelect && estadoSelect.addEventListener("change", (event) => cargarMunicipios(event));
-
-  const municipioSelect = document.getElementById('id_municipio');
-  municipioSelect && municipioSelect.addEventListener("change", (event) => cargarParroquias(event));
-
-  const parroquiaSelect = document.getElementById('id_parroquia');
-  primerOption(municipioSelect)
-  primerOption(parroquiaSelect)
+  if (estadoSelect.tagName == "SELECT") {
+    estadoSelect && estadoSelect.addEventListener("change", (event) => cargarMunicipios(event));
+  
+    const municipioSelect = document.getElementById('id_municipio');
+    municipioSelect && municipioSelect.addEventListener("change", (event) => cargarParroquias(event));
+  
+    const parroquiaSelect = document.getElementById('id_parroquia');
+    municipioSelect && primerOption(municipioSelect)
+    parroquiaSelect && primerOption(parroquiaSelect)
+  }
 })();
 
 function reiniciarOptiones(select) {
