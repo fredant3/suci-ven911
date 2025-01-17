@@ -7,14 +7,31 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-
+from django.db.models import F, Value
+from django.db.models.functions import Concat
+from django.http import JsonResponse
 
 class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
 
     def get(self, request, *args, **kwargs):
-        # Filtra los datos del modelo para generar el archivo Excel
-        denuncias = Denuncia.objects.all()
+        denuncias = Denuncia.objects.all().values(
+            "estatus",
+            "ente",
+            "denunciante__nombres",
+            "denunciante__apellidos",
+            "denunciante__cedula",
+            "denunciante__telefono",
+            "denunciante__email",
+            "denunciante__direccion",
+            "denunciado__nombres",
+            "denunciado__apellidos",
+            "denunciado__cedula",
+            "motivo",
+            "zona",
+            "fecha_denuncia",
+            "fecha_incidente",
+        )
 
         # Crea un archivo Excel en memoria
         wb = Workbook()
@@ -72,21 +89,21 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         for dato in denuncias:
             ws.append(
                 [
-                    dato.estatus,
-                    dato.ente,
-                    dato.nombres_d,
-                    dato.apellidos_d,
-                    dato.cedula_d,
-                    dato.telefono,
-                    dato.email,
-                    dato.direccion_d,
-                    dato.nombres_denunciado,
-                    dato.apellidos_denunciado,
-                    dato.cedula_denunciado,
-                    dato.motivo,
-                    dato.zona,
-                    dato.fecha_denuncia,
-                    dato.fecha_incidente,
+                    dato['estatus'],
+                    dato['ente'],
+                    dato['denunciante__nombres'],
+                    dato['denunciante__apellidos'],
+                    dato['denunciante__cedula'],
+                    dato['denunciante__telefono'],
+                    dato['denunciante__email'],
+                    dato['denunciante__direccion'],
+                    dato['denunciado__nombres'],
+                    dato['denunciado__apellidos'],
+                    dato['denunciado__cedula'],
+                    dato['motivo'],
+                    dato['zona'],
+                    dato['fecha_denuncia'],
+                    dato['fecha_incidente'],
                 ]
             )  # Reemplaza con los campos de tu modelo
 
