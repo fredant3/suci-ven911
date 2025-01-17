@@ -1,6 +1,6 @@
 import random
 
-import faker.providers
+import faker
 from administracion.averia.models import TipoAveria
 
 TIPOS_DE_AVERIA = ["BUENO", "DEFECTUOSO", "EN REPARACION"]
@@ -12,12 +12,12 @@ class AveriaProvider(faker.providers.BaseProvider):
 
 
 class AveriaFake:
-    def tipo_averia(self):
+    def tipo_averia():
         for avg in TIPOS_DE_AVERIA:
             TipoAveria.objects.create(nombre=avg)
 
     def averia(faker):
-        faker.add_provider(ArticuloProvider)
+        faker.add_provider(AveriaProvider)
         for _ in range(15):
             tipoArticulo = TipoArticulo.objects.order_by("?").first()
             articulo = Articulo.objects.create(
