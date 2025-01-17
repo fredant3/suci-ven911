@@ -13,7 +13,6 @@ class Reglamento(BaseModel):
     user = models.CharField(max_length=64, verbose_name="Usuario", default="")
     date = models.DateField(verbose_name="Fecha", blank=True)
     progre = models.CharField(max_length=64, verbose_name="Progreso:", default="")
-    estado = models.BooleanField(default=False)
 
     def toJSON(self):
         return model_to_dict(self)

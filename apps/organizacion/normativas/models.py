@@ -2,14 +2,12 @@ from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 
-
 class Normativa(BaseModel):
-    name = models.CharField("Nombre de Normativa", max_length=64)
-    file = models.FileField("Archivo", upload_to="normativas/")
-    user = models.CharField("Usuario", max_length=64)
-    date = models.DateField("Fecha", blank=True)
-    progre = models.CharField("Progreso", max_length=64)
-    estado = models.BooleanField(default=False)
+    name = models.CharField(max_length=64, verbose_name="Nombre de Normativa:", default="")
+    file = models.FileField(upload_to="normativas/", verbose_name="Archivo", default="")
+    user = models.CharField(max_length=64, verbose_name="Usuario", default="")
+    date = models.DateField(verbose_name="Fecha", blank=True)
+    progre = models.CharField(max_length=64, verbose_name="Progreso:", default="")
 
     def toJSON(self):
         return model_to_dict(self)
