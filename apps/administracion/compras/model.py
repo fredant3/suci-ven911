@@ -8,4 +8,3 @@ class Compra(BaseModel):
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     n_orden = models.IntegerField()
     valor_bs = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
