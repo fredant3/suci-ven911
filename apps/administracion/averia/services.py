@@ -4,6 +4,16 @@ from helpers.CrudMixin import CrudService
 
 
 class AveriaService(CrudService):
+    select = (
+        "id",
+        "problema",
+        "tipo_averia__nombre",
+        "departamento__nombre",
+        "ubicacion",
+        "serial",
+        "codigo_bn",
+    )
+
     def __init__(self):
         self.repository = AveriaRepository()
         self.tipo_averia_repository = TipoAveriaRepository()
