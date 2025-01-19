@@ -6,7 +6,7 @@
 ```bash
 # Clonar repositorio
 git clone git@github.com:fredant3/suci-ven911.git
-cd suci
+cd suci-ven911
 
 # Crear entorno virtual
 python -m venv venv
