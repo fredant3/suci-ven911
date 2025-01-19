@@ -6,6 +6,7 @@ class TipoAveriaRepository(Repository):
     def __init__(self):
         self.entity = TipoAveria
 
+
 class AveriaRepository(Repository):
     def __init__(self):
         self.entity = Averia

@@ -18,6 +18,6 @@ class CompraService(CrudService):
     def buscar_articulo(self, articulo_id):
         return self.articulo_repository.getById(articulo_id)
 
-    def relationship(self, payload, *arg, **kwargs):        
+    def relationship(self, payload, *arg, **kwargs):
         payload["articulo"] = self.buscar_articulo(payload.get("articulo"))
         return payload

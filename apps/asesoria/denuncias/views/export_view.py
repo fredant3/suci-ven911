@@ -89,6 +89,7 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         for dato in denuncias:
             ws.append(
                 [
+<<<<<<< HEAD
                     dato['estatus'],
                     dato['ente'],
                     dato['denunciante__nombres'],
@@ -104,6 +105,23 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     dato['zona'],
                     dato['fecha_denuncia'],
                     dato['fecha_incidente'],
+=======
+                    dato["estatus"],
+                    dato["ente"],
+                    dato["denunciante__nombres"],
+                    dato["denunciante__apellidos"],
+                    dato["denunciante__cedula"],
+                    dato["denunciante__telefono"],
+                    dato["denunciante__email"],
+                    dato["denunciante__direccion"],
+                    dato["denunciado__nombres"],
+                    dato["denunciado__apellidos"],
+                    dato["denunciado__cedula"],
+                    dato["motivo"],
+                    dato["zona"],
+                    dato["fecha_denuncia"],
+                    dato["fecha_incidente"],
+>>>>>>> mergeUpdateven911
                 ]
             )  # Reemplaza con los campos de tu modelo
 

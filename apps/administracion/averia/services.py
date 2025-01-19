@@ -25,7 +25,7 @@ class AveriaService(CrudService):
     def buscar_departamento(self, departamento_id):
         return self.departamento_repository.getById(departamento_id)
 
-    def relationship(self, payload, *arg, **kwargs):        
+    def relationship(self, payload, *arg, **kwargs):
         payload["tipo_averia"] = self.buscar_tipo_averia(payload.get("tipo_averia"))
         payload["departamento"] = self.buscar_departamento(payload.get("departamento"))
         return payload
