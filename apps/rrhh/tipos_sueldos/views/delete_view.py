@@ -6,9 +6,9 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import TipoSueldoForm
-from ..models import TipoSueldo
-from ..services import TipoSueldoService
+from rrhh.tipos_sueldos.forms import TipoSueldoForm
+from rrhh.tipos_sueldos.models import TipoSueldo
+from rrhh.tipos_sueldos.services import TipoSueldoService
 
 
 class TipoSueldoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):

@@ -74,7 +74,7 @@ class UpdateController(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.object = self.get_object()
-        except Exception as e:
+        except Exception:
             return HttpResponseRedirect(self.get_url_redirect())
 
         if self.request.method.upper() == "PUT":
@@ -90,7 +90,6 @@ class UpdateController(LoginRequiredMixin, UpdateView):
                 data.updated_by = self.request.user.username
                 return data
             except ObjectDoesNotExist:
-                print(f"REDIRECT ObjectDoesNotExist {ObjectDoesNotExist}")
                 error(self.request, "El recurso no se ha encontrado")
         else:
             error(self.request, "No se proporcionó ningún recurso válido")

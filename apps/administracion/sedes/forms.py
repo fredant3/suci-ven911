@@ -1,9 +1,9 @@
-from django import forms
+from helpers.FormBase import FormBase
 
 from .models import Sede
 
 
-class SedeForm(forms.ModelForm):
+class SedeForm(FormBase):
     class Meta:
         model = Sede
         fields = (

@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import TipoSueldoForm
-from ..services import TipoSueldoService
+from rrhh.tipos_sueldos.forms import TipoSueldoForm
+from rrhh.tipos_sueldos.services import TipoSueldoService
 
 
 class TipoSueldoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views.create_view import AsignacionCreateView
-from .views.delete_view import AsignacionDeleteView
-from .views.list_view import AsignacionListView
-from .views.update_view import AsignacionUpdateView
+from presupuesto.asignacion.views.create_view import AsignacionCreateView
+from presupuesto.asignacion.views.delete_view import AsignacionDeleteView
+from presupuesto.asignacion.views.list_view import AsignacionListView
+from presupuesto.asignacion.views.update_view import AsignacionUpdateView
 
 urlpatterns = [
     path(

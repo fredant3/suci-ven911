@@ -1,9 +1,10 @@
 from administracion.asignaciones.models import Asignacion
 from administracion.inventario.models import Articulo
 from django import forms
+from helpers.FormBase import FormBase
 
 
-class AsignacionForm(forms.ModelForm):
+class AsignacionForm(FormBase):
     class Meta:
         model = Asignacion
         fields = [

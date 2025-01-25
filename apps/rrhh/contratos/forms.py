@@ -1,9 +1,10 @@
 from django import forms
 
 from .models import Contrato
+from helpers.FormBase import FormBase
 
 
-class ContratoForm(forms.ModelForm):
+class ContratoForm(FormBase):
     class Meta:
         model = Contrato
         fields = (

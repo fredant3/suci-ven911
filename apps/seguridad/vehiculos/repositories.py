@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Vehiculo
+from seguridad.vehiculos.models import Vehiculo
 
 
 class VehiculoRepository(Repository):

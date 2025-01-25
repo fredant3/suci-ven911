@@ -2,7 +2,7 @@ from administracion.departamentos.models import Departamento
 from administracion.sedes.models import Sede
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 
 
 class TipoIncidencia(BaseModel):
@@ -15,7 +15,9 @@ class TipoIncidencia(BaseModel):
 class Incidencia(BaseModel):
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    estado = models.CharField("Estado", max_length=120)
+    estado = models.CharField(
+        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
+    )
     tipo_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
     tipo_solicitud = models.CharField(max_length=80, verbose_name="Tipo Solicitud")
     observaciones = models.CharField(max_length=200)

@@ -1,9 +1,10 @@
 from django import forms
 
 from rrhh.cargos.models import Cargo
+from helpers.FormBase import FormBase
 
 
-class CargoForm(forms.ModelForm):
+class CargoForm(FormBase):
     class Meta:
         model = Cargo
         fields = (

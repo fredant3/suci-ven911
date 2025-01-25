@@ -4,31 +4,29 @@ from helpers.BaseModelMixin import BaseModel
 
 
 class Accion(BaseModel):
-    nombrep = models.CharField(max_length=64, verbose_name="Nombre del Proyecto:")
-    fechai = models.DateField(verbose_name="Fecha de Inicio")
-    fechac = models.DateField(verbose_name="Fecha de Culminación")
-    situacionp = models.CharField(
-        max_length=64, verbose_name="Situación Presupuestaria:"
+    proyecto = models.CharField("Nombre del Proyecto:", max_length=64)
+    fecha_inicio = models.DateField("Fecha de Inicio")
+    fecha_culminacion = models.DateField("Fecha de Culminación")
+    situacion_presupuestaria = models.CharField(
+        "Situación Presupuestaria:", max_length=64
     )
-    montoproyecto = models.CharField(
-        max_length=64, verbose_name="Monto Total del Proyecto:"
+    monto = models.CharField("Monto Total del Proyecto:", max_length=64)
+    responsable_gerente = models.CharField("Responsable Gerente:", max_length=64)
+    responsable_tecnico = models.CharField("Responsable Técnico:", max_length=64)
+    responsable_registrador = models.CharField(
+        "Responsable Registrador:", max_length=64
     )
-    responsableg = models.CharField(max_length=64, verbose_name="Responsable Gerente:")
-    responsablet = models.CharField(max_length=64, verbose_name="Responsable Técnico:")
-    responsabler = models.CharField(
-        max_length=64, verbose_name="Responsable Registrador:"
+    responsable_administrativo = models.CharField(
+        "Responsable Administrativo:", max_length=64
     )
-    responsablea = models.CharField(
-        max_length=64, verbose_name="Responsable Administrativo:"
-    )
-    estatus = models.CharField(max_length=64, verbose_name="Estatus del Proyecto:")
+    estatus = models.CharField("Estatus del Proyecto:", max_length=64)
 
     def toJSON(self):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.nombrep
+        return self.proyecto
 
     class Meta:
-        verbose_name = "accion"
-        verbose_name_plural = "acciones"
+        verbose_name = "Accion"
+        verbose_name_plural = "Acciones"

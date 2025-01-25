@@ -1,13 +1,16 @@
 from django import forms
 
-from .models import TipoSueldo
+from rrhh.tipos_sueldos.models import TipoSueldo
+from helpers.FormBase import FormBase
 
 
-class TipoSueldoForm(forms.ModelForm):
+class TipoSueldoForm(FormBase):
     class Meta:
         model = TipoSueldo
         fields = (
-            "tipo_personal",
+            "tipo",
+            "monto",
+            "descripcion",
             "estatus",
         )
         exclude = [

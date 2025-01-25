@@ -1,11 +1,10 @@
-from django import forms
+from helpers.FormBase import FormBase
+from seguridad.entradas.models import Entrada
 
-from .models import Entrada
 
-
-class EntradaForm(forms.ModelForm):
-    fecha = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
-    hora = forms.CharField(widget=forms.TextInput(attrs={"type": "time"}))
+class EntradaForm(FormBase):
+    fecha = FormBase.create_date_field("fecha")
+    hora = FormBase.create_time_field("hora")
 
     class Meta:
         model = Entrada

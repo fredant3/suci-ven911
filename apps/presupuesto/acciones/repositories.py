@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Accion
+from presupuesto.acciones.models import Accion
 
 
 class AccionRepository(Repository):

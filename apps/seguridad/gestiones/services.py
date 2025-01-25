@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import GestionRepository
+from seguridad.gestiones.repositories import GestionRepository
 
 
 class GestionService(CrudService):

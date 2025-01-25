@@ -1,11 +1,11 @@
-from django import forms
+from helpers.FormBase import FormBase
 
-from .models import Proyecto
+from presupuesto.proyecto.models import Proyecto
 
 
-class ProyectoForm(forms.ModelForm):
-    fechai = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
-    fechac = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
+class ProyectoForm(FormBase):
+    fechai = FormBase.create_date_field("fechai")
+    fechac = FormBase.create_date_field("fechac")
 
     class Meta:
         model = Proyecto

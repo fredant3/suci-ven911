@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AccionForm
-from ..services import AccionService
+from presupuesto.acciones.forms import AccionForm
+from presupuesto.acciones.services import AccionService
 
 
 class AccionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -18,7 +18,7 @@ class AccionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Acciones"
         context["titleForm"] = "Añadir una accion"

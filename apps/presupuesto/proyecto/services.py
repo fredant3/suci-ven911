@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import ProyectoRepository
+from presupuesto.proyecto.repositories import ProyectoRepository
 
 
 class ProyectoService(CrudService):

@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import VehiculoRepository
+from seguridad.vehiculos.repositories import VehiculoRepository
 
 
 class VehiculoService(CrudService):

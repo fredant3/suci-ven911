@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import EntradaRepository
+from seguridad.entradas.repositories import EntradaRepository
 
 
 class EntradaService(CrudService):

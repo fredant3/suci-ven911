@@ -18,7 +18,7 @@ class RegistroFilmicoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateVi
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Registro Filmico"
         context["titleForm"] = "Actualizar Registro Filmico"

@@ -1,6 +1,8 @@
 from django.urls import include, path
+from asesoria.views import AsesoriaView
 
 urlpatterns = [
+    path("", AsesoriaView.as_view(), name="asesoria"),
     path("denuncias/", include(("apps.asesoria.denuncias.urls", "denuncias"))),
     path(
         "api/denuncias/",

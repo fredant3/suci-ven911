@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import AsignacionRepository
+from presupuesto.asignacion.repositories import AsignacionRepository
 
 
 class AsignacionService(CrudService):

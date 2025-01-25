@@ -1,12 +1,13 @@
 from django import forms
 
-from .models import Asignacion
+from presupuesto.asignacion.models import Asignacion
+from helpers.FormBase import FormBase
 
 
-class AsignacionForm(forms.ModelForm):
+class AsignacionForm(FormBase):
     class Meta:
         model = Asignacion
-        fields = ("nombredir", "presuasig", "objeanual", "numpartida")
+        fields = ("departamento", "presupuesto", "objetivo", "numero_partida")
         exclude = [
             "created_at",
             "created_by",

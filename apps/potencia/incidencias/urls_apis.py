@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views.create_view import IncidenciaCreateApiView
-from .views.delete_view import IncidenciaDeleteApiView
-from .views.list_view import IncidenciaListApiView
-from .views.update_view import IncidenciaUpdateApiView
+from potencia.incidencias.views.create_view import IncidenciaCreateApiView
+from potencia.incidencias.views.delete_view import IncidenciaDeleteApiView
+from potencia.incidencias.views.list_view import IncidenciaListApiView
+from potencia.incidencias.views.update_view import IncidenciaUpdateApiView
 
 urlpatterns = [
     path(

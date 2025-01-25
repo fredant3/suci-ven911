@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Receptor
+from presupuesto.receptor.models import Receptor
 
 
 class ReceptorRepository(Repository):

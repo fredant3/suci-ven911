@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import AccionRepository
+from presupuesto.acciones.repositories import AccionRepository
 
 
 class AccionService(CrudService):

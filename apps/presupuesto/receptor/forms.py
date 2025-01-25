@@ -1,9 +1,8 @@
-from django import forms
+from presupuesto.receptor.models import Receptor
+from helpers.FormBase import FormBase
 
-from .models import Receptor
 
-
-class ReceptorForm(forms.ModelForm):
+class ReceptorForm(FormBase):
     class Meta:
         model = Receptor
         fields = (

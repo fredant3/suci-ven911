@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views.create_view import ReceptorCreateApiView
-from .views.delete_view import ReceptorDeleteApiView
-from .views.export_view import ReceptorPDFView
-from .views.list_view import ReceptorListApiView
-from .views.update_view import ReceptorUpdateApiView
+from presupuesto.receptor.views.create_view import ReceptorCreateApiView
+from presupuesto.receptor.views.delete_view import ReceptorDeleteApiView
+from presupuesto.receptor.views.export_view import ReceptorPDFView
+from presupuesto.receptor.views.list_view import ReceptorListApiView
+from presupuesto.receptor.views.update_view import ReceptorUpdateApiView
 
 urlpatterns = [
     path(

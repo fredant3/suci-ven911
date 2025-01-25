@@ -3,6 +3,13 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 
 
+ESTATUS_CHOICES = (
+    ("reg", "Registrado"),
+    ("pro", "En Proceso"),
+    ("nop", "No Procede"),
+)
+
+
 class Denunciante(BaseModel):
     nombres = models.CharField("Nombre del denunciante", max_length=120)
     apellidos = models.CharField("Apellido del denunciante", max_length=120)
@@ -64,18 +71,14 @@ class Denunciado(BaseModel):
 
 
 class Denuncia(BaseModel):
-    estatus = models.CharField(max_length=50, blank=True, null=True)
+    estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
     ente = models.CharField(max_length=50, blank=True, null=True)
     denunciante = models.ForeignKey(Denunciante, on_delete=models.CASCADE)
     denunciado = models.ForeignKey(Denunciado, on_delete=models.CASCADE)
     motivo = models.TextField(max_length=400)
-    zona = models.CharField(
-        max_length=150, blank=True, null=True, verbose_name="Zona del incidente"
-    )
-    fecha_denuncia = models.DateField(verbose_name="Fecha de la denuncia")
-    fecha_incidente = models.DateField(
-        blank=True, null=True, verbose_name="Fecha del incidente"
-    )
+    zona = models.CharField("Zona del incidente", max_length=150, blank=True, null=True)
+    fecha_denuncia = models.DateField("Fecha de la denuncia")
+    fecha_incidente = models.DateField("Fecha del incidente", blank=True, null=True)
 
     def toJSON(self):
         return model_to_dict(self)

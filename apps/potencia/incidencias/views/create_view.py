@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import IncidenciaForm
-from ..services import IncidenciaService
+from potencia.incidencias.forms import IncidenciaForm
+from potencia.incidencias.services import IncidenciaService
 
 
 class IncidenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):

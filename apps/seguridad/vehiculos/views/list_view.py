@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import VehiculoService
+from seguridad.vehiculos.services import VehiculoService
 
 
 class VehiculoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -21,8 +21,8 @@ class VehiculoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Vehiculos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("vehiculos:create")

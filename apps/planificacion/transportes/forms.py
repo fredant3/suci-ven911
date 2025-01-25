@@ -1,8 +1,9 @@
 from django import forms
 from planificacion.transportes.models import Transporte
+from helpers.FormBase import FormBase
 
 
-class TransporteForm(forms.ModelForm):
+class TransporteForm(FormBase):
     class Meta:
         model = Transporte
         fields = (

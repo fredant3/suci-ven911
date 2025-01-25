@@ -1,0 +1,107 @@
+{% extends layout_path %}
+
+{% load static %}
+
+{% block title %}{{ titlePage }}{% endblock %}
+
+{% block breadcrumbs %}
+<span class="text-muted fw-light">
+  <a href="../" class="text-muted fw-light">{{ module }}</a> /
+</span>
+<span class="">{{ submodule }}</span>
+{% endblock %}
+
+{% block btnAdd %}
+{% if isSelect %}
+<div class="mb-4">
+  <select class="form-select" id="select-options">
+    <option selected>{{ selectTitle }}</option>
+    {% for value, label in selectOptions %}
+    <option value="{{ value }}">{{ label }}</option>
+    {% endfor %}
+  </select>
+</div>
+{% else %}
+<a href="{{ createUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>{{ createBtn }}
+</a>
+{% endif %}
+
+{% if exportExcelUrl %}
+<a href="{{ exportExcelUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>Exportar a Excel
+</a>
+{% endif %}
+
+{% if exportPdfUrl %}
+<a href="{{ exportPdfUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>Exportar a Pdf
+</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive text-nowrap">
+      <table id="data-table" class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre de Normativa</th>
+            <th>Archivo</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Progreso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody class=" table-border-bottom-0">
+          {% for archivo in columns %}
+          <tr>
+            <td>{{ archivo.id }}</td>
+            <td>{{ archivo.name }}</td>
+            <td><a href="/media/{{ archivo.file }}">LINK</a></td>
+            <td>{{ archivo.user }}</td>
+            <td>{{ archivo.date }}</td>
+            <td>{{ archivo.progre }}</td>
+            <td>
+              <a href="{{ archivo.id }}/update" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
+              <a href="{{ archivo.id }}/delete" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block vendor_css %}
+<link rel="stylesheet" href="{% static 'vendor/libs/data-tables/css/dataTables.bootstrap5.css' %}">
+{% endblock %}
+
+{% block vendor_js %}
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.js' %}"></script>
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.bootstrap5.js' %}"></script>
+{% endblock %}
+
+{% block page_js %}
+<script src="{% static 'js/data-table.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#select-options').change(function () {
+      const createUrl = "{{ createUrl }}"
+      let valorSeleccionado = $(this).val();
+      window.location.href = createUrl.replace("0", valorSeleccionado);
+    });
+    const url = "{{ listApiUrl }}"
+    const updateUrl = "{{ updateUrl }}"
+    const deleteUrl = "{{ deleteUrl }}"
+    const columns = {{ columns| safe
+  }}
+    setTBody({ url, columns, updateUrl, deleteUrl });
+});
+</script>
+{% endblock %}

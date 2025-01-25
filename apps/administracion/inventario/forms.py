@@ -1,8 +1,10 @@
 from administracion.inventario.models import Articulo
-from django import forms
+from helpers.FormBase import FormBase
 
 
-class ArticuloForm(forms.ModelForm):
+class ArticuloForm(FormBase):
+    fecha_adq = FormBase.create_date_field("fecha_adq")
+
     class Meta:
         model = Articulo
         fields = [
@@ -13,7 +15,7 @@ class ArticuloForm(forms.ModelForm):
             "placa",
             "cantidad_combustible",
             "codigo_bn",
-            "cantidad",
+            "cantidad",  # Asegúrate de que esta línea esté alineada correctamente
             "condicion",
             "fecha_adq",
             # "tipo_articulo",
@@ -31,15 +33,11 @@ class ArticuloForm(forms.ModelForm):
             "fecha_adq": "Fecha de adquisición",
             # "tipo_articulo": "Tipo de artículo",
         }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
 
 
-class TecnologiaForm(forms.ModelForm):
+class TecnologiaForm(FormBase):
+    fecha_adq = FormBase.create_date_field("fecha_adq")
+
     class Meta:
         model = Articulo
         fields = [
@@ -62,15 +60,11 @@ class TecnologiaForm(forms.ModelForm):
             "condicion": "Condición",
             "fecha_adq": "Fecha de adquisición",
         }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
 
 
-class ConsumibleForm(forms.ModelForm):
+class ConsumibleForm(FormBase):
+    fecha_adq = FormBase.create_date_field("fecha_adq")
+
     class Meta:
         model = Articulo
         fields = ["descripcion", "marca", "serial", "cantidad", "fecha_adq"]
@@ -81,15 +75,11 @@ class ConsumibleForm(forms.ModelForm):
             "cantidad": "Cantidad",
             "fecha_adq": "Fecha de adquisición",
         }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
 
 
-class MobiliarioForm(forms.ModelForm):
+class MobiliarioForm(FormBase):
+    fecha_adq = FormBase.create_date_field("fecha_adq")
+
     class Meta:
         model = Articulo
         fields = [
@@ -108,15 +98,11 @@ class MobiliarioForm(forms.ModelForm):
             "condicion": "Condición",
             "fecha_adq": "Fecha de adquisición",
         }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
 
 
-class VehiculoForm(forms.ModelForm):
+class VehiculoForm(FormBase):
+    fecha_adq = FormBase.create_date_field("fecha_adq")
+
     class Meta:
         model = Articulo
         fields = [
@@ -140,10 +126,4 @@ class VehiculoForm(forms.ModelForm):
             "cantidad": "Cantidad",
             "condicion": "Condición",
             "fecha_adq": "Fecha de adquisición",
-        }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
         }

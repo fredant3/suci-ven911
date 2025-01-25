@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import GestionForm
-from ..services import GestionService
+from seguridad.gestiones.forms import GestionForm
+from seguridad.gestiones.services import GestionService
 
 
 class GestionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -18,8 +18,8 @@ class GestionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Gestions"
         context["titleForm"] = "Añadir una gestion nueva"
         context["tag"] = "Registrar"

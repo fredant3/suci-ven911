@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Cedente
+from presupuesto.cedente.models import Cedente
 
 
 class CedenteRepository(Repository):

@@ -1,9 +1,10 @@
 from django import forms
 
 from .models import Familiar
+from helpers.FormBase import FormBase
 
 
-class FamiliarForm(forms.ModelForm):
+class FamiliarForm(FormBase):
     class Meta:
         model = Familiar
         fields = (

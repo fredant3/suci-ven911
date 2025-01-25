@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Entrada
+from seguridad.entradas.models import Entrada
 
 
 class EntradaRepository(Repository):

@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReceptorForm
-from ..services import ReceptorService
+from presupuesto.receptor.forms import ReceptorForm
+from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -18,7 +18,7 @@ class ReceptorCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Receptores"
         context["titleForm"] = "Añadir un receptor"

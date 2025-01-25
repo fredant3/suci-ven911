@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import EntradaService
+from seguridad.entradas.services import EntradaService
 
 
 class EntradaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -21,8 +21,8 @@ class EntradaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Entradas"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("entradas:create")

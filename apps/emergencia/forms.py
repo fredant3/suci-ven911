@@ -1,8 +1,9 @@
 from django import forms
 from emergencia.models import Emergencia
+from helpers.FormBase import FormBase
 
 
-class EmergenciaForm(forms.ModelForm):
+class EmergenciaForm(FormBase):
     class Meta:
         model = Emergencia
         fields = [
