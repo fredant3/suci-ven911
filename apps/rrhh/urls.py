@@ -8,6 +8,11 @@ urlpatterns = [
         "api/cargos/",
         include(("apps.rrhh.cargos.urls_apis", "api_cargos")),
     ),
+    path("tipos-sueldos/", include(("apps.rrhh.tipos_sueldos.urls", "tipos_sueldos"))),
+    path(
+        "api/tipos-sueldos/",
+        include(("apps.rrhh.tipos_sueldos.urls_apis", "api_tipos_sueldos")),
+    ),
     path("sueldos/tipos", include(("apps.rrhh.tipos_sueldos.urls", "tipos_sueldos"))),
     path(
         "api/sueldos/tipos/",
