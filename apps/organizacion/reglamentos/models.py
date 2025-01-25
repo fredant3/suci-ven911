@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTATUS_CHOICES
 
 
 class Reglamento(BaseModel):
@@ -13,7 +13,7 @@ class Reglamento(BaseModel):
     user = models.CharField(max_length=64, verbose_name="Usuario", default="")
     date = models.DateField(verbose_name="Fecha", blank=True)
     progre = models.CharField(max_length=64, verbose_name="Progreso:", default="")
-    estado = models.BooleanField(default=False)
+    estado = models.CharField(max_length=8, choices=ESTATUS_CHOICES, default="inactivo")
 
     def toJSON(self):
         return model_to_dict(self)

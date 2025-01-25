@@ -4,13 +4,13 @@ from helpers.FormBase import FormBase
 
 
 class NormativaForm(FormBase):
-    estado = forms.BooleanField(
-        widget=forms.CheckboxInput(attrs={"value": "True"}), required=False
-    )
+    # estado = forms.BooleanField(
+    #     widget=forms.CheckboxInput(attrs={"value": "True"}), required=False
+    # )
 
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        return estado if estado is not None else False
+    # def clean_estado(self):
+    #     estado = self.cleaned_data.get("estado")
+    #     return estado if estado is not None else False
 
     date = FormBase.create_date_field("date")
 

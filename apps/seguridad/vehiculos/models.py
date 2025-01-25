@@ -16,7 +16,7 @@ class Vehiculo(BaseModel):
         max_length=64, verbose_name="Capacidad de Gasolina:", default=""
     )
     cantigasolina = models.CharField(
-        max_length=64, verbose_name="Capacidad de Gasolina:", default=""
+        max_length=64, verbose_name="Cantidad de Gasolina:", default=""
     )
     placa = models.CharField(max_length=64, verbose_name="Placa:", default="")
     fecha = models.DateField(verbose_name="Fecha")
