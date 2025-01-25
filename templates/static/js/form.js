@@ -25,12 +25,12 @@ function form_errors(errors) {
   );
 
   const estadoSelect = document.getElementById('id_estado');
-  if (estadoSelect.tagName == "SELECT") {
+  if (estadoSelect && estadoSelect.tagName == "SELECT") {
     estadoSelect && estadoSelect.addEventListener("change", (event) => cargarMunicipios(event));
-  
+
     const municipioSelect = document.getElementById('id_municipio');
     municipioSelect && municipioSelect.addEventListener("change", (event) => cargarParroquias(event));
-  
+
     const parroquiaSelect = document.getElementById('id_parroquia');
     municipioSelect && primerOption(municipioSelect)
     parroquiaSelect && primerOption(parroquiaSelect)
@@ -39,7 +39,7 @@ function form_errors(errors) {
 
 function reiniciarOptiones(select) {
   if (select.options.length > 0) {
-    for (i = select.options.length-1; i >= 0;i--) {
+    for (i = select.options.length - 1; i >= 0; i--) {
       select.remove(i);
     }
   }
@@ -70,9 +70,9 @@ function cargarMunicipios(event) {
 
 function cargarParroquias(event) {
   const idMunicipio = event.target.value;
-  const estadoSelect = document.getElementById('id_estado');  
+  const estadoSelect = document.getElementById('id_estado');
   const parroquiasSelect = document.getElementById('id_parroquia');
-  primerOption(parroquiasSelect);  
+  primerOption(parroquiasSelect);
   if (!idMunicipio || idMunicipio == '---------') return;
 
   data.find(estado => estado.id_estado == estadoSelect.value)
