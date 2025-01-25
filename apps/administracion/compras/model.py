@@ -1,7 +1,6 @@
 from administracion.inventario.models import Articulo
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
-from users.auth.models import User
 
 
 class Compra(BaseModel):

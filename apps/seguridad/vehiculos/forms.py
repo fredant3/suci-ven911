@@ -15,7 +15,6 @@ class VehiculoForm(FormBase):
             "modelo",
             "vehiculo",
             "motivo",
-            "capagasolina",
             "cantigasolina",
             "placa",
             "fecha",

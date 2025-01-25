@@ -1,7 +1,6 @@
 from administracion.departamentos.models import Departamento
 from django.db.models import CASCADE, CharField, ForeignKey, TextField
 from helpers.BaseModelMixin import BaseModel
-from users.auth.models import User
 
 
 class TipoAveria(BaseModel):

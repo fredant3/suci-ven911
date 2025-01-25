@@ -29,6 +29,9 @@ ESTADOS_CHOICES = (
     ("24", "Distrito Capital"),
 )
 
+ESTATUS_CHOICES = (("activo", "Activo"), ("inactivo", "Inactivo"))
+YES_NO_CHOICES = (("si", "Si"), ("no", "No"))
+
 
 class BaseModelManager(models.Manager):
     def get_queryset(self):
