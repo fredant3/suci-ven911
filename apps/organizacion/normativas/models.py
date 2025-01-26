@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel, ESTATUS_CHOICES
+from helpers.BaseModelMixin import BaseModel
 
 
 class Normativa(BaseModel):
@@ -9,7 +9,7 @@ class Normativa(BaseModel):
     user = models.CharField("Usuario", max_length=64)
     date = models.DateField("Fecha", blank=True)
     progre = models.CharField("Progreso", max_length=64)
-    estado = models.CharField(max_length=8, choices=ESTATUS_CHOICES, default="inactivo")
+    estado = models.BooleanField(default=False)
 
     def toJSON(self):
         return model_to_dict(self)
