@@ -118,9 +118,9 @@ if os.environ.get("DB_BACKEND").lower() == "postgresql":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ.get("DB_BACKEND", default="suci_ven911").lower(),
-            "USER": os.environ.get("DB_BACKEND", default="suci").lower(),
-            "PASSWORD": os.environ.get("DB_BACKEND", default="123456").lower(),
+            "NAME": os.environ.get("DB_DATABASE", default="suci_ven911").lower(),
+            "USER": os.environ.get("DB_USERNAME", default="suci").lower(),
+            "PASSWORD": os.environ.get("DB_PASSWORD", default="123456").lower(),
         }
     }
 
@@ -131,7 +131,6 @@ if os.environ.get("DB_BACKEND", default="sqlite").lower() == "sqlite":
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -212,6 +211,10 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = "auth:login"
