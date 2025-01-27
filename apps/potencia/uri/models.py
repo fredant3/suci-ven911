@@ -4,8 +4,17 @@ from helpers.BaseModelMixin import BaseModel
 
 
 class Uri(BaseModel):
-    nombre_apellido = models.CharField(
-        "Nombre completo", max_length=120, blank=True, null=True
+    fecha_atencion = models.DateField("Fecha de Atencion")
+    nroreporte = models.CharField(
+        "Numero de Reporte", max_length=10, blank=True, null=True
+    )
+    placa = models.CharField("Placa", max_length=10, blank=True, null=True)
+    institucion = models.CharField("Institucion", max_length=300, blank=True, null=True)
+    tipounidad = models.CharField(
+        "Tipo de Unidad", max_length=10, blank=True, null=True
+    )
+    num_interna = models.CharField(
+        "Numeracion Interna", max_length=10, blank=True, null=True
     )
 
     def toJSON(self):
