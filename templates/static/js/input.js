@@ -5,4 +5,6 @@ function displayFileName(input) {
 }
 
 const checkboxes = document.querySelectorAll('.input__checkbox');
-checkboxes[0].parentNode.parentElement.classList.add('input--checkbox');
+checkboxes.forEach(checkbox => {
+	checkbox.parentNode.parentElement.classList.add('input--checkbox')
+})
