@@ -1,11 +1,11 @@
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:${RUNSERVER_PORT}
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "${RUNSERVER_PORT}:${RUNSERVER_PORT}"
     environment:
       - DEBUG=${DEBUG}
     depends_on:
@@ -18,7 +18,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
