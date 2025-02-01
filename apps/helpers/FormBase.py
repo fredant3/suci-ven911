@@ -18,7 +18,13 @@ class FormBase(forms.ModelForm):
                 field.widget.attrs.update({"class": "input__textarea"})
             # Verificar si el widget es un FileField
             elif isinstance(field.widget, forms.FileInput):
-                field.widget.attrs.update({"class": "input__file"})
+                field.widget.attrs.update(
+                    {
+                        "class": "input__file",
+                        "onchange": "displayFileName(this)",
+                        "data-text": "Subir archivo",
+                    }
+                )
             # Verificar si el widget es un CheckboxInput
             elif isinstance(field.widget, forms.CheckboxInput):
                 field.widget.attrs.update({"class": "input__checkbox"})
