@@ -17,6 +17,13 @@ class Gestion(BaseModel):
     direccion = models.CharField(max_length=64, verbose_name="Dirección:", default="")
     cargo = models.CharField(max_length=64, verbose_name="Cargo:", default="")
     hora = models.CharField(max_length=64, verbose_name="Hora de Entrada:", default="")
+    permissions = [
+        ("listar_gestiones", "Listar gestiones"),
+        ("agregar_gestion", "Agregar gestion"),
+        ("ver_gestion", "Ver gestion"),
+        ("modificar_gestion", "Modificar gestion"),
+        ("eliminar_gestion", "Eliminar gestion"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

@@ -8,6 +8,13 @@ class Asignacion(BaseModel):
     presupuesto = models.CharField("Presupuesto asignado:", max_length=64)
     objetivo = models.CharField("Objetivo general anual:", max_length=64)
     numero_partida = models.CharField("Número de partida:", max_length=10)
+    permissions = [
+        ("listar_asignacion", "Puede listar asignacion"),
+        ("agregar_asignacion", "Puede agregar asignacion"),
+        ("ver_asignacion", "Puede ver asignacion"),
+        ("editar_asignacion", "Puede actualizar asignacion"),
+        ("eliminar_asignacion", "Puede eliminar asignacion"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

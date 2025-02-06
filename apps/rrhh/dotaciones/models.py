@@ -50,6 +50,13 @@ class Dotacion(BaseModel):
     pantalon = models.CharField(max_length=2, choices=TALLA_PANTALON_CHOICES)
     zapato = models.CharField(max_length=2, choices=TALLA_ZAPATO_CHOICES)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    permissions = [
+        ("listar_dotacion", "Puede listar dotacion"),
+        ("agregar_dotacion", "Puede agregar dotacion"),
+        ("ver_dotacion", "Puede ver dotacion"),
+        ("editar_dotacion", "Puede actualizar dotacion"),
+        ("eliminar_dotacion", "Puede eliminar dotacion"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

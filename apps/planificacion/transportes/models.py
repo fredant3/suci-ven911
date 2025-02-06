@@ -10,6 +10,13 @@ class Transporte(BaseModel):
     )
     transporte = models.CharField(max_length=64, verbose_name="Transporte:", default="")
     cantidad = models.CharField(max_length=64, verbose_name="Cantidad:", default="")
+    permissions = [
+        ("listar_transporte", "Puede listar transporte"),
+        ("agregar_transporte", "Puede agregar transporte"),
+        ("ver_transporte", "Puede ver transporte"),
+        ("editar_transporte", "Puede actualizar transporte"),
+        ("eliminar_transporte", "Puede eliminar transporte"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

@@ -29,6 +29,13 @@ class Contrato(BaseModel):
     fecha_ingreso = models.DateField()
     fecha_culminacion = models.DateField(null=True, blank=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    permissions = [
+        ("listar_contrato", "Puede listar contratos"),
+        ("agregar_contrato", "Puede agregar contrato"),
+        ("ver_contrato", "Puede ver contrato"),
+        ("editar_contrato", "Puede actualizar contrato"),
+        ("eliminar_contrato", "Puede eliminar contrato"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)
