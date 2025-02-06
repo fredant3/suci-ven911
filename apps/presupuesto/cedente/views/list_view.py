@@ -13,7 +13,7 @@ from presupuesto.cedente.services import CedenteService
 
 
 class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.listar_cedente"
     url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -131,7 +131,7 @@ class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class CedenteListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.listar_cedente"
 
     def __init__(self):
         self.service = CedenteService()

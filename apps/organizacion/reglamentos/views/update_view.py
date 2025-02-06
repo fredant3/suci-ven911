@@ -12,7 +12,7 @@ from ..services import ReglamentoService
 
 
 class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.editar_reglamento"
     form_class = ReglamentoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ReglamentoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.editar_reglamento"
     form_class = ReglamentoForm
 
     def __init__(self):

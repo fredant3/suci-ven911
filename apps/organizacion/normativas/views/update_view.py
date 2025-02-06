@@ -12,7 +12,7 @@ from organizacion.normativas.services import NormativaService
 
 
 class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "organizacion.normativas.editar_normativa"
     form_class = NormativaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -38,7 +38,7 @@ class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class NormativaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.normativas.editar_normativa"
     form_class = NormativaForm
 
     def __init__(self):

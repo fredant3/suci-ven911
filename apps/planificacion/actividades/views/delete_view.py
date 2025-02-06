@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class ActividadDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "planificacion.actividades.eliminar_actividad"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class ActividadDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ActividadDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.actividades.eliminar_actividad"
     form_class = ActividadForm
 
     def __init__(self):

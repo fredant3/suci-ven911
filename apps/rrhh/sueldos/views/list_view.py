@@ -13,7 +13,7 @@ from ..services import SueldoService
 
 
 class SueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.sueldos.listar_sueldo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -109,7 +109,7 @@ class SueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class SueldoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.sueldos.listar_sueldo"
 
     def __init__(self):
         self.service = SueldoService()

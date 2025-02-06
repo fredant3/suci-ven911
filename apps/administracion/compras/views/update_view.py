@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.compras.editar_compra"
     form_class = CompraForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -36,7 +36,7 @@ class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ComprasUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.compras.editar_compra"
     form_class = CompraForm
 
     def __init__(self):

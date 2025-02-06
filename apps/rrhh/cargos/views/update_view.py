@@ -12,7 +12,7 @@ from rrhh.cargos.services import CargoService
 
 
 class CargoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.editar_cargo"
     form_class = CargoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class CargoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class CargoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.editar_cargo"
     form_class = CargoForm
 
     def __init__(self):

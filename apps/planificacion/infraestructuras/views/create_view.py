@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class InfraestructuraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.agregar_infraestructura"
     form_class = InfraestructuraForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class InfraestructuraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateVi
 
 
 class InfraestructuraCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.agregar_infraestructura"
     form_class = InfraestructuraForm
 
     def __init__(self):

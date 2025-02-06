@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class IncidenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "potencia.incidencias.editar_incidencia"
     form_class = IncidenciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -36,7 +36,7 @@ class IncidenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class IncidenciaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "potencia.incidencias.editar_incidencia"
     form_class = IncidenciaForm
 
     def __init__(self):

@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class ObjetivoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "planificacion.objetivos.agregar_objetivo"
     form_class = ObjetivoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class ObjetivoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ObjetivoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.objetivos.agregar_objetivo"
     form_class = ObjetivoForm
 
     def __init__(self):

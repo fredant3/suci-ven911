@@ -34,6 +34,7 @@ class Receptor(BaseModel):
         ("ver_receptor", "Puede ver receptor"),
         ("editar_receptor", "Puede actualizar receptor"),
         ("eliminar_receptor", "Puede eliminar receptor"),
+        ("pdf_receptor", "Puede generar pdf de receptor"),
     ]
 
     def toJSON(self):

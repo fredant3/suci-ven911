@@ -12,7 +12,7 @@ from seguridad.vehiculos.services import VehiculoService
 
 
 class VehiculoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.eliminar_vehiculo"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class VehiculoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class VehiculoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.eliminar_vehiculo"
     form_class = VehiculoForm
 
     def __init__(self):

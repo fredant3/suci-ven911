@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class LlamadaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.eliminar_llamada"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class LlamadaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class LlamadaDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.eliminar_llamada"
     form_class = LlamadaForm
 
     def __init__(self):

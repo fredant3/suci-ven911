@@ -12,7 +12,7 @@ from seguridad.salidas.services import SalidaService
 
 
 class SalidaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "seguridad.salidas.eliminar_salida"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class SalidaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class SalidaDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.salidas.eliminar_salida"
     form_class = SalidaForm
 
     def __init__(self):

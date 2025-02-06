@@ -13,7 +13,7 @@ from seguridad.salidas.services import SalidaService
 
 
 class SalidaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "seguridad.salidas.listar_salida"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -102,7 +102,7 @@ class SalidaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class SalidaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.salidas.listar_salida"
 
     def __init__(self):
         self.service = SalidaService()

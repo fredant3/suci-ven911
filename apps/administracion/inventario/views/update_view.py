@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class ArticuloUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.inventario.editar_articulo"
     form_class = ArticuloForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -40,7 +40,7 @@ class ArticuloUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ArticuloUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.inventario.editar_articulo"
     form_class = ArticuloForm
 
     def __init__(self):

@@ -12,7 +12,7 @@ from ..services import SueldoService
 
 
 class SueldoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.sueldos.editar_sueldo"
     form_class = SueldoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class SueldoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class SueldoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.sueldos.editar_sueldo"
     form_class = SueldoForm
 
     def __init__(self):

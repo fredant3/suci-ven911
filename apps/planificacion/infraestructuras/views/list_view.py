@@ -13,7 +13,7 @@ from ..services import InfraestructuraService
 
 
 class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.listar_infraestructuras"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -75,7 +75,7 @@ class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
 
 
 class InfraestructuraListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.listar_infraestructuras"
 
     def __init__(self):
         self.service = InfraestructuraService()

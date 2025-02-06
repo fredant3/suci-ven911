@@ -12,7 +12,7 @@ from ..services import FamiliarService
 
 
 class FamiliarUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.familiares.editar_familiar"
     form_class = FamiliarForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class FamiliarUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class FamiliarUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.familiares.editar_familiar"
     form_class = FamiliarForm
 
     def __init__(self):

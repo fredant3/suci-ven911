@@ -28,6 +28,7 @@ class Proyecto(BaseModel):
         ("ver_proyecto", "Puede ver proyecto"),
         ("editar_proyecto", "Puede actualizar proyecto"),
         ("eliminar_proyecto", "Puede eliminar proyecto"),
+        ("pdf_proyecto", "Puede generar pdf de proyecto"),
     ]
 
     def toJSON(self):

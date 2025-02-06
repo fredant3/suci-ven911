@@ -22,6 +22,7 @@ class Cedente(BaseModel):
         ("ver_cedente", "Puede ver cedente"),
         ("editar_cedente", "Puede actualizar cedente"),
         ("eliminar_cedente", "Puede eliminar cedente"),
+        ("pdf_cedente", "Puede generar pdf de cedente"),
     ]
 
     def toJSON(self):

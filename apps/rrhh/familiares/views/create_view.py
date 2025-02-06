@@ -11,7 +11,7 @@ from ..services import FamiliarService
 
 
 class FamiliarCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.familiares.agregar_familiar"
     form_class = FamiliarForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class FamiliarCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class FamiliarCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.familiares.agregar_familiar"
     form_class = FamiliarForm
 
     def __init__(self):

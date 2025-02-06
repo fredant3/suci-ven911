@@ -12,7 +12,7 @@ from ..services import ActividadService
 
 
 class ActividadUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "planificacion.actividades.editar_actividad"
     form_class = ActividadForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class ActividadUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ActividadUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.actividades.editar_actividad"
     form_class = ActividadForm
 
     def __init__(self):

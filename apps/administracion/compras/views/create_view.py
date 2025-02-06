@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class CompraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "administracion.compras.agregar_compra"
     form_class = CompraForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class CompraCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class CompraCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.compras.agregar_compra"
     form_class = CompraForm
 
     def __init__(self):
