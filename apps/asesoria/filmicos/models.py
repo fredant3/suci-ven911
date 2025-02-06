@@ -23,6 +23,7 @@ class RegistroFilmico(BaseModel):
         ("ver_registro_filmico", "Puede ver registro filmico"),
         ("editar_registro_filmico", "Puede actualizar registro filmico"),
         ("eliminar_registro_filmico", "Puede eliminar registro filmico"),
+        ("exel_registro_filmico", "Puede exportar a exel registro filmico"),
     ]
 
     def toJSON(self):

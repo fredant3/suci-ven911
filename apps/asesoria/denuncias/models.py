@@ -99,6 +99,7 @@ class Denuncia(BaseModel):
         ("ver_denuncia", "Puede ver denuncia"),
         ("editar_denuncia", "Puede actualizar denuncia"),
         ("eliminar_denuncia", "Puede eliminar denuncia"),
+        ("exel_denuncia", "Puede exportar a exel denuncias"),
     ]
 
     def toJSON(self):

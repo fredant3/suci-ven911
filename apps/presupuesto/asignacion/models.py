@@ -14,6 +14,7 @@ class Asignacion(BaseModel):
         ("ver_asignacion", "Puede ver asignacion"),
         ("editar_asignacion", "Puede actualizar asignacion"),
         ("eliminar_asignacion", "Puede eliminar asignacion"),
+        ("pdf_asignacion", "Puede generar pdf de asignacion"),
     ]
 
     def toJSON(self):

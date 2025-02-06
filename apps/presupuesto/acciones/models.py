@@ -26,6 +26,7 @@ class Accion(BaseModel):
         ("ver_accion", "Puede ver accion"),
         ("editar_accion", "Puede actualizar accion"),
         ("eliminar_accion", "Puede eliminar accion"),
+        ("pdf_accion", "Puede generar pdf de accion"),
     ]
 
     def toJSON(self):
