@@ -9,6 +9,7 @@ Claro, aquí tienes la traducción de la documentación sobre Docker para el pro
 Docker es una plataforma que permite a los desarrolladores crear, empaquetar y ejecutar aplicaciones en contenedores. Los contenedores son entornos ligeros e independientes que incluyen todo lo necesario para ejecutar una aplicación: código, tiempo de ejecución, herramientas del sistema, bibliotecas y configuraciones.
 
 ### Ventajas Principales de Docker
+
 - **Consistencia**: Las aplicaciones se ejecutan de la misma manera en cualquier entorno.
 - **Aislamiento**: Las aplicaciones y dependencias están aisladas del sistema anfitrión.
 - **Portabilidad**: Ejecutar el mismo contenedor en diferentes máquinas.
@@ -21,6 +22,7 @@ Este proyecto utiliza Docker para garantizar entornos de desarrollo y despliegue
 ### Prerrequisitos
 
 1. Instalar Docker Desktop:
+
    - Para Windows: [Docker Desktop para Windows](https://docs.docker.com/desktop/windows/install/)
    - Para Mac: [Docker Desktop para Mac](https://docs.docker.com/desktop/mac/install/)
    - Para Linux: [Motor Docker](https://docs.docker.com/engine/install/)
@@ -30,8 +32,9 @@ Este proyecto utiliza Docker para garantizar entornos de desarrollo y despliegue
 ### Primeros Pasos
 
 1. Clona el repositorio:
+
    ```bash
-   git clone [url-del-repositorio]
+   git clone https://github.com/fredant3/suci-ven911.git
    cd suci-proyecto
    ```
 
@@ -43,42 +46,53 @@ Este proyecto utiliza Docker para garantizar entornos de desarrollo y despliegue
 ### Comandos Esenciales
 
 #### Migraciones de Bases de Datos
+
 Para aplicar migraciones de bases de datos, ejecuta:
+
 ```bash
 docker-compose exec web python manage.py migrate
 ```
 
 #### Crear Datos Iniciales
+
 Para poblar la base de datos con datos iniciales:
+
 ```bash
 docker-compose exec web python manage.py createdata
 ```
 
 #### Crear Superusuario
+
 Para crear un superusuario administrador:
+
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
+
 Sigue las indicaciones para establecer el nombre de usuario, correo electrónico y contraseña.
 
 ### Comandos Docker Comunes
 
 1. Iniciar la aplicación:
+
    ```bash
    docker-compose up
    ```
 
 2. Iniciar en modo desacoplado (en segundo plano):
+
    ```bash
    docker-compose up -d
    ```
 
 3. Detener la aplicación:
+
    ```bash
    docker-compose down
    ```
 
 4. Ver registros:
+
    ```bash
    docker-compose logs
    ```
@@ -107,6 +121,7 @@ Si encuentras problemas:
 ### Estructura del Proyecto
 
 El proyecto utiliza una configuración multicontenedor definida en `docker-compose.yml`:
+
 - `web`: Contenedor principal de la aplicación que ejecuta Django.
 - Contenedor de base de datos (si corresponde).
 - Otros contenedores de servicios según sea necesario.
