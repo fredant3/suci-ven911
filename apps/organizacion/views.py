@@ -12,7 +12,7 @@ from organizacion.reglamentos.models import Reglamento
 
 
 class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "organizacion_index"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/layout_module.html"
 
