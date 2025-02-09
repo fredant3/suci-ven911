@@ -12,7 +12,7 @@ from seguridad.entradas.services import EntradaService
 
 
 class EntradaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "seguridad.entradas.editar_entrada"
     form_class = EntradaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class EntradaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class EntradaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.entradas.editar_entrada"
     form_class = EntradaForm
 
     def __init__(self):

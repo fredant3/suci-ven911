@@ -12,7 +12,7 @@ from ..services import ObjetivoService
 
 
 class ObjetivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "planificacion.objetivos.editar_objetivo"
     form_class = ObjetivoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class ObjetivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ObjetivoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.objetivos.editar_objetivo"
     form_class = ObjetivoForm
 
     def __init__(self):

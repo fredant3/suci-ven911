@@ -12,7 +12,7 @@ from ..services import DotacionService
 
 
 class DotacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.eliminar_dotacion"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class DotacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class DotacionDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.eliminar_dotacion"
     form_class = DotacionForm
 
     def __init__(self):

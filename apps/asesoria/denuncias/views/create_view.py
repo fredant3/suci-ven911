@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.agregar_denuncia"
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class DenunciaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.agregar_denuncia"
     form_class = DenunciaForm
 
     def __init__(self):

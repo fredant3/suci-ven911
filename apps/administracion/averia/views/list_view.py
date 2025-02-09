@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.averia.ver_averia"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -87,7 +87,7 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class AveriaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.averia.eliminar_averia"
 
     def __init__(self):
         self.service = AveriaService()

@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class DepartamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.departamentos.editar_departamento"
     form_class = DepartamentoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -36,7 +36,7 @@ class DepartamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView)
 
 
 class DepartamentoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.departamentos.editar_departamento"
     form_class = DepartamentoForm
 
     def __init__(self):

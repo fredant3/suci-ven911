@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.agregar_reglamento"
     form_class = ReglamentoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ReglamentoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.agregar_reglamento"
     form_class = ReglamentoForm
 
     def __init__(self):

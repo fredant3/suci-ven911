@@ -11,7 +11,7 @@ from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.agregar_proyecto"
     form_class = ProyectoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class ProyectoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ProyectoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.agregar_proyecto"
     form_class = ProyectoForm
 
     def __init__(self):

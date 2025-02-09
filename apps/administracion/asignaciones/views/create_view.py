@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "administracion.asignaciones.agregar_asignacion"
     form_class = AsignacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class AsignacionCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.asignaciones.agregar_asignacion"
     form_class = AsignacionForm
 
     def __init__(self):

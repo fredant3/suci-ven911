@@ -13,7 +13,7 @@ from ..services import ReglamentoService
 
 
 class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.ver_reglamento"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -81,7 +81,7 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ReglamentoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.ver_reglamento"
 
     def __init__(self):
         self.service = ReglamentoService()

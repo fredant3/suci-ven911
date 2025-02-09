@@ -11,7 +11,7 @@ from seguridad.salidas.services import SalidaService
 
 
 class SalidaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "seguridad.salidas.agregar_salida"
     form_class = SalidaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class SalidaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class SalidaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.salidas.agregar_salida"
     form_class = SalidaForm
 
     def __init__(self):

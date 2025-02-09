@@ -13,7 +13,7 @@ from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.listar_receptor"
     url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -124,7 +124,7 @@ class ReceptorListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ReceptorListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.listar_receptor"
 
     def __init__(self):
         self.service = ReceptorService()

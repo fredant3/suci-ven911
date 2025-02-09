@@ -13,7 +13,7 @@ from ..services import TransporteService
 
 
 class TransporteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.transportes.listar_transportes"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -74,7 +74,7 @@ class TransporteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class TransporteListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.transportes.listar_transportes"
 
     def __init__(self):
         self.service = TransporteService()

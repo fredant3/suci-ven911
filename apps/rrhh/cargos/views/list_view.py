@@ -13,7 +13,7 @@ from rrhh.cargos.services import CargoService
 
 
 class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.listar_cargo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -60,7 +60,7 @@ class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class CargoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.listar_cargo"
 
     def __init__(self):
         self.service = CargoService()

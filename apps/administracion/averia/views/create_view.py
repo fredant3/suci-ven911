@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class AveriaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "administracion.averia.agregar_averia"
     form_class = AveriaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class AveriaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class AveriaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.averia.agregar_averia"
     form_class = AveriaForm
 
     def __init__(self):

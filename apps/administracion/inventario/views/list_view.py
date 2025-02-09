@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.inventario.list_articulo"
     url_redirect = reverse_lazy("administracion")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -80,7 +80,7 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ArticuloListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.inventario.list_articulo"
 
     def __init__(self):
         self.service = ArticuloService()

@@ -12,7 +12,7 @@ from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.eliminar_proyecto"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class ProyectoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ProyectoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.eliminar_proyecto"
     form_class = ProyectoForm
 
     def __init__(self):

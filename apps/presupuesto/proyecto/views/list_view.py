@@ -13,7 +13,7 @@ from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.listar_proyecto"
     url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -117,7 +117,7 @@ class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ProyectoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.listar_proyecto"
 
     def __init__(self):
         self.service = ProyectoService()

@@ -11,7 +11,7 @@ from seguridad.vehiculos.services import VehiculoService
 
 
 class VehiculoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.agregar_vehiculo"
     form_class = VehiculoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class VehiculoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class VehiculoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.agregar_vehiculo"
     form_class = VehiculoForm
 
     def __init__(self):

@@ -12,7 +12,7 @@ from ..services import LlamadaService
 
 
 class LlamadaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.editar_llamada"
     form_class = LlamadaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class LlamadaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class LlamadaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.editar_llamada"
     form_class = LlamadaForm
 
     def __init__(self):

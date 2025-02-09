@@ -21,6 +21,13 @@ class Llamada(BaseModel):
     videop = models.CharField(
         max_length=64, verbose_name="Video Protección:", default=""
     )
+    permissions = [
+        ("listar_llamada", "Puede listar llamada"),
+        ("agregar_llamada", "Puede agregar llamada"),
+        ("ver_llamada", "Puede ver llamada"),
+        ("editar_llamada", "Puede actualizar llamada"),
+        ("eliminar_llamada", "Puede eliminar llamada"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

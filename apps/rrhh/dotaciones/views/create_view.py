@@ -11,7 +11,7 @@ from ..services import DotacionService
 
 
 class DotacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.agregar_dotacion"
     form_class = DotacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class DotacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class DotacionCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.agregar_dotacion"
     form_class = DotacionForm
 
     def __init__(self):

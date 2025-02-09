@@ -7,7 +7,7 @@ from templates.sneat import TemplateLayout
 
 
 class PresupuestoView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto_index"
     url_redirect = reverse_lazy("modules:index")
     template_name = "dashborad/index.html"
 

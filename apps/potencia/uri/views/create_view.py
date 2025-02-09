@@ -11,7 +11,7 @@ from potencia.uri.services import UriService
 
 
 class UriCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "potencia.uri.agregar_uri"
     form_class = UriForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class UriCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class UriCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "potencia.uri.agregar_uri"
     form_class = UriForm
 
     def __init__(self):

@@ -11,7 +11,7 @@ from ..services import CuentaService
 
 
 class CuentaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.agregar_cuenta"
     form_class = CuentaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class CuentaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class CuentaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.agregar_cuenta"
     form_class = CuentaForm
 
     def __init__(self):

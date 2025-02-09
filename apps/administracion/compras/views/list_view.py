@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.compras.ver_compra"
     url_redirect = reverse_lazy("administracion")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -66,7 +66,7 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class CompraListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.compras.ver_compra"
 
     def __init__(self):
         self.service = CompraService()

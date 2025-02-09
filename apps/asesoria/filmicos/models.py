@@ -17,6 +17,14 @@ class RegistroFilmico(BaseModel):
     direccion = models.CharField("Dirección", max_length=150, blank=True, null=True)
     fecha_solicitud = models.DateField(blank=True, null=True)
     fecha_culminacion = models.DateField(blank=True, null=True)
+    permissions = [
+        ("listar_registro_filmico", "Puede listar registros filmicos"),
+        ("agregar_registro_filmico", "Puede agregar registro filmico"),
+        ("ver_registro_filmico", "Puede ver registro filmico"),
+        ("editar_registro_filmico", "Puede actualizar registro filmico"),
+        ("eliminar_registro_filmico", "Puede eliminar registro filmico"),
+        ("exel_registro_filmico", "Puede exportar a exel registro filmico"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)
