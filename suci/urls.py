@@ -15,5 +15,6 @@ urlpatterns = [
     path("potencia/", include(("apps.potencia.urls"))),
     path("gestion-humana/", include(("apps.rrhh.urls"))),
     path("seguridad/", include(("apps.seguridad.urls"))),
+    path("tecnologia/", include(("apps.tecnologia.urls"))),
     path("", RedirectView.as_view(url="dashboard", permanent=True)),
 ]
