@@ -1,11 +1,12 @@
 from potencia.uri.models import Uri
 from helpers.FormBase import FormBase
-from django.forms.fields import DateTimeInput
-
-# fecha_atencion = FormBase.create_date_field("fecha_atencion")
+from django import forms
 
 
 class UriForm(FormBase):
+    fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atencion")
+    edad_testigo = forms.IntegerField(label="Edad Testigo", required=False)
+
     class Meta:
         model = Uri
         fields = (
@@ -140,3 +141,23 @@ class UriForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+
+
+# class UriDatosTestigosForm(FormBase):
+#     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atencion")
+
+#     class Meta:
+#         model = Uri
+#         fields = (
+#             "fecha_atencion",
+#             "nroreporte",
+#             "placa",
+#         )
+#         exclude = [
+#             "created_at",
+#             "created_by",
+#             "updated_at",
+#             "updated_by",
+#             "deleted_at",
+#             "deleted_by",
+#         ]

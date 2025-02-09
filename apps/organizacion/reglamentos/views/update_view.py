@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
@@ -9,6 +8,7 @@ from organizacion.reglamentos.forms import ReglamentoForm
 from organizacion.reglamentos.models import Reglamento
 from organizacion.reglamentos.services import ReglamentoService
 from templates.sneat import TemplateLayout
+from django.views.generic import UpdateView
 
 from ..forms import ReglamentoForm
 from ..models import Reglamento

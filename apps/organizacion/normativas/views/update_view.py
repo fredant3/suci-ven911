@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
@@ -9,6 +8,7 @@ from organizacion.normativas.forms import NormativaForm
 from organizacion.normativas.models import Normativa
 from organizacion.normativas.services import NormativaService
 from templates.sneat import TemplateLayout
+from django.views.generic import UpdateView
 
 
 class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
