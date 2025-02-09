@@ -13,7 +13,7 @@ from presupuesto.acciones.services import AccionService
 
 
 class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.listar_accion"
     url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -117,7 +117,7 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class AccionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.listar_accion"
 
     def __init__(self):
         self.service = AccionService()

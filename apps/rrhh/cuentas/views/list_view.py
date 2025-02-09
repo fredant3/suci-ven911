@@ -13,7 +13,7 @@ from ..services import CuentaService
 
 
 class CuentaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.listar_cuenta"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -109,7 +109,7 @@ class CuentaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class CuentaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.listar_cuenta"
 
     def __init__(self):
         self.service = CuentaService()

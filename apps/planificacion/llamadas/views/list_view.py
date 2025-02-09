@@ -13,7 +13,7 @@ from ..services import LlamadaService
 
 
 class LlamadaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.listar_llamadas"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -102,7 +102,7 @@ class LlamadaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class LlamadaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.listar_llamadas"
 
     def __init__(self):
         self.service = LlamadaService()

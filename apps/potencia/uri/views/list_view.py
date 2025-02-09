@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "potencia.uri.listar_uri"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -52,7 +52,7 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class UriListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "potencia.uri.listar_uri"
 
     def __init__(self):
         self.service = UriService()

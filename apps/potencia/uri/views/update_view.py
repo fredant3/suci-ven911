@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class UriUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "potencia.uri.editar_uri"
     form_class = UriForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -36,7 +36,7 @@ class UriUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class UriUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "potencia.uri.editar_uri"
     form_class = UriForm
 
     def __init__(self):

@@ -16,6 +16,14 @@ class Cedente(BaseModel):
     montocc = models.CharField(max_length=64, verbose_name="Monto a ceder")
     saldofc = models.CharField(max_length=64, verbose_name="Saldo final")
     direccionc = models.CharField(max_length=64, verbose_name="Dirección cedente")
+    permissions = [
+        ("listar_cedente", "Puede listar cedente"),
+        ("agregar_cedente", "Puede agregar cedente"),
+        ("ver_cedente", "Puede ver cedente"),
+        ("editar_cedente", "Puede actualizar cedente"),
+        ("eliminar_cedente", "Puede eliminar cedente"),
+        ("pdf_cedente", "Puede generar pdf de cedente"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

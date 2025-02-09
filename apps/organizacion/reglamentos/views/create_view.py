@@ -9,7 +9,7 @@ from templates.sneat import TemplateLayout
 from django.http import JsonResponse
 
 class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.agregar_reglamento"
     form_class = ReglamentoForm
     template_name = "sneat/layout/partials/form/layout_normativas.html"
     success_url = reverse_lazy("reglamentos:list")
@@ -32,7 +32,7 @@ class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         return JsonResponse({"message": "Se ha registrado con éxito."})
 
 class ReglamentoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.agregar_reglamento"
     form_class = ReglamentoForm
 
     def __init__(self):

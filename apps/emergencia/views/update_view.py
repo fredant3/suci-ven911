@@ -12,7 +12,7 @@ from ..services import EmergenciaService
 
 
 class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "emergrncia.actualizar_emergencia"
     form_class = EmergenciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class EmergenciaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "emergrncia.actualizar_emergencia"
     form_class = EmergenciaForm
 
     def __init__(self):

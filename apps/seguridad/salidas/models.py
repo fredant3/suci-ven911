@@ -12,6 +12,13 @@ class Salida(BaseModel):
     direccion = models.CharField(max_length=64, verbose_name="Dirección:", default="")
     cargo = models.CharField(max_length=64, verbose_name="Cargo:", default="")
     hora = models.CharField(max_length=64, verbose_name="Hora de Entrada:", default="")
+    permissions = [
+        ("listar_salidas", "Listar salidas"),
+        ("agregar_salida", "Agregar salida"),
+        ("ver_salida", "Ver salida"),
+        ("modificar_salida", "Modificar salida"),
+        ("eliminar_salida", "Eliminar salida"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

@@ -6,13 +6,13 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import SedeForm
-from ..models import Sede
-from ..services import SedeService
+from administracion.sedes.forms import SedeForm
+from administracion.sedes.models import Sede
+from administracion.sedes.services import SedeService
 
 
 class SedeUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.sedes.editar_sede"
     form_class = SedeForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class SedeUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class SedeUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.sedes.editar_sede"
     form_class = SedeForm
 
     def __init__(self):

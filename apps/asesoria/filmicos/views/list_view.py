@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "asesoria.filmicos.ver_registro_filmico"
     url_redirect = reverse_lazy("asesoría")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -81,7 +81,7 @@ class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
 
 
 class RegistroFilmicoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.filmicos.ver_registro_filmico"
 
     def __init__(self):
         self.service = RegistroFilmicoService()

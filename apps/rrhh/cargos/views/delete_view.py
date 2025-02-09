@@ -12,7 +12,7 @@ from rrhh.cargos.services import CargoService
 
 
 class CargoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.eliminar_cargo"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class CargoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class CargoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.eliminar_cargo"
     form_class = CargoForm
 
     def __init__(self):

@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "potencia.incidencias.listar_incidencias"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -80,7 +80,7 @@ class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class IncidenciaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "potencia.incidencias.listar_incidencias"
 
     def __init__(self):
         self.service = IncidenciaService()

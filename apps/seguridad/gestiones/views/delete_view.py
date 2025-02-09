@@ -12,7 +12,7 @@ from seguridad.gestiones.services import GestionService
 
 
 class GestionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.eliminar_gestion"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class GestionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class GestionDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.eliminar_gestion"
     form_class = GestionForm
 
     def __init__(self):

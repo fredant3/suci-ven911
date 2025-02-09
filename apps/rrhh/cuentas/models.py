@@ -50,6 +50,13 @@ class Cuenta(BaseModel):
     pago_movil = models.BooleanField()
     telefono = models.CharField(max_length=12)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    permissions = [
+        ("listar_cuenta", "Puede listar cuentas"),
+        ("agregar_cuenta", "Puede agregar cuenta"),
+        ("ver_cuenta", "Puede ver cuenta"),
+        ("editar_cuenta", "Puede actualizar cuenta"),
+        ("eliminar_cuenta", "Puede eliminar cuenta"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

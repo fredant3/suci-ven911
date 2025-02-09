@@ -12,7 +12,7 @@ from ..services import EmpleadoService
 
 
 class EmpleadoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.empleados.eliminar_empleado"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class EmpleadoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class EmpleadoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.empleados.eliminar_empleado"
     form_class = EmpleadoForm
 
     def __init__(self):

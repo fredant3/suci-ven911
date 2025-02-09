@@ -11,7 +11,7 @@ from seguridad.entradas.services import EntradaService
 
 
 class EntradaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "seguridad.entradas.agregar_entrada"
     form_class = EntradaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class EntradaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class EntradaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.entradas.agregar_entrada"
     form_class = EntradaForm
 
     def __init__(self):

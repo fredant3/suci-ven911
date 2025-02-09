@@ -10,7 +10,7 @@ from ..services import NormativaService
 from ..models import Normativa
 
 class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "organizacion.normativas.ver_normativa"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/normativas.html"
 
@@ -31,7 +31,7 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         return TemplateLayout.init(self, context)
 
 class NormativaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.normativas.ver_normativa"
 
     def __init__(self):
         self.service = NormativaService()

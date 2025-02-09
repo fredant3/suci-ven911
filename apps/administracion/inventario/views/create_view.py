@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "administracion.inventario.agregar_articulo"
     template_name = "sneat/layout/partials/form/layout.html"
     form_class = ArticuloForm
 
@@ -36,7 +36,7 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ArtiluloCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.inventario.agregar_articulo"
     form_class = ArticuloForm
 
     def __init__(self):

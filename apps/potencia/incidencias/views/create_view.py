@@ -11,7 +11,7 @@ from potencia.incidencias.services import IncidenciaService
 
 
 class IncidenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "potencia.incidencias.agregar_incidencia"
     form_class = IncidenciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class IncidenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class IncidenciaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "potencia.incidencias.agregar_incidencia"
     form_class = IncidenciaForm
 
     def __init__(self):

@@ -13,7 +13,7 @@ from ..services import ContratoService
 
 
 class ContratoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.contratos.listar_contrato"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -109,7 +109,7 @@ class ContratoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ContratoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.contratos.listar_contrato"
 
     def __init__(self):
         self.service = ContratoService()

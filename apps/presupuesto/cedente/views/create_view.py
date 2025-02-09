@@ -11,7 +11,7 @@ from presupuesto.cedente.services import CedenteService
 
 
 class CedenteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.agregar_cedente"
     form_class = CedenteForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class CedenteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class CedenteCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.agregar_cedente"
     form_class = CedenteForm
 
     def __init__(self):

@@ -10,8 +10,9 @@ from organizacion.normativas.models import Normativa
 from organizacion.normativas.services import NormativaService
 from templates.sneat import TemplateLayout
 
-class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, View):
-    permission_required = ""
+
+class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+    permission_required = "organizacion.normativas.editar_normativa"
     form_class = NormativaForm
     template_name = "sneat/layout/partials/form/layout_normativas_editar.html"
     success_url = reverse_lazy("normativas:list")
@@ -43,13 +44,16 @@ class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, View):
         context["titleForm"] = "Actualizar normativa"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("normativas:list")
-        context["urlForm"] = reverse_lazy("api_normativas:update", args=[self.kwargs.get("pk")])
+        context["urlForm"] = reverse_lazy(
+            "api_normativas:update", args=[self.kwargs.get("pk")]
+        )
         context["methodForm"] = "POST"
         context["formu"] = data
         return TemplateLayout.init(self, context)
 
+
 class NormativaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.normativas.editar_normativa"
     form_class = NormativaForm
 
     def __init__(self):

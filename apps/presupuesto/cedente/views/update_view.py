@@ -12,7 +12,7 @@ from presupuesto.cedente.services import CedenteService
 
 
 class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.editar_cedente"
     form_class = CedenteForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class CedenteUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.editar_cedente"
     form_class = CedenteForm
 
     def __init__(self):

@@ -11,7 +11,7 @@ from ..services import ContratoService
 
 
 class ContratoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.contratos.agregar_contrato"
     form_class = ContratoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class ContratoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ContratoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.contratos.agregar_contrato"
     form_class = ContratoForm
 
     def __init__(self):

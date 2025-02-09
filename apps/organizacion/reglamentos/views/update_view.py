@@ -10,8 +10,13 @@ from organizacion.reglamentos.models import Reglamento
 from organizacion.reglamentos.services import ReglamentoService
 from templates.sneat import TemplateLayout
 
-class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, View):
-    permission_required = ""
+from ..forms import ReglamentoForm
+from ..models import Reglamento
+from ..services import ReglamentoService
+
+
+class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+    permission_required = "organizacion.reglamentos.editar_reglamento"
     form_class = ReglamentoForm
     template_name = "sneat/layout/partials/form/layout_reglamentos_editar.html"
     success_url = reverse_lazy("reglamentos:list")
@@ -43,13 +48,16 @@ class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, View):
         context["titleForm"] = "Actualizar reglamento"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("reglamentos:list")
-        context["urlForm"] = reverse_lazy("api_reglamentos:update", args=[self.kwargs.get("pk")])
+        context["urlForm"] = reverse_lazy(
+            "api_reglamentos:update", args=[self.kwargs.get("pk")]
+        )
         context["methodForm"] = "POST"
         context["formu"] = data
         return TemplateLayout.init(self, context)
 
+
 class ReglamentoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.editar_reglamento"
     form_class = ReglamentoForm
 
     def __init__(self):

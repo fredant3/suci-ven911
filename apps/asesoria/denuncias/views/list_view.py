@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.listar_denuncia"
     url_redirect = reverse_lazy("asesoría")
     template_name = "sneat/layout/partials/data-table/layout.html"
 

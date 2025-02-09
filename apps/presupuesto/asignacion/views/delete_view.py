@@ -12,7 +12,7 @@ from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.eliminar_asignacion"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class AsignacionDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.eliminar_asignacion"
     form_class = AsignacionForm
 
     def __init__(self):

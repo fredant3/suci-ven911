@@ -13,7 +13,7 @@ from ..services import DotacionService
 
 
 class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.listar_dotacion"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -109,7 +109,7 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class DotacionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.listar_dotacion"
 
     def __init__(self):
         self.service = DotacionService()

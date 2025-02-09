@@ -12,7 +12,7 @@ from ..services import ContratoService
 
 
 class ContratoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.contratos.editar_contrato"
     form_class = ContratoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class ContratoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ContratoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.contratos.editar_contrato"
     form_class = ContratoForm
 
     def __init__(self):

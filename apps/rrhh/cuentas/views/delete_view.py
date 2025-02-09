@@ -12,7 +12,7 @@ from ..services import CuentaService
 
 
 class CuentaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.eliminar_cuenta"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class CuentaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class CuentaDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.eliminar_cuenta"
     form_class = CuentaForm
 
     def __init__(self):

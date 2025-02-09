@@ -12,7 +12,7 @@ from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.editar_asignacion"
     form_class = AsignacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AsignacionUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.editar_asignacion"
     form_class = AsignacionForm
 
     def __init__(self):

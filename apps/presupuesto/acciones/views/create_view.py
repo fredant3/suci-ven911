@@ -11,7 +11,7 @@ from presupuesto.acciones.services import AccionService
 
 
 class AccionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.agregar_accion"
     form_class = AccionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class AccionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class AccionCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.agregar_accion"
     form_class = AccionForm
 
     def __init__(self):
