@@ -12,11 +12,11 @@ class EmergenciaForm(FormBase):
             "estado",
             "municipio",
             "parroquia",
-            "id_incidencia",
+            "incidencia",
+            "organismo",
             "direccion_incidencia",
-            "id_organismo",
+            "telefono_cuadrante_paz",
             "observaciones",
-            "datecompleted",
         ]
         exclude = [
             "created_at",
