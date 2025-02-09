@@ -6,7 +6,7 @@ class TipoIncidencia(BaseModel):
     nombre_incidencia = models.CharField(max_length=120)
 
     def __str__(self):
-        return self.tipo
+        return self.nombre_incidencia
 
     class Meta:
         permissions = [

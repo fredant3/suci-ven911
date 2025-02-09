@@ -1,5 +1,4 @@
 from helpers.RepositoryMixin import Repository
-
 from emergencia.incidencias.models import TipoIncidencia
 
 

@@ -12,16 +12,16 @@ class EmergenciaService(CrudService):
 
     def search_type_incidences(self, id):
         search = self.repositoryIncidence.getById(id)
-
-        return search["id"] if search is not None else None
+        print(search)
+        return search if search is not None else None
 
     def search_organismo(self, id):
         search = self.repositoryOrganismo.getById(id)
-
-        return search["id"] if search is not None else None
+        print(search)
+        return search if search is not None else None
 
     def relationship(self, payload, *arg, **kwargs):
-        payload["incidencia"] = self.search_type_incidences(kwargs.get("incidencia"))
-        payload["organismo"] = self.search_organismo(kwargs.get("organismo"))
+        payload["incidencia"] = self.search_type_incidences(payload["incidencia"])
+        payload["organismo"] = self.search_organismo(payload["organismo"])
 
         return payload

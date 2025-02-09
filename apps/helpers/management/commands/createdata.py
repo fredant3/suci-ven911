@@ -8,6 +8,7 @@ from helpers.management.commands.seed.administracion._Sede import SedesFaker
 from helpers.management.commands.seed.administracion._Averia import AveriaFake
 from helpers.management.commands.seed.potencia._Incidencias import IncidenciaFake
 from helpers.management.commands.seed.users._UserFaker import UserFaker
+from helpers.management.commands.seed.emergencia._Incidencias import EmergenciaFake
 
 # from helpers.management.commands.seed.rrhh._TipoSueldoFake import TipoSueldoFake
 
@@ -29,6 +30,8 @@ class Command(BaseCommand):
         DepartamentoFaker.add_departamentos(fake)
         IncidenciaFake.tipo_incidencia()
         AveriaFake.tipo_averia()
+        EmergenciaFake.organismo()
+        EmergenciaFake.tipo_incidencia()
 
         # Gestion Humana (RRHH)
         # TipoSueldoFake.tipos_sueldos(fake)
