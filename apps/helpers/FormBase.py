@@ -30,19 +30,19 @@ class FormBase(forms.ModelForm):
                 field.widget.attrs.update({"class": "input__checkbox"})
 
     @staticmethod
-    def create_date_field(field_name):
+    def create_date_field(field_name, title=None):
         return forms.DateField(
             widget=forms.TextInput(attrs={"type": "date"}),
             # input_formats=["%d/%m/%Y"],
             error_messages={"invalid": "Ingrese la fecha en el formato DD/MM/YYYY."},
-            label=field_name.capitalize(),
+            label=title.capitalize() if title is not None else field_name.capitalize(),
         )
 
     @staticmethod
-    def create_time_field(field_name):
+    def create_time_field(field_name, title=None):
         return forms.TimeField(
             widget=forms.TextInput(attrs={"type": "time"}),
             # input_formats=["%H:%M"],
             error_messages={"invalid": "Ingrese la hora en el formato HH:MM."},
-            label=field_name.capitalize(),
+            label=title.capitalize() if title is not None else field_name.capitalize(),
         )
