@@ -189,7 +189,11 @@ class Uri(BaseModel):
     )
     # Informacion Legal
     contacto = models.CharField(
-        "¿Hubo contacto con el paciente?", max_length=9, choices=ESTATUS_CHOICES
+        "¿Hubo contacto con el paciente?",
+        max_length=9,
+        choices=ESTATUS_CHOICES,
+        blank=True,
+        null=True,
     )
 
     # Centro Asistencial Recibido
@@ -200,7 +204,11 @@ class Uri(BaseModel):
 
     # Registro Visuales
     foto = models.CharField(
-        "¿Hubo registro fotografico?", max_length=9, choices=ESTATUS_CHOICES2
+        "¿Hubo registro fotografico?",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )
     # 2)Datos del paciente
     # Datos del paciente
@@ -294,19 +302,31 @@ class Uri(BaseModel):
     eje_evento = models.CharField("Eje", max_length=30, blank=True, null=True)
 
     lugar_atencion = models.CharField(
-        "Lugar de Atención", max_length=9, choices=ESTATUS_CHOICES3
+        "Lugar de Atención",
+        max_length=9,
+        choices=ESTATUS_CHOICES3,
+        blank=True,
+        null=True,
     )
 
     modo_traslado = models.CharField(
-        "Modo de Traslado", max_length=9, choices=ESTATUS_CHOICES4
+        "Modo de Traslado",
+        max_length=9,
+        choices=ESTATUS_CHOICES4,
+        blank=True,
+        null=True,
     )
 
     via_reporte = models.CharField(
-        "Vía del Reporte", max_length=9, choices=ESTATUS_CHOICES5
+        "Vía del Reporte", max_length=9, choices=ESTATUS_CHOICES5, blank=True, null=True
     )
 
     servicio_tipo = models.CharField(
-        "Tipo de Servicio", max_length=9, choices=ESTATUS_CHOICES6
+        "Tipo de Servicio",
+        max_length=9,
+        choices=ESTATUS_CHOICES6,
+        blank=True,
+        null=True,
     )
 
     # Cronologia del Servicio
@@ -331,49 +351,90 @@ class Uri(BaseModel):
     # 5) Informacion Clinica
     # Trauma
     accidenteVehicular = models.CharField(
-        "Accidente Vehicular", max_length=9, choices=ESTATUS_CHOICES2
+        "Accidente Vehicular",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )  # opciones: (colision, volcamiento, Embarracamiento, Choque, Arrollamiento, otro )
     enfrentamientoArmado = models.CharField(
-        "Enfrentamiento Armado", max_length=9, choices=ESTATUS_CHOICES2
+        "Enfrentamiento Armado",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )  # si es si, activar opciones "Tipo de Arma" (Blanca, Fuego, Biologica, Quimica, Otro)
     # tipoArma=models.ForeignKey(Tipo_arma, on_delete=models.CASCADE, blank=True, null=True)
     traumaVehiculo = models.CharField(
-        "Trauma con Vehiculo", max_length=9, choices=ESTATUS_CHOICES2
+        "Trauma con Vehiculo",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )  # si es si, activar opciones "Tipo de Vehiculo" (Automovil/Carro, Moto, Maquinaria, Otro)
-    viajaba = models.CharField("Viajaba como", max_length=9, choices=ESTATUS_CHOICES7)
+    viajaba = models.CharField(
+        "Viajaba como", max_length=9, choices=ESTATUS_CHOICES7, blank=True, null=True
+    )
     sustanciaPeligrosa = models.CharField(
-        "Sustancia Peligrosa", max_length=9, choices=ESTATUS_CHOICES2
+        "Sustancia Peligrosa",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )  # si es si, activar opcion si es inflamable o explosivo)
     # inflamable = models.BooleanField()
     # explosivo = models.BooleanField()
     observacionesSustancia = models.CharField(
-        "Observaciones de la sustancia", max_length=100, blank=True, null=True
+        "Observaciones de la sustancia",
+        max_length=100,
+        blank=True,
+        null=True,
     )
     traumaNoIntencional = models.CharField(
-        "Trauma no Intencional", max_length=9, choices=ESTATUS_CHOICES8
+        "Trauma no Intencional",
+        max_length=9,
+        choices=ESTATUS_CHOICES8,
+        blank=True,
+        null=True,
     )
     emergenciaMedica = models.CharField(
-        "Emergencias Médicas no Traumáticas", max_length=9, choices=ESTATUS_CHOICES9
+        "Emergencias Médicas no Traumáticas",
+        max_length=9,
+        choices=ESTATUS_CHOICES9,
+        blank=True,
+        null=True,
     )
 
     # Evaluacion Inicial + Intervenciones criticas
 
-    hemorragia = models.CharField("Hemorragias", max_length=9, choices=ESTATUS_CHOICES2)
+    hemorragia = models.CharField(
+        "Hemorragias", max_length=9, choices=ESTATUS_CHOICES2, blank=True, null=True
+    )
     presion = models.CharField(
-        "Presión Directa", max_length=9, choices=ESTATUS_CHOICES2
+        "Presión Directa", max_length=9, choices=ESTATUS_CHOICES2, blank=True, null=True
     )
     empaquetado = models.CharField(
-        "Empaquetado de la Herida", max_length=9, choices=ESTATUS_CHOICES2
+        "Empaquetado de la Herida",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )
-    torniquete = models.CharField("Torniquete", max_length=9, choices=ESTATUS_CHOICES2)
+    torniquete = models.CharField(
+        "Torniquete", max_length=9, choices=ESTATUS_CHOICES2, blank=True, null=True
+    )
 
     # Via aerea o control cervical
 
-    evaluacion = models.CharField("Evaluación", max_length=9, choices=ESTATUS_CHOICES10)
-    intervencion = models.CharField(
-        "Intervenciones", max_length=9, choices=ESTATUS_CHOICES11
+    evaluacion = models.CharField(
+        "Evaluación", max_length=9, choices=ESTATUS_CHOICES10, blank=True, null=True
     )
-    resultado = models.CharField("Resultados", max_length=9, choices=ESTATUS_CHOICES12)
+    intervencion = models.CharField(
+        "Intervenciones", max_length=9, choices=ESTATUS_CHOICES11, blank=True, null=True
+    )
+    resultado = models.CharField(
+        "Resultados", max_length=9, choices=ESTATUS_CHOICES12, blank=True, null=True
+    )
     descripcion_adic = models.CharField(
         "Descripción Adicional", max_length=100, blank=True, null=True
     )
@@ -383,13 +444,13 @@ class Uri(BaseModel):
     # Respiracion y Oxigenacion
 
     evaluacionResp = models.CharField(
-        "Evaluación", max_length=20, choices=ESTATUS_CHOICES13
+        "Evaluación", max_length=20, choices=ESTATUS_CHOICES13, blank=True, null=True
     )
     intervencionResp = models.CharField(
-        "Intervención", max_length=20, choices=ESTATUS_CHOICES14
+        "Intervención", max_length=20, choices=ESTATUS_CHOICES14, blank=True, null=True
     )
     resultadoResp = models.CharField(
-        "Resultado", max_length=20, choices=ESTATUS_CHOICES15
+        "Resultado", max_length=20, choices=ESTATUS_CHOICES15, blank=True, null=True
     )
     descripcion_adic_resp = models.CharField(
         "Descripción Adicional", max_length=100, blank=True, null=True
@@ -397,21 +458,45 @@ class Uri(BaseModel):
 
     # Circulacion
     colorPiel = models.CharField(
-        "Color de la Piel", max_length=9, choices=ESTATUS_CHOICES16
+        "Color de la Piel",
+        max_length=9,
+        choices=ESTATUS_CHOICES16,
+        blank=True,
+        null=True,
     )
     temperaturaPiel = models.CharField(
-        "Temperatura de la Piel", max_length=9, choices=ESTATUS_CHOICES17
+        "Temperatura de la Piel",
+        max_length=9,
+        choices=ESTATUS_CHOICES17,
+        blank=True,
+        null=True,
     )
     humedadPiel = models.CharField(
-        "Humedad de la Piel", max_length=9, choices=ESTATUS_CHOICES18
+        "Humedad de la Piel",
+        max_length=9,
+        choices=ESTATUS_CHOICES18,
+        blank=True,
+        null=True,
     )
-    pulso = models.CharField("Pulsos distales", max_length=9, choices=ESTATUS_CHOICES2)
+    pulso = models.CharField(
+        "Pulsos distales", max_length=9, choices=ESTATUS_CHOICES2, blank=True, null=True
+    )
     otrasHerida = models.CharField(
-        "Otras hemorro/heridas", max_length=9, choices=ESTATUS_CHOICES2
+        "Otras hemorro/heridas",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )
-    fractura = models.CharField("Fracturas", max_length=9, choices=ESTATUS_CHOICES2)
+    fractura = models.CharField(
+        "Fracturas", max_length=9, choices=ESTATUS_CHOICES2, blank=True, null=True
+    )
     maniobraPelvis = models.CharField(
-        "Maniobra de Pelvis", max_length=9, choices=ESTATUS_CHOICES2
+        "Maniobra de Pelvis",
+        max_length=9,
+        choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )
 
     # Deficit Neurologico
@@ -420,12 +505,16 @@ class Uri(BaseModel):
     ecgM = models.IntegerField(blank=True, null=True)
     ecgTotal = models.IntegerField(blank=True, null=True)
     reaccionPupilar = models.CharField(
-        "Reacción Pupilar", max_length=9, choices=ESTATUS_CHOICES19
+        "Reacción Pupilar",
+        max_length=9,
+        choices=ESTATUS_CHOICES19,
+        blank=True,
+        null=True,
     )
 
     # Exposicion
     hipotermia = models.CharField(
-        "Hipotermia", max_length=9, choices=ESTATUS_CHOICES2
+        "Hipotermia", max_length=9, choices=ESTATUS_CHOICES2, blank=True, null=True
     )  # Opciones si es positivo (Menta Termica, Admini de liq tibios EV, otras lesiones)
     signosSintomas = models.CharField(
         "Signos y Sintomas", max_length=100, blank=True, null=True
@@ -486,6 +575,8 @@ class Uri(BaseModel):
         "¿El paciente fue referido del centro asistencial al que fue trasladado inicialmente?",
         max_length=9,
         choices=ESTATUS_CHOICES2,
+        blank=True,
+        null=True,
     )
     hospitalOrigen = models.CharField(
         "Hospital Origen", max_length=100, blank=True, null=True
