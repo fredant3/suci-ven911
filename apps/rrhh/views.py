@@ -7,7 +7,7 @@ from templates.sneat import TemplateLayout
 
 
 class GestionHumanaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "gestion_humana_index"
     url_redirect = reverse_lazy("modules:index")
     template_name = "widzard/index.html"
 

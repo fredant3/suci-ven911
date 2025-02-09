@@ -13,7 +13,7 @@ from seguridad.gestiones.services import GestionService
 
 
 class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.listar_gestion"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -109,7 +109,7 @@ class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class GestionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.listar_gestion"
 
     def __init__(self):
         self.service = GestionService()

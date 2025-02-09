@@ -11,7 +11,7 @@ from rrhh.cargos.services import CargoService
 
 
 class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.agregar_cargo"
     form_class = CargoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class CargoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.agregar_cargo"
     form_class = CargoForm
 
     def __init__(self):

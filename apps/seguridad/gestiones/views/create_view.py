@@ -11,7 +11,7 @@ from seguridad.gestiones.services import GestionService
 
 
 class GestionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.agregar_gestion"
     form_class = GestionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class GestionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class GestionCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.agregar_gestion"
     form_class = GestionForm
 
     def __init__(self):

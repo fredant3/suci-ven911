@@ -12,7 +12,7 @@ from ..services import CuentaService
 
 
 class CuentaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.editar_cuenta"
     form_class = CuentaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class CuentaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class CuentaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cuentas.editar_cuenta"
     form_class = CuentaForm
 
     def __init__(self):

@@ -11,7 +11,7 @@ from ..services import SueldoService
 
 
 class SueldoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.sueldos.agregar_sueldo"
     form_class = SueldoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class SueldoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class SueldoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.sueldos.eliminar_sueldo"
     form_class = SueldoForm
 
     def __init__(self):

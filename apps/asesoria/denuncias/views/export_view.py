@@ -7,13 +7,10 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-from django.db.models import F, Value
-from django.db.models.functions import Concat
-from django.http import JsonResponse
 
 
 class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.exel_denuncia"
 
     def get(self, request, *args, **kwargs):
         denuncias = Denuncia.objects.all().values(

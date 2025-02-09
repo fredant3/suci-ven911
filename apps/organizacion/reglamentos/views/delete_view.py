@@ -6,10 +6,12 @@ from helpers.ControllerMixin import DeleteController
 from organizacion.reglamentos.forms import ReglamentoForm
 from organizacion.reglamentos.models import Reglamento
 from organizacion.reglamentos.services import ReglamentoService
+
 from templates.sneat import TemplateLayout
 
+
 class ReglamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.eliminar_reglamento"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -32,7 +34,7 @@ class ReglamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ReglamentoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.eliminar_reglamento"
     form_class = ReglamentoForm
 
     def __init__(self):

@@ -13,7 +13,7 @@ from ..services import FamiliarService
 
 
 class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.familiares.listar_familiar"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -109,7 +109,7 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class FamiliarListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.familiares.editar_familiar"
 
     def __init__(self):
         self.service = FamiliarService()

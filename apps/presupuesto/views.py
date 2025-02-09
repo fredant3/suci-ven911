@@ -2,10 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
+
 from templates.sneat import TemplateLayout
 
+
 class PresupuestoView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto_index"
     url_redirect = reverse_lazy("modules:index")
     template_name = "dashborad/index.html"
 

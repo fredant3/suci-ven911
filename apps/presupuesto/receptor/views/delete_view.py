@@ -12,7 +12,7 @@ from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.eliminar_receptor"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class ReceptorDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ReceptorDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.eliminar_receptor"
     form_class = ReceptorForm
 
     def __init__(self):

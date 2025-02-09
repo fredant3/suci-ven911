@@ -12,7 +12,7 @@ from ..services import InfraestructuraService
 
 
 class InfraestructuraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.editar_infraestructura"
     form_class = InfraestructuraForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class InfraestructuraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateVi
 
 
 class InfraestructuraUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.editar_infraestructura"
     form_class = InfraestructuraForm
 
     def __init__(self):

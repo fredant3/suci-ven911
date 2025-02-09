@@ -12,7 +12,7 @@ from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.editar_receptor"
     form_class = ReceptorForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class ReceptorUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ReceptorUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.editar_receptor"
     form_class = ReceptorForm
 
     def __init__(self):

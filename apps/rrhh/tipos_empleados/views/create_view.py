@@ -11,7 +11,7 @@ from ..services import TipoEmpleadoService
 
 
 class TipoEmpleadoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.tipos_empleados.agregar_tipo_empleado"
     form_class = TipoEmpleadoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class TipoEmpleadoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView)
 
 
 class TipoEmpleadoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.tipos_empleados.agregar_tipo_empleado"
     form_class = TipoEmpleadoForm
 
     def __init__(self):

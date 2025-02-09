@@ -22,6 +22,14 @@ class Proyecto(BaseModel):
         max_length=64, verbose_name="Responsable Administrativo:"
     )
     estatus = models.CharField(max_length=64, verbose_name="Estatus del Proyecto:")
+    permissions = [
+        ("listar_proyecto", "Puede listar proyectos"),
+        ("agregar_proyecto", "Puede agregar proyecto"),
+        ("ver_proyecto", "Puede ver proyecto"),
+        ("editar_proyecto", "Puede actualizar proyecto"),
+        ("eliminar_proyecto", "Puede eliminar proyecto"),
+        ("pdf_proyecto", "Puede generar pdf de proyecto"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

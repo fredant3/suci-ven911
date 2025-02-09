@@ -13,7 +13,7 @@ from seguridad.vehiculos.services import VehiculoService
 
 
 class VehiculoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.listar_vehiculo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -123,7 +123,7 @@ class VehiculoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class VehiculoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.listar_vehiculo"
 
     def __init__(self):
         self.service = VehiculoService()

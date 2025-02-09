@@ -13,7 +13,7 @@ from ..services import EmergenciaService
 
 
 class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "emergrncia.ver_emergencia"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -67,7 +67,7 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class EmergenciaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "emergrncia.ver_emergencia"
 
     def __init__(self):
         self.service = EmergenciaService()

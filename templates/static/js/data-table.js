@@ -1,4 +1,6 @@
-const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
+const setTBody = ({ url, columns, withActions, updateUrl, deleteUrl }) => {
+  withActions = withActions ?? 'True';
+
   $("#data-table").DataTable({
     resposive: true,
     autoWidth: false,
@@ -16,8 +18,8 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
       // accepts: "application/json; charset=utf-8",
     },
     // columns: columns,
-    columns: getColumns(columns),
-    columnDefs: getcolumnDefs(updateUrl, deleteUrl),
+    columns: getColumns(withActions, columns),
+    columnDefs: getcolumnDefs(withActions, updateUrl, deleteUrl),
     initComplete: function (settings, json) {
       // console.info('Datos cargados.', { settings, json })
     },
@@ -25,7 +27,9 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
   });
 };
 
-function getcolumnDefs (updateUrl, deleteUrl) {
+function getcolumnDefs (withActions, updateUrl, deleteUrl) {
+  if (withActions == 'False') return;
+
   if (updateUrl && deleteUrl) {
     return [
       {
@@ -46,11 +50,12 @@ function getcolumnDefs (updateUrl, deleteUrl) {
   return []
 }
 
-function getColumns (stringColumns) {
+function getColumns (withActions, stringColumns) {
   if (typeof stringColumns === "string")
     stringColumns = stringColumns.split("|").map((item) => ({ data: item }));
 
-  stringColumns.push({ data: "" });
+  if (withActions == 'True') stringColumns.push({ data: "" });
+
   return stringColumns;
 }
 

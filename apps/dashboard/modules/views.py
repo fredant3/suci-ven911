@@ -23,7 +23,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Gestión Humana (Pendiente)",
-                "url": "gestion_humana",
+                "url": "tipos_sueldos:list",
                 "image": "img/modules/gestion_humana.png",
             },
             {
@@ -33,7 +33,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Unidad de Respuesta Inmediata (Pendiente)",
-                "url": "asesoria",
+                "url": "uri:list",
                 "image": "img/modules/ambulancia.png",
             },
             {
@@ -47,7 +47,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/organizacion.png",
             },
             {
-                "title": "Presupuesto",
+                "title": "Presupuestos",
                 "url": "presupuesto",
                 "image": "img/modules/presupuesto.png",
             },

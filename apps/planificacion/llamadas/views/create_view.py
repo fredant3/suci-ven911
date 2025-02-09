@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class LlamadaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.agregar_llamada"
     form_class = LlamadaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class LlamadaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class LlamadaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.agregar_llamada"
     form_class = LlamadaForm
 
     def __init__(self):

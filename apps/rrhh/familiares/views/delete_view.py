@@ -12,7 +12,7 @@ from ..services import FamiliarService
 
 
 class FamiliarDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.familiares.eliminar_familiar"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class FamiliarDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class FamiliarDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.familiares.editar_familiar"
     form_class = FamiliarForm
 
     def __init__(self):

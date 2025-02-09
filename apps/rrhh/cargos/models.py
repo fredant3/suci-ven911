@@ -13,6 +13,13 @@ ESTATUS_CHOICES = (
 class Cargo(BaseModel):
     cargo = models.CharField(max_length=60)
     estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
+    permissions = [
+        ("listar_cargo", "Puede listar cargos"),
+        ("agregar_cargo", "Puede agregar cargo"),
+        ("ver_cargo", "Puede ver cargo"),
+        ("editar_cargo", "Puede actualizar cargo"),
+        ("eliminar_cargo", "Puede eliminar cargo"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

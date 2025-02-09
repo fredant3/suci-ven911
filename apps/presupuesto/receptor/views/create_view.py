@@ -11,7 +11,7 @@ from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.agregar_receptor"
     form_class = ReceptorForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -30,7 +30,7 @@ class ReceptorCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ReceptorCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.agregar_receptor"
     form_class = ReceptorForm
 
     def __init__(self):

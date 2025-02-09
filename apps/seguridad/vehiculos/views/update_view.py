@@ -12,7 +12,7 @@ from seguridad.vehiculos.services import VehiculoService
 
 
 class VehiculoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.editar_vehiculo"
     form_class = VehiculoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class VehiculoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class VehiculoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.vehiculos.editar_vehiculo"
     form_class = VehiculoForm
 
     def __init__(self):

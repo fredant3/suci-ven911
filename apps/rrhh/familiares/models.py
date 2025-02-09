@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
 from helpers.models import ESTADO_CIVIL_CHOICES, GENERO_CHOICES
 from rrhh.empleados.models import Empleado
 
@@ -23,7 +23,7 @@ class Familiar(BaseModel):
     tipo_hijo = models.CharField(
         max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
-    discapacidad = models.BooleanField(default=False)
+    discapacidad = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
     nombres = models.CharField(max_length=90)
     apellidos = models.CharField(max_length=90)
     cedula = models.IntegerField(null=True, blank=True)
@@ -32,6 +32,13 @@ class Familiar(BaseModel):
     estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     observacion = models.CharField(max_length=150, blank=True, null=True)
+    permissions = [
+        ("listar_familiares", "Listar familiares"),
+        ("agregar_familiar", "Agregar familiares"),
+        ("ver_familiar", "Ver familiares"),
+        ("modificar_familiar", "Modificar familiares"),
+        ("eliminar_familiar", "Eliminar familiares"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

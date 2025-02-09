@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
 
 
 tipo_considcion = (("N", "Nuevo"), ("U", "Usado"), ("D", "Deteriorado"))
@@ -50,7 +50,7 @@ class Articulo(BaseModel):
     tipo_articulo = models.ForeignKey(TipoArticulo, on_delete=models.CASCADE)
     condicion = models.CharField(max_length=1, choices=tipo_considcion)
     fecha_adq = models.DateField()
-    asignado = models.BooleanField(default=False)
+    asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
 
     def __str__(self):
         return self.descripcion + " - " + str(self.marca) + " - " + str(self.modelo)

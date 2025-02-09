@@ -12,7 +12,7 @@ from ..services import DotacionService
 
 
 class DotacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.editar_dotacion"
     form_class = DotacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class DotacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class DotacionUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.dotaciones.editar_dotacion"
     form_class = DotacionForm
 
     def __init__(self):

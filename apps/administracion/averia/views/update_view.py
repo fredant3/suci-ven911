@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class AveriaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.averia.editar_averia"
     form_class = AveriaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -36,7 +36,7 @@ class AveriaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AveriaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.averia.eliminar_averia"
     form_class = AveriaForm
 
     def __init__(self):

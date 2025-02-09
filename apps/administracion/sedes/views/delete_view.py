@@ -6,13 +6,13 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import SedeForm
-from ..models import Sede
-from ..services import SedeService
+from administracion.sedes.forms import SedeForm
+from administracion.sedes.models import Sede
+from administracion.sedes.services import SedeService
 
 
 class SedeDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "administracion.sedes.eliminar_sede"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class SedeDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class SedeDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.sedes.eliminar_sede"
     form_class = SedeForm
 
     def __init__(self):

@@ -12,7 +12,7 @@ from presupuesto.cedente.services import CedenteService
 
 
 class CedenteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.eliminar_cedente"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class CedenteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class CedenteDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.eliminar_cedente"
     form_class = CedenteForm
 
     def __init__(self):

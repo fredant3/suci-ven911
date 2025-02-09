@@ -25,6 +25,13 @@ class Emergencia(BaseModel):
     observaciones = models.TextField(blank=True)
     # Localizacion_sede soon
     datecompleted = models.DateTimeField(null=True, blank=True)
+    permissions = [
+        ("listar_emergencia", "Puede listar emergencias"),
+        ("agregar_emergencia", "Puede agregar emergencia"),
+        ("ver_emergencia", "Puede ver emergencia"),
+        ("editar_emergencia", "Puede actualizar emergencia"),
+        ("eliminar_emergencia", "Puede eliminar emergencia"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)

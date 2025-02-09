@@ -13,7 +13,7 @@ from ..services import ObjetivoService
 
 
 class ObjetivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.objetivos.listar_objetivos"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -74,7 +74,7 @@ class ObjetivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ObjetivoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.objetivos.listar_objetivos"
 
     def __init__(self):
         self.service = ObjetivoService()

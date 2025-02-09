@@ -13,7 +13,7 @@ from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.listar_asignacion"
     url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -75,7 +75,7 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class AsignacionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.listar_asignacion"
 
     def __init__(self):
         self.service = AsignacionService()

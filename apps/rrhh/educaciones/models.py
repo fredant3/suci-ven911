@@ -13,6 +13,13 @@ class Educacion(BaseModel):
     fecha_culminacion = models.DateField()
     enlace_certificado = models.CharField(max_length=120, null=True, blank=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    permissions = [
+        ("listar_educacion", "Puede listar educacion"),
+        ("agregar_educacion", "Puede agregar educacion"),
+        ("ver_educacion", "Puede ver educacion"),
+        ("editar_educacion", "Puede actualizar educacion"),
+        ("eliminar_educacion", "Puede eliminar educacion"),
+    ]
 
     def toJSON(self):
         return model_to_dict(self)
