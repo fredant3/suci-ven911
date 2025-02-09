@@ -12,13 +12,15 @@ class Infraestructura(BaseModel):
         max_length=64, verbose_name="Infraestrutuctura:", default=""
     )
     cantidad = models.CharField(max_length=64, verbose_name="Cantidad:", default="")
-    permissions = [
-        ("listar_infraestructura", "Puede listar infraestructura"),
-        ("agregar_infraestructura", "Puede agregar infraestructura"),
-        ("ver_infraestructura", "Puede ver infraestructura"),
-        ("editar_infraestructura", "Puede actualizar infraestructura"),
-        ("eliminar_infraestructura", "Puede eliminar infraestructura"),
-    ]
+
+    class Meta:
+        permissions = [
+            ("listar_infraestructura", "Puede listar infraestructura"),
+            ("agregar_infraestructura", "Puede agregar infraestructura"),
+            ("ver_infraestructura", "Puede ver infraestructura"),
+            ("editar_infraestructura", "Puede actualizar infraestructura"),
+            ("eliminar_infraestructura", "Puede eliminar infraestructura"),
+        ]
 
     def toJSON(self):
         return model_to_dict(self)

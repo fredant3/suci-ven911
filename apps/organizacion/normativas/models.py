@@ -10,13 +10,15 @@ class Normativa(BaseModel):
     date = models.DateField("Fecha", blank=True)
     progre = models.CharField("Progreso", max_length=64)
     estado = models.CharField(max_length=8, choices=ESTATUS_CHOICES, default="inactivo")
-    permissions = [
-        ("listar_normativa", "Puede listar normativas"),
-        ("agregar_normativa", "Puede agregar normativa"),
-        ("ver_normativa", "Puede ver normativa"),
-        ("editar_normativa", "Puede actualizar normativa"),
-        ("eliminar_normativa", "Puede eliminar normativa"),
-    ]
+
+    class Meeta:
+        permissions = [
+            ("listar_normativa", "Puede listar normativas"),
+            ("agregar_normativa", "Puede agregar normativa"),
+            ("ver_normativa", "Puede ver normativa"),
+            ("editar_normativa", "Puede actualizar normativa"),
+            ("eliminar_normativa", "Puede eliminar normativa"),
+        ]
 
     def toJSON(self):
         return model_to_dict(self)

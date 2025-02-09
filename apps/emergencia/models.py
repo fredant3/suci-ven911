@@ -19,13 +19,15 @@ class Emergencia(BaseModel):
     observaciones = models.TextField(blank=True)
     # Localizacion_sede soon
     telefono_cuadrante_paz = models.CharField(max_length=20, blank=True)
-    permissions = [
-        ("listar_emergencia", "Puede listar emergencias"),
-        ("agregar_emergencia", "Puede agregar emergencia"),
-        ("ver_emergencia", "Puede ver emergencia"),
-        ("editar_emergencia", "Puede actualizar emergencia"),
-        ("eliminar_emergencia", "Puede eliminar emergencia"),
-    ]
+
+    class Meta:
+        permissions = [
+            ("listar_emergencia", "Puede listar emergencias"),
+            ("agregar_emergencia", "Puede agregar emergencia"),
+            ("ver_emergencia", "Puede ver emergencia"),
+            ("editar_emergencia", "Puede actualizar emergencia"),
+            ("eliminar_emergencia", "Puede eliminar emergencia"),
+        ]
 
     def toJSON(self):
         return model_to_dict(self)
