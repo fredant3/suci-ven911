@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import FamiliarRepository
+from rrhh.familiares.repositories import FamiliarRepository
 
 
 class FamiliarService(CrudService):

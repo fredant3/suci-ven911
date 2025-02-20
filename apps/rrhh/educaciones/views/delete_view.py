@@ -6,13 +6,13 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ContratoForm
-from ..models import Contrato
-from ..services import ContratoService
+from rrhh.educaciones.forms import EducacionForm
+from rrhh.educaciones.models import Educacion
+from rrhh.educaciones.services import EducacionService
 
 
-class ContratoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = "rrhh.contratos.eliminar_contrato"
+class EducacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
+    permission_required = "rrhh.educacion.eliminar_educacion"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -20,23 +20,23 @@ class ContratoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Gestión Huamana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Huamana"
-        context["submodule"] = "Contratos"
-        context["titleForm"] = "Eliminar contrato"
+        context["submodule"] = "Educacion"
+        context["titleForm"] = "Eliminar educación"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("contratos:list")
+        context["listUrl"] = reverse_lazy("educaciones:list")
         context["urlDelete"] = reverse_lazy(
-            "api_contratos:delete", args=[self.kwargs.get("pk")]
+            "api_educacion:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Contrato.objects.filter(pk=id)
+        return Educacion.objects.filter(pk=id)
 
 
-class ContratoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = "rrhh.contratos.eliminar_contrato"
-    form_class = ContratoForm
+class EducacionDeleteApiView(DeleteController, CheckPermisosMixin):
+    permission_required = "rrhh.educacion.eliminar_educacion"
+    form_class = EducacionForm
 
     def __init__(self):
-        self.service = ContratoService()
+        self.service = EducacionService()

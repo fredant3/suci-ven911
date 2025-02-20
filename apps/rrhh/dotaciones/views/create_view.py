@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import DotacionForm
-from ..services import DotacionService
+from rrhh.dotaciones.forms import DotacionForm
+from rrhh.dotaciones.services import DotacionService
 
 
 class DotacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -17,10 +17,10 @@ class DotacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Dotacions"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
+        context["submodule"] = "Dotaciones"
         context["titleForm"] = "Añadir una dotacion nueva"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("dotaciones:list")

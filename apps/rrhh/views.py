@@ -9,25 +9,23 @@ from templates.sneat import TemplateLayout
 class GestionHumanaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "gestion_humana_index"
     url_redirect = reverse_lazy("modules:index")
-    template_name = "widzard/index.html"
+    template_name = "dashborad/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestion Humana"
-        context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestion Humana"
-        context["submodule"] = "Cargos"
-        context["titleForm"] = "Añadir una cargo nueva"
-        context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("cargos:list")
-        context["urlForm"] = reverse_lazy("api_cargos:create")
-        context["methodForm"] = "POST"
-        return TemplateLayout.init(self, context)
-
-        context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestion Humana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Gestion Humana"
-        context["submodule"] = "Dashboard Gestion Humana"
-
+        context["module"] = "Gestión Humana"
+        context["submodule"] = "Dashboard Gestión Humana"
+        context["submoduleList"] = (
+            ("Empleados", reverse_lazy("empleados:list")),
+            ("Tipos de Empleados", reverse_lazy("tipos_empleados:list")),
+            ("Cargos", reverse_lazy("cargos:list")),
+            ("Tipos de Sueldos", reverse_lazy("tipos_sueldos:list")),
+            # ("Sueldos", reverse_lazy("sueldos:list")),
+            ("Cuentas", reverse_lazy("cuentas:list")),
+            ("Dotaciones", reverse_lazy("dotaciones:list")),
+            ("Educación", reverse_lazy("educaciones:list")),
+            ("Familiar", reverse_lazy("familiares:list")),
+        )
         return TemplateLayout.init(self, context)

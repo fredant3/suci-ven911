@@ -9,26 +9,26 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from rrhh.tipos_sueldos.services import TipoSueldoService
+from rrhh.educaciones.services import EducacionService
 
 
-class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "rrhh.tipos_sueldos.listar_tipo_sueldo"
+class EducacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+    permission_required = "rrhh.educacion.listar_educacion"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Humana"
+        context["titlePage"] = "Gestión Huamana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestión Humana"
-        context["submodule"] = "Tipos de Sueldos"
+        context["module"] = "Gestión Huamana"
+        context["submodule"] = "Educacion"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("tipos_sueldos:create")
-        context["listApiUrl"] = reverse_lazy("api_tipos_sueldos:list")
-        context["updateUrl"] = reverse_lazy("tipos_sueldos:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("tipos_sueldos:delete", args=[0])
+        context["createUrl"] = reverse_lazy("educaciones:create")
+        context["listApiUrl"] = reverse_lazy("api_educaciones:list")
+        context["updateUrl"] = reverse_lazy("educaciones:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("educaciones:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -43,31 +43,38 @@ class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo",
+                "data": "colegio",
+                "name": "colegio",
+                "title": "Colegio",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "monto",
-                "name": "monto",
-                "title": "Monto",
+                "data": "codigo_titulo",
+                "name": "codigo_titulo",
+                "title": "Código ",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
+                "data": "area_conocimiento",
+                "name": "area_conocimiento",
+                "title": "Área de Conocimiento",
                 "orderable": "false",
                 "searchable": "false",
+            },
+            {
+                "data": "empleado",
+                "name": "empleado",
+                "title": "Empleado",
+                "orderable": "false",
+                "searchable": "true",
             },
         ]
 
 
-class TipoSueldoListApiView(ListController, CheckPermisosMixin):
-    permission_required = "rrhh.tipos_sueldos.listar_tipo_sueldo"
+class EducacionListApiView(ListController, CheckPermisosMixin):
+    permission_required = "rrhh.educacion.listar_educacion"
 
     def __init__(self):
-        self.service = TipoSueldoService()
+        self.service = EducacionService()

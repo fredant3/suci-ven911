@@ -6,9 +6,9 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import TipoEmpleadoForm
-from ..models import TipoEmpleado
-from ..services import TipoEmpleadoService
+from rrhh.tipos_empleados.forms import TipoEmpleadoForm
+from rrhh.tipos_empleados.models import TipoEmpleado
+from rrhh.tipos_empleados.services import TipoEmpleadoService
 
 
 class TipoEmpleadoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
@@ -17,9 +17,9 @@ class TipoEmpleadoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Tipos de Empleados"
         context["titleForm"] = "Eliminar tipo de empleado"
         context["tag"] = "Eliminar"

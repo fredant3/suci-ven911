@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import FamiliarService
+from rrhh.familiares.services import FamiliarService
 
 
 class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,10 +20,10 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Familiars"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
+        context["submodule"] = "Familiar"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("familiares:create")
         context["listApiUrl"] = reverse_lazy("api_familiares:list")
@@ -71,37 +71,9 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "descripcion",
                 "name": "descripcion",
                 "title": "Descripción",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
                 "orderable": "false",
                 "searchable": "false",
             },

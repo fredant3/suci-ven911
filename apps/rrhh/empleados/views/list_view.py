@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import EmpleadoService
+from rrhh.empleados.services import EmpleadoService
 
 
 class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,9 +20,9 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Empleados"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("empleados:create")

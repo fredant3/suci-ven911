@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Cuenta
+from rrhh.cuentas.models import Cuenta
 from helpers.FormBase import FormBase
 
 
@@ -8,14 +8,11 @@ class CuentaForm(FormBase):
     class Meta:
         model = Cuenta
         fields = (
-            "colegio",
-            "codigo_titulo",
-            "titulo",
-            "area_conocimiento",
-            "fecha_inicio",
-            "fecha_culminacion",
-            "enlace_certificado",
-            "personal",
+            "banco",
+            "tipo",
+            "pago_movil",
+            "telefono",
+            "empleado",
         )
         exclude = [
             "created_at",

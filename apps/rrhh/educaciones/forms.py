@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Educacion
+from rrhh.educaciones.models import Educacion
 from helpers.FormBase import FormBase
 
 
@@ -15,7 +15,7 @@ class EducacionForm(FormBase):
             "fecha_inicio",
             "fecha_culminacion",
             "enlace_certificado",
-            "personal",
+            "empleado",
         )
         exclude = [
             "created_at",

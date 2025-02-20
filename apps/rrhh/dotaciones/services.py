@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import DotacionRepository
+from rrhh.dotaciones.repositories import DotacionRepository
 
 
 class DotacionService(CrudService):

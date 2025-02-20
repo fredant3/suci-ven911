@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Familiar
+from rrhh.familiares.models import Familiar
 from helpers.FormBase import FormBase
 
 
@@ -8,10 +8,17 @@ class FamiliarForm(FormBase):
     class Meta:
         model = Familiar
         fields = (
-            "camisa",
-            "pantalon",
-            "zapato",
-            "personal",
+            "parentezco",
+            "tipo_hijo",
+            "discapacidad",
+            "nombres",
+            "apellidos",
+            "cedula",
+            "fecha_nacimiento",
+            "sexo",
+            "estado_civil",
+            "empleado",
+            "observacion",
         )
         exclude = [
             "created_at",

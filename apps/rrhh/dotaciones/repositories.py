@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Dotacion
+from rrhh.dotaciones.models import Dotacion
 
 
 class DotacionRepository(Repository):

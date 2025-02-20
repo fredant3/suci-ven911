@@ -6,14 +6,14 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from rrhh.cuentas.forms import CuentaForm
-from rrhh.cuentas.models import Cuenta
-from rrhh.cuentas.services import CuentaService
+from rrhh.educaciones.forms import EducacionForm
+from rrhh.educaciones.models import Educacion
+from rrhh.educaciones.services import EducacionService
 
 
-class CuentaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = "rrhh.cuentas.editar_cuenta"
-    form_class = CuentaForm
+class EducacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+    permission_required = "rrhh.educacion.editar_educacion"
+    form_class = EducacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -21,24 +21,24 @@ class CuentaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Gestión Huamana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Huamana"
-        context["submodule"] = "Cuentas"
-        context["titleForm"] = "Actualizar cuenta"
+        context["submodule"] = "Educaciones"
+        context["titleForm"] = "Actualizar educación"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("cuentas:list")
+        context["listUrl"] = reverse_lazy("educaciones:list")
         context["urlForm"] = reverse_lazy(
-            "api_cuentas:update", args=[self.kwargs.get("pk")]
+            "api_educaciones:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Cuenta.objects.filter(pk=id)
+        return Educacion.objects.filter(pk=id)
 
 
-class CuentaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = "rrhh.cuentas.editar_cuenta"
-    form_class = CuentaForm
+class EducacionUpdateApiView(UpdateController, CheckPermisosMixin):
+    permission_required = "rrhh.educacion.editar_educacion"
+    form_class = EducacionForm
 
     def __init__(self):
-        self.service = CuentaService()
+        self.service = EducacionService()

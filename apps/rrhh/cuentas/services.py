@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import CuentaRepository
+from rrhh.cuentas.repositories import CuentaRepository
 
 
 class CuentaService(CrudService):

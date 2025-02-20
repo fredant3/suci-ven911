@@ -6,13 +6,13 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from rrhh.cargos.forms import CargoForm
-from rrhh.cargos.services import CargoService
+from rrhh.educaciones.forms import EducacionForm
+from rrhh.educaciones.services import EducacionService
 
 
-class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "rrhh.cargos.agregar_cargo"
-    form_class = CargoForm
+class EducacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+    permission_required = "rrhh.educacion.agregar_educacion"
+    form_class = EducacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -20,18 +20,18 @@ class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titlePage"] = "Gestión Huamana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Huamana"
-        context["submodule"] = "Cargos"
-        context["titleForm"] = "Añadir una cargo nueva"
+        context["submodule"] = "Educación"
+        context["titleForm"] = "Añadir una educación nueva"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("cargos:list")
-        context["urlForm"] = reverse_lazy("api_cargos:create")
+        context["listUrl"] = reverse_lazy("educaciones:list")
+        context["urlForm"] = reverse_lazy("api_educaciones:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
 
-class CargoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = "rrhh.cargos.agregar_cargo"
-    form_class = CargoForm
+class EducacionCreateApiView(CreateController, CheckPermisosMixin):
+    permission_required = "rrhh.educacion.agregar_educacion"
+    form_class = EducacionForm
 
     def __init__(self):
-        self.service = CargoService()
+        self.service = EducacionService()

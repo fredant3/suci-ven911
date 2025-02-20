@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Cuenta
+from rrhh.cuentas.models import Cuenta
 
 
 class CuentaRepository(Repository):

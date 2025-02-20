@@ -6,9 +6,9 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import DotacionForm
-from ..models import Dotacion
-from ..services import DotacionService
+from rrhh.dotaciones.forms import DotacionForm
+from rrhh.dotaciones.models import Dotacion
+from rrhh.dotaciones.services import DotacionService
 
 
 class DotacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
@@ -17,10 +17,10 @@ class DotacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Dotacions"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
+        context["submodule"] = "Dotaciones"
         context["titleForm"] = "Eliminar dotacion"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("dotaciones:list")

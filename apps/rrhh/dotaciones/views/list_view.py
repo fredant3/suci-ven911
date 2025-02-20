@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import DotacionService
+from rrhh.dotaciones.services import DotacionService
 
 
 class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,10 +20,10 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Dotacions"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
+        context["submodule"] = "Dotaciones"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("dotaciones:create")
         context["listApiUrl"] = reverse_lazy("api_dotaciones:list")
@@ -43,16 +43,16 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
+                "data": "camisa",
+                "name": "camisa",
+                "title": "Camisa",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
+                "data": "pantalon",
+                "name": "pantalon",
+                "title": "Pantalón",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -64,44 +64,16 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
+                "data": "zapato",
+                "name": "zapato",
+                "title": "Zapato",
                 "orderable": "false",
                 "searchable": "true",
             },
             {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
+                "data": "empleado",
+                "name": "empleado",
+                "title": "Empleado",
                 "orderable": "false",
                 "searchable": "false",
             },

@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import EducacionRepository
+from rrhh.educaciones.repositories import EducacionRepository
 
 
 class EducacionService(CrudService):
