@@ -5,6 +5,8 @@ from helpers.FormBase import FormBase
 
 
 class EmpleadoForm(FormBase):
+    fecha_nacimiento = FormBase.create_date_field("fecha_nacimiento")
+
     class Meta:
         model = Empleado
         fields = (
