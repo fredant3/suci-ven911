@@ -6,6 +6,13 @@ from helpers.FormBase import FormBase
 
 class EmpleadoForm(FormBase):
     fecha_nacimiento = FormBase.create_date_field("fecha_nacimiento")
+    estudia = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={"value": "False"}),
+    )
+    discapacitado = forms.BooleanField(
+        required=False, widget=forms.CheckboxInput(attrs={"value": "False"})
+    )
 
     class Meta:
         model = Empleado

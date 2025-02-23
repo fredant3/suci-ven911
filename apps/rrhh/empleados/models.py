@@ -30,8 +30,8 @@ class Empleado(BaseModel):
     email = models.EmailField(blank=True, null=True)
     telefono = models.CharField(max_length=12)
     direccion = models.CharField(max_length=180)
-    estudia = models.BooleanField()
-    discapacitado = models.BooleanField()
+    estudia = models.BooleanField(default=False)
+    discapacitado = models.BooleanField(default=False)
     contratos = models.IntegerField()
     permissions = [
         ("listar_empleado", "Puede listar empleados"),
