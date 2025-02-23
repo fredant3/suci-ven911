@@ -32,13 +32,15 @@ class Familiar(BaseModel):
     estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     observacion = models.CharField(max_length=150, blank=True, null=True)
-    permissions = [
-        ("listar_familiares", "Listar familiares"),
-        ("agregar_familiar", "Agregar familiares"),
-        ("ver_familiar", "Ver familiares"),
-        ("modificar_familiar", "Modificar familiares"),
-        ("eliminar_familiar", "Eliminar familiares"),
-    ]
+
+    class Meta:
+        permissions = [
+            ("listar_familiares", "Listar familiares"),
+            ("agregar_familiar", "Agregar familiares"),
+            ("ver_familiar", "Ver familiares"),
+            ("modificar_familiar", "Modificar familiares"),
+            ("eliminar_familiar", "Eliminar familiares"),
+        ]
 
     def toJSON(self):
         return model_to_dict(self)

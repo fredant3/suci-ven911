@@ -21,13 +21,15 @@ class Vehiculo(BaseModel):
     placa = models.CharField(max_length=64, verbose_name="Placa:", default="")
     fecha = models.DateField(verbose_name="Fecha")
     hora = models.CharField(max_length=64, verbose_name="Hora:", default="")
-    permissions = [
-        ("listar_vehiculos", "Listar vehiculos"),
-        ("agregar_vehiculo", "Agregar vehiculo"),
-        ("ver_vehiculo", "Ver vehiculo"),
-        ("modificar_vehiculo", "Modificar vehiculo"),
-        ("eliminar_vehiculo", "Eliminar vehiculo"),
-    ]
+
+    class Meta:
+        permissions = [
+            ("listar_vehiculos", "Listar vehiculos"),
+            ("agregar_vehiculo", "Agregar vehiculo"),
+            ("ver_vehiculo", "Ver vehiculo"),
+            ("modificar_vehiculo", "Modificar vehiculo"),
+            ("eliminar_vehiculo", "Eliminar vehiculo"),
+        ]
 
     def toJSON(self):
         return model_to_dict(self)

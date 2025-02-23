@@ -33,13 +33,15 @@ class Empleado(BaseModel):
     estudia = models.BooleanField()
     discapacitado = models.BooleanField()
     contratos = models.IntegerField()
-    permissions = [
-        ("listar_empleado", "Puede listar empleados"),
-        ("agregar_empleado", "Puede agregar empleado"),
-        ("ver_empleado", "Puede ver empleado"),
-        ("editar_empleado", "Puede actualizar empleado"),
-        ("eliminar_empleado", "Puede eliminar empleado"),
-    ]
+
+    class Meta:
+        permissions = [
+            ("listar_empleado", "Puede listar empleados"),
+            ("agregar_empleado", "Puede agregar empleado"),
+            ("ver_empleado", "Puede ver empleado"),
+            ("editar_empleado", "Puede actualizar empleado"),
+            ("eliminar_empleado", "Puede eliminar empleado"),
+        ]
 
     def toJSON(self):
         return model_to_dict(self)
