@@ -3,9 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
-
 from templates.sneat import TemplateLayout
-
 from rrhh.cuentas.forms import CuentaForm
 from rrhh.cuentas.services import CuentaService
 
@@ -17,9 +15,9 @@ class CuentaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Huamana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestión Huamana"
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Cuentas"
         context["titleForm"] = "Añadir una cuenta nueva"
         context["tag"] = "Registrar"
