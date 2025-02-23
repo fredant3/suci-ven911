@@ -5,6 +5,9 @@ from helpers.FormBase import FormBase
 
 
 class EducacionForm(FormBase):
+    fecha_inicio = FormBase.create_date_field("fecha_inicio")
+    fecha_culminacion = FormBase.create_date_field("fecha_culminacion")
+
     class Meta:
         model = Educacion
         fields = (
