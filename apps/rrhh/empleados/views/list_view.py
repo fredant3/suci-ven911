@@ -11,6 +11,22 @@ from templates.sneat import TemplateLayout
 
 from rrhh.empleados.services import EmpleadoService
 
+# estatus
+# nombres
+# apellidos
+# nacionalidad
+# cedula
+# sexo
+# fecha_nacimiento
+# estado_civil
+# tipo_sangre
+# email
+# telefono
+# direccion
+# estudia
+# discapacitado
+# contratos
+
 
 class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "rrhh.empleados.listar_empleado"
@@ -43,67 +59,102 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
-                "orderable": "false",
-                "searchable": "false",
+                "data": "nombres",
+                "name": "nombres",
+                "title": "Nombres",
+                "orderable": "true",
+                "searchable": "true",
             },
             {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "false",
-                "searchable": "false",
+                "data": "apellidos",
+                "name": "apellidos",
+                "title": "Apellidos",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "nacionalidad",
+                "name": "nacionalidad",
+                "title": "Nacionalidad",
+                "orderable": "true",
+                "searchable": "true",
             },
             {
                 "data": "cedula",
                 "name": "cedula",
-                "title": "Cédula",
-                "orderable": "false",
-                "searchable": "false",
+                "title": "Cedula",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "sexo",
+                "name": "sexo",
+                "title": "Sexo",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "fecha_nacimiento",
+                "name": "fecha_nacimiento",
+                "title": "Fecha Nacimiento",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "estado_civil",
+                "name": "estado_civil",
+                "title": "Estado Civil",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "tipo_sangre",
+                "name": "tipo_sangre",
+                "title": "Tipo Sangre",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "email",
+                "name": "email",
+                "title": "Email",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "telefono",
+                "name": "telefono",
+                "title": "Telefono",
+                "orderable": "true",
+                "searchable": "true",
             },
             {
                 "data": "direccion",
                 "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
+                "title": "Direccion",
+                "orderable": "true",
                 "searchable": "true",
             },
             {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
-                "orderable": "false",
-                "searchable": "false",
+                "data": "estudia",
+                "name": "estudia",
+                "title": "Estudia",
+                "orderable": "true",
+                "searchable": "true",
             },
             {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
-                "orderable": "false",
-                "searchable": "false",
+                "data": "discapacitado",
+                "name": "discapacitado",
+                "title": "Discapacitado",
+                "orderable": "true",
+                "searchable": "true",
             },
             {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
-                "orderable": "false",
-                "searchable": "false",
+                "data": "contratos",
+                "name": "contratos",
+                "title": "Contratos",
+                "orderable": "true",
+                "searchable": "true",
             },
         ]
 
