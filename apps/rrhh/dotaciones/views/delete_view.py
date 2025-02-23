@@ -17,9 +17,9 @@ class DotacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Huamana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestión Huamana"
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Dotaciones"
         context["titleForm"] = "Eliminar dotacion"
         context["tag"] = "Eliminar"

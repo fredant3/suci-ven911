@@ -68,8 +68,8 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "empleado",
-                "name": "empleado",
+                "data": "empleado___nombres",
+                "name": "empleado___nombres",
                 "title": "Empleado",
                 "orderable": "false",
                 "searchable": "false",
