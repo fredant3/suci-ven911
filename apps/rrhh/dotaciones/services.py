@@ -9,7 +9,6 @@ class DotacionService(CrudService):
         "id",
         "camisa",
         "pantalon",
-        "cedula",
         "zapato",
         "empleado__nombres",
     )
