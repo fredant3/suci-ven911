@@ -1,14 +1,11 @@
 import json
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
-
 from templates.sneat import TemplateLayout
-
 from rrhh.dotaciones.services import DotacionService
 
 
@@ -20,9 +17,9 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Huamana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestión Huamana"
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Dotaciones"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("dotaciones:create")
@@ -39,8 +36,8 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "data": "id",
                 "name": "id",
                 "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
+                "orderable": "false",
+                "searchable": "false",
             },
             {
                 "data": "camisa",
@@ -52,14 +49,14 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "pantalon",
                 "name": "pantalon",
-                "title": "Pantalón",
+                "title": "Pantalon",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
                 "data": "cedula",
                 "name": "cedula",
-                "title": "Cédula",
+                "title": "Cedula",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -68,7 +65,7 @@ class DotacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "name": "zapato",
                 "title": "Zapato",
                 "orderable": "false",
-                "searchable": "true",
+                "searchable": "false",
             },
             {
                 "data": "empleado",
