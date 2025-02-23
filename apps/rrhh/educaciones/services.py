@@ -6,6 +6,7 @@ from rrhh.educaciones.repositories import EducacionRepository
 
 class EducacionService(CrudService):
     select = (
+        "id",
         "colegio",
         "codigo_titulo",
         "titulo",
