@@ -1,14 +1,11 @@
 import json
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
-
 from templates.sneat import TemplateLayout
-
 from rrhh.educaciones.services import EducacionService
 
 
@@ -20,9 +17,9 @@ class EducacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Huamana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestión Huamana"
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Educacion"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("educaciones:create")
@@ -39,8 +36,8 @@ class EducacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "data": "id",
                 "name": "id",
                 "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
+                "orderable": "false",
+                "searchable": "false",
             },
             {
                 "data": "colegio",
@@ -64,8 +61,8 @@ class EducacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "empleado",
-                "name": "empleado",
+                "data": "empleado__nombres",
+                "name": "empleado_nombres",
                 "title": "Empleado",
                 "orderable": "false",
                 "searchable": "true",
