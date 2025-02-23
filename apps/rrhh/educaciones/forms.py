@@ -1,5 +1,5 @@
 from django import forms
-
+from rrhh.empleados.models import Empleado
 from rrhh.educaciones.models import Educacion
 from helpers.FormBase import FormBase
 
@@ -29,3 +29,7 @@ class EducacionForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        labels = {
+            "empleado": "Empleado",
+        }
+        widgets = {}

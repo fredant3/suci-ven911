@@ -6,10 +6,12 @@ from rrhh.dotaciones.repositories import DotacionRepository
 
 class DotacionService(CrudService):
     select = (
+        "id",
         "camisa",
         "pantalon",
-        "zapatos",
-        "empleado",
+        "cedula",
+        "zapato",
+        "empleado__nombres",
     )
 
     def __init__(self):
