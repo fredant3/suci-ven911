@@ -1,4 +1,4 @@
-from administracion.inventario import Articulo
+from administracion.inventario.models import Articulo
 from helpers.CrudMixin import CrudService
 from tecnologia.repositories import TecnologiaRepository
 

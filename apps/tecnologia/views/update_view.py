@@ -4,9 +4,7 @@ from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
 from tecnologia.forms import TecnologiaForm
-from tecnologia.models import Tecnologia
 from tecnologia.services import TecnologiaService
-
 from templates.sneat import TemplateLayout
 
 
@@ -30,9 +28,6 @@ class TecnologiaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
 
-    def get_queryset(self):
-        id = self.kwargs.get("pk")
-        return Tecnologia.objects.filter(pk=id)
 
 
 class TecnologiaUpdateApiView(UpdateController, CheckPermisosMixin):

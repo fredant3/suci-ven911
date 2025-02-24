@@ -26,8 +26,6 @@ class TecnologiaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["createBtn"] = "Añadir"
         # context["createUrl"] = reverse_lazy("tecnologia:create")
         context["listApiUrl"] = reverse_lazy("api_tecnologia:list")
-        context["updateUrl"] = reverse_lazy("tecnologia:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("tecnologia:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -39,16 +37,31 @@ class TecnologiaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "name": "id",
                 "title": "#",
                 "orderable": "true",
-                "searchable": "true",
+                "searchable": "false",
             },
             {
-                "data": "nombre_apellido",
-                "name": "nombre_apellido",
-                "title": "Nombre completo",
+                "data": "marca",
+                "name": "marca",
+                "title": "Marca",
                 "orderable": "true",
-                "searchable": "true",
+                "searchable": "false",
+            },
+            {
+                "data": "modelo",
+                "name": "modelo",
+                "title": "Modelo",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "fecha_adq",
+                "name": "fecha_adq",
+                "title": "Adquirido",
+                "orderable": "false",
+                "searchable": "false",
             },
         ]
+
 
 
 class TecnologiaListApiView(ListController, CheckPermisosMixin):

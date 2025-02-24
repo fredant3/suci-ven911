@@ -1,21 +1,21 @@
-from tecnologia.models import Tecnologia
-from tecnologia.models import Inventory
+from administracion.inventario.models import Articulo
 from helpers.FormBase import FormBase
 
 
 class TecnologiaForm(FormBase):
     class Meta:
-        model = Inventory
-        fields = ("nombre",
-                  "n_activo",
-                  "marca",
-                  "serial",
-                  "color",
-                  "estado_conservacion",
-                  "descripcion_equipo",
-                  "descripcion_ubicacion",
-                  "ubicacion",
-                  "cantidad",
+        model = Articulo
+        fields = ("descripcion", 
+                    "modelo",
+                    "serial",
+                    "placa",
+                    "cantidad_combustible",
+                    "codigo_bn",
+                    "cantidad",
+                    "tipo_articulo",
+                    "condicion",
+                    "fecha_adq",
+                    "asignado",
                   )
         exclude = [
             "created_at",
@@ -25,3 +25,4 @@ class TecnologiaForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+
