@@ -27,7 +27,7 @@ class Educacion(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return "{0} {1}".format(self.name, self.apellido)
+        return "{0} {1}".format(self.nombres, self.apellidos)
 
     class Meta:
         verbose_name = "educacion"
