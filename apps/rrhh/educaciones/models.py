@@ -14,7 +14,12 @@ class Educacion(BaseModel):
     enlace_certificado = models.CharField(max_length=120, null=True, blank=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
 
+    def toJSON(self):
+        return model_to_dict(self)
+
     class Meta:
+        verbose_name = "educacion"
+        verbose_name_plural = "educaciones"
         permissions = [
             ("listar_educacion", "Puede listar educacion"),
             ("agregar_educacion", "Puede agregar educacion"),
@@ -22,13 +27,3 @@ class Educacion(BaseModel):
             ("editar_educacion", "Puede actualizar educacion"),
             ("eliminar_educacion", "Puede eliminar educacion"),
         ]
-
-    def toJSON(self):
-        return model_to_dict(self)
-
-    def __str__(self):
-        return "{0} {1}".format(self.nombres, self.apellidos)
-
-    class Meta:
-        verbose_name = "educacion"
-        verbose_name_plural = "educaciones"
