@@ -6,6 +6,7 @@ from rrhh.familiares.repositories import FamiliarRepository
 
 class FamiliarService(CrudService):
     select = (
+        "id",
         "parentezco",
         "tipo_hijo",
         "discapacidad",
