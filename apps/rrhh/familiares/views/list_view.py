@@ -43,8 +43,8 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
+                "data": "nombre",
+                "name": "nombre",
                 "title": "Nombre",
                 "orderable": "false",
                 "searchable": "false",
