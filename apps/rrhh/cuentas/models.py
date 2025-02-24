@@ -63,8 +63,8 @@ class Cuenta(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return "{0} {1}".format(self.nombres, self.apellidos)
+    # def __str__(self):
+    #   return "{0} {1}".format(self.nombres, self.apellidos)
 
     class Meta:
         verbose_name = "cuenta"

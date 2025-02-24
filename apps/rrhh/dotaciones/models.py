@@ -54,8 +54,8 @@ class Dotacion(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return "{0} {1}".format(self.name, self.apellido)
+    # def __str__(self):
+    #    return "{0} {1}".format(self.name, self.apellido)
 
     class Meta:
         verbose_name = "dotacion"
