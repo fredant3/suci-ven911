@@ -51,7 +51,12 @@ class Cuenta(BaseModel):
     telefono = models.CharField(max_length=12)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
 
+    def toJSON(self):
+        return model_to_dict(self)
+
     class Meta:
+        verbose_name = "cuenta"
+        verbose_name_plural = "cuentas"
         permissions = [
             ("listar_cuenta", "Puede listar cuentas"),
             ("agregar_cuenta", "Puede agregar cuenta"),
@@ -59,13 +64,3 @@ class Cuenta(BaseModel):
             ("editar_cuenta", "Puede actualizar cuenta"),
             ("eliminar_cuenta", "Puede eliminar cuenta"),
         ]
-
-    def toJSON(self):
-        return model_to_dict(self)
-
-    def __str__(self):
-        return "{0} {1}".format(self.nombres, self.apellidos)
-
-    class Meta:
-        verbose_name = "cuenta"
-        verbose_name_plural = "cuentas"
