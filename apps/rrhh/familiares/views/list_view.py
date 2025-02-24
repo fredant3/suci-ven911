@@ -12,6 +12,17 @@ from templates.sneat import TemplateLayout
 from rrhh.familiares.services import FamiliarService
 
 
+# parentezco
+# tipo_hijo
+# discapacidad
+# nombres
+# apellidos
+# cedula
+# fecha_nacimiento
+# sexo
+# estado_civil
+# empleado__nombres
+# observacion
 class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "rrhh.familiares.listar_familiar"
     url_redirect = reverse_lazy("modules:index")
@@ -43,39 +54,81 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "nombre",
-                "name": "nombre",
-                "title": "Nombre",
-                "orderable": "true",
-                "searchable": "true",
+                "data": "parentezco",
+                "name": "parentezco",
+                "title": "Parentesco",
+                "orderable": "false",
+                "searchable": "false",
             },
             {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "true",
-                "searchable": "true",
+                "data": "tipo_hijo",
+                "name": "tipo_hijo",
+                "title": "Tipo de hijo",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "discapacidad",
+                "name": "discapacidad",
+                "title": "Discapacidad",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "nombres",
+                "name": "nombres",
+                "title": "Nombres",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "apellidos",
+                "name": "apellidos",
+                "title": "Apellidos",
+                "orderable": "false",
+                "searchable": "false",
             },
             {
                 "data": "cedula",
                 "name": "cedula",
                 "title": "Cédula",
-                "orderable": "true",
-                "searchable": "true",
+                "orderable": "false",
+                "searchable": "false",
             },
             {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "true",
-                "searchable": "true",
+                "data": "fecha_nacimiento",
+                "name": "fecha_nacimiento",
+                "title": "Fecha de nacimiento",
+                "orderable": "false",
+                "searchable": "false",
             },
             {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
-                "orderable": "true",
-                "searchable": "true",
+                "data": "sexo",
+                "name": "sexo",
+                "title": "Sexo",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "estado_civil",
+                "name": "estado_civil",
+                "title": "Estado civil",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "empleado__nombres",
+                "name": "empleado__nombres",
+                "title": "Empleado",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "observacion",
+                "name": "observacion",
+                "title": "Observaciones",
+                "orderable": "false",
+                "searchable": "false",
             },
         ]
 
