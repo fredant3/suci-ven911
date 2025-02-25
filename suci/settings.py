@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     "apps.presupuesto",
     "apps.rrhh",
     "apps.seguridad",
+    "apps.tecnologia",
 ]
 
 MIDDLEWARE = [

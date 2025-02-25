@@ -73,7 +73,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Tecnología Comunicación e Información (Pendiente)",
-                "url": "asesoria",
+                "url": "tecnologia:list",
                 "image": "img/modules/tecnologia.png",
             },
             {
