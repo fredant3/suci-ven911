@@ -52,13 +52,6 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def getColumns(self):
         return [
             {
-                "data": "id",
-                "name": "id",
-                "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
                 "data": "nombres",
                 "name": "nombres",
                 "title": "Nombres",
@@ -73,13 +66,6 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "nacionalidad",
-                "name": "nacionalidad",
-                "title": "Nacionalidad",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
                 "data": "cedula",
                 "name": "cedula",
                 "title": "Cedula",
@@ -87,30 +73,9 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "sexo",
-                "name": "sexo",
-                "title": "Sexo",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
                 "data": "fecha_nacimiento",
                 "name": "fecha_nacimiento",
                 "title": "Fecha Nacimiento",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "estado_civil",
-                "name": "estado_civil",
-                "title": "Estado Civil",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "tipo_sangre",
-                "name": "tipo_sangre",
-                "title": "Tipo Sangre",
                 "orderable": "true",
                 "searchable": "true",
             },
@@ -125,34 +90,6 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "data": "telefono",
                 "name": "telefono",
                 "title": "Telefono",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Direccion",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "estudia",
-                "name": "estudia",
-                "title": "Estudia",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "discapacitado",
-                "name": "discapacitado",
-                "title": "Discapacitado",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "contratos",
-                "name": "contratos",
-                "title": "Contratos",
                 "orderable": "true",
                 "searchable": "true",
             },
