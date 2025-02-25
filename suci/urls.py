@@ -10,6 +10,7 @@ urlpatterns = [
     path("biblioteca/", include(("apps.biblioteca.urls"))),
     path("organizacion/", include(("apps.organizacion.urls"))),
     path("emergencia/", include(("apps.emergencia.urls"))),
+    path("emergencia/", include("apps.emergencia.urls")),
     path("planificacion/", include(("apps.planificacion.urls"))),
     path("presupuesto/", include(("apps.presupuesto.urls"))),
     path("potencia/", include(("apps.potencia.urls"))),
