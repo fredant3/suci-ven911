@@ -13,9 +13,7 @@ class UriForm(FormBase):
     institucion = CharField(max_length=300, required=False, label="Institución")
     num_interna = CharField(max_length=10, required=False, label="Numeración Interna")
     # Informacion Legal
-    contacto = CharField(
-        max_length=10, required=False, label="¿Hubo contacto con el paciente?"
-    )
+
     # Centro Asistencial Recibido
     centroAsistencial = CharField(
         max_length=50, required=False, label="Centro Asistencial"
@@ -28,8 +26,6 @@ class UriForm(FormBase):
     msds = CharField(max_length=50, required=False, label="MS/DS")
 
     # Registro Visuales
-
-    foto = CharField(max_length=10, required=False, label="¿Hubo registro fotográfico?")
 
     # Datos del paciente
     nombrepaciente = CharField(
@@ -109,11 +105,6 @@ class UriForm(FormBase):
     )
     eje_evento = CharField(max_length=30, required=False, label="Eje")
 
-    lugar_atencion = CharField(max_length=30, required=False, label="Lugar de Atención")
-    modo_traslado = CharField(max_length=30, required=False, label="Modo de Traslado")
-    via_reporte = CharField(max_length=30, required=False, label="Via del Reporte")
-    servicio_tipo = CharField(max_length=30, required=False, label="Tipo de Servicio")
-
     # Cronologia del servicio
 
     hora_alarma = FormBase.create_time_field("Hora de Alarma")
@@ -132,73 +123,24 @@ class UriForm(FormBase):
     )
     # 5) Informacion Clinica
     # Trauma
-    accidenteVehicular = CharField(
-        max_length=50, required=False, label="Accidente Vehicular"
-    )
-    enfrentamientoArmado = CharField(
-        max_length=50, required=False, label="Enfrentamiento armado"
-    )
-    traumaVehiculo = CharField(
-        max_length=50, required=False, label="Trauma con Vehiculo"
-    )
-    viajaba = CharField(max_length=50, required=False, label="Viajaba Como")
-    sustanciaPeligrosa = CharField(
-        max_length=50, required=False, label="Sustancia Peligrosa"
-    )
+
     observacionesSustancia = CharField(
         max_length=50, required=False, label="Observaciones de la sustancia"
-    )
-    traumaNoIntencional = CharField(
-        max_length=50, required=False, label="Trauma no Intencional"
-    )
-    emergenciaMedica = CharField(
-        max_length=50, required=False, label="Emergencias Médicas no Traumáticas"
     )
 
     # Evaluacion Inicial + Intervenciones criticas
 
-    hemorragia = CharField(max_length=20, required=False, label="Hemorragias")
-    presion = CharField(max_length=20, required=False, label="Presión Directa")
-    empaquetado = CharField(
-        max_length=20, required=False, label="Empaquetado de la Herida"
-    )
-    torniquete = CharField(max_length=20, required=False, label="Torniquete")
-
     # Via aerea o control cervical
-
-    evaluacion = CharField(max_length=20, required=False, label="Evaluación")
-    intervencion = CharField(max_length=20, required=False, label="Intevención")
-    resultado = CharField(max_length=20, required=False, label="Resultados")
-    descripcion_adic = CharField(
-        max_length=100, required=False, label="Descripción Adicional"
-    )
 
     # 6) Respiracion, Oxigenacion y Circulacion
 
     # Respiracion y Oxigenacion
 
-    evaluacionResp = CharField(max_length=20, required=False, label="Evaluación")
-    intervencionResp = CharField(max_length=20, required=False, label="Intervención")
-    resultadoResp = CharField(max_length=20, required=False, label="Resultados")
     descripcion_adic_resp = CharField(
         max_length=100, required=False, label="Descripción Adicional"
     )
 
     # Circulacion
-
-    colorPiel = CharField(max_length=20, required=False, label="Color de la piel")
-    temperaturaPiel = CharField(
-        max_length=20, required=False, label="Temperatura de la piel"
-    )
-    humedadPiel = CharField(max_length=20, required=False, label="Humedad de la piel")
-    pulso = CharField(max_length=20, required=False, label="Pulso distales")
-    otrasHerida = CharField(
-        max_length=20, required=False, label="Otras hemorragias/heridas"
-    )
-    fractura = CharField(max_length=20, required=False, label="Fracturas")
-    maniobraPelvis = CharField(
-        max_length=20, required=False, label="Maniobra de Pelvis"
-    )
 
     # Deficit Neurologico
 
@@ -206,11 +148,9 @@ class UriForm(FormBase):
     ecgV = forms.IntegerField(required=False)
     ecgM = forms.IntegerField(required=False)
     ecgTotal = forms.IntegerField(required=False)
-    reaccionPupilar = CharField(max_length=20, required=False, label="Reacción Pupilar")
 
     # Exposicion
 
-    hipotermia = CharField(max_length=9, required=False, label="Hipotermia")
     signosSintomas = CharField(
         max_length=100, required=False, label="Signos y Sintomas"
     )
@@ -254,11 +194,6 @@ class UriForm(FormBase):
 
     # Registro de Referencias y Contrareferencias
 
-    trasladoIncial = CharField(
-        max_length=20,
-        required=False,
-        label="¿El paciente fue referido del centro asistencial al que fue trasladado inicialmente?",
-    )
     hospitalOrigen = CharField(
         max_length=100, required=False, label="Hospital de Origen"
     )
