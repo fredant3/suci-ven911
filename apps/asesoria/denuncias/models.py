@@ -98,16 +98,6 @@ class Denuncia(BaseModel):
     fecha_denuncia = models.DateField("Fecha de la denuncia")
     fecha_incidente = models.DateField("Fecha del incidente", blank=True, null=True)
 
-    class Meta:
-        permissions = [
-            ("listar_denuncia", "Puede listar denuncias"),
-            ("agregar_denuncia", "Puede agregar denuncia"),
-            ("ver_denuncia", "Puede ver denuncia"),
-            ("editar_denuncia", "Puede actualizar denuncia"),
-            ("eliminar_denuncia", "Puede eliminar denuncia"),
-            ("exel_denuncia", "Puede exportar a exel denuncias"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -117,3 +107,11 @@ class Denuncia(BaseModel):
     class Meta:
         verbose_name = "Denuncia"
         verbose_name_plural = "Denuncias"
+        permissions = [
+            ("listar_denuncia", "Puede listar denuncias"),
+            ("agregar_denuncia", "Puede agregar denuncia"),
+            ("ver_denuncia", "Puede ver denuncia"),
+            ("editar_denuncia", "Puede actualizar denuncia"),
+            ("eliminar_denuncia", "Puede eliminar denuncia"),
+            ("exel_denuncia", "Puede exportar a exel denuncias"),
+        ]

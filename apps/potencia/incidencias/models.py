@@ -31,15 +31,6 @@ class Incidencia(BaseModel):
     tipo_solicitud = models.CharField(max_length=80, verbose_name="Tipo Solicitud")
     observaciones = models.CharField(max_length=200)
 
-    class Meta:
-        permissions = [
-            ("listar_incidencia", "Puede listar incidencia"),
-            ("agregar_incidencia", "Puede agregar incidencia"),
-            ("ver_incidencia", "Puede ver incidencia"),
-            ("editar_incidencia", "Puede actualizar incidencia"),
-            ("eliminar_incidencia", "Puede eliminar incidencia"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -49,3 +40,10 @@ class Incidencia(BaseModel):
     class Meta:
         verbose_name = "Incidencia"
         verbose_name_plural = "Incidencias"
+        permissions = [
+            ("listar_incidencia", "Puede listar incidencia"),
+            ("agregar_incidencia", "Puede agregar incidencia"),
+            ("ver_incidencia", "Puede ver incidencia"),
+            ("editar_incidencia", "Puede actualizar incidencia"),
+            ("eliminar_incidencia", "Puede eliminar incidencia"),
+        ]

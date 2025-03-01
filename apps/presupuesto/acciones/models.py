@@ -21,16 +21,6 @@ class Accion(BaseModel):
     )
     estatus = models.CharField("Estatus del Proyecto:", max_length=64)
 
-    class Meta:
-        permissions = [
-            ("listar_accion", "Puede listar acciones"),
-            ("agregar_accion", "Puede agregar accion"),
-            ("ver_accion", "Puede ver accion"),
-            ("editar_accion", "Puede actualizar accion"),
-            ("eliminar_accion", "Puede eliminar accion"),
-            ("pdf_accion", "Puede generar pdf de accion"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -40,3 +30,11 @@ class Accion(BaseModel):
     class Meta:
         verbose_name = "Accion"
         verbose_name_plural = "Acciones"
+        permissions = [
+            ("listar_accion", "Puede listar acciones"),
+            ("agregar_accion", "Puede agregar accion"),
+            ("ver_accion", "Puede ver accion"),
+            ("editar_accion", "Puede actualizar accion"),
+            ("eliminar_accion", "Puede eliminar accion"),
+            ("pdf_accion", "Puede generar pdf de accion"),
+        ]
