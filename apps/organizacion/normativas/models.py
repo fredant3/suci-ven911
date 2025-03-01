@@ -2,12 +2,28 @@ from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTATUS_CHOICES
 
+PROGRESS_CHOICES = (
+    ("0", "0%"),
+    ("10", "10%"),
+    ("20", "20%"),
+    ("30", "30%"),
+    ("40", "40%"),
+    ("50", "50%"),
+    ("60", "60%"),
+    ("70", "70%"),
+    ("80", "80%"),
+    ("90", "90%"),
+    ("100", "100%"),
+)
+
 
 class Normativa(BaseModel):
     name = models.CharField("Nombre de Normativa", max_length=64)
     file = models.FileField("Archivo", upload_to="normativas/")
     date = models.DateField("Fecha", blank=True)
-    progre = models.CharField("Progreso", max_length=64)
+    progre = models.CharField(
+        "Progreso:", max_length=3, choices=PROGRESS_CHOICES, default="0"
+    )
     estado = models.CharField(max_length=8, choices=ESTATUS_CHOICES, default="inactivo")
 
     def toJSON(self):

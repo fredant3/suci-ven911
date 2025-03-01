@@ -1,18 +1,16 @@
-from django import forms
 from organizacion.reglamentos.models import Reglamento
 from helpers.FormBase import FormBase
 
 
 class ReglamentoForm(FormBase):
-    estado = forms.BooleanField(
-        required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
-    )
-
     date = FormBase.create_date_field("date")
 
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        return estado if estado is not None else False
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
+
+        if instance:
+            self.fields.pop("file")
 
     class Meta:
         model = Reglamento
