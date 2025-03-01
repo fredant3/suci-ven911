@@ -4,6 +4,7 @@ from rrhh.dotaciones.views.create_view import DotacionCreateView
 from rrhh.dotaciones.views.delete_view import DotacionDeleteView
 from rrhh.dotaciones.views.list_view import DotacionListView
 from rrhh.dotaciones.views.update_view import DotacionUpdateView
+from rrhh.dotaciones.views.export_view import DotacionExcelView
 
 urlpatterns = [
     path(
@@ -30,5 +31,10 @@ urlpatterns = [
         "<int:pk>/delete",
         DotacionDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        DotacionExcelView.as_view(),
+        name="export_excel",
     ),
 ]

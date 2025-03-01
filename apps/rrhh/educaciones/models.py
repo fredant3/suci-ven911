@@ -26,4 +26,5 @@ class Educacion(BaseModel):
             ("ver_educacion", "Puede ver educacion"),
             ("editar_educacion", "Puede actualizar educacion"),
             ("eliminar_educacion", "Puede eliminar educacion"),
+            ("exel_educacion", "Puede exportar educacion a excel"),
         ]

@@ -4,6 +4,7 @@ from rrhh.cuentas.views.create_view import CuentaCreateView
 from rrhh.cuentas.views.delete_view import CuentaDeleteView
 from rrhh.cuentas.views.list_view import CuentaListView
 from rrhh.cuentas.views.update_view import CuentaUpdateView
+from rrhh.cuentas.views.export_view import CuentaExcelView
 
 urlpatterns = [
     path(
@@ -30,5 +31,10 @@ urlpatterns = [
         "<int:pk>/delete",
         CuentaDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        CuentaExcelView.as_view(),
+        name="export_excel",
     ),
 ]

@@ -63,4 +63,5 @@ class Dotacion(BaseModel):
             ("ver_dotacion", "Puede ver dotacion"),
             ("editar_dotacion", "Puede actualizar dotacion"),
             ("eliminar_dotacion", "Puede eliminar dotacion"),
+            ("exel_dotacion", "Puede exportar dotacion a excel"),
         ]

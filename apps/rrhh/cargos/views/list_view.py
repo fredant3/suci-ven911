@@ -29,6 +29,7 @@ class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_cargos:list")
         context["updateUrl"] = reverse_lazy("cargos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("cargos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_cargos:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

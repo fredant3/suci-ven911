@@ -63,4 +63,5 @@ class Cuenta(BaseModel):
             ("ver_cuenta", "Puede ver cuenta"),
             ("editar_cuenta", "Puede actualizar cuenta"),
             ("eliminar_cuenta", "Puede eliminar cuenta"),
+            ("exel_cuenta", "Puede exportar cuenta a excel"),
         ]

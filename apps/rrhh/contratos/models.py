@@ -30,15 +30,6 @@ class Contrato(BaseModel):
     fecha_culminacion = models.DateField(null=True, blank=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
 
-    class Meta:
-        permissions = [
-            ("listar_contrato", "Puede listar contratos"),
-            ("agregar_contrato", "Puede agregar contrato"),
-            ("ver_contrato", "Puede ver contrato"),
-            ("editar_contrato", "Puede actualizar contrato"),
-            ("eliminar_contrato", "Puede eliminar contrato"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -48,3 +39,11 @@ class Contrato(BaseModel):
     class Meta:
         verbose_name = "contrato"
         verbose_name_plural = "contratos"
+        permissions = [
+            ("listar_contrato", "Puede listar contratos"),
+            ("agregar_contrato", "Puede agregar contrato"),
+            ("ver_contrato", "Puede ver contrato"),
+            ("editar_contrato", "Puede actualizar contrato"),
+            ("eliminar_contrato", "Puede eliminar contrato"),
+            ("exel_contrato", "Puede exportar contrato a excel"),
+        ]

@@ -11,22 +11,6 @@ from templates.sneat import TemplateLayout
 
 from rrhh.empleados.services import EmpleadoService
 
-# estatus
-# nombres
-# apellidos
-# nacionalidad
-# cedula
-# sexo
-# fecha_nacimiento
-# estado_civil
-# tipo_sangre
-# email
-# telefono
-# direccion
-# estudia
-# discapacitado
-# contratos
-
 
 class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "rrhh.empleados.listar_empleado"
@@ -45,6 +29,7 @@ class EmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_empleados:list")
         context["updateUrl"] = reverse_lazy("empleados:update", args=[0])
         context["deleteUrl"] = reverse_lazy("empleados:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_empleados:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

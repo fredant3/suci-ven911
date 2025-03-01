@@ -29,4 +29,5 @@ class Cargo(BaseModel):
             ("ver_cargo", "Puede ver cargo"),
             ("editar_cargo", "Puede actualizar cargo"),
             ("eliminar_cargo", "Puede eliminar cargo"),
+            ("exel_cargo", "Puede exportar cargo a excel"),
         ]
