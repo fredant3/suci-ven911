@@ -25,7 +25,6 @@ class TecnologiaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submodule"] = "Tecnologia"
         context["listApiUrl"] = reverse_lazy("api_tecnologia:list")
         context["heads"] = columns
-        # context["withActions"] = False
         context["updateUrl"] = reverse_lazy("tecnologia:update", args=[0])
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

@@ -1,5 +1,6 @@
 from django.urls import path
 from tecnologia.views.list_view import TecnologiaListView
+from tecnologia.views.update_view import TecnologiaUpdateView
 
 urlpatterns = [
     path(
@@ -12,5 +13,5 @@ urlpatterns = [
         TecnologiaListView.as_view(),
         name="read",
     ),
-    path("<int:pk>/update", TecnologiaListView.as_view(), name="update"),
+    path("<int:pk>/update", TecnologiaUpdateView.as_view(), name="update"),
 ]
