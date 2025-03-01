@@ -54,6 +54,8 @@ function getColumns (withActions, stringColumns) {
   if (typeof stringColumns === "string")
     stringColumns = stringColumns.split("|").map((item) => ({ data: item }));
 
+  console.info({ stringColumns })
+
   if (withActions == 'True') stringColumns.push({ data: "" });
 
   return stringColumns;
