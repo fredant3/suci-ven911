@@ -9,15 +9,6 @@ class Objetivo(BaseModel):
     objetiv = models.CharField(max_length=64, verbose_name="Objetivos:", default="")
     meta = models.CharField(max_length=64, verbose_name="Meta:", default="")
 
-    class Meta:
-        permissions = [
-            ("listar_objetivo", "Puede listar objetivos"),
-            ("agregar_objetivo", "Puede agregar objetivo"),
-            ("ver_objetivo", "Puede ver objetivo"),
-            ("editar_objetivo", "Puede actualizar objetivo"),
-            ("eliminar_objetivo", "Puede eliminar objetivo"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -27,3 +18,10 @@ class Objetivo(BaseModel):
     class Meta:
         verbose_name = "objetivo"
         verbose_name_plural = "objetivos"
+        permissions = [
+            ("listar_objetivo", "Puede listar objetivos"),
+            ("agregar_objetivo", "Puede agregar objetivo"),
+            ("ver_objetivo", "Puede ver objetivo"),
+            ("editar_objetivo", "Puede actualizar objetivo"),
+            ("eliminar_objetivo", "Puede eliminar objetivo"),
+        ]

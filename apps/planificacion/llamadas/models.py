@@ -22,15 +22,6 @@ class Llamada(BaseModel):
         max_length=64, verbose_name="Video Protección:", default=""
     )
 
-    class Meta:
-        permissions = [
-            ("listar_llamada", "Puede listar llamada"),
-            ("agregar_llamada", "Puede agregar llamada"),
-            ("ver_llamada", "Puede ver llamada"),
-            ("editar_llamada", "Puede actualizar llamada"),
-            ("eliminar_llamada", "Puede eliminar llamada"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -40,3 +31,10 @@ class Llamada(BaseModel):
     class Meta:
         verbose_name = "llamada"
         verbose_name_plural = "llamadas"
+        permissions = [
+            ("listar_llamada", "Puede listar llamada"),
+            ("agregar_llamada", "Puede agregar llamada"),
+            ("ver_llamada", "Puede ver llamada"),
+            ("editar_llamada", "Puede actualizar llamada"),
+            ("eliminar_llamada", "Puede eliminar llamada"),
+        ]
