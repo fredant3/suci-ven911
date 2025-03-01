@@ -27,5 +27,6 @@ class GestionHumanaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             ("Dotaciones", reverse_lazy("dotaciones:list")),
             ("Educación", reverse_lazy("educaciones:list")),
             ("Familiar", reverse_lazy("familiares:list")),
+            ("Contratos", reverse_lazy("contratos:list")),
         )
         return TemplateLayout.init(self, context)
