@@ -23,10 +23,10 @@ class TecnologiaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Tecnologia de la Informacion"
         context["submodule"] = "Tecnologia"
-        context["createBtn"] = "Añadir"
-        # context["createUrl"] = reverse_lazy("tecnologia:create")
         context["listApiUrl"] = reverse_lazy("api_tecnologia:list")
         context["heads"] = columns
+        # context["withActions"] = False
+        context["updateUrl"] = reverse_lazy("tecnologia:update", args=[0])
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
 
@@ -61,7 +61,6 @@ class TecnologiaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
         ]
-
 
 
 class TecnologiaListApiView(ListController, CheckPermisosMixin):

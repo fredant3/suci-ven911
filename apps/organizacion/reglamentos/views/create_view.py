@@ -5,20 +5,20 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
 from organizacion.reglamentos.forms import ReglamentoForm
 from organizacion.reglamentos.services import ReglamentoService
+
 from templates.sneat import TemplateLayout
-from django.http import JsonResponse
+
 
 class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = "organizacion.reglamentos.agregar_reglamento"
     form_class = ReglamentoForm
-    template_name = "sneat/layout/partials/form/layout_normativas.html"
-    success_url = reverse_lazy("reglamentos:list")
+    template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Organización"
+        context["titlePage"] = "Organizacion"
         context["indexUrl"] = reverse_lazy("organizacion")
-        context["module"] = "Organización"
+        context["module"] = "Organizacion"
         context["submodule"] = "Reglamentos"
         context["titleForm"] = "Añadir un reglamento"
         context["tag"] = "Registrar"
@@ -26,10 +26,7 @@ class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["urlForm"] = reverse_lazy("api_reglamentos:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
-    
-    def form_valid(self, form):
-        form.instance.usuario = self.request.user
-        return JsonResponse({"message": "Se ha registrado con éxito."})
+
 
 class ReglamentoCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = "organizacion.reglamentos.agregar_reglamento"
@@ -37,11 +34,3 @@ class ReglamentoCreateApiView(CreateController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = ReglamentoService()
-    
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({"message": "Se ha registrado con éxito."})
-        else:
-            return self.form_invalid(form)

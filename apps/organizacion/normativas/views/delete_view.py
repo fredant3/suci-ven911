@@ -6,7 +6,9 @@ from helpers.ControllerMixin import DeleteController
 from organizacion.normativas.forms import NormativaForm
 from organizacion.normativas.models import Normativa
 from organizacion.normativas.services import NormativaService
+
 from templates.sneat import TemplateLayout
+
 
 class NormativaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
     permission_required = "organizacion.normativas.eliminar_normativa"
@@ -21,7 +23,9 @@ class NormativaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titleForm"] = "Eliminar normativa"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("normativas:list")
-        context["urlDelete"] = reverse_lazy("api_normativas:delete", args=[self.kwargs.get("pk")])
+        context["urlDelete"] = reverse_lazy(
+            "api_normativas:delete", args=[self.kwargs.get("pk")]
+        )
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):

@@ -21,7 +21,7 @@
     {% endfor %}
   </select>
 </div>
-{% else %}
+{% elif createUrl is not None %}
 <a href="{{ createUrl }}" class="btn btn-outline-primary">
   <span class="tf-icons bx bx-plus me-1"></span>{{ createBtn }}
 </a>
@@ -77,7 +77,8 @@ const url = "{{ listApiUrl }}"
 const updateUrl = "{{ updateUrl }}"
 const deleteUrl = "{{ deleteUrl }}"
   const columns =  {{ columns|safe }}
-  setTBody({url, columns, updateUrl, deleteUrl});
+  const withActions = "{{ withActions }}"
+  setTBody({url, columns, withActions, updateUrl, deleteUrl});
 });
 </script>
 {% endblock %}
