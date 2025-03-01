@@ -1,10 +1,13 @@
 from django import forms
-
-from .models import Educacion
+from rrhh.empleados.models import Empleado
+from rrhh.educaciones.models import Educacion
 from helpers.FormBase import FormBase
 
 
 class EducacionForm(FormBase):
+    fecha_inicio = FormBase.create_date_field("fecha_inicio")
+    fecha_culminacion = FormBase.create_date_field("fecha_culminacion")
+
     class Meta:
         model = Educacion
         fields = (
@@ -15,7 +18,7 @@ class EducacionForm(FormBase):
             "fecha_inicio",
             "fecha_culminacion",
             "enlace_certificado",
-            "personal",
+            "empleado",
         )
         exclude = [
             "created_at",
@@ -26,3 +29,7 @@ class EducacionForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        labels = {
+            "empleado": "Empleado",
+        }
+        widgets = {}

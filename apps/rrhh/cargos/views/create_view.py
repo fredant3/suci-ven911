@@ -17,9 +17,9 @@ class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestion Humana"
+        context["titlePage"] = "Gestión Huamana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestion Humana"
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Cargos"
         context["titleForm"] = "Añadir una cargo nueva"
         context["tag"] = "Registrar"

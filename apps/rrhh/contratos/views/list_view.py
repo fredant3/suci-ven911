@@ -20,15 +20,16 @@ class ContratoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestion Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestion Humana"
         context["submodule"] = "Contratos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("contratos:create")
         context["listApiUrl"] = reverse_lazy("api_contratos:list")
         context["updateUrl"] = reverse_lazy("contratos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("contratos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_contratos:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

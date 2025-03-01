@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views.create_view import ContratoCreateApiView
-from .views.delete_view import ContratoDeleteApiView
-from .views.list_view import ContratoListApiView
-from .views.update_view import ContratoUpdateApiView
+from rrhh.contratos.views.create_view import ContratoCreateApiView
+from rrhh.contratos.views.delete_view import ContratoDeleteApiView
+from rrhh.contratos.views.list_view import ContratoListApiView
+from rrhh.contratos.views.update_view import ContratoUpdateApiView
+from rrhh.contratos.views.export_view import ContratoExcelView
 
 urlpatterns = [
     path(
@@ -25,5 +26,10 @@ urlpatterns = [
         "<int:pk>/delete",
         ContratoDeleteApiView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        ContratoExcelView.as_view(),
+        name="export_excel",
     ),
 ]

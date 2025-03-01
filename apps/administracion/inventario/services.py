@@ -12,6 +12,8 @@ class ArticuloService(CrudService):
         "marca",
         "modelo",
         "fecha_adq",
+        "codigo_bn",
+        "serial",
     )
 
     def __init__(self):

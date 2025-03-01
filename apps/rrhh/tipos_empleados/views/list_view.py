@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import TipoEmpleadoService
+from rrhh.tipos_empleados.services import TipoEmpleadoService
 
 
 class TipoEmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,15 +20,16 @@ class TipoEmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView)
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Tipos de Empleados"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("tipos_empleados:create")
         context["listApiUrl"] = reverse_lazy("api_tipos_empleados:list")
         context["updateUrl"] = reverse_lazy("tipos_empleados:update", args=[0])
         context["deleteUrl"] = reverse_lazy("tipos_empleados:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_tipos_empleados:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -43,65 +44,16 @@ class TipoEmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView)
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
+                "data": "tipo_personal",
+                "name": "tipo_personal",
+                "title": "Tipo Personal",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cedula",
-                "name": "cedula",
-                "title": "Cédula",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
+                "data": "estatus",
+                "name": "estatus",
+                "title": "Estatus",
                 "orderable": "false",
                 "searchable": "false",
             },

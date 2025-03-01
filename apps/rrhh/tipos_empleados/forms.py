@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import TipoEmpleado
+from rrhh.tipos_empleados.models import TipoEmpleado
 from helpers.FormBase import FormBase
 
 

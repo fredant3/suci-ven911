@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 
 
 class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "administracion.inventario.list_articulo"
+    permission_required = "administracion.inventario.listar_articulo"
     url_redirect = reverse_lazy("administracion")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -76,11 +76,25 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
+            {
+                "data": "codigo_bn",
+                "name": "codigo_bn",
+                "title": "Codigo Bienes",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "serial",
+                "name": "serial",
+                "title": "Serial",
+                "orderable": "false",
+                "searchable": "false",
+            },
         ]
 
 
 class ArticuloListApiView(ListController, CheckPermisosMixin):
-    permission_required = "administracion.inventario.list_articulo"
+    permission_required = "administracion.inventario.listar_articulo"
 
     def __init__(self):
         self.service = ArticuloService()

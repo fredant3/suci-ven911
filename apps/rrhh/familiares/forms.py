@@ -1,17 +1,26 @@
 from django import forms
-
-from .models import Familiar
+from rrhh.familiares.models import Familiar
 from helpers.FormBase import FormBase
+from rrhh.empleados.models import Empleado
 
 
 class FamiliarForm(FormBase):
+    fecha_nacimiento = FormBase.create_date_field("fecha_nacimiento")
+
     class Meta:
         model = Familiar
         fields = (
-            "camisa",
-            "pantalon",
-            "zapato",
-            "personal",
+            "parentezco",
+            "tipo_hijo",
+            "discapacidad",
+            "nombres",
+            "apellidos",
+            "cedula",
+            "fecha_nacimiento",
+            "sexo",
+            "estado_civil",
+            "empleado",
+            "observacion",
         )
         exclude = [
             "created_at",
@@ -22,3 +31,7 @@ class FamiliarForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        labels = {
+            "empleado": "Empleado",
+        }
+        widgets = {}

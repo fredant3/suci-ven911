@@ -63,7 +63,7 @@ class DenunciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class DenunciaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.editar_denuncia"
     form_class = DenunciaForm
 
     def __init__(self):

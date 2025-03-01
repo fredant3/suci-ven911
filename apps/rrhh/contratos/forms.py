@@ -8,14 +8,19 @@ class ContratoForm(FormBase):
     class Meta:
         model = Contrato
         fields = (
-            "colegio",
-            "codigo_titulo",
-            "titulo",
-            "area_conocimiento",
-            "fecha_inicio",
+            "tipo",
+            "comision_servicio",
+            "pnb",
+            "departamento",
+            "tipo_personal",
+            "cargo",
+            "sede",
+            "fecha_ingreso_911",
+            "fecha_ingreso_apn",
+            "fasmij",
+            "fecha_ingreso",
             "fecha_culminacion",
-            "enlace_certificado",
-            "personal",
+            "empleado",
         )
         exclude = [
             "created_at",

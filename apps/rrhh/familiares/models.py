@@ -33,21 +33,20 @@ class Familiar(BaseModel):
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     observacion = models.CharField(max_length=150, blank=True, null=True)
 
+    def toJSON(self):
+        return model_to_dict(self)
+
+    def __str__(self):
+        return "{0} {1}".format(self.nombres, self.apellidos)
+
     class Meta:
+        verbose_name = "familiar"
+        verbose_name_plural = "familiares"
         permissions = [
             ("listar_familiares", "Listar familiares"),
             ("agregar_familiar", "Agregar familiares"),
             ("ver_familiar", "Ver familiares"),
             ("modificar_familiar", "Modificar familiares"),
             ("eliminar_familiar", "Eliminar familiares"),
+            ("exel_familiar", "Exportar familiares a excel"),
         ]
-
-    def toJSON(self):
-        return model_to_dict(self)
-
-    def __str__(self):
-        return "{0} {1}".format(self.name, self.apellido)
-
-    class Meta:
-        verbose_name = "familiar"
-        verbose_name_plural = "familiares"
