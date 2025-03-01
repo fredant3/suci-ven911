@@ -1,6 +1,7 @@
 from helpers.CrudMixin import CrudService
 from organizacion.normativas.repositories import NormativaRepository
 from organizacion.reglamentos.repositories import ReglamentoRepository
+from django.conf import settings
 
 
 class OrganizacionService(CrudService):
@@ -9,10 +10,28 @@ class OrganizacionService(CrudService):
         self.reglamentoRepository = ReglamentoRepository()
 
     def getLastThreeNormativas(self, select, orderBy, orderAsc):
-        return self.normativaRepository.getAll(select, orderBy, orderAsc)[:3]
+        data = self.normativaRepository.getAll(select, orderBy, orderAsc)[:3]
+
+        for field in data:
+            if "file" in field:
+                url_file = f"{settings.MEDIA_URL}{field['file']}"
+                field["file"] = (
+                    f'<img src="{url_file}" style="height:50px;width:50px;" />'
+                )
+
+        return data
 
     def getLastThreeReglamentos(self, select, orderBy, orderAsc):
-        return self.reglamentoRepository.getAll(select, orderBy, orderAsc)[:3]
+        data = self.reglamentoRepository.getAll(select, orderBy, orderAsc)[:3]
+
+        for field in data:
+            if "file" in field:
+                url_file = f"{settings.MEDIA_URL}{field['file']}"
+                field["file"] = (
+                    f'<img src="{url_file}" style="height:50px;width:50px;" />'
+                )
+
+        return data
 
     def getAll(
         self,

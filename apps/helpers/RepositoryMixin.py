@@ -34,7 +34,8 @@ class Repository:
     def media(self, file, custom_folder):
         path = self.media_folder(file, custom_folder)
         self.seve_media(path, file)
-        return path
+
+        return path.replace(settings.MEDIA_ROOT, "").replace("\\", "/")
 
     def media_folder(self, file, custom_folder):
         file_extension = Path(file.name).suffix.lower()
