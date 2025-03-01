@@ -12,4 +12,5 @@ urlpatterns = [
         TecnologiaListView.as_view(),
         name="read",
     ),
+    path("<int:pk>/update", TecnologiaListView.as_view(), name="update"),
 ]

@@ -1,23 +1,31 @@
-from django import forms
-from .models import Reglamento
+from organizacion.reglamentos.models import Reglamento
+from helpers.FormBase import FormBase
 
-class ReglamentoForm(forms.ModelForm):
-    date = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
+
+class ReglamentoForm(FormBase):
+    date = FormBase.create_date_field("date")
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
+
+        if instance:
+            self.fields.pop("file")
+
     class Meta:
         model = Reglamento
         fields = [
             "name",
             "file",
-            "user",
             "date",
             "progre",
+            "estado",
         ]
         exclude = [
             "created_at",
             "created_by",
             "updated_at",
             "updated_by",
-            "deleted",
             "deleted_at",
             "deleted_by",
         ]

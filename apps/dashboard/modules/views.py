@@ -47,7 +47,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/organizacion.png",
             },
             {
-                "title": "Presupuesto",
+                "title": "Presupuestos",
                 "url": "presupuesto",
                 "image": "img/modules/presupuesto.png",
             },
