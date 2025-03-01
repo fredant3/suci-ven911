@@ -18,15 +18,6 @@ class Sueldo(BaseModel):
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
 
-    class Meta:
-        permissions = [
-            ("listar_sueldos", "Listar sueldos"),
-            ("agregar_sueldo", "Agregar sueldos"),
-            ("ver_sueldo", "Ver sueldos"),
-            ("modificar_sueldo", "Modificar sueldos"),
-            ("eliminar_sueldo", "Eliminar sueldos"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -36,21 +27,20 @@ class Sueldo(BaseModel):
     class Meta:
         verbose_name = "sueldo"
         verbose_name_plural = "sueldos"
-
-
-class SueldoEmpleado(BaseModel):
-    sueldo = models.ForeignKey(Sueldo, on_delete=models.CASCADE)
-    fecha_pago = models.DateField()
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
-
-    class Meta:
         permissions = [
             ("listar_sueldos", "Listar sueldos"),
             ("agregar_sueldo", "Agregar sueldos"),
             ("ver_sueldo", "Ver sueldos"),
             ("modificar_sueldo", "Modificar sueldos"),
             ("eliminar_sueldo", "Eliminar sueldos"),
+            ("exel_sueldo", "Exportar sueldos a excel"),
         ]
+
+
+class SueldoEmpleado(BaseModel):
+    sueldo = models.ForeignKey(Sueldo, on_delete=models.CASCADE)
+    fecha_pago = models.DateField()
+    monto = models.DecimalField(max_digits=10, decimal_places=2)
 
     def toJSON(self):
         return model_to_dict(self)
@@ -61,3 +51,11 @@ class SueldoEmpleado(BaseModel):
     class Meta:
         verbose_name = "detalles del sueldo"
         verbose_name_plural = "destalles de los sueldos"
+        permissions = [
+            ("listar_sueldos", "Listar sueldos"),
+            ("agregar_sueldo", "Agregar sueldos"),
+            ("ver_sueldo", "Ver sueldos"),
+            ("modificar_sueldo", "Modificar sueldos"),
+            ("eliminar_sueldo", "Eliminar sueldos"),
+            ("exel_sueldo", "Exportar sueldos a excel"),
+        ]

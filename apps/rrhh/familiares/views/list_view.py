@@ -12,17 +12,6 @@ from templates.sneat import TemplateLayout
 from rrhh.familiares.services import FamiliarService
 
 
-# parentezco
-# tipo_hijo
-# discapacidad
-# nombres
-# apellidos
-# cedula
-# fecha_nacimiento
-# sexo
-# estado_civil
-# empleado__nombres
-# observacion
 class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "rrhh.familiares.listar_familiar"
     url_redirect = reverse_lazy("modules:index")
@@ -40,6 +29,7 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_familiares:list")
         context["updateUrl"] = reverse_lazy("familiares:update", args=[0])
         context["deleteUrl"] = reverse_lazy("familiares:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_familiares:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

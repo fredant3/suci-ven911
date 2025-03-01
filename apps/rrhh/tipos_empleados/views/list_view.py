@@ -29,6 +29,7 @@ class TipoEmpleadoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView)
         context["listApiUrl"] = reverse_lazy("api_tipos_empleados:list")
         context["updateUrl"] = reverse_lazy("tipos_empleados:update", args=[0])
         context["deleteUrl"] = reverse_lazy("tipos_empleados:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_tipos_empleados:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

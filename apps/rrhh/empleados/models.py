@@ -41,6 +41,7 @@ class Empleado(BaseModel):
             ("ver_empleado", "Puede ver empleado"),
             ("editar_empleado", "Puede actualizar empleado"),
             ("eliminar_empleado", "Puede eliminar empleado"),
+            ("exel_empleado", "Puede exportar empleado a excel"),
         ]
 
     def toJSON(self):

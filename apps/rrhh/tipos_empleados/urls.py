@@ -4,6 +4,7 @@ from rrhh.tipos_empleados.views.create_view import TipoEmpleadoCreateView
 from rrhh.tipos_empleados.views.delete_view import TipoEmpleadoDeleteView
 from rrhh.tipos_empleados.views.list_view import TipoEmpleadoListView
 from rrhh.tipos_empleados.views.update_view import TipoEmpleadoUpdateView
+from rrhh.tipos_empleados.views.export_view import TipoEmpleadoExcelView
 
 urlpatterns = [
     path(
@@ -30,5 +31,10 @@ urlpatterns = [
         "<int:pk>/delete",
         TipoEmpleadoDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        TipoEmpleadoExcelView.as_view(),
+        name="export_excel",
     ),
 ]

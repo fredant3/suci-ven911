@@ -48,4 +48,5 @@ class Familiar(BaseModel):
             ("ver_familiar", "Ver familiares"),
             ("modificar_familiar", "Modificar familiares"),
             ("eliminar_familiar", "Eliminar familiares"),
+            ("exel_familiar", "Exportar familiares a excel"),
         ]
