@@ -76,6 +76,20 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
+            {
+                "data": "codigo_bn",
+                "name": "codigo_bn",
+                "title": "Codigo Bienes",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "serial",
+                "name": "serial",
+                "title": "Serial",
+                "orderable": "false",
+                "searchable": "false",
+            },
         ]
 
 
