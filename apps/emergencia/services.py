@@ -1,3 +1,4 @@
+from django.db.models import Q
 from helpers.CrudMixin import CrudService
 from .repositories import EmergenciaRepository
 from emergencia.incidencias.repositories import TipoIncidenciaRepository
@@ -12,12 +13,10 @@ class EmergenciaService(CrudService):
 
     def search_type_incidences(self, id):
         search = self.repositoryIncidence.getById(id)
-        print(search)
         return search if search is not None else None
 
     def search_organismo(self, id):
         search = self.repositoryOrganismo.getById(id)
-        print(search)
         return search if search is not None else None
 
     def relationship(self, payload, *arg, **kwargs):
@@ -25,3 +24,15 @@ class EmergenciaService(CrudService):
         payload["organismo"] = self.search_organismo(payload["organismo"])
 
         return payload
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= (
+                Q(denunciante__icontains=search)
+                | Q(incidencia__nombre_incidencia__icontains=search)
+                | Q(organismo__nombre__icontains=search)
+            )
+
+        return query
