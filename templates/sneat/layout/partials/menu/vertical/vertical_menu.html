@@ -37,7 +37,7 @@
 
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div class="text-truncate" data-i18n="Layouts">Administracion </div>
+        <div class="text-truncate" data-i18n="Layouts">Administracion</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item {% if 'administracion' == request.resolver_match.url_name %}active{% endif %}">
@@ -147,46 +147,42 @@
       </a>
     </li>
 
-    
-      <li class="menu-item {% if 'planificacion' == request.resolver_match.url_name or 'objetivos' in request.resolver_match.namespaces or 'transportes' %}active open{% endif %}">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div class="text-truncate" data-i18n="Layouts">Planificacion</div>
-        </a>
-        <ul class="menu-sub">
-          <li
-          class="menu-item {% if 'objetivos' == request.resolver_match.url_name %}active{% endif %}">
+    <li class="menu-item {% if 'planificacion' == request.resolver_match.url_name or 'objetivos' in request.resolver_match.namespaces or 'transportes' %}active open{% endif %}">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div class="text-truncate" data-i18n="Layouts">Planificacion</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item {% if 'objetivos' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'objetivos:list' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Objetivos</div>
           </a>
         </li>
-        <li
-          <li
-            class="menu-item {% if 'actividades' == request.resolver_match.url_name %}active{% endif %}">
-            <a href="{% url 'actividades:list' %}" class="menu-link">
-              <div class="text-truncate" data-i18n="Without menu">Actividades</div>
-            </a>
-          </li>
-          <li
-            class="menu-item {% if 'llamadas' == request.resolver_match.url_name %}active{% endif %}">
-            <a href="{% url 'llamadas:list' %}" class="menu-link">
-              <div class="text-truncate" data-i18n="Without menu">Llamadas</div>
-            </a>
-          </li>
-      <li
-          class="menu-item {% if 'infraestructuras' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
-            <a href="{% url 'infraestructuras:list' %}" class="menu-link">
-              <div class="text-truncate" data-i18n="Without menu">Infraestructuras</div>
-            </a>
-      </li>
-      <li
-          class="menu-item {% if 'transportes' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
-            <a href="{% url 'transportes:list' %}" class="menu-link">
-              <div class="text-truncate" data-i18n="Without menu">Transportes</div>
-            </a>   
-      </li>
 
-         </ul>
+        <li class="menu-item {% if 'actividades' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'actividades:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Actividades</div>
+          </a>
+        </li>
+
+        <li class="menu-item {% if 'llamadas' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'llamadas:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Llamadas</div>
+          </a>
+        </li>
+
+        <li class="menu-item {% if 'infraestructuras' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'infraestructuras:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Infraestructuras</div>
+          </a>
+        </li>
+
+        <li class="menu-item {% if 'transportes' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'transportes:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Transportes</div>
+          </a>   
+        </li>
+      </ul>
     </li>
 
 
