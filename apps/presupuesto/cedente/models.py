@@ -17,16 +17,6 @@ class Cedente(BaseModel):
     saldofc = models.CharField(max_length=64, verbose_name="Saldo final")
     direccionc = models.CharField(max_length=64, verbose_name="Dirección cedente")
 
-    class Meta:
-        permissions = [
-            ("listar_cedente", "Puede listar cedente"),
-            ("agregar_cedente", "Puede agregar cedente"),
-            ("ver_cedente", "Puede ver cedente"),
-            ("editar_cedente", "Puede actualizar cedente"),
-            ("eliminar_cedente", "Puede eliminar cedente"),
-            ("pdf_cedente", "Puede generar pdf de cedente"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -36,3 +26,11 @@ class Cedente(BaseModel):
     class Meta:
         verbose_name = "Cedente"
         verbose_name_plural = "Cedentes"
+        permissions = [
+            ("listar_cedente", "Puede listar cedente"),
+            ("agregar_cedente", "Puede agregar cedente"),
+            ("ver_cedente", "Puede ver cedente"),
+            ("editar_cedente", "Puede actualizar cedente"),
+            ("eliminar_cedente", "Puede eliminar cedente"),
+            ("pdf_cedente", "Puede generar pdf de cedente"),
+        ]

@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import FamiliarService
+from rrhh.familiares.services import FamiliarService
 
 
 class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,15 +20,16 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Familiars"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
+        context["submodule"] = "Familiar"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("familiares:create")
         context["listApiUrl"] = reverse_lazy("api_familiares:list")
         context["updateUrl"] = reverse_lazy("familiares:update", args=[0])
         context["deleteUrl"] = reverse_lazy("familiares:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_familiares:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -39,20 +40,41 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "data": "id",
                 "name": "id",
                 "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
+                "data": "parentezco",
+                "name": "parentezco",
+                "title": "Parentesco",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "tipo_hijo",
+                "name": "tipo_hijo",
+                "title": "Tipo de hijo",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "discapacidad",
+                "name": "discapacidad",
+                "title": "Discapacidad",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "nombres",
+                "name": "nombres",
+                "title": "Nombres",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "apellidos",
+                "name": "apellidos",
+                "title": "Apellidos",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -64,44 +86,37 @@ class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
+                "data": "fecha_nacimiento",
+                "name": "fecha_nacimiento",
+                "title": "Fecha de nacimiento",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
+                "data": "sexo",
+                "name": "sexo",
+                "title": "Sexo",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
+                "data": "estado_civil",
+                "name": "estado_civil",
+                "title": "Estado civil",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
+                "data": "empleado__nombres",
+                "name": "empleado__nombres",
+                "title": "Empleado",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
+                "data": "observacion",
+                "name": "observacion",
+                "title": "Observaciones",
                 "orderable": "false",
                 "searchable": "false",
             },

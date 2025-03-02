@@ -1,21 +1,37 @@
 from django import forms
 
-from .models import Empleado
+from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
 
 
 class EmpleadoForm(FormBase):
+    fecha_nacimiento = FormBase.create_date_field("fecha_nacimiento")
+    estudia = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={"value": "False"}),
+    )
+    discapacitado = forms.BooleanField(
+        required=False, widget=forms.CheckboxInput(attrs={"value": "False"})
+    )
+
     class Meta:
         model = Empleado
         fields = (
-            "colegio",
-            "codigo_titulo",
-            "titulo",
-            "area_conocimiento",
-            "fecha_inicio",
-            "fecha_culminacion",
-            "enlace_certificado",
-            "personal",
+            "estatus",
+            "nombres",
+            "apellidos",
+            "nacionalidad",
+            "cedula",
+            "sexo",
+            "fecha_nacimiento",
+            "estado_civil",
+            "tipo_sangre",
+            "email",
+            "telefono",
+            "direccion",
+            "estudia",
+            "discapacitado",
+            "contratos",
         )
         exclude = [
             "created_at",

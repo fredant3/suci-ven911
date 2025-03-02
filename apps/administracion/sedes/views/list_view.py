@@ -13,7 +13,7 @@ from administracion.sedes.services import SedeService
 
 
 class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "administracion.sedes.view_sede"
+    permission_required = "administracion.sedes.listar_sede"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -60,7 +60,7 @@ class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class SedeListApiView(ListController, CheckPermisosMixin):
-    permission_required = "administracion.sedes.view_sede"
+    permission_required = "administracion.sedes.listar_sede"
 
     def __init__(self):
         self.service = SedeService()

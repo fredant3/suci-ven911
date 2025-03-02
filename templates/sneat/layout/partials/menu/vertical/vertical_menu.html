@@ -32,15 +32,15 @@
     </li>
 
 
-    <li class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'compras' in request.resolver_match.namespaces or 'departamentos' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces or 'sedes' in request.resolver_match.namespaces %}active open{% endif %}">
+    <li
+      class="menu-item {% if 'administracion' == request.resolver_match.url_name or 'asignaciones' in request.resolver_match.namespaces or 'averias' in request.resolver_match.namespaces or 'compras' in request.resolver_match.namespaces or 'departamentos' in request.resolver_match.namespaces or 'articulos' in request.resolver_match.namespaces or 'sedes' in request.resolver_match.namespaces %}active open{% endif %}">
 
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div class="text-truncate" data-i18n="Layouts">Administracion</div>
       </a>
       <ul class="menu-sub">
-        <li
-          class="menu-item {% if 'administracion' == request.resolver_match.url_name %}active{% endif %}">
+        <li class="menu-item {% if 'administracion' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'administracion' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Inicio</div>
           </a>
@@ -111,8 +111,7 @@
         <div class="text-truncate" data-i18n="Layouts">Biblioteca</div>
       </a>
       <ul class="menu-sub">
-        <li
-          class="menu-item {% if 'bibliotecas' == request.resolver_match.url_name %}active{% endif %}">
+        <li class="menu-item {% if 'bibliotecas' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'bibliotecas' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Inicio</div>
           </a>
@@ -133,7 +132,8 @@
     </li>
 
 
-    <li class="menu-item {% if 'emergencias' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+    <li
+      class="menu-item {% if 'emergencias' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
       <a href="{% url 'emergencias:list' %}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-envelope"></i>
         <div class="text-truncate" data-i18n="Email">Emergencias</div>
@@ -241,14 +241,12 @@
         <div class="text-truncate" data-i18n="Layouts">Organizacion</div>
       </a>
       <ul class="menu-sub">
-        <li
-          class="menu-item {% if 'organizacion' == request.resolver_match.url_name %}active{% endif %}">
+        <li class="menu-item {% if 'organizacion' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'organizacion' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Inicio</div>
           </a>
         </li>
-        <li
-          class="menu-item {% if 'reglamentos' == request.resolver_match.url_name %}active{% endif %}">
+        <li class="menu-item {% if 'reglamentos' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'reglamentos:list' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Reglamentos</div>
           </a>

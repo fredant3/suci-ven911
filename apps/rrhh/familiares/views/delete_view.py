@@ -6,9 +6,9 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import FamiliarForm
-from ..models import Familiar
-from ..services import FamiliarService
+from rrhh.familiares.forms import FamiliarForm
+from rrhh.familiares.models import Familiar
+from rrhh.familiares.services import FamiliarService
 
 
 class FamiliarDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
@@ -17,9 +17,9 @@ class FamiliarDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Familiars"
         context["titleForm"] = "Eliminar familiar"
         context["tag"] = "Eliminar"

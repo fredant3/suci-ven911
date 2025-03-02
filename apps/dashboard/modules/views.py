@@ -23,7 +23,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Gestión Humana (Pendiente)",
-                "url": "tipos_sueldos:list",
+                "url": "gestion_humana",
                 "image": "img/modules/gestion_humana.png",
             },
             {

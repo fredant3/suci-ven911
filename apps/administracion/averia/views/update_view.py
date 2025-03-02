@@ -36,7 +36,7 @@ class AveriaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AveriaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = "administracion.averia.eliminar_averia"
+    permission_required = "administracion.averia.editar_averia"
     form_class = AveriaForm
 
     def __init__(self):

@@ -1,28 +1,26 @@
 from django import forms
-
-from .models import Cuenta
+from rrhh.cuentas.models import Cuenta
+from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
 
 
 class CuentaForm(FormBase):
+    pago_movil = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={"value": "False"}),
+    )
+
     class Meta:
         model = Cuenta
         fields = (
-            "colegio",
-            "codigo_titulo",
-            "titulo",
-            "area_conocimiento",
-            "fecha_inicio",
-            "fecha_culminacion",
-            "enlace_certificado",
-            "personal",
+            "banco",
+            "tipo",
+            "numero_cuenta",
+            "pago_movil",
+            "telefono",
+            "empleado",
         )
-        exclude = [
-            "created_at",
-            "created_by",
-            "updated_at",
-            "updated_by",
-            "deleted",
-            "deleted_at",
-            "deleted_by",
-        ]
+        labels = {
+            "empleado": "Empleado",
+        }
+        widgets = {}

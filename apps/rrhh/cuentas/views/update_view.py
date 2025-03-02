@@ -6,9 +6,9 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CuentaForm
-from ..models import Cuenta
-from ..services import CuentaService
+from rrhh.cuentas.forms import CuentaForm
+from rrhh.cuentas.models import Cuenta
+from rrhh.cuentas.services import CuentaService
 
 
 class CuentaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
@@ -18,9 +18,9 @@ class CuentaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Cuentas"
         context["titleForm"] = "Actualizar cuenta"
         context["tag"] = "Editar"

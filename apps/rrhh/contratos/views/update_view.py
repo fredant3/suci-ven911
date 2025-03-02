@@ -18,9 +18,9 @@ class ContratoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Contratos"
         context["titleForm"] = "Actualizar contrato"
         context["tag"] = "Editar"

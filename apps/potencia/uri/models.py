@@ -632,15 +632,6 @@ class Uri(BaseModel):
     )
     selloMsds = models.CharField("Sellos/MSDS", max_length=25, blank=True, null=True)
 
-    class Meta:
-        permissions = [
-            ("listar_uri", "Puede listar uri"),
-            ("agregar_uri", "Puede agregar uri"),
-            ("ver_uri", "Puede ver uri"),
-            ("editar_uri", "Puede actualizar uri"),
-            ("eliminar_uri", "Puede eliminar uri"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -650,3 +641,10 @@ class Uri(BaseModel):
     class Meta:
         verbose_name = "Unidad de repuesta inmediata"
         verbose_name_plural = "Unidades de repuestas inmediatas"
+        permissions = [
+            ("listar_uri", "Puede listar uri"),
+            ("agregar_uri", "Puede agregar uri"),
+            ("ver_uri", "Puede ver uri"),
+            ("editar_uri", "Puede actualizar uri"),
+            ("eliminar_uri", "Puede eliminar uri"),
+        ]

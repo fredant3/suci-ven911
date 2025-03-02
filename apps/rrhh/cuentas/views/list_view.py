@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import CuentaService
+from rrhh.cuentas.services import CuentaService
 
 
 class CuentaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,15 +20,16 @@ class CuentaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Cuentas"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("cuentas:create")
         context["listApiUrl"] = reverse_lazy("api_cuentas:list")
         context["updateUrl"] = reverse_lazy("cuentas:update", args=[0])
         context["deleteUrl"] = reverse_lazy("cuentas:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_cuentas:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -43,65 +44,44 @@ class CuentaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
+                "data": "banco",
+                "name": "banco",
+                "title": "Banco",
                 "orderable": "false",
                 "searchable": "false",
-            },
-            {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cedula",
-                "name": "cedula",
-                "title": "Cédula",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
-                "searchable": "true",
             },
             {
                 "data": "tipo",
                 "name": "tipo",
-                "title": "Tipo de Incidente",
+                "title": "Tipo",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
+                "data": "numero_cuenta",
+                "name": "numero_cuenta",
+                "title": "Numero Cuenta",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
+                "data": "pago_movil",
+                "name": "pago_movil",
+                "title": "Pago Movil",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
+                "data": "telefono",
+                "name": "telefono",
+                "title": "Telefono",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
+                "data": "empleado__nombres",
+                "name": "empleado__nombres",
+                "title": "Empleado",
                 "orderable": "false",
                 "searchable": "false",
             },
