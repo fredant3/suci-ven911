@@ -1,6 +1,7 @@
 from administracion.averia.repositories import AveriaRepository, TipoAveriaRepository
 from administracion.departamentos.repositories import DepartamentoRepository
 from helpers.CrudMixin import CrudService
+from django.db.models import Q
 
 
 class AveriaService(CrudService):
@@ -29,3 +30,15 @@ class AveriaService(CrudService):
         payload["tipo_averia"] = self.buscar_tipo_averia(payload.get("tipo_averia"))
         payload["departamento"] = self.buscar_departamento(payload.get("departamento"))
         return payload
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= (
+                Q(departamento__nombre__icontains=search)
+                | Q(problema__icontains=search)
+                | Q(ubicacion__icontains=search)
+            )
+
+        return query

@@ -1,6 +1,7 @@
 from administracion.compras.repositories import CompraRepository
 from helpers.CrudMixin import CrudService
 from administracion.inventario.repositories import ArticuloRepository
+from django.db.models import Q
 
 
 class CompraService(CrudService):
@@ -21,3 +22,11 @@ class CompraService(CrudService):
     def relationship(self, payload, *arg, **kwargs):
         payload["articulo"] = self.buscar_articulo(payload.get("articulo"))
         return payload
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= Q(n_orden__icontains=search)
+
+        return query
