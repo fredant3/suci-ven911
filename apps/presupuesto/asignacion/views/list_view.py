@@ -46,8 +46,8 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "departamento": "nombredir",
-                "departamento": "nombredir",
+                "data": "departamento",
+                "name": "departamento",
                 "title": "Nombre de la dirección",
                 "orderable": "false",
                 "searchable": "false",
