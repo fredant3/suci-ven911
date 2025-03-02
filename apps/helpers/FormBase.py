@@ -2,6 +2,9 @@ from django import forms
 
 
 class FormBase(forms.ModelForm):
+    container_class = ""
+    input_class = ""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

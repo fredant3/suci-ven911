@@ -20,5 +20,6 @@ class tecnologiaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submoduleList"] = (
             ("Inventario", reverse_lazy("tecnologia:list")),
             ("Averia", reverse_lazy("averias:list")),
+            ("Grupos", reverse_lazy("grupos:list")),
         )
         return TemplateLayout.init(self, context)

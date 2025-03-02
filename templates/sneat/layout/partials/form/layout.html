@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-  {{ titlePage }}
+{{ titlePage }}
 {% endblock %}
 
 {% block breadcrumbs %}
-  <span class="text-muted fw-light"><a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /</span>
-  <span class="text-muted fw-light"><a href="{{ listUrl }}" class="text-muted fw-light">{{ submodule }}</a> /</span>
+<span class="text-muted fw-light"><a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /</span>
+<span class="text-muted fw-light"><a href="{{ listUrl }}" class="text-muted fw-light">{{ submodule }}</a> /</span>
 <span class="">{{ tag }}</span>
 {% endblock %}
 
@@ -15,9 +15,7 @@
 <div class="row">
 	<div class="col-xl">
 		<div class="card mb-4">
-			<div
-				class="card-header d-flex justify-content-between align-items-center"
-			>
+			<div class="card-header d-flex justify-content-between align-items-center">
 				<h5 class="mb-0">{{ titleForm }}</h5>
 				<small class="text-muted float-end">{{ tag }}</small>
 			</div>
@@ -25,12 +23,10 @@
 			<div class="card-body">
 				<form id="form" novalidate enctype="multipart/form-data">
 					{% csrf_token %}
-					<div class="inputContainer">
+					<div class="inputContainer {{ form.container_class }}">
 						{% for field in form %}
-						<div class="input">
-							<label for="inputEmail3" class="input__label"
-								>{{ field.label }}</label
-							>
+						<div class="input {{ form.input_class }}">
+							<label for="inputEmail3" class="input__label">{{ field.label }}</label>
 							<div class="input__container">
 								{{ field }}
 								<div class="invalid-feedback"></div>
@@ -56,7 +52,7 @@
 {% endblock %}
 
 {% block page_js %}
-  {{ block.super }}
+{{ block.super }}
 <script src="{% static 'js/ajax-setup.js' %}"></script>
 <script src="{% static 'js/venezuela.js' %}"></script>
 <script src="{% static 'js/form.js' %}"></script>
