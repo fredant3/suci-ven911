@@ -23,8 +23,8 @@ class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["submodule"] = "Asignaciones"
         context["titleForm"] = "Añadir una asignacion"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("asignaciones:list")
-        context["urlForm"] = reverse_lazy("api_asignaciones:create")
+        context["listUrl"] = reverse_lazy("presupuesto_asignaciones:list")
+        context["urlForm"] = reverse_lazy("api_presupuesto_asignaciones:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 

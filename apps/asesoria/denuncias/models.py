@@ -20,15 +20,6 @@ class Denunciante(BaseModel):
     )
     direccion = models.CharField("Dirección del denunciante", max_length=180)
 
-    class Meta:
-        permissions = [
-            ("listar_denunciante", "Puede listar denunciantes"),
-            ("agregar_denunciante", "Puede agregar denunciante"),
-            ("ver_denunciante", "Puede ver denunciante"),
-            ("editar_denunciante", "Puede actualizar denunciante"),
-            ("eliminar_denunciante", "Puede eliminar denunciante"),
-        ]
-
     @property
     def nombre_completo(self):
         return f"{self.nombres} {self.apellidos}"
@@ -42,6 +33,13 @@ class Denunciante(BaseModel):
     class Meta:
         verbose_name = "Denunciante"
         verbose_name_plural = "Denunciantes"
+        permissions = [
+            ("listar_denunciante", "Puede listar denunciantes"),
+            ("agregar_denunciante", "Puede agregar denunciante"),
+            ("ver_denunciante", "Puede ver denunciante"),
+            ("editar_denunciante", "Puede actualizar denunciante"),
+            ("eliminar_denunciante", "Puede eliminar denunciante"),
+        ]
 
 
 class Denunciado(BaseModel):
@@ -64,15 +62,6 @@ class Denunciado(BaseModel):
         "Dirección del denunciado", max_length=180, blank=True, null=True
     )
 
-    class Meta:
-        permissions = [
-            ("listar_denunciado", "Puede listar denunciados"),
-            ("agregar_denunciado", "Puede agregar denunciado"),
-            ("ver_denunciado", "Puede ver denunciado"),
-            ("editar_denunciado", "Puede actualizar denunciado"),
-            ("eliminar_denunciado", "Puede eliminar denunciado"),
-        ]
-
     @property
     def nombre_completo(self):
         return f"{self.nombres} {self.apellidos}"
@@ -86,6 +75,13 @@ class Denunciado(BaseModel):
     class Meta:
         verbose_name = "Denunciado"
         verbose_name_plural = "Denunciados"
+        permissions = [
+            ("listar_denunciado", "Puede listar denunciados"),
+            ("agregar_denunciado", "Puede agregar denunciado"),
+            ("ver_denunciado", "Puede ver denunciado"),
+            ("editar_denunciado", "Puede actualizar denunciado"),
+            ("eliminar_denunciado", "Puede eliminar denunciado"),
+        ]
 
 
 class Denuncia(BaseModel):

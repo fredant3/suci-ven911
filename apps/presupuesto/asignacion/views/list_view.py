@@ -25,11 +25,13 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["module"] = "Presupuesto"
         context["submodule"] = "Asignaciones"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("asignacion:create")
-        context["listApiUrl"] = reverse_lazy("api_asignacion:list")
-        context["updateUrl"] = reverse_lazy("asignacion:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("asignacion:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_asignacion:export_pdf")
+        context["createUrl"] = reverse_lazy("presupuesto_asignaciones:create")
+        context["listApiUrl"] = reverse_lazy("api_presupuesto_asignaciones:list")
+        context["updateUrl"] = reverse_lazy("presupuesto_asignaciones:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("presupuesto_asignaciones:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy(
+            "api_presupuesto_asignaciones:export_pdf"
+        )
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
