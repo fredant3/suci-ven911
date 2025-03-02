@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel, ESTATUS_CHOICES
+from helpers.BaseModelMixin import BaseModel
 
 PROGRESS_CHOICES = (
     ("0", "0%"),
@@ -16,13 +16,15 @@ PROGRESS_CHOICES = (
     ("100", "100%"),
 )
 
+ESTATUS_CHOICES = (("bor", "Borrador"), ("rev", "Revision"), ("pub", "Publicado"))
+
 
 class Reglamento(BaseModel):
     name = models.CharField("Nombre de Reglamento:", max_length=64)
     file = models.FileField("Archivo", upload_to="reglamentos/")
     date = models.DateField("Fecha", blank=True)
     progre = models.CharField("Progreso:", max_length=64, choices=PROGRESS_CHOICES)
-    estado = models.CharField(max_length=8, choices=ESTATUS_CHOICES, default="inactivo")
+    estado = models.CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
 
     def toJSON(self):
         return model_to_dict(self)

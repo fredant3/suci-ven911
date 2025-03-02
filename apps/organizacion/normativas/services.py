@@ -1,5 +1,5 @@
+from django.conf import settings
 from helpers.CrudMixin import CrudService
-
 from organizacion.normativas.repositories import NormativaRepository
 from django.db.models import Q
 
