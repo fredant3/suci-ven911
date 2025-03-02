@@ -1,6 +1,7 @@
 from helpers.CrudMixin import CrudService
 
 from organizacion.normativas.repositories import NormativaRepository
+from django.db.models import Q
 
 
 class NormativaService(CrudService):
@@ -18,3 +19,11 @@ class NormativaService(CrudService):
         file = read.file
         if file:
             self.repository.remove_media(file.path)
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= Q(name__icontains=search) | Q(progre__icontains=search)
+
+        return query
