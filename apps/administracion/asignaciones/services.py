@@ -3,6 +3,7 @@ from administracion.departamentos.repositories import DepartamentoRepository
 from administracion.inventario.repositories import ArticuloRepository
 from administracion.sedes.repositories import SedeRepository
 from helpers.CrudMixin import CrudService
+from django.db.models import Q
 
 
 class AsignacionService(CrudService):
@@ -38,3 +39,13 @@ class AsignacionService(CrudService):
         payload["departamento"] = self.search_departamento(payload.get("departamento"))
 
         return payload
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= Q(sede__sede__icontains=search) | Q(
+                articulo__serial__icontains=search
+            )
+
+        return query

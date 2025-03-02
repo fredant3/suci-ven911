@@ -53,7 +53,7 @@ class Articulo(BaseModel):
     asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
 
     def __str__(self):
-        return self.descripcion + " - " + str(self.marca) + " - " + str(self.modelo)
+        return str(self.marca) + " - " + str(self.modelo)
 
     def toJSON(self):
         return model_to_dict(self)

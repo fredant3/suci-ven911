@@ -1,3 +1,4 @@
+from django.db.models import Q
 from asesoria.denuncias.repositories import (
     DenunciadoRepository,
     DenuncianteRepository,
@@ -61,3 +62,19 @@ class DenunciaService(CrudService):
     def before_update(self, entity, data):
         self.update_denunciante(entity.denunciante, data)
         self.update_denunciado(entity.denunciado, data)
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= (
+                Q(denunciante__nombres__icontains=search)
+                | Q(denunciante__apellidos__icontains=search)
+                | Q(denunciante__cedula__icontains=search)
+                | Q(denunciado__nombres__icontains=search)
+                | Q(denunciado__apellidos__icontains=search)
+                | Q(denunciado__cedula__icontains=search)
+                | Q(zona__icontains=search)
+            )
+
+        return query

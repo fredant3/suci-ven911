@@ -20,15 +20,6 @@ class Emergencia(BaseModel):
     # Localizacion_sede soon
     telefono_cuadrante_paz = models.CharField(max_length=20, blank=True)
 
-    class Meta:
-        permissions = [
-            ("listar_emergencia", "Puede listar emergencias"),
-            ("agregar_emergencia", "Puede agregar emergencia"),
-            ("ver_emergencia", "Puede ver emergencia"),
-            ("editar_emergencia", "Puede actualizar emergencia"),
-            ("eliminar_emergencia", "Puede eliminar emergencia"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -38,3 +29,10 @@ class Emergencia(BaseModel):
     class Meta:
         verbose_name = "emergencia"
         verbose_name_plural = "emergencias"
+        permissions = [
+            ("listar_emergencia", "Puede listar emergencias"),
+            ("agregar_emergencia", "Puede agregar emergencia"),
+            ("ver_emergencia", "Puede ver emergencia"),
+            ("editar_emergencia", "Puede actualizar emergencia"),
+            ("eliminar_emergencia", "Puede eliminar emergencia"),
+        ]
