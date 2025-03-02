@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import ContratoRepository
+from rrhh.contratos.repositories import ContratoRepository
 
 
 class ContratoService(CrudService):

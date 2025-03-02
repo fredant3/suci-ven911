@@ -5,6 +5,11 @@ from helpers.FormBase import FormBase
 
 
 class ContratoForm(FormBase):
+    fecha_ingreso_911 = FormBase.create_date_field("fecha_ingreso_911")
+    fecha_ingreso_apn = FormBase.create_date_field("fecha_ingreso_apn")
+    fecha_ingreso = FormBase.create_date_field("fecha_ingreso")
+    fecha_culminacion = FormBase.create_date_field("fecha_culminacion")
+
     class Meta:
         model = Contrato
         fields = (
