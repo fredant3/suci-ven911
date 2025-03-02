@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import Group, Permission
 from django.utils.translation import gettext_lazy as _
 from helpers.FormBase import FormBase
+from django.db.models import Q
 
 
 class GrupoPermisosForm(FormBase):
@@ -25,7 +26,14 @@ class GrupoPermisosForm(FormBase):
 
     def get_grouped_permissions(self):
         # Agrupar permisos por app_label
-        permissions = Permission.objects.select_related("content_type").all()
+        permissions = permissions = Permission.objects.select_related(
+            "content_type"
+        ).exclude(
+            Q(codename__startswith="add_")
+            | Q(codename__startswith="change_")
+            | Q(codename__startswith="delete_")
+            | Q(codename__startswith="view_")
+        )
         groups = {}
 
         for perm in permissions:
