@@ -13,12 +13,21 @@
 	padding-bottom: 0.3125em;
 }
 
+
 @media screen and (min-width: 768px) {
 	.inputContainer {
 		width: 80%;
 		grid-template-columns: 1fr 1fr;
+
+	}
+
+	.inputContainer--inline {
+		width: 100%;
+		grid-template-columns: 1fr;
 	}
 }
+
+
 
 .input {
 	width: 100%;
@@ -28,6 +37,10 @@
 	font-size: 1rem;
 	gap: 0.4em;
 	margin: 0 auto;
+}
+
+.input--width {
+	max-width: 40em;
 }
 
 .input--checkbox {
