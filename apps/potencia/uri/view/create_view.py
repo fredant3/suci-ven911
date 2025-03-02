@@ -3,16 +3,26 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
+from formtools.wizard.views import SessionWizardView
+from potencia.uri.forms import (
+    UriInfoGeneralForm,
+    UripacienteForm,
+    UriConsentimientoForm,
+    UriDireccionForm,
+    UriInfoclinicaForm,
+    UriSignosVitalesForm,
+    UriReferenciasForm,
+)
 
 from templates.sneat import TemplateLayout
 
-from potencia.uri.forms import UriForm
 from potencia.uri.services import UriService
+from django.http import HttpResponse
 
 
 class UriCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = "potencia.uri.agregar_uri"
-    form_class = UriForm
+    form_class = UriInfoGeneralForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -31,7 +41,23 @@ class UriCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 class UriCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = "potencia.uri.agregar_uri"
-    form_class = UriForm
+    form_class = UriInfoGeneralForm
 
-    def __init__(self):
-        self.service = UriService()
+
+class InfogeneralWizardView(SessionWizardView):
+    template_name = "template/widzards/index.html"
+    form_list = [
+        UriInfoGeneralForm,
+        UripacienteForm,
+        UriConsentimientoForm,
+        UriDireccionForm,
+        UriInfoclinicaForm,
+        UriSignosVitalesForm,
+        UriReferenciasForm,
+    ]
+
+    def done(self, form_list, **kwargs):
+        return HttpResponse()
+
+    # def __init__(self):
+    # self.service = UriService()

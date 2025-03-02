@@ -3,7 +3,6 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
-from potencia.uri.forms import UriForm
 from potencia.uri.models import Uri
 from potencia.uri.services import UriService
 
@@ -35,7 +34,6 @@ class UriDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 class UriDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = "potencia.uri.eliminar_uri"
-    form_class = UriForm
 
     def __init__(self):
         self.service = UriService()
