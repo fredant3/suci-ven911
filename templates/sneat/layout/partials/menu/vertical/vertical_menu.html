@@ -193,6 +193,14 @@
         <div class="text-truncate" data-i18n="Layouts">Presupuesto</div>
       </a>
       <ul class="menu-sub">
+
+        <li
+        class="menu-item {% if 'acciones' == request.resolver_match.url_name %}active{% endif %}">
+        <a href="{% url 'acciones:list' %}" class="menu-link">
+          <div class="text-truncate" data-i18n="Without menu">Acciones</div>
+        </a>
+      </li>
+
         <li
           class="menu-item {% if 'acciones' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'acciones:list' %}" class="menu-link">
@@ -235,7 +243,7 @@
       </a>
     </li>
 
-      <li class="menu-item {% if 'organizacion' == request.resolver_match.url_name or 'normativas' in request.resolver_match.namespaces or 'reglamentos' %}active open{% endif %}">
+      <li class="menu-item {% if 'organizacion' == request.resolver_match.url_name or 'reglamentos' in request.resolver_match.namespaces or 'normativas' %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div class="text-truncate" data-i18n="Layouts">Organizacion</div>
@@ -251,14 +259,51 @@
             <div class="text-truncate" data-i18n="Without menu">Reglamentos</div>
           </a>
         </li>
-      <li
-        class="menu-item {% if 'normativas' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+      <li class="menu-item {% if 'normativas' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
           <a href="{% url 'normativas:list' %}" class="menu-link">
             <div class="text-truncate" data-i18n="Without menu">Normativas</div>
           </a>
-      </li>
-  
+        </ul>
+     </li>
+    </li>
 
+      <li
+      class="menu-item {% if 'seguridad' == request.resolver_match.url_name or 'entradas' in request.resolver_match.namespaces or 'gestiones' in request.resolver_match.namespaces or 'salidas' in request.resolver_match.namespaces or 'vehiculos' in request.resolver_match.namespaces %}active open{% endif %}">
+
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div class="text-truncate" data-i18n="Layouts">Seguridad </div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item {% if 'seguridad' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'seguridad' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Inicio</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'entradas' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'entradas:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without menu">Entradas</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'gestiones' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'gestiones:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without navbar">Gestiones</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'salidas' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'salidas:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without navbar">Salidas</div>
+          </a>
+        </li>
+        <li
+          class="menu-item {% if 'vehiculos' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+          <a href="{% url 'vehiculos:list' %}" class="menu-link">
+            <div class="text-truncate" data-i18n="Without navbar">Vehiculos</div>
+          </a>
+        </li>
       </ul>
     </li>
 
