@@ -27,10 +27,10 @@ class NormativaService(CrudService):
 
         for col in columns:
             if col["name"] == "id":
-                query = query.filter(id__icontains=col["search"])
+                query = Q(id__icontains=col["search"])
             elif col["name"] == "name":
-                query = query.filter(name__icontains=col["search"])
+                query = Q(name__icontains=col["search"])
             elif col["name"] == "estado":
-                query = query.filter(estado__icontains=col["search"])
+                query = Q(estado__icontains=col["search"])
 
         return query

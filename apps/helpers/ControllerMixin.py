@@ -25,7 +25,7 @@ class ListController(LoginRequiredMixin, ListView):
         i = 0
         while True:
             searchable = self.request.GET.get(f"columns[{i}][searchable]")
-            if searchable is False:
+            if searchable is False or searchable == "false" or searchable is None:
                 break
 
             col_name = self.request.GET.get(f"columns[{i}][name]")
@@ -33,7 +33,6 @@ class ListController(LoginRequiredMixin, ListView):
                 break
 
             col_search = self.request.GET.get(f"columns[{i}][search][value]")
-
             if col_search:
                 columns.append({"name": col_name, "search": col_search})
 
@@ -42,7 +41,9 @@ class ListController(LoginRequiredMixin, ListView):
         orderBy = self.request.GET.get("order[0][name]") or None
         orderAsc = self.request.GET.get("order[0][dir]") or None
 
-        return self.service.getAll(draw, start, length, search, orderBy, orderAsc)
+        return self.service.getAll(
+            draw, start, length, search, orderBy, orderAsc, (""), columns
+        )
 
     def get(self, request, *args, **kwargs):
         data = {}

@@ -21,7 +21,7 @@ class CrudService(ServiceUtilMixin):
         columns=[],
     ):
         select = select if select else self.select
-        if search is None:
+        if search is None and len(columns) == 0:
             entities = self.repository.getAll(select, orderBy, orderAsc)
         else:
             search = self.criteria(search, columns)

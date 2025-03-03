@@ -65,6 +65,7 @@ $(document).ready(function () {
       dataType: 'json'
     })
       .done(function (data) {
+        showHtml (data.entities)
         $('#biblioteca-wrapper').append(`
           <div class="border rounded biblioteca-wrapper my-1">
             <div class="d-flex align-items-center">
