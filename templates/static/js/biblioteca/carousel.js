@@ -7,9 +7,6 @@ window.addEventListener('load',function(){
 
 const baseUrl = "https://raw.githubusercontent.com/rishikumarr/images/main/hand-picked-books/";
 const cardTemplate = document.querySelector('[data-card-template]');
-const bookTemplate = document.querySelector('[data-book]');
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
 
 const books = [
   [0, "wilder-girls.jpeg","Wilder Chica","Rory Power","Drama","This fresh debut is a mind-bending novel unlike anything you’ve read before. Rory Power’s work is a feminist Lord of the Flies about three best friends living in quarantine at their island boarding school, and the lengths they go to uncover the truth of their confinement when one disappears.",14,true] ,
@@ -36,33 +33,4 @@ books.forEach((book)=>{
   card.querySelector('[data-genre]').textContent = genre;
   card.querySelector('[data-author]').textContent = author;
   subContainer.appendChild(card);   
-});
-
-const cards = document.querySelectorAll('.img-container');
-
-cards.forEach(function(card){
-  card.addEventListener('click',function(){
-    subContainer.classList.add('show');
-    const title = this.querySelector('.title').textContent;
-    const author = this.querySelector('.author').textContent;
-    const id = this.querySelector('img').id;
-    const description = books[+id][5];
-    const cost = books[+id][6];
-    const genre = this.querySelector('.genre').textContent;
-    const book = document.importNode(bookTemplate.content,true);
-    book.querySelector('.modal-title').textContent = title;
-    book.querySelector('.modal-author').textContent = `- ${author}`;
-    book.querySelector('.modal-genre').textContent = genre;
-    book.querySelector('.description').textContent = description;
-    book.querySelector('.cost').innerText = `$ ${cost}`;
-    const bookImg = this.querySelector('.book-img').src;
-    book.querySelector('img').src = bookImg;
-    book.querySelector('.back').style.backgroundImage = `url(${bookImg})`;
-    modal.appendChild(book);
-  });
-});
-
-overlay.addEventListener('click',function(){
-  subContainer.classList.remove('show');
-  modal.innerHTML = '';
 });
