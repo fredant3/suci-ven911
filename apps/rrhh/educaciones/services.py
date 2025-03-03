@@ -2,6 +2,7 @@ from helpers.CrudMixin import CrudService
 from rrhh.empleados.models import Empleado  # Importar modelo Empleado
 from rrhh.empleados.repositories import EmpleadoRepository
 from rrhh.educaciones.repositories import EducacionRepository
+from django.db.models import Q
 
 
 class EducacionService(CrudService):
@@ -27,3 +28,13 @@ class EducacionService(CrudService):
     def relationship(self, payload, *arg, **kwargs):
         payload["empleado"] = self.buscar_empleado(payload.get("empleado"))
         return payload
+
+    def criteria(self, search):
+        query = Q()
+
+        if search:
+            query &= Q(sede__sede__icontains=search) | Q(
+                articulo__serial__icontains=search
+            )
+
+        return query

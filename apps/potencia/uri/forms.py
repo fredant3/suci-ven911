@@ -4,7 +4,7 @@ from helpers.FormBase import FormBase
 from django import forms
 
 
-class UriForm(FormBase):
+class UriInfoGeneralForm(FormBase):
     # 1) Informacion General
     # -Datos del servicio
     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atención")
@@ -27,6 +27,33 @@ class UriForm(FormBase):
 
     # Registro Visuales
 
+    class Meta:
+        model = Uri
+        fields = (
+            "fecha_atencion",
+            "nroreporte",
+            "placa",
+            "institucion",
+            "tipounidad",
+            "num_interna",
+            "contacto",
+            "centroAsistencial",
+            "servicioAsistencial",
+            "medico_receptor",
+            "msds",
+            "foto",
+        )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
+
+
+class UripacienteForm(FormBase):
     # Datos del paciente
     nombrepaciente = CharField(
         max_length=50, required=False, label="Nombre y Apellido del Paciente"
@@ -50,7 +77,8 @@ class UriForm(FormBase):
     unidad_placa = CharField(max_length=10, required=False, label="Unidad/Placa")
     firma = CharField(max_length=10, required=False, label="Firma")
 
-    # 3) Consentimiento informado
+
+class UriConsentimientoForm(FormBase):
     # Datos del acompañante
     nombre_acompanante = CharField(
         max_length=50, required=False, label="Nombre y Apellido del Acompañante"
@@ -87,7 +115,9 @@ class UriForm(FormBase):
     )
 
     # 4)Direccion Exacta del Evento
-    # Direccion
+
+
+class UriDireccionForm(FormBase):
 
     estado_evento = CharField(max_length=20, required=False, label="Estado")
     municipio_evento = CharField(max_length=20, required=False, label="Municipio")
@@ -121,6 +151,9 @@ class UriForm(FormBase):
     observaciones_servicio = CharField(
         max_length=300, required=False, label="Observaciones del Servicio"
     )
+
+
+class UriInfoclinicaForm(FormBase):
     # 5) Informacion Clinica
     # Trauma
 
@@ -160,6 +193,8 @@ class UriForm(FormBase):
     ultimaComida = CharField(max_length=100, required=False, label="Última comida")
     evento = CharField(max_length=100, required=False, label="Evento")
 
+
+class UriSignosVitalesForm(FormBase):
     # 7) Signos Vitales o Tratamiento
 
     # Signos Vitales
@@ -194,6 +229,8 @@ class UriForm(FormBase):
 
     # Registro de Referencias y Contrareferencias
 
+
+class UriReferenciasForm(FormBase):
     hospitalOrigen = CharField(
         max_length=100, required=False, label="Hospital de Origen"
     )
@@ -241,18 +278,6 @@ class UriForm(FormBase):
     class Meta:
         model = Uri
         fields = (
-            "fecha_atencion",
-            "nroreporte",
-            "placa",
-            "institucion",
-            "tipounidad",
-            "num_interna",
-            "contacto",
-            "centroAsistencial",
-            "servicioAsistencial",
-            "medico_receptor",
-            "msds",
-            "foto",
             "nombrepaciente",
             "cedulapaciente",
             "telefonopaciente",
@@ -373,24 +398,3 @@ class UriForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-
-
-# class UriInfoGeneralForm(FormBase):
-# fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atencion")
-# nroreporte= CharField(max_length=10, required=False, label="Número de Reporte")
-
-#     class Meta:
-#         model = Uri
-#         fields = (
-#             "fecha_atencion",
-#             "nroreporte",
-#             "placa",
-#         )
-#         exclude = [
-#             "created_at",
-#             "created_by",
-#             "updated_at",
-#             "updated_by",
-#             "deleted_at",
-#             "deleted_by",
-#         ]

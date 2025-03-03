@@ -12,4 +12,9 @@ urlpatterns = [
         "api/tecnologia-de-informacion/",
         include(("apps.tecnologia.urls_apis", "api_tecnologia")),
     ),
+    path("grupos/", include(("apps.tecnologia.groups.urls", "grupos"))),
+    path(
+        "api/grupos/",
+        include(("apps.tecnologia.groups.urls_apis", "api_grupos")),
+    ),
 ]
