@@ -28,7 +28,6 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     "api": "{0}?length=3&order[0][name]=date&order[0][dir]=desc&search[value]=(estado=1)".format(
                         str(reverse_lazy("api_biblioteca_normativas:list"))
                     ),
-                    # "api": "",
                     "name": "Normativas",
                 },
             )
