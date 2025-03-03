@@ -20,7 +20,7 @@ class ReglamentoService(CrudService):
         if file:
             self.repository.remove_media(file.path)
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

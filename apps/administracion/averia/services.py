@@ -31,7 +31,7 @@ class AveriaService(CrudService):
         payload["departamento"] = self.buscar_departamento(payload.get("departamento"))
         return payload
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

@@ -33,7 +33,7 @@ class ArticuloService(CrudService):
 
         return payload
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

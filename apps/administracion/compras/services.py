@@ -23,7 +23,7 @@ class CompraService(CrudService):
         payload["articulo"] = self.buscar_articulo(payload.get("articulo"))
         return payload
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

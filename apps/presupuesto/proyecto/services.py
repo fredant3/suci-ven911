@@ -8,7 +8,7 @@ class ProyectoService(CrudService):
     def __init__(self):
         self.repository = ProyectoRepository()
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

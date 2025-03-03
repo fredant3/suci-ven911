@@ -8,7 +8,7 @@ class ReceptorService(CrudService):
     def __init__(self):
         self.repository = ReceptorRepository()
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

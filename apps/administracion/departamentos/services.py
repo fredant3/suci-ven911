@@ -7,7 +7,7 @@ class DepartamentoService(CrudService):
     def __init__(self):
         self.repository = DepartamentoRepository()
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

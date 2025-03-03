@@ -8,7 +8,7 @@ class CedenteService(CrudService):
     def __init__(self):
         self.repository = CedenteRepository()
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:

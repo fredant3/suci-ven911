@@ -63,7 +63,7 @@ class DenunciaService(CrudService):
         self.update_denunciante(entity.denunciante, data)
         self.update_denunciado(entity.denunciado, data)
 
-    def criteria(self, search):
+    def criteria(self, search, arg=None):
         query = Q()
 
         if search:
