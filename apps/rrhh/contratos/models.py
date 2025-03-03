@@ -17,15 +17,15 @@ TIPO_CONTRATOS_CHOICES = (
 
 class Contrato(BaseModel):
     tipo = models.CharField(max_length=8, choices=TIPO_CONTRATOS_CHOICES)
-    comision_servicio = models.BooleanField()
-    pnb = models.BooleanField()
+    comision_servicio = models.BooleanField(default=False)
+    pnb = models.BooleanField(default=False)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     tipo_personal = models.ForeignKey(TipoEmpleado, on_delete=models.CASCADE)
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     fecha_ingreso_911 = models.DateField()
     fecha_ingreso_apn = models.DateField()
-    fasmij = models.BooleanField()
+    fasmij = models.BooleanField(default=False)
     fecha_ingreso = models.DateField()
     fecha_culminacion = models.DateField(null=True, blank=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
