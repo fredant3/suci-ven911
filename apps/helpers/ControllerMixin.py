@@ -21,6 +21,24 @@ class ListController(LoginRequiredMixin, ListView):
         )
         search = self.request.GET.get("search[value]") or None
 
+        columns = []
+        i = 0
+        while True:
+            searchable = self.request.GET.get(f"columns[{i}][searchable]")
+            if searchable is False:
+                break
+
+            col_name = self.request.GET.get(f"columns[{i}][name]")
+            if not col_name:
+                break
+
+            col_search = self.request.GET.get(f"columns[{i}][search][value]")
+
+            if col_search:
+                columns.append({"name": col_name, "search": col_search})
+
+            i += 1
+
         orderBy = self.request.GET.get("order[0][name]") or None
         orderAsc = self.request.GET.get("order[0][dir]") or None
 
