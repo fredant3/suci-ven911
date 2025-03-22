@@ -3,42 +3,12 @@ from administracion.sedes.models import Sede
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
-
+from potencia.tipoIncidencia.models import TipoIncidencia
 
 INCIDENCIA_CHOICES = (
     ("soliint", "Solicitud Interna"),
     ("soliext", "Solicitud Externa"),
 )
-
-DEPARTAMENTO_CHOICES = (
-    ("admin", "Gestión Administrativa"),
-    ("aseju", "Asesoría Jurídica"),
-    ("emerge", "Emergencias"),
-    ("gesthum", "Gestión Humana"),
-    ("plani", "Planificación"),
-    ("presup", "Presupuesto"),
-    ("pote", "Potencia"),
-    ("organiz", "Organización"),
-    ("segur", "Seguridad"),
-    ("tecno", "Tecnología, Comunicación e Información"),
-    ("uri", "Unidad de Respuesta Inmediata"),
-)
-
-
-class TipoIncidencia(BaseModel):
-    tipo = models.CharField(max_length=120)
-
-    class Meta:
-        permissions = [
-            ("listar_tipo_incidencia", "Puede listar tipo incidencia"),
-            ("agregar_tipo_incidencia", "Puede agregar tipo incidencia"),
-            ("ver_tipo_incidencia", "Puede ver tipo incidencia"),
-            ("editar_tipo_incidencia", "Puede actualizar tipo incidencia"),
-            ("eliminar_tipo_incidencia", "Puede eliminar tipo incidencia"),
-        ]
-
-    def __str__(self):
-        return self.tipo
 
 
 class Incidencia(BaseModel):
