@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel, ESTATUS_CHOICES
+from helpers.BaseModelMixin import BaseModel
 
 PROGRESS_CHOICES = (
     ("0", "0%"),
@@ -16,6 +16,8 @@ PROGRESS_CHOICES = (
     ("100", "100%"),
 )
 
+ESTATUS_CHOICES = (("bor", "Borrador"), ("rev", "Revision"), ("pub", "Publicado"))
+
 
 class Normativa(BaseModel):
     name = models.CharField("Nombre de Normativa", max_length=64)
@@ -24,7 +26,7 @@ class Normativa(BaseModel):
     progre = models.CharField(
         "Progreso:", max_length=3, choices=PROGRESS_CHOICES, default="0"
     )
-    estado = models.CharField(max_length=8, choices=ESTATUS_CHOICES, default="inactivo")
+    estado = models.CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
 
     def toJSON(self):
         return model_to_dict(self)

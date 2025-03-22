@@ -3,7 +3,6 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
-from potencia.uri.forms import UriForm
 from potencia.uri.models import Uri
 from potencia.uri.services import UriService
 
@@ -12,7 +11,6 @@ from templates.sneat import TemplateLayout
 
 class UriUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = "potencia.uri.editar_uri"
-    form_class = UriForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -37,7 +35,6 @@ class UriUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 class UriUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = "potencia.uri.editar_uri"
-    form_class = UriForm
 
     def __init__(self):
         self.service = UriService()

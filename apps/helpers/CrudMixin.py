@@ -6,17 +6,25 @@ from .ServiceUtilMixin import ServiceUtilMixin
 class CrudService(ServiceUtilMixin):
     select = ""
 
-    def criteria(self, search):
+    def criteria(self, search, columns=[]):
         return search
 
     def getAll(
-        self, draw, start, length, search=None, orderBy=None, orderAsc=None, select=("")
+        self,
+        draw,
+        start,
+        length,
+        search=None,
+        orderBy=None,
+        orderAsc=None,
+        select=(""),
+        columns=[],
     ):
         select = select if select else self.select
-        if search is None:
+        if search is None and len(columns) == 0:
             entities = self.repository.getAll(select, orderBy, orderAsc)
         else:
-            search = self.criteria(search)
+            search = self.criteria(search, columns)
             entities = self.repository.getFilter(search, select, orderBy, orderAsc)
 
         return self.response(entities, start, length, draw)

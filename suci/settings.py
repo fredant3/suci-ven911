@@ -70,8 +70,10 @@ INSTALLED_APPS = [
     "apps.presupuesto",
     "apps.rrhh",
     "apps.seguridad",
+    "apps.tecnologia",
+    "crispy_forms",
+    "formtools",
 ]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

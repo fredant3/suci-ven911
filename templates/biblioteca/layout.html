@@ -16,39 +16,37 @@
 {% endblock %}
 
 {% block content %}
-  <div id="biblioteca-wrapper"></div>
+  <div class=''>
+    <div class="container flex"><div class="subcontainer"></div></div>
+
+    <template data-card-template>
+      <div class='img-container'>
+        <div class="img-subcontainer"><img src="" class='book-img' id=""></div>
+
+        <div class="content flex">
+          <h3 class='title' data-title>Wilder Girls</h3>
+
+          <div class='wrapper flex'>
+            <p class='default'>- by </p>
+            <p class="author" data-author>Rory Power</p>
+          </div>
+
+          <p class='genre' data-genre>Fiction</p>
+        </div>
+      </div>
+    </template>
+  </div>
+  {% comment %} <div id="biblioteca-wrapper"></div> {% endcomment %}
 {% endblock %}
 
 {% block page_css %}
 {{ block.super }}
-
-<style>
-  .biblioteca-wrapper{
-    min-height: 275px;
-    background-color: #f0f2f4;
-  }
-  .bibliotecas{
-    max-width: 250px;
-    min-width: 215px;
-  }
-  .img-fluid-custom {
-      width: 50px;
-  }
-  .pagination > .page-item {
-    height: 41px;
-  }
-  .pagination > .page-item > .page-link {
-    height: 100%;
-    line-height: inherit;
-  }
-  .h-228 {
-    height: 228px;
-  }
-</style>
+<link rel="stylesheet" href="{% static  'css/biblioteca.css' %}">
 {% endblock %}
 
 {% block page_js %}
 <script src="{% static 'js/ajax-setup.js' %}"></script>
+<script src="{% static 'js/biblioteca/carousel.js' %}"></script>
 <script>
 $(document).ready(function () {
   $('#normativas-cards').empty();
@@ -67,6 +65,7 @@ $(document).ready(function () {
       dataType: 'json'
     })
       .done(function (data) {
+        showHtml (data.entities)
         $('#biblioteca-wrapper').append(`
           <div class="border rounded biblioteca-wrapper my-1">
             <div class="d-flex align-items-center">

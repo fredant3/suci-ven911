@@ -5,6 +5,26 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 
 
+INCIDENCIA_CHOICES = (
+    ("soliint", "Solicitud Interna"),
+    ("soliext", "Solicitud Externa"),
+)
+
+DEPARTAMENTO_CHOICES = (
+    ("admin", "Gestión Administrativa"),
+    ("aseju", "Asesoría Jurídica"),
+    ("emerge", "Emergencias"),
+    ("gesthum", "Gestión Humana"),
+    ("plani", "Planificación"),
+    ("presup", "Presupuesto"),
+    ("pote", "Potencia"),
+    ("organiz", "Organización"),
+    ("segur", "Seguridad"),
+    ("tecno", "Tecnología, Comunicación e Información"),
+    ("uri", "Unidad de Respuesta Inmediata"),
+)
+
+
 class TipoIncidencia(BaseModel):
     tipo = models.CharField(max_length=120)
 
@@ -23,12 +43,17 @@ class TipoIncidencia(BaseModel):
 
 class Incidencia(BaseModel):
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
-    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+    departamento = models.CharField(
+        "Departamento/ Módulo", max_length=10, choices=DEPARTAMENTO_CHOICES
+    )
+    # departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     estado = models.CharField(
         "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
     )
     tipo_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
-    tipo_solicitud = models.CharField(max_length=80, verbose_name="Tipo Solicitud")
+    tipo_solicitud = models.CharField(
+        "Tipo de Solicitud", max_length=10, choices=INCIDENCIA_CHOICES
+    )
     observaciones = models.CharField(max_length=200)
 
     def toJSON(self):

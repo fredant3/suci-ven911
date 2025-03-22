@@ -42,6 +42,7 @@ class OrganizacionService(CrudService):
         orderBy="created_at",
         orderAsc="asc",
         select=("name", "file", "date", "estado"),
+        arg=None,
     ):
         normativas = self.getLastThreeNormativas(select, orderBy, orderAsc)
         reglamentos = self.getLastThreeReglamentos(select, orderBy, orderAsc)

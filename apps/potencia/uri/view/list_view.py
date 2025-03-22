@@ -42,9 +42,9 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "nombre_apellido",
-                "name": "nombre_apellido",
-                "title": "Nombre completo",
+                "data": "fecha_atencion",
+                "name": "fecha_atencion",
+                "title": "Fecha de Atencion",
                 "orderable": "true",
                 "searchable": "true",
             },

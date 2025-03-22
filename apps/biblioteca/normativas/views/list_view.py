@@ -25,10 +25,9 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submodules"] = json.dumps(
             (
                 {
-                    "api": "{0}?length=3&order[0][name]=date&order[0][dir]=desc&search[value]=(estado=1)".format(
+                    "api": "{0}?order[0][name]=date&order[0][dir]=desc&columns[0][searchable]=true&columns[0][name]=estado&columns[0][search][value]=pub".format(
                         str(reverse_lazy("api_biblioteca_normativas:list"))
                     ),
-                    # "api": "",
                     "name": "Normativas",
                 },
             )
