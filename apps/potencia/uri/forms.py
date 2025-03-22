@@ -54,7 +54,7 @@ class UriInfoGeneralForm(FormBase):
 
 
 class UripacienteForm(FormBase):
-    # Datos del paciente
+    # 2) Datos del paciente
     nombrepaciente = CharField(
         max_length=50, required=False, label="Nombre y Apellido del Paciente"
     )
@@ -70,16 +70,37 @@ class UripacienteForm(FormBase):
     direccionpaciente = CharField(
         max_length=100, required=False, label="Direccion del paciente"
     )
-
     # Autoridades presentes
     organismo = CharField(max_length=50, required=False, label="Nombre del Organismo")
     jefedecomision = CharField(max_length=50, required=False, label="Jefe de Comision")
     unidad_placa = CharField(max_length=10, required=False, label="Unidad/Placa")
     firma = CharField(max_length=10, required=False, label="Firma")
 
+    class Meta:
+        model = Uri
+        fields = (
+            "nombrepaciente",
+            "cedulapaciente",
+            "telefonopaciente",
+            "generopaciente",
+            "direccionpaciente",
+            "organismo",
+            "jefedecomision",
+            "unidad_placa",
+            "firma",
+        )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
+
 
 class UriConsentimientoForm(FormBase):
-    # Datos del acompañante
+    3  # Datos del acompañante
     nombre_acompanante = CharField(
         max_length=50, required=False, label="Nombre y Apellido del Acompañante"
     )
@@ -113,6 +134,30 @@ class UriConsentimientoForm(FormBase):
     direccion_testigo = CharField(
         max_length=100, required=False, label="Dirección del Acompañante"
     )
+
+    class Meta:
+        model = Uri
+        fields = (
+            "nombre_acompanante",
+            "parentezco_acompanante",
+            "cedula_acompanante",
+            "telefono_acompanate",
+            "genero_acompanante",
+            "direccion_acompanante",
+            "nombre_testigo",
+            "edad_testigo",
+            "cedula_testigo",
+            "telefono_testigo",
+            "direccion_testigo",
+        )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
     # 4)Direccion Exacta del Evento
 
@@ -151,6 +196,41 @@ class UriDireccionForm(FormBase):
     observaciones_servicio = CharField(
         max_length=300, required=False, label="Observaciones del Servicio"
     )
+
+
+class Meta:
+    model = Uri
+    fields = (
+        "estado_evento",
+        "municipio_evento",
+        "parroquia_evento",
+        "sector_evento",
+        "calle_evento",
+        "casa_evento",
+        "piso_evento",
+        "referencia_evento",
+        "eje_evento",
+        "lugar_atencion",
+        "modo_traslado",
+        "via_reporte",
+        "servicio_tipo",
+        "hora_alarma",
+        "hora_salida",
+        "hora_llegada",
+        "hospital",
+        "transferencia_emergencia",
+        "hora_sede",
+        "tiempo_servicio",
+        "observaciones_servicio",
+    )
+    exclude = [
+        "created_at",
+        "created_by",
+        "updated_at",
+        "updated_by",
+        "deleted_at",
+        "deleted_by",
+    ]
 
 
 class UriInfoclinicaForm(FormBase):
@@ -193,6 +273,58 @@ class UriInfoclinicaForm(FormBase):
     ultimaComida = CharField(max_length=100, required=False, label="Última comida")
     evento = CharField(max_length=100, required=False, label="Evento")
 
+    class Meta:
+        model = Uri
+        fields = (
+            "accidenteVehicular",
+            "enfrentamientoArmado",
+            "traumaVehiculo",
+            "viajaba",
+            "sustanciaPeligrosa",
+            "observacionesSustancia",
+            "traumaNoIntencional",
+            "emergenciaMedica",
+            "hemorragia",
+            "presion",
+            "empaquetado",
+            "torniquete",
+            "evaluacion",
+            "intervencion",
+            "resultado",
+            "descripcion_adic",
+            "evaluacionResp",
+            "intervencionResp",
+            "resultadoResp",
+            "descripcion_adic_resp",
+            "colorPiel",
+            "temperaturaPiel",
+            "humedadPiel",
+            "pulso",
+            "otrasHerida",
+            "fractura",
+            "maniobraPelvis",
+            "ecgO",
+            "ecgV",
+            "ecgM",
+            "ecgTotal",
+            "reaccionPupilar",
+            "hipotermia",
+            "signosSintomas",
+            "alergias",
+            "medicamentos",
+            "preexistencias",
+            "ultimaComida",
+            "evento",
+        )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
+
 
 class UriSignosVitalesForm(FormBase):
     # 7) Signos Vitales o Tratamiento
@@ -227,7 +359,35 @@ class UriSignosVitalesForm(FormBase):
         label="Resultados de la Evaluación Fisica Cefalo Caudal",
     )
 
-    # Registro de Referencias y Contrareferencias
+
+class Meta:
+    model = Uri
+    fields = (
+        "horaMedicion",
+        "frecuenciaCardiaca",
+        "frecuenciaRespiratoria",
+        "presionArterial",
+        "spo2",
+        "temperatura",
+        "llenadoCapilar",
+        "glicemiaCapilar",
+        "escalaGlasgow",
+        "medicamento",
+        "dosis",
+        "hora",
+        "resultadoEvaluacion",
+    )
+    exclude = [
+        "created_at",
+        "created_by",
+        "updated_at",
+        "updated_by",
+        "deleted_at",
+        "deleted_by",
+    ]
+
+
+# Registro de Referencias y Contrareferencias
 
 
 class UriReferenciasForm(FormBase):
@@ -278,99 +438,6 @@ class UriReferenciasForm(FormBase):
     class Meta:
         model = Uri
         fields = (
-            "nombrepaciente",
-            "cedulapaciente",
-            "telefonopaciente",
-            "generopaciente",
-            "direccionpaciente",
-            "organismo",
-            "jefedecomision",
-            "unidad_placa",
-            "firma",
-            "nombre_acompanante",
-            "parentezco_acompanante",
-            "cedula_acompanante",
-            "telefono_acompanate",
-            "genero_acompanante",
-            "direccion_acompanante",
-            "nombre_testigo",
-            "edad_testigo",
-            "cedula_testigo",
-            "telefono_testigo",
-            "direccion_testigo",
-            "estado_evento",
-            "municipio_evento",
-            "parroquia_evento",
-            "sector_evento",
-            "calle_evento",
-            "casa_evento",
-            "piso_evento",
-            "referencia_evento",
-            "eje_evento",
-            "lugar_atencion",
-            "modo_traslado",
-            "via_reporte",
-            "servicio_tipo",
-            "hora_alarma",
-            "hora_salida",
-            "hora_llegada",
-            "hospital",
-            "transferencia_emergencia",
-            "hora_sede",
-            "tiempo_servicio",
-            "observaciones_servicio",
-            "accidenteVehicular",
-            "enfrentamientoArmado",
-            "traumaVehiculo",
-            "viajaba",
-            "sustanciaPeligrosa",
-            "observacionesSustancia",
-            "traumaNoIntencional",
-            "emergenciaMedica",
-            "hemorragia",
-            "presion",
-            "empaquetado",
-            "torniquete",
-            "evaluacion",
-            "intervencion",
-            "resultado",
-            "descripcion_adic",
-            "evaluacionResp",
-            "intervencionResp",
-            "resultadoResp",
-            "descripcion_adic_resp",
-            "colorPiel",
-            "temperaturaPiel",
-            "humedadPiel",
-            "pulso",
-            "otrasHerida",
-            "fractura",
-            "maniobraPelvis",
-            "ecgO",
-            "ecgV",
-            "ecgM",
-            "ecgTotal",
-            "reaccionPupilar",
-            "hipotermia",
-            "signosSintomas",
-            "alergias",
-            "medicamentos",
-            "preexistencias",
-            "ultimaComida",
-            "evento",
-            "horaMedicion",
-            "frecuenciaCardiaca",
-            "frecuenciaRespiratoria",
-            "presionArterial",
-            "spo2",
-            "temperatura",
-            "llenadoCapilar",
-            "glicemiaCapilar",
-            "escalaGlasgow",
-            "medicamento",
-            "dosis",
-            "hora",
-            "resultadoEvaluacion",
             "trasladoIncial",
             "hospitalOrigen",
             "medicoRefiere",
