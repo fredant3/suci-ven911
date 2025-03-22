@@ -4,9 +4,6 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 
 from templates.sneat import TemplateLayout
-import json
-
-from django.utils.safestring import mark_safe
 
 
 class AdministracionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
