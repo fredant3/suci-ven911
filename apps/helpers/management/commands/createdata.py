@@ -20,8 +20,10 @@ class Command(BaseCommand):
         fake = Faker("es_ES")
 
         UserFaker.admin_user()
-        UserFaker.guest_user()
-        UserFaker.other_user()
+        UserFaker.director_user()
+        UserFaker.gerente_user()
+        UserFaker.supervisor_user()
+        UserFaker.analista_user()
 
         ArticleFake.type_article()
         ArticleFake.article(fake)
