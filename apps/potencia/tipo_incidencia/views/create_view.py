@@ -1,10 +1,10 @@
-from potencia.tipoIncidencia.services import TipoIncidenciaService
+from potencia.tipo_incidencia.services import TipoIncidenciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
-from potencia.tipoIncidencia.forms import TipoIncidenciaForm
+from potencia.tipo_incidencia.forms import TipoIncidenciaForm
 from templates.sneat import TemplateLayout
 
 

@@ -1,6 +1,6 @@
 import json
 
-from potencia.tipoIncidencia.services import TipoIncidenciaService
+from potencia.tipo_incidencia.services import TipoIncidenciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe

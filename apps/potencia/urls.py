@@ -10,11 +10,11 @@ urlpatterns = [
     ),
     path(
         "tipoIncidencia/",
-        include(("apps.potencia.tipoIncidencia.urls", "tipoIncidencia")),
+        include(("apps.potencia.tipo_incidencia.urls", "tipoIncidencia")),
     ),
     path(
         "api/tipoIncidencia/",
-        include(("apps.potencia.tipoIncidencia.urls_apis", "api_tipoIncidencia")),
+        include(("apps.potencia.tipo_incidencia.urls_apis", "api_tipoIncidencia")),
     ),
     path(
         "unidad-respuesta-inmediata/",

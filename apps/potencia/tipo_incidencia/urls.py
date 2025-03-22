@@ -1,7 +1,7 @@
-from potencia.tipoIncidencia.views.create_view import TipoIncidenciaCreateView
-from potencia.tipoIncidencia.views.delete_view import TipoIncidenciaDeleteView
-from potencia.tipoIncidencia.views.list_view import TipoIncidenciaListView
-from potencia.tipoIncidencia.views.update_view import TipoIncidenciaUpdateView
+from potencia.tipo_incidencia.views.create_view import TipoIncidenciaCreateView
+from potencia.tipo_incidencia.views.delete_view import TipoIncidenciaDeleteView
+from potencia.tipo_incidencia.views.list_view import TipoIncidenciaListView
+from potencia.tipo_incidencia.views.update_view import TipoIncidenciaUpdateView
 from django.urls import path
 
 urlpatterns = [

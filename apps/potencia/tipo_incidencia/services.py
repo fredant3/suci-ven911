@@ -1,4 +1,4 @@
-from potencia.tipoIncidencia.repositories import TipoIncidencaRepository
+from potencia.tipo_incidencia.repositories import TipoIncidencaRepository
 from helpers.CrudMixin import CrudService
 from django.db.models import Q
 

@@ -1,4 +1,4 @@
-from potencia.tipoIncidencia.models import TipoIncidencia
+from potencia.tipo_incidencia.models import TipoIncidencia
 from helpers.RepositoryMixin import Repository
 
 
