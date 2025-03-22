@@ -43,10 +43,7 @@ class TipoIncidencia(BaseModel):
 
 class Incidencia(BaseModel):
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
-    departamento = models.CharField(
-        "Departamento/ Módulo", max_length=10, choices=DEPARTAMENTO_CHOICES
-    )
-    # departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     estado = models.CharField(
         "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
     )
