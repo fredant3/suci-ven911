@@ -57,6 +57,7 @@ class InfogeneralWizardView(SessionWizardView):
     ]
 
     def done(self, form_list, **kwargs):
+        print (form_list)
         return HttpResponse()
 
     # def __init__(self):

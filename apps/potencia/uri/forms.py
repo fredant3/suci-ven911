@@ -100,7 +100,7 @@ class UripacienteForm(FormBase):
 
 
 class UriConsentimientoForm(FormBase):
-    3  # Datos del acompañante
+    #  Datos del acompañante
     nombre_acompanante = CharField(
         max_length=50, required=False, label="Nombre y Apellido del Acompañante"
     )
@@ -163,7 +163,6 @@ class UriConsentimientoForm(FormBase):
 
 
 class UriDireccionForm(FormBase):
-
     estado_evento = CharField(max_length=20, required=False, label="Estado")
     municipio_evento = CharField(max_length=20, required=False, label="Municipio")
     parroquia_evento = CharField(max_length=20, required=False, label="Parroquia")
@@ -197,46 +196,44 @@ class UriDireccionForm(FormBase):
         max_length=300, required=False, label="Observaciones del Servicio"
     )
 
-
-class Meta:
-    model = Uri
-    fields = (
-        "estado_evento",
-        "municipio_evento",
-        "parroquia_evento",
-        "sector_evento",
-        "calle_evento",
-        "casa_evento",
-        "piso_evento",
-        "referencia_evento",
-        "eje_evento",
-        "lugar_atencion",
-        "modo_traslado",
-        "via_reporte",
-        "servicio_tipo",
-        "hora_alarma",
-        "hora_salida",
-        "hora_llegada",
-        "hospital",
-        "transferencia_emergencia",
-        "hora_sede",
-        "tiempo_servicio",
-        "observaciones_servicio",
-    )
-    exclude = [
-        "created_at",
-        "created_by",
-        "updated_at",
-        "updated_by",
-        "deleted_at",
-        "deleted_by",
-    ]
+    class Meta:
+        model = Uri
+        fields = (
+            "estado_evento",
+            "municipio_evento",
+            "parroquia_evento",
+            "sector_evento",
+            "calle_evento",
+            "casa_evento",
+            "piso_evento",
+            "referencia_evento",
+            "eje_evento",
+            "lugar_atencion",
+            "modo_traslado",
+            "via_reporte",
+            "servicio_tipo",
+            "hora_alarma",
+            "hora_salida",
+            "hora_llegada",
+            "hospital",
+            "transferencia_emergencia",
+            "hora_sede",
+            "tiempo_servicio",
+            "observaciones_servicio",
+        )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 
 class UriInfoclinicaForm(FormBase):
     # 5) Informacion Clinica
     # Trauma
-
     observacionesSustancia = CharField(
         max_length=50, required=False, label="Observaciones de la sustancia"
     )
@@ -360,36 +357,33 @@ class UriSignosVitalesForm(FormBase):
     )
 
 
-class Meta:
-    model = Uri
-    fields = (
-        "horaMedicion",
-        "frecuenciaCardiaca",
-        "frecuenciaRespiratoria",
-        "presionArterial",
-        "spo2",
-        "temperatura",
-        "llenadoCapilar",
-        "glicemiaCapilar",
-        "escalaGlasgow",
-        "medicamento",
-        "dosis",
-        "hora",
-        "resultadoEvaluacion",
-    )
-    exclude = [
-        "created_at",
-        "created_by",
-        "updated_at",
-        "updated_by",
-        "deleted_at",
-        "deleted_by",
-    ]
-
+    class Meta:
+        model = Uri
+        fields = (
+            "horaMedicion",
+            "frecuenciaCardiaca",
+            "frecuenciaRespiratoria",
+            "presionArterial",
+            "spo2",
+            "temperatura",
+            "llenadoCapilar",
+            "glicemiaCapilar",
+            "escalaGlasgow",
+            "medicamento",
+            "dosis",
+            "hora",
+            "resultadoEvaluacion",
+        )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 # Registro de Referencias y Contrareferencias
-
-
 class UriReferenciasForm(FormBase):
     hospitalOrigen = CharField(
         max_length=100, required=False, label="Hospital de Origen"

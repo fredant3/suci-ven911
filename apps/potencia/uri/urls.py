@@ -1,5 +1,4 @@
 from django.urls import path
-
 from potencia.uri.view.create_view import UriCreateView, InfogeneralWizardView
 from potencia.uri.view.delete_view import UriDeleteView
 from potencia.uri.view.list_view import UriListView
