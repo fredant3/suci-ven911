@@ -15,6 +15,7 @@ import random
 import string
 from datetime import timedelta
 from pathlib import Path
+import logging.config
 
 from dotenv import load_dotenv
 
@@ -82,6 +83,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "suci.middleware.CaptureIPAndDeviceMiddleware",
 ]
 
 ROOT_URLCONF = "suci.urls"
@@ -223,3 +225,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = "auth:login"
 LOGIN_REDIRECT_URL = "dashboard"
+
+LOGGING_CONFIG = None
+LOGLEVEL = os.getenv("LOG_LEVEL", "info").upper()
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "verbose": {
+                "format": "%(asctime)s %(levelname)s [%(name)s:%(lineno)s] %(module)s %(process)d %(thread)d %(message)s",
+                "datefmt": "%d-%m-%Y %I:%M %p",
+            },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "verbose",
+            },
+        },
+        "loggers": {
+            "": {
+                "level": LOGLEVEL,
+                "propagate": True,
+                "handlers": ["console"],
+            },
+        },
+    }
+)
