@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     "apps.rrhh",
     "apps.seguridad",
     "apps.tecnologia",
+    "apps.auditoria",
     "crispy_forms",
     "formtools",
 ]
@@ -83,7 +84,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "suci.middleware.CaptureIPAndDeviceMiddleware",
+    "apps.auditoria.middleware.CaptureIPAndDeviceMiddleware",
 ]
 
 ROOT_URLCONF = "suci.urls"

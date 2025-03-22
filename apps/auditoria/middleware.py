@@ -1,5 +1,6 @@
 import logging
 from user_agents import parse
+from auditoria.models import RequestLog
 
 
 class CaptureIPAndDeviceMiddleware:
@@ -21,6 +22,16 @@ class CaptureIPAndDeviceMiddleware:
         self.logger.info(
             f"IP: {ip}, Conectado desde: {device_type}, Dispositivo: {device_name}, Sistema Operativo: {os}, Navegador: {browser}"
         )
+
+        if request.method in ["POST", "PUT", "PATCH", "DELETE"]:
+            RequestLog.objects.create(
+                ip_address=ip,
+                device_type=device_type,
+                device_name=device_name,
+                operating_system=os,
+                browser=browser,
+                method=request.method,
+            )
 
         return self.get_response(request)
 
