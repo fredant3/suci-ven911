@@ -12,11 +12,6 @@ class Modules(LoginRequiredMixin, TemplateView):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["modules"] = [
             {
-                "title": "Operaciones Cuadrantes de Paz (Pendiente)",
-                "url": "asesoria",
-                "image": "img/modules/cuadrantes_de_paz.png",
-            },
-            {
                 "title": "Asesoría Jurídica",
                 "url": "asesoria",
                 "image": "img/modules/asesoria_juridica.png",
