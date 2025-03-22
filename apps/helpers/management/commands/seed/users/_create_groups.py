@@ -8,31 +8,33 @@ def create_group(self):
 
     for module in [
         # "users", TODO: Pendiente
-        # administracion,
+        # ADMINISTRACION,
         "asignacion",
         "averia",
         "compra",
         "departamento",
         "articulo",
         "sede"
-        # asesoria,
+        # ASESORIA,
         "denuncia",
-        "registroFilmico",
-        # Emergencia
+        "registro filmico",
+        # EMERGENCIA
+        "incidencia",
+        "organismo",
         "emergencia",
-        # Organizacion
+        # ORGANIZACION
         "normativa",
         "reglamento",
-        # planificacion
+        # PLANIFICACION
         "actividad",
         "infraestructura",
         "llamada",
         "objetivo",
         "transporte",
-        # potencia
+        # POTENCIA
         "incidencia",
         "uri",
-        # presupuesto
+        # PRESUPUESTO
         "accion",
         "asignacion",
         "cedente",
@@ -49,11 +51,14 @@ def create_group(self):
         "sueldoEmpleado",
         "tipoEmpleado",
         "tipoSueldo",
-        # seguridad
+        # SEGURIDAD
         "entrada",
         "gestione",
         "salida",
         "vehiculo",
+        # TECNOLOGIA
+        "grupos",
+        "usuarios",
     ]:
         # LOS PERMISOS
         list = Permission.objects.get(codename=f"listar_{module}")
@@ -63,29 +68,43 @@ def create_group(self):
         delete = Permission.objects.get(codename=f"eliminar_{module}")
         excel = Permission.objects.get(codename=f"exel_{module}")
 
+        Group.objects.get_or_create(name=f"{module} director")
         Group.objects.get_or_create(name=f"{module} gerente")
         Group.objects.get_or_create(name=f"{module} supervisor")
         Group.objects.get_or_create(name=f"{module} analista")
 
-        gerente = Group.objects.get(name=f"{module} gerente")
+        director = Group.objects.get(name=f"{module} director")
+        permissionsDirector = []
+        permissionsDirector.append(list.id)
+        permissionsDirector.append(add.id)
+        permissionsDirector.append(read.id)
+        permissionsDirector.append(change.id)
+        permissionsDirector.append(delete.id)
+        permissionsDirector.append(excel.id)
+        director.permissions.set(permissionsDirector)
+
+        gerente = Group.objects.get(name=f"{module} coordinador")
         permissionsGerente = []
         permissionsGerente.append(list.id)
-        permissionsGerente.append(read.id)
         permissionsGerente.append(add.id)
+        permissionsGerente.append(read.id)
         permissionsGerente.append(change.id)
         permissionsGerente.append(delete.id)
+        permissionsDirector.append(excel.id)
         gerente.permissions.set(permissionsGerente)
 
         supervisor = Group.objects.get(name=f"{module} supervisor")
         permissionsSupervisor = []
         permissionsSupervisor.append(list.id)
-        permissionsSupervisor.append(read.id)
         permissionsSupervisor.append(add.id)
+        permissionsSupervisor.append(read.id)
+        permissionsGerente.append(change.id)
         supervisor.permissions.set(permissionsSupervisor)
 
         analista = Group.objects.get(name=f"{module} analista")
         permissionsAnalista = []
         permissionsAnalista.append(list.id)
+        permissionsSupervisor.append(add.id)
         permissionsAnalista.append(read.id)
         analista.permissions.set(permissionsAnalista)
 
