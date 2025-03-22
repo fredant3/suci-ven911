@@ -13,15 +13,6 @@ class Entrada(BaseModel):
     cargo = models.CharField(max_length=64, verbose_name="Cargo:", default="")
     hora = models.CharField(max_length=64, verbose_name="Hora de Entrada:", default="")
 
-    class Meta:
-        permissions = [
-            ("listar_entradas", "Listar entradas"),
-            ("agregar_entrada", "Agregar entrada"),
-            ("ver_entrada", "Ver entrada"),
-            ("modificar_entrada", "Modificar entrada"),
-            ("eliminar_entrada", "Eliminar entrada"),
-        ]
-
     def toJSON(self):
         return model_to_dict(self)
 
@@ -31,3 +22,10 @@ class Entrada(BaseModel):
     class Meta:
         verbose_name = "entrada"
         verbose_name_plural = "entradas"
+        permissions = [
+            ("listar_entradas", "Listar entradas"),
+            ("agregar_entrada", "Agregar entrada"),
+            ("ver_entrada", "Ver entrada"),
+            ("modificar_entrada", "Modificar entrada"),
+            ("eliminar_entrada", "Eliminar entrada"),
+        ]
