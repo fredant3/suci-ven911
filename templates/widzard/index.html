@@ -44,3 +44,15 @@
 	<input type="submit" value="{% translate " submit" %}" />
 </form>
 {% endblock %}
+
+</ /p class="lead">
+{% if wizard.steps.step1 == 1 %}
+Información General (Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }})
+{% elif wizard.steps.step1 == 2 %}
+Detalles de Contacto (Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }})
+{% elif wizard.steps.step1 == 3 %}
+Confirmación (Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }})
+{% else %}
+Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }}
+{% endif %}
+</ /
