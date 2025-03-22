@@ -1,6 +1,6 @@
-from administracion.departamentos.forms import DepartamentoForm
-from administracion.departamentos.models import Departamento
-from administracion.departamentos.services import DepartamentoService
+from potencia.tipoIncidencia.forms import TipoIncidenciaForm
+from potencia.tipoIncidencia.models import TipoIncidencia
+from potencia.tipoIncidencia.services import TipoIncidenciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
@@ -10,32 +10,32 @@ from helpers.ControllerMixin import DeleteController
 from templates.sneat import TemplateLayout
 
 
-class DepartamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = "administracion.departamentos.eliminar_departamento"
+class TipoIncidenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
+    permission_required = "potencia.tipoIncidencia.eliminar_tipoIncidencia"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
-        context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administrasion"
-        context["submodule"] = "Departamentos"
-        context["titleForm"] = "Eliminar departamento"
+        context["titlePage"] = "Potencia"
+        context["indexUrl"] = reverse_lazy("potencia")
+        context["module"] = "Potencia"
+        context["submodule"] = "Tipo de Incidencia"
+        context["titleForm"] = "Eliminar tipo de incidencia"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("departamentos:list")
+        context["listUrl"] = reverse_lazy("tipoIncidencia:list")
         context["urlDelete"] = reverse_lazy(
-            "api_departamentos:delete", args=[self.kwargs.get("pk")]
+            "api_tipoIncidencia:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Departamento.objects.filter(pk=id)
+        return TipoIncidencia.objects.filter(pk=id)
 
 
-class DepartamentoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = "administracion.departamentos.eliminar_departamento"
-    form_class = DepartamentoForm
+class TipoIncidenciaDeleteApiView(DeleteController, CheckPermisosMixin):
+    permission_required = "potencia.tipoIncidencia.eliminar_tipoIncidencia"
+    form_class = TipoIncidenciaForm
 
     def __init__(self):
-        self.service = DepartamentoService()
+        self.service = TipoIncidenciaService()

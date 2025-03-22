@@ -30,5 +30,8 @@ class PotenciaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "China",
             "Germany",
         ]
-        context["submoduleList"] = (("Incidencias", reverse_lazy("incidencias:list")),)
+        context["submoduleList"] = (
+            ("Incidencias", reverse_lazy("incidencias:list")),
+            ("Tipo de incidencias", reverse_lazy("tipoIncidencia:list")),
+        )
         return TemplateLayout.init(self, context)

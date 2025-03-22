@@ -1,33 +1,33 @@
-from administracion.departamentos.views.create_view import DepartamentoCreateView
-from administracion.departamentos.views.delete_view import DepartamentoDeleteView
-from administracion.departamentos.views.list_view import DepartamentoListView
-from administracion.departamentos.views.update_view import DepartamentoUpdateView
+from potencia.tipoIncidencia.views.create_view import TipoIncidenciaCreateView
+from potencia.tipoIncidencia.views.delete_view import TipoIncidenciaDeleteView
+from potencia.tipoIncidencia.views.list_view import TipoIncidenciaListView
+from potencia.tipoIncidencia.views.update_view import TipoIncidenciaUpdateView
 from django.urls import path
 
 urlpatterns = [
     path(
         "",
-        DepartamentoListView.as_view(),
+        TipoIncidenciaListView.as_view(),
         name="list",
     ),
     path(
         "create",
-        DepartamentoCreateView.as_view(),
+        TipoIncidenciaCreateView.as_view(),
         name="create",
     ),
     path(
         "<int:pk>/read",
-        DepartamentoListView.as_view(),
+        TipoIncidenciaListView.as_view(),
         name="read",
     ),
     path(
         "<int:pk>/update",
-        DepartamentoUpdateView.as_view(),
+        TipoIncidenciaUpdateView.as_view(),
         name="update",
     ),
     path(
         "<int:pk>/delete",
-        DepartamentoDeleteView.as_view(),
+        TipoIncidenciaDeleteView.as_view(),
         name="delete",
     ),
 ]

@@ -1,10 +1,10 @@
-from potencia.TipoIncidencia.models import TipoIncidencia
+from potencia.tipoIncidencia.models import TipoIncidencia
 from helpers.FormBase import FormBase
 
 
 class TipoIncidenciaForm(FormBase):
     class Meta:
-        model = Tipo de Incidencia
+        model = TipoIncidencia
         fields = [
             "tipo",
         ]
