@@ -1,5 +1,3 @@
-{% extends layout_path %}
-
 {% load static %}
 
 {% block title %}{{ titlePage }}{% endblock %}
@@ -10,32 +8,32 @@
 
 {% block content %}
 <div class="card">
-  <div class="card-body">
-    Cooming Soon
-    <h1>{{ submodule }}</h1>
-  </div>
-  <div class="card-body">
-    Sub Modulos
-    <div class="">
-      {% for name, link in submoduleList %}
-        <a href="{{ link }}" class="btn btn-outline-primary">
-          <span class="tf-icons bx bx-plus me-1"></span>{{ name }}
-        </a>
-      {% endfor %}
-      </div>
+	<div class="card-body">
+		Cooming Soon
+		<h1>{{ submodule }}</h1>
+	</div>
+	<div class="card-body">
+		Sub Modulos
+		<div class="">
+			{% for name, link in submoduleList %}
+			<a href="{{ link }}" class="btn btn-outline-primary">
+				<span class="tf-icons bx bx-plus me-1"></span>{{ name }}
+			</a>
+			{% endfor %}
+		</div>
 
-      
-  <!-- Order Statistics -->
-  <div class="row align-items-center">
-  <div class="col-lg-6 col-sm-12 mb-6">
-    <div id="idFirstStatisticsChart"></div>
-  </div>
-  <div class="col-lg-6 cpl-sm-12 mb-6 m-auto">
-    <div id="idSecondStatisticsChart" ></div>
-  </div>
-  <!--/ Order Statistics -->
-  </div>
-</div>
+
+		<!-- Order Statistics -->
+		<div class="row align-items-center">
+			<div class="col-lg-6 col-sm-12 mb-6">
+				<div id="idFirstStatisticsChart"></div>
+			</div>
+			<div class="col-lg-6 cpl-sm-12 mb-6 m-auto">
+				<div id="idSecondStatisticsChart"></div>
+			</div>
+			<!--/ Order Statistics -->
+		</div>
+	</div>
 </div>
 {% endblock %}
 
@@ -45,8 +43,8 @@
 
 {% block vendor_js %}
 <script>
-	const data = {{ data|safe }};
-	const labels = {{ labels|safe }};
+	const data = {{ data| safe }};
+	const labels = {{ labels| safe }};
 </script>
 
 <script src="{% static 'vendor/libs/apex-charts/apexcharts.js' %}"></script>

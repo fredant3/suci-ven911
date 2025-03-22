@@ -45,7 +45,7 @@ class UriCreateApiView(CreateController, CheckPermisosMixin):
 
 
 class InfogeneralWizardView(SessionWizardView):
-    template_name = "template/widzards/index.html"
+    template_name = "widzard/index.html"
     form_list = [
         UriInfoGeneralForm,
         UripacienteForm,
@@ -56,7 +56,16 @@ class InfogeneralWizardView(SessionWizardView):
         UriReferenciasForm,
     ]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titlePage"] = "Potencia"
+        context["indexUrl"] = reverse_lazy("modules:index")
+        context["module"] = "Potencia"
+        context["submodule"] = "Unidad de Respuesta Inmediata"
+        return TemplateLayout.init(self, context)
+
     def done(self, form_list, **kwargs):
+        print (form_list)
         return HttpResponse()
 
     # def __init__(self):
