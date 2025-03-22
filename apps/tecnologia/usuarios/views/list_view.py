@@ -9,26 +9,26 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import EmergenciaService
+from ..services import UserService
 
 
-class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "emergrncia.ver_emergencia"
+class UserListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+    permission_required = "user.ver_users"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Emergencias"
+        context["titlePage"] = "Users"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Emergencias"
+        context["module"] = "Users"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("emergencias:create")
-        context["listApiUrl"] = reverse_lazy("api_emergencias:list")
-        context["updateUrl"] = reverse_lazy("emergencias:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("emergencias:delete", args=[0])
+        context["createUrl"] = reverse_lazy("user:create")
+        context["listApiUrl"] = reverse_lazy("api_user:list")
+        context["updateUrl"] = reverse_lazy("user:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("user:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -43,31 +43,31 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "denunciante",
-                "name": "denunciante",
-                "title": "Denunciante",
+                "data": "username",
+                "name": "username",
+                "title": "Usuario",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "telefono_denunciante",
-                "name": "telefono_denunciante",
-                "title": "Telefono",
+                "data": "dni",
+                "name": "dni",
+                "title": "Cédula de Iden.",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "created_by",
-                "name": "created_by",
-                "title": "Creado por",
+                "data": "is_active",
+                "name": "is_active",
+                "title": "Estatus",
                 "orderable": "false",
                 "searchable": "false",
             },
         ]
 
 
-class EmergenciaListApiView(ListController, CheckPermisosMixin):
-    permission_required = "emergrncia.ver_emergencia"
+class UserListApiView(ListController, CheckPermisosMixin):
+    permission_required = "user.ver_users"
 
     def __init__(self):
-        self.service = EmergenciaService()
+        self.service = UserService()

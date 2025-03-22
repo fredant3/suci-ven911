@@ -3,42 +3,40 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
-
 from templates.sneat import TemplateLayout
+from tecnologia.usuarios.forms import UserForm
+from users.auth.models import User
+from ..services import UserService
 
-from ..forms import EmergenciaForm
-from ..models import Emergencia
-from ..services import EmergenciaService
 
-
-class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = "emergrncia.actualizar_emergencia"
-    form_class = EmergenciaForm
+class UserUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+    permission_required = "user.actualizar_user"
+    form_class = UserForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Emergencias"
+        context["titlePage"] = "User"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Emergencias"
-        context["submodule"] = "Emergencias"
-        context["titleForm"] = "Actualizar emergancia"
+        context["module"] = "User"
+        context["submodule"] = "User"
+        context["titleForm"] = "Actualizar Usuarios"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("emergencias:list")
+        context["listUrl"] = reverse_lazy("user:list")
         context["urlForm"] = reverse_lazy(
-            "api_emergencias:update", args=[self.kwargs.get("pk")]
+            "api_user:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Emergencia.objects.filter(pk=id)
+        return User.objects.filter(pk=id)
 
 
-class EmergenciaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = "emergrncia.actualizar_emergencia"
-    form_class = EmergenciaForm
+class UserUpdateApiView(UpdateController, CheckPermisosMixin):
+    permission_required = "user.actualizar_user"
+    form_class = UserForm
 
     def __init__(self):
-        self.service = EmergenciaService()
+        self.service = UserService()

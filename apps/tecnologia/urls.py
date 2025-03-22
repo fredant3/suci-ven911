@@ -17,9 +17,9 @@ urlpatterns = [
         "api/grupos/",
         include(("apps.tecnologia.groups.urls_apis", "api_grupos")),
     ),
-    path("usuarios/", include(("apps.tecnologia.usuarios.urls", "usuarios"))),
+    path("usuarios/", include(("apps.tecnologia.usuarios.urls", "user"))),
     path(
         "api/usuarios/",
-        include(("apps.tecnologia.usuarios.urls_apis", "api_usuarios")),
+        include(("apps.tecnologia.usuarios.urls_apis", "api_user")),
     ),
 ]

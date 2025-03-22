@@ -21,5 +21,6 @@ class tecnologiaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             ("Inventario", reverse_lazy("tecnologia:list")),
             ("Averia", reverse_lazy("averias:list")),
             ("Grupos", reverse_lazy("grupos:list")),
+            ("Usuarios", reverse_lazy("user:list")),
         )
         return TemplateLayout.init(self, context)
