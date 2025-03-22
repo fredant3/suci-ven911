@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.models import Group, Permission
-from django.utils.translation import gettext_lazy as _
 from helpers.FormBase import FormBase
 from django.db.models import Q
 

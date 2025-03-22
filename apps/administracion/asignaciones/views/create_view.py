@@ -5,12 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
+from administracion.asignaciones.models import Asignacion
 
 from templates.sneat import TemplateLayout
 
 
 class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "administracion.asignaciones.agregar_asignacion"
+    permission_required = Asignacion.ADD_ARTICLE
     form_class = AsignacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +30,7 @@ class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class AsignacionCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = "administracion.asignaciones.agregar_asignacion"
+    permission_required = Asignacion.ADD_ARTICLE
     form_class = AsignacionForm
 
     def __init__(self):

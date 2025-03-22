@@ -23,7 +23,19 @@
         </a>
       {% endfor %}
       </div>
+
+      
+  <!-- Order Statistics -->
+  <div class="row align-items-center">
+  <div class="col-lg-6 col-sm-12 mb-6">
+    <div id="idFirstStatisticsChart"></div>
   </div>
+  <div class="col-lg-6 cpl-sm-12 mb-6 m-auto">
+    <div id="idSecondStatisticsChart" ></div>
+  </div>
+  <!--/ Order Statistics -->
+  </div>
+</div>
 </div>
 {% endblock %}
 
@@ -32,6 +44,11 @@
 {% endblock %}
 
 {% block vendor_js %}
-<script src="{% static 'vendor/libs/data-tables/js/dataTables.js' %}"></script>
-<script src="{% static 'vendor/libs/data-tables/js/dataTables.bootstrap5.js' %}"></script>
+<script>
+	const data = {{ data|safe }};
+	const labels = {{ labels|safe }};
+</script>
+
+<script src="{% static 'vendor/libs/apex-charts/apexcharts.js' %}"></script>
+<script src="{% static 'js/charts/dashboard.js' %}"></script>
 {% endblock %}
