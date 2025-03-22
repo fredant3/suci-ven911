@@ -38,7 +38,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Potencia",
-                "url": "incidencias:list",
+                "url": "potencia",
                 "image": "img/modules/incidente.png",
             },
             {

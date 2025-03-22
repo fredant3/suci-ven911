@@ -1,6 +1,8 @@
 from django.urls import include, path
+from potencia.views import PotenciaView
 
 urlpatterns = [
+    path("", PotenciaView.as_view(), name="potencia"),
     path("incidencias/", include(("apps.potencia.incidencias.urls", "incidencias"))),
     path(
         "api/incidencias/",
