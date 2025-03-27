@@ -5,7 +5,6 @@ from emergencia.forms import EmergenciaForm
 from emergencia.services import EmergenciaService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
-
 from templates.sneat import TemplateLayout
 
 
