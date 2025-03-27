@@ -1,11 +1,12 @@
 from django import forms
 from planificacion.actividades.models import Actividad
 from helpers.FormBase import FormBase
+from helpers.validForm import validate_ente, validate_valor_bs
 
 
 class ActividadForm(FormBase):
-    fechai = FormBase.create_date_field("date")
-    fechaf = FormBase.create_date_field("date")
+    fechai = FormBase.create_date_field("date", title="Fecha de inicio")
+    fechaf = FormBase.create_date_field("date", title="Fecha de fin")
 
     class Meta:
         model = Actividad
@@ -24,3 +25,43 @@ class ActividadForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        labels = {"objetiv": "Objetivo", "meta": "Meta"}
+        widgets = {
+            "objetiv": forms.Textarea(
+                attrs={
+                    "placeholder": "Objetivo de la actividad",
+                }
+            ),
+            "meta": forms.Textarea(
+                attrs={
+                    "placeholder": "Meta de la actividad",
+                }
+            ),
+        }
+
+    def clean_objetiv(self):
+        objetiv = self.cleaned_data.get("objetiv")
+        validate_ente(
+            objetiv,
+            "El objetivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
+        )
+        return objetiv
+
+    def clean_meta(self):
+        meta = self.cleaned_data.get("meta")
+        validate_valor_bs(
+            str(meta), "La meta debe ser un número positivo con hasta dos decimales."
+        )
+        return meta
+
+    def clean(self):
+        cleaned_data = super().clean()
+        fechai = cleaned_data.get("fechai")
+        fechaf = cleaned_data.get("fechaf")
+
+        if fechai and fechaf and fechaf < fechai:
+            raise forms.ValidationError(
+                "La fecha de fin no puede ser anterior a la fecha de inicio."
+            )
+
+        return cleaned_data
