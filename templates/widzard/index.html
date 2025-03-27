@@ -7,7 +7,7 @@
 {% block breadcrumbs %}
 {% if submodule %}
 <span class="text-muted fw-light">
-	<a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /
+	<a href="/uri" class="text-muted fw-light">{{ module }}</a> /
 </span>
 <span class="">{{ submodule }}</span>
 {% else %}
@@ -24,7 +24,8 @@
 {% block content %}
 
 
-<p> Informacion General {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+<p> Informacion General, Datos de Paciente {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+
 <form action="" method="post">{% csrf_token %}
 	<table>
 		{{ wizard.management_form }}
@@ -41,11 +42,11 @@
 	<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
 	<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
 	{% endif %}
-	<input type="submit" value="{% translate " submit" %}" />
+	<input type="submit" value="{% translate " Avanzar" %}" />
 </form>
 {% endblock %}
 
-</ /p class="lead">
+<!-- / /p class="lead">
 {% if wizard.steps.step1 == 1 %}
 Información General (Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }})
 {% elif wizard.steps.step1 == 2 %}
