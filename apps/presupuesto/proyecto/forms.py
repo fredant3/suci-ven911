@@ -2,10 +2,10 @@ from helpers.FormBase import FormBase
 from presupuesto.proyecto.models import Proyecto
 from django import forms
 from helpers.validForm import (
-    validate_ente,
-    validate_valor_bs,
+    validate_general_text,
+    validate_decimal_number,
     validate_nombres_apellidos,
-    validate_condicion,
+    validate_basic_text,
 )
 
 
@@ -96,7 +96,7 @@ class ProyectoForm(FormBase):
 
     def clean_nombrep(self):
         nombre = self.cleaned_data.get("nombrep")
-        validate_ente(
+        validate_general_text(
             nombre,
             "El nombre del proyecto solo permite letras, números y caracteres .,-!?()",
         )
@@ -104,14 +104,14 @@ class ProyectoForm(FormBase):
 
     def clean_situacionp(self):
         situacion = self.cleaned_data.get("situacionp")
-        validate_condicion(
+        validate_basic_text(
             situacion, "La situación debe contener letras, números y caracteres .,-"
         )
         return situacion
 
     def clean_montoproyecto(self):
         monto = self.cleaned_data.get("montoproyecto")
-        validate_valor_bs(
+        validate_decimal_number(
             str(monto), "El monto debe ser un valor positivo con hasta dos decimales"
         )
         return monto
@@ -137,7 +137,7 @@ class ProyectoForm(FormBase):
 
     def clean_estatus(self):
         estatus = self.cleaned_data.get("estatus")
-        validate_ente(
+        validate_general_text(
             estatus, "El estatus solo permite letras, números y caracteres .,-!?()"
         )
         return estatus

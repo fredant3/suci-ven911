@@ -5,8 +5,8 @@ from rrhh.empleados.models import Empleado
 from helpers.validForm import (
     validate_nombres_apellidos,
     validate_cedula,
-    validate_observaciones,
-    validate_condicion,
+    validate_basic_text,
+    validate_basic_text,
 )
 from django.utils import timezone
 
@@ -119,14 +119,14 @@ class FamiliarForm(FormBase):
 
     def clean_observacion(self):
         data = self.cleaned_data.get("observacion") or ""
-        validate_observaciones(
+        validate_basic_text(
             data, "Las observaciones contienen caracteres no permitidos"
         )
         return data
 
     def clean_parentezco(self):
         data = self.cleaned_data.get("parentezco")
-        validate_condicion(data, "Seleccione un parentesco válido")
+        validate_basic_text(data, "Seleccione un parentesco válido")
         return data
 
     def clean_empleado(self):

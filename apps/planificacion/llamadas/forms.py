@@ -2,9 +2,9 @@ from django import forms
 from planificacion.llamadas.models import Llamada
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_condicion,
+    validate_basic_text,
     validate_cantidad,
-    validate_cantidad_combustible,
+    validate_decimal_number,
 )
 
 
@@ -112,7 +112,7 @@ class LlamadaForm(FormBase):
 
     def clean_estado(self):
         estado = self.cleaned_data.get("estado")
-        validate_condicion(
+        validate_basic_text(
             estado,
             "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
         )

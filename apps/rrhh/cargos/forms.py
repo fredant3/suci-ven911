@@ -1,7 +1,7 @@
 from django import forms
 from rrhh.cargos.models import Cargo
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_ente, validate_condicion
+from helpers.validForm import validate_general_text, validate_basic_text
 
 
 class CargoForm(FormBase):
@@ -32,7 +32,7 @@ class CargoForm(FormBase):
 
     def clean_cargo(self):
         cargo = self.cleaned_data.get("cargo")
-        validate_ente(
+        validate_general_text(
             cargo,
             "El nombre del cargo solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )
@@ -40,7 +40,7 @@ class CargoForm(FormBase):
 
     def clean_estatus(self):
         estatus = self.cleaned_data.get("estatus")
-        validate_condicion(
+        validate_basic_text(
             estatus,
             "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
         )

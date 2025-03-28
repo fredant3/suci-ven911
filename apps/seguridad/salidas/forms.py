@@ -7,7 +7,7 @@ from helpers.validForm import (
     validate_cedula,
     validate_telefono,
     validate_direccion,
-    validate_ente,
+    validate_general_text,
 )
 from datetime import datetime
 
@@ -101,7 +101,7 @@ class SalidaForm(FormBase):
 
     def clean_cargo(self):
         data = self.cleaned_data.get("cargo")
-        validate_ente(data, "Seleccione un cargo válido")
+        validate_general_text(data, "Seleccione un cargo válido")
         return data
 
     def clean_fecha(self):

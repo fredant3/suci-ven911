@@ -2,7 +2,7 @@ from django import forms
 from rrhh.empleados.models import Empleado
 from rrhh.dotaciones.models import Dotacion
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_ente
+from helpers.validForm import validate_general_text
 
 
 class DotacionForm(FormBase):
@@ -49,7 +49,7 @@ class DotacionForm(FormBase):
 
     def clean_camisa(self):
         data = self.cleaned_data.get("camisa")
-        validate_ente(
+        validate_general_text(
             data,
             "La talla de camisa solo puede contener letras, números y los caracteres -/",
         )
@@ -57,7 +57,7 @@ class DotacionForm(FormBase):
 
     def clean_pantalon(self):
         data = self.cleaned_data.get("pantalon")
-        validate_ente(
+        validate_general_text(
             data,
             "La talla de pantalón solo puede contener letras, números y los caracteres -/",
         )
@@ -65,7 +65,7 @@ class DotacionForm(FormBase):
 
     def clean_zapato(self):
         data = self.cleaned_data.get("zapato")
-        validate_ente(
+        validate_general_text(
             data,
             "La talla de zapato solo puede contener letras, números y los caracteres -/.",
         )

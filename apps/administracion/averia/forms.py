@@ -2,8 +2,7 @@ from administracion.averia.models import Averia
 from helpers.FormBase import FormBase
 from django import forms
 from helpers.validForm import (
-    validate_problema,
-    validate_ubicacion,
+    validate_basic_text,
     validate_serial,
     validate_codigo_bn,
 )
@@ -43,7 +42,7 @@ class AveriaForm(FormBase):
 
     def clean_problema(self):
         problema = self.cleaned_data.get("problema")
-        validate_problema(
+        validate_basic_text(
             problema,
             "El problema solo puede contener letras, números, espacios y los caracteres .,-",
         )
@@ -51,7 +50,7 @@ class AveriaForm(FormBase):
 
     def clean_ubicacion(self):
         ubicacion = self.cleaned_data.get("ubicacion")
-        validate_ubicacion(
+        validate_basic_text(
             ubicacion,
             "La ubicación solo puede contener letras, números, espacios y los caracteres .,-",
         )

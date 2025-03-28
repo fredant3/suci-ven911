@@ -6,8 +6,8 @@ from helpers.validForm import (
     validate_nombres_apellidos,
     validate_cedula,
     validate_direccion,
-    validate_ente,
-    validate_observaciones,
+    validate_general_text,
+    validate_basic_text,
 )
 
 
@@ -102,12 +102,12 @@ class GestionForm(FormBase):
 
     def clean_tipo(self):
         data = self.cleaned_data.get("tipo")
-        validate_ente(data, "Seleccione un tipo de gestión válido")
+        validate_general_text(data, "Seleccione un tipo de gestión válido")
         return data
 
     def clean_descripcion(self):
         data = self.cleaned_data.get("descripcion")
-        validate_observaciones(data, "La descripción contiene caracteres no permitidos")
+        validate_basic_text(data, "La descripción contiene caracteres no permitidos")
         return data
 
     def clean_direccion(self):
@@ -117,7 +117,7 @@ class GestionForm(FormBase):
 
     def clean_cargo(self):
         data = self.cleaned_data.get("cargo")
-        validate_ente(data, "Seleccione un cargo válido")
+        validate_general_text(data, "Seleccione un cargo válido")
         return data
 
     def clean_fecha(self):

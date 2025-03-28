@@ -2,7 +2,7 @@ from administracion.compras.model import Compra
 from helpers.FormBase import FormBase
 from helpers.validForm import (
     validate_n_orden,
-    validate_valor_bs,
+    validate_decimal_number,
 )
 from django import forms
 
@@ -37,5 +37,5 @@ class CompraForm(FormBase):
 
     def clean_valor_bs(self):
         valor_bs = self.cleaned_data.get("valor_bs")
-        validate_valor_bs(valor_bs, "El valor en BS debe ser un número positivo.")
+        validate_decimal_number(valor_bs, "El valor en BS debe ser un número positivo.")
         return valor_bs

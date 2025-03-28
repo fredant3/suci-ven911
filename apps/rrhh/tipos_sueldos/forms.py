@@ -1,7 +1,7 @@
 from django import forms
 from rrhh.tipos_sueldos.models import TipoSueldo
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_valor_bs, validate_observaciones
+from helpers.validForm import validate_decimal_number, validate_basic_text
 
 
 class TipoSueldoForm(FormBase):
@@ -59,14 +59,14 @@ class TipoSueldoForm(FormBase):
 
     def clean_monto(self):
         data = self.cleaned_data.get("monto")
-        validate_valor_bs(
+        validate_decimal_number(
             str(data), "El monto debe ser un valor positivo con hasta dos decimales"
         )
         return data
 
     def clean_descripcion(self):
         data = self.cleaned_data.get("descripcion")
-        validate_observaciones(data, "La descripción contiene caracteres no permitidos")
+        validate_basic_text(data, "La descripción contiene caracteres no permitidos")
         return data
 
     def clean_estatus(self):

@@ -1,7 +1,7 @@
 from django import forms
 from rrhh.tipos_empleados.models import TipoEmpleado
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_condicion, validate_ente
+from helpers.validForm import validate_basic_text, validate_general_text
 
 
 class TipoEmpleadoForm(FormBase):
@@ -35,7 +35,7 @@ class TipoEmpleadoForm(FormBase):
 
     def clean_tipo_personal(self):
         data = self.cleaned_data.get("tipo_personal")
-        validate_ente(
+        validate_general_text(
             data,
             "El tipo de personal solo puede contener letras, números y caracteres especiales válidos",
         )
@@ -43,7 +43,7 @@ class TipoEmpleadoForm(FormBase):
 
     def clean_estatus(self):
         data = self.cleaned_data.get("estatus")
-        validate_condicion(
+        validate_basic_text(
             data, "Seleccione un estatus válido para el tipo de personal"
         )
         return data

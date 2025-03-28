@@ -5,7 +5,7 @@ from helpers.validForm import (
     validate_nombre,
     validate_telefono,
     validate_direccion,
-    validate_observaciones,
+    validate_basic_text,
 )
 
 
@@ -123,7 +123,7 @@ class EmergenciaForm(FormBase):
 
     def clean_observaciones(self):
         observaciones = self.cleaned_data.get("observaciones")
-        validate_observaciones(
+        validate_basic_text(
             observaciones,
             "Las observaciones solo pueden contener letras, números, espacios y los caracteres .,-!?().",
         )

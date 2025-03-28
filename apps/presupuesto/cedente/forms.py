@@ -4,8 +4,8 @@ from helpers.FormBase import FormBase
 from helpers.validForm import (
     validate_codigo_bn,
     validate_cantidad,
-    validate_ente,
-    validate_valor_bs,
+    validate_general_text,
+    validate_decimal_number,
     validate_direccion,
 )
 
@@ -152,40 +152,44 @@ class CedenteForm(FormBase):
 
     def clean_denomc(self):
         data = self.cleaned_data.get("denomc")
-        validate_ente(
+        validate_general_text(
             data, "La denominación solo permite letras, números y caracteres .,-!?()"
         )
         return data
 
     def clean_presuacorc(self):
         data = self.cleaned_data.get("presuacorc")
-        validate_valor_bs(
+        validate_decimal_number(
             str(data), "El presupuesto debe ser un valor positivo con 2 decimales"
         )
         return data
 
     def clean_caufechac(self):
         data = self.cleaned_data.get("caufechac")
-        validate_ente(data, "Formato de fecha no válido. Use caracteres permitidos")
+        validate_general_text(
+            data, "Formato de fecha no válido. Use caracteres permitidos"
+        )
         return data
 
     def clean_dispc(self):
         data = self.cleaned_data.get("dispc")
-        validate_ente(
+        validate_general_text(
             data, "Formato de disposición no válido. Use caracteres permitidos"
         )
         return data
 
     def clean_montocc(self):
         data = self.cleaned_data.get("montocc")
-        validate_valor_bs(
+        validate_decimal_number(
             str(data), "El monto comprometido debe ser un valor con 2 decimales"
         )
         return data
 
     def clean_saldofc(self):
         data = self.cleaned_data.get("saldofc")
-        validate_valor_bs(str(data), "El saldo final debe ser un valor con 2 decimales")
+        validate_decimal_number(
+            str(data), "El saldo final debe ser un valor con 2 decimales"
+        )
         return data
 
     def clean_direccionc(self):

@@ -5,9 +5,9 @@ from django.utils import timezone
 from helpers.validForm import (
     validate_nombres_apellidos,
     validate_cedula,
-    validate_ente,
-    validate_observaciones,
-    validate_cantidad_combustible,
+    validate_general_text,
+    validate_basic_text,
+    validate_decimal_number,
     validate_placa,
 )
 from datetime import datetime
@@ -108,22 +108,22 @@ class VehiculoForm(FormBase):
 
     def clean_modelo(self):
         data = self.cleaned_data.get("modelo")
-        validate_ente(data, "El modelo contiene caracteres no permitidos")
+        validate_general_text(data, "El modelo contiene caracteres no permitidos")
         return data
 
     def clean_vehiculo(self):
         data = self.cleaned_data.get("vehiculo")
-        validate_ente(data, "Seleccione un tipo de vehículo válido")
+        validate_general_text(data, "Seleccione un tipo de vehículo válido")
         return data
 
     def clean_motivo(self):
         data = self.cleaned_data.get("motivo")
-        validate_observaciones(data, "El motivo contiene caracteres no permitidos")
+        validate_basic_text(data, "El motivo contiene caracteres no permitidos")
         return data
 
     def clean_cantigasolina(self):
         data = self.cleaned_data.get("cantigasolina")
-        validate_cantidad_combustible(
+        validate_decimal_number(
             str(data), "La cantidad de gasolina debe ser un número positivo (ej: 15.5)"
         )
         return data

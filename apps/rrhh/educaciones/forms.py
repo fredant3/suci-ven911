@@ -2,7 +2,7 @@ from django import forms
 from rrhh.empleados.models import Empleado
 from rrhh.educaciones.models import Educacion
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_ente, validate_codigo_bn, validate_url
+from helpers.validForm import validate_general_text, validate_codigo_bn, validate_url
 
 
 class EducacionForm(FormBase):
@@ -77,7 +77,7 @@ class EducacionForm(FormBase):
 
     def clean_colegio(self):
         data = self.cleaned_data.get("colegio")
-        validate_ente(
+        validate_general_text(
             data,
             "El nombre de la institución solo puede contener letras, números y caracteres especiales comunes",
         )
@@ -92,12 +92,16 @@ class EducacionForm(FormBase):
 
     def clean_titulo(self):
         data = self.cleaned_data.get("titulo")
-        validate_ente(data, "El título académico contiene caracteres no permitidos")
+        validate_general_text(
+            data, "El título académico contiene caracteres no permitidos"
+        )
         return data
 
     def clean_area_conocimiento(self):
         data = self.cleaned_data.get("area_conocimiento")
-        validate_ente(data, "El área de conocimiento contiene caracteres no permitidos")
+        validate_general_text(
+            data, "El área de conocimiento contiene caracteres no permitidos"
+        )
         return data
 
     def clean_enlace_certificado(self):

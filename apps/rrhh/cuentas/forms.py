@@ -4,9 +4,9 @@ from helpers.FormBase import FormBase
 from helpers.validForm import (
     validate_codigo_bn,
     validate_telefono,
-    validate_condicion,
+    validate_basic_text,
     validate_cantidad,
-    validate_ente,
+    validate_general_text,
 )
 from rrhh.empleados.models import Empleado
 
@@ -77,12 +77,12 @@ class CuentaForm(FormBase):
 
     def clean_banco(self):
         banco = self.cleaned_data.get("banco")
-        validate_condicion(banco, "Seleccione un banco válido de la lista")
+        validate_basic_text(banco, "Seleccione un banco válido de la lista")
         return banco
 
     def clean_tipo(self):
         tipo = self.cleaned_data.get("tipo")
-        validate_ente(tipo, "Seleccione un tipo de cuenta válido")
+        validate_general_text(tipo, "Seleccione un tipo de cuenta válido")
         return tipo
 
     def clean_empleado(self):

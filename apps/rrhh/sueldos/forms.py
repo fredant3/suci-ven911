@@ -2,10 +2,10 @@ from django import forms
 from .models import Sueldo
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_ente,
+    validate_general_text,
     validate_codigo_bn,
     validate_url,
-    validate_valor_bs,
+    validate_decimal_number,
 )
 
 
@@ -90,7 +90,7 @@ class SueldoForm(FormBase):
 
     def clean_colegio(self):
         data = self.cleaned_data.get("colegio")
-        validate_ente(
+        validate_general_text(
             data,
             "El nombre del colegio solo permite caracteres alfanuméricos y símbolos comunes",
         )
@@ -98,7 +98,7 @@ class SueldoForm(FormBase):
 
     def clean_titulo(self):
         data = self.cleaned_data.get("titulo")
-        validate_ente(data, "El título contiene caracteres no permitidos")
+        validate_general_text(data, "El título contiene caracteres no permitidos")
         return data
 
     def clean_personal(self):

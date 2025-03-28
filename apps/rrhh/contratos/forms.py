@@ -3,9 +3,9 @@ from .models import Contrato
 from helpers.FormBase import FormBase
 from helpers.validForm import (
     validate_sede,
-    validate_condicion,
+    validate_basic_text,
     validate_nombres_apellidos,
-    validate_ente,
+    validate_general_text,
 )
 
 
@@ -69,14 +69,14 @@ class ContratoForm(FormBase):
 
     def clean_cargo(self):
         data = self.cleaned_data.get("cargo")
-        validate_ente(
+        validate_general_text(
             data, "El cargo solo permite letras, números y caracteres .,-!?()"
         )
         return data
 
     def clean_tipo(self):
         data = self.cleaned_data.get("tipo")
-        validate_condicion(
+        validate_basic_text(
             data,
             "El tipo de contrato solo permite letras, números y caracteres básicos",
         )
@@ -84,7 +84,7 @@ class ContratoForm(FormBase):
 
     def clean_tipo_personal(self):
         data = self.cleaned_data.get("tipo_personal")
-        validate_condicion(
+        validate_basic_text(
             data,
             "El tipo de personal solo permite letras, números y caracteres básicos",
         )

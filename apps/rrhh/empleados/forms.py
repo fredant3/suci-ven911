@@ -7,7 +7,7 @@ from helpers.validForm import (
     validate_telefono,
     validate_email,
     validate_direccion,
-    validate_condicion,
+    validate_basic_text,
 )
 import datetime
 
@@ -163,7 +163,7 @@ class EmpleadoForm(FormBase):
 
     def clean_estatus(self):
         data = self.cleaned_data.get("estatus")
-        validate_condicion(data, "Seleccione un estatus válido")
+        validate_basic_text(data, "Seleccione un estatus válido")
         return data
 
     def clean_sexo(self):

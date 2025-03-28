@@ -3,9 +3,9 @@ from helpers.FormBase import FormBase
 from django.forms.fields import DateTimeInput
 from helpers.validForm import (
     validate_direccion,
-    validate_camara,
-    validate_motivo_solicitud,
-    validate_ente_solicita,
+    validate_general_text,
+    validate_general_text_solicitud,
+    validate_general_text_solicita,
 )
 from django import forms
 
@@ -56,7 +56,7 @@ class RegistroFilmicoForm(FormBase):
 
     def clean_camara(self):
         camara = self.cleaned_data.get("camara")
-        validate_camara(
+        validate_general_text(
             camara,
             "El campo cámara solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )
@@ -64,7 +64,7 @@ class RegistroFilmicoForm(FormBase):
 
     def clean_motivo_solicitud(self):
         motivo_solicitud = self.cleaned_data.get("motivo_solicitud")
-        validate_motivo_solicitud(
+        validate_general_text_solicitud(
             motivo_solicitud,
             "El motivo de la solicitud solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )
@@ -72,7 +72,7 @@ class RegistroFilmicoForm(FormBase):
 
     def clean_ente_solicita(self):
         ente_solicita = self.cleaned_data.get("ente_solicita")
-        validate_ente_solicita(
+        validate_general_text_solicita(
             ente_solicita,
             "El ente que solicita solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )

@@ -2,11 +2,10 @@ from potencia.incidencias.models import Incidencia
 from helpers.FormBase import FormBase
 from django import forms
 from helpers.validForm import (
-    validate_condicion,
+    validate_basic_text,
     validate_sede,
-    validate_observaciones,
-    validate_ente,
-    validate_problema,
+    validate_basic_text,
+    validate_general_text,
 )
 
 
@@ -75,7 +74,7 @@ class IncidenciaForm(FormBase):
 
     def clean_estado(self):
         estado = self.cleaned_data.get("estado")
-        validate_condicion(
+        validate_basic_text(
             estado,
             "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
         )
@@ -98,7 +97,7 @@ class IncidenciaForm(FormBase):
 
     def clean_tipo_incidencia(self):
         tipo = self.cleaned_data.get("tipo_incidencia")
-        validate_problema(
+        validate_basic_text(
             tipo,
             "El tipo de incidencia solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )
@@ -106,14 +105,14 @@ class IncidenciaForm(FormBase):
 
     def clean_observaciones(self):
         obs = self.cleaned_data.get("observaciones")
-        validate_observaciones(
+        validate_basic_text(
             obs, "Use solo letras, números, espacios y los caracteres .,-!?()."
         )
         return obs
 
     def clean_tipo_solicitud(self):
         solicitud = self.cleaned_data.get("tipo_solicitud")
-        validate_ente(
+        validate_general_text(
             solicitud,
             "El tipo de solicitud solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )
