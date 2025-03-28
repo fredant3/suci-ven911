@@ -363,5 +363,45 @@
 				<div class="text-truncate" data-i18n="Email">Unidad de Respuesta Inmediata</div>
 			</a>
 		</li>
+
+		<li
+			class="menu-item {% if 'tecnologia' == request.resolver_match.url_name or 'grupos' in request.resolver_match.namespaces or 'usuarios' in request.resolver_match.namespaces %}active open{% endif %}">
+
+			<a href="javascript:void(0);" class="menu-link menu-toggle">
+				<i class="menu-icon tf-icons bx bx-cog"></i>
+				<div class="text-truncate" data-i18n="Layouts">Tecnologia</div>
+			</a>
+			<ul class="menu-sub">
+				<li class="menu-item {% if 'tecnologia' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'tecnologia' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Inicio</div>
+					</a>
+				</li>
+				<li class="menu-item {% if 'grupos' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'grupos:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Grupos</div>
+					</a>
+				</li>
+
+				<li class="menu-item {% if 'user' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'user:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Usuarios</div>
+					</a>
+				</li>
+
+				<li class="menu-item {% if '' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'tecnologia:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Inventario</div>
+					</a>
+				</li>
+				<li
+					class="menu-item {% if 'averias' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'averias:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without navbar">Averias</div>
+					</a>
+				</li>
+			</ul>
+		</li>
 	</ul>
+
 </aside>
