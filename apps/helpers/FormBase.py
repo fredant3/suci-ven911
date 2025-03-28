@@ -38,7 +38,8 @@ class FormBase(forms.ModelForm):
             widget=forms.TextInput(attrs={"type": "date"}),
             # input_formats=["%d/%m/%Y"],
             error_messages={"invalid": "Ingrese la fecha en el formato DD/MM/YYYY."},
-            label=title.capitalize() if title is not None else field_name.capitalize(),
+            # No asignar el label aquí si ya está definido en el Meta del formulario
+            label=title.capitalize() if title is not None else None,
         )
 
     @staticmethod
@@ -47,5 +48,5 @@ class FormBase(forms.ModelForm):
             widget=forms.TextInput(attrs={"type": "time"}),
             # input_formats=["%H:%M"],
             error_messages={"invalid": "Ingrese la hora en el formato HH:MM."},
-            label=title.capitalize() if title is not None else field_name.capitalize(),
+            label=title.capitalize() if title is not None else None,
         )
