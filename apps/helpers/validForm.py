@@ -1,5 +1,6 @@
 import re
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 
 
 # Valida que el valor sea un número entero positivo.
@@ -220,3 +221,12 @@ def validate_ente_solicita(
 ):
     if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
         raise ValidationError(msg)
+
+
+# Valida que el valor sea una URL válida.
+def validate_url(value, message):
+    validator = URLValidator()
+    try:
+        validator(value)
+    except ValidationError:
+        raise ValidationError(message)

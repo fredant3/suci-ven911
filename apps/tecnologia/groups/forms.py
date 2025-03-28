@@ -16,6 +16,7 @@ class GrupoPermisosForm(FormBase):
             "permissions": "Permisos",
         }
         widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "Nombre del Grupo"}),
             "permissions": forms.CheckboxSelectMultiple(),
         }
 
