@@ -166,11 +166,11 @@ class EmpleadoForm(FormBase):
         validate_basic_text(data, "Seleccione un estatus válido")
         return data
 
-    def clean_sexo(self):
-        data = self.cleaned_data.get("sexo")
-        if data not in [choice[0] for choice in Empleado.SEXO_CHOICES]:
-            raise forms.ValidationError("Seleccione un género válido")
-        return data
+    # def clean_sexo(self):
+    # data = self.cleaned_data.get("sexo")
+    # if data not in [choice[0] for choice in Empleado.SEXO_CHOICES]:
+    # raise forms.ValidationError("Seleccione un género válido")
+    # return data
 
     def clean(self):
         cleaned_data = super().clean()
