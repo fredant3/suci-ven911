@@ -2,9 +2,7 @@ from organizacion.reglamentos.models import Reglamento
 from helpers.FormBase import FormBase
 from django import forms
 from helpers.validForm import (
-    validate_ente,
-    validate_codigo_bn,
-    validate_condicion,
+    validate_general_text,
 )
 
 
@@ -64,7 +62,7 @@ class ReglamentoForm(FormBase):
 
     def clean_name(self):
         name = self.cleaned_data.get("name")
-        validate_ente(
+        validate_general_text(
             name,
             "El nombre solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )

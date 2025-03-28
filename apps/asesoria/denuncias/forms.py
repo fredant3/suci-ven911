@@ -7,9 +7,9 @@ from helpers.validForm import (
     validate_telefono,
     validate_email,
     validate_direccion,
-    validate_ente,
-    validate_motivo,
-    validate_zona,
+    validate_general_text,
+    validate_general_text,
+    validate_general_text,
 )
 
 
@@ -136,7 +136,7 @@ class DenunciaForm(FormBase):
         max_length=120,
         label="Ente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el ente relacionado"}),
-        validators=[validate_ente],
+        validators=[validate_general_text],
     )
     motivo = forms.CharField(
         max_length=120,
@@ -144,13 +144,13 @@ class DenunciaForm(FormBase):
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el motivo de la denuncia"}
         ),
-        validators=[validate_motivo],
+        validators=[validate_general_text],
     )
     zona = forms.CharField(
         max_length=120,
         label="Zona del incidente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la zona del incidente"}),
-        validators=[validate_zona],
+        validators=[validate_general_text],
     )
 
     class Meta:

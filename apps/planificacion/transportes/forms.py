@@ -1,7 +1,11 @@
 from django import forms
 from planificacion.transportes.models import Transporte
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_condicion, validate_cantidad, validate_ente
+from helpers.validForm import (
+    validate_basic_text,
+    validate_cantidad,
+    validate_general_text,
+)
 
 
 class TransporteForm(FormBase):
@@ -57,7 +61,7 @@ class TransporteForm(FormBase):
 
     def clean_estado(self):
         estado = self.cleaned_data.get("estado")
-        validate_condicion(
+        validate_basic_text(
             estado,
             "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
         )
@@ -72,7 +76,7 @@ class TransporteForm(FormBase):
 
     def clean_transporte(self):
         transporte = self.cleaned_data.get("transporte")
-        validate_ente(
+        validate_general_text(
             transporte,
             "El tipo de transporte solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )

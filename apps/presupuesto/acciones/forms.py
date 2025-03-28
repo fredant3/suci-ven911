@@ -2,10 +2,10 @@ from django import forms
 from presupuesto.models import Accion
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_valor_bs,
+    validate_decimal_number,
     validate_nombres_apellidos,
-    validate_condicion,
-    validate_ente,
+    validate_basic_text,
+    validate_general_text,
 )
 
 
@@ -87,7 +87,7 @@ class AccionForm(FormBase):
 
     def clean_monto(self):
         monto = self.cleaned_data.get("monto")
-        validate_valor_bs(
+        validate_decimal_number(
             str(monto), "El monto debe ser un valor positivo con hasta dos decimales"
         )
         return monto
@@ -113,14 +113,14 @@ class AccionForm(FormBase):
 
     def clean_situacion_presupuestaria(self):
         situacion = self.cleaned_data.get("situacion_presupuestaria")
-        validate_condicion(
+        validate_basic_text(
             situacion, "Use solo letras, números, espacios y los caracteres .,-."
         )
         return situacion
 
     def clean_estatus(self):
         estatus = self.cleaned_data.get("estatus")
-        validate_ente(
+        validate_general_text(
             estatus,
             "El estatus solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )

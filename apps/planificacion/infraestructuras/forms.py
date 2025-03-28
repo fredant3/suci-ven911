@@ -2,9 +2,9 @@ from django import forms
 from planificacion.infraestructuras.models import Infraestructura
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_condicion,
+    validate_basic_text,
     validate_cantidad,
-    validate_ente,
+    validate_general_text,
 )
 
 
@@ -57,7 +57,7 @@ class InfraestructuraForm(FormBase):
 
     def clean_estado(self):
         estado = self.cleaned_data.get("estado")
-        validate_condicion(
+        validate_basic_text(
             estado,
             "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
         )
@@ -72,7 +72,7 @@ class InfraestructuraForm(FormBase):
 
     def clean_infraestructura(self):
         infraestructura = self.cleaned_data.get("infraestructura")
-        validate_ente(
+        validate_general_text(
             infraestructura,
             "El nombre debe contener letras, números, espacios y los caracteres .,-!?().",
         )

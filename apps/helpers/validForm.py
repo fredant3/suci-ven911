@@ -1,5 +1,6 @@
 import re
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 
 
 # Valida que el valor sea un número entero positivo.
@@ -8,43 +9,8 @@ def validate_cantidad(value, msg="La cantidad debe ser un número entero positiv
         raise ValidationError(msg)
 
 
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-.
-def validate_descripcion(
-    value,
-    msg="La descripción solo puede contener letras, números, espacios y los caracteres .,-.",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_observaciones(
-    value,
-    msg="Las observaciones solo pueden contener letras, números, espacios y los caracteres .,-!?().",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_problema(
-    value,
-    msg="El problema solo puede contener letras, números, espacios y los caracteres .,-!?().",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-.
-def validate_ubicacion(
-    value,
-    msg="La ubicación solo puede contener letras, números, espacios y los caracteres .,-.",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-]+$", value):
-        raise ValidationError(msg)
-
-
 # Valida que el valor contenga solo letras, números y guiones.
+# TODO: ver que patron de sserial tiene que ser
 def validate_serial(
     value, msg="El serial solo puede contener letras, números y guiones."
 ):
@@ -53,6 +19,7 @@ def validate_serial(
 
 
 # Valida que el valor contenga solo letras, números y guiones.
+# TODO: ver que patron de sserial tiene que ser
 def validate_codigo_bn(
     value, msg="El código BN solo puede contener letras, números y guiones."
 ):
@@ -61,18 +28,11 @@ def validate_codigo_bn(
 
 
 # Valida que el valor contenga solo letras, números y guiones.
+# TODO: ver que patron de sserial tiene que ser
 def validate_n_orden(
     value, msg="El número de orden solo puede contener letras, números y guiones."
 ):
     if not re.match(r"^[a-zA-Z0-9\-]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor sea un número positivo, permitiendo hasta dos decimales.
-def validate_valor_bs(
-    value, msg="El valor en BS debe ser un número positivo con hasta dos decimales."
-):
-    if not re.match(r"^\d+(\.\d{1,2})?$", str(value)):
         raise ValidationError(msg)
 
 
@@ -82,47 +42,12 @@ def validate_nombre(value, msg="El nombre solo puede contener letras y espacios.
         raise ValidationError(msg)
 
 
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-.
-def validate_marca(
-    value,
-    msg="La marca solo puede contener letras, números, espacios y los caracteres .,-.",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-.
-def validate_modelo(
-    value,
-    msg="El modelo solo puede contener letras, números, espacios y los caracteres .,-.",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-]+$", value):
-        raise ValidationError(msg)
-
-
 # Valida que el valor contenga solo letras, números y guiones.
+# TODO: ver que patron de sserial tiene que ser
 def validate_placa(
     value, msg="La placa solo puede contener letras, números y guiones."
 ):
     if not re.match(r"^[a-zA-Z0-9\-]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor sea un número positivo, permitiendo hasta dos decimales.
-def validate_cantidad_combustible(
-    value,
-    msg="La cantidad de combustible debe ser un número positivo con hasta dos decimales.",
-):
-    if not re.match(r"^\d+(\.\d{1,2})?$", str(value)):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-.
-def validate_condicion(
-    value,
-    msg="La condición solo puede contener letras, números, espacios y los caracteres .,-.",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-]+$", value):
         raise ValidationError(msg)
 
 
@@ -148,8 +73,14 @@ def validate_cedula(value, msg="La cédula solo puede contener números y guione
 
 
 # Valida que el valor sea un número de teléfono válido (solo números y guiones).
-def validate_telefono(value, msg="El teléfono solo puede contener números y guiones."):
-    if not re.match(r"^[0-9\-]+$", value):
+def validate_telefono(
+    value,
+    msg="El teléfono solo puede contener números y guiones. Debe tener la estructura 0412-3456789 o 04123456789",
+):
+
+    if not re.match(
+        r"/^(?:\+58|58|0)?(2[0-9]{2}|4[0-9]{2}|[5-9][0-9]{2})[0-9]{7}$/", value
+    ):
         raise ValidationError(msg)
 
 
@@ -169,43 +100,7 @@ def validate_email(value, msg="Ingrese un correo electrónico válido."):
 
 
 # Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_ente(
-    value,
-    msg="El ente solo puede contener letras, números, espacios y los caracteres .,-!?().",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_motivo(
-    value,
-    msg="El motivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_zona(
-    value,
-    msg="La zona solo puede contener letras, números, espacios y los caracteres .,-!?().",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_camara(
-    value,
-    msg="El campo cámara solo puede contener letras, números, espacios y los caracteres .,-!?().",
-):
-    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
-        raise ValidationError(msg)
-
-
-# Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_motivo_solicitud(
+def validate_general_text_solicitud(
     value,
     msg="El motivo de la solicitud solo puede contener letras, números, espacios y los caracteres .,-!?().",
 ):
@@ -214,9 +109,39 @@ def validate_motivo_solicitud(
 
 
 # Valida que el valor contenga solo letras, números, espacios y los caracteres .,-!?().
-def validate_ente_solicita(
+def validate_general_text_solicita(
     value,
     msg="El ente que solicita solo puede contener letras, números, espacios y los caracteres .,-!?().",
 ):
     if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
+        raise ValidationError(msg)
+
+
+# Valida que el valor sea una URL válida.
+def validate_url(value, message):
+    validator = URLValidator()
+    try:
+        validator(value)
+    except ValidationError:
+        raise ValidationError(message)
+
+
+def validate_general_text(
+    value, msg="Solo se permiten letras, números, espacios y los caracteres .,-!?()."
+):
+    if not re.match(r"^[a-zA-Z0-9\s\.,\-!?()]+$", value):
+        raise ValidationError(msg)
+
+
+def validate_basic_text(
+    value, msg="Solo se permiten letras, números, espacios y los caracteres .,-."
+):
+    if not re.match(r"^[a-zA-Z0-9\s\.,\-]+$", value):
+        raise ValidationError(msg)
+
+
+def validate_decimal_number(
+    value, msg="Debe ser un número positivo con hasta dos decimales."
+):
+    if not re.match(r"^\d+(\.\d{1,2})?$", str(value)):
         raise ValidationError(msg)

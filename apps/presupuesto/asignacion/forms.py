@@ -3,8 +3,8 @@ from presupuesto.asignacion.models import Asignacion
 from helpers.FormBase import FormBase
 from helpers.validForm import (
     validate_sede,
-    validate_valor_bs,
-    validate_ente,
+    validate_decimal_number,
+    validate_general_text,
     validate_codigo_bn,
 )
 
@@ -60,7 +60,7 @@ class AsignacionForm(FormBase):
 
     def clean_presupuesto(self):
         presupuesto = self.cleaned_data.get("presupuesto")
-        validate_valor_bs(
+        validate_decimal_number(
             str(presupuesto),
             "El presupuesto debe ser un valor positivo con hasta dos decimales.",
         )
@@ -68,7 +68,7 @@ class AsignacionForm(FormBase):
 
     def clean_objetivo(self):
         objetivo = self.cleaned_data.get("objetivo")
-        validate_ente(
+        validate_general_text(
             objetivo,
             "El objetivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )

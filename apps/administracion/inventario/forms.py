@@ -1,15 +1,15 @@
 from administracion.inventario.models import Articulo
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_descripcion,
-    validate_marca,
-    validate_modelo,
+    validate_basic_text,
+    validate_basic_text,
+    validate_basic_text,
     validate_serial,
     validate_placa,
-    validate_cantidad_combustible,
+    validate_decimal_number,
     validate_codigo_bn,
     validate_cantidad,
-    validate_condicion,
+    validate_basic_text,
 )
 from django import forms
 
@@ -64,7 +64,7 @@ class ArticuloForm(FormBase):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get("descripcion")
-        validate_descripcion(
+        validate_basic_text(
             descripcion,
             "La descripción solo puede contener letras, números y espacios.",
         )
@@ -72,14 +72,14 @@ class ArticuloForm(FormBase):
 
     def clean_marca(self):
         marca = self.cleaned_data.get("marca")
-        validate_marca(
+        validate_basic_text(
             marca, "La marca solo puede contener letras, números y espacios."
         )
         return marca
 
     def clean_modelo(self):
         modelo = self.cleaned_data.get("modelo")
-        validate_modelo(
+        validate_basic_text(
             modelo, "El modelo solo puede contener letras, números y espacios."
         )
         return modelo
@@ -98,7 +98,7 @@ class ArticuloForm(FormBase):
 
     def clean_cantidad_combustible(self):
         cantidad_combustible = self.cleaned_data.get("cantidad_combustible")
-        validate_cantidad_combustible(
+        validate_decimal_number(
             cantidad_combustible,
             "La cantidad de combustible debe ser un número positivo.",
         )
@@ -118,7 +118,7 @@ class ArticuloForm(FormBase):
 
     def clean_condicion(self):
         condicion = self.cleaned_data.get("condicion")
-        validate_condicion(
+        validate_basic_text(
             condicion, "La condición solo puede contener letras, números y espacios."
         )
         return condicion
@@ -167,7 +167,7 @@ class TecnologiaForm(FormBase):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get("descripcion")
-        validate_descripcion(
+        validate_basic_text(
             descripcion,
             "La descripción solo puede contener letras, números y espacios.",
         )
@@ -175,14 +175,14 @@ class TecnologiaForm(FormBase):
 
     def clean_marca(self):
         marca = self.cleaned_data.get("marca")
-        validate_marca(
+        validate_basic_text(
             marca, "La marca solo puede contener letras, números y espacios."
         )
         return marca
 
     def clean_modelo(self):
         modelo = self.cleaned_data.get("modelo")
-        validate_modelo(
+        validate_basic_text(
             modelo, "El modelo solo puede contener letras, números y espacios."
         )
         return modelo
@@ -208,7 +208,7 @@ class TecnologiaForm(FormBase):
 
     def clean_condicion(self):
         condicion = self.cleaned_data.get("condicion")
-        validate_condicion(
+        validate_basic_text(
             condicion, "La condición solo puede contener letras, números y espacios."
         )
         return condicion
@@ -240,7 +240,7 @@ class ConsumibleForm(FormBase):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get("descripcion")
-        validate_descripcion(
+        validate_basic_text(
             descripcion,
             "La descripción solo puede contener letras, números y espacios.",
         )
@@ -248,7 +248,7 @@ class ConsumibleForm(FormBase):
 
     def clean_marca(self):
         marca = self.cleaned_data.get("marca")
-        validate_marca(
+        validate_basic_text(
             marca, "La marca solo puede contener letras, números y espacios."
         )
         return marca
@@ -301,7 +301,7 @@ class MobiliarioForm(FormBase):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get("descripcion")
-        validate_descripcion(
+        validate_basic_text(
             descripcion,
             "La descripción solo puede contener letras, números y espacios.",
         )
@@ -328,7 +328,7 @@ class MobiliarioForm(FormBase):
 
     def clean_condicion(self):
         condicion = self.cleaned_data.get("condicion")
-        validate_condicion(
+        validate_basic_text(
             condicion, "La condición solo puede contener letras, números y espacios."
         )
         return condicion
@@ -380,7 +380,7 @@ class VehiculoForm(FormBase):
 
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get("descripcion")
-        validate_descripcion(
+        validate_basic_text(
             descripcion,
             "La descripción solo puede contener letras, números y espacios.",
         )
@@ -388,14 +388,14 @@ class VehiculoForm(FormBase):
 
     def clean_marca(self):
         marca = self.cleaned_data.get("marca")
-        validate_marca(
+        validate_basic_text(
             marca, "La marca solo puede contener letras, números y espacios."
         )
         return marca
 
     def clean_modelo(self):
         modelo = self.cleaned_data.get("modelo")
-        validate_modelo(
+        validate_basic_text(
             modelo, "El modelo solo puede contener letras, números y espacios."
         )
         return modelo
@@ -407,7 +407,7 @@ class VehiculoForm(FormBase):
 
     def clean_cantidad_combustible(self):
         cantidad_combustible = self.cleaned_data.get("cantidad_combustible")
-        validate_cantidad_combustible(
+        validate_decimal_number(
             cantidad_combustible,
             "La cantidad de combustible debe ser un número positivo.",
         )
@@ -427,7 +427,7 @@ class VehiculoForm(FormBase):
 
     def clean_condicion(self):
         condicion = self.cleaned_data.get("condicion")
-        validate_condicion(
+        validate_basic_text(
             condicion, "La condición solo puede contener letras, números y espacios."
         )
         return condicion

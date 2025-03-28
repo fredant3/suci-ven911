@@ -1,7 +1,7 @@
 from django import forms
 from planificacion.actividades.models import Actividad
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_ente, validate_valor_bs
+from helpers.validForm import validate_general_text, validate_decimal_number
 
 
 class ActividadForm(FormBase):
@@ -41,7 +41,7 @@ class ActividadForm(FormBase):
 
     def clean_objetiv(self):
         objetiv = self.cleaned_data.get("objetiv")
-        validate_ente(
+        validate_general_text(
             objetiv,
             "El objetivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
         )
@@ -49,7 +49,7 @@ class ActividadForm(FormBase):
 
     def clean_meta(self):
         meta = self.cleaned_data.get("meta")
-        validate_valor_bs(
+        validate_decimal_number(
             str(meta), "La meta debe ser un número positivo con hasta dos decimales."
         )
         return meta
