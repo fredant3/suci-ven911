@@ -78,9 +78,7 @@ def validate_telefono(
     msg="El teléfono solo puede contener números y guiones. Debe tener la estructura 0412-3456789 o 04123456789",
 ):
 
-    if not re.match(
-        r"/^(?:\+58|58|0)?(2[0-9]{2}|4[0-9]{2}|[5-9][0-9]{2})[0-9]{7}$/", value
-    ):
+    if not re.match(r"^(\+?58)?(0?4\d{9})$", value):
         raise ValidationError(msg)
 
 

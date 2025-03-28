@@ -2,6 +2,7 @@ from administracion.asignaciones.views.create_view import AsignacionCreateView
 from administracion.asignaciones.views.delete_view import AsignacionDeleteView
 from administracion.asignaciones.views.list_view import AsignacionListView
 from administracion.asignaciones.views.update_view import AsignacionUpdateView
+from administracion.asignaciones.views.export_view import AsignacionExcelView
 from django.urls import path
 
 urlpatterns = [
@@ -29,5 +30,10 @@ urlpatterns = [
         "<int:pk>/delete",
         AsignacionDeleteView.as_view(),
         name="delete",
+    ),
+        path(
+        "export",
+        AsignacionExcelView.as_view(),
+        name="export_excel",
     ),
 ]
