@@ -16,7 +16,7 @@ class tecnologiaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Tecnologia"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Tecnologia"
-        context["submodule"] = "Dashboard Tecnologia"
+        context["submodule"] = "Tecnologia"
         context["submoduleList"] = (
             ("Inventario", reverse_lazy("tecnologia:list")),
             ("Averia", reverse_lazy("averias:list")),

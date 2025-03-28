@@ -19,10 +19,10 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Asignacion"
+        context["module"] = "Administración"
+        context["submodule"] = "Asignación"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("asignaciones:create")
         context["listApiUrl"] = reverse_lazy("api_asignaciones:list")

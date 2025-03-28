@@ -21,7 +21,7 @@ class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Asignaciones"
         context["submodule"] = "Asignaciones"
-        context["titleForm"] = "Añadir una asignacion"
+        context["titleForm"] = "Añadir una Asignación"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlForm"] = reverse_lazy("api_asignaciones:create")
