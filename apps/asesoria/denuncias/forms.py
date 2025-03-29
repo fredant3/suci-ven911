@@ -2,33 +2,21 @@ from asesoria.denuncias.models import Denuncia
 from django import forms
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_nombres_apellidos,
     validate_cedula,
-    validate_telefono,
     validate_email,
-    validate_direccion,
-    validate_general_text,
-    validate_general_text,
-    validate_general_text,
 )
 
 
 class DenunciaForm(FormBase):
     nombres_denunciante = forms.CharField(
-        max_length=120,
-        label="Nombre del denunciante",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el nombre del denunciante"}
         ),
-        validators=[validate_nombres_apellidos],
     )
     apellidos_denunciante = forms.CharField(
-        max_length=120,
-        label="Apellido del denunciante",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el apellido del denunciante"}
         ),
-        validators=[validate_nombres_apellidos],
     )
     cedula_denunciante = forms.CharField(
         max_length=12,
@@ -39,12 +27,10 @@ class DenunciaForm(FormBase):
         validators=[validate_cedula],
     )
     telefono_denunciante = forms.CharField(
-        max_length=15,
         label="Teléfono del denunciante",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el teléfono del denunciante"}
         ),
-        validators=[validate_telefono],
     )
     email_denunciante = forms.EmailField(
         max_length=60,
@@ -56,31 +42,21 @@ class DenunciaForm(FormBase):
         validators=[validate_email],
     )
     direccion_denunciante = forms.CharField(
-        max_length=180,
         label="Dirección del denunciante",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese la dirección del denunciante"}
         ),
-        validators=[validate_direccion],
     )
 
     nombres_denunciado = forms.CharField(
-        max_length=120,
-        required=False,
-        label="Nombre del denunciado",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el nombre del denunciado"}
         ),
-        validators=[validate_nombres_apellidos],
     )
     apellidos_denunciado = forms.CharField(
-        max_length=120,
-        required=False,
-        label="Apellido del denunciado",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el apellido del denunciado"}
         ),
-        validators=[validate_nombres_apellidos],
     )
     cedula_denunciado = forms.CharField(
         max_length=12,
@@ -92,13 +68,11 @@ class DenunciaForm(FormBase):
         validators=[validate_cedula],
     )
     telefono_denunciado = forms.CharField(
-        max_length=15,
         required=False,
         label="Teléfono del denunciado",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el teléfono del denunciado"}
         ),
-        validators=[validate_telefono],
     )
     email_denunciado = forms.EmailField(
         max_length=60,
@@ -110,13 +84,11 @@ class DenunciaForm(FormBase):
         validators=[validate_email],
     )
     direccion_denunciado = forms.CharField(
-        max_length=180,
         required=False,
         label="Dirección del denunciado",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese la dirección del denunciado"}
         ),
-        validators=[validate_direccion],
     )
 
     fecha_denuncia = forms.DateField(
@@ -133,24 +105,18 @@ class DenunciaForm(FormBase):
     )
 
     ente = forms.CharField(
-        max_length=120,
         label="Ente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el ente relacionado"}),
-        validators=[validate_general_text],
     )
     motivo = forms.CharField(
-        max_length=120,
         label="Motivo",
         widget=forms.TextInput(
             attrs={"placeholder": "Ingrese el motivo de la denuncia"}
         ),
-        validators=[validate_general_text],
     )
     zona = forms.CharField(
-        max_length=120,
         label="Zona del incidente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la zona del incidente"}),
-        validators=[validate_general_text],
     )
 
     class Meta:

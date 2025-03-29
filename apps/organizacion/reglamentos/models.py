@@ -1,6 +1,11 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 PROGRESS_CHOICES = (
     ("0", "0%"),
@@ -20,7 +25,11 @@ ESTATUS_CHOICES = (("bor", "Borrador"), ("rev", "Revision"), ("pub", "Publicado"
 
 
 class Reglamento(BaseModel):
-    name = models.CharField("Nombre de Reglamento:", max_length=64)
+    name = models.CharField(
+        "Nombre de Reglamento:",
+        max_length=64,
+        validators=[MinLengthValidator(3), MaxLengthValidator(64), TextValidator()],
+    )
     file = models.FileField("Archivo", upload_to="reglamentos/")
     date = models.DateField("Fecha", blank=True)
     progre = models.CharField("Progreso:", max_length=64, choices=PROGRESS_CHOICES)

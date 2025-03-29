@@ -1,12 +1,7 @@
 from django import forms
 from presupuesto.models import Accion
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_decimal_number,
-    validate_nombres_apellidos,
-    validate_basic_text,
-    validate_general_text,
-)
+from helpers.validForm import validate_decimal_number
 
 
 class AccionForm(FormBase):
@@ -38,10 +33,6 @@ class AccionForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-        labels = {
-            "situacion_presupuestaria": "Situación Presupuestaria",
-            "monto": "Monto asignado",
-        }
         widgets = {
             "fecha_inicio": forms.DateInput(attrs={"class": "form-control datepicker"}),
             "fecha_culminacion": forms.DateInput(
@@ -91,40 +82,6 @@ class AccionForm(FormBase):
             str(monto), "El monto debe ser un valor positivo con hasta dos decimales"
         )
         return monto
-
-    def clean_responsable(self, field_name):
-        nombre = self.cleaned_data.get(field_name)
-        validate_nombres_apellidos(
-            nombre, "Este campo solo puede contener letras y espacios"
-        )
-        return nombre
-
-    def clean_responsable_gerente(self):
-        return self.clean_responsable("responsable_gerente")
-
-    def clean_responsable_tecnico(self):
-        return self.clean_responsable("responsable_tecnico")
-
-    def clean_responsable_registrador(self):
-        return self.clean_responsable("responsable_registrador")
-
-    def clean_responsable_administrativo(self):
-        return self.clean_responsable("responsable_administrativo")
-
-    def clean_situacion_presupuestaria(self):
-        situacion = self.cleaned_data.get("situacion_presupuestaria")
-        validate_basic_text(
-            situacion, "Use solo letras, números, espacios y los caracteres .,-."
-        )
-        return situacion
-
-    def clean_estatus(self):
-        estatus = self.cleaned_data.get("estatus")
-        validate_general_text(
-            estatus,
-            "El estatus solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return estatus
 
     def clean(self):
         cleaned_data = super().clean()

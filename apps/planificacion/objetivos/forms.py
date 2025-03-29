@@ -2,9 +2,7 @@ from django import forms
 from planificacion.objetivos.models import Objetivo
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_general_text,
     validate_decimal_number,
-    validate_cantidad,
 )
 
 
@@ -42,14 +40,6 @@ class ObjetivoForm(FormBase):
                 }
             ),
         }
-
-    def clean_objetiv(self):
-        objetiv = self.cleaned_data.get("objetiv")
-        validate_general_text(
-            objetiv,
-            "El objetivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return objetiv
 
     def clean_meta(self):
         meta = self.cleaned_data.get("meta")

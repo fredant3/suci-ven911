@@ -1,6 +1,11 @@
 from administracion.departamentos.models import Departamento
 from django.db.models import CASCADE, CharField, ForeignKey, TextField
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class TipoAveria(BaseModel):
@@ -20,12 +25,36 @@ class TipoAveria(BaseModel):
 
 
 class Averia(BaseModel):
-    problema = TextField(max_length=255)
-    tipo_averia = ForeignKey(TipoAveria, on_delete=CASCADE)
-    departamento = ForeignKey(Departamento, on_delete=CASCADE)
-    ubicacion = TextField(max_length=255)
-    serial = CharField(max_length=255)
-    codigo_bn = CharField(max_length=255)
+    tipo_averia = ForeignKey(
+        TipoAveria, on_delete=CASCADE, verbose_name="Tipo de avería"
+    )
+    departamento = ForeignKey(
+        Departamento, on_delete=CASCADE, verbose_name="Departamento"
+    )
+    problema = TextField(
+        "Problema",
+        max_length=255,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    ubicacion = TextField(
+        "Ubicación",
+        max_length=255,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    serial = CharField(
+        "Serial",
+        max_length=255,
+        validators=[
+            MinLengthValidator(6),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(extra_chars="-"),
+        ],
+    )
+    codigo_bn = CharField(
+        "Código BN",
+        max_length=255,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
 
     class Meta:
         permissions = [

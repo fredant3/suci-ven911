@@ -1,12 +1,26 @@
 from administracion.inventario.models import Articulo
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import UnicodeAlphaSpaceValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Compra(BaseModel):
-    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
-    n_orden = models.IntegerField()
-    valor_bs = models.TextField(max_length=255)
+    articulo = models.ForeignKey(
+        Articulo, on_delete=models.CASCADE, verbose_name="Artículo"
+    )
+    n_orden = models.IntegerField(
+        "N° de orden",
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(extra_chars="-"),
+        ],
+    )
+    valor_bs = models.TextField("Valor en BS", max_length=255)
 
     class Meta:
         permissions = [
