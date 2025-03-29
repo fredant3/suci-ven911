@@ -1,6 +1,6 @@
 from gestion_comunicacional.equipments.forms.EquipmentForm import EquipmentForm
 from gestion_comunicacional.equipments.services.EquipmentService import EquipmentService
-from index.mixins.ControllerMixin import CreateController
+from helpers.ControllerMixin import CreateController
 from templates.sneat import TemplateLayout
 
 from django.urls import reverse_lazy

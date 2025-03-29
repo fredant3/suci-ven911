@@ -1,5 +1,5 @@
 from gestion_comunicacional.social_activity.services.SocialActivityService import SocialActivityService
-from index.mixins.ControllerMixin import DeleteController
+from helpers.ControllerMixin import DeleteController
 from templates.sneat import TemplateLayout
 
 from django.urls import reverse_lazy

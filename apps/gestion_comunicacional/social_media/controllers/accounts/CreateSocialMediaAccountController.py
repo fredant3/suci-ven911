@@ -1,6 +1,6 @@
 from gestion_comunicacional.social_media.forms.SocialMediaAccountForm import SocialMediaAccountForm
 from gestion_comunicacional.social_media.services.SocialMediaAccountService import SocialMediaAccountService
-from index.mixins.ControllerMixin import CreateController
+from helpers.ControllerMixin import CreateController
 from templates.sneat import TemplateLayout
 
 from django.urls import reverse_lazy

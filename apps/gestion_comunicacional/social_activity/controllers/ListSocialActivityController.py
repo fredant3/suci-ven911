@@ -2,8 +2,8 @@ import json
 
 from gestion_comunicacional.social_activity.entities.SocialActivityEntity import SocialActivityEntity
 from gestion_comunicacional.social_activity.services.SocialActivityService import SocialActivityService
-from index.mixins.CheckPermisosMixin import CheckPermisosMixin
-from index.mixins.ControllerMixin import ListController
+from helpers.CheckPermisosMixin import CheckPermisosMixin
+from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from django.contrib.auth.mixins import LoginRequiredMixin

@@ -1,5 +1,5 @@
 from gestion_comunicacional.social_media.repositories.SocialMediaAccountRepository import SocialMediaAccountRepository
-from index.mixins.CrudMixin import CrudService
+from helpers.CrudMixin import CrudService
 
 
 class SocialMediaAccountService(CrudService):

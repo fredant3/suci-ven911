@@ -1,4 +1,4 @@
-from index.mixins.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel
 
 from django.db.models import CharField, PositiveSmallIntegerField, URLField
 from django.forms import model_to_dict

@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "apps.users",
     "apps.dashboard",
     "apps.administracion",
+    "apps.gestion_comunicacional",
     "apps.asesoria",
     "apps.biblioteca",
     "apps.emergencia",

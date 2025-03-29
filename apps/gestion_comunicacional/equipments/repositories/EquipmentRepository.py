@@ -1,5 +1,5 @@
 from gestion_comunicacional.equipments.entities.EquipmentEntity import EquipmentEntity
-from index.mixins.RepositoryMixin import Repository
+from helpers.RepositoryMixin import Repository
 
 
 class EquipmentRepository(Repository):

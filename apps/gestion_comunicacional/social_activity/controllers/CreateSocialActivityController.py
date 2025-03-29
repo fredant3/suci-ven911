@@ -1,6 +1,6 @@
 from gestion_comunicacional.social_activity.forms.SocialActivityForm import SocialActivityForm
 from gestion_comunicacional.social_activity.services.SocialActivityService import SocialActivityService
-from index.mixins.ControllerMixin import CreateController
+from helpers.ControllerMixin import CreateController
 from templates.sneat import TemplateLayout
 
 from django.urls import reverse_lazy

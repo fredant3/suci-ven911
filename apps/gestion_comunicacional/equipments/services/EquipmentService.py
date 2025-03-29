@@ -1,5 +1,5 @@
 from gestion_comunicacional.equipments.repositories.EquipmentRepository import EquipmentRepository
-from index.mixins.CrudMixin import CrudService
+from helpers.CrudMixin import CrudService
 
 
 class EquipmentService(CrudService):

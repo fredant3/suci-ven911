@@ -11,8 +11,6 @@ from gestion_comunicacional.social_media.controllers.accounts.UpdateSocialMediaA
     UpdateSocialMediaAccount,
 )
 
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
 
 urlpatterns = [
@@ -42,5 +40,3 @@ urlpatterns = [
         name="destroyer-account",
     ),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

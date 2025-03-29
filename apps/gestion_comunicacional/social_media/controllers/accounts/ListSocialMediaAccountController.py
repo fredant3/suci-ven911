@@ -1,5 +1,5 @@
 from gestion_comunicacional.social_media.services.SocialMediaAccountService import SocialMediaAccountService
-from index.mixins.CheckPermisosMixin import CheckPermisosMixin
+from helpers.CheckPermisosMixin import CheckPermisosMixin
 from templates.sneat import TemplateLayout
 
 from django.contrib.auth.mixins import LoginRequiredMixin

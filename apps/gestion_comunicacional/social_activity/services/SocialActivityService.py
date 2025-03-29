@@ -1,5 +1,5 @@
 from gestion_comunicacional.social_activity.repositories.SocialActivityRepository import SocialActivityRepository
-from index.mixins.CrudMixin import CrudService
+from helpers.CrudMixin import CrudService
 
 from django.db.models import Q
 
