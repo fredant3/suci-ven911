@@ -9,7 +9,7 @@ class UriInfoGeneralForm(FormBase):
     # -Datos del servicio
     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atención")
     nroreporte = CharField(max_length=10, required=False, label="Número de Reporte")
-    placa = CharField(max_length=10, required=False, label="Número de Reporte")
+    placa = CharField(max_length=10, required=False, label="Placa")
     institucion = CharField(max_length=300, required=False, label="Institución")
     num_interna = CharField(max_length=10, required=False, label="Numeración Interna")
     # Informacion Legal
@@ -356,7 +356,6 @@ class UriSignosVitalesForm(FormBase):
         label="Resultados de la Evaluación Fisica Cefalo Caudal",
     )
 
-
     class Meta:
         model = Uri
         fields = (
@@ -382,6 +381,7 @@ class UriSignosVitalesForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+
 
 # Registro de Referencias y Contrareferencias
 class UriReferenciasForm(FormBase):
