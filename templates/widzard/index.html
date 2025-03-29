@@ -52,10 +52,42 @@
 		{% if wizard.form.forms %}
 		{{ wizard.form.management_form }}
 		{% for form in wizard.form.forms %}
-		{{ form.as_table }}
+		{% for field in form %}
+		<div class="input">
+			<label for="{{ field.id_for_label }}" class="input__label">
+				{{ field.label }}
+				{% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+			</label>
+			<div class="input__container">
+				{{ field }}
+				{% if field.help_text %}
+				<small class="form-text text-muted">{{ field.help_text }}</small>
+				{% endif %}
+				{% for error in field.errors %}
+				<div class="invalid-feedback d-block">{{ error }}</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
 		{% endfor %}
 		{% else %}
-		{{ wizard.form }}
+		{% for field in wizard.form %}
+		<div class="input">
+			<label for="{{ field.id_for_label }}" class="input__label">
+				{{ field.label }}
+				{% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+			</label>
+			<div class="input__container">
+				{{ field }}
+				{% if field.help_text %}
+				<small class="form-text text-muted">{{ field.help_text }}</small>
+				{% endif %}
+				{% for error in field.errors %}
+				<div class="invalid-feedback d-block">{{ error }}</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
 		{% endif %}
 	</div>
 
