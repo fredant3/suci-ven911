@@ -15,13 +15,12 @@ from helpers.models import (
     TIPO_CONTRATOS,
 )
 from helpers.validForm import (
-    PositiveIntegerValidator,
+    CedulaVenezolanaValidator,
     TextValidator,
     UnicodeAlphaSpaceValidator,
     PhoneNumberValidator,
 )
 from django.core.validators import (
-    MinValueValidator,
     MinLengthValidator,
     MaxLengthValidator,
 )
@@ -41,7 +40,7 @@ class Empleado(BaseModel):
         "Nombres del empleado",
         max_length=90,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(3),
             MaxLengthValidator(90),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -50,13 +49,22 @@ class Empleado(BaseModel):
         "Apellidos del empleado",
         max_length=90,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(3),
             MaxLengthValidator(90),
             UnicodeAlphaSpaceValidator(),
         ],
     )
     nacionalidad = CharField("Nacionalidad", max_length=2, choices=NACIONALIDAD_CHOICES)
-    cedula = CharField("Cedula de identidad", max_length=15, unique=True)
+    cedula = CharField(
+        "Cedula de identidad",
+        max_length=15,
+        unique=True,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
+    )
     sexo = CharField("Genero", max_length=1, choices=SEXO_CHOICES)
     fecha_nacimiento = DateField("Fecha de nacimiento")
     estado_civil = CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)

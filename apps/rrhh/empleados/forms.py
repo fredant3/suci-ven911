@@ -1,7 +1,7 @@
 from django import forms
 from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_cedula, validate_email
+from helpers.validForm import validate_email
 from datetime import date
 
 
@@ -11,15 +11,17 @@ class EmpleadoForm(FormBase):
         title="Fecha de nacimiento",
     )
     estudia = forms.BooleanField(
+        initial=False,
         required=False,
         widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch"}
+            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
         ),
     )
     discapacitado = forms.BooleanField(
+        initial=False,
         required=False,
         widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch"}
+            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
         ),
     )
 
@@ -114,11 +116,6 @@ class EmpleadoForm(FormBase):
             ),
         }
 
-    def clean_cedula(self):
-        data = self.cleaned_data.get("cedula")
-        validate_cedula(data, "Formato de cédula inválido. Use el formato: V-12345678")
-        return data
-
     def clean_email(self):
         data = self.cleaned_data.get("email")
         validate_email(data, "Ingrese un correo electrónico válido")
@@ -129,17 +126,29 @@ class EmpleadoForm(FormBase):
 
         if fecha:
             hoy = date.today()
-            # Calcula si ha cumplido 18 años exactos
-            mayor_edad = hoy.year - fecha.year >= 18
-            cumple_este_año = (hoy.month, hoy.day) >= (fecha.month, fecha.day)
+            # Calcula la edad exacta
+            edad = (
+                hoy.year
+                - fecha.year
+                - ((hoy.month, hoy.day) < (fecha.month, fecha.day))
+            )
 
-            if not (mayor_edad and cumple_este_año):
-                raise forms.ValidationError("Debe ser mayor de edad (18+ años)")
+            if edad < 18:
+                raise forms.ValidationError("Debe ser mayor de edad (18+ años).")
 
         return fecha
 
+    def clean_discapacitado(self):
+        print(self.cleaned_data.get("discapacitado", False))
+        return self.cleaned_data.get("discapacitado", False)
+
+    def clean_estudia(self):
+        print(self.cleaned_data.get("estudia", False))
+        return self.cleaned_data.get("estudia", False)
+
     def clean(self):
         cleaned_data = super().clean()
+
         # Validación adicional si es discapacitado
         if cleaned_data.get("discapacitado") and not cleaned_data.get("tipo_sangre"):
             self.add_error(

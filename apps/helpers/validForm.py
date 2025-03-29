@@ -267,3 +267,101 @@ class PhoneNumberValidator:
             and (self.min_length == other.min_length)
             and (self.messages == other.messages)
         )
+
+
+@deconstructible
+class CedulaVenezolanaValidator:
+    """
+    Valida cédulas de identidad venezolanas con formatos:
+    - V12345678
+    - V-12345678
+    - V-12.345.678
+    También valida el dígito verificador cuando está completo (opcional)
+    """
+
+    messages = {
+        "invalid": _("Formato de cédula inválido."),
+        "invalid_format": _(
+            "El formato debe ser: V12345678, V-12345678 o V-12.345.678"
+        ),
+        "invalid_chars": _("Solo se permiten números, guiones, puntos y la letra V"),
+        "verification_failed": _("El dígito verificador no es válido"),
+        "length_error": _("La cédula debe tener entre 6 y 8 dígitos después de la V"),
+    }
+
+    # Expresión regular para los formatos aceptados
+    FORMAT_REGEX = r"^V[-]?(\d{1,3}(?:\.?\d{3}){1,2}|\d{6,8})$"
+
+    def __init__(self, validate_verifier=False, message=None):
+        """
+        Args:
+            validate_verifier (bool): Si True, valida el dígito verificador (para cédulas completas)
+            message (str): Mensaje personalizado para el error 'invalid'
+        """
+        self.validate_verifier = validate_verifier
+        if message:
+            self.messages = self.messages.copy()
+            self.messages["invalid"] = message
+
+    def __call__(self, value):
+        str_value = str(value).strip().upper()
+
+        # Validación básica de caracteres
+        if not re.match(r"^V[-\.\d]+$", str_value):
+            invalid_chars = set(re.findall(r"[^V\d\-\.]", str_value))
+            raise ValidationError(
+                self.messages["invalid_chars"],
+                code="invalid_chars",
+                params={"invalid_chars": "".join(invalid_chars)},
+            )
+
+        # Validación del formato
+        if not re.match(self.FORMAT_REGEX, str_value):
+            raise ValidationError(
+                self.messages["invalid_format"],
+                code="invalid_format",
+                params={"value": value},
+            )
+
+        # Extraer solo los dígitos
+        digits = re.sub(r"[^\d]", "", str_value[1:])  # Excluye la V inicial
+
+        # Validar longitud
+        if len(digits) < 6 or len(digits) > 8:
+            raise ValidationError(
+                self.messages["length_error"],
+                code="length_error",
+                params={"value": value},
+            )
+
+        # Validar dígito verificador (si está configurado)
+        if self.validate_verifier and len(digits) == 8:
+            if not self._validate_verification_digit(digits):
+                raise ValidationError(
+                    self.messages["verification_failed"],
+                    code="verification_failed",
+                    params={"value": value},
+                )
+
+    def _validate_verification_digit(self, digits):
+        """
+        Implementa el algoritmo de validación del dígito verificador
+        para cédulas venezolanas (opcional)
+        """
+        # Algoritmo de validación del dígito verificador
+        # (Implementación real dependerá del algoritmo oficial)
+        base = digits[:-1]
+        verifier = digits[-1]
+
+        # Ejemplo simplificado (reemplazar con algoritmo real)
+        total = sum(int(d) for d in base)
+        calculated_verifier = total % 10
+
+        return str(calculated_verifier) == verifier
+
+    def __eq__(self, other):
+        return (
+            isinstance(other, self.__class__)
+            and (self.validate_verifier == other.validate_verifier)
+            and (self.messages == other.messages)
+        )
