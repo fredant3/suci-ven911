@@ -1,9 +1,6 @@
 from administracion.inventario.models import Articulo
 from helpers.FormBase import FormBase
 from helpers.validForm import (
-    validate_basic_text,
-    validate_basic_text,
-    validate_basic_text,
     validate_serial,
     validate_placa,
     validate_decimal_number,
@@ -56,7 +53,7 @@ class ArticuloForm(FormBase):
             ),
             "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
             "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "condicion": forms.TextInput(attrs={"placeholder": "Ingrese la condición"}),
+            "condicion": forms.Select(attrs={"placeholder": "Ingrese la condición"}),
             "fecha_adq": forms.DateInput(
                 attrs={"placeholder": "Seleccione la fecha de adquisición"}
             ),
@@ -157,7 +154,7 @@ class TecnologiaForm(FormBase):
             "serial": forms.TextInput(attrs={"placeholder": "Ingrese el serial"}),
             "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
             "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "condicion": forms.TextInput(attrs={"placeholder": "Ingrese la condición"}),
+            "condicion": forms.Select(attrs={"placeholder": "Ingrese la condición"}),
             "fecha_adq": forms.DateInput(
                 attrs={
                     "placeholder": "Seleccione la fecha de adquisición",
@@ -293,7 +290,7 @@ class MobiliarioForm(FormBase):
             "serial": forms.TextInput(attrs={"placeholder": "Ingrese el serial"}),
             "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
             "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "condicion": forms.TextInput(attrs={"placeholder": "Ingrese la condición"}),
+            "condicion": forms.Select(attrs={"placeholder": "Ingrese la condición"}),
             "fecha_adq": forms.DateInput(
                 attrs={"placeholder": "Seleccione la fecha de adquisición"}
             ),
@@ -372,7 +369,7 @@ class VehiculoForm(FormBase):
             ),
             "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
             "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "condicion": forms.TextInput(attrs={"placeholder": "Ingrese la condición"}),
+            "condicion": forms.Select(attrs={"placeholder": "Ingrese la condición"}),
             "fecha_adq": forms.DateInput(
                 attrs={"placeholder": "Seleccione la fecha de adquisición"}
             ),

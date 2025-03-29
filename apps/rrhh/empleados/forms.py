@@ -9,7 +9,7 @@ from helpers.validForm import (
     validate_direccion,
     validate_basic_text,
 )
-import datetime
+from datetime import date
 
 
 class EmpleadoForm(FormBase):
@@ -156,21 +156,29 @@ class EmpleadoForm(FormBase):
         return data
 
     def clean_fecha_nacimiento(self):
-        data = self.cleaned_data.get("fecha_nacimiento")
-        if data and data.year > (datetime.date.today().year - 18):
-            raise forms.ValidationError("El empleado debe ser mayor de edad")
-        return data
+        fecha = self.cleaned_data.get("fecha_nacimiento")
+
+        if fecha:
+            hoy = date.today()
+            # Calcula si ha cumplido 18 años exactos
+            mayor_edad = hoy.year - fecha.year >= 18
+            cumple_este_año = (hoy.month, hoy.day) >= (fecha.month, fecha.day)
+
+            if not (mayor_edad and cumple_este_año):
+                raise forms.ValidationError("Debe ser mayor de edad (18+ años)")
+
+        return fecha
 
     def clean_estatus(self):
         data = self.cleaned_data.get("estatus")
         validate_basic_text(data, "Seleccione un estatus válido")
         return data
 
-    def clean_sexo(self):
-        data = self.cleaned_data.get("sexo")
-        if data not in [choice[0] for choice in Empleado.SEXO_CHOICES]:
-            raise forms.ValidationError("Seleccione un género válido")
-        return data
+    # def clean_sexo(self):
+    # data = self.cleaned_data.get("sexo")
+    # if data not in [choice[0] for choice in Empleado.SEXO_CHOICES]:
+    # raise forms.ValidationError("Seleccione un género válido")
+    # return data
 
     def clean(self):
         cleaned_data = super().clean()

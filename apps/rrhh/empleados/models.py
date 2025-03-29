@@ -3,7 +3,7 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.models import (
     ESTADO_CIVIL_CHOICES,
-    GENERO_CHOICES,
+    SEXO_CHOICES,
     NACIONALIDAD_CHOICES,
     TIPO_SANGRE_CHOICES,
 )
@@ -22,8 +22,8 @@ class Empleado(BaseModel):
     nombres = models.CharField(max_length=90)
     apellidos = models.CharField(max_length=90)
     nacionalidad = models.CharField(max_length=2, choices=NACIONALIDAD_CHOICES)
-    cedula = models.IntegerField()
-    sexo = models.CharField(max_length=1, choices=GENERO_CHOICES)
+    cedula = models.CharField(max_length=15, unique=True)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
     fecha_nacimiento = models.DateField()
     estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
     tipo_sangre = models.CharField(max_length=3, choices=TIPO_SANGRE_CHOICES)
