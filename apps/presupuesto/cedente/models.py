@@ -1,21 +1,79 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import (
+    TextValidator,
+    UnicodeAlphaSpaceValidator,
+    PositiveIntegerValidator,
+)
+from django.core.validators import (
+    MinValueValidator,
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Cedente(BaseModel):
-    idc = models.CharField(max_length=100, verbose_name="Id Cedente:")
-    partidac = models.CharField(max_length=64, verbose_name="Partida")
-    generalc = models.CharField(max_length=64, verbose_name="General")
-    espefc = models.CharField(max_length=64, verbose_name="Específicaciones")
-    subespefc = models.CharField(max_length=64, verbose_name="Sub-Especialidad")
-    denomc = models.CharField(max_length=64, verbose_name="Denomincación")
-    presuacorc = models.CharField(max_length=64, verbose_name="Presupuesto acordado")
-    caufechac = models.CharField(max_length=64, verbose_name="Causado a la fecha")
-    dispc = models.CharField(max_length=64, verbose_name="Disponible a causar")
-    montocc = models.CharField(max_length=64, verbose_name="Monto a ceder")
-    saldofc = models.CharField(max_length=64, verbose_name="Saldo final")
-    direccionc = models.CharField(max_length=64, verbose_name="Dirección cedente")
+    idc = models.CharField(
+        "Identificador Cedente:",
+        max_length=100,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(extra_chars="-"),
+        ],
+    )
+    partidac = models.CharField(
+        "Partida Contable",
+        max_length=64,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(extra_chars="-"),
+        ],
+    )
+    generalc = models.CharField(
+        "General",
+        max_length=64,
+        validators=[
+            MinValueValidator(1),
+            MaxLengthValidator(255),
+            PositiveIntegerValidator(),
+        ],
+    )
+    espefc = models.CharField(
+        "Específicaciones",
+        max_length=64,
+        validators=[
+            MinValueValidator(1),
+            MaxLengthValidator(255),
+            PositiveIntegerValidator(),
+        ],
+    )
+    subespefc = models.CharField(
+        "Sub-Especialidad",
+        max_length=64,
+        validators=[
+            MinValueValidator(1),
+            MaxLengthValidator(255),
+            PositiveIntegerValidator(),
+        ],
+    )
+    denomc = models.CharField(
+        "Denominación",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    presuacorc = models.CharField("Presupuesto asignado", max_length=64)
+    caufechac = models.CharField("Causado a la fecha", max_length=64)
+    dispc = models.CharField("Disponible a causar", max_length=64)
+    montocc = models.CharField("Monto comprometido", max_length=64)
+    saldofc = models.CharField("Saldo final", max_length=64)
+    direccionc = models.CharField(
+        "Dirección cedente",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
 
     def toJSON(self):
         return model_to_dict(self)

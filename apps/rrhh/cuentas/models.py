@@ -2,6 +2,12 @@ from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.empleados.models import Empleado
+from helpers.validForm import PhoneNumberValidator, TextValidator
+from django.core.validators import (
+    MinValueValidator,
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 TIPO_BANCO_CHOICES = (
     ("0001", "0001 - Banco Central de Venezuela"),
@@ -45,11 +51,31 @@ TIPO_CUEMTA_CHOICES = (
 class Cuenta(BaseModel):
     banco = models.CharField(max_length=4, choices=TIPO_BANCO_CHOICES)
     tipo = models.CharField(max_length=3, choices=TIPO_CUEMTA_CHOICES)
-    numero_cuenta = models.CharField(max_length=30)
+    numero_cuenta = models.CharField(
+        "Número de cuenta",
+        max_length=30,
+        validators=[
+            MinLengthValidator(6),
+            MaxLengthValidator(30),
+            TextValidator(),
+        ],
+    )
     # cedula = models.IntegerField()
-    pago_movil = models.BooleanField()
-    telefono = models.CharField(max_length=12)
-    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    pago_movil = models.BooleanField("¿Activar pago móvil?")
+    telefono = models.CharField(
+        "Teléfono móvil",
+        max_length=20,
+        blank=True,
+        null=True,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
+    )
+    empleado = models.ForeignKey(
+        Empleado, on_delete=models.CASCADE, verbose_name="Empleado"
+    )
 
     def toJSON(self):
         return model_to_dict(self)

@@ -1,12 +1,6 @@
 from helpers.FormBase import FormBase
 from presupuesto.proyecto.models import Proyecto
 from django import forms
-from helpers.validForm import (
-    validate_general_text,
-    validate_decimal_number,
-    validate_nombres_apellidos,
-    validate_basic_text,
-)
 
 
 class ProyectoForm(FormBase):
@@ -93,54 +87,6 @@ class ProyectoForm(FormBase):
                 }
             ),
         }
-
-    def clean_nombrep(self):
-        nombre = self.cleaned_data.get("nombrep")
-        validate_general_text(
-            nombre,
-            "El nombre del proyecto solo permite letras, números y caracteres .,-!?()",
-        )
-        return nombre
-
-    def clean_situacionp(self):
-        situacion = self.cleaned_data.get("situacionp")
-        validate_basic_text(
-            situacion, "La situación debe contener letras, números y caracteres .,-"
-        )
-        return situacion
-
-    def clean_montoproyecto(self):
-        monto = self.cleaned_data.get("montoproyecto")
-        validate_decimal_number(
-            str(monto), "El monto debe ser un valor positivo con hasta dos decimales"
-        )
-        return monto
-
-    def clean_responsable(self, field_name):
-        responsable = self.cleaned_data.get(field_name)
-        validate_nombres_apellidos(
-            responsable, "Este campo solo permite letras y espacios"
-        )
-        return responsable
-
-    def clean_responsableg(self):
-        return self.clean_responsable("responsableg")
-
-    def clean_responsablet(self):
-        return self.clean_responsable("responsablet")
-
-    def clean_responsabler(self):
-        return self.clean_responsable("responsabler")
-
-    def clean_responsablea(self):
-        return self.clean_responsable("responsablea")
-
-    def clean_estatus(self):
-        estatus = self.cleaned_data.get("estatus")
-        validate_general_text(
-            estatus, "El estatus solo permite letras, números y caracteres .,-!?()"
-        )
-        return estatus
 
     def clean(self):
         cleaned_data = super().clean()

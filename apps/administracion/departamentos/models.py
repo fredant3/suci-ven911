@@ -1,9 +1,22 @@
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import UnicodeAlphaSpaceValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Departamento(BaseModel):
-    nombre = models.CharField(max_length=255)
+    nombre = models.CharField(
+        "Departamento",
+        max_length=255,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
 
     class Meta:
         permissions = [

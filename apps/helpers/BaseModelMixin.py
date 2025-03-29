@@ -31,6 +31,20 @@ ESTADOS_CHOICES = (
 
 ESTATUS_CHOICES = (("activo", "Activo"), ("inactivo", "Inactivo"))
 YES_NO_CHOICES = (("si", "Si"), ("no", "No"))
+MONTH_CHOICES = (
+    ("ene", "Enero"),
+    ("feb", "Febrero"),
+    ("mar", "Marzo"),
+    ("abr", "Abril"),
+    ("may", "Mayo"),
+    ("jun", "Junio"),
+    ("jul", "Julio"),
+    ("ago", "Agosto"),
+    ("sep", "Septiembre"),
+    ("oct", "Octubre"),
+    ("nov", "Noviembre"),
+    ("dic", "Diciembre"),
+)
 
 
 class BaseModelManager(models.Manager):

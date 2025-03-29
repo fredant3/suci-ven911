@@ -1,6 +1,8 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Accion(BaseModel):
@@ -8,18 +10,40 @@ class Accion(BaseModel):
     fecha_inicio = models.DateField("Fecha de Inicio")
     fecha_culminacion = models.DateField("Fecha de Culminación")
     situacion_presupuestaria = models.CharField(
-        "Situación Presupuestaria:", max_length=64
+        "Situación Presupuestaria:",
+        max_length=64,
+        validators=[
+            MinLengthValidator(6),
+            MaxLengthValidator(64),
+            UnicodeAlphaSpaceValidator(),
+        ],
     )
-    monto = models.CharField("Monto Total del Proyecto:", max_length=64)
-    responsable_gerente = models.CharField("Responsable Gerente:", max_length=64)
-    responsable_tecnico = models.CharField("Responsable Técnico:", max_length=64)
+    monto = models.CharField("Monto asignado:", max_length=64)
+    responsable_gerente = models.CharField(
+        "Responsable Gerente:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
+    )
+    responsable_tecnico = models.CharField(
+        "Responsable Técnico:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
+    )
     responsable_registrador = models.CharField(
-        "Responsable Registrador:", max_length=64
+        "Responsable Registrador:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
     )
     responsable_administrativo = models.CharField(
-        "Responsable Administrativo:", max_length=64
+        "Responsable Administrativo:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
     )
-    estatus = models.CharField("Estatus del Proyecto:", max_length=64)
+    estatus = models.CharField(
+        "Estatus del Proyecto:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
+    )
 
     def toJSON(self):
         return model_to_dict(self)

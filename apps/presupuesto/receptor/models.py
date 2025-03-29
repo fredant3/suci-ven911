@@ -1,32 +1,109 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import (
+    PositiveIntegerValidator,
+    TextValidator,
+    UnicodeAlphaSpaceValidator,
+)
+from django.core.validators import (
+    MinValueValidator,
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Receptor(BaseModel):
-    idr = models.CharField(max_length=100, verbose_name="Id Receptor:", default="")
-    partidar = models.CharField(max_length=64, verbose_name="Partida", default="")
-    generalr = models.CharField(max_length=64, verbose_name="General", default="")
+    idr = models.CharField(
+        "Identificador Receptor",
+        max_length=100,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(100),
+            UnicodeAlphaSpaceValidator(extra_chars="-"),
+        ],
+    )
+    partidar = models.CharField(
+        "Partida Contable",
+        max_length=64,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            UnicodeAlphaSpaceValidator(extra_chars="-"),
+        ],
+    )
+    generalr = models.CharField(
+        "General",
+        max_length=64,
+        validators=[
+            MinValueValidator(100),
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            PositiveIntegerValidator(),
+        ],
+    )
     espefr = models.CharField(
-        max_length=64, verbose_name="Específicaciones", default=""
+        "Específicaciones",
+        max_length=64,
+        validators=[
+            MinValueValidator(100),
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            PositiveIntegerValidator(),
+        ],
     )
     subespefr = models.CharField(
-        max_length=64, verbose_name="Sub-Especialidad", default=""
+        "Sub-Especialidad",
+        max_length=64,
+        validators=[
+            MinValueValidator(100),
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            PositiveIntegerValidator(),
+        ],
     )
-    denomr = models.CharField(max_length=64, verbose_name="Denomincación", default="")
+    denomr = models.CharField(
+        "Denomincación",
+        max_length=64,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            TextValidator(),
+        ],
+    )
     presuacorr = models.CharField(
-        max_length=64, verbose_name="Presupuesto acordado", default=""
+        "Presupuesto acordado",
+        max_length=64,
     )
     caufechar = models.CharField(
-        max_length=64, verbose_name="Causado a la fecha", default=""
+        "Causado a la fecha",
+        max_length=64,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            TextValidator(),
+        ],
     )
     dispr = models.CharField(
-        max_length=64, verbose_name="Disponible a causar", default=""
+        "Disponible a causar",
+        max_length=64,
     )
-    montocr = models.CharField(max_length=64, verbose_name="Monto a ceder", default="")
-    saldofr = models.CharField(max_length=64, verbose_name="Saldo final", default="")
+    montocr = models.CharField(
+        "Monto a ceder",
+        max_length=64,
+    )
+    saldofr = models.CharField(
+        "Saldo final",
+        max_length=64,
+    )
     direccionr = models.CharField(
-        max_length=64, verbose_name="Dirección cedente", default=""
+        "Dirección cedente",
+        max_length=64,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            TextValidator(),
+        ],
     )
 
     def toJSON(self):

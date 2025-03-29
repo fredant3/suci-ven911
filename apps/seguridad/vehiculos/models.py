@@ -1,26 +1,53 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Vehiculo(BaseModel):
-    nombre = models.CharField(max_length=64, verbose_name="Nombre:", default="")
-    apellido = models.CharField(max_length=64, verbose_name="Apellido:", default="")
-    cedula = models.CharField(max_length=64, verbose_name="Cédula:", default="")
-    modelo = models.CharField(max_length=64, verbose_name="Modelo:", default="")
+    nombre = models.CharField(
+        "Nombre",
+        max_length=64,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    apellido = models.CharField(
+        "Apellido",
+        max_length=64,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    cedula = models.CharField("Cédula de identidad", max_length=64)
+    modelo = models.CharField(
+        "Modelo",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+    )
     vehiculo = models.CharField(
-        max_length=64, verbose_name="Tipo de vehiculo:", default=""
+        "Tipo de vehiculo",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
     )
-    motivo = models.CharField(max_length=64, verbose_name="Motivo:", default="")
-    capagasolina = models.CharField(
-        max_length=64, verbose_name="Capacidad de Gasolina:", default=""
+    motivo = models.CharField(
+        "Motivo",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
     )
-    cantigasolina = models.CharField(
-        max_length=64, verbose_name="Cantidad de Gasolina:", default=""
-    )
-    placa = models.CharField(max_length=64, verbose_name="Placa:", default="")
-    fecha = models.DateField(verbose_name="Fecha")
-    hora = models.CharField(max_length=64, verbose_name="Hora:", default="")
+    capagasolina = models.CharField("Capacidad de Gasolina", max_length=64)
+    cantigasolina = models.CharField("Cantidad de Gasolina", max_length=64)
+    placa = models.CharField("Placa", max_length=64)
+    fecha = models.DateField("Fecha")
+    hora = models.CharField("Hora", max_length=64)
 
     def toJSON(self):
         return model_to_dict(self)

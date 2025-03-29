@@ -1,12 +1,7 @@
 from django import forms
 from presupuesto.asignacion.models import Asignacion
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_sede,
-    validate_decimal_number,
-    validate_general_text,
-    validate_codigo_bn,
-)
+from helpers.validForm import validate_decimal_number
 
 
 class AsignacionForm(FormBase):
@@ -22,7 +17,6 @@ class AsignacionForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-        labels = {"numero_partida": "Número de partida presupuestaria"}
         widgets = {
             "departamento": forms.TextInput(
                 attrs={
@@ -50,14 +44,6 @@ class AsignacionForm(FormBase):
             ),
         }
 
-    def clean_departamento(self):
-        departamento = self.cleaned_data.get("departamento")
-        validate_sede(
-            departamento,
-            "El departamento solo puede contener letras, números y espacios.",
-        )
-        return departamento
-
     def clean_presupuesto(self):
         presupuesto = self.cleaned_data.get("presupuesto")
         validate_decimal_number(
@@ -65,19 +51,3 @@ class AsignacionForm(FormBase):
             "El presupuesto debe ser un valor positivo con hasta dos decimales.",
         )
         return presupuesto
-
-    def clean_objetivo(self):
-        objetivo = self.cleaned_data.get("objetivo")
-        validate_general_text(
-            objetivo,
-            "El objetivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return objetivo
-
-    def clean_numero_partida(self):
-        partida = self.cleaned_data.get("numero_partida")
-        validate_codigo_bn(
-            partida,
-            "El número de partida solo puede contener letras, números y guiones.",
-        )
-        return partida
