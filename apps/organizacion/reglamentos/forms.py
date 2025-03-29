@@ -1,18 +1,20 @@
-from django import forms
 from organizacion.reglamentos.models import Reglamento
 from helpers.FormBase import FormBase
+from django import forms
+from helpers.validForm import (
+    validate_general_text,
+)
 
 
 class ReglamentoForm(FormBase):
-    estado = forms.BooleanField(
-        required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
-    )
+    date = FormBase.create_date_field("date", title="Fecha de publicación")
 
-    date = FormBase.create_date_field("date")
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
 
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        return estado if estado is not None else False
+        if instance:
+            self.fields.pop("file")
 
     class Meta:
         model = Reglamento
@@ -31,3 +33,37 @@ class ReglamentoForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el nombre del reglamento",
+                }
+            ),
+            "file": forms.FileInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Seleccione el archivo",
+                }
+            ),
+            "progre": forms.Select(
+                attrs={
+                    "class": "form-select mb-3",
+                    "placeholder": "Seleccione el progreso",
+                }
+            ),
+            "estado": forms.Select(
+                attrs={
+                    "class": "form-select mb-3",
+                    "placeholder": "Seleccione el estado",
+                }
+            ),
+        }
+
+    def clean_name(self):
+        name = self.cleaned_data.get("name")
+        validate_general_text(
+            name,
+            "El nombre solo puede contener letras, números, espacios y los caracteres .,-!?().",
+        )
+        return name

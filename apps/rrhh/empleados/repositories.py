@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Empleado
+from rrhh.empleados.models import Empleado
 
 
 class EmpleadoRepository(Repository):

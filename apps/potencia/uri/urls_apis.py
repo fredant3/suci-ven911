@@ -1,9 +1,9 @@
 from django.urls import path
 
-from potencia.uri.views.create_view import UriCreateApiView
-from potencia.uri.views.delete_view import UriDeleteApiView
-from potencia.uri.views.list_view import UriListApiView
-from potencia.uri.views.update_view import UriUpdateApiView
+from potencia.uri.view.create_view import UriCreateApiView
+from potencia.uri.view.delete_view import UriDeleteApiView
+from potencia.uri.view.list_view import UriListApiView
+from potencia.uri.view.update_view import UriUpdateApiView
 
 urlpatterns = [
     path(

@@ -19,8 +19,8 @@ class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Administrasion"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administrasion"
-        context["submodule"] = "Asignacion"
-        context["titleForm"] = "Eliminar asignacion"
+        context["submodule"] = "Asignación"
+        context["titleForm"] = "Eliminar Asignación"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlDelete"] = reverse_lazy(

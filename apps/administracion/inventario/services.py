@@ -3,6 +3,7 @@ from administracion.inventario.repositories import (
     TipoArticuloRepository,
 )
 from helpers.CrudMixin import CrudService
+from django.db.models import Q
 
 
 class ArticuloService(CrudService):
@@ -12,6 +13,8 @@ class ArticuloService(CrudService):
         "marca",
         "modelo",
         "fecha_adq",
+        "codigo_bn",
+        "serial",
     )
 
     def __init__(self):
@@ -29,3 +32,15 @@ class ArticuloService(CrudService):
         payload["tipo_articulo_id"] = self.search_type_article(kwargs.get("type"))
 
         return payload
+
+    def criteria(self, search, arg=None):
+        query = Q()
+
+        if search:
+            query &= (
+                Q(marca__icontains=search)
+                | Q(modelo__icontains=search)
+                | Q(serial__icontains=search)
+                | Q(tipo_articulo__nombre__icontains=search)
+            )
+        return query

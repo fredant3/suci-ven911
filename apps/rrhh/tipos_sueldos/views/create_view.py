@@ -17,11 +17,11 @@ class TipoSueldoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Tipos de Sueldos"
-        context["titleForm"] = "Añadir una tipo de empleado nueva"
+        context["titleForm"] = "Añadir un tipo de empleado nuevo"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("tipos_sueldos:list")
         context["urlForm"] = reverse_lazy("api_tipos_sueldos:create")

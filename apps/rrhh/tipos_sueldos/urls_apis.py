@@ -4,6 +4,7 @@ from rrhh.tipos_sueldos.views.create_view import TipoSueldoCreateApiView
 from rrhh.tipos_sueldos.views.delete_view import TipoSueldoDeleteApiView
 from rrhh.tipos_sueldos.views.list_view import TipoSueldoListApiView
 from rrhh.tipos_sueldos.views.update_view import TipoSueldoUpdateApiView
+from rrhh.tipos_sueldos.views.export_view import TipoSueldoExcelView
 
 urlpatterns = [
     path(
@@ -25,5 +26,10 @@ urlpatterns = [
         "<int:pk>/delete",
         TipoSueldoDeleteApiView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        TipoSueldoExcelView.as_view(),
+        name="export_excel",
     ),
 ]

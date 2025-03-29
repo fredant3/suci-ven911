@@ -19,7 +19,7 @@ class PresupuestoView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submodule"] = "Dashboard Presupuesto"
         context["submoduleList"] = (
             ("Acciones", reverse_lazy("acciones:list")),
-            ("Asignaciones", reverse_lazy("asignaciones:list")),
+            ("Asignaciones", reverse_lazy("presupuesto_asignaciones:list")),
             ("Cedentes", reverse_lazy("cedentes:list")),
             ("Proyectos", reverse_lazy("proyectos:list")),
             ("Receptores", reverse_lazy("receptores:list")),

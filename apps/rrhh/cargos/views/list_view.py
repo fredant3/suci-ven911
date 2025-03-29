@@ -20,15 +20,16 @@ class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestion Humana"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Cargos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("cargos:create")
         context["listApiUrl"] = reverse_lazy("api_cargos:list")
         context["updateUrl"] = reverse_lazy("cargos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("cargos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_cargos:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

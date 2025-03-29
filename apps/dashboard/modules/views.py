@@ -12,18 +12,13 @@ class Modules(LoginRequiredMixin, TemplateView):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         context["modules"] = [
             {
-                "title": "Operaciones Cuadrantes de Paz (Pendiente)",
-                "url": "asesoria",
-                "image": "img/modules/cuadrantes_de_paz.png",
-            },
-            {
                 "title": "Asesoría Jurídica",
                 "url": "asesoria",
                 "image": "img/modules/asesoria_juridica.png",
             },
             {
                 "title": "Gestión Humana (Pendiente)",
-                "url": "tipos_sueldos:list",
+                "url": "gestion_humana",
                 "image": "img/modules/gestion_humana.png",
             },
             {
@@ -38,7 +33,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Potencia",
-                "url": "incidencias:list",
+                "url": "potencia",
                 "image": "img/modules/incidente.png",
             },
             {
@@ -73,7 +68,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             },
             {
                 "title": "Tecnología Comunicación e Información (Pendiente)",
-                "url": "asesoria",
+                "url": "tecnologia",
                 "image": "img/modules/tecnologia.png",
             },
             {

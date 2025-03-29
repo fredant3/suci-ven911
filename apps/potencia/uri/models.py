@@ -197,10 +197,16 @@ class Uri(BaseModel):
     )
 
     # Centro Asistencial Recibido
-    centroAsistencial = models.CharField(max_length=50, blank=True, null=True)
-    servicioAsistencial = models.CharField(max_length=50, blank=True, null=True)
-    medico_receptor = models.CharField(max_length=50, blank=True, null=True)
-    msds = models.CharField(max_length=50, blank=True, null=True)
+    centroAsistencial = models.CharField(
+        "Centro Asistencial", max_length=50, blank=True, null=True
+    )
+    servicioAsistencial = models.CharField(
+        "Servicio Asistencial", max_length=50, blank=True, null=True
+    )
+    medico_receptor = models.CharField(
+        "Medico Receptor", max_length=50, blank=True, null=True
+    )
+    msds = models.CharField("MS/DS", max_length=50, blank=True, null=True)
 
     # Registro Visuales
     foto = models.CharField(
@@ -289,15 +295,15 @@ class Uri(BaseModel):
         "Parroquia", max_length=20, blank=True, null=True
     )
     sector_evento = models.CharField(
-        "Sector/Urbanizacion", max_length=300, blank=True, null=True
+        "Sector/Urbanizacion", max_length=100, blank=True, null=True
     )
     calle_evento = models.CharField(
-        "Calle/Avenida/Carrera", max_length=300, blank=True, null=True
+        "Calle/Avenida/Carrera", max_length=100, blank=True, null=True
     )
     casa_evento = models.CharField("Edif/ Casa", max_length=20, blank=True, null=True)
     piso_evento = models.CharField("Piso y Apto", max_length=20, blank=True, null=True)
     referencia_evento = models.CharField(
-        "Punto de Referencia", max_length=300, blank=True, null=True
+        "Punto de Referencia", max_length=100, blank=True, null=True
     )
     eje_evento = models.CharField("Eje", max_length=30, blank=True, null=True)
 
@@ -534,9 +540,8 @@ class Uri(BaseModel):
     # 7) Signos Vitales o Tratamiento
 
     # Signos Vitales
-    horaMedicion = models.CharField(
-        "Hora de la Medición", max_length=100, blank=True, null=True
-    )
+    horaMedicion = models.TimeField("Hora de Medición", blank=True, null=True)
+
     frecuenciaCardiaca = models.CharField(
         "Frecuencia Cardiaca", max_length=100, blank=True, null=True
     )
@@ -552,7 +557,7 @@ class Uri(BaseModel):
         "Llenado Capilar", max_length=100, blank=True, null=True
     )
     glicemiaCapilar = models.CharField(
-        "Glicemia Capillar", max_length=100, blank=True, null=True
+        "Glicemia Capilar", max_length=100, blank=True, null=True
     )
     escalaGlasgow = models.CharField(
         "Escala Glasgow", max_length=100, blank=True, null=True
@@ -626,13 +631,6 @@ class Uri(BaseModel):
         "Cédula del Médico de Guardia", max_length=10, blank=True, null=True
     )
     selloMsds = models.CharField("Sellos/MSDS", max_length=25, blank=True, null=True)
-    permissions = [
-        ("listar_uri", "Puede listar uri"),
-        ("agregar_uri", "Puede agregar uri"),
-        ("ver_uri", "Puede ver uri"),
-        ("editar_uri", "Puede actualizar uri"),
-        ("eliminar_uri", "Puede eliminar uri"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
@@ -643,3 +641,10 @@ class Uri(BaseModel):
     class Meta:
         verbose_name = "Unidad de repuesta inmediata"
         verbose_name_plural = "Unidades de repuestas inmediatas"
+        permissions = [
+            ("listar_uri", "Puede listar uri"),
+            ("agregar_uri", "Puede agregar uri"),
+            ("ver_uri", "Puede ver uri"),
+            ("editar_uri", "Puede actualizar uri"),
+            ("eliminar_uri", "Puede eliminar uri"),
+        ]

@@ -6,8 +6,8 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import FamiliarForm
-from ..services import FamiliarService
+from rrhh.familiares.forms import FamiliarForm
+from rrhh.familiares.services import FamiliarService
 
 
 class FamiliarCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -17,11 +17,11 @@ class FamiliarCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Familiars"
-        context["titleForm"] = "Añadir una familiar nueva"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
+        context["submodule"] = "Familiares"
+        context["titleForm"] = "Añadir un familiar nuevo"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("familiares:list")
         context["urlForm"] = reverse_lazy("api_familiares:create")

@@ -2,7 +2,7 @@ NACIONALIDAD_CHOICES = (
     ("ve", "Venezolano"),
     ("ex", "Extranjero"),
 )
-GENERO_CHOICES = (
+SEXO_CHOICES = (
     ("f", "Femenino"),
     ("m", "Masculino"),
 )

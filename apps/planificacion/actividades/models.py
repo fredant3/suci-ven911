@@ -8,13 +8,6 @@ class Actividad(BaseModel):
     fechaf = models.DateField(verbose_name="Fecha Final")
     objetiv = models.CharField(max_length=64, verbose_name="Objetivos:", default="")
     meta = models.CharField(max_length=64, verbose_name="Meta:", default="")
-    permissions = [
-        ("listar_actividad", "Puede listar actividades"),
-        ("agregar_actividad", "Puede agregar actividad"),
-        ("ver_actividad", "Puede ver actividad"),
-        ("editar_actividad", "Puede actualizar actividad"),
-        ("eliminar_actividad", "Puede eliminar actividad"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
@@ -25,3 +18,10 @@ class Actividad(BaseModel):
     class Meta:
         verbose_name = "actividad"
         verbose_name_plural = "actividades"
+        permissions = [
+            ("listar_actividad", "Puede listar actividades"),
+            ("agregar_actividad", "Puede agregar actividad"),
+            ("ver_actividad", "Puede ver actividad"),
+            ("editar_actividad", "Puede actualizar actividad"),
+            ("eliminar_actividad", "Puede eliminar actividad"),
+        ]

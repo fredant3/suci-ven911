@@ -34,7 +34,8 @@ class Repository:
     def media(self, file, custom_folder):
         path = self.media_folder(file, custom_folder)
         self.seve_media(path, file)
-        return path
+
+        return path.replace(settings.MEDIA_ROOT, "").replace("\\", "/")
 
     def media_folder(self, file, custom_folder):
         file_extension = Path(file.name).suffix.lower()
@@ -73,9 +74,28 @@ class Repository:
             os.remove(file_path)
 
     def create(self, data):
-        data = {k: v for k, v in data.items() if k != "csrfmiddlewaretoken"}
-        entity = self.entity(**data)
-        entity.save()
+        # 1. Filtrar campos ManyToMany y campos no existentes en el modelo
+        m2m_data = {}
+        valid_fields = [
+            f.name for f in self.entity._meta.get_fields()
+        ]  # Nombres de campos válidos
+
+        # Extraer campos no válidos y M2M
+        data_filtered = {}
+        for key, value in data.items():
+            if key in valid_fields:
+                if key in [field.name for field in self.entity._meta.many_to_many]:
+                    m2m_data[key] = value
+                else:
+                    data_filtered[key] = value
+
+        # 2. Crear instancia base con campos válidos
+        entity = self.entity.objects.create(**data_filtered)
+
+        # 3. Asignar relaciones ManyToMany
+        for field_name, values in m2m_data.items():
+            getattr(entity, field_name).set(values)
+
         return entity
 
     def update(self, entity, payload):

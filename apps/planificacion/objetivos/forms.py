@@ -1,12 +1,16 @@
 from django import forms
-from django.forms.fields import DateTimeInput
 from planificacion.objetivos.models import Objetivo
 from helpers.FormBase import FormBase
+from helpers.validForm import (
+    validate_general_text,
+    validate_decimal_number,
+    validate_cantidad,
+)
 
 
 class ObjetivoForm(FormBase):
-    fechai = FormBase.create_date_field("fechai")
-    fechaf = FormBase.create_date_field("fechaf")
+    fechai = FormBase.create_date_field("fechai", title="Fecha Inicio")
+    fechaf = FormBase.create_date_field("fechaf", title="Fecha Fin")
 
     class Meta:
         model = Objetivo
@@ -25,3 +29,43 @@ class ObjetivoForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        labels = {"objetiv": "Objetivo estratégico", "meta": "Meta cuantitativa"}
+        widgets = {
+            "objetiv": forms.Textarea(
+                attrs={
+                    "placeholder": "Escribe aquí el objetivo estratégico",
+                }
+            ),
+            "meta": forms.NumberInput(
+                attrs={
+                    "placeholder": "Escribe aquí la meta cuantitativa",
+                }
+            ),
+        }
+
+    def clean_objetiv(self):
+        objetiv = self.cleaned_data.get("objetiv")
+        validate_general_text(
+            objetiv,
+            "El objetivo solo puede contener letras, números, espacios y los caracteres .,-!?().",
+        )
+        return objetiv
+
+    def clean_meta(self):
+        meta = self.cleaned_data.get("meta")
+        validate_decimal_number(
+            str(meta), "La meta debe ser un número positivo (ej: 100 o 75.5)"
+        )
+        return meta
+
+    def clean(self):
+        cleaned_data = super().clean()
+        fechai = cleaned_data.get("fechai")
+        fechaf = cleaned_data.get("fechaf")
+
+        if fechai and fechaf and fechaf < fechai:
+            self.add_error(
+                "fechaf", "La fecha de fin no puede ser anterior a la fecha de inicio"
+            )
+
+        return cleaned_data

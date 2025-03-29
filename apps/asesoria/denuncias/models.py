@@ -19,13 +19,6 @@ class Denunciante(BaseModel):
         "Correo electrónico del denunciante", max_length=60, blank=True, null=True
     )
     direccion = models.CharField("Dirección del denunciante", max_length=180)
-    permissions = [
-        ("listar_denunciante", "Puede listar denunciantes"),
-        ("agregar_denunciante", "Puede agregar denunciante"),
-        ("ver_denunciante", "Puede ver denunciante"),
-        ("editar_denunciante", "Puede actualizar denunciante"),
-        ("eliminar_denunciante", "Puede eliminar denunciante"),
-    ]
 
     @property
     def nombre_completo(self):
@@ -40,6 +33,13 @@ class Denunciante(BaseModel):
     class Meta:
         verbose_name = "Denunciante"
         verbose_name_plural = "Denunciantes"
+        permissions = [
+            ("listar_denunciante", "Puede listar denunciantes"),
+            ("agregar_denunciante", "Puede agregar denunciante"),
+            ("ver_denunciante", "Puede ver denunciante"),
+            ("editar_denunciante", "Puede actualizar denunciante"),
+            ("eliminar_denunciante", "Puede eliminar denunciante"),
+        ]
 
 
 class Denunciado(BaseModel):
@@ -61,13 +61,6 @@ class Denunciado(BaseModel):
     direccion = models.CharField(
         "Dirección del denunciado", max_length=180, blank=True, null=True
     )
-    permissions = [
-        ("listar_denunciado", "Puede listar denunciados"),
-        ("agregar_denunciado", "Puede agregar denunciado"),
-        ("ver_denunciado", "Puede ver denunciado"),
-        ("editar_denunciado", "Puede actualizar denunciado"),
-        ("eliminar_denunciado", "Puede eliminar denunciado"),
-    ]
 
     @property
     def nombre_completo(self):
@@ -82,6 +75,13 @@ class Denunciado(BaseModel):
     class Meta:
         verbose_name = "Denunciado"
         verbose_name_plural = "Denunciados"
+        permissions = [
+            ("listar_denunciado", "Puede listar denunciados"),
+            ("agregar_denunciado", "Puede agregar denunciado"),
+            ("ver_denunciado", "Puede ver denunciado"),
+            ("editar_denunciado", "Puede actualizar denunciado"),
+            ("eliminar_denunciado", "Puede eliminar denunciado"),
+        ]
 
 
 class Denuncia(BaseModel):
@@ -93,14 +93,6 @@ class Denuncia(BaseModel):
     zona = models.CharField("Zona del incidente", max_length=150, blank=True, null=True)
     fecha_denuncia = models.DateField("Fecha de la denuncia")
     fecha_incidente = models.DateField("Fecha del incidente", blank=True, null=True)
-    permissions = [
-        ("listar_denuncia", "Puede listar denuncias"),
-        ("agregar_denuncia", "Puede agregar denuncia"),
-        ("ver_denuncia", "Puede ver denuncia"),
-        ("editar_denuncia", "Puede actualizar denuncia"),
-        ("eliminar_denuncia", "Puede eliminar denuncia"),
-        ("exel_denuncia", "Puede exportar a exel denuncias"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
@@ -111,3 +103,11 @@ class Denuncia(BaseModel):
     class Meta:
         verbose_name = "Denuncia"
         verbose_name_plural = "Denuncias"
+        permissions = [
+            ("listar_denuncia", "Puede listar denuncias"),
+            ("agregar_denuncia", "Puede agregar denuncia"),
+            ("ver_denuncia", "Puede ver denuncia"),
+            ("editar_denuncia", "Puede actualizar denuncia"),
+            ("eliminar_denuncia", "Puede eliminar denuncia"),
+            ("exel_denuncia", "Puede exportar a exel denuncias"),
+        ]

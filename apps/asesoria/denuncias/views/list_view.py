@@ -81,7 +81,7 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class DenunciaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.listar_denuncia"
 
     def __init__(self):
         self.service = DenunciaService()

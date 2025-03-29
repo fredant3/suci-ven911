@@ -3,38 +3,50 @@ from administracion.sedes.models import Sede
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
+from potencia.tipo_incidencia.models import TipoIncidencia
 
+INCIDENCIA_CHOICES = (
+    ("Interna", "Solicitud Interna"),
+    ("Externa", "Solicitud Externa"),
+)
 
-class TipoIncidencia(BaseModel):
-    tipo = models.CharField(max_length=120)
-    permissions = [
-        ("listar_tipo_incidencia", "Puede listar tipo incidencia"),
-        ("agregar_tipo_incidencia", "Puede agregar tipo incidencia"),
-        ("ver_tipo_incidencia", "Puede ver tipo incidencia"),
-        ("editar_tipo_incidencia", "Puede actualizar tipo incidencia"),
-        ("eliminar_tipo_incidencia", "Puede eliminar tipo incidencia"),
-    ]
-
-    def __str__(self):
-        return self.tipo
+ESTADOS_CHOICES = (
+    ("Dtto. Capital", "Distrito Capital"),
+    ("Amazonas", "Amazonas"),
+    ("Anzoátegui", "Anzoátegui"),
+    ("Apure", "Apure"),
+    ("Aragua", "Aragua"),
+    ("Barinas", "Barinas"),
+    ("Bolívar", "Bolívar"),
+    ("Carabobo", "Carabobo"),
+    ("Cojedes", "Cojedes"),
+    ("Delta Amacuro", "Delta Amacuro"),
+    ("Falcón", "Falcón"),
+    ("Guárico", "Guárico"),
+    ("Lara", "Lara"),
+    ("Mérida", "Mérida"),
+    ("Miranda", "Miranda"),
+    ("Monagas", "Monagas"),
+    ("Nva. Esparta", "Nueva Esparta"),
+    ("Portuguesa", "Portuguesa"),
+    ("Sucre", "Sucre"),
+    ("Táchira", "Táchira"),
+    ("Trujillo", "Trujillo"),
+    ("Vargas", "Vargas"),
+    ("Yaracuy", "Yaracuy"),
+    ("Zulia", "Zulia"),
+)
 
 
 class Incidencia(BaseModel):
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    estado = models.CharField(
-        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
-    )
+    estado = models.CharField("Estado", max_length=15, choices=ESTADOS_CHOICES)
     tipo_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
-    tipo_solicitud = models.CharField(max_length=80, verbose_name="Tipo Solicitud")
+    tipo_solicitud = models.CharField(
+        "Tipo de Solicitud", max_length=10, choices=INCIDENCIA_CHOICES
+    )
     observaciones = models.CharField(max_length=200)
-    permissions = [
-        ("listar_incidencia", "Puede listar incidencia"),
-        ("agregar_incidencia", "Puede agregar incidencia"),
-        ("ver_incidencia", "Puede ver incidencia"),
-        ("editar_incidencia", "Puede actualizar incidencia"),
-        ("eliminar_incidencia", "Puede eliminar incidencia"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
@@ -45,3 +57,10 @@ class Incidencia(BaseModel):
     class Meta:
         verbose_name = "Incidencia"
         verbose_name_plural = "Incidencias"
+        permissions = [
+            ("listar_incidencia", "Puede listar incidencia"),
+            ("agregar_incidencia", "Puede agregar incidencia"),
+            ("ver_incidencia", "Puede ver incidencia"),
+            ("editar_incidencia", "Puede actualizar incidencia"),
+            ("eliminar_incidencia", "Puede eliminar incidencia"),
+        ]

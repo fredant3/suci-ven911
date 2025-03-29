@@ -7,11 +7,11 @@ from helpers.BaseModelMixin import BaseModel
 
 
 class Asignacion(BaseModel):
-    LIST_ARTICLE = "listar_articulo"
-    ADD_ARTICLE = "agregar_articulo"
-    VIEW_ARTICLE = "ver_articulo"
-    CHANGE_ARTICLE = "editar_articulo"
-    DELETE_ARTICLE = "eliminar_articulo"
+    LIST_ARTICLE = "administracion.listar_asignacion"
+    ADD_ARTICLE = "administracion.agregar_asignacion"
+    VIEW_ARTICLE = "administracion.ver_asignacion"
+    CHANGE_ARTICLE = "administracion.editar_asignacion"
+    DELETE_ARTICLE = "administracion.eliminar_asignacion"
 
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
@@ -29,7 +29,7 @@ class Asignacion(BaseModel):
         verbose_name_plural = "Asignaciones"
         ordering = ["-id"]
         permissions = [
-            ("listar_asignacion", "Puede listar asignacions"),
+            ("listar_asignacion", "Puede listar asignaciones"),
             ("agregar_asignacion", "Puede agregar asignacion"),
             ("ver_asignacion", "Puede ver asignacion"),
             ("editar_asignacion", "Puede actualizar asignacion"),

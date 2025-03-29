@@ -50,13 +50,6 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "user",
-                "name": "user",
-                "title": "Usuario",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "date",
                 "name": "date",
                 "title": "Fecha",

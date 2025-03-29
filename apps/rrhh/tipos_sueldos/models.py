@@ -29,13 +29,6 @@ class TipoSueldo(BaseModel):
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     descripcion = models.CharField(max_length=50, blank=True, null=True)
     estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
-    permissions = [
-        ("listar_tipo_sueldos", "Listar tipos de sueldos"),
-        ("agregar_tipo_sueldo", "Agregar tipos de sueldos"),
-        ("ver_tipo_sueldo", "Ver tipos de sueldos"),
-        ("modificar_tipo_sueldo", "Modificar tipos de sueldos"),
-        ("eliminar_tipo_sueldo", "Eliminar tipos de sueldos"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
@@ -46,3 +39,11 @@ class TipoSueldo(BaseModel):
     class Meta:
         verbose_name = "tipo de empleado"
         verbose_name_plural = "tipos de empleados"
+        permissions = [
+            ("listar_tipo_sueldos", "Listar tipos de sueldos"),
+            ("agregar_tipo_sueldo", "Agregar tipos de sueldos"),
+            ("ver_tipo_sueldo", "Ver tipos de sueldos"),
+            ("modificar_tipo_sueldo", "Modificar tipos de sueldos"),
+            ("eliminar_tipo_sueldo", "Eliminar tipos de sueldos"),
+            ("exel_tipo_sueldo", "Exportar tipos de sueldos a excel"),
+        ]

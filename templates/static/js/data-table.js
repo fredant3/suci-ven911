@@ -1,5 +1,5 @@
 const setTBody = ({ url, columns, withActions, updateUrl, deleteUrl }) => {
-  withActions = withActions ?? 'True';
+  withActions = withActions ? withActions : 'True';
 
   $("#data-table").DataTable({
     resposive: true,
@@ -30,17 +30,24 @@ const setTBody = ({ url, columns, withActions, updateUrl, deleteUrl }) => {
 function getcolumnDefs (withActions, updateUrl, deleteUrl) {
   if (withActions == 'False') return;
 
-  if (updateUrl && deleteUrl) {
+  if (updateUrl || deleteUrl) {
     return [
       {
         targets: [-1],
         class: "text-center",
         orderable: false,
         render: function (data, type, row) {
-          let buttons = `
-            <a href="${updateUrl.replace("0",row.id)}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
-            <a href="${deleteUrl.replace("0",row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
-          `;
+          let buttons = '';
+
+          if (updateUrl) {
+            buttons += `<a href="${updateUrl.replace("0", row.id)}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>`;
+          }
+          
+          if (deleteUrl) {
+            console.info('HEY deleteUrl');
+            buttons += `<a href="${deleteUrl.replace("0", row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>`; 
+          }
+
           return buttons;
         },
       },

@@ -3,7 +3,7 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.models import (
     ESTADO_CIVIL_CHOICES,
-    GENERO_CHOICES,
+    SEXO_CHOICES,
     NACIONALIDAD_CHOICES,
     TIPO_SANGRE_CHOICES,
 )
@@ -22,24 +22,17 @@ class Empleado(BaseModel):
     nombres = models.CharField(max_length=90)
     apellidos = models.CharField(max_length=90)
     nacionalidad = models.CharField(max_length=2, choices=NACIONALIDAD_CHOICES)
-    cedula = models.IntegerField()
-    sexo = models.CharField(max_length=1, choices=GENERO_CHOICES)
+    cedula = models.CharField(max_length=15, unique=True)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
     fecha_nacimiento = models.DateField()
     estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
     tipo_sangre = models.CharField(max_length=3, choices=TIPO_SANGRE_CHOICES)
     email = models.EmailField(blank=True, null=True)
     telefono = models.CharField(max_length=12)
     direccion = models.CharField(max_length=180)
-    estudia = models.BooleanField()
-    discapacitado = models.BooleanField()
+    estudia = models.BooleanField(default=False)
+    discapacitado = models.BooleanField(default=False)
     contratos = models.IntegerField()
-    permissions = [
-        ("listar_empleado", "Puede listar empleados"),
-        ("agregar_empleado", "Puede agregar empleado"),
-        ("ver_empleado", "Puede ver empleado"),
-        ("editar_empleado", "Puede actualizar empleado"),
-        ("eliminar_empleado", "Puede eliminar empleado"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
@@ -50,3 +43,11 @@ class Empleado(BaseModel):
     class Meta:
         verbose_name = "empleado"
         verbose_name_plural = "empleados"
+        permissions = [
+            ("listar_empleado", "Puede listar empleados"),
+            ("agregar_empleado", "Puede agregar empleado"),
+            ("ver_empleado", "Puede ver empleado"),
+            ("editar_empleado", "Puede actualizar empleado"),
+            ("eliminar_empleado", "Puede eliminar empleado"),
+            ("exel_empleado", "Puede exportar empleado a excel"),
+        ]

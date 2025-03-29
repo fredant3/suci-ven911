@@ -6,9 +6,9 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import EmpleadoForm
-from ..models import Empleado
-from ..services import EmpleadoService
+from rrhh.empleados.forms import EmpleadoForm
+from rrhh.empleados.models import Empleado
+from rrhh.empleados.services import EmpleadoService
 
 
 class EmpleadoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
@@ -17,9 +17,9 @@ class EmpleadoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Empleados"
         context["titleForm"] = "Eliminar empleado"
         context["tag"] = "Eliminar"

@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
-from helpers.models import ESTADO_CIVIL_CHOICES, GENERO_CHOICES
+from helpers.models import ESTADO_CIVIL_CHOICES, SEXO_CHOICES
 from rrhh.empleados.models import Empleado
 
 PARENTEZCO = (
@@ -28,24 +28,25 @@ class Familiar(BaseModel):
     apellidos = models.CharField(max_length=90)
     cedula = models.IntegerField(null=True, blank=True)
     fecha_nacimiento = models.DateField()
-    sexo = models.CharField(max_length=1, choices=GENERO_CHOICES)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
     estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     observacion = models.CharField(max_length=150, blank=True, null=True)
-    permissions = [
-        ("listar_familiares", "Listar familiares"),
-        ("agregar_familiar", "Agregar familiares"),
-        ("ver_familiar", "Ver familiares"),
-        ("modificar_familiar", "Modificar familiares"),
-        ("eliminar_familiar", "Eliminar familiares"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
 
     def __str__(self):
-        return "{0} {1}".format(self.name, self.apellido)
+        return "{0} {1}".format(self.nombres, self.apellidos)
 
     class Meta:
         verbose_name = "familiar"
         verbose_name_plural = "familiares"
+        permissions = [
+            ("listar_familiares", "Listar familiares"),
+            ("agregar_familiar", "Agregar familiares"),
+            ("ver_familiar", "Ver familiares"),
+            ("modificar_familiar", "Modificar familiares"),
+            ("eliminar_familiar", "Eliminar familiares"),
+            ("exel_familiar", "Exportar familiares a excel"),
+        ]

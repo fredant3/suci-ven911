@@ -18,11 +18,11 @@ class TipoSueldoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Tipos de Sueldos"
-        context["titleForm"] = "Actualizar tipo de empleado"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
+        context["submodule"] = "Tipos de sueldos"
+        context["titleForm"] = "Actualizar tipo de sueldo"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("tipos_sueldos:list")
         context["urlForm"] = reverse_lazy(

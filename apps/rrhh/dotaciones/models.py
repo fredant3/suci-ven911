@@ -50,20 +50,18 @@ class Dotacion(BaseModel):
     pantalon = models.CharField(max_length=2, choices=TALLA_PANTALON_CHOICES)
     zapato = models.CharField(max_length=2, choices=TALLA_ZAPATO_CHOICES)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    permissions = [
-        ("listar_dotacion", "Puede listar dotacion"),
-        ("agregar_dotacion", "Puede agregar dotacion"),
-        ("ver_dotacion", "Puede ver dotacion"),
-        ("editar_dotacion", "Puede actualizar dotacion"),
-        ("eliminar_dotacion", "Puede eliminar dotacion"),
-    ]
 
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return "{0} {1}".format(self.name, self.apellido)
-
     class Meta:
         verbose_name = "dotacion"
         verbose_name_plural = "dotaciones"
+        permissions = [
+            ("listar_dotacion", "Puede listar dotacion"),
+            ("agregar_dotacion", "Puede agregar dotacion"),
+            ("ver_dotacion", "Puede ver dotacion"),
+            ("editar_dotacion", "Puede actualizar dotacion"),
+            ("eliminar_dotacion", "Puede eliminar dotacion"),
+            ("exel_dotacion", "Puede exportar dotacion a excel"),
+        ]

@@ -16,7 +16,7 @@ class PlanificacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Planificacion"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Planificacion"
-        context["submodule"] = "Dashboard Planificacion"
+        context["submodule"] = "Planificacion"
         context["submoduleList"] = (
             ("Objetivos", reverse_lazy("objetivos:list")),
             ("Actividades", reverse_lazy("actividades:list")),
