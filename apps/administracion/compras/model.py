@@ -5,7 +5,7 @@ from helpers.BaseModelMixin import BaseModel
 
 class Compra(BaseModel):
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
-    n_orden = models.IntegerField()
+    n_orden = models.TextField(max_length=255)
     valor_bs = models.TextField(max_length=255)
 
     class Meta:
