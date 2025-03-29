@@ -30,19 +30,19 @@ class IncidenciaForm(FormBase):
                     "placeholder": "Seleccione el estado",
                 }
             ),
-            "sede": forms.TextInput(
+            "sede": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el nombre de la sede",
                 }
             ),
-            "departamento": forms.TextInput(
+            "departamento": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el departamento",
                 }
             ),
-            "tipo_incidencia": forms.TextInput(
+            "tipo_incidencia": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el tipo de incidencia",
@@ -54,7 +54,7 @@ class IncidenciaForm(FormBase):
                     "placeholder": "Ingrese las observaciones",
                 }
             ),
-            "tipo_solicitud": forms.TextInput(
+            "tipo_solicitud": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el tipo de solicitud",
