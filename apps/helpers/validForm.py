@@ -143,10 +143,10 @@ class UnicodeAlphaSpaceValidator:
     default_regex = r"^[\p{L}\s]+$"
 
     def __init__(self, message=None, extra_chars=None):
-        self.regex = self.default_regex
+        self.regex = self.default_regex = r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
 
         if extra_chars:
-            self.regex = f"^[\\p{{L}}\\s{re.escape(extra_chars)}]+$"
+            self.regex = f"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s{re.escape(extra_chars)}]+$"
 
         if message:
             self.messages = self.messages.copy()
