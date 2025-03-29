@@ -1,52 +1,36 @@
 from administracion.departamentos.models import Departamento
 from administracion.sedes.models import Sede
-from django.db import models
+from django.db.models import CASCADE, CharField, ForeignKey
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 from potencia.tipo_incidencia.models import TipoIncidencia
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 INCIDENCIA_CHOICES = (
     ("Interna", "Solicitud Interna"),
     ("Externa", "Solicitud Externa"),
 )
 
-ESTADOS_CHOICES = (
-    ("Dtto. Capital", "Distrito Capital"),
-    ("Amazonas", "Amazonas"),
-    ("Anzoátegui", "Anzoátegui"),
-    ("Apure", "Apure"),
-    ("Aragua", "Aragua"),
-    ("Barinas", "Barinas"),
-    ("Bolívar", "Bolívar"),
-    ("Carabobo", "Carabobo"),
-    ("Cojedes", "Cojedes"),
-    ("Delta Amacuro", "Delta Amacuro"),
-    ("Falcón", "Falcón"),
-    ("Guárico", "Guárico"),
-    ("Lara", "Lara"),
-    ("Mérida", "Mérida"),
-    ("Miranda", "Miranda"),
-    ("Monagas", "Monagas"),
-    ("Nva. Esparta", "Nueva Esparta"),
-    ("Portuguesa", "Portuguesa"),
-    ("Sucre", "Sucre"),
-    ("Táchira", "Táchira"),
-    ("Trujillo", "Trujillo"),
-    ("Vargas", "Vargas"),
-    ("Yaracuy", "Yaracuy"),
-    ("Zulia", "Zulia"),
-)
-
 
 class Incidencia(BaseModel):
-    sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
-    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    estado = models.CharField("Estado", max_length=15, choices=ESTADOS_CHOICES)
-    tipo_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
-    tipo_solicitud = models.CharField(
+    sede = ForeignKey(Sede, on_delete=CASCADE)
+    departamento = ForeignKey(Departamento, on_delete=CASCADE)
+    tipo_incidencia = ForeignKey(
+        TipoIncidencia, on_delete=CASCADE, verbose_name="Tipo de incidencia"
+    )
+    estado = CharField("Estado", max_length=15, choices=ESTADOS_CHOICES)
+    tipo_solicitud = CharField(
         "Tipo de Solicitud", max_length=10, choices=INCIDENCIA_CHOICES
     )
-    observaciones = models.CharField(max_length=200)
+    observaciones = CharField(
+        "Observaciones",
+        max_length=200,
+        validators=[MinLengthValidator(9), MaxLengthValidator(2800), TextValidator()],
+    )
 
     def toJSON(self):
         return model_to_dict(self)

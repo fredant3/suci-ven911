@@ -1,12 +1,6 @@
 from potencia.incidencias.models import Incidencia
 from helpers.FormBase import FormBase
 from django import forms
-from helpers.validForm import (
-    validate_basic_text,
-    validate_sede,
-    validate_basic_text,
-    validate_general_text,
-)
 
 
 class IncidenciaForm(FormBase):
@@ -29,10 +23,6 @@ class IncidenciaForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-        labels = {
-            "tipo_incidencia": "Tipo de incidencia",
-            "tipo_solicitud": "Tipo de solicitud",
-        }
         widgets = {
             "estado": forms.Select(
                 attrs={
@@ -71,49 +61,3 @@ class IncidenciaForm(FormBase):
                 }
             ),
         }
-
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        validate_basic_text(
-            estado,
-            "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
-        )
-        return estado
-
-    def clean_sede(self):
-        sede = self.cleaned_data.get("sede")
-        validate_sede(
-            sede, "El nombre de sede solo puede contener letras, números y espacios."
-        )
-        return sede
-
-    def clean_departamento(self):
-        departamento = self.cleaned_data.get("departamento")
-        validate_sede(
-            departamento,
-            "El departamento solo puede contener letras, números y espacios.",
-        )
-        return departamento
-
-    def clean_tipo_incidencia(self):
-        tipo = self.cleaned_data.get("tipo_incidencia")
-        validate_basic_text(
-            tipo,
-            "El tipo de incidencia solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return tipo
-
-    def clean_observaciones(self):
-        obs = self.cleaned_data.get("observaciones")
-        validate_basic_text(
-            obs, "Use solo letras, números, espacios y los caracteres .,-!?()."
-        )
-        return obs
-
-    def clean_tipo_solicitud(self):
-        solicitud = self.cleaned_data.get("tipo_solicitud")
-        validate_general_text(
-            solicitud,
-            "El tipo de solicitud solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return solicitud

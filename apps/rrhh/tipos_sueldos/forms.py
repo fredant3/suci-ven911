@@ -1,7 +1,7 @@
 from django import forms
 from rrhh.tipos_sueldos.models import TipoSueldo
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_decimal_number, validate_basic_text
+from helpers.validForm import validate_decimal_number
 
 
 class TipoSueldoForm(FormBase):
@@ -50,30 +50,11 @@ class TipoSueldoForm(FormBase):
             "estatus": "Estado Actual",
         }
 
-    def clean_tipo(self):
-        data = self.cleaned_data.get("tipo")
-        valid_types = [choice[0] for choice in TipoSueldo.TIPO_CHOICES]
-        if data not in valid_types:
-            raise forms.ValidationError("Seleccione un tipo de sueldo válido")
-        return data
-
     def clean_monto(self):
         data = self.cleaned_data.get("monto")
         validate_decimal_number(
             str(data), "El monto debe ser un valor positivo con hasta dos decimales"
         )
-        return data
-
-    def clean_descripcion(self):
-        data = self.cleaned_data.get("descripcion")
-        validate_basic_text(data, "La descripción contiene caracteres no permitidos")
-        return data
-
-    def clean_estatus(self):
-        data = self.cleaned_data.get("estatus")
-        valid_status = [choice[0] for choice in TipoSueldo.ESTATUS_CHOICES]
-        if data not in valid_status:
-            raise forms.ValidationError("Seleccione un estatus válido")
         return data
 
     def clean(self):

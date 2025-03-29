@@ -1,14 +1,7 @@
 from django import forms
 from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_nombres_apellidos,
-    validate_cedula,
-    validate_telefono,
-    validate_email,
-    validate_direccion,
-    validate_basic_text,
-)
+from helpers.validForm import validate_cedula, validate_email
 from datetime import date
 
 
@@ -121,38 +114,14 @@ class EmpleadoForm(FormBase):
             ),
         }
 
-    def clean_nombres(self):
-        data = self.cleaned_data.get("nombres")
-        validate_nombres_apellidos(
-            data, "Los nombres solo pueden contener letras y espacios"
-        )
-        return data
-
-    def clean_apellidos(self):
-        data = self.cleaned_data.get("apellidos")
-        validate_nombres_apellidos(
-            data, "Los apellidos solo pueden contener letras y espacios"
-        )
-        return data
-
     def clean_cedula(self):
         data = self.cleaned_data.get("cedula")
         validate_cedula(data, "Formato de cédula inválido. Use el formato: V-12345678")
         return data
 
-    def clean_telefono(self):
-        data = self.cleaned_data.get("telefono")
-        validate_telefono(data, "Formato de teléfono inválido. Use: 0412-1234567")
-        return data
-
     def clean_email(self):
         data = self.cleaned_data.get("email")
         validate_email(data, "Ingrese un correo electrónico válido")
-        return data
-
-    def clean_direccion(self):
-        data = self.cleaned_data.get("direccion")
-        validate_direccion(data, "La dirección contiene caracteres no permitidos")
         return data
 
     def clean_fecha_nacimiento(self):
@@ -173,12 +142,6 @@ class EmpleadoForm(FormBase):
         data = self.cleaned_data.get("estatus")
         validate_basic_text(data, "Seleccione un estatus válido")
         return data
-
-    # def clean_sexo(self):
-    # data = self.cleaned_data.get("sexo")
-    # if data not in [choice[0] for choice in Empleado.SEXO_CHOICES]:
-    # raise forms.ValidationError("Seleccione un género válido")
-    # return data
 
     def clean(self):
         cleaned_data = super().clean()
