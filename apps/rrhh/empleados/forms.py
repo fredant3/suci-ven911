@@ -113,9 +113,9 @@ class EmpleadoForm(FormBase):
                     "placeholder": "Seleccione estatus laboral",
                 }
             ),
-            "contratos": forms.SelectMultiple(
+            "contratos": forms.Select(
                 attrs={
-                    "class": "form-control select2-multiple",
+                    "class": "form-control",
                     "placeholder": "Seleccione contratos asociados",
                 }
             ),
@@ -172,6 +172,11 @@ class EmpleadoForm(FormBase):
     def clean_estatus(self):
         data = self.cleaned_data.get("estatus")
         validate_basic_text(data, "Seleccione un estatus válido")
+        return data
+
+    def clean_contratos(self):
+        data = self.cleaned_data.get("contratos")
+        validate_basic_text(data, "Seleccione una contratos válida")
         return data
 
     # def clean_sexo(self):

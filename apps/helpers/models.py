@@ -22,3 +22,15 @@ TIPO_SANGRE_CHOICES = (
     ("o+", "O+ (Rh positivo)"),
     ("o-", "O- (Rh negativo)"),
 )
+TIPO_CONTRATOS = (
+    ("Fi", "Fijo"),
+    ("Te", "Temporal"),
+    ("I", "Indefinido"),
+    ("HP", "Por Horas"),
+    ("P", "Practicante"),
+    ("pro", "Por Proyecto"),
+    ("Tar", "Por Tarea"),
+    ("In", "Interno"),
+    ("E", "Externo"),
+    ("O", "Otro"),
+)

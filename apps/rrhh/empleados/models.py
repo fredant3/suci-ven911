@@ -6,6 +6,7 @@ from helpers.models import (
     SEXO_CHOICES,
     NACIONALIDAD_CHOICES,
     TIPO_SANGRE_CHOICES,
+    TIPO_CONTRATOS,
 )
 
 ESTATUS_CHOICES = (
@@ -32,7 +33,7 @@ class Empleado(BaseModel):
     direccion = models.CharField(max_length=180)
     estudia = models.BooleanField(default=False)
     discapacitado = models.BooleanField(default=False)
-    contratos = models.IntegerField()
+    contratos = models.CharField(max_length=3, choices=TIPO_CONTRATOS)
 
     def toJSON(self):
         return model_to_dict(self)
