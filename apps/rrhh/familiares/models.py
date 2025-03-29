@@ -3,6 +3,11 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
 from helpers.models import ESTADO_CIVIL_CHOICES, SEXO_CHOICES
 from rrhh.empleados.models import Empleado
+from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 PARENTEZCO = (
     ("hermano", "Hermana|Hermano"),
@@ -19,19 +24,51 @@ TIPO_HIJO = (
 
 
 class Familiar(BaseModel):
-    parentezco = models.CharField(max_length=7, choices=PARENTEZCO)
+    parentezco = models.CharField("Parentezco", max_length=7, choices=PARENTEZCO)
     tipo_hijo = models.CharField(
-        max_length=11, choices=TIPO_HIJO, null=True, blank=True
+        "Tipo de hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
-    discapacidad = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
-    nombres = models.CharField(max_length=90)
-    apellidos = models.CharField(max_length=90)
-    cedula = models.IntegerField(null=True, blank=True)
-    fecha_nacimiento = models.DateField()
-    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
-    estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
-    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    observacion = models.CharField(max_length=150, blank=True, null=True)
+    discapacidad = models.CharField(
+        "Discapacidad", max_length=8, choices=YES_NO_CHOICES, default="no"
+    )
+    nombres = models.CharField(
+        "Nombres del Familiar",
+        max_length=90,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(90),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    apellidos = models.CharField(
+        "Apellidos del Familiar",
+        max_length=90,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(90),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    cedula = models.IntegerField("Cedula de identidad", null=True, blank=True)
+    fecha_nacimiento = models.DateField("Fecha de nacimiento")
+    sexo = models.CharField("Genero", max_length=1, choices=SEXO_CHOICES)
+    estado_civil = models.CharField(
+        "Estado civil", max_length=1, choices=ESTADO_CIVIL_CHOICES
+    )
+    empleado = models.ForeignKey(
+        Empleado, on_delete=models.CASCADE, verbose_name="Empleado"
+    )
+    observacion = models.CharField(
+        "Observaciones",
+        max_length=150,
+        blank=True,
+        null=True,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(150),
+            TextValidator(),
+        ],
+    )
 
     def toJSON(self):
         return model_to_dict(self)

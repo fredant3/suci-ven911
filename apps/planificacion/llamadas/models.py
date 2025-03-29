@@ -1,32 +1,41 @@
-from django.db import models
+from django.db.models import CharField
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES, MONTH_CHOICES
+from helpers.validForm import PositiveIntegerValidator
+from django.core.validators import MinValueValidator
 
 
 class Llamada(BaseModel):
-    mes = models.CharField(max_length=64, verbose_name="Mes:", default="")
-    estado = models.CharField(
-        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
+    mes = CharField("Mes:", max_length=3, choices=MONTH_CHOICES)
+    estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
+    informativa = CharField(
+        "Llamadas informativas",
+        max_length=64,
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    informativa = models.CharField(
-        max_length=64, verbose_name="Informativa:", default=""
+    falsa = CharField(
+        "Llamadas falsas",
+        max_length=64,
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    falsa = models.CharField(max_length=64, verbose_name="Falsa:", default="")
-    realesno = models.CharField(
-        max_length=64, verbose_name="Reales no Efectivas:", default=""
+    realesno = CharField(
+        "Llamadas reales no atendidas",
+        max_length=64,
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    realesf = models.CharField(
-        max_length=64, verbose_name="Reales Efectivas:", default=""
+    realesf = CharField(
+        "Llamadas reales finalizadas",
+        max_length=64,
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    videop = models.CharField(
-        max_length=64, verbose_name="Video Protección:", default=""
+    videop = CharField(
+        "Videollamadas protección",
+        max_length=64,
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
 
     def toJSON(self):
         return model_to_dict(self)
-
-    def __str__(self):
-        return self.ente
 
     class Meta:
         verbose_name = "llamada"

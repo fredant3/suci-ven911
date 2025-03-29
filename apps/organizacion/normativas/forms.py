@@ -1,9 +1,6 @@
 from django import forms
 from organizacion.normativas.models import Normativa
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_nombre,
-)
 
 
 class NormativaForm(FormBase):
@@ -59,11 +56,3 @@ class NormativaForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-
-    def clean_name(self):
-        name = self.cleaned_data.get("name")
-        validate_nombre(
-            name,
-            "El nombre de la normativa solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return name

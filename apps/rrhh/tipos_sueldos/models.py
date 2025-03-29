@@ -1,6 +1,11 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 TIPO_CHOICES = (
     ("ticket", "Cesta Ticket"),
@@ -25,10 +30,16 @@ ESTATUS_CHOICES = (
 
 
 class TipoSueldo(BaseModel):
-    tipo = models.CharField(max_length=21, choices=TIPO_CHOICES)
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
-    descripcion = models.CharField(max_length=50, blank=True, null=True)
-    estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
+    tipo = models.CharField("Tipo de Sueldo", max_length=21, choices=TIPO_CHOICES)
+    monto = models.DecimalField("Monto Asignado", max_digits=10, decimal_places=2)
+    descripcion = models.CharField(
+        "Descripción Detallada",
+        max_length=50,
+        blank=True,
+        null=True,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    estatus = models.CharField("Estado Actual", max_length=3, choices=ESTATUS_CHOICES)
 
     def toJSON(self):
         return model_to_dict(self)
