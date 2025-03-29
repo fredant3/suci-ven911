@@ -81,15 +81,7 @@ class Empleado(BaseModel):
     )
     estudia = BooleanField(default=False)
     discapacitado = BooleanField(default=False)
-    contratos = IntegerField(
-        "Cantidad de contratos",
-        validators=[
-            MinValueValidator(1),
-            MinLengthValidator(1),
-            MaxLengthValidator(180),
-            PositiveIntegerValidator(),
-        ],
-    )
+    contratos = CharField(max_length=3, choices=TIPO_CONTRATOS)
 
     def toJSON(self):
         return model_to_dict(self)
