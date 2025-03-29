@@ -65,7 +65,7 @@ class InfogeneralWizardView(SessionWizardView):
         return TemplateLayout.init(self, context)
 
     def done(self, form_list, **kwargs):
-        print (form_list)
+        print(form_list)
         return HttpResponse()
 
     # def __init__(self):
