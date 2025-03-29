@@ -40,19 +40,19 @@ class IncidenciaForm(FormBase):
                     "placeholder": "Seleccione el estado",
                 }
             ),
-            "sede": forms.TextInput(
+            "sede": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el nombre de la sede",
                 }
             ),
-            "departamento": forms.TextInput(
+            "departamento": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el departamento",
                 }
             ),
-            "tipo_incidencia": forms.TextInput(
+            "tipo_incidencia": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el tipo de incidencia",
@@ -64,7 +64,7 @@ class IncidenciaForm(FormBase):
                     "placeholder": "Ingrese las observaciones",
                 }
             ),
-            "tipo_solicitud": forms.TextInput(
+            "tipo_solicitud": forms.Select(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el tipo de solicitud",
@@ -72,48 +72,9 @@ class IncidenciaForm(FormBase):
             ),
         }
 
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        validate_basic_text(
-            estado,
-            "El estado solo puede contener letras, números, espacios y los caracteres .,-.",
-        )
-        return estado
-
-    def clean_sede(self):
-        sede = self.cleaned_data.get("sede")
-        validate_sede(
-            sede, "El nombre de sede solo puede contener letras, números y espacios."
-        )
-        return sede
-
-    def clean_departamento(self):
-        departamento = self.cleaned_data.get("departamento")
-        validate_sede(
-            departamento,
-            "El departamento solo puede contener letras, números y espacios.",
-        )
-        return departamento
-
-    def clean_tipo_incidencia(self):
-        tipo = self.cleaned_data.get("tipo_incidencia")
-        validate_basic_text(
-            tipo,
-            "El tipo de incidencia solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return tipo
-
     def clean_observaciones(self):
         obs = self.cleaned_data.get("observaciones")
         validate_basic_text(
             obs, "Use solo letras, números, espacios y los caracteres .,-!?()."
         )
         return obs
-
-    def clean_tipo_solicitud(self):
-        solicitud = self.cleaned_data.get("tipo_solicitud")
-        validate_general_text(
-            solicitud,
-            "El tipo de solicitud solo puede contener letras, números, espacios y los caracteres .,-!?().",
-        )
-        return solicitud
