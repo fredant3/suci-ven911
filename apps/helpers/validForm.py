@@ -38,7 +38,7 @@ class PositiveIntegerValidator:
     messages = {
         "invalid": "Introduzca un número entero positivo",
         "not_integer": "Asegúrese de que este valor sea un entero (%(type)s recibido).",
-        "not_positive": "Asegúrese de que este valor sea mayor que 0 (%(valor)s recibidos)",
+        "not_positive": "Asegúrese de que este valor sea mayor que 0 (%(value)s recibidos)",
     }
 
     def __init__(self, message=None):
