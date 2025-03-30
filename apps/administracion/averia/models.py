@@ -1,7 +1,7 @@
 from administracion.departamentos.models import Departamento
 from django.db.models import CASCADE, CharField, ForeignKey, TextField
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from helpers.validForm import TextValidator
 from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
@@ -9,15 +9,18 @@ from django.core.validators import (
 
 
 class TipoAveria(BaseModel):
-    nombre = CharField(max_length=255)
+    nombre = CharField(
+        max_length=200,
+        validators=[MinLengthValidator(3), MaxLengthValidator(200), TextValidator()],
+    )
 
     class Meta:
         permissions = [
-            ("listar_tipo_averia", "Puede listar tipos de averias"),
-            ("agregar_tipo_averia", "Puede agregar tipo de averia"),
-            ("ver_tipo_averia", "Puede ver tipo de averia"),
-            ("editar_tipo_averia", "Puede actualizar tipo de averia"),
-            ("eliminar_tipo_averia", "Puede eliminar tipo de averia"),
+            ("listar_tipo_averia", "Puede listar tipos de averías"),
+            ("agregar_tipo_averia", "Puede agregar tipo de avería"),
+            ("ver_tipo_averia", "Puede ver tipo de avería"),
+            ("editar_tipo_averia", "Puede editar tipo de avería"),
+            ("eliminar_tipo_averia", "Puede eliminar tipo de avería"),
         ]
 
     def __str__(self):
@@ -58,11 +61,11 @@ class Averia(BaseModel):
 
     class Meta:
         permissions = [
-            ("listar_averia", "Puede listar averias"),
-            ("agregar_averia", "Puede agregar averia"),
-            ("ver_averia", "Puede ver averia"),
-            ("editar_averia", "Puede actualizar averia"),
-            ("eliminar_averia", "Puede eliminar averia"),
+            ("listar_averia", "Puede listar averías"),
+            ("agregar_averia", "Puede agregar avería"),
+            ("ver_averia", "Puede ver avería"),
+            ("editar_averia", "Puede editar avería"),
+            ("eliminar_averia", "Puede eliminar avería"),
         ]
 
     def __str__(self):
