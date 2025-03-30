@@ -11,6 +11,7 @@ class CompraForm(FormBase):
             "n_orden": NumberInput(
                 attrs={
                     "placeholder": "Ingrese el número de orden",
+                    "min": 1,
                 }
             ),
             "valor_bs": TextInput(
