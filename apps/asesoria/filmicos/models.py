@@ -1,9 +1,8 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import PositiveIntegerValidator, TextValidator
+from helpers.validForm import TextValidator
 from django.core.validators import (
-    MinValueValidator,
     MinLengthValidator,
     MaxLengthValidator,
 )
@@ -18,16 +17,19 @@ ESTATUS_CHOICES = (
 class RegistroFilmico(BaseModel):
     estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
     camara = models.CharField(
+        "Cámara",
         max_length=50,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(50), TextValidator()],
+        validators=[MinLengthValidator(5), MaxLengthValidator(50), TextValidator()],
     )
     motivo_solicitud = models.TextField(
+        "Motivo de Solicitud",
         max_length=400,
-        validators=[MinLengthValidator(9), MaxLengthValidator(400), TextValidator()],
+        validators=[MinLengthValidator(5), MaxLengthValidator(400), TextValidator()],
     )
     ente_solicita = models.CharField(
+        "Ente que Solicita",
         max_length=50,
         blank=True,
         null=True,
