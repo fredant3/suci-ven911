@@ -23,9 +23,15 @@ class AsignacionForm(FormBase):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "cantidad": NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "descripcion": TextInput(attrs={"placeholder": "Ingrese una descripción"}),
-            "observaciones": TextInput(attrs={"placeholder": "Ingrese observaciones"}),
+            "cantidad": NumberInput(
+                attrs={"placeholder": "Ingrese la cantidad (número entero positivo)"}
+            ),
+            "descripcion": TextInput(
+                attrs={"placeholder": "Ingrese una descripción (mínimo 10 caracteres)"}
+            ),
+            "observaciones": TextInput(
+                attrs={"placeholder": "Ingrese observaciones (mínimo 10 caracteres)"}
+            ),
         }
 
 
@@ -41,7 +47,7 @@ class AsignacionUpdateForm(FormBase):
             "observaciones",
         ]
         labels = {
-            "articulo": "Artículo (Solo lectura)",
+            "articulo": "Artículo (solo lectura)",
             "sede": "Sede",
             "departamento": "Departamento",
             "cantidad": "Cantidad",
@@ -49,7 +55,13 @@ class AsignacionUpdateForm(FormBase):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "cantidad": NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "descripcion": TextInput(attrs={"placeholder": "Ingrese una descripción"}),
-            "observaciones": TextInput(attrs={"placeholder": "Ingrese observaciones"}),
+            "cantidad": NumberInput(
+                attrs={"placeholder": "Ingrese la cantidad (número entero positivo)"}
+            ),
+            "descripcion": TextInput(
+                attrs={"placeholder": "Ingrese una descripción (mínimo 10 caracteres)"}
+            ),
+            "observaciones": TextInput(
+                attrs={"placeholder": "Ingrese observaciones (mínimo 10 caracteres)"}
+            ),
         }

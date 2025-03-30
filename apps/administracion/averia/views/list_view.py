@@ -19,11 +19,11 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Averia"
-        context["createBtn"] = "Añadir"
+        context["module"] = "Administración"
+        context["submodule"] = "Averías"
+        context["createBtn"] = "Nueva avería"
         context["createUrl"] = reverse_lazy("averias:create")
         context["listApiUrl"] = reverse_lazy("api_averias:list")
         context["updateUrl"] = reverse_lazy("averias:update", args=[0])
@@ -37,7 +37,7 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "#",
+                "title": "ID",
                 "orderable": "true",
                 "searchable": "false",
             },
@@ -72,7 +72,7 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "serial",
                 "name": "serial",
-                "title": "Serial",
+                "title": "Número de serie",
                 "orderable": "false",
                 "searchable": "false",
             },

@@ -24,7 +24,7 @@ class Asignacion(BaseModel):
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     cantidad = models.IntegerField(
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
-        help_text="La cantidad debe ser un número entero positivo.",
+        help_text="La cantidad debe ser un número entero mayor o igual a 1.",
     )
     descripcion = models.TextField(
         max_length=255,

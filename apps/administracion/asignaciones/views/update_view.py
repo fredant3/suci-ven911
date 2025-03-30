@@ -17,11 +17,11 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Asignacion"
-        context["titleForm"] = "Actualizar"
+        context["module"] = "Administración"
+        context["submodule"] = "Asignaciones"
+        context["titleForm"] = "Actualizar asignación"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlForm"] = reverse_lazy(

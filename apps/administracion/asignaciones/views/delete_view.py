@@ -16,11 +16,11 @@ class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administrasion"
-        context["submodule"] = "Asignación"
-        context["titleForm"] = "Eliminar Asignación"
+        context["module"] = "Administración"
+        context["submodule"] = "Asignaciones"
+        context["titleForm"] = "Eliminar asignación"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlDelete"] = reverse_lazy(

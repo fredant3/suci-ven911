@@ -16,11 +16,11 @@ class CompraDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Administrasion"
-        context["submodule"] = "compra"
-        context["titleForm"] = "Eliminar Compra"
+        context["titlePage"] = "Administración"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administración"
+        context["submodule"] = "Compras"
+        context["titleForm"] = "Confirmar eliminación"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("compras:list")
         context["urlDelete"] = reverse_lazy(

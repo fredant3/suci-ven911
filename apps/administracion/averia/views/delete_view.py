@@ -16,11 +16,11 @@ class AveriaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administrasion"
-        context["submodule"] = "Averia"
-        context["titleForm"] = "Eliminar Averia"
+        context["module"] = "Administración"
+        context["submodule"] = "Averías"
+        context["titleForm"] = "Confirmar eliminación"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("averias:list")
         context["urlDelete"] = reverse_lazy(
