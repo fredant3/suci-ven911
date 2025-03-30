@@ -31,12 +31,12 @@ class Averia(BaseModel):
     departamento = ForeignKey(
         Departamento, on_delete=CASCADE, verbose_name="Departamento"
     )
-    problema = TextField(
+    problema = CharField(
         "Problema",
         max_length=255,
         validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
     )
-    ubicacion = TextField(
+    ubicacion = CharField(
         "Ubicación",
         max_length=255,
         validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
@@ -53,7 +53,7 @@ class Averia(BaseModel):
     codigo_bn = CharField(
         "Código BN",
         max_length=255,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(5), MaxLengthValidator(255), TextValidator()],
     )
 
     class Meta:

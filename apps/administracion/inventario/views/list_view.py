@@ -22,7 +22,7 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Administracion"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administracion"
-        context["submodule"] = "Artiulo"
+        context["submodule"] = "Articulos"
         context["createUrl"] = reverse_lazy("articulos:create", args=[0])
         context["listApiUrl"] = reverse_lazy("api_articulos:list")
         context["updateUrl"] = reverse_lazy("articulos:update", args=[0])

@@ -15,14 +15,30 @@ class AveriaForm(FormBase):
             "codigo_bn",
         ]
         widgets = {
-            "problema": forms.TextInput(attrs={"placeholder": "Ingrese el problema"}),
+            "problema": forms.Textarea(
+                attrs={
+                    "placeholder": "Ingrese el problema (mínimo 9 caracteres)",
+                }
+            ),
             "tipo_averia": forms.Select(
                 attrs={"placeholder": "Seleccione el tipo de avería"}
             ),
             "departamento": forms.Select(
                 attrs={"placeholder": "Seleccione el departamento"}
             ),
-            "ubicacion": forms.TextInput(attrs={"placeholder": "Ingrese la ubicación"}),
-            "serial": forms.TextInput(attrs={"placeholder": "Ingrese el serial"}),
-            "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
+            "ubicacion": forms.TextInput(
+                attrs={
+                    "placeholder": "Ingrese la ubicación (mínimo 9 caracteres)",
+                }
+            ),
+            "serial": forms.TextInput(
+                attrs={
+                    "placeholder": "Ingrese el serial (mínimo 6 caracteres)",
+                }
+            ),
+            "codigo_bn": forms.TextInput(
+                attrs={
+                    "placeholder": "Ingrese el código BN (mínimo 9 caracteres)",
+                }
+            ),
         }
