@@ -17,12 +17,12 @@ class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Administracion"
-        context["submodule"] = "compra"
-        context["titleForm"] = "Actualizar"
-        context["tag"] = "Editar"
+        context["titlePage"] = "Administración"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administración"
+        context["submodule"] = "Compras"
+        context["titleForm"] = "Editar compra"
+        context["tag"] = "Guardar cambios"
         context["listUrl"] = reverse_lazy("compras:list")
         context["urlForm"] = reverse_lazy(
             "api_compras:update", args=[self.kwargs.get("pk")]

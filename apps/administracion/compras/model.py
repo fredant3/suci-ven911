@@ -24,8 +24,8 @@ class Compra(BaseModel):
     class Meta:
         permissions = [
             ("listar_compra", "Puede listar compras"),
-            ("agregar_compra", "Puede agregar compra"),
-            ("ver_compra", "Puede ver compra"),
-            ("editar_compra", "Puede actualizar compra"),
-            ("eliminar_compra", "Puede eliminar compra"),
+            ("agregar_compra", "Puede registrar compras"),
+            ("ver_compra", "Puede ver detalles de compras"),
+            ("editar_compra", "Puede editar compras"),
+            ("eliminar_compra", "Puede eliminar compras"),
         ]

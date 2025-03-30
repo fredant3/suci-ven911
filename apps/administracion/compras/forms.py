@@ -8,7 +8,11 @@ class CompraForm(FormBase):
         model = Compra
         fields = ["articulo", "n_orden", "valor_bs"]
         widgets = {
-            "n_orden": NumberInput(attrs={"placeholder": "Ingrese el número de orden"}),
+            "n_orden": NumberInput(
+                attrs={
+                    "placeholder": "Ingrese el número de orden",
+                }
+            ),
             "valor_bs": TextInput(
                 attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),

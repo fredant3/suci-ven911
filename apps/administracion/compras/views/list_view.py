@@ -19,11 +19,11 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Compra"
-        context["createBtn"] = "Añadir"
+        context["module"] = "Administración"
+        context["submodule"] = "Compras"
+        context["createBtn"] = "Nueva compra"
         context["createUrl"] = reverse_lazy("compras:create")
         context["listApiUrl"] = reverse_lazy("api_compras:list")
         context["updateUrl"] = reverse_lazy("compras:update", args=[0])
@@ -37,28 +37,28 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "#",
+                "title": "ID",
                 "orderable": "true",
                 "searchable": "false",
             },
             {
                 "data": "articulo__descripcion",
                 "name": "articulo__descripcion",
-                "title": "Articulo",
+                "title": "Artículo",
                 "orderable": "true",
                 "searchable": "true",
             },
             {
                 "data": "n_orden",
                 "name": "n_orden",
-                "title": "Num Orden",
+                "title": "N° de orden",
                 "orderable": "true",
                 "searchable": "false",
             },
             {
                 "data": "valor_bs",
                 "name": "valor_bs",
-                "title": "Valor",
+                "title": "Valor (Bs.)",
                 "orderable": "false",
                 "searchable": "false",
             },
