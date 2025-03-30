@@ -6,10 +6,12 @@ from django import forms
 
 class ArticuloForm(FormBase):
     fecha_adq = FormBase.create_date_field("fecha_adq")
+    tipo_articulo_id = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Articulo
         fields = [
+            "tipo_articulo_id",
             "descripcion",
             "marca",
             "modelo",
@@ -40,13 +42,13 @@ class ArticuloForm(FormBase):
             ),
         }
 
-    def clean_cantidad_combustible(self):
-        cantidad_combustible = self.cleaned_data.get("cantidad_combustible")
-        validate_decimal_number(
-            cantidad_combustible,
-            "La cantidad de combustible debe ser un número positivo.",
-        )
-        return cantidad_combustible
+    # def clean_cantidad_combustible(self):
+    #     cantidad_combustible = self.cleaned_data.get("cantidad_combustible")
+    #     validate_decimal_number(
+    #         cantidad_combustible,
+    #         "La cantidad de combustible debe ser un número positivo.",
+    #     )
+    #     return cantidad_combustible
 
 
 class TecnologiaForm(FormBase):

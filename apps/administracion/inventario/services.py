@@ -30,7 +30,6 @@ class ArticuloService(CrudService):
 
     def relationship(self, payload, *arg, **kwargs):
         payload["tipo_articulo_id"] = self.search_type_article(kwargs.get("type"))
-
         return payload
 
     def criteria(self, search, arg=None):

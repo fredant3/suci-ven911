@@ -42,6 +42,7 @@ class ArtiluloCreateApiView(CreateController, CheckPermisosMixin):
     def __init__(self):
         self.service = ArticuloService()
 
-    def get_form_class(self):
-        self.form_class = define_type_form(self.kwargs)
-        return self.form_class
+    def get_initial(self):
+        initial = super().get_initial()
+        initial["tipo_articulo_id"] = define_type_form(self.kwargs)
+        return initial

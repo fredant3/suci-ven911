@@ -78,6 +78,7 @@ class Repository:
         # entity = self.entity(**data)
         # entity.save()
         # return entity
+
         # 1. Filtrar campos ManyToMany y campos no existentes en el modelo
         m2m_data = {}
         valid_fields = [
