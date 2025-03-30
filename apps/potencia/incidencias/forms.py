@@ -1,12 +1,6 @@
 from potencia.incidencias.models import Incidencia
 from helpers.FormBase import FormBase
 from django import forms
-from helpers.validForm import (
-    validate_basic_text,
-    validate_sede,
-    validate_basic_text,
-    validate_general_text,
-)
 
 
 class IncidenciaForm(FormBase):
@@ -29,10 +23,6 @@ class IncidenciaForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-        labels = {
-            "tipo_incidencia": "Tipo de incidencia",
-            "tipo_solicitud": "Tipo de solicitud",
-        }
         widgets = {
             "estado": forms.Select(
                 attrs={
@@ -71,10 +61,3 @@ class IncidenciaForm(FormBase):
                 }
             ),
         }
-
-    def clean_observaciones(self):
-        obs = self.cleaned_data.get("observaciones")
-        validate_basic_text(
-            obs, "Use solo letras, números, espacios y los caracteres .,-!?()."
-        )
-        return obs

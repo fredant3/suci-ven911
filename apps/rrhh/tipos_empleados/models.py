@@ -1,6 +1,11 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 ESTATUS_CHOICES = (
     ("act", "Activo"),
@@ -11,8 +16,12 @@ ESTATUS_CHOICES = (
 
 
 class TipoEmpleado(BaseModel):
-    tipo_personal = models.CharField(max_length=60)
-    estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
+    tipo_personal = models.CharField(
+        "Tipo de personal",
+        max_length=60,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    estatus = models.CharField("Estatus", max_length=3, choices=ESTATUS_CHOICES)
 
     def toJSON(self):
         return model_to_dict(self)

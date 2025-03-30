@@ -1,4 +1,10 @@
-from django.db import models
+from django.db.models import (
+    DateField,
+    EmailField,
+    CharField,
+    BooleanField,
+    IntegerField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.models import (
@@ -6,6 +12,17 @@ from helpers.models import (
     SEXO_CHOICES,
     NACIONALIDAD_CHOICES,
     TIPO_SANGRE_CHOICES,
+    TIPO_CONTRATOS,
+)
+from helpers.validForm import (
+    CedulaVenezolanaValidator,
+    TextValidator,
+    UnicodeAlphaSpaceValidator,
+    PhoneNumberValidator,
+)
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
 )
 
 ESTATUS_CHOICES = (
@@ -18,21 +35,61 @@ ESTATUS_CHOICES = (
 
 
 class Empleado(BaseModel):
-    estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
-    nombres = models.CharField(max_length=90)
-    apellidos = models.CharField(max_length=90)
-    nacionalidad = models.CharField(max_length=2, choices=NACIONALIDAD_CHOICES)
-    cedula = models.CharField(max_length=15, unique=True)
-    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
-    fecha_nacimiento = models.DateField()
-    estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
-    tipo_sangre = models.CharField(max_length=3, choices=TIPO_SANGRE_CHOICES)
-    email = models.EmailField(blank=True, null=True)
-    telefono = models.CharField(max_length=12)
-    direccion = models.CharField(max_length=180)
-    estudia = models.BooleanField(default=False)
-    discapacitado = models.BooleanField(default=False)
-    contratos = models.IntegerField()
+    estatus = CharField(max_length=3, choices=ESTATUS_CHOICES)
+    nombres = CharField(
+        "Nombres del empleado",
+        max_length=90,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(90),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    apellidos = CharField(
+        "Apellidos del empleado",
+        max_length=90,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(90),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    nacionalidad = CharField("Nacionalidad", max_length=2, choices=NACIONALIDAD_CHOICES)
+    cedula = CharField(
+        "Cédula de identidad",
+        max_length=15,
+        unique=True,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
+    )
+    sexo = CharField("Genero", max_length=1, choices=SEXO_CHOICES)
+    fecha_nacimiento = DateField("Fecha de nacimiento")
+    estado_civil = CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
+    tipo_sangre = CharField(max_length=3, choices=TIPO_SANGRE_CHOICES)
+    email = EmailField(blank=True, null=True)
+    telefono = CharField(
+        "Telefono del empleado",
+        max_length=20,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
+    )
+    direccion = CharField(
+        max_length=180,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(180),
+            TextValidator(),
+        ],
+    )
+    estudia = BooleanField(default=False)
+    discapacitado = BooleanField(default=False)
+    contratos = CharField(max_length=3, choices=TIPO_CONTRATOS)
 
     def toJSON(self):
         return model_to_dict(self)

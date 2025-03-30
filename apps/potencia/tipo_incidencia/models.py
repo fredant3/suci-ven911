@@ -1,9 +1,18 @@
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class TipoIncidencia(BaseModel):
-    tipo = models.CharField(max_length=120)
+    tipo = models.CharField(
+        "Tipo de Incidencia",
+        max_length=120,
+        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+    )
 
     class Meta:
         permissions = [

@@ -1,5 +1,10 @@
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import UnicodeAlphaSpaceValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Departamento(BaseModel):

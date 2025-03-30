@@ -1,12 +1,5 @@
-from django import forms
-from .models import Contrato
+from rrhh.contratos.models import Contrato
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_sede,
-    validate_basic_text,
-    validate_nombres_apellidos,
-    validate_general_text,
-)
 
 
 class ContratoForm(FormBase):
@@ -53,49 +46,6 @@ class ContratoForm(FormBase):
             "empleado": "Nombre del empleado",
         }
         widgets = {}
-
-    # Validaciones de texto
-    def clean_departamento(self):
-        data = self.cleaned_data.get("departamento")
-        validate_sede(
-            data, "El departamento solo puede contener letras, números y espacios"
-        )
-        return data
-
-    def clean_sede(self):
-        data = self.cleaned_data.get("sede")
-        validate_sede(data, "La sede solo puede contener letras, números y espacios")
-        return data
-
-    def clean_cargo(self):
-        data = self.cleaned_data.get("cargo")
-        validate_general_text(
-            data, "El cargo solo permite letras, números y caracteres .,-!?()"
-        )
-        return data
-
-    def clean_tipo(self):
-        data = self.cleaned_data.get("tipo")
-        validate_basic_text(
-            data,
-            "El tipo de contrato solo permite letras, números y caracteres básicos",
-        )
-        return data
-
-    def clean_tipo_personal(self):
-        data = self.cleaned_data.get("tipo_personal")
-        validate_basic_text(
-            data,
-            "El tipo de personal solo permite letras, números y caracteres básicos",
-        )
-        return data
-
-    def clean_empleado(self):
-        data = self.cleaned_data.get("empleado")
-        validate_nombres_apellidos(
-            data, "El nombre debe contener solo letras y espacios"
-        )
-        return data
 
     # Validaciones booleanas optimizadas
     def clean_comision_servicio(self):

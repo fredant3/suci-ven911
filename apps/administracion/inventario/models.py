@@ -1,13 +1,13 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
-from helpers.validators import (
+from helpers.validForm import PositiveIntegerValidator, TextValidator
+from django.core.validators import (
+    MinValueValidator,
     MinLengthValidator,
     MaxLengthValidator,
-    TextValidator,
-    MinValueValidator,
-    PositiveIntegerValidator,
 )
+
 
 tipo_considcion = (("N", "Nuevo"), ("U", "Usado"), ("D", "Deteriorado"))
 
@@ -94,8 +94,8 @@ class Articulo(BaseModel):
         help_text="La cantidad debe ser un número entero positivo.",
     )
     tipo_articulo = models.ForeignKey(TipoArticulo, on_delete=models.CASCADE)
-    condicion = models.CharField(max_length=1, choices=tipo_considcion)
-    fecha_adq = models.DateField()
+    condicion = models.CharField("Condición", max_length=1, choices=tipo_considcion)
+    fecha_adq = models.DateField("Fecha de adquisición")
     asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
 
     def __str__(self):

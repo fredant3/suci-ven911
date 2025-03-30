@@ -1,22 +1,61 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Gestion(BaseModel):
-    name = models.CharField(max_length=64, verbose_name="Nombre:", default="")
-    apellido = models.CharField(max_length=64, verbose_name="Apellido:", default="")
-    cedula = models.CharField(max_length=64, verbose_name="Cédula:", default="")
+    name = models.CharField(
+        "Nombre",
+        max_length=64,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    apellido = models.CharField(
+        "Apellido",
+        max_length=64,
+        validators=[
+            MinLengthValidator(9),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    cedula = models.CharField(
+        "Cédula",
+        max_length=64,
+    )
     tipo = models.CharField(
-        max_length=64, verbose_name="Tipo de Incidente:", default=""
+        "Tipo de Gestión",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
     )
     descripcion = models.CharField(
-        max_length=64, verbose_name="Descripción:", default=""
+        "Descripción",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
     )
-    fecha = models.DateField(verbose_name="Fecha")
-    direccion = models.CharField(max_length=64, verbose_name="Dirección:", default="")
-    cargo = models.CharField(max_length=64, verbose_name="Cargo:", default="")
-    hora = models.CharField(max_length=64, verbose_name="Hora de Entrada:", default="")
+    fecha = models.DateField("Fecha")
+    direccion = models.CharField(
+        "Dirección",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    cargo = models.CharField(
+        "Cargo",
+        max_length=64,
+        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+    )
+    hora = models.CharField(
+        "Hora de Entrada",
+        max_length=64,
+    )
 
     def toJSON(self):
         return model_to_dict(self)

@@ -2,14 +2,7 @@ from helpers.FormBase import FormBase
 from seguridad.vehiculos.models import Vehiculo
 from django import forms
 from django.utils import timezone
-from helpers.validForm import (
-    validate_nombres_apellidos,
-    validate_cedula,
-    validate_general_text,
-    validate_basic_text,
-    validate_decimal_number,
-    validate_placa,
-)
+from helpers.validForm import validate_cedula, validate_decimal_number
 from datetime import datetime
 
 
@@ -87,38 +80,9 @@ class VehiculoForm(FormBase):
             ),
         }
 
-    def clean_nombre(self):
-        data = self.cleaned_data.get("nombre")
-        validate_nombres_apellidos(
-            data, "El nombre solo puede contener letras y espacios"
-        )
-        return data
-
-    def clean_apellido(self):
-        data = self.cleaned_data.get("apellido")
-        validate_nombres_apellidos(
-            data, "Los apellidos solo pueden contener letras y espacios"
-        )
-        return data
-
     def clean_cedula(self):
         data = self.cleaned_data.get("cedula")
         validate_cedula(data, "Formato de cédula inválido. Use: V-12345678")
-        return data
-
-    def clean_modelo(self):
-        data = self.cleaned_data.get("modelo")
-        validate_general_text(data, "El modelo contiene caracteres no permitidos")
-        return data
-
-    def clean_vehiculo(self):
-        data = self.cleaned_data.get("vehiculo")
-        validate_general_text(data, "Seleccione un tipo de vehículo válido")
-        return data
-
-    def clean_motivo(self):
-        data = self.cleaned_data.get("motivo")
-        validate_basic_text(data, "El motivo contiene caracteres no permitidos")
         return data
 
     def clean_cantigasolina(self):
@@ -126,11 +90,6 @@ class VehiculoForm(FormBase):
         validate_decimal_number(
             str(data), "La cantidad de gasolina debe ser un número positivo (ej: 15.5)"
         )
-        return data
-
-    def clean_placa(self):
-        data = self.cleaned_data.get("placa")
-        validate_placa(data, "Formato de placa inválido. Use: ABC123")
         return data
 
     def clean_fecha(self):

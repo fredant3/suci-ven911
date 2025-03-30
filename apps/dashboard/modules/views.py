@@ -72,8 +72,8 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/tecnologia.png",
             },
             {
-                "title": "Permisos y Usuarios (Pendiente)",
-                "url": "asesoria",
+                "title": "Permisos y Usuarios",
+                "url": "user:list",
                 "image": "img/modules/admin.png",
             },
         ]

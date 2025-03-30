@@ -1,14 +1,7 @@
 from django import forms
 from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_nombres_apellidos,
-    validate_cedula,
-    validate_telefono,
-    validate_email,
-    validate_direccion,
-    validate_basic_text,
-)
+from helpers.validForm import validate_email
 from datetime import date
 
 
@@ -18,15 +11,17 @@ class EmpleadoForm(FormBase):
         title="Fecha de nacimiento",
     )
     estudia = forms.BooleanField(
+        initial=False,
         required=False,
         widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch"}
+            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
         ),
     )
     discapacitado = forms.BooleanField(
+        initial=False,
         required=False,
         widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch"}
+            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
         ),
     )
 
@@ -113,46 +108,17 @@ class EmpleadoForm(FormBase):
                     "placeholder": "Seleccione estatus laboral",
                 }
             ),
-            "contratos": forms.SelectMultiple(
+            "contratos": forms.Select(
                 attrs={
-                    "class": "form-control select2-multiple",
+                    "class": "form-control",
                     "placeholder": "Seleccione contratos asociados",
                 }
             ),
         }
 
-    def clean_nombres(self):
-        data = self.cleaned_data.get("nombres")
-        validate_nombres_apellidos(
-            data, "Los nombres solo pueden contener letras y espacios"
-        )
-        return data
-
-    def clean_apellidos(self):
-        data = self.cleaned_data.get("apellidos")
-        validate_nombres_apellidos(
-            data, "Los apellidos solo pueden contener letras y espacios"
-        )
-        return data
-
-    def clean_cedula(self):
-        data = self.cleaned_data.get("cedula")
-        validate_cedula(data, "Formato de cédula inválido. Use el formato: V-12345678")
-        return data
-
-    def clean_telefono(self):
-        data = self.cleaned_data.get("telefono")
-        validate_telefono(data, "Formato de teléfono inválido. Use: 0412-1234567")
-        return data
-
     def clean_email(self):
         data = self.cleaned_data.get("email")
         validate_email(data, "Ingrese un correo electrónico válido")
-        return data
-
-    def clean_direccion(self):
-        data = self.cleaned_data.get("direccion")
-        validate_direccion(data, "La dirección contiene caracteres no permitidos")
         return data
 
     def clean_fecha_nacimiento(self):
@@ -160,28 +126,29 @@ class EmpleadoForm(FormBase):
 
         if fecha:
             hoy = date.today()
-            # Calcula si ha cumplido 18 años exactos
-            mayor_edad = hoy.year - fecha.year >= 18
-            cumple_este_año = (hoy.month, hoy.day) >= (fecha.month, fecha.day)
+            # Calcula la edad exacta
+            edad = (
+                hoy.year
+                - fecha.year
+                - ((hoy.month, hoy.day) < (fecha.month, fecha.day))
+            )
 
-            if not (mayor_edad and cumple_este_año):
-                raise forms.ValidationError("Debe ser mayor de edad (18+ años)")
+            if edad < 18:
+                raise forms.ValidationError("Debe ser mayor de edad (18+ años).")
 
         return fecha
 
-    def clean_estatus(self):
-        data = self.cleaned_data.get("estatus")
-        validate_basic_text(data, "Seleccione un estatus válido")
-        return data
+    def clean_discapacitado(self):
+        print(self.cleaned_data.get("discapacitado", False))
+        return self.cleaned_data.get("discapacitado", False)
 
-    # def clean_sexo(self):
-    # data = self.cleaned_data.get("sexo")
-    # if data not in [choice[0] for choice in Empleado.SEXO_CHOICES]:
-    # raise forms.ValidationError("Seleccione un género válido")
-    # return data
+    def clean_estudia(self):
+        print(self.cleaned_data.get("estudia", False))
+        return self.cleaned_data.get("estudia", False)
 
     def clean(self):
         cleaned_data = super().clean()
+
         # Validación adicional si es discapacitado
         if cleaned_data.get("discapacitado") and not cleaned_data.get("tipo_sangre"):
             self.add_error(
