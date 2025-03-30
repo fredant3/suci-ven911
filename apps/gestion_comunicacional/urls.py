@@ -3,7 +3,7 @@ from django.urls import include, path
 from gestion_comunicacional.info.InfoController import InfoController
 
 urlpatterns = [
-    path("", InfoController.as_view(), name="info"),
+    path("", InfoController.as_view(), name="gc_info"),
     path("equipments/", include(("gestion_comunicacional.equipments.urls", "eq"))),
     path("social-media/", include(("gestion_comunicacional.social_media.urls", "sm"))),
     path(
