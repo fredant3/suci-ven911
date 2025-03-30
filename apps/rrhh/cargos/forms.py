@@ -23,7 +23,7 @@ class CargoForm(FormBase):
             "cargo": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Nombre del Cargo"}
             ),
-            "estatus": forms.TextInput(
+            "estatus": forms.Select(
                 attrs={"class": "form-control", "placeholder": "Estado del Cargo"}
             ),
         }
