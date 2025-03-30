@@ -18,17 +18,17 @@ ESTATUS_CHOICES = (
 
 class Denunciante(BaseModel):
     nombres = models.CharField(
-        "Nombrecito del denunciante",
+        "Nombre del denunciante",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos = models.CharField(
         "Apellido del denunciante",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula = models.CharField(
-        "AQUI Cédula del denunciante",
+        "Cédula del denunciante",
         max_length=15,
         validators=[
             MinLengthValidator(7),
