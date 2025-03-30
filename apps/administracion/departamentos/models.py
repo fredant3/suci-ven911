@@ -21,10 +21,10 @@ class Departamento(BaseModel):
     class Meta:
         permissions = [
             ("listar_departamento", "Puede listar departamentos"),
-            ("agregar_departamento", "Puede agregar departamento"),
-            ("ver_departamento", "Puede ver departamento"),
-            ("editar_departamento", "Puede actualizar departamento"),
-            ("eliminar_departamento", "Puede eliminar departamento"),
+            ("agregar_departamento", "Puede agregar departamentos"),
+            ("ver_departamento", "Puede ver detalles de departamentos"),
+            ("editar_departamento", "Puede editar departamentos"),
+            ("eliminar_departamento", "Puede eliminar departamentos"),
         ]
 
     def __str__(self):

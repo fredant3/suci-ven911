@@ -19,11 +19,11 @@ class DepartamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView)
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Departamento"
-        context["createBtn"] = "Añadir"
+        context["module"] = "Administración"
+        context["submodule"] = "Departamentos"
+        context["createBtn"] = "Nuevo departamento"
         context["createUrl"] = reverse_lazy("departamentos:create")
         context["listApiUrl"] = reverse_lazy("api_departamentos:list")
         context["updateUrl"] = reverse_lazy("departamentos:update", args=[0])
@@ -37,14 +37,14 @@ class DepartamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView)
             {
                 "data": "id",
                 "name": "id",
-                "title": "#",
+                "title": "ID",
                 "orderable": "true",
                 "searchable": "false",
             },
             {
                 "data": "nombre",
                 "name": "nombre",
-                "title": "Nombre",
+                "title": "Nombre del departamento",
                 "orderable": "true",
                 "searchable": "true",
             },

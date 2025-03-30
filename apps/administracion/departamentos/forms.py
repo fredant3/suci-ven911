@@ -6,14 +6,14 @@ from django.forms import TextInput
 class DepartamentoForm(FormBase):
     class Meta:
         model = Departamento
-        fields = [
-            "nombre",
-        ]
+        fields = ["nombre"]
         labels = {
-            "nombre": "Nombre",
+            "nombre": "Nombre del departamento",
         }
         widgets = {
             "nombre": TextInput(
-                attrs={"placeholder": "Ingrese el nombre del departamento"}
+                attrs={
+                    "placeholder": "Ingrese el nombre del departamento (3-30 caracteres)",
+                }
             ),
         }
