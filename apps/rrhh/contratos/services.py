@@ -9,6 +9,14 @@ from rrhh.cargos.repositories import CargoRepository
 
 
 class ContratoService(CrudService):
+    select = (
+        "id",
+        "empleado__nombres",
+        "empleado__cedula",
+        "tipo",
+        "cargo__cargo",
+    )
+
     def __init__(self):
         self.repository = ContratoRepository()
         self.departamento_repository = DepartamentoRepository()
