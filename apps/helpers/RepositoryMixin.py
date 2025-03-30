@@ -17,7 +17,8 @@ class Repository:
     def getFilter(self, criteria, select="", orderBy="id", orderAsc="-"):
         orderBy = orderBy if orderBy else "id"
         order = orderBy if orderAsc == "asc" else "-" + orderBy
-        entities = self.entity.objects.filter(criteria).order_by(order).values(*select)
+        entities = self.entity.objects.filter(criteria).order_by(order)
+        # entities = self.entity.objects.filter(criteria).order_by(order).values(*select)
         return self.after_get_all(entities)
 
     def getById(self, id, select=""):
@@ -95,6 +96,10 @@ class Repository:
                     data_filtered[key] = value
 
         # 2. Crear instancia base con campos válidos
+        print("++++++++++++++++++++++++++++++++++++")
+        print(m2m_data)
+        print(data_filtered)
+        print("++++++++++++++++++++++++++++++++++++")
         entity = self.entity.objects.create(**data_filtered)
 
         # 3. Asignar relaciones ManyToMany
