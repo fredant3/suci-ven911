@@ -63,7 +63,7 @@ class DenunciaForm(FormBase):
         label="Dirección del denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciante"}),
         max_length=180,
-        validators=[MinLengthValidator(10), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     nombres_denunciado = CharField(
@@ -116,7 +116,7 @@ class DenunciaForm(FormBase):
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciado"}),
         max_length=180,
         required=False,
-        validators=[MinLengthValidator(10), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     class Meta:
