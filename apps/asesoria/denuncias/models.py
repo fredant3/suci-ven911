@@ -7,6 +7,13 @@ from helpers.validForm import (
     CedulaVenezolanaValidator,
 )
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.db.models import (
+    DateField,
+    EmailField,
+    CharField,
+    BooleanField,
+    IntegerField,
+)
 
 
 ESTATUS_CHOICES = (
@@ -27,9 +34,10 @@ class Denunciante(BaseModel):
         max_length=120,
         validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
     )
-    cedula = models.CharField(
-        "AQUI Cédula del denunciante",
+    cedula = CharField(
+        "Cédula de identidad",
         max_length=15,
+        unique=True,
         validators=[
             MinLengthValidator(7),
             MaxLengthValidator(14),
