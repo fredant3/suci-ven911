@@ -9,7 +9,12 @@ from django.core.validators import (
 )
 
 
-tipo_considcion = (("N", "Nuevo"), ("U", "Usado"), ("D", "Deteriorado"))
+tipo_considcion = (
+    ("N", "Nuevo"),
+    ("U", "Usado"),
+    ("D", "Deteriorado"),
+    ("-", "No Aplica"),
+)
 
 
 class TipoArticulo(BaseModel):
@@ -94,7 +99,9 @@ class Articulo(BaseModel):
         help_text="La cantidad debe ser un número entero positivo.",
     )
     tipo_articulo = models.ForeignKey(TipoArticulo, on_delete=models.CASCADE)
-    condicion = models.CharField("Condición", max_length=1, choices=tipo_considcion)
+    condicion = models.CharField(
+        "Condición", max_length=1, choices=tipo_considcion, default="-"
+    )
     fecha_adq = models.DateField("Fecha de adquisición")
     asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
 
