@@ -6,70 +6,117 @@ from django.forms import (
     DateInput,
     EmailInput,
 )
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_cedula, validate_email, CedulaVenezolanaValidator
+from helpers.validForm import (
+    TextValidator,
+    PhoneNumberValidator,
+    CedulaVenezolanaValidator,
+    validate_email,
+)
 
 
 class DenunciaForm(FormBase):
     nombres_denunciante = CharField(
+        label="Nombre del denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese el nombre del denunciante"}),
+        max_length=120,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos_denunciante = CharField(
+        label="Apellido del denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese el apellido del denunciante"}),
+        max_length=120,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula_denunciante = CharField(
+        label="Cédula del denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese la cédula del denunciante"}),
-        validators=[CedulaVenezolanaValidator()],
+        max_length=15,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
     )
     telefono_denunciante = CharField(
         label="Teléfono del denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese el teléfono del denunciante"}),
+        max_length=20,
+        required=False,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
     )
     email_denunciante = EmailField(
-        max_length=60,
-        required=False,
         label="Correo electrónico del denunciante",
         widget=EmailInput(
             attrs={"placeholder": "Ingrese el correo electrónico del denunciante"}
         ),
+        max_length=60,
+        required=False,
         validators=[validate_email],
     )
     direccion_denunciante = CharField(
         label="Dirección del denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciante"}),
+        max_length=180,
+        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     nombres_denunciado = CharField(
+        label="Nombre del denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese el nombre del denunciado"}),
+        max_length=120,
+        required=False,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos_denunciado = CharField(
+        label="Apellido del denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese el apellido del denunciado"}),
+        max_length=120,
+        required=False,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula_denunciado = CharField(
-        max_length=12,
-        required=False,
         label="Cédula del denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese la cédula del denunciado"}),
-        validators=[validate_cedula],
+        max_length=15,
+        required=False,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
     )
     telefono_denunciado = CharField(
-        required=False,
         label="Teléfono del denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese el teléfono del denunciado"}),
+        max_length=20,
+        required=False,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
     )
     email_denunciado = EmailField(
-        max_length=60,
-        required=False,
         label="Correo electrónico del denunciado",
         widget=EmailInput(
             attrs={"placeholder": "Ingrese el correo electrónico del denunciado"}
         ),
+        max_length=60,
+        required=False,
         validators=[validate_email],
     )
     direccion_denunciado = CharField(
-        required=False,
         label="Dirección del denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciado"}),
+        max_length=180,
+        required=False,
+        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     class Meta:

@@ -53,40 +53,40 @@ class Articulo(BaseModel):
     marca = models.CharField(
         "Marca",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(2), MaxLengthValidator(120), TextValidator()],
         blank=True,
         null=True,
     )
     modelo = models.CharField(
         "Modelo",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(2), MaxLengthValidator(120), TextValidator()],
         blank=True,
         null=True,
     )
     serial = models.CharField(
         "Serial",
-        max_length=255,
+        max_length=30,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(7), MaxLengthValidator(30), TextValidator()],
     )
     placa = models.CharField(
         "Placa",
-        max_length=255,
+        max_length=10,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(7), MaxLengthValidator(10), TextValidator()],
     )
     cantidad_combustible = models.IntegerField(
         "Cantidad de combustible máx. (En litros)", blank=True, null=True
     )
     codigo_bn = models.CharField(
         "Código BN",
-        max_length=255,
+        max_length=30,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(30), TextValidator()],
     )
     cantidad = models.IntegerField(
         "Cantidad",

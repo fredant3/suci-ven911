@@ -18,17 +18,17 @@ ESTATUS_CHOICES = (
 
 class Denunciante(BaseModel):
     nombres = models.CharField(
-        "Nombrecito del denunciante",
+        "Nombre del denunciante",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos = models.CharField(
         "Apellido del denunciante",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula = models.CharField(
-        "AQUI Cédula del denunciante",
+        "Cédula del denunciante",
         max_length=15,
         validators=[
             MinLengthValidator(7),
@@ -53,7 +53,7 @@ class Denunciante(BaseModel):
     direccion = models.CharField(
         "Dirección del denunciante",
         max_length=180,
-        validators=[MinLengthValidator(10), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     @property
@@ -84,14 +84,14 @@ class Denunciado(BaseModel):
         max_length=120,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos = models.CharField(
         "Apellido del denunciado",
         max_length=120,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula = models.CharField(
         "Cédula del denunciado",
@@ -123,7 +123,7 @@ class Denunciado(BaseModel):
         max_length=180,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(10), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     @property
@@ -161,14 +161,14 @@ class Denuncia(BaseModel):
     denunciado = models.ForeignKey(Denunciado, on_delete=models.CASCADE)
     motivo = models.TextField(
         max_length=400,
-        validators=[MinLengthValidator(9), MaxLengthValidator(400), TextValidator()],
+        validators=[MinLengthValidator(6), MaxLengthValidator(400), TextValidator()],
     )
     zona = models.CharField(
         "Zona del incidente",
         max_length=150,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(150), TextValidator()],
+        validators=[MinLengthValidator(6), MaxLengthValidator(150), TextValidator()],
     )
     fecha_denuncia = models.DateField("Fecha de la denuncia")
     fecha_incidente = models.DateField("Fecha del incidente", blank=True, null=True)

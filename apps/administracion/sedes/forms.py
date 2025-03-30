@@ -25,8 +25,7 @@ class SedeForm(FormBase):
         }
         widgets = {
             "sede": forms.TextInput(
-                attrs={
-                    "placeholder": "Ingrese el nombre de la sede (6-30 caracteres)",
-                }
+                attrs={"placeholder": "Ingrese el nombre de la sede"}
             ),
+            "estatus": forms.Select(attrs={"placeholder": "Seleccione el estatus"}),
         }

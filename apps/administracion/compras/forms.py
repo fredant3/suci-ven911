@@ -1,7 +1,7 @@
 from administracion.compras.model import Compra
 from helpers.FormBase import FormBase
 from helpers.validForm import validate_decimal_number
-from django import forms
+from django.forms import Select, TextInput
 
 
 class CompraForm(FormBase):
@@ -9,11 +9,9 @@ class CompraForm(FormBase):
         model = Compra
         fields = ["articulo", "n_orden", "valor_bs"]
         widgets = {
-            "articulo": forms.Select(attrs={"placeholder": "Seleccione un artículo"}),
-            "n_orden": forms.TextInput(
-                attrs={"placeholder": "Ingrese el número de orden"}
-            ),
-            "valor_bs": forms.TextInput(
+            "articulo": Select(attrs={"placeholder": "Seleccione un artículo"}),
+            "n_orden": TextInput(attrs={"placeholder": "Ingrese el número de orden"}),
+            "valor_bs": TextInput(
                 attrs={
                     "placeholder": "Ingrese el valor en BS con la estrucura Bs. 0,00"
                 }

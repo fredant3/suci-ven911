@@ -23,35 +23,17 @@ class AsignacionForm(FormBase):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "articulo": forms.Select(
-                attrs={"class": "form-select", "placeholder": "Seleccione un artículo"}
-            ),
-            "sede": forms.Select(
-                attrs={"class": "form-select", "placeholder": "Seleccione una sede"}
-            ),
+            "articulo": forms.Select(attrs={"placeholder": "Seleccione un artículo"}),
+            "sede": forms.Select(attrs={"placeholder": "Seleccione una sede"}),
             "departamento": forms.Select(
-                attrs={
-                    "class": "form-select",
-                    "placeholder": "Seleccione un departamento",
-                }
+                attrs={"placeholder": "Seleccione un departamento"}
             ),
-            "cantidad": forms.NumberInput(
-                attrs={
-                    "placeholder": "Ingrese la cantidad",
-                    "min": "1",
-                }
+            "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
+            "descripcion": forms.TextInput(
+                attrs={"placeholder": "Ingrese una descripción"}
             ),
-            "descripcion": forms.Textarea(
-                attrs={
-                    "placeholder": "Ingrese una descripción",
-                    "rows": "3",
-                }
-            ),
-            "observaciones": forms.Textarea(
-                attrs={
-                    "placeholder": "Ingrese observaciones",
-                    "rows": "3",
-                }
+            "observaciones": forms.TextInput(
+                attrs={"placeholder": "Ingrese observaciones"}
             ),
         }
 
@@ -78,37 +60,20 @@ class AsignacionUpdateForm(forms.ModelForm):
         widgets = {
             "articulo": forms.Select(
                 attrs={
-                    "class": "form-select",
-                    "style": "pointer-events: none; background-color: #e9ecef;",
+                    "style": "pointer-events: none;",
                     "readonly": "readonly",
                     "placeholder": "Artículo seleccionado",
                 }
             ),
-            "sede": forms.Select(
-                attrs={"class": "form-select", "placeholder": "Seleccione una sede"}
-            ),
+            "sede": forms.Select(attrs={"placeholder": "Seleccione una sede"}),
             "departamento": forms.Select(
-                attrs={
-                    "class": "form-select",
-                    "placeholder": "Seleccione un departamento",
-                }
+                attrs={"placeholder": "Seleccione un departamento"}
             ),
-            "cantidad": forms.NumberInput(
-                attrs={
-                    "placeholder": "Ingrese la cantidad",
-                    "min": "1",
-                }
+            "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
+            "descripcion": forms.TextInput(
+                attrs={"placeholder": "Ingrese una descripción"}
             ),
-            "descripcion": forms.Textarea(
-                attrs={
-                    "placeholder": "Ingrese una descripción",
-                    "rows": "3",
-                }
-            ),
-            "observaciones": forms.Textarea(
-                attrs={
-                    "placeholder": "Ingrese observaciones",
-                    "rows": "3",
-                }
+            "observaciones": forms.TextInput(
+                attrs={"placeholder": "Ingrese observaciones"}
             ),
         }

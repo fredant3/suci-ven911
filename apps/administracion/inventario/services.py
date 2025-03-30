@@ -22,15 +22,11 @@ class ArticuloService(CrudService):
         self.repositoryTypeArticle = TipoArticuloRepository()
 
     def search_type_article(self, tipo_articulo):
-        search = self.repositoryTypeArticle.getFilter(
-            ("nombre", tipo_articulo), ("id",)
-        ).first()
-
-        return search["id"] if search is not None else None
+        search = self.repositoryTypeArticle.getFilter(("nombre", tipo_articulo)).first()
+        return search if search is not None else None
 
     def relationship(self, payload, *arg, **kwargs):
-        payload["tipo_articulo_id"] = self.search_type_article(kwargs.get("type"))
-
+        payload["tipo_articulo"] = self.search_type_article(kwargs.get("type"))
         return payload
 
     def criteria(self, search, arg=None):

@@ -6,10 +6,12 @@ from django import forms
 
 class ArticuloForm(FormBase):
     fecha_adq = FormBase.create_date_field("fecha_adq")
+    tipo_articulo_id = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Articulo
         fields = [
+            "tipo_articulo_id",
             "descripcion",
             "marca",
             "modelo",
@@ -21,6 +23,32 @@ class ArticuloForm(FormBase):
             "condicion",
             "fecha_adq",
         ]
+        widgets = {
+            "descripcion": forms.TextInput(
+                attrs={"placeholder": "Ingrese la descripción"}
+            ),
+            "marca": forms.TextInput(attrs={"placeholder": "Ingrese la marca"}),
+            "modelo": forms.TextInput(attrs={"placeholder": "Ingrese el modelo"}),
+            "serial": forms.TextInput(attrs={"placeholder": "Ingrese el serial"}),
+            "placa": forms.TextInput(attrs={"placeholder": "Ingrese la placa"}),
+            "cantidad_combustible": forms.NumberInput(
+                attrs={"placeholder": "Ingrese la cantidad de combustible"}
+            ),
+            "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
+            "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
+            "condicion": forms.Select(attrs={"placeholder": "Ingrese la condición"}),
+            "fecha_adq": forms.DateInput(
+                attrs={"placeholder": "Seleccione la fecha de adquisición"}
+            ),
+        }
+
+    # def clean_cantidad_combustible(self):
+    #     cantidad_combustible = self.cleaned_data.get("cantidad_combustible")
+    #     validate_decimal_number(
+    #         cantidad_combustible,
+    #         "La cantidad de combustible debe ser un número positivo.",
+    #     )
+    #     return cantidad_combustible
 
 
 class TecnologiaForm(FormBase):

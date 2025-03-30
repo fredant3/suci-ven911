@@ -10,10 +10,10 @@ from django.core.validators import (
 class Departamento(BaseModel):
     nombre = models.CharField(
         "Departamento",
-        max_length=255,
+        max_length=30,
         validators=[
             MinLengthValidator(3),
-            MaxLengthValidator(255),
+            MaxLengthValidator(30),
             UnicodeAlphaSpaceValidator(),
         ],
     )
