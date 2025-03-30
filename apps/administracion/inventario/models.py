@@ -84,7 +84,10 @@ class Articulo(BaseModel):
         validators=[MinLengthValidator(7), MaxLengthValidator(10), TextValidator()],
     )
     cantidad_combustible = models.IntegerField(
-        "Cantidad de combustible máx. (En litros)", blank=True, null=True
+        "Cantidad de combustible máx. (En litros)",
+        blank=True,
+        null=True,
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
     codigo_bn = models.CharField(
         "Código BN",

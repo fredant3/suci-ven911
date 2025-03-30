@@ -15,23 +15,25 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     template_name = "sneat/layout/partials/form/layout.html"
     form_class = ArticuloForm
 
+    def get_form_class(self):
+        return define_type_form(self.kwargs)
+
     def get_context_data(self, **kwargs):
-        self.form_class = define_type_form(self.kwargs)
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Articulo"
-        context["titleForm"] = "Añadir articulo tipo {0}".format(
-            str(self.kwargs.get("type"))
+        context["module"] = "Administración"
+        context["submodule"] = "Artículos"
+        context["titleForm"] = (
+            f"Registrar nuevo artículo - {str(self.kwargs.get('type')).capitalize()}"
         )
-        # context["titleForm"] = "Añadir articulo tipo "
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("articulos:list")
         context["urlForm"] = reverse_lazy(
             "api_articulos:create", args=[self.kwargs.get("type")]
         )
         context["methodForm"] = "POST"
+        self.form_class = define_type_form(self.kwargs)
         return TemplateLayout.init(self, context)
 
 

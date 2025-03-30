@@ -16,11 +16,11 @@ class ArticuloDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Articulo"
-        context["titleForm"] = "Eliminar Articulo"
+        context["module"] = "Administración"
+        context["submodule"] = "Artículos"
+        context["titleForm"] = "Confirmar eliminación de artículo"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("articulos:list")
         context["urlDelete"] = reverse_lazy(

@@ -20,11 +20,11 @@ class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Sedes"
-        context["createBtn"] = "Añadir"
+        context["createBtn"] = "Agregar sede"
         context["createUrl"] = reverse_lazy("sedes:create")
         context["listApiUrl"] = reverse_lazy("api_sedes:list")
         context["updateUrl"] = reverse_lazy("sedes:update", args=[0])

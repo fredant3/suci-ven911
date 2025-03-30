@@ -16,11 +16,11 @@ class DepartamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administrasion"
+        context["module"] = "Administración"
         context["submodule"] = "Departamentos"
-        context["titleForm"] = "Eliminar departamento"
+        context["titleForm"] = "Confirmar eliminación"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("departamentos:list")
         context["urlDelete"] = reverse_lazy(

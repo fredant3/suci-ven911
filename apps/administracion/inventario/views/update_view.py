@@ -13,18 +13,20 @@ from templates.sneat import TemplateLayout
 
 class ArticuloUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = "administracion.inventario.editar_articulo"
-    form_class = ArticuloForm
     template_name = "sneat/layout/partials/form/layout.html"
+    form_class = ArticuloForm
+
+    def get_form_class(self):
+        return define_type_form(self.kwargs)
 
     def get_context_data(self, **kwargs):
-        self.form_class = define_type_form(self.kwargs)
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Articulo"
-        context["titleForm"] = f"Actualizar articulo tipo {self.kwargs['type']}"
-        context["tag"] = "Editar"
+        context["module"] = "Administración"
+        context["submodule"] = "Artículos"
+        context["titleForm"] = f"Editar artículo - {self.kwargs['type'].capitalize()}"
+        context["tag"] = "Guardar cambios"
         context["listUrl"] = reverse_lazy("articulos:list")
         context["urlForm"] = reverse_lazy(
             "api_articulos:update", args=[self.kwargs.get("pk")]
