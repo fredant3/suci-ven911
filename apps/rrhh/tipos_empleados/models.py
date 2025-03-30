@@ -6,6 +6,14 @@ from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
 )
+from django.core.exceptions import ValidationError
+
+TIPO_PERSONAL_CHOICES = (
+    ("per", "Permanente"),
+    ("con", "Contrato"),
+    ("int", "Internado"),
+    ("est", "Estudiante"),
+)
 
 ESTATUS_CHOICES = (
     ("act", "Activo"),
@@ -16,11 +24,7 @@ ESTATUS_CHOICES = (
 
 
 class TipoEmpleado(BaseModel):
-    tipo_personal = models.CharField(
-        "Tipo de personal",
-        max_length=60,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
-    )
+    tipo_personal = models.CharField(max_length=3, choices=TIPO_PERSONAL_CHOICES)
     estatus = models.CharField("Estatus", max_length=3, choices=ESTATUS_CHOICES)
 
     def toJSON(self):
@@ -40,3 +44,17 @@ class TipoEmpleado(BaseModel):
             ("eliminar_tipo_empleado", "Eliminar tipos de empleados"),
             ("exel_tipo_empleado", "Exportar tipos de empleados a excel"),
         ]
+
+    class TipoEmpleado(models.Model):
+        tipo_personal = models.CharField(max_length=255)
+        estatus = models.CharField(max_length=255)
+
+        def clean(self):
+            combinaciones_validas = [
+                ("per", "act"),
+                ("per", "ina"),
+            ]
+            if (self.tipo_personal, self.estatus) not in combinaciones_validas:
+                raise ValidationError(
+                    "La combinación de tipo de personal y estatus no es válida."
+                )
