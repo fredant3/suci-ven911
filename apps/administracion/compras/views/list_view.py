@@ -42,9 +42,9 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "articulo__descripcion",
-                "name": "articulo__descripcion",
-                "title": "Artículo",
+                "data": "articulo__marca",
+                "name": "articulo__marca",
+                "title": "Articulo",
                 "orderable": "true",
                 "searchable": "true",
             },

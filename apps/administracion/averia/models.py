@@ -42,7 +42,7 @@ class Averia(BaseModel):
     ubicacion = TextField(
         "Ubicación",
         max_length=180,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     serial = CharField(
         "Serial",
