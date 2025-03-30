@@ -4,7 +4,6 @@ from django.forms import (
     CharField,
     EmailField,
     DateInput,
-    DateField,
     EmailInput,
 )
 from helpers.FormBase import FormBase
