@@ -5,6 +5,21 @@ from helpers.FormBase import FormBase
 COMBINACIONES_VALIDAS = [
     ("per", "act"),
     ("per", "ina"),
+    ("con", "act"),
+    ("con", "ina"),
+    ("int", "act"),
+    ("int", "ina"),
+    ("est", "act"),
+    ("est", "ina"),
+    #
+    ("per", "inv"),
+    ("per", "cer"),
+    ("con", "inv"),
+    ("con", "cer"),
+    ("int", "inv"),
+    ("int", "cer"),
+    ("est", "inv"),
+    ("est", "cer"),
 ]
 
 

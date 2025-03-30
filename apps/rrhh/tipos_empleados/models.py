@@ -44,17 +44,3 @@ class TipoEmpleado(BaseModel):
             ("eliminar_tipo_empleado", "Eliminar tipos de empleados"),
             ("exel_tipo_empleado", "Exportar tipos de empleados a excel"),
         ]
-
-    class TipoEmpleado(models.Model):
-        tipo_personal = models.CharField(max_length=255)
-        estatus = models.CharField(max_length=255)
-
-        def clean(self):
-            combinaciones_validas = [
-                ("per", "act"),
-                ("per", "ina"),
-            ]
-            if (self.tipo_personal, self.estatus) not in combinaciones_validas:
-                raise ValidationError(
-                    "La combinación de tipo de personal y estatus no es válida."
-                )
