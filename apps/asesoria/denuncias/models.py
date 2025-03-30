@@ -1,4 +1,3 @@
-from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
@@ -11,8 +10,9 @@ from django.db.models import (
     DateField,
     EmailField,
     CharField,
-    BooleanField,
-    IntegerField,
+    ForeignKey,
+    TextField,
+    CASCADE,
 )
 
 
@@ -24,17 +24,17 @@ ESTATUS_CHOICES = (
 
 
 class Denunciante(BaseModel):
-    nombres = models.CharField(
+    nombres = CharField(
         "Nombre del denunciante",
         max_length=120,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
-    apellidos = models.CharField(
+    apellidos = CharField(
         "Apellido del denunciante",
         max_length=120,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
-    cedula = models.CharField(
+    cedula = CharField(
         "Cédula del denunciante",
         max_length=15,
         unique=True,
@@ -44,7 +44,7 @@ class Denunciante(BaseModel):
             CedulaVenezolanaValidator(),
         ],
     )
-    telefono = models.CharField(
+    telefono = CharField(
         "Teléfono del denunciante",
         max_length=20,
         blank=True,
@@ -55,10 +55,10 @@ class Denunciante(BaseModel):
             PhoneNumberValidator(),
         ],
     )
-    email = models.EmailField(
+    email = EmailField(
         "Correo electrónico del denunciante", max_length=60, blank=True, null=True
     )
-    direccion = models.CharField(
+    direccion = CharField(
         "Dirección del denunciante",
         max_length=180,
         validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
@@ -87,21 +87,21 @@ class Denunciante(BaseModel):
 
 
 class Denunciado(BaseModel):
-    nombres = models.CharField(
+    nombres = CharField(
         "Nombre del denunciado",
         max_length=120,
         blank=True,
         null=True,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
-    apellidos = models.CharField(
+    apellidos = CharField(
         "Apellido del denunciado",
         max_length=120,
         blank=True,
         null=True,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
-    cedula = models.CharField(
+    cedula = CharField(
         "Cédula del denunciado",
         max_length=15,
         blank=True,
@@ -112,7 +112,7 @@ class Denunciado(BaseModel):
             CedulaVenezolanaValidator(),
         ],
     )
-    telefono = models.CharField(
+    telefono = CharField(
         "Teléfono del denunciado",
         max_length=20,
         blank=True,
@@ -123,10 +123,10 @@ class Denunciado(BaseModel):
             PhoneNumberValidator(),
         ],
     )
-    email = models.EmailField(
+    email = EmailField(
         "Correo electrónico del denunciado", max_length=60, blank=True, null=True
     )
-    direccion = models.CharField(
+    direccion = CharField(
         "Dirección del denunciado",
         max_length=180,
         blank=True,
@@ -157,29 +157,29 @@ class Denunciado(BaseModel):
 
 
 class Denuncia(BaseModel):
-    estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
-    ente = models.CharField(
+    estatus = CharField(max_length=3, choices=ESTATUS_CHOICES)
+    ente = CharField(
         "Ente relacionado",
         max_length=50,
         blank=True,
         null=True,
         validators=[MinLengthValidator(3), MaxLengthValidator(50), TextValidator()],
     )
-    denunciante = models.ForeignKey(Denunciante, on_delete=models.CASCADE)
-    denunciado = models.ForeignKey(Denunciado, on_delete=models.CASCADE)
-    motivo = models.TextField(
+    denunciante = ForeignKey(Denunciante, on_delete=CASCADE)
+    denunciado = ForeignKey(Denunciado, on_delete=CASCADE)
+    motivo = TextField(
         max_length=400,
         validators=[MinLengthValidator(6), MaxLengthValidator(400), TextValidator()],
     )
-    zona = models.CharField(
+    zona = CharField(
         "Zona del incidente",
         max_length=150,
         blank=True,
         null=True,
         validators=[MinLengthValidator(6), MaxLengthValidator(150), TextValidator()],
     )
-    fecha_denuncia = models.DateField("Fecha de la denuncia")
-    fecha_incidente = models.DateField("Fecha del incidente", blank=True, null=True)
+    fecha_denuncia = DateField("Fecha de la denuncia")
+    fecha_incidente = DateField("Fecha del incidente", blank=True, null=True)
 
     def toJSON(self):
         return model_to_dict(self)
