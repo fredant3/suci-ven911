@@ -9,6 +9,33 @@ class CrudService(ServiceUtilMixin):
     def criteria(self, search, columns=[]):
         return search
 
+    def queryset_to_dict(self, queryset, fields=None, use_model_json=False):
+        if use_model_json:
+            return [obj.toJSON() for obj in queryset]
+
+        if fields is None:
+            fields = [f.name for f in queryset.model._meta.fields]
+
+        result = []
+        for obj in queryset:
+            item = {}
+            for field in fields:
+                if "__" in field:
+                    parts = field.split("__")
+                    current = obj
+                    try:
+                        for part in parts:
+                            current = getattr(current, part)
+                        item[field.replace("__", "_")] = current
+                    except AttributeError:
+                        item[field.replace("__", "_")] = None
+                else:
+                    value = getattr(obj, field)
+                    item[field] = value() if callable(value) else value
+            result.append(item)
+
+        return result
+
     def getAll(
         self,
         draw,
@@ -27,6 +54,7 @@ class CrudService(ServiceUtilMixin):
             search = self.criteria(search, columns)
             entities = self.repository.getFilter(search, select, orderBy, orderAsc)
 
+        # entities = self.queryset_to_dict(entities, select)
         return self.response(entities, start, length, draw)
 
     def creator(self, form, request, *arg, **kwargs):
