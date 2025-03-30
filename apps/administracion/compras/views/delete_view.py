@@ -22,9 +22,9 @@ class CompraDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "compra"
         context["titleForm"] = "Eliminar Compra"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("compra:list")
+        context["listUrl"] = reverse_lazy("compras:list")
         context["urlDelete"] = reverse_lazy(
-            "api_compra:delete", args=[self.kwargs.get("pk")]
+            "api_compras:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
