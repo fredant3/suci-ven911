@@ -3,7 +3,15 @@ from helpers.BaseModelMixin import BaseModel
 
 
 class Departamento(BaseModel):
-    nombre = models.CharField(max_length=255)
+    nombre = models.CharField(
+        "Departamento",
+        max_length=30,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(30),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
 
     class Meta:
         permissions = [
