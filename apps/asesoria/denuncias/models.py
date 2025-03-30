@@ -1,7 +1,11 @@
 from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator, PhoneNumberValidator
+from helpers.validForm import (
+    TextValidator,
+    PhoneNumberValidator,
+    CedulaVenezolanaValidator,
+)
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
@@ -14,7 +18,7 @@ ESTATUS_CHOICES = (
 
 class Denunciante(BaseModel):
     nombres = models.CharField(
-        "Nombre del denunciante",
+        "Nombrecito del denunciante",
         max_length=120,
         validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
     )
@@ -23,7 +27,15 @@ class Denunciante(BaseModel):
         max_length=120,
         validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
     )
-    cedula = models.CharField("Cédula del denunciante", max_length=12)
+    cedula = models.CharField(
+        "AQUI Cédula del denunciante",
+        max_length=15,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
+    )
     telefono = models.CharField(
         "Teléfono del denunciante",
         max_length=20,
@@ -82,7 +94,15 @@ class Denunciado(BaseModel):
         validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
     )
     cedula = models.CharField(
-        "Cédula del denunciado", max_length=12, blank=True, null=True
+        "Cédula del denunciado",
+        max_length=15,
+        blank=True,
+        null=True,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
     )
     telefono = models.CharField(
         "Teléfono del denunciado",
@@ -131,6 +151,7 @@ class Denunciado(BaseModel):
 class Denuncia(BaseModel):
     estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
     ente = models.CharField(
+        "Ente relacionado",
         max_length=50,
         blank=True,
         null=True,

@@ -56,7 +56,7 @@ class Empleado(BaseModel):
     )
     nacionalidad = CharField("Nacionalidad", max_length=2, choices=NACIONALIDAD_CHOICES)
     cedula = CharField(
-        "Cedula de identidad",
+        "Cédula de identidad",
         max_length=15,
         unique=True,
         validators=[
