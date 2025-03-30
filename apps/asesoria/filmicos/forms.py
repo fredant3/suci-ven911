@@ -1,6 +1,6 @@
 from asesoria.filmicos.models import RegistroFilmico
 from helpers.FormBase import FormBase
-from django import forms
+from django.forms import TextInput
 
 
 class RegistroFilmicoForm(FormBase):
@@ -32,13 +32,12 @@ class RegistroFilmicoForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "estatus": forms.Select(attrs={"placeholder": "Seleccione el estatus"}),
-            "direccion": forms.TextInput(attrs={"placeholder": "Ingrese la dirección"}),
-            "camara": forms.TextInput(attrs={"placeholder": "Ingrese la cámara"}),
-            "motivo_solicitud": forms.TextInput(
+            "direccion": TextInput(attrs={"placeholder": "Ingrese la dirección"}),
+            "camara": TextInput(attrs={"placeholder": "Ingrese la cámara"}),
+            "motivo_solicitud": TextInput(
                 attrs={"placeholder": "Ingrese el motivo de la solicitud"}
             ),
-            "ente_solicita": forms.TextInput(
+            "ente_solicita": TextInput(
                 attrs={"placeholder": "Ingrese el ente que solicita"}
             ),
         }
