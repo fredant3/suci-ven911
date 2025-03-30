@@ -17,11 +17,11 @@ class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Asignaciones"
         context["submodule"] = "Asignaciones"
-        context["titleForm"] = "Añadir una Asignación"
+        context["titleForm"] = "Crear nueva asignación"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlForm"] = reverse_lazy("api_asignaciones:create")
