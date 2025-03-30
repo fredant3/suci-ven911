@@ -33,27 +33,27 @@ class Averia(BaseModel):
     )
     problema = TextField(
         "Problema",
-        max_length=255,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        max_length=180,
+        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
     )
     ubicacion = TextField(
         "Ubicación",
-        max_length=255,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        max_length=180,
+        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
     )
     serial = CharField(
         "Serial",
-        max_length=255,
+        max_length=30,
         validators=[
             MinLengthValidator(6),
-            MaxLengthValidator(255),
+            MaxLengthValidator(30),
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
     )
     codigo_bn = CharField(
         "Código BN",
-        max_length=255,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        max_length=30,
+        validators=[MinLengthValidator(6), MaxLengthValidator(30), TextValidator()],
     )
 
     class Meta:

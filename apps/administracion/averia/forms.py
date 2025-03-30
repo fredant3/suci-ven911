@@ -1,6 +1,6 @@
 from administracion.averia.models import Averia
 from helpers.FormBase import FormBase
-from django import forms
+from django.forms import Select, TextInput
 
 
 class AveriaForm(FormBase):
@@ -15,14 +15,12 @@ class AveriaForm(FormBase):
             "codigo_bn",
         ]
         widgets = {
-            "problema": forms.TextInput(attrs={"placeholder": "Ingrese el problema"}),
-            "tipo_averia": forms.Select(
+            "tipo_averia": Select(
                 attrs={"placeholder": "Seleccione el tipo de avería"}
             ),
-            "departamento": forms.Select(
-                attrs={"placeholder": "Seleccione el departamento"}
-            ),
-            "ubicacion": forms.TextInput(attrs={"placeholder": "Ingrese la ubicación"}),
-            "serial": forms.TextInput(attrs={"placeholder": "Ingrese el serial"}),
-            "codigo_bn": forms.TextInput(attrs={"placeholder": "Ingrese el código BN"}),
+            "departamento": Select(attrs={"placeholder": "Seleccione el departamento"}),
+            "problema": TextInput(attrs={"placeholder": "Ingrese el problema"}),
+            "ubicacion": TextInput(attrs={"placeholder": "Ingrese la ubicación"}),
+            "serial": TextInput(attrs={"placeholder": "Ingrese el serial"}),
+            "codigo_bn": TextInput(attrs={"placeholder": "Ingrese el código BN"}),
         }
