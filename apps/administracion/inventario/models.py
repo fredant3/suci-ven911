@@ -100,7 +100,12 @@ class Articulo(BaseModel):
     )
     tipo_articulo = models.ForeignKey(TipoArticulo, on_delete=models.CASCADE)
     condicion = models.CharField(
-        "Condición", max_length=1, choices=tipo_considcion, default="-"
+        "Condición",
+        max_length=1,
+        choices=tipo_considcion,
+        null=True,
+        blank=True,
+        default="-",
     )
     fecha_adq = models.DateField("Fecha de adquisición")
     asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
