@@ -10,6 +10,13 @@ class FamiliarForm(FormBase):
         "fecha_nacimiento",
         title="Fecha de nacimiento",
     )
+    discapacidad = forms.BooleanField(
+        initial=False,
+        required=False,
+        widget=forms.CheckboxInput(
+            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
+        ),
+    )
 
     class Meta:
         model = Familiar
@@ -60,9 +67,6 @@ class FamiliarForm(FormBase):
                     "placeholder": "Ingrese apellidos completos",
                 }
             ),
-            "cedula": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
-            ),
             "sexo": forms.Select(
                 attrs={"class": "form-control", "placeholder": "Seleccione el género"}
             ),
@@ -86,11 +90,6 @@ class FamiliarForm(FormBase):
                 attrs={"class": "form-check-input", "role": "switch"}
             ),
         }
-
-    def clean_cedula(self):
-        data = self.cleaned_data.get("cedula")
-        validate_cedula(data, "Formato de cédula inválido. Use: V-12345678")
-        return data
 
     def clean_fecha_nacimiento(self):
         data = self.cleaned_data.get("fecha_nacimiento")

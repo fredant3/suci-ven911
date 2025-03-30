@@ -8,6 +8,16 @@ from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
 )
+from django.db.models import (
+    CharField,
+    BooleanField,
+)
+from helpers.validForm import (
+    CedulaVenezolanaValidator,
+    TextValidator,
+    UnicodeAlphaSpaceValidator,
+    PhoneNumberValidator,
+)
 
 PARENTEZCO = (
     ("hermano", "Hermana|Hermano"),
@@ -28,14 +38,12 @@ class Familiar(BaseModel):
     tipo_hijo = models.CharField(
         "Tipo de hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
-    discapacidad = models.CharField(
-        "Discapacidad", max_length=8, choices=YES_NO_CHOICES, default="no"
-    )
+    discapacidad = BooleanField(default=False)
     nombres = models.CharField(
         "Nombres del Familiar",
         max_length=90,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(3),
             MaxLengthValidator(90),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -44,12 +52,21 @@ class Familiar(BaseModel):
         "Apellidos del Familiar",
         max_length=90,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(3),
             MaxLengthValidator(90),
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    cedula = models.IntegerField("Cedula de identidad", null=True, blank=True)
+    cedula = CharField(
+        "Cédula de identidad",
+        max_length=15,
+        unique=True,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
+    )
     fecha_nacimiento = models.DateField("Fecha de nacimiento")
     sexo = models.CharField("Genero", max_length=1, choices=SEXO_CHOICES)
     estado_civil = models.CharField(
@@ -64,7 +81,7 @@ class Familiar(BaseModel):
         blank=True,
         null=True,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(5),
             MaxLengthValidator(150),
             TextValidator(),
         ],
