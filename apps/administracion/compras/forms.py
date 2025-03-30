@@ -1,7 +1,6 @@
 from administracion.compras.model import Compra
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_decimal_number
-from django.forms import Select, TextInput
+from django.forms import TextInput, NumberInput
 
 
 class CompraForm(FormBase):
@@ -9,16 +8,8 @@ class CompraForm(FormBase):
         model = Compra
         fields = ["articulo", "n_orden", "valor_bs"]
         widgets = {
-            "articulo": Select(attrs={"placeholder": "Seleccione un artículo"}),
-            "n_orden": TextInput(attrs={"placeholder": "Ingrese el número de orden"}),
+            "n_orden": NumberInput(attrs={"placeholder": "Ingrese el número de orden"}),
             "valor_bs": TextInput(
-                attrs={
-                    "placeholder": "Ingrese el valor en BS con la estrucura Bs. 0,00"
-                }
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
         }
-
-    def clean_valor_bs(self):
-        valor_bs = self.cleaned_data.get("valor_bs")
-        validate_decimal_number(valor_bs, "El valor en BS debe ser un número positivo.")
-        return valor_bs

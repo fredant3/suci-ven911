@@ -1,5 +1,5 @@
 from administracion.asignaciones.models import Asignacion
-from django import forms
+from django.forms import TextInput, NumberInput
 from helpers.FormBase import FormBase
 
 
@@ -23,22 +23,13 @@ class AsignacionForm(FormBase):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "articulo": forms.Select(attrs={"placeholder": "Seleccione un artículo"}),
-            "sede": forms.Select(attrs={"placeholder": "Seleccione una sede"}),
-            "departamento": forms.Select(
-                attrs={"placeholder": "Seleccione un departamento"}
-            ),
-            "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "descripcion": forms.TextInput(
-                attrs={"placeholder": "Ingrese una descripción"}
-            ),
-            "observaciones": forms.TextInput(
-                attrs={"placeholder": "Ingrese observaciones"}
-            ),
+            "cantidad": NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
+            "descripcion": TextInput(attrs={"placeholder": "Ingrese una descripción"}),
+            "observaciones": TextInput(attrs={"placeholder": "Ingrese observaciones"}),
         }
 
 
-class AsignacionUpdateForm(forms.ModelForm):
+class AsignacionUpdateForm(FormBase):
     class Meta:
         model = Asignacion
         fields = [
@@ -58,22 +49,7 @@ class AsignacionUpdateForm(forms.ModelForm):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "articulo": forms.Select(
-                attrs={
-                    "style": "pointer-events: none;",
-                    "readonly": "readonly",
-                    "placeholder": "Artículo seleccionado",
-                }
-            ),
-            "sede": forms.Select(attrs={"placeholder": "Seleccione una sede"}),
-            "departamento": forms.Select(
-                attrs={"placeholder": "Seleccione un departamento"}
-            ),
-            "cantidad": forms.NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
-            "descripcion": forms.TextInput(
-                attrs={"placeholder": "Ingrese una descripción"}
-            ),
-            "observaciones": forms.TextInput(
-                attrs={"placeholder": "Ingrese observaciones"}
-            ),
+            "cantidad": NumberInput(attrs={"placeholder": "Ingrese la cantidad"}),
+            "descripcion": TextInput(attrs={"placeholder": "Ingrese una descripción"}),
+            "observaciones": TextInput(attrs={"placeholder": "Ingrese observaciones"}),
         }

@@ -1,11 +1,8 @@
 from administracion.inventario.models import Articulo
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import UnicodeAlphaSpaceValidator
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from helpers.validForm import PositiveIntegerValidator, CurrencyValidator
+from django.core.validators import MinValueValidator
 
 
 class Compra(BaseModel):
@@ -15,12 +12,14 @@ class Compra(BaseModel):
     n_orden = models.IntegerField(
         "N° de orden",
         validators=[
-            MinLengthValidator(9),
-            MaxLengthValidator(255),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            MinValueValidator(1),
+            PositiveIntegerValidator(),
         ],
     )
-    valor_bs = models.TextField("Valor en BS", max_length=255)
+    valor_bs = models.TextField(
+        "Valor en BS",
+        validators=[CurrencyValidator()],
+    )
 
     class Meta:
         permissions = [
