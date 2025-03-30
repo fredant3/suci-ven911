@@ -47,7 +47,7 @@ class Averia(BaseModel):
         validators=[
             MinLengthValidator(6),
             MaxLengthValidator(30),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            TextValidator(),
         ],
     )
     codigo_bn = CharField(

@@ -48,7 +48,7 @@ class Articulo(BaseModel):
     descripcion = models.TextField(
         "Descripción",
         max_length=255,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(5), MaxLengthValidator(255), TextValidator()],
     )
     marca = models.CharField(
         "Marca",

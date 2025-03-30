@@ -1,6 +1,6 @@
 from administracion.departamentos.models import Departamento
 from helpers.FormBase import FormBase
-from django import forms
+from django.forms import TextInput
 
 
 class DepartamentoForm(FormBase):
@@ -13,7 +13,7 @@ class DepartamentoForm(FormBase):
             "nombre": "Nombre",
         }
         widgets = {
-            "nombre": forms.TextInput(
+            "nombre": TextInput(
                 attrs={"placeholder": "Ingrese el nombre del departamento"}
             ),
         }
