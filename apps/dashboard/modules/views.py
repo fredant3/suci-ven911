@@ -76,5 +76,10 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "user:list",
                 "image": "img/modules/admin.png",
             },
+            {
+                "title": "Gestion Comunicacional",
+                "url": "gc_info",
+                "image": "img/modules/admin.png",
+            },
         ]
         return context

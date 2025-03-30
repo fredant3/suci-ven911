@@ -17,7 +17,7 @@ from django.core.validators import (
 class Emergencia(BaseModel):
     denunciante = models.CharField(
         "Nombre del denunciante",
-        max_length=100,
+        max_length=180,
         validators=[
             MinLengthValidator(9),
             MaxLengthValidator(180),

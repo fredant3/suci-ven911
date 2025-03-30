@@ -3,6 +3,7 @@ from emergencia.models import Emergencia
 from helpers.FormBase import FormBase
 
 
+# TODO: crear los select para estado, municipio y parroquia
 class EmergenciaForm(FormBase):
     class Meta:
         model = Emergencia
@@ -29,55 +30,22 @@ class EmergenciaForm(FormBase):
         widgets = {
             "denunciante": forms.TextInput(
                 attrs={
-                    "class": "form-control mb-3",
                     "placeholder": "Ejem. George Harris",
                 }
             ),
             "telefono_denunciante": forms.TextInput(
-                attrs={"class": "form-control mb-3", "placeholder": "Ejem. 04125248935"}
-            ),
-            "estado": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione el estado",
-                }
-            ),
-            "municipio": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione el municipio",
-                }
-            ),
-            "parroquia": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione la parroquia",
-                }
-            ),
-            "incidencia": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione la incidencia",
-                }
-            ),
-            "organismo": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione el organismo",
-                }
+                attrs={"placeholder": "Ejem. 04125248935"}
             ),
             "direccion_incidencia": forms.Textarea(
                 attrs={
-                    "class": "form-control mb-3",
                     "placeholder": "Ejem. Urbanización Lomas de Urdaneta",
                 }
             ),
             "telefono_cuadrante_paz": forms.TextInput(
-                attrs={"class": "form-control mb-3", "placeholder": "Ejem. 04125248935"}
+                attrs={"placeholder": "Ejem. 04125248935"}
             ),
             "observaciones": forms.Textarea(
                 attrs={
-                    "class": "form-control mb-3",
                     "placeholder": "Ingrese las observaciones",
                 }
             ),
