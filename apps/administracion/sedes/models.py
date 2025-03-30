@@ -9,8 +9,8 @@ from django.core.validators import (
 
 ESTATUS_CHOICES = (
     ("act", "Activo"),
-    ("rem", "Remodelacion"),
-    ("cer", "Cerrada"),
+    ("rem", "En remodelación"),
+    ("cer", "Cerrado"),
 )
 
 

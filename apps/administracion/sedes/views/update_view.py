@@ -18,12 +18,11 @@ class SedeUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Administración"
+        context["module"] = "Administración"
         context["submodule"] = "Sedes"
         context["titleForm"] = "Actualizar sede"
-        context["tag"] = "Editar"
+        context["tag"] = "Editar sede"
         context["listUrl"] = reverse_lazy("sedes:list")
         context["urlForm"] = reverse_lazy(
             "api_sedes:update", args=[self.kwargs.get("pk")]

@@ -17,12 +17,12 @@ class SedeDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Sedes"
         context["titleForm"] = "Eliminar sede"
-        context["tag"] = "Eliminar"
+        context["tag"] = "Eliminar sede"
         context["listUrl"] = reverse_lazy("sedes:list")
         context["urlDelete"] = reverse_lazy(
             "api_sedes:delete", args=[self.kwargs.get("pk")]
