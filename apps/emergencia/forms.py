@@ -3,7 +3,6 @@ from emergencia.models import Emergencia
 from helpers.FormBase import FormBase
 
 
-# TODO: crear los select para estado, municipio y parroquia
 class EmergenciaForm(FormBase):
     class Meta:
         model = Emergencia
