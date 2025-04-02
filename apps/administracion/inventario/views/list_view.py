@@ -27,6 +27,7 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_articulos:list")
         context["updateUrl"] = reverse_lazy("articulos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("articulos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("articulos:export_excel")
         context["heads"] = columns
         context["isSelect"] = True
         context["selectTitle"] = "Registrar nuevo artículo"

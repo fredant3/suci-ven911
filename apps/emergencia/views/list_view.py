@@ -26,6 +26,7 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_emergencias:list")
         context["updateUrl"] = reverse_lazy("emergencias:update", args=[0])
         context["deleteUrl"] = reverse_lazy("emergencias:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("emergencias:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

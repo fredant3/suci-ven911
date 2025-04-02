@@ -2,6 +2,7 @@ from administracion.departamentos.views.create_view import DepartamentoCreateVie
 from administracion.departamentos.views.delete_view import DepartamentoDeleteView
 from administracion.departamentos.views.list_view import DepartamentoListView
 from administracion.departamentos.views.update_view import DepartamentoUpdateView
+from administracion.departamentos.views.export_view import DepartamentoExcelView
 from django.urls import path
 
 urlpatterns = [
@@ -29,5 +30,10 @@ urlpatterns = [
         "<int:pk>/delete",
         DepartamentoDeleteView.as_view(),
         name="delete",
+    ),
+        path(
+        "export",
+        DepartamentoExcelView.as_view(),
+        name="export_excel",
     ),
 ]

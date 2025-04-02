@@ -1,5 +1,4 @@
 import json
-
 from administracion.averia.services import AveriaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -7,7 +6,6 @@ from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
-
 from templates.sneat import TemplateLayout
 
 
@@ -28,6 +26,7 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_averias:list")
         context["updateUrl"] = reverse_lazy("averias:update", args=[0])
         context["deleteUrl"] = reverse_lazy("averias:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("averias:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
