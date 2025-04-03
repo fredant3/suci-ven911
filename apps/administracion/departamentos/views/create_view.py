@@ -16,9 +16,9 @@ class DepartamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Departamentos"
         context["titleForm"] = "Añadir un departamento"
         context["tag"] = "Registrar"

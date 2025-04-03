@@ -17,9 +17,9 @@ class DepartamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Departamentos"
         context["titleForm"] = "Actualizar"
         context["tag"] = "Editar"

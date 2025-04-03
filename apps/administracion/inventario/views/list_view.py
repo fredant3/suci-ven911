@@ -19,9 +19,9 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Artiulo"
         context["createUrl"] = reverse_lazy("articulos:create", args=[0])
         context["listApiUrl"] = reverse_lazy("api_articulos:list")
