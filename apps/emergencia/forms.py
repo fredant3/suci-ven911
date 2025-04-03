@@ -1,4 +1,4 @@
-from django import forms
+from django.forms import TextInput, Textarea
 from emergencia.models import Emergencia
 from helpers.FormBase import FormBase
 
@@ -27,23 +27,23 @@ class EmergenciaForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "denunciante": forms.TextInput(
+            "denunciante": TextInput(
                 attrs={
                     "placeholder": "Ejem. George Harris",
                 }
             ),
-            "telefono_denunciante": forms.TextInput(
+            "telefono_denunciante": TextInput(
                 attrs={"placeholder": "Ejem. 04125248935"}
             ),
-            "direccion_incidencia": forms.Textarea(
+            "direccion_incidencia": Textarea(
                 attrs={
                     "placeholder": "Ejem. Urbanización Lomas de Urdaneta",
                 }
             ),
-            "telefono_cuadrante_paz": forms.TextInput(
+            "telefono_cuadrante_paz": TextInput(
                 attrs={"placeholder": "Ejem. 04125248935"}
             ),
-            "observaciones": forms.Textarea(
+            "observaciones": Textarea(
                 attrs={
                     "placeholder": "Ingrese las observaciones",
                 }
