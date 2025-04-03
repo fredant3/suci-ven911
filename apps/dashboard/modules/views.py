@@ -17,7 +17,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/asesoria_juridica.png",
             },
             {
-                "title": "Gestión Humana (Pendiente)",
+                "title": "Gestión Humana",
                 "url": "gestion_humana",
                 "image": "img/modules/gestion_humana.png",
             },
@@ -27,7 +27,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/gestion_administrativa.png",
             },
             {
-                "title": "Unidad de Respuesta Inmediata (Pendiente)",
+                "title": "Unidad de Respuesta Inmediata",
                 "url": "uri:list",
                 "image": "img/modules/ambulancia.png",
             },
@@ -57,7 +57,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/seguridad.png",
             },
             {
-                "title": "Biblioteca de Manuales (---)",
+                "title": "Biblioteca de Manuales",
                 "url": "bibliotecas",
                 "image": "img/modules/biblioteca.png",
             },
@@ -67,7 +67,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/ambulancia.png",
             },
             {
-                "title": "Tecnología Comunicación e Información (Pendiente)",
+                "title": "Tecnología Comunicación e Información",
                 "url": "tecnologia",
                 "image": "img/modules/tecnologia.png",
             },
