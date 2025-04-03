@@ -13,12 +13,12 @@ class AsesoriaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoria"
+        context["titlePage"] = "Asesoría"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoria"
-        context["submodule"] = "Dashboard Asesoria"
+        context["module"] = "Asesoría"
+        context["submodule"] = "Inicio Asesoría"
         context["submoduleList"] = (
             ("Denuncias", reverse_lazy("denuncias:list")),
-            ("Filmicos", reverse_lazy("filmicos:list")),
+            ("Fílmicos", reverse_lazy("filmicos:list")),
         )
         return TemplateLayout.init(self, context)
