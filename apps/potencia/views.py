@@ -16,7 +16,7 @@ class PotenciaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Potencia"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Potencia"
-        context["submodule"] = "Dashboard Potencia"
+        context["submodule"] = "Inicio Potencia"
         context["data"] = [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
         context["labels"] = [
             "South Korea",

@@ -16,7 +16,7 @@ class AdministracionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Administración"
-        context["submodule"] = "Dashboard Administracion"
+        context["submodule"] = "Inicio Administracion"
         context["data"] = [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
         context["labels"] = [
             "South Korea",

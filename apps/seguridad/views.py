@@ -16,7 +16,7 @@ class SeguridadView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Seguridad"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Seguridad"
-        context["submodule"] = "Dashboard Seguridad"
+        context["submodule"] = "Inicio Seguridad"
         context["submoduleList"] = (
             ("Entradas", reverse_lazy("entradas:list")),
             ("Gestiones", reverse_lazy("gestiones:list")),
