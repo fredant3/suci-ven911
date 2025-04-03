@@ -13,10 +13,10 @@ class AdministracionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Administracion"
-        context["submodule"] = "Administracion"
+        context["module"] = "Administración"
+        context["submodule"] = "Administración"
         context["data"] = [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
         context["labels"] = [
             "South Korea",
