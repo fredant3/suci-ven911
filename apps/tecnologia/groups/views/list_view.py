@@ -19,9 +19,9 @@ class GroupPermisosListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Tecnologia"
+        context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("tecnologia")
-        context["module"] = "Tecnologia"
+        context["module"] = "Tecnología"
         context["submodule"] = "Grupos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("grupos:create")

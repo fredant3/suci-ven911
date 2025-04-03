@@ -16,10 +16,10 @@ class UserUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "User"
+        context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "User"
-        context["submodule"] = "User"
+        context["module"] = "Tecnología"
+        context["submodule"] = "Usuario"
         context["titleForm"] = "Actualizar Usuarios"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("user:list")

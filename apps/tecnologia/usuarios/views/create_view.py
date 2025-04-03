@@ -18,10 +18,10 @@ class UserCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Users"
+        context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Users"
-        context["submodule"] = "Users"
+        context["module"] = "Tecnología"
+        context["submodule"] = "Usuario"
         context["titleForm"] = "Añadir una Usuario"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("user:list")

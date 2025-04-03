@@ -16,9 +16,9 @@ class GroupPermisosDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Tecnologia"
+        context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("tecnologia")
-        context["module"] = "Tecnologia"
+        context["module"] = "Tecnología"
         context["submodule"] = "Grupos"
         context["titleForm"] = "Eliminar un grupo"
         context["tag"] = "Eliminar"

@@ -16,9 +16,9 @@ class GroupPermisosUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Tegnologia"
+        context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("tecnologia")
-        context["module"] = "Tegnologia"
+        context["module"] = "Tecnología"
         context["submodule"] = "Grupos"
         context["titleForm"] = "Actualizar un grupo"
         context["tag"] = "Editar"

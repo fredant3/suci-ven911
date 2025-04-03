@@ -19,10 +19,10 @@ class TecnologiaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Tecnologia de la Informacion"
+        context["titlePage"] = "Tecnología de la Informacion"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Tecnologia de la Informacion"
-        context["submodule"] = "Tecnologia"
+        context["module"] = "Tecnología"
+        context["submodule"] = "Inventario de Tecnología"
         context["listApiUrl"] = reverse_lazy("api_tecnologia:list")
         context["heads"] = columns
         context["updateUrl"] = reverse_lazy("tecnologia:update", args=[0])
