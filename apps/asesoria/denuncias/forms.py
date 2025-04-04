@@ -118,6 +118,8 @@ class DenunciaForm(FormBase):
         required=False,
         validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
+    fecha_denuncia = FormBase.create_date_field("fecha_denuncia")
+    fecha_incidente = FormBase.create_date_field("fecha_incidente")
 
     class Meta:
         model = Denuncia
@@ -146,15 +148,6 @@ class DenunciaForm(FormBase):
             "zona": TextInput(attrs={"placeholder": "Ingrese la zona del incidente"}),
             "motivo": TextInput(
                 attrs={"placeholder": "Ingrese el motivo de la denuncia"}
-            ),
-            "fecha_denuncia": DateInput(
-                attrs={"placeholder": "Seleccione la fecha de denuncia", "type": "date"}
-            ),
-            "fecha_incidente": DateInput(
-                attrs={
-                    "placeholder": "Seleccione la fecha del incidente",
-                    "type": "date",
-                }
             ),
         }
         exclude = [
