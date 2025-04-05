@@ -34,3 +34,7 @@ TIPO_CONTRATOS = (
     ("E", "Externo"),
     ("O", "Otro"),
 )
+BOOLEAN_CHOICES = (
+    (True, "si"),
+    (False, "no"),
+)
