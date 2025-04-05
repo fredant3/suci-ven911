@@ -31,56 +31,40 @@ class LlamadaForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-        # labels = {
-        #     "estado": "Estado de la llamada",
-        #     "mes": "Mes de registro",
-        #     "informativa": "Llamadas informativas",
-        #     "falsa": "Llamadas falsas",
-        #     "realesno": "Llamadas reales no atendidas",
-        #     "realesf": "Llamadas reales finalizadas",
-        #     "videop": "Videollamadas programadas",
-        # }
         widgets = {
-            "estado": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione el estado",
-                }
-            ),
-            "mes": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Mes programado",
-                }
-            ),
             "informativa": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Número de llamadas informativas",
+                    "min": "0",
                 }
             ),
             "falsa": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Número de llamadas falsas",
+                    "min": "0",
                 }
             ),
             "realesno": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Número de llamadas reales no atendidas",
+                    "min": "0",
                 }
             ),
             "realesf": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Número de llamadas reales finalizadas",
+                    "min": "0",
                 }
             ),
             "videop": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Número de videollamadas programadas",
+                    "min": "0",
                 }
             ),
         }

@@ -30,7 +30,12 @@ class TipoSueldoForm(FormBase):
                 }
             ),
             "monto": forms.NumberInput(
-                attrs={"class": "form-control", "placeholder": "0.00", "step": "0.01"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "0.00",
+                    "step": "0.01",
+                    "min": "0",
+                }
             ),
             "descripcion": forms.Textarea(
                 attrs={

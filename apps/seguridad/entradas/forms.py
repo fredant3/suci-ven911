@@ -58,8 +58,11 @@ class EntradaForm(FormBase):
                     "placeholder": "Ej: Av. Principal, Edificio X",
                 }
             ),
-            "cargo": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione un cargo"}
+            "cargo": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ingrese el cargo asignado",
+                }
             ),
         }
 

@@ -7,18 +7,7 @@ from django.utils import timezone
 class FamiliarForm(FormBase):
     fecha_nacimiento = FormBase.create_date_field(
         "fecha_nacimiento",
-<<<<<<< HEAD
-        title="Fecha de Nacimiento",
-    )
-    discapacidad = forms.BooleanField(
-        initial=False,
-        required=False,
-        widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
-        ),
-=======
         "Fecha de nacimiento",
->>>>>>> e31a2b52942413d17d1b2c676ea4316538ac0dee
     )
 
     class Meta:

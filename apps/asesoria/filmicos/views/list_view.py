@@ -9,6 +9,7 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
+from asesoria.filmicos.models import ESTATUS_CHOICES
 
 
 class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -85,3 +86,22 @@ class RegistroFilmicoListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = RegistroFilmicoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                # Convertir estatus a su valor legible
+                for item in data.get("entities", []):
+                    if "estatus" in item:
+                        item["estatus"] = estatus_mapping.get(
+                            item["estatus"], item["estatus"]
+                        )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError:
+                pass  # Manejar error si el contenido no es JSON válido
+        return response

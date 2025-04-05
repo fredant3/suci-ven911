@@ -13,10 +13,10 @@ class PlanificacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Planificacion"
+        context["titlePage"] = "Planificación"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Planificacion"
-        context["submodule"] = "Planificacion"
+        context["module"] = "Planificación"
+        context["submodule"] = "Planificación"
         context["submoduleList"] = (
             ("Objetivos", reverse_lazy("objetivos:list")),
             ("Actividades", reverse_lazy("actividades:list")),

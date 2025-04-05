@@ -42,8 +42,6 @@ class ProyectoForm(FormBase):
                     "placeholder": "Ingrese el nombre del proyecto",
                 }
             ),
-            "fechai": forms.DateInput(attrs={"class": "form-control datepicker"}),
-            "fechac": forms.DateInput(attrs={"class": "form-control datepicker"}),
             "responsableg": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
@@ -84,6 +82,8 @@ class ProyectoForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el monto del proyecto",
+                    "min": "0",
+                    "step": "0.01",
                 }
             ),
         }

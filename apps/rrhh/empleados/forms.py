@@ -59,26 +59,7 @@ class EmpleadoForm(FormBase):
             "cedula": TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
             ),
-<<<<<<< HEAD
-            "sexo": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione el Género"}
-            ),
-            "estado_civil": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione estado civil",
-                }
-            ),
-            "tipo_sangre": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione tipo de sangre",
-                }
-            ),
-            "email": forms.EmailInput(
-=======
             "email": EmailInput(
->>>>>>> e31a2b52942413d17d1b2c676ea4316538ac0dee
                 attrs={"class": "form-control", "placeholder": "ejemplo@correo.com"}
             ),
             "telefono": TextInput(

@@ -21,23 +21,7 @@ class InfraestructuraForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
-        # labels = {
-        #     "estado": "Estado de la infraestructura",
-        #     "mes": "Mes programado",
-        #     "infraestructura": "Nombre de la infraestructura",
-        #     "cantidad": "Cantidad estimada",
-        # }
         widgets = {
-            "estado": forms.TextInput(
-                attrs={
-                    "placeholder": "Estado de la infraestructura",
-                }
-            ),
-            "mes": forms.TextInput(
-                attrs={
-                    "placeholder": "Mes programado",
-                }
-            ),
             "infraestructura": forms.TextInput(
                 attrs={
                     "placeholder": "Nombre de la infraestructura",
@@ -46,6 +30,7 @@ class InfraestructuraForm(FormBase):
             "cantidad": forms.NumberInput(
                 attrs={
                     "placeholder": "Cantidad estimada",
+                    "min": "0",
                 }
             ),
         }
