@@ -37,9 +37,9 @@ class GestionComunicacional(BaseModel):
     municipio = models.CharField("Municipio", name="municipio", max_length=90)
     parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
     estrategias_metodologicas = CharField(
-        max_length=1, choices=ESTRATEGIAS_METODOLOGICAS
+        max_length=2, choices=ESTRATEGIAS_METODOLOGICAS
     )
-    ambito_accion = CharField(max_length=3, choices=ACTIVIDAD_PREVENTIVA)
+    ambito_accion = CharField(max_length=2, choices=ACTIVIDAD_PREVENTIVA)
     poblacion_abordada = models.TextField(
         "población abordada",
         max_length=180,
