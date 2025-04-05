@@ -21,7 +21,7 @@ class UriInfoGeneralForm(FormBase):
     servicioAsistencial = CharField(
         max_length=50, required=False, label="Servicio Asistencial"
     )
-    medico_receptor = CharField(max_length=50, required=False, label="Medico receptor")
+    medico_receptor = CharField(max_length=50, required=False, label="Medico Receptor")
 
     msds = CharField(max_length=50, required=False, label="MS/DS")
 
@@ -59,20 +59,20 @@ class UripacienteForm(FormBase):
         max_length=50, required=False, label="Nombre y Apellido del Paciente"
     )
     cedulapaciente = CharField(
-        max_length=10, required=False, label="Cedula del Paciente"
+        max_length=10, required=False, label="Cédula del Paciente"
     )
     telefonopaciente = CharField(
-        max_length=10, required=False, label="Numero de Telefono del Paciente"
+        max_length=10, required=False, label="Número de Telefono del Paciente"
     )
     generopaciente = CharField(
-        max_length=10, required=False, label="Genero del Paciente"
+        max_length=10, required=False, label="Género del Paciente"
     )
     direccionpaciente = CharField(
-        max_length=100, required=False, label="Direccion del paciente"
+        max_length=100, required=False, label="Dirección del paciente"
     )
     # Autoridades presentes
     organismo = CharField(max_length=50, required=False, label="Nombre del Organismo")
-    jefedecomision = CharField(max_length=50, required=False, label="Jefe de Comision")
+    jefedecomision = CharField(max_length=50, required=False, label="Jefe de Comisión")
     unidad_placa = CharField(max_length=10, required=False, label="Unidad/Placa")
     firma = CharField(max_length=10, required=False, label="Firma")
 
@@ -108,13 +108,13 @@ class UriConsentimientoForm(FormBase):
         max_length=10, required=False, label="Parentesco del Acompañante"
     )
     cedula_acompanante = CharField(
-        max_length=10, required=False, label="Cedula de Acompañante"
+        max_length=10, required=False, label="Cédula de Acompañante"
     )
     telefono_acompanate = CharField(
-        max_length=10, required=False, label="Telefono del Acompañante"
+        max_length=10, required=False, label="Télefono del Acompañante"
     )
     genero_acompanante = CharField(
-        max_length=10, required=False, label="Genero del Acompañante"
+        max_length=10, required=False, label="Género del Acompañante"
     )
     direccion_acompanante = CharField(
         max_length=100, required=False, label="Dirección del Acompañante"
@@ -126,10 +126,10 @@ class UriConsentimientoForm(FormBase):
     )
     edad_testigo = forms.IntegerField(label="Edad Testigo", required=False)
     cedula_testigo = CharField(
-        max_length=10, required=False, label="Cedula del Testigo"
+        max_length=10, required=False, label="Cédula del Testigo"
     )
     telefono_testigo = CharField(
-        max_length=10, required=False, label="Telefono del Testigo"
+        max_length=10, required=False, label="Télefono del Testigo"
     )
     direccion_testigo = CharField(
         max_length=100, required=False, label="Dirección del Acompañante"
@@ -262,12 +262,12 @@ class UriInfoclinicaForm(FormBase):
     # Exposicion
 
     signosSintomas = CharField(
-        max_length=100, required=False, label="Signos y Sintomas"
+        max_length=100, required=False, label="Signos y Síntomas"
     )
-    alergias = CharField(max_length=100, required=False, label="Alergias")
+    alergias = CharField(max_length=100, required=False, label="Alergías")
     medicamentos = CharField(max_length=100, required=False, label="Medicamentos")
     preexistencias = CharField(max_length=100, required=False, label="Preexistencias")
-    ultimaComida = CharField(max_length=100, required=False, label="Última comida")
+    ultimaComida = CharField(max_length=100, required=False, label="Última Comida")
     evento = CharField(max_length=100, required=False, label="Evento")
 
     class Meta:
@@ -330,7 +330,7 @@ class UriSignosVitalesForm(FormBase):
 
     horaMedicion = FormBase.create_time_field("Hora de la Medición")
     frecuenciaCardiaca = CharField(
-        max_length=100, required=False, label="Frecuencia Cardiaca"
+        max_length=100, required=False, label="Frecuencia Cardíaca"
     )
     frecuenciaRespiratoria = CharField(
         max_length=100, required=False, label="Frecuencia Respiratoria"
@@ -389,11 +389,11 @@ class UriReferenciasForm(FormBase):
         max_length=100, required=False, label="Hospital de Origen"
     )
     medicoRefiere = CharField(
-        max_length=100, required=False, label="Medico que refiere"
+        max_length=100, required=False, label="Médico que Refiere"
     )
     horaSalidaHosp = FormBase.create_time_field("Hora de Salida")
     hospitalDestino = CharField(
-        max_length=100, required=False, label="Hospital que recibe"
+        max_length=100, required=False, label="Hospital que Recibe"
     )
     horaLlegadaHosp = FormBase.create_time_field("Hora de Llegada")
     causa = CharField(max_length=100, required=False, label="Ingrese las causas")
