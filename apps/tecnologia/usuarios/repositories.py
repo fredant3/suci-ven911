@@ -14,9 +14,6 @@ class UserRepository(Repository):
             .prefetch_related("contratos")
         )
 
-        print("AAAAAAAAAAAAAAAAAAAAAAA")
-        print(f"Empleados empleados_con_usuarios: {empleados_con_usuarios}")
-
         empleados_map = {emp.usuario_id: emp for emp in empleados_con_usuarios}
 
         users = self.entity.objects.all()

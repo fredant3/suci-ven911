@@ -9,13 +9,12 @@ class UserService(CrudService):
     def get_all_with_related_info(self, draw, start, length, search=None):
         users, empleados_map = self.repository.get_all_with_related()
         result = []
-        print(empleados_map)
 
         for user in users:
             empleado = empleados_map.get(user.id)
             contrato = (
-                empleado.contrato_set.first()
-                if hasattr(user, "empleado") and empleado
+                empleado.contratos.first()  # Cambiado de contrato_set a contratos
+                if empleado and hasattr(empleado, "contratos")
                 else None
             )
 
