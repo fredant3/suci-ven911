@@ -91,4 +91,4 @@ CARGOS = [
 
 class CargosFake:
     def execute(faker):
-        
+        pass
