@@ -7,7 +7,7 @@ from helpers.ControllerMixin import UpdateController
 from templates.sneat import TemplateLayout
 
 from gestion_comunicacional.forms import GestionComunicacionalForm
-from gestion_comunicacional.models import Gestion_comunicacional
+from gestion_comunicacional.models import GestionComunicacional
 from gestion_comunicacional.services import GestioncomunicacionalService
 
 
@@ -33,7 +33,7 @@ class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Gestion_comunicacional.objects.filter(pk=id)
+        return GestionComunicacional.objects.filter(pk=id)
 
 
 class Gestion_comunicacionalUpdateApiView(UpdateController, CheckPermisosMixin):

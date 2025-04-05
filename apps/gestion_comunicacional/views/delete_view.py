@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from gestion_comunicacional.forms import GestionComunicacionalForm
-from gestion_comunicacional.models import Gestion_comunicacional
+from gestion_comunicacional.models import GestionComunicacional
 from gestion_comunicacional.services import GestioncomunicacionalService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
@@ -30,7 +30,7 @@ class EmergenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_queryset(self):
         id = self.kwargs.get("pk")
-        return Gestion_comunicacional.objects.filter(pk=id)
+        return GestionComunicacional.objects.filter(pk=id)
 
 
 class EmergenciaDeleteApiView(DeleteController, CheckPermisosMixin):

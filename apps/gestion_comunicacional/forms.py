@@ -1,5 +1,5 @@
 from django.forms import TextInput, Textarea
-from gestion_comunicacional import GestionComunicacional
+from gestion_comunicacional.models import GestionComunicacional
 from helpers.FormBase import FormBase
 from django import forms
 

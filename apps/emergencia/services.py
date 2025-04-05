@@ -4,7 +4,7 @@ from helpers.CrudMixin import CrudService
 from gestion_comunicacional.repositories import Gestion_comunicacionalRepository
 
 
-class GestioncomunicacionalService(CrudService):
+class EmergenciaService(CrudService):
     def __init__(self):
         self.repository = Gestion_comunicacionalRepository()
 

@@ -2,36 +2,16 @@ from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 from helpers.models import (
-    ESTRATEGIAS_METODOLOGICAS_CHOICES,
-    AMBITO_ACCION_CHOICES,
+    ESTRATEGIAS_METODOLOGICAS,
+    AMBITO_ACCION,
+    ACTIVIDAD_PREVENTIVA,
 )
-from django.db.models import (
-    DateField,
-    EmailField,
-    CharField,
-    BooleanField,
-    ForeignKey,
-    NumField,
-    CASCADE,
-)
-from helpers.validForm import (
-    CedulaVenezolanaValidator,
-    TextValidator,
-    UnicodeAlphaSpaceValidator,
-    PhoneNumberValidator,
-)
-from helpers.validForm import (
-    UnicodeAlphaSpaceValidator,
-    TextValidator,
-    PhoneNumberValidator,
-)
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.db.models import CharField, BooleanField
+from helpers.validForm import CedulaVenezolanaValidator, TextValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
-class Gestion_comunicacional(BaseModel):
+class GestionComunicacional(BaseModel):
     nombre_actividad = models.TextField(
         "Nombre de la actividad",
         max_length=180,
@@ -50,16 +30,16 @@ class Gestion_comunicacional(BaseModel):
         blank=True,
         validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
     )
-    actividad_preventiva = CharField(max_length=3, choices=AMBITO_ACCION_CHOICES)
+    actividad_preventiva = CharField(max_length=3, choices=AMBITO_ACCION)
     estado = models.CharField(
         "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
     )
     municipio = models.CharField("Municipio", name="municipio", max_length=90)
     parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
     estrategias_metodologicas = CharField(
-        max_length=1, choices=ESTRATEGIAS_METODOLOGICAS_CHOICES
+        max_length=1, choices=ESTRATEGIAS_METODOLOGICAS
     )
-    ambito_accion = CharField(max_length=3, choices=AMBITO_ACCION_CHOICES)
+    ambito_accion = CharField(max_length=3, choices=ACTIVIDAD_PREVENTIVA)
     poblacion_abordada = models.TextField(
         "población abordada",
         max_length=180,

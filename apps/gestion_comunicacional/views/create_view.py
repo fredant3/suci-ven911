@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from gestion_comunicacional.forms import gestioncomunicacionalForm
+from gestion_comunicacional.forms import GestionComunicacionalForm
 from gestion_comunicacional.services import GestioncomunicacionalService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
@@ -12,7 +12,7 @@ class GestioncomunicacionalCreateView(
     LoginRequiredMixin, CheckPermisosMixin, CreateView
 ):
     permission_required = "gestioncomunicacional.agregar_gestioscomunicacional"
-    form_class = gestioncomunicacionalForm
+    form_class = GestionComunicacionalForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -31,7 +31,7 @@ class GestioncomunicacionalCreateView(
 
 class EmergenciaCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = "gestionalcomunicacional.agregar_gestioncomunicacional"
-    form_class = gestioncomunicacionalForm
+    form_class = GestionComunicacionalForm
 
     def __init__(self):
         self.service = GestioncomunicacionalService()
