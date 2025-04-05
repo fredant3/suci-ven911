@@ -17,7 +17,6 @@ class ContratoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "comision_servicio",
             "pnb",
             "departamento__nombre",  # Asume que el modelo Departamento tiene un campo 'nombre'
-            "tipo_personal__tipo",  # Asume que el modelo TipoEmpleado tiene un campo 'tipo'
             "cargo__cargo",  # Asume que el modelo Cargo tiene un campo 'cargo'
             "sede__nombre",  # Asume que el modelo Sede tiene un campo 'nombre'
             "fecha_ingreso_911",
@@ -87,7 +86,6 @@ class ContratoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     "Sí" if contrato["comision_servicio"] else "No",
                     "Sí" if contrato["pnb"] else "No",
                     contrato["departamento__nombre"],
-                    contrato["tipo_personal__tipo"],
                     contrato["cargo__cargo"],
                     contrato["sede__nombre"],
                     (
