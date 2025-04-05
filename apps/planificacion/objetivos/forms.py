@@ -37,6 +37,8 @@ class ObjetivoForm(FormBase):
             "meta": forms.NumberInput(
                 attrs={
                     "placeholder": "Escribe aquí la meta cuantitativa",
+                    "step": "0.01",
+                    "min": "0",
                 }
             ),
         }

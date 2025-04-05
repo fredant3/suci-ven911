@@ -9,7 +9,8 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import TransporteService
+from planificacion.transportes.services import TransporteService
+from helpers.BaseModelMixin import ESTADOS_CHOICES, MONTH_CHOICES
 
 
 class TransporteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -21,7 +22,7 @@ class TransporteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("planificacion")
         context["module"] = "Planificación"
         context["submodule"] = "Transportes"
         context["createBtn"] = "Añadir"
@@ -78,3 +79,36 @@ class TransporteListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = TransporteService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+
+                # Create mappings for choices
+                estado_mapping = dict(ESTADOS_CHOICES)
+                mes_mapping = dict(MONTH_CHOICES)
+
+                for item in data.get("entities", []):
+                    # Convert estado code to full name
+                    if "estado" in item:
+                        item["estado"] = estado_mapping.get(
+                            item["estado"], item["estado"]
+                        )
+
+                    # Convert month code to full name
+                    if "mes" in item:
+                        item["mes"] = mes_mapping.get(item["mes"], item["mes"])
+
+                    # Ensure cantidad is a number
+                    if "cantidad" in item:
+                        try:
+                            item["cantidad"] = int(item["cantidad"])
+                        except (ValueError, TypeError):
+                            item["cantidad"] = 0
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+        return response

@@ -28,18 +28,6 @@ class TransporteForm(FormBase):
             "cantidad": "Cantidad de unidades",
         }
         widgets = {
-            "estado": forms.Select(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Estado del transporte",
-                }
-            ),
-            "mes": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Mes de operación",
-                }
-            ),
             "transporte": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
@@ -50,6 +38,7 @@ class TransporteForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Cantidad de unidades",
+                    "min": "0",
                 }
             ),
         }

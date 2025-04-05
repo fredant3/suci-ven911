@@ -9,6 +9,7 @@ from helpers.ControllerMixin import ListController
 from organizacion.normativas.services import NormativaService
 
 from templates.sneat import TemplateLayout
+from organizacion.normativas.models import ESTATUS_CHOICES
 
 
 class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -77,3 +78,27 @@ class NormativaListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = NormativaService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                # Convertir estatus y formatear otros campos
+                for item in data.get("entities", []):
+                    # Formatear estatus
+                    if "estado" in item:
+                        item["estado"] = estatus_mapping.get(
+                            item["estado"], item["estado"]
+                        )
+
+                    # Formatear fecha (si existe)
+                    if "date" in item and item["date"]:
+                        item["date"] = item["date"][:10]  # Solo fecha sin hora
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decodificando JSON: {e}")
+        return response

@@ -10,6 +10,7 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from rrhh.cargos.services import CargoService
+from rrhh.cargos.models import ESTATUS_CHOICES
 
 
 class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -65,3 +66,22 @@ class CargoListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = CargoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                # Convertir estatus a su valor legible
+                for item in data.get("entities", []):
+                    if "estatus" in item:
+                        item["estatus"] = estatus_mapping.get(
+                            item["estatus"], item["estatus"]
+                        )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decodificando JSON: {e}")
+        return response

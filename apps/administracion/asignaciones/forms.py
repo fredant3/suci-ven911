@@ -24,7 +24,11 @@ class AsignacionForm(FormBase):
         }
         widgets = {
             "cantidad": NumberInput(
-                attrs={"placeholder": "Ingrese la cantidad (número entero positivo)"}
+                attrs={
+                    "placeholder": "Ingrese la cantidad (número entero positivo)",
+                    "step": "1",
+                    "min": "1",
+                }
             ),
             "descripcion": TextInput(
                 attrs={"placeholder": "Ingrese una descripción (mínimo 10 caracteres)"}
@@ -56,7 +60,11 @@ class AsignacionUpdateForm(FormBase):
         }
         widgets = {
             "cantidad": NumberInput(
-                attrs={"placeholder": "Ingrese la cantidad (número entero positivo)"}
+                attrs={
+                    "placeholder": "Ingrese la cantidad (número entero positivo)",
+                    "step": "1",
+                    "min": "1",
+                }
             ),
             "descripcion": TextInput(
                 attrs={"placeholder": "Ingrese una descripción (mínimo 10 caracteres)"}

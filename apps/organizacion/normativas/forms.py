@@ -35,18 +35,6 @@ class NormativaForm(FormBase):
                     "placeholder": "Seleccione el archivo",
                 }
             ),
-            "progre": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione el progreso",
-                }
-            ),
-            "estado": forms.Select(
-                attrs={
-                    "class": "form-select mb-3",
-                    "placeholder": "Seleccione el estado",
-                }
-            ),
         }
         exclude = [
             "created_at",

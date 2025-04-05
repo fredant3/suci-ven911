@@ -10,6 +10,7 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from administracion.sedes.services import SedeService
+from administracion.sedes.models import ESTATUS_CHOICES
 
 
 class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -65,3 +66,20 @@ class SedeListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = SedeService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                for item in data.get("entities", []):
+                    item["estatus"] = estatus_mapping.get(
+                        item.get("estatus", ""), item.get("estatus", "")
+                    )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError:
+                pass
+        return response

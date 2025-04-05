@@ -28,6 +28,8 @@ class AsignacionForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el presupuesto",
+                    "min": "0",
+                    "step": "0.01",
                 }
             ),
             "objetivo": forms.TextInput(

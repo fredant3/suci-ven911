@@ -47,18 +47,21 @@ class ReceptorForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el código general",
+                    "min": "0",
                 }
             ),
             "espefr": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el código específico",
+                    "min": "0",
                 }
             ),
             "subespefr": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el subcódigo específico",
+                    "min": "0",
                 }
             ),
             "denomr": forms.TextInput(
@@ -71,6 +74,8 @@ class ReceptorForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el presupuesto asignado",
+                    "min": "0",
+                    "step": "0.01",
                 }
             ),
             "caufechar": forms.TextInput(
@@ -89,12 +94,16 @@ class ReceptorForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el monto comprometido",
+                    "min": "0",
+                    "step": "0.01",
                 }
             ),
             "saldofr": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el saldo final",
+                    "min": "0",
+                    "step": "0.01",
                 }
             ),
             "direccionr": forms.TextInput(

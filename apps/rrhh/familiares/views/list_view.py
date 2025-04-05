@@ -10,6 +10,8 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from rrhh.familiares.services import FamiliarService
+from helpers.models import BOOLEAN_CHOICES, ESTADO_CIVIL_CHOICES, SEXO_CHOICES
+from rrhh.familiares.models import PARENTEZCO, TIPO_HIJO
 
 
 class FamiliarListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -128,3 +130,60 @@ class FamiliarListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = FamiliarService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+
+                # Mapeos para los campos con choices
+                parentezco_map = dict(PARENTEZCO)
+                tipo_hijo_map = dict(TIPO_HIJO)
+                discapacidad_map = dict(BOOLEAN_CHOICES)
+                sexo_map = dict(SEXO_CHOICES)
+                estado_civil_map = dict(ESTADO_CIVIL_CHOICES)
+
+                for item in data.get("entities", []):
+                    # Convertir parentezco
+                    if "parentezco" in item:
+                        item["parentezco"] = parentezco_map.get(
+                            item["parentezco"], item["parentezco"]
+                        )
+
+                    # Convertir tipo_hijo
+                    if "tipo_hijo" in item and item["tipo_hijo"]:
+                        item["tipo_hijo"] = tipo_hijo_map.get(
+                            item["tipo_hijo"], item["tipo_hijo"]
+                        )
+
+                    # Convertir discapacidad
+                    if "discapacidad" in item:
+                        discapacidad_value = item["discapacidad"]
+                        if isinstance(discapacidad_value, bool):
+                            item["discapacidad"] = discapacidad_map.get(
+                                discapacidad_value, str(discapacidad_value)
+                            )
+                        else:
+                            item["discapacidad"] = "Sí" if discapacidad_value else "No"
+
+                    # Convertir sexo
+                    if "sexo" in item:
+                        item["sexo"] = sexo_map.get(item["sexo"], item["sexo"])
+
+                    # Convertir estado_civil
+                    if "estado_civil" in item:
+                        item["estado_civil"] = estado_civil_map.get(
+                            item["estado_civil"], item["estado_civil"]
+                        )
+
+                    # Formatear fecha
+                    if "fecha_nacimiento" in item and item["fecha_nacimiento"]:
+                        item["fecha_nacimiento"] = item["fecha_nacimiento"][
+                            :10
+                        ]  # Solo fecha sin hora
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decodificando JSON: {e}")
+        return response
