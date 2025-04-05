@@ -26,7 +26,7 @@ class Educacion(BaseModel):
         validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
     )
     titulo = models.CharField(
-        "Titulo obtenido",
+        "Titulo Obtenido",
         max_length=120,
         validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
     )

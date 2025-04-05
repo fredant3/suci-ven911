@@ -8,7 +8,7 @@ from django.utils import timezone
 class FamiliarForm(FormBase):
     fecha_nacimiento = FormBase.create_date_field(
         "fecha_nacimiento",
-        title="Fecha de nacimiento",
+        title="Fecha de Nacimiento",
     )
     discapacidad = forms.BooleanField(
         initial=False,

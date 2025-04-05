@@ -4,7 +4,7 @@ from django.forms import TextInput, NumberInput, IntegerField, HiddenInput
 
 
 class ArticuloForm(FormBase):
-    fecha_adq = FormBase.create_date_field("fecha_adq")
+    fecha_adq = FormBase.create_date_field("fecha_adq", "Fecha Adquisición")
 
     class Meta:
         model = Articulo

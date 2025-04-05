@@ -21,7 +21,7 @@ class FamiliarCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Humana"
         context["submodule"] = "Familiares"
-        context["titleForm"] = "Añadir un familiar nuevo"
+        context["titleForm"] = "Añadir un Familiar Nuevo"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("familiares:list")
         context["urlForm"] = reverse_lazy("api_familiares:create")

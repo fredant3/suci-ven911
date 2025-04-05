@@ -24,7 +24,7 @@ ESTATUS_CHOICES = (
 
 
 class TipoEmpleado(BaseModel):
-    tipo_personal = models.CharField(max_length=3, choices=TIPO_PERSONAL_CHOICES)
+    tipo_personal = models.CharField("Tipo Personal", max_length=3, choices=TIPO_PERSONAL_CHOICES)
     estatus = models.CharField("Estatus", max_length=3, choices=ESTATUS_CHOICES)
 
     def toJSON(self):

@@ -4,7 +4,7 @@ from helpers.FormBase import FormBase
 
 
 class CuentaForm(FormBase):
-    pago_movil = forms.BooleanField(
+    pago_movil = forms.BooleanField(label="Pago Móvil",
         required=False,
         widget=forms.CheckboxInput(
             attrs={"class": "form-check-input", "role": "switch", "value": "False"}

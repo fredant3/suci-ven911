@@ -20,7 +20,7 @@ class EducacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Humana"
-        context["submodule"] = "Educacion"
+        context["submodule"] = "Educación"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("educaciones:create")
         context["listApiUrl"] = reverse_lazy("api_educaciones:list")

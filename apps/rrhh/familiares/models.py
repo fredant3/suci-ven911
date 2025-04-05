@@ -36,7 +36,7 @@ TIPO_HIJO = (
 class Familiar(BaseModel):
     parentezco = models.CharField("Parentezco", max_length=7, choices=PARENTEZCO)
     tipo_hijo = models.CharField(
-        "Tipo de hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
+        "Tipo de Hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
     discapacidad = BooleanField(default=False)
     nombres = models.CharField(
@@ -58,7 +58,7 @@ class Familiar(BaseModel):
         ],
     )
     cedula = CharField(
-        "Cédula de identidad",
+        "Cédula de Identidad",
         max_length=15,
         unique=True,
         validators=[
@@ -68,9 +68,9 @@ class Familiar(BaseModel):
         ],
     )
     fecha_nacimiento = models.DateField("Fecha de nacimiento")
-    sexo = models.CharField("Genero", max_length=1, choices=SEXO_CHOICES)
+    sexo = models.CharField("Género", max_length=1, choices=SEXO_CHOICES)
     estado_civil = models.CharField(
-        "Estado civil", max_length=1, choices=ESTADO_CIVIL_CHOICES
+        "Estado Civil", max_length=1, choices=ESTADO_CIVIL_CHOICES
     )
     empleado = models.ForeignKey(
         Empleado, on_delete=models.CASCADE, verbose_name="Empleado"

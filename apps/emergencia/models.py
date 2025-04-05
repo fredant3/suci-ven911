@@ -25,7 +25,7 @@ class Emergencia(BaseModel):
         ],
     )
     telefono_denunciante = models.CharField(
-        "Telefono del denunciante",
+        "Teléfono del denunciante",
         max_length=20,
         blank=True,
         null=True,
@@ -43,7 +43,7 @@ class Emergencia(BaseModel):
     organismo = models.ForeignKey(OrganismoCompetente, on_delete=models.CASCADE)
     incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
     direccion_incidencia = models.TextField(
-        "Direccion de la incidencia",
+        "Dirección de la incidencia",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
@@ -56,7 +56,7 @@ class Emergencia(BaseModel):
     )
     # Localizacion_sede soon
     telefono_cuadrante_paz = models.CharField(
-        "Telefono del Cuadrente de Paz",
+        "Teléfono del Cuadrente de Paz",
         max_length=20,
         blank=True,
         null=True,

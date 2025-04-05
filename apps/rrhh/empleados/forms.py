@@ -8,7 +8,7 @@ from datetime import date
 class EmpleadoForm(FormBase):
     fecha_nacimiento = FormBase.create_date_field(
         "fecha_nacimiento",
-        title="Fecha de nacimiento",
+        title="Fecha de Nacimiento",
     )
     estudia = forms.BooleanField(
         initial=False,
@@ -70,7 +70,7 @@ class EmpleadoForm(FormBase):
                 attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
             ),
             "sexo": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione el género"}
+                attrs={"class": "form-control", "placeholder": "Seleccione el Género"}
             ),
             "estado_civil": forms.Select(
                 attrs={

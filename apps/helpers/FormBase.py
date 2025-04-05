@@ -39,7 +39,7 @@ class FormBase(forms.ModelForm):
             # input_formats=["%d/%m/%Y"],
             error_messages={"invalid": "Ingrese la fecha en el formato DD/MM/YYYY."},
             # No asignar el label aquí si ya está definido en el Meta del formulario
-            label=title.capitalize() if title is not None else None,
+            label=title if title is not None else None,
         )
 
     @staticmethod
