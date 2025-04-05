@@ -5,7 +5,6 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.cargos.models import Cargo
 from rrhh.empleados.models import Empleado
-from rrhh.tipos_empleados.models import TipoEmpleado
 
 TIPO_CONTRATOS_CHOICES = (
     ("pasante", "Pasante"),
@@ -23,9 +22,6 @@ class Contrato(BaseModel):
     pnb = models.BooleanField("Funcionario PNB", default=False)
     departamento = models.ForeignKey(
         Departamento, on_delete=models.CASCADE, verbose_name="Departamento"
-    )
-    tipo_personal = models.ForeignKey(
-        TipoEmpleado, on_delete=models.CASCADE, verbose_name="Tipo de personal"
     )
     cargo = models.ForeignKey(
         Cargo, on_delete=models.CASCADE, verbose_name="Cargo asignado"

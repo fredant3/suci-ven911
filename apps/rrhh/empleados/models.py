@@ -3,7 +3,8 @@ from django.db.models import (
     EmailField,
     CharField,
     BooleanField,
-    IntegerField,
+    ForeignKey,
+    CASCADE,
 )
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
@@ -20,10 +21,8 @@ from helpers.validForm import (
     UnicodeAlphaSpaceValidator,
     PhoneNumberValidator,
 )
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from users.auth.models import User
 
 ESTATUS_CHOICES = (
     ("act", "Activo"),
@@ -90,6 +89,7 @@ class Empleado(BaseModel):
     estudia = BooleanField(default=False)
     discapacitado = BooleanField(default=False)
     contratos = CharField(max_length=3, choices=TIPO_CONTRATOS)
+    usuario = ForeignKey(User, on_delete=CASCADE, blank=True, null=True)
 
     def toJSON(self):
         return model_to_dict(self)

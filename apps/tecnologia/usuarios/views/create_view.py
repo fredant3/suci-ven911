@@ -1,13 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-
 from tecnologia.usuarios.forms import UserForm
-
 from tecnologia.usuarios.services import UserService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
-
 from templates.sneat import TemplateLayout
 
 

@@ -10,7 +10,7 @@ from helpers.management.commands.seed.potencia._Incidencias import IncidenciaFak
 from helpers.management.commands.seed.users._UserFaker import UserFaker
 from helpers.management.commands.seed.emergencia._Incidencias import EmergenciaFake
 
-# from helpers.management.commands.seed.rrhh._TipoSueldoFake import TipoSueldoFake
+from helpers.management.commands.seed.rrhh._TipoSueldoFake import TipoSueldoFake
 
 
 class Command(BaseCommand):
@@ -36,4 +36,4 @@ class Command(BaseCommand):
         EmergenciaFake.tipo_incidencia()
 
         # Gestion Humana (RRHH)
-        # TipoSueldoFake.tipos_sueldos(fake)
+        TipoSueldoFake.tipos_sueldos(fake)
