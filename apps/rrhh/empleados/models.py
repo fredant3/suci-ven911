@@ -1,10 +1,4 @@
-from django.db.models import (
-    DateField,
-    EmailField,
-    CharField,
-    BooleanField,
-    IntegerField,
-)
+from django.db.models import DateField, EmailField, CharField, BooleanField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.models import (
@@ -13,6 +7,7 @@ from helpers.models import (
     NACIONALIDAD_CHOICES,
     TIPO_SANGRE_CHOICES,
     TIPO_CONTRATOS,
+    BOOLEAN_CHOICES,
 )
 from helpers.validForm import (
     CedulaVenezolanaValidator,
@@ -87,8 +82,12 @@ class Empleado(BaseModel):
             TextValidator(),
         ],
     )
-    estudia = BooleanField(default=False)
-    discapacitado = BooleanField(default=False)
+    estudia = BooleanField(
+        "Estudia", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+    )
+    discapacitado = BooleanField(
+        "Discapacitado", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+    )
     contratos = CharField(max_length=3, choices=TIPO_CONTRATOS)
 
     def toJSON(self):

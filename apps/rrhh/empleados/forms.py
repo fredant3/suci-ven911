@@ -1,4 +1,8 @@
-from django import forms
+from django.forms import (
+    TextInput,
+    EmailInput,
+    ValidationError,
+)
 from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
 from helpers.validForm import validate_email
@@ -9,20 +13,6 @@ class EmpleadoForm(FormBase):
     fecha_nacimiento = FormBase.create_date_field(
         "fecha_nacimiento",
         title="Fecha de Nacimiento",
-    )
-    estudia = forms.BooleanField(
-        initial=False,
-        required=False,
-        widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
-        ),
-    )
-    discapacitado = forms.BooleanField(
-        initial=False,
-        required=False,
-        widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
-        ),
     )
 
     class Meta:
@@ -54,21 +44,22 @@ class EmpleadoForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "nombres": forms.TextInput(
+            "nombres": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ingrese los nombres completos",
                 }
             ),
-            "apellidos": forms.TextInput(
+            "apellidos": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ingrese los apellidos completos",
                 }
             ),
-            "cedula": forms.TextInput(
+            "cedula": TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
             ),
+<<<<<<< HEAD
             "sexo": forms.Select(
                 attrs={"class": "form-control", "placeholder": "Seleccione el Género"}
             ),
@@ -85,33 +76,18 @@ class EmpleadoForm(FormBase):
                 }
             ),
             "email": forms.EmailInput(
+=======
+            "email": EmailInput(
+>>>>>>> e31a2b52942413d17d1b2c676ea4316538ac0dee
                 attrs={"class": "form-control", "placeholder": "ejemplo@correo.com"}
             ),
-            "telefono": forms.TextInput(
+            "telefono": TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: 0412-1234567"}
             ),
-            "direccion": forms.TextInput(
+            "direccion": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ej: Av. Principal, Edificio X, Piso 3",
-                }
-            ),
-            "nacionalidad": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione nacionalidad",
-                }
-            ),
-            "estatus": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione estatus laboral",
-                }
-            ),
-            "contratos": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione contratos asociados",
                 }
             ),
         }
@@ -134,23 +110,17 @@ class EmpleadoForm(FormBase):
             )
 
             if edad < 18:
-                raise forms.ValidationError("Debe ser mayor de edad (18+ años).")
+                raise ValidationError("Debe ser mayor de edad (18+ años).")
 
         return fecha
-
-    def clean_discapacitado(self):
-        print(self.cleaned_data.get("discapacitado", False))
-        return self.cleaned_data.get("discapacitado", False)
-
-    def clean_estudia(self):
-        print(self.cleaned_data.get("estudia", False))
-        return self.cleaned_data.get("estudia", False)
 
     def clean(self):
         cleaned_data = super().clean()
 
         # Validación adicional si es discapacitado
-        if cleaned_data.get("discapacitado") and not cleaned_data.get("tipo_sangre"):
+        if cleaned_data.get("discapacitado") == "si" and not cleaned_data.get(
+            "tipo_sangre"
+        ):
             self.add_error(
                 "tipo_sangre",
                 "Debe especificar tipo de sangre para personas con discapacidad",
