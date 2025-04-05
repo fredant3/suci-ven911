@@ -1,3 +1,4 @@
+import random
 from django.core.management.base import BaseCommand
 from faker import Faker
 from helpers.management.commands.seed.administracion._Departamento import (
@@ -40,4 +41,4 @@ class Command(BaseCommand):
         # Gestion Humana (RRHH)
         TipoSueldoFake.execute(fake)
         CargosFake.execute(fake)
-        ContratosFake.execute(fake)
+        ContratosFake.execute(fake, random.randint(1, 55))
