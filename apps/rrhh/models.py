@@ -1,6 +1,5 @@
 from rrhh.cargos.models import Cargo
 from rrhh.contratos.models import Contrato
-from rrhh.cuentas.models import Cuenta
 from rrhh.dotaciones.models import Dotacion
 from rrhh.educaciones.models import Educacion
 from rrhh.empleados.models import Empleado
@@ -15,7 +14,6 @@ __all__ = [
     "Educacion",
     "Dotacion",
     "Familiar",
-    "Cuenta",
     "TipoSueldo",
     "Sueldo",
 ]

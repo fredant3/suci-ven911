@@ -18,11 +18,6 @@ TIPO_CHOICES = (
     ("minimo", "Sueldo Minimo"),
 )
 
-PROFESIONALES_CHOICES = (
-    ("ticket", "Cesta Ticket"),
-    ("ticket", "Cesta Ticket"),
-)
-
 ESTATUS_CHOICES = (
     ("act", "Activo"),
     ("sup", "Suspendido"),

@@ -13,11 +13,6 @@ urlpatterns = [
         "api/cargos/",
         include(("apps.rrhh.cargos.urls_apis", "api_cargos")),
     ),
-    path("cuentas/", include(("apps.rrhh.cuentas.urls", "cuentas"))),
-    path(
-        "api/cuentas/",
-        include(("apps.rrhh.cuentas.urls_apis", "api_cuentas")),
-    ),
     path("dotaciones/", include(("apps.rrhh.dotaciones.urls", "dotaciones"))),
     path(
         "api/dotaciones/",
