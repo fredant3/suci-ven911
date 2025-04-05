@@ -12,7 +12,7 @@ from django.core.validators import (
 
 class Educacion(BaseModel):
     colegio = models.CharField(
-        "Nombre del colegio",
+        "Nombre del Colegio",
         max_length=120,
         validators=[
             MinLengthValidator(9),

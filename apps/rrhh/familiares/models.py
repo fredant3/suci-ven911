@@ -30,15 +30,9 @@ TIPO_HIJO = (
 
 
 class Familiar(BaseModel):
-<<<<<<< HEAD
-    parentezco = models.CharField("Parentezco", max_length=7, choices=PARENTEZCO)
-    tipo_hijo = models.CharField(
-        "Tipo de Hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
-=======
     parentezco = CharField("Parentezco", max_length=7, choices=PARENTEZCO)
     tipo_hijo = CharField(
-        "Tipo de hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
->>>>>>> e31a2b52942413d17d1b2c676ea4316538ac0dee
+        "Tipo de Hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
     discapacidad = BooleanField(
         "Discapacidad", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
@@ -71,23 +65,11 @@ class Familiar(BaseModel):
             CedulaVenezolanaValidator(),
         ],
     )
-<<<<<<< HEAD
-    fecha_nacimiento = models.DateField("Fecha de nacimiento")
-    sexo = models.CharField("Género", max_length=1, choices=SEXO_CHOICES)
-    estado_civil = models.CharField(
-        "Estado Civil", max_length=1, choices=ESTADO_CIVIL_CHOICES
-    )
-    empleado = models.ForeignKey(
-        Empleado, on_delete=models.CASCADE, verbose_name="Empleado"
-    )
-    observacion = models.CharField(
-=======
     fecha_nacimiento = DateField("Fecha de nacimiento")
-    sexo = CharField("Genero", max_length=1, choices=SEXO_CHOICES)
+    sexo = CharField("Género", max_length=1, choices=SEXO_CHOICES)
     estado_civil = CharField("Estado civil", max_length=1, choices=ESTADO_CIVIL_CHOICES)
     empleado = ForeignKey(Empleado, on_delete=CASCADE, verbose_name="Empleado")
     observacion = CharField(
->>>>>>> e31a2b52942413d17d1b2c676ea4316538ac0dee
         "Observaciones",
         max_length=150,
         blank=True,
