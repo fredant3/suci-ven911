@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from gestion_comunicacional.info.InfoController import InfoController
 

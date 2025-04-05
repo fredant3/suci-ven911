@@ -34,3 +34,21 @@ TIPO_CONTRATOS = (
     ("E", "Externo"),
     ("O", "Otro"),
 )
+ESTRATEGIAS_METODOLOGICAS = (
+    ("AT", "Acompañamineto tecnico"),
+    ("S", "Supervición"),
+    ("C", "Capacitacion"),
+)
+AMBITO_ACCION = (
+    ("Ed", "Educativo"),
+    ("D", "Deportivo"),
+    ("R", "Recreativo"),
+    ("C", "Cultural"),
+    ("A", "Alimentación"),
+    ("Sa", "Salud"),
+    ("AJS", "Asesoria juridica y social"),
+)
+ACTIVIDAD_PREVENTIVA = (
+    ("I", "Individual"),
+    ("Fp", "Frente preventivo"),
+)
