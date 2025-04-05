@@ -20,7 +20,7 @@ class DepartamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView)
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administración"
         context["submodule"] = "Departamentos"
-        context["titleForm"] = "Registrar nuevo departamento"
+        context["titleForm"] = "Registrar Nuevo Departamento"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("departamentos:list")
         context["urlForm"] = reverse_lazy("api_departamentos:create")

@@ -159,7 +159,7 @@ class Denunciado(BaseModel):
 class Denuncia(BaseModel):
     estatus = CharField(max_length=3, choices=ESTATUS_CHOICES)
     ente = CharField(
-        "Ente relacionado",
+        "Ente Relacionado",
         max_length=50,
         blank=True,
         null=True,
@@ -172,7 +172,7 @@ class Denuncia(BaseModel):
         validators=[MinLengthValidator(6), MaxLengthValidator(400), TextValidator()],
     )
     zona = CharField(
-        "Zona del incidente",
+        "Zona del Incidente",
         max_length=150,
         blank=True,
         null=True,

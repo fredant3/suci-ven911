@@ -18,19 +18,19 @@ from helpers.validForm import (
 
 class DenunciaForm(FormBase):
     nombres_denunciante = CharField(
-        label="Nombre del denunciante",
+        label="Nombre del Denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese el nombre del denunciante"}),
         max_length=120,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos_denunciante = CharField(
-        label="Apellido del denunciante",
+        label="Apellido Del Denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese el apellido del denunciante"}),
         max_length=120,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula_denunciante = CharField(
-        label="Cédula del denunciante",
+        label="Cédula del Denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese la cédula del denunciante"}),
         max_length=15,
         validators=[
@@ -40,7 +40,7 @@ class DenunciaForm(FormBase):
         ],
     )
     telefono_denunciante = CharField(
-        label="Teléfono del denunciante",
+        label="Teléfono del Denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese el teléfono del denunciante"}),
         max_length=20,
         required=False,
@@ -51,7 +51,7 @@ class DenunciaForm(FormBase):
         ],
     )
     email_denunciante = EmailField(
-        label="Correo electrónico del denunciante",
+        label="Correo electrónico del Denunciante",
         widget=EmailInput(
             attrs={"placeholder": "Ingrese el correo electrónico del denunciante"}
         ),
@@ -60,28 +60,28 @@ class DenunciaForm(FormBase):
         validators=[validate_email],
     )
     direccion_denunciante = CharField(
-        label="Dirección del denunciante",
+        label="Dirección del Denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciante"}),
         max_length=180,
         validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
     )
 
     nombres_denunciado = CharField(
-        label="Nombre del denunciado",
+        label="Nombre del Denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese el nombre del denunciado"}),
         max_length=120,
         required=False,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos_denunciado = CharField(
-        label="Apellido del denunciado",
+        label="Apellido del Denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese el apellido del denunciado"}),
         max_length=120,
         required=False,
         validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula_denunciado = CharField(
-        label="Cédula del denunciado",
+        label="Cédula del Denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese la cédula del denunciado"}),
         max_length=15,
         required=False,
@@ -92,7 +92,7 @@ class DenunciaForm(FormBase):
         ],
     )
     telefono_denunciado = CharField(
-        label="Teléfono del denunciado",
+        label="Teléfono del Denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese el teléfono del denunciado"}),
         max_length=20,
         required=False,
@@ -103,7 +103,7 @@ class DenunciaForm(FormBase):
         ],
     )
     email_denunciado = EmailField(
-        label="Correo electrónico del denunciado",
+        label="Correo electrónico del Denunciado",
         widget=EmailInput(
             attrs={"placeholder": "Ingrese el correo electrónico del denunciado"}
         ),
@@ -112,7 +112,7 @@ class DenunciaForm(FormBase):
         validators=[validate_email],
     )
     direccion_denunciado = CharField(
-        label="Dirección del denunciado",
+        label="Dirección del Denunciado",
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciado"}),
         max_length=180,
         required=False,
@@ -146,9 +146,7 @@ class DenunciaForm(FormBase):
         widgets = {
             "ente": TextInput(attrs={"placeholder": "Ingrese el ente relacionado"}),
             "zona": TextInput(attrs={"placeholder": "Ingrese la zona del incidente"}),
-            "motivo": TextInput(
-                attrs={"placeholder": "Ingrese el motivo de la denuncia"}
-            ),
+            "motivo": TextInput(attrs={"placeholder": "Ingrese el motivo de la denuncia"}),
         }
         exclude = [
             "created_at",
