@@ -100,6 +100,22 @@ TIPO_CONTRATOS_CHOICES = (
     ("contrato", "Contratado"),
     ("fijo", "Personal Fijo"),
 )
+ESTATUS_CONTRATO_CHOICES = (
+    ("act", "Activo"),
+    ("pen", "Pendiente de Inicio"),
+    ("sus", "Suspendido"),
+    ("ter", "Terminado"),
+    ("ren", "Renuncia Voluntaria"),
+    ("des", "Despido"),
+    ("fin", "Finalizado por Término de Contrato"),
+    ("inc", "Incapacitado"),
+    ("lic", "En Licencia"),
+    ("vac", "En Vacaciones"),
+    ("aju", "Ajuste de Contrato"),
+    ("ces", "Cesado"),
+    ("ret", "Jubilado/Retirado"),
+    ("fal", "Fallecido"),
+)
 
 
 class ContratosFake:
@@ -125,13 +141,15 @@ class ContratosFake:
         sexo = random.choice(["f", "m"])
         nombres = faker.first_name_female() if sexo == "f" else faker.first_name_male()
         apellidos = faker.last_name() + " " + faker.last_name()
+        cedula = faker.unique.numerify("V########")
+        usuario = ContratosFake.usuarios(cedula)
 
         return Empleado.objects.create(
             estatus=random.choice(["act", "vac", "sus"]),
             nombres=nombres,
             apellidos=apellidos,
             nacionalidad=random.choice(["ve", "ex"]),
-            cedula=faker.unique.numerify("V########"),
+            cedula=cedula,
             sexo=sexo,
             fecha_nacimiento=faker.date_of_birth(minimum_age=18, maximum_age=65),
             estado_civil=random.choice(["s", "c", "d", "v"]),
@@ -141,14 +159,14 @@ class ContratosFake:
             direccion=faker.address(),
             estudia=random.choice([True, False]),
             discapacitado=random.choice([True, False]),
-            contratos=random.choice([t[0] for t in TIPO_CONTRATOS]),
-            usuario=None,
+            tipo_contrato=random.choice([t[0] for t in TIPO_CONTRATOS]),
+            usuario=usuario,
         )
 
-    def usuarios(empleado: Empleado):
-        User.objects.create(
-            username=empleado.cedula,
-            dni=empleado.cedula,
+    def usuarios(cedula: str):
+        return User.objects.create(
+            username=cedula,
+            dni=cedula,
             password="pbkdf2_sha256$720000$Qr3Og7wGXM7qADiK7Vlx7V$Q8D6HF/H5CzO3W0ub+CTnwMjdnTzWdqJjxD78YEcTf0=",  # SUCI-Ven911
             is_staff=False,
             is_active=True,
@@ -275,5 +293,6 @@ class ContratosFake:
             fasmij=random.choice([True, False]),
             fecha_ingreso=fecha_ingreso,
             fecha_culminacion=fecha_culminacion,
+            estatus=random.choice([t[0] for t in ESTATUS_CONTRATO_CHOICES]),
             empleado=empleado,
         )
