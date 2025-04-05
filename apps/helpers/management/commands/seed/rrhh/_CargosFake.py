@@ -91,4 +91,9 @@ CARGOS = [
 
 class CargosFake:
     def execute(faker):
-        pass
+        for cargo in CARGOS:
+            model = Cargo.objects.create(
+                cargo=cargo,
+                estatus=random.choice(["act", "ina", "inv", "cer"]),
+            )
+            print(f"Cargo {model.cargo} registrado")

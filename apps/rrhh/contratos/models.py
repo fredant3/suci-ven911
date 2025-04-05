@@ -1,6 +1,6 @@
 from administracion.departamentos.models import Departamento
 from administracion.sedes.models import Sede
-from django.db import models
+from django.db.models import CASCADE, CharField, DateField, ForeignKey, BooleanField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.cargos.models import Cargo
@@ -13,27 +13,44 @@ TIPO_CONTRATOS_CHOICES = (
     ("fijo", "Personal Fijo"),
 )
 
+ESTATUS_CONTRATO_CHOICES = (
+    ("act", "Activo"),
+    ("pen", "Pendiente de Inicio"),
+    ("sus", "Suspendido"),
+    ("ter", "Terminado"),
+    ("ren", "Renuncia Voluntaria"),
+    ("des", "Despido"),
+    ("fin", "Finalizado por Término de Contrato"),
+    ("inc", "Incapacitado"),
+    ("lic", "En Licencia"),
+    ("vac", "En Vacaciones"),
+    ("aju", "Ajuste de Contrato"),
+    ("ces", "Cesado"),
+    ("ret", "Jubilado/Retirado"),
+    ("fal", "Fallecido"),
+)
+
 
 class Contrato(BaseModel):
-    tipo = models.CharField(
-        "Tipo de contrato", max_length=8, choices=TIPO_CONTRATOS_CHOICES
+    tipo = CharField("Tipo de contrato", max_length=8, choices=TIPO_CONTRATOS_CHOICES)
+    comision_servicio = BooleanField("Comision servicio", default=False)
+    pnb = BooleanField("Funcionario PNB", default=False)
+    departamento = ForeignKey(
+        Departamento, on_delete=CASCADE, verbose_name="Departamento"
     )
-    comision_servicio = models.BooleanField("Comision servicio", default=False)
-    pnb = models.BooleanField("Funcionario PNB", default=False)
-    departamento = models.ForeignKey(
-        Departamento, on_delete=models.CASCADE, verbose_name="Departamento"
-    )
-    cargo = models.ForeignKey(
-        Cargo, on_delete=models.CASCADE, verbose_name="Cargo asignado"
-    )
-    sede = models.ForeignKey(Sede, on_delete=models.CASCADE, verbose_name="Sede")
-    fecha_ingreso_911 = models.DateField("Fecha de ingreso al Ven-911")
-    fecha_ingreso_apn = models.DateField("Fecha de ingreso APN")
-    fasmij = models.BooleanField(default=False)
-    fecha_ingreso = models.DateField("Fecha de ingreso")
-    fecha_culminacion = models.DateField("Fecha de culminacion", null=True, blank=True)
-    empleado = models.ForeignKey(
-        Empleado, on_delete=models.CASCADE, verbose_name="Nombre del empleado"
+    cargo = ForeignKey(Cargo, on_delete=CASCADE, verbose_name="Cargo asignado")
+    sede = ForeignKey(Sede, on_delete=CASCADE, verbose_name="Sede")
+    fecha_ingreso_911 = DateField("Fecha de ingreso al Ven-911")
+    fecha_ingreso_apn = DateField("Fecha de ingreso APN")
+    fasmij = BooleanField(default=False)
+    fecha_ingreso = DateField("Fecha de ingreso")
+    fecha_culminacion = DateField("Fecha de culminacion", null=True, blank=True)
+    estatus = CharField(max_length=3, choices=ESTATUS_CONTRATO_CHOICES, default="pen")
+    empleado = ForeignKey(
+        Empleado,
+        on_delete=CASCADE,
+        verbose_name="Nombre del empleado",
+        related_name="contratos",
     )
 
     def toJSON(self):

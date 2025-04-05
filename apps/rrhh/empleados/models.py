@@ -3,7 +3,7 @@ from django.db.models import (
     EmailField,
     CharField,
     BooleanField,
-    ForeignKey,
+    OneToOneField,
     CASCADE,
 )
 from django.forms import model_to_dict
@@ -88,8 +88,10 @@ class Empleado(BaseModel):
     )
     estudia = BooleanField(default=False)
     discapacitado = BooleanField(default=False)
-    contratos = CharField(max_length=3, choices=TIPO_CONTRATOS)
-    usuario = ForeignKey(User, on_delete=CASCADE, blank=True, null=True)
+    tipo_contrato = CharField(max_length=3, choices=TIPO_CONTRATOS)
+    usuario = OneToOneField(
+        User, on_delete=CASCADE, blank=True, null=True, related_name="empleado"
+    )
 
     def toJSON(self):
         return model_to_dict(self)
