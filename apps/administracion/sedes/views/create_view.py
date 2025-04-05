@@ -21,7 +21,7 @@ class SedeCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administración"
         context["submodule"] = "Sedes"
-        context["titleForm"] = "Agregar sede"
+        context["titleForm"] = "Agregar Sede"
         context["tag"] = "Registrar sede"
         context["listUrl"] = reverse_lazy("sedes:list")
         context["urlForm"] = reverse_lazy("api_sedes:create")

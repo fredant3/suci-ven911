@@ -19,7 +19,7 @@ class EducacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Humana"
         context["submodule"] = "Educación"
-        context["titleForm"] = "Añadir una educación nueva"
+        context["titleForm"] = "Añadir una Educación Nueva"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("educaciones:list")
         context["urlForm"] = reverse_lazy("api_educaciones:create")
