@@ -1,13 +1,14 @@
-from django.forms import BooleanField, CheckboxInput
+from django import forms
 from users.auth.models import User
 from helpers.FormBase import FormBase
-from django import forms
+from helpers.models import BOOLEAN_CHOICES
 
 
 class UserForm(FormBase):
-    is_active = BooleanField(
-        required=False,
-        widget=CheckboxInput(attrs={"value": "False"}),
+    is_active = forms.ChoiceField(
+        choices=BOOLEAN_CHOICES,
+        widget=forms.Select,
+        label="Activo",
     )
 
     class Meta:
@@ -21,13 +22,11 @@ class UserForm(FormBase):
         labels = {
             "username": "Usuario",
             "dni": "DNI",
-            "is_active": "Activo",
             "password": "Contraseña",
         }
         widgets = {
             "username": forms.TextInput(attrs={"placeholder": "Usuario"}),
             "dni": forms.TextInput(attrs={"placeholder": "DNI"}),
-            "is_active": forms.CheckboxInput(attrs={"value": "False"}),
             "password": forms.PasswordInput(
                 attrs={"placeholder": "Contraseña", "class": "input__input"}
             ),

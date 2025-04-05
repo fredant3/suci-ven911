@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import DateField, CharField, ForeignKey, CASCADE, BooleanField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
 from helpers.models import ESTADO_CIVIL_CHOICES, SEXO_CHOICES
@@ -8,16 +8,12 @@ from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
 )
-from django.db.models import (
-    CharField,
-    BooleanField,
-)
 from helpers.validForm import (
     CedulaVenezolanaValidator,
     TextValidator,
     UnicodeAlphaSpaceValidator,
-    PhoneNumberValidator,
 )
+from helpers.models import BOOLEAN_CHOICES
 
 PARENTEZCO = (
     ("hermano", "Hermana|Hermano"),
@@ -34,12 +30,14 @@ TIPO_HIJO = (
 
 
 class Familiar(BaseModel):
-    parentezco = models.CharField("Parentezco", max_length=7, choices=PARENTEZCO)
-    tipo_hijo = models.CharField(
+    parentezco = CharField("Parentezco", max_length=7, choices=PARENTEZCO)
+    tipo_hijo = CharField(
         "Tipo de hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
-    discapacidad = BooleanField(default=False)
-    nombres = models.CharField(
+    discapacidad = BooleanField(
+        "Discapacidad", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+    )
+    nombres = CharField(
         "Nombres del Familiar",
         max_length=90,
         validators=[
@@ -48,7 +46,7 @@ class Familiar(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    apellidos = models.CharField(
+    apellidos = CharField(
         "Apellidos del Familiar",
         max_length=90,
         validators=[
@@ -67,15 +65,11 @@ class Familiar(BaseModel):
             CedulaVenezolanaValidator(),
         ],
     )
-    fecha_nacimiento = models.DateField("Fecha de nacimiento")
-    sexo = models.CharField("Genero", max_length=1, choices=SEXO_CHOICES)
-    estado_civil = models.CharField(
-        "Estado civil", max_length=1, choices=ESTADO_CIVIL_CHOICES
-    )
-    empleado = models.ForeignKey(
-        Empleado, on_delete=models.CASCADE, verbose_name="Empleado"
-    )
-    observacion = models.CharField(
+    fecha_nacimiento = DateField("Fecha de nacimiento")
+    sexo = CharField("Genero", max_length=1, choices=SEXO_CHOICES)
+    estado_civil = CharField("Estado civil", max_length=1, choices=ESTADO_CIVIL_CHOICES)
+    empleado = ForeignKey(Empleado, on_delete=CASCADE, verbose_name="Empleado")
+    observacion = CharField(
         "Observaciones",
         max_length=150,
         blank=True,

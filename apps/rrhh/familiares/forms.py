@@ -1,21 +1,13 @@
-from django import forms
+from django.forms import ValidationError, TextInput, Textarea
 from rrhh.familiares.models import Familiar
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_cedula
 from django.utils import timezone
 
 
 class FamiliarForm(FormBase):
     fecha_nacimiento = FormBase.create_date_field(
         "fecha_nacimiento",
-        title="Fecha de nacimiento",
-    )
-    discapacidad = forms.BooleanField(
-        initial=False,
-        required=False,
-        widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
-        ),
+        "Fecha de nacimiento",
     )
 
     class Meta:
@@ -43,58 +35,31 @@ class FamiliarForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "parentezco": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione el parentesco",
-                }
-            ),
-            "tipo_hijo": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione tipo de hijo",
-                }
-            ),
-            "nombres": forms.TextInput(
+            "nombres": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ingrese nombres completos",
                 }
             ),
-            "apellidos": forms.TextInput(
+            "apellidos": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ingrese apellidos completos",
                 }
             ),
-            "sexo": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione el género"}
-            ),
-            "estado_civil": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione estado civil",
-                }
-            ),
-            "empleado": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione empleado"}
-            ),
-            "observacion": forms.Textarea(
+            "observacion": Textarea(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ingrese observaciones relevantes",
                     "rows": 3,
                 }
             ),
-            "discapacidad": forms.CheckboxInput(
-                attrs={"class": "form-check-input", "role": "switch"}
-            ),
         }
 
     def clean_fecha_nacimiento(self):
         data = self.cleaned_data.get("fecha_nacimiento")
         if data and data > timezone.now().date():
-            raise forms.ValidationError("La fecha de nacimiento no puede ser futura")
+            raise ValidationError("La fecha de nacimiento no puede ser futura")
         return data
 
     def clean(self):
@@ -102,7 +67,7 @@ class FamiliarForm(FormBase):
         discapacidad = cleaned_data.get("discapacidad")
         observacion = cleaned_data.get("observacion", "")
 
-        if discapacidad and not observacion:
+        if discapacidad == "si" and not observacion:
             self.add_error(
                 "observacion",
                 "Debe agregar una observación cuando existe una discapacidad",
