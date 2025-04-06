@@ -1,5 +1,4 @@
 from io import BytesIO
-
 from asesoria.filmicos.models import RegistroFilmico
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse

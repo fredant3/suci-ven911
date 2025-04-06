@@ -6,6 +6,15 @@ from emergencia.organismo.repositories import OrganismoRepository
 
 
 class EmergenciaService(CrudService):
+    select={
+        "id",
+        "denunciante",
+        "telefono_denunciante",
+        "incidencia__nombre_incidencia",
+        "organismo__nombre",
+        "created_by",
+    }
+
     def __init__(self):
         self.repository = EmergenciaRepository()
         self.repositoryIncidence = TipoIncidenciaRepository()
