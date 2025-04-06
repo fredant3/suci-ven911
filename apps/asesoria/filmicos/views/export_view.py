@@ -1,5 +1,5 @@
 from io import BytesIO
-from asesoria.filmicos.models import RegistroFilmico
+from asesoria.filmicos.models import RegistroFilmico, ESTATUS_CHOICES
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse
 from django.views.generic import TemplateView
