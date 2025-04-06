@@ -26,7 +26,7 @@ class RegistroFilmico(BaseModel):
     motivo_solicitud = models.TextField(
         "Motivo de Solicitud",
         max_length=400,
-        validators=[MinLengthValidator(5), MaxLengthValidator(400), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(400), TextValidator()],
     )
     ente_solicita = models.CharField(
         "Ente que Solicita",
