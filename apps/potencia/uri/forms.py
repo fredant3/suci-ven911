@@ -32,7 +32,7 @@ class UriInfoGeneralForm(FormBase):
         label="Numeración Interna",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la numeración interna"}),
     )
-    
+
     # Centro Asistencial Recibido
     centroAsistencial = CharField(
         max_length=50,
@@ -44,7 +44,9 @@ class UriInfoGeneralForm(FormBase):
         max_length=50,
         required=False,
         label="Servicio Asistencial",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el servicio asistencial"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "Ingrese el servicio asistencial"}
+        ),
     )
     medico_receptor = CharField(
         max_length=50,
@@ -106,19 +108,13 @@ class UripacienteForm(FormBase):
         label="Número de Teléfono del Paciente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el teléfono"}),
     )
-    generopaciente = CharField(
-        max_length=10,
-        required=False,
-        label="Género del Paciente",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el género"}),
-    )
     direccionpaciente = CharField(
         max_length=100,
         required=False,
         label="Dirección del Paciente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la dirección"}),
     )
-    
+
     # Autoridades presentes
     organismo = CharField(
         max_length=50,
@@ -194,12 +190,6 @@ class UriConsentimientoForm(FormBase):
         label="Teléfono del Acompañante",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el teléfono"}),
     )
-    genero_acompanante = CharField(
-        max_length=10,
-        required=False,
-        label="Género del Acompañante",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el género"}),
-    )
     direccion_acompanante = CharField(
         max_length=100,
         required=False,
@@ -264,24 +254,8 @@ class UriConsentimientoForm(FormBase):
 
 
 class UriDireccionForm(FormBase):
-    estado_evento = CharField(
-        max_length=20,
-        required=False,
-        label="Estado",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el estado"}),
-    )
-    municipio_evento = CharField(
-        max_length=20,
-        required=False,
-        label="Municipio",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el municipio"}),
-    )
-    parroquia_evento = CharField(
-        max_length=20,
-        required=False,
-        label="Parroquia",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la parroquia"}),
-    )
+    municipio_evento = CharField(max_length=20, required=False, label="Municipio")
+    parroquia_evento = CharField(max_length=20, required=False, label="Parroquia")
     sector_evento = CharField(
         max_length=100,
         required=False,
@@ -292,7 +266,9 @@ class UriDireccionForm(FormBase):
         max_length=100,
         required=False,
         label="Calle/Avenida/Carretera",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese calle/avenida/carretera"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "Ingrese calle/avenida/carretera"}
+        ),
     )
     casa_evento = CharField(
         max_length=100,
@@ -401,20 +377,16 @@ class UriInfoclinicaForm(FormBase):
     )
 
     ecgO = forms.IntegerField(
-        required=False, 
-        widget=forms.NumberInput(attrs={"placeholder": "O"})
+        required=False, widget=forms.NumberInput(attrs={"placeholder": "O"})
     )
     ecgV = forms.IntegerField(
-        required=False, 
-        widget=forms.NumberInput(attrs={"placeholder": "V"})
+        required=False, widget=forms.NumberInput(attrs={"placeholder": "V"})
     )
     ecgM = forms.IntegerField(
-        required=False, 
-        widget=forms.NumberInput(attrs={"placeholder": "M"})
+        required=False, widget=forms.NumberInput(attrs={"placeholder": "M"})
     )
     ecgTotal = forms.IntegerField(
-        required=False, 
-        widget=forms.NumberInput(attrs={"placeholder": "Total"})
+        required=False, widget=forms.NumberInput(attrs={"placeholder": "Total"})
     )
 
     signosSintomas = CharField(
@@ -520,7 +492,9 @@ class UriSignosVitalesForm(FormBase):
         max_length=100,
         required=False,
         label="Frecuencia Respiratoria",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese frecuencia respiratoria"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "Ingrese frecuencia respiratoria"}
+        ),
     )
     presionArterial = CharField(
         max_length=100,
@@ -577,7 +551,9 @@ class UriSignosVitalesForm(FormBase):
         max_length=500,
         required=False,
         label="Resultados de la Evaluación Física Cefalocaudal",
-        widget=forms.Textarea(attrs={"placeholder": "Ingrese resultados de evaluación"}),
+        widget=forms.Textarea(
+            attrs={"placeholder": "Ingrese resultados de evaluación"}
+        ),
     )
 
     class Meta:

@@ -21,7 +21,6 @@ class ContratoForm(FormBase):
             "comision_servicio",
             "pnb",
             "departamento",
-            "tipo_personal",
             "cargo",
             "sede",
             "fecha_ingreso_911",

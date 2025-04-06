@@ -3,11 +3,7 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.empleados.models import Empleado
 from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
-from django.core.validators import (
-    MinValueValidator,
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Educacion(BaseModel):

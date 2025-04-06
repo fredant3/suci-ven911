@@ -1,7 +1,8 @@
 from django import forms
 from users.auth.models import User
 from helpers.FormBase import FormBase
-from helpers.models import BOOLEAN_CHOICES
+from django import forms
+from apps.rrhh.models import Empleado
 
 
 class UserForm(FormBase):
@@ -9,6 +10,17 @@ class UserForm(FormBase):
         choices=BOOLEAN_CHOICES,
         widget=forms.Select,
         label="Activo",
+    )
+
+    empleado = forms.ModelChoiceField(
+        queryset=Empleado.objects.all(),
+        label="Empleado",
+        widget=forms.Select(
+            attrs={
+                "class": "select-with-search",
+                "data-placeholder": "Buscar empleado...",
+            }
+        ),
     )
 
     class Meta:

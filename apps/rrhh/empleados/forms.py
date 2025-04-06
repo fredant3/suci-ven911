@@ -32,7 +32,7 @@ class EmpleadoForm(FormBase):
             "direccion",
             "estudia",
             "discapacitado",
-            "contratos",
+            "tipo_contrato",
         )
         exclude = [
             "created_at",

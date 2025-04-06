@@ -63,7 +63,10 @@ class ServiceUtilMixin:
         for item in payload:
             data.append(item)
 
-        records_total = entities.count()
+        try:
+            records_total = entities.count()
+        except Exception:
+            records_total = len(entities)
 
         response["draw"] = draw
         response["entities"] = data

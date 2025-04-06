@@ -1,13 +1,10 @@
 from django.db.models import DateField, CharField, ForeignKey, CASCADE, BooleanField
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
+from helpers.BaseModelMixin import BaseModel
 from helpers.models import ESTADO_CIVIL_CHOICES, SEXO_CHOICES
 from rrhh.empleados.models import Empleado
-from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.db.models import CharField, BooleanField
 from helpers.validForm import (
     CedulaVenezolanaValidator,
     TextValidator,

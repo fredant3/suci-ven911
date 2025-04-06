@@ -13,7 +13,7 @@ class UserManager(BaseUserManager):
         if not dni:
             raise ValueError("La cédula de identidad es requerida")
         user = self.model(username=username, dni=dni, **extra_fields)
-        user.set_password(password)
+        user.set_password("SUCI-Ven911")
         user.save()
         return user
 

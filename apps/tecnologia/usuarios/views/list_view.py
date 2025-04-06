@@ -1,15 +1,13 @@
 import json
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from django.http import JsonResponse
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
-
 from templates.sneat import TemplateLayout
-
-from ..services import UserService
+from tecnologia.usuarios.services import UserService
 
 
 class UserListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -24,8 +22,6 @@ class UserListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Tecnología"
         context["submodule"] = "Usuario"
-        context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("user:create")
         context["listApiUrl"] = reverse_lazy("api_user:list")
         context["updateUrl"] = reverse_lazy("user:update", args=[0])
         context["deleteUrl"] = reverse_lazy("user:delete", args=[0])
@@ -39,29 +35,64 @@ class UserListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "data": "id",
                 "name": "id",
                 "title": "#",
-                "orderable": "true",
-                "searchable": "true",
+                "orderable": True,
+                "searchable": True,
             },
             {
                 "data": "username",
                 "name": "username",
                 "title": "Usuario",
-                "orderable": "false",
-                "searchable": "false",
+                "orderable": True,
+                "searchable": True,
             },
             {
-                "data": "dni",
-                "name": "dni",
-                "title": "Cédula de Iden.",
-                "orderable": "false",
-                "searchable": "false",
+                "data": "empleado_nombre",
+                "name": "empleado_nombre",
+                "title": "Empleado",
+                "orderable": True,
+                "searchable": True,
+            },
+            {
+                "data": "empleado_cedula",
+                "name": "empleado_cedula",
+                "title": "Cédula",
+                "orderable": True,
+                "searchable": True,
+            },
+            {
+                "data": "tipo_contrato",
+                "name": "tipo_contrato",
+                "title": "Tipo Contrato",
+                "orderable": True,
+                "searchable": True,
+            },
+            {
+                "data": "estatus_contrato",
+                "name": "estatus_contrato",
+                "title": "Estatus Contrato",
+                "orderable": True,
+                "searchable": True,
+            },
+            {
+                "data": "departamento",
+                "name": "departamento",
+                "title": "Departamento",
+                "orderable": True,
+                "searchable": True,
+            },
+            {
+                "data": "cargo",
+                "name": "cargo",
+                "title": "Cargo",
+                "orderable": True,
+                "searchable": True,
             },
             {
                 "data": "is_active",
                 "name": "is_active",
-                "title": "Estatus",
-                "orderable": "false",
-                "searchable": "false",
+                "title": "Estatus Usuario",
+                "orderable": True,
+                "searchable": True,
             },
         ]
 
@@ -71,3 +102,21 @@ class UserListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = UserService()
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        draw = int(self.request.GET.get("draw")) if self.request.GET.get("draw") else 1
+        start = (
+            int(self.request.GET.get("start")) if self.request.GET.get("start") else 0
+        )
+        length = (
+            int(self.request.GET.get("length"))
+            if self.request.GET.get("length")
+            else 10
+        )
+        search = self.request.GET.get("search[value]") or None
+        try:
+            data = self.service.get_all_with_related_info(draw, start, length, search)
+        except Exception as e:
+            data["error"] = str(e)
+        return JsonResponse(data, safe=False)
