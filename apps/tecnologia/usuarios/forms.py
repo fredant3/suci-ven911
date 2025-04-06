@@ -3,6 +3,7 @@ from users.auth.models import User
 from helpers.FormBase import FormBase
 from django import forms
 from apps.rrhh.models import Empleado
+from helpers.models import BOOLEAN_CHOICES
 
 
 class UserForm(FormBase):
