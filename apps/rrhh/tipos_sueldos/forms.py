@@ -23,12 +23,6 @@ class TipoSueldoForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "tipo": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione tipo de sueldo",
-                }
-            ),
             "monto": forms.NumberInput(
                 attrs={
                     "class": "form-control",
@@ -74,6 +68,6 @@ class TipoSueldoForm(FormBase):
                 queryset = queryset.exclude(pk=self.instance.pk)
 
             if queryset.exists():
-                self.add_error(None, "Esta combinación de tipo y estatus ya existe")
+                self.add_error("tipo", "Esta combinación de tipo y estatus ya existe")
 
         return cleaned_data
