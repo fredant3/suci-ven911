@@ -21,19 +21,19 @@ class RegistroFilmico(BaseModel):
         max_length=50,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(5), MaxLengthValidator(50), TextValidator()],
+        validators=[MinLengthValidator(2), MaxLengthValidator(50), TextValidator()],
     )
     motivo_solicitud = models.TextField(
         "Motivo de Solicitud",
         max_length=400,
-        validators=[MinLengthValidator(5), MaxLengthValidator(400), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(400), TextValidator()],
     )
     ente_solicita = models.CharField(
         "Ente que Solicita",
         max_length=50,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(50), TextValidator()],
+        validators=[MinLengthValidator(2), MaxLengthValidator(50), TextValidator()],
     )
     direccion = models.CharField(
         "Dirección",

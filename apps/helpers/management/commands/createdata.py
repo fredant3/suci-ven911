@@ -1,3 +1,4 @@
+import random
 from django.core.management.base import BaseCommand
 from faker import Faker
 from helpers.management.commands.seed.administracion._Departamento import (
@@ -10,7 +11,9 @@ from helpers.management.commands.seed.potencia._Incidencias import IncidenciaFak
 from helpers.management.commands.seed.users._UserFaker import UserFaker
 from helpers.management.commands.seed.emergencia._Incidencias import EmergenciaFake
 
-# from helpers.management.commands.seed.rrhh._TipoSueldoFake import TipoSueldoFake
+from helpers.management.commands.seed.rrhh._TipoSueldoFake import TipoSueldoFake
+from helpers.management.commands.seed.rrhh._CargosFake import CargosFake
+from helpers.management.commands.seed.rrhh._ContratosFake import ContratosFake
 
 
 class Command(BaseCommand):
@@ -36,4 +39,6 @@ class Command(BaseCommand):
         EmergenciaFake.tipo_incidencia()
 
         # Gestion Humana (RRHH)
-        # TipoSueldoFake.tipos_sueldos(fake)
+        TipoSueldoFake.execute(fake)
+        CargosFake.execute(fake)
+        ContratosFake.execute(fake, random.randint(1, 55))

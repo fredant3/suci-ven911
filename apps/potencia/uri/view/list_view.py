@@ -48,6 +48,20 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "true",
                 "searchable": "true",
             },
+            {
+                "data": "nombrepaciente",
+                "name": "nombrepaciente",
+                "title": "Nombre Completo",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "estado_evento",
+                "name": "estado_evento",
+                "title": "Estado del Evento",
+                "orderable": "true",
+                "searchable": "true",
+            },
         ]
 
 

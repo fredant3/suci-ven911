@@ -1,4 +1,4 @@
-from django.forms import TextInput, Textarea
+from django.forms import TextInput, Textarea, Select
 from emergencia.models import Emergencia
 from helpers.FormBase import FormBase
 
@@ -48,4 +48,7 @@ class EmergenciaForm(FormBase):
                     "placeholder": "Ingrese las observaciones",
                 }
             ),
+            "estado": Select(attrs={"class": "form-select mb-3"}),
+            "municipio": Select(attrs={"class": "form-select mb-3"}),
+            "parroquia": Select(attrs={"class": "form-select mb-3"}),
         }

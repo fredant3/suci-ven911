@@ -32,7 +32,7 @@ class Asignacion(BaseModel):
     )
     observaciones = models.TextField(
         max_length=255,
-        validators=[MinLengthValidator(10), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(255), TextValidator()],
     )
 
     def toJSON(self):

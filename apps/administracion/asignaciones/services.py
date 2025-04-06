@@ -44,8 +44,12 @@ class AsignacionService(CrudService):
         query = Q()
 
         if search:
-            query &= Q(sede__sede__icontains=search) | Q(
-                articulo__serial__icontains=search
+            query &= (
+                Q(sede__sede__icontains=search)
+                | Q(articulo__serial__icontains=search)
+                | Q(departamento__nombre__icontains=search)
+                | Q(descripcion__icontains=search)
+                | Q(observaciones__icontains=search)
             )
 
         return query

@@ -1,4 +1,11 @@
-from django.db.models import DateField, EmailField, CharField, BooleanField
+from django.db.models import (
+    DateField,
+    EmailField,
+    CharField,
+    BooleanField,
+    OneToOneField,
+    CASCADE,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.models import (
@@ -15,10 +22,8 @@ from helpers.validForm import (
     UnicodeAlphaSpaceValidator,
     PhoneNumberValidator,
 )
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from users.auth.models import User
 
 ESTATUS_CHOICES = (
     ("act", "Activo"),
@@ -63,7 +68,7 @@ class Empleado(BaseModel):
     sexo = CharField("Género", max_length=1, choices=SEXO_CHOICES)
     fecha_nacimiento = DateField("Fecha de Nacimiento")
     estado_civil = CharField("Estado Civil", max_length=1, choices=ESTADO_CIVIL_CHOICES)
-    tipo_sangre = CharField("Tipo de Sangre",max_length=3, choices=TIPO_SANGRE_CHOICES)
+    tipo_sangre = CharField("Tipo de Sangre", max_length=3, choices=TIPO_SANGRE_CHOICES)
     email = EmailField(blank=True, null=True)
     telefono = CharField(
         "Teléfono del Empleado",
@@ -74,7 +79,8 @@ class Empleado(BaseModel):
             PhoneNumberValidator(),
         ],
     )
-    direccion = CharField("Dirección",
+    direccion = CharField(
+        "Dirección",
         max_length=180,
         validators=[
             MinLengthValidator(9),
@@ -82,13 +88,12 @@ class Empleado(BaseModel):
             TextValidator(),
         ],
     )
-    estudia = BooleanField(
-        "Estudia", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+    estudia = BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
+    discapacitado = BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
+    tipo_contrato = CharField(max_length=3, choices=TIPO_CONTRATOS)
+    usuario = OneToOneField(
+        User, on_delete=CASCADE, blank=True, null=True, related_name="empleado"
     )
-    discapacitado = BooleanField(
-        "Discapacitado", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
-    )
-    contratos = CharField(max_length=3, choices=TIPO_CONTRATOS)
 
     def toJSON(self):
         return model_to_dict(self)

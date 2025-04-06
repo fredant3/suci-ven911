@@ -37,7 +37,6 @@ class Denunciante(BaseModel):
     cedula = CharField(
         "Cédula del denunciante",
         max_length=15,
-        unique=True,
         validators=[
             MinLengthValidator(7),
             MaxLengthValidator(14),

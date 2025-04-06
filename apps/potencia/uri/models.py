@@ -169,6 +169,38 @@ ESTATUS_CHOICES19 = (
     ("midri", "Midriasis"),
 )
 
+ESTADOS_CHOICES = (
+    ("Dtto. Capital", "Distrito Capital"),
+    ("Amazonas", "Amazonas"),
+    ("Anzoátegui", "Anzoátegui"),
+    ("Apure", "Apure"),
+    ("Aragua", "Aragua"),
+    ("Barinas", "Barinas"),
+    ("Bolívar", "Bolívar"),
+    ("Carabobo", "Carabobo"),
+    ("Cojedes", "Cojedes"),
+    ("Delta Amacuro", "Delta Amacuro"),
+    ("Falcón", "Falcón"),
+    ("Guárico", "Guárico"),
+    ("Lara", "Lara"),
+    ("Mérida", "Mérida"),
+    ("Miranda", "Miranda"),
+    ("Monagas", "Monagas"),
+    ("Nva. Esparta", "Nueva Esparta"),
+    ("Portuguesa", "Portuguesa"),
+    ("Sucre", "Sucre"),
+    ("Táchira", "Táchira"),
+    ("Trujillo", "Trujillo"),
+    ("Vargas", "Vargas"),
+    ("Yaracuy", "Yaracuy"),
+    ("Zulia", "Zulia"),
+)
+
+GENERO_CHOICES = (
+    ("Femenino", "Femenino"),
+    ("Masculino", "Masculino"),
+)
+
 
 class Uri(BaseModel):
     # 1) Informacion General
@@ -228,7 +260,11 @@ class Uri(BaseModel):
         "Numero de Telefono del Paciente", max_length=11, blank=True, null=True
     )
     generopaciente = models.CharField(
-        "Genero del Paciente", max_length=10, blank=True, null=True
+        "Genero del Paciente",
+        max_length=9,
+        choices=GENERO_CHOICES,
+        blank=True,
+        null=True,
     )
     direccionpaciente = models.CharField(
         "Direccion del Paciente", max_length=300, blank=True, null=True
@@ -262,7 +298,11 @@ class Uri(BaseModel):
         "Numero de Telefono del Acompañante", max_length=11, blank=True, null=True
     )
     genero_acompanante = models.CharField(
-        "Genero del acompañante", max_length=10, blank=True, null=True
+        "Genero del acompañante",
+        max_length=9,
+        choices=GENERO_CHOICES,
+        blank=True,
+        null=True,
     )
     direccion_acompanante = models.CharField(
         "Direccion del acompañante", max_length=300, blank=True, null=True
@@ -286,7 +326,11 @@ class Uri(BaseModel):
     # 4)Direccion Exacta del Evento
     # Direccion
     estado_evento = models.CharField(
-        "Estado", max_length=20, blank=True, null=True
+        "Estado del Evento",
+        max_length=15,
+        choices=ESTADOS_CHOICES,
+        blank=True,
+        null=True,
     )  # Input Select
     municipio_evento = models.CharField(
         "Municipio", max_length=20, blank=True, null=True
@@ -388,8 +432,8 @@ class Uri(BaseModel):
         blank=True,
         null=True,
     )  # si es si, activar opcion si es inflamable o explosivo)
-    # inflamable = models.BooleanField()
-    # explosivo = models.BooleanField()
+    # inflamable = models.BooleanField(choices=BOOLEAN_CHOICES,default=BOOLEAN_CHOICES[1])
+    # explosivo = models.BooleanField(choices=BOOLEAN_CHOICES,default=BOOLEAN_CHOICES[1])
     observacionesSustancia = models.CharField(
         "Observaciones de la sustancia",
         max_length=100,

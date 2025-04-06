@@ -1,13 +1,10 @@
 from django.db.models import DateField, CharField, ForeignKey, CASCADE, BooleanField
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
+from helpers.BaseModelMixin import BaseModel
 from helpers.models import ESTADO_CIVIL_CHOICES, SEXO_CHOICES
 from rrhh.empleados.models import Empleado
-from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.db.models import CharField, BooleanField
 from helpers.validForm import (
     CedulaVenezolanaValidator,
     TextValidator,
@@ -35,7 +32,9 @@ class Familiar(BaseModel):
         "Tipo de Hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
     discapacidad = BooleanField(
-        "Discapacidad", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+        "Discapacidad",
+        choices=BOOLEAN_CHOICES,
+        default=BOOLEAN_CHOICES[1],
     )
     nombres = CharField(
         "Nombres del Familiar",

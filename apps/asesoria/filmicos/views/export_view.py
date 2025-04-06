@@ -1,5 +1,9 @@
 from io import BytesIO
+<<<<<<< HEAD
 from asesoria.filmicos.models import RegistroFilmico
+=======
+from asesoria.filmicos.models import RegistroFilmico, ESTATUS_CHOICES
+>>>>>>> 9282305e9bbbc0ab15c50cae7004ea6780fbdfa0
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse
 from django.views.generic import TemplateView
@@ -13,23 +17,23 @@ class RegistroFilmicoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
 
     def get(self, request, *args, **kwargs):
         # Filtra los datos del modelo para generar el archivo Excel
-        registro = RegistroFilmico.objects.all()
+        registros = RegistroFilmico.objects.all()
+
+        # Crear mapeo de estatus
+        estatus_mapping = dict(ESTATUS_CHOICES)
 
         # Crea un archivo Excel en memoria
         wb = Workbook()
         ws = wb.active
 
         # Agrega el título en la primera fila
-        ws.merge_cells("A1:G1")  # Mezcla las celdas de A1 a D1
-        ws["A1"] = "Registros Filmicos del 911"  # Agrega el texto del título
-        ws["A1"].alignment = Alignment(
-            horizontal="center"
-        )  # Centra el texto del título
-        ws["A1"].font = Font(
-            bold=True, color="0000FF"
-        )  # Establece el texto en negrita y color azul
-        ws["A2"] = ""  # Agrega el texto del título
+        ws.merge_cells("A1:G1")
+        ws["A1"] = "Registros Filmicos del 911"
+        ws["A1"].alignment = Alignment(horizontal="center")
+        ws["A1"].font = Font(bold=True, color="0000FF")
+        ws["A2"] = ""
 
+        # Encabezados
         ws.append(
             [
                 "Estatus",
@@ -40,8 +44,9 @@ class RegistroFilmicoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
                 "Fecha de la solicitud",
                 "Fecha de culminacion",
             ]
-        )  # Reemplaza con los nombres de tus campos
-        # Obtiene las columnas y establece el ancho deseado
+        )
+
+        # Configuración de ancho de columnas
         columnas = ws.column_dimensions
         columnas["A"].width = 15
         columnas["B"].width = 20
@@ -51,18 +56,22 @@ class RegistroFilmicoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
         columnas["F"].width = 30
         columnas["G"].width = 30
 
-        for dato in registro:
+        # Datos
+        for registro in registros:
+            # Formatear el estatus usando el mapeo
+            estatus = estatus_mapping.get(registro.estatus, registro.estatus)
+
             ws.append(
                 [
-                    dato.estatus,
-                    dato.direccion,
-                    dato.camara,
-                    dato.motivo_solicitud,
-                    dato.ente_solicita,
-                    dato.fecha_solicitud,
-                    dato.fecha_culminacion,
+                    estatus,  # Estatus formateado
+                    registro.direccion,
+                    registro.camara,
+                    registro.motivo_solicitud,
+                    registro.ente_solicita,
+                    registro.fecha_solicitud,
+                    registro.fecha_culminacion,
                 ]
-            )  # Reemplaza con los campos de tu modelo
+            )
 
         # Convierte el archivo Excel en memoria a bytes
         output = BytesIO()

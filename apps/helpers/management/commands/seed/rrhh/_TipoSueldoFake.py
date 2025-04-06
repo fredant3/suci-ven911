@@ -1,4 +1,5 @@
 from rrhh.tipos_sueldos.models import TipoSueldo
+from faker import Faker
 import random
 
 TIPOS_DE_SUELDOS = [
@@ -14,12 +15,18 @@ TIPOS_DE_SUELDOS = [
 
 
 class TipoSueldoFake:
-    def tipos_sueldos(faker):
-        # for tipo_sueldo in TIPOS_DE_SUELDOS:
-        #     model = TipoSueldo.objects.create(
-        #         tipo=tipo_sueldo,
-        #         monto=faker.pricetag(),
-        #         descripcion=faker.texts(nb_texts=2),
-        #         estatus=random.choice(["act", "sup"]),
-        #     )
-        #     print(f"Tipo de sueldo {model.tipo} registrado")
+    def execute(faker: Faker):
+        for tipo_sueldo in TIPOS_DE_SUELDOS:
+            model = TipoSueldo.objects.create(
+                tipo=tipo_sueldo,
+                monto=faker.pydecimal(
+                    left_digits=5,
+                    right_digits=2,
+                    positive=True,
+                    min_value=100,
+                    max_value=10000,
+                ),
+                descripcion=faker.texts(nb_texts=2),
+                estatus=random.choice(["act", "sup"]),
+            )
+            print(f"Tipo de sueldo {model.tipo} registrado")
