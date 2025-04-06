@@ -147,3 +147,17 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
+/********************
+ *** MULTI SELECT ***
+ ********************/
+select.input__select[name="user_permissions"], select.input__select[name="groups"] {
+	width: 100%;
+	height: 200px;
+	overflow: revert;
+	background-image: none;
+}
+
+select.input__select[name="user_permissions"] option, select.input__select[name="groups"] option {
+	padding: 5px;
+}

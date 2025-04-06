@@ -51,7 +51,7 @@ class IncidenciaForm(FormBase):
             "observaciones": forms.Textarea(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese las observaciones",
+                    "placeholder": "Describe la falla",
                 }
             ),
             "tipo_solicitud": forms.Select(

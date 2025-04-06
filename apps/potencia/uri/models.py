@@ -257,7 +257,7 @@ class Uri(BaseModel):
         "Cedula del paciente", max_length=10, blank=True, null=True
     )
     telefonopaciente = models.CharField(
-        "Numero de Telefono del Paciente", max_length=11, blank=True, null=True
+        "Numero de Telefono del Paciente", max_length=11, blank=True, null=True, 
     )
     generopaciente = models.CharField(
         "Genero del Paciente",
@@ -295,7 +295,7 @@ class Uri(BaseModel):
         "Cedula del Acompañante", max_length=10, blank=True, null=True
     )
     telefono_acompanate = models.CharField(
-        "Numero de Telefono del Acompañante", max_length=11, blank=True, null=True
+        "Numero de Telefono del Acompañante", max_length=11, blank=True, null=True,
     )
     genero_acompanante = models.CharField(
         "Genero del acompañante",
