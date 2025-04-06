@@ -1,7 +1,7 @@
 from administracion.inventario.models import Articulo
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import CurrencyValidator, PositiveIntegerValidator
+from helpers.validForm import CurrencyValidator
 from django.core.validators import MinLengthValidator
 
 

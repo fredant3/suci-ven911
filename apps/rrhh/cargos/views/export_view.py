@@ -14,6 +14,14 @@ class CargoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         cargos = Cargo.objects.all().values("cargo", "estatus")
 
+        # Diccionario para mapear las claves de estatus a sus valores descriptivos
+        ESTATUS_MAP = {
+            "act": "Activo",
+            "ina": "Inactivo",
+            "inv": "Invalido",
+            "cer": "Cerrado",
+        }
+
         # Crea un archivo Excel en memoria
         wb = Workbook()
         ws = wb.active
@@ -37,9 +45,10 @@ class CargoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columnas["A"].width = 30
         columnas["B"].width = 15
 
-        # Agrega los datos de los cargos
+        # Agrega los datos de los cargos, convirtiendo la clave de estatus a su valor descriptivo
         for cargo in cargos:
-            ws.append([cargo["cargo"], cargo["estatus"]])
+            estatus_descriptivo = ESTATUS_MAP.get(cargo["estatus"], cargo["estatus"])
+            ws.append([cargo["cargo"], estatus_descriptivo])
 
         # Convierte el archivo Excel en memoria a bytes
         output = BytesIO()
