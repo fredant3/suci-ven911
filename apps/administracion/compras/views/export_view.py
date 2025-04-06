@@ -58,7 +58,7 @@ class CompraExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         # Llenar datos
         for compra in compras:
             fecha = (
-                compra["created_at"].strftime("%d/%m/%Y %H:%M")
+                compra["created_at"].strftime("%d/%m/%Y")
                 if compra["created_at"]
                 else "N/A"
             )
