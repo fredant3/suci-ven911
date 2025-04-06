@@ -273,6 +273,7 @@ class PhoneNumberValidator:
 class CedulaVenezolanaValidator:
     """
     Valida cédulas de identidad venezolanas con formatos:
+    - 12345678
     - V12345678
     - V-12345678
     - V-12.345.678
@@ -282,15 +283,17 @@ class CedulaVenezolanaValidator:
     messages = {
         "invalid": _("Formato de cédula inválido."),
         "invalid_format": _(
-            "El formato debe ser: V12345678, V-12345678 o V-12.345.678"
+            "El formato debe ser: 12345678, V12345678, V-12345678 o V-12.345.678"
         ),
-        "invalid_chars": _("Solo se permiten números, guiones, puntos y la letra V"),
+        "invalid_chars": _(
+            "Solo se permiten números, guiones, puntos y la letra V opcional"
+        ),
         "verification_failed": _("El dígito verificador no es válido"),
-        "length_error": _("La cédula debe tener entre 6 y 8 dígitos después de la V"),
+        "length_error": _("La cédula debe tener entre 6 y 8 dígitos"),
     }
 
-    # Expresión regular para los formatos aceptados
-    FORMAT_REGEX = r"^V[-]?(\d{1,3}(?:\.?\d{3}){1,2}|\d{6,8})$"
+    # Expresión regular para los formatos aceptados (V opcional)
+    FORMAT_REGEX = r"^(V[-]?)?(\d{1,3}(?:\.?\d{3}){1,2}|\d{6,8})$"
 
     def __init__(self, validate_verifier=False, message=None):
         """
@@ -306,8 +309,8 @@ class CedulaVenezolanaValidator:
     def __call__(self, value):
         str_value = str(value).strip().upper()
 
-        # Validación básica de caracteres
-        if not re.match(r"^V[-\.\d]+$", str_value):
+        # Validación básica de caracteres (V opcional)
+        if not re.match(r"^(V[-\.\d]+|\d+)$", str_value):
             invalid_chars = set(re.findall(r"[^V\d\-\.]", str_value))
             raise ValidationError(
                 self.messages["invalid_chars"],
@@ -324,7 +327,10 @@ class CedulaVenezolanaValidator:
             )
 
         # Extraer solo los dígitos
-        digits = re.sub(r"[^\d]", "", str_value[1:])  # Excluye la V inicial
+        if str_value.startswith("V"):
+            digits = re.sub(r"[^\d]", "", str_value[1:])  # Excluye la V inicial
+        else:
+            digits = re.sub(r"[^\d]", "", str_value)  # Toda la cadena son dígitos
 
         # Validar longitud
         if len(digits) < 6 or len(digits) > 8:

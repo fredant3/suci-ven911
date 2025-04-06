@@ -40,7 +40,7 @@ class RegistroFilmico(BaseModel):
         max_length=150,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(150), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(150), TextValidator()],
     )
     fecha_solicitud = models.DateField(blank=True, null=True)
     fecha_culminacion = models.DateField(blank=True, null=True)

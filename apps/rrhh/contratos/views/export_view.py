@@ -22,7 +22,6 @@ class ContratoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "sede__nombre",  # Asume que el modelo Sede tiene un campo 'nombre'
             "fecha_ingreso_911",
             "fecha_ingreso_apn",
-            "fasmij",
             "fecha_ingreso",
             "fecha_culminacion",
             "empleado__nombres",  # Asume que el modelo Empleado tiene un campo 'nombres'
@@ -56,7 +55,6 @@ class ContratoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "Sede",
                 "Fecha de Ingreso 911",
                 "Fecha de Ingreso APN",
-                "FASMIJ",
                 "Fecha de Ingreso",
                 "Fecha de Culminación",
                 "Empleado",
@@ -100,7 +98,6 @@ class ContratoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                         if contrato["fecha_ingreso_apn"]
                         else ""
                     ),
-                    "Sí" if contrato["fasmij"] else "No",
                     (
                         contrato["fecha_ingreso"].strftime("%Y-%m-%d")
                         if contrato["fecha_ingreso"]

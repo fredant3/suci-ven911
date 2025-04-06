@@ -63,7 +63,7 @@ class DenunciaForm(FormBase):
         label="Dirección del Denunciante",
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciante"}),
         max_length=180,
-        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
 
     nombres_denunciado = CharField(
@@ -116,7 +116,7 @@ class DenunciaForm(FormBase):
         widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciado"}),
         max_length=180,
         required=False,
-        validators=[MinLengthValidator(6), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     fecha_denuncia = FormBase.create_date_field("fecha_denuncia")
     fecha_incidente = FormBase.create_date_field("fecha_incidente")
@@ -146,7 +146,9 @@ class DenunciaForm(FormBase):
         widgets = {
             "ente": TextInput(attrs={"placeholder": "Ingrese el ente relacionado"}),
             "zona": TextInput(attrs={"placeholder": "Ingrese la zona del incidente"}),
-            "motivo": TextInput(attrs={"placeholder": "Ingrese el motivo de la denuncia"}),
+            "motivo": TextInput(
+                attrs={"placeholder": "Ingrese el motivo de la denuncia"}
+            ),
         }
         exclude = [
             "created_at",

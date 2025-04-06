@@ -17,7 +17,7 @@ class Entrada(BaseModel):
         "Nombre",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -26,7 +26,7 @@ class Entrada(BaseModel):
         "Apellido",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -48,7 +48,7 @@ class Entrada(BaseModel):
         "Dirección",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             TextValidator(),
         ],
