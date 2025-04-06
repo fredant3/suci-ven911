@@ -32,7 +32,9 @@ class Familiar(BaseModel):
         "Tipo de Hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
     discapacidad = BooleanField(
-        "Discapacidad", choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+        "Discapacidad",
+        choices=BOOLEAN_CHOICES,
+        default=BOOLEAN_CHOICES[1],
     )
     nombres = CharField(
         "Nombres del Familiar",

@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from helpers.models import BOOLEAN_CHOICES
 
 
 class UserManager(BaseUserManager):
@@ -29,9 +30,11 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
     dni = models.CharField(max_length=12, unique=True)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
+    is_active = models.BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
+    is_superuser = models.BooleanField(
+        choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1]
+    )
 
     objects = UserManager()
 

@@ -25,7 +25,6 @@ class ContratoForm(FormBase):
             "sede",
             "fecha_ingreso_911",
             "fecha_ingreso_apn",
-            "fasmij",
             "fecha_ingreso",
             "fecha_culminacion",
             "empleado",

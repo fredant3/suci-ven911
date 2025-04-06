@@ -5,6 +5,7 @@ from helpers.models import (
     ESTRATEGIAS_METODOLOGICAS,
     AMBITO_ACCION,
     ACTIVIDAD_PREVENTIVA,
+    BOOLEAN_CHOICES,
 )
 from django.db.models import CharField, BooleanField
 from helpers.validForm import CedulaVenezolanaValidator, TextValidator
@@ -81,7 +82,11 @@ class GestionComunicacional(BaseModel):
         validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
     )
     # Localizacion_sede soon
-    municipio_priorizado = BooleanField(default=False)
+    municipio_priorizado = BooleanField(
+        "Municipio priorizado",
+        choices=BOOLEAN_CHOICES,
+        default=BOOLEAN_CHOICES[1],
+    )
 
     def toJSON(self):
         return model_to_dict(self)

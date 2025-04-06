@@ -88,8 +88,8 @@ class Empleado(BaseModel):
             TextValidator(),
         ],
     )
-    estudia = BooleanField(default=False)
-    discapacitado = BooleanField(default=False)
+    estudia = BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
+    discapacitado = BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
     tipo_contrato = CharField(max_length=3, choices=TIPO_CONTRATOS)
     usuario = OneToOneField(
         User, on_delete=CASCADE, blank=True, null=True, related_name="empleado"
