@@ -62,7 +62,7 @@ class UripacienteForm(FormBase):
         max_length=10, required=False, label="Cedula del Paciente"
     )
     telefonopaciente = CharField(
-        max_length=10, required=False, label="Numero de Telefono del Paciente"
+        max_length=11, required=False, label="Numero de Telefono del Paciente"
     )
     direccionpaciente = CharField(
         max_length=100, required=False, label="Direccion del paciente"
@@ -108,7 +108,7 @@ class UriConsentimientoForm(FormBase):
         max_length=10, required=False, label="Cedula de Acompañante"
     )
     telefono_acompanate = CharField(
-        max_length=10, required=False, label="Telefono del Acompañante"
+        max_length=11, required=False, label="Telefono del Acompañante"
     )
     direccion_acompanante = CharField(
         max_length=100, required=False, label="Dirección del Acompañante"
@@ -123,10 +123,10 @@ class UriConsentimientoForm(FormBase):
         max_length=10, required=False, label="Cedula del Testigo"
     )
     telefono_testigo = CharField(
-        max_length=10, required=False, label="Telefono del Testigo"
+        max_length=11, required=False, label="Telefono del Testigo"
     )
     direccion_testigo = CharField(
-        max_length=100, required=False, label="Dirección del Acompañante"
+        max_length=100, required=False, label="Dirección del Testigo"
     )
 
     class Meta:
