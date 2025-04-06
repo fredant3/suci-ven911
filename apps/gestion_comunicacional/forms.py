@@ -16,21 +16,18 @@ class GestionComunicacionalForm(FormBase):
     class Meta:
         model = GestionComunicacional
         fields = [
-            "nombre actividad",
-            "actividad realizada",
-            "descripcion actividad",
-            "actividad preventiva",
+            "nombre_actividad",
+            "actividad_realizada",
+            "descripcion_actividad",
+            "actividad_preventiva",
             "municipio",
             "parroquia",
-            "estrategias metodologicas",
-            "ambito accion",
-            "poblacion abordada",
-            "municipio priorizado",
-            "equipo social",
-            "cedula",
+            "estrategias_metodologicas",
             "ambito_accion",
-            "poblacion abordada",
-            "telefono_cuadrante_paz",
+            "poblacion_abordada",
+            "municipio_priorizado",
+            "equipo_social",
+            "cedula",
             "observaciones",
         ]
         exclude = [

@@ -1,28 +1,28 @@
 from django.urls import path
-from emergencia.views.create_view import EmergenciaCreateApiView
-from emergencia.views.delete_view import EmergenciaDeleteApiView
-from emergencia.views.list_view import EmergenciaListApiView
-from emergencia.views.update_view import EmergenciaUpdateApiView
+from gestion_comunicacional.views.create_view import GestioncomunicacionalCreateView
+from gestion_comunicacional.views.delete_view import GestioncomunicacionalDeleteApiView
+from gestion_comunicacional.views.list_view import GestioncomunicacionalListApiView
+from gestion_comunicacional.views.update_view import GestioncomunicacionalUpdateApiView
 
 urlpatterns = [
     path(
         "",
-        EmergenciaListApiView.as_view(),
+        GestioncomunicacionalDeleteApiView.as_view(),
         name="list",
     ),
     path(
         "create",
-        EmergenciaCreateApiView.as_view(),
+        GestioncomunicacionalCreateView.as_view(),
         name="create",
     ),
     path(
         "<int:pk>/update",
-        EmergenciaUpdateApiView.as_view(),
+        GestioncomunicacionalListApiView.as_view(),
         name="update",
     ),
     path(
         "<int:pk>/delete",
-        EmergenciaDeleteApiView.as_view(),
+        GestioncomunicacionalUpdateApiView.as_view(),
         name="delete",
     ),
 ]

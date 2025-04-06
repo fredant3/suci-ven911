@@ -9,7 +9,9 @@ from templates.sneat import TemplateLayout
 from gestion_comunicacional.services import GestioncomunicacionalService
 
 
-class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class GestioncomunicacionalListView(
+    LoginRequiredMixin, CheckPermisosMixin, TemplateView
+):
     permission_required = "gestioncomuicacional.ver_gestioncomunicacional"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
@@ -26,7 +28,6 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_gestioncomunicacional:list")
         context["updateUrl"] = reverse_lazy("gestioncomunicacional:update", args=[0])
         context["deleteUrl"] = reverse_lazy("gestioncomunicacional:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("gestioncomunicacional:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -64,7 +65,7 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class EmergenciaListApiView(ListController, CheckPermisosMixin):
+class GestioncomunicacionalListApiView(ListController, CheckPermisosMixin):
     permission_required = "gestioncomunicacional.ver_gestioncomunicacional"
 
     def __init__(self):

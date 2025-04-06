@@ -29,7 +29,7 @@ class GestioncomunicacionalCreateView(
         return TemplateLayout.init(self, context)
 
 
-class EmergenciaCreateApiView(CreateController, CheckPermisosMixin):
+class GestioncomunicacoinalCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = "gestionalcomunicacional.agregar_gestioncomunicacional"
     form_class = GestionComunicacionalForm
 

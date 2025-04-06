@@ -11,7 +11,9 @@ from gestion_comunicacional.models import GestionComunicacional
 from gestion_comunicacional.services import GestioncomunicacionalService
 
 
-class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+class GestioncomunicacionalUpdateView(
+    LoginRequiredMixin, CheckPermisosMixin, UpdateView
+):
     permission_required = "gestioncomunicacional.actualizar_gestioncomunicacional"
     form_class = GestionComunicacionalForm
     template_name = "sneat/layout/partials/form/layout.html"
@@ -36,8 +38,8 @@ class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         return GestionComunicacional.objects.filter(pk=id)
 
 
-class Gestion_comunicacionalUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = "emergrncia.actualizar_emergencia"
+class GestioncomunicacionalUpdateApiView(UpdateController, CheckPermisosMixin):
+    permission_required = "gestioncomunicacional.actualizar_comunicacional"
     form_class = GestionComunicacionalForm
 
     def __init__(self):

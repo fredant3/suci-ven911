@@ -10,7 +10,9 @@ from helpers.ControllerMixin import DeleteController
 from templates.sneat import TemplateLayout
 
 
-class EmergenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
+class GestioncomunicacionalDeleteView(
+    LoginRequiredMixin, CheckPermisosMixin, DeleteView
+):
     permission_required = "gestioncomunicacional.eliminar_gestioncomunicacional"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
@@ -33,8 +35,8 @@ class EmergenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         return GestionComunicacional.objects.filter(pk=id)
 
 
-class EmergenciaDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = "emergrncia.eliminar_emergencia"
+class GestioncomunicacionalDeleteApiView(DeleteController, CheckPermisosMixin):
+    permission_required = "gestioncomunicacional.eliminar_gestioncomunicacional"
     form_class = GestionComunicacionalForm
 
     def __init__(self):
