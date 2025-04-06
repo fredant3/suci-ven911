@@ -64,9 +64,6 @@ class UripacienteForm(FormBase):
     telefonopaciente = CharField(
         max_length=10, required=False, label="Numero de Telefono del Paciente"
     )
-    generopaciente = CharField(
-        max_length=10, required=False, label="Genero del Paciente"
-    )
     direccionpaciente = CharField(
         max_length=100, required=False, label="Direccion del paciente"
     )
@@ -112,9 +109,6 @@ class UriConsentimientoForm(FormBase):
     )
     telefono_acompanate = CharField(
         max_length=10, required=False, label="Telefono del Acompañante"
-    )
-    genero_acompanante = CharField(
-        max_length=10, required=False, label="Genero del Acompañante"
     )
     direccion_acompanante = CharField(
         max_length=100, required=False, label="Dirección del Acompañante"
@@ -163,7 +157,6 @@ class UriConsentimientoForm(FormBase):
 
 
 class UriDireccionForm(FormBase):
-    estado_evento = CharField(max_length=20, required=False, label="Estado")
     municipio_evento = CharField(max_length=20, required=False, label="Municipio")
     parroquia_evento = CharField(max_length=20, required=False, label="Parroquia")
     sector_evento = CharField(
