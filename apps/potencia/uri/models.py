@@ -196,6 +196,11 @@ ESTADOS_CHOICES = (
     ("Zulia", "Zulia"),
 )
 
+GENERO_CHOICES = (
+    ("Femenino", "Femenino"),
+    ("Masculino", "Masculino"),
+)
+
 
 class Uri(BaseModel):
     # 1) Informacion General
@@ -255,7 +260,11 @@ class Uri(BaseModel):
         "Numero de Telefono del Paciente", max_length=11, blank=True, null=True
     )
     generopaciente = models.CharField(
-        "Genero del Paciente", max_length=10, blank=True, null=True
+        "Genero del Paciente",
+        max_length=9,
+        choices=GENERO_CHOICES,
+        blank=True,
+        null=True,
     )
     direccionpaciente = models.CharField(
         "Direccion del Paciente", max_length=300, blank=True, null=True
@@ -289,7 +298,11 @@ class Uri(BaseModel):
         "Numero de Telefono del Acompañante", max_length=11, blank=True, null=True
     )
     genero_acompanante = models.CharField(
-        "Genero del acompañante", max_length=10, blank=True, null=True
+        "Genero del acompañante",
+        max_length=9,
+        choices=GENERO_CHOICES,
+        blank=True,
+        null=True,
     )
     direccion_acompanante = models.CharField(
         "Direccion del acompañante", max_length=300, blank=True, null=True

@@ -12,7 +12,7 @@ urlpatterns = [
     ),
     path(
         "create",
-      	InfogeneralWizardView.as_view(),
+        InfogeneralWizardView.as_view(),
         name="create",
     ),
     path(
