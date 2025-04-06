@@ -169,6 +169,33 @@ ESTATUS_CHOICES19 = (
     ("midri", "Midriasis"),
 )
 
+ESTADOS_CHOICES = (
+    ("Dtto. Capital", "Distrito Capital"),
+    ("Amazonas", "Amazonas"),
+    ("Anzoátegui", "Anzoátegui"),
+    ("Apure", "Apure"),
+    ("Aragua", "Aragua"),
+    ("Barinas", "Barinas"),
+    ("Bolívar", "Bolívar"),
+    ("Carabobo", "Carabobo"),
+    ("Cojedes", "Cojedes"),
+    ("Delta Amacuro", "Delta Amacuro"),
+    ("Falcón", "Falcón"),
+    ("Guárico", "Guárico"),
+    ("Lara", "Lara"),
+    ("Mérida", "Mérida"),
+    ("Miranda", "Miranda"),
+    ("Monagas", "Monagas"),
+    ("Nva. Esparta", "Nueva Esparta"),
+    ("Portuguesa", "Portuguesa"),
+    ("Sucre", "Sucre"),
+    ("Táchira", "Táchira"),
+    ("Trujillo", "Trujillo"),
+    ("Vargas", "Vargas"),
+    ("Yaracuy", "Yaracuy"),
+    ("Zulia", "Zulia"),
+)
+
 
 class Uri(BaseModel):
     # 1) Informacion General
@@ -286,7 +313,11 @@ class Uri(BaseModel):
     # 4)Direccion Exacta del Evento
     # Direccion
     estado_evento = models.CharField(
-        "Estado", max_length=20, blank=True, null=True
+        "Estado del Evento",
+        max_length=15,
+        choices=ESTADOS_CHOICES,
+        blank=True,
+        null=True,
     )  # Input Select
     municipio_evento = models.CharField(
         "Municipio", max_length=20, blank=True, null=True
