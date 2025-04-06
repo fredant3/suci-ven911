@@ -52,7 +52,7 @@ class Emergencia(BaseModel):
         "Observaciones",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(180), TextValidator()],
     )
     # Localizacion_sede soon
     telefono_cuadrante_paz = models.CharField(
