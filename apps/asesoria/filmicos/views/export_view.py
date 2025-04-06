@@ -1,9 +1,5 @@
 from io import BytesIO
-<<<<<<< HEAD
 from asesoria.filmicos.models import RegistroFilmico
-=======
-from asesoria.filmicos.models import RegistroFilmico, ESTATUS_CHOICES
->>>>>>> 9282305e9bbbc0ab15c50cae7004ea6780fbdfa0
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse
 from django.views.generic import TemplateView
