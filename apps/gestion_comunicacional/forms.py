@@ -1,20 +1,21 @@
 from django.forms import TextInput, Textarea
 from gestion_comunicacional.models import GestionComunicacional
 from helpers.FormBase import FormBase
-from django import forms
-from helpers.models import BOOLEAN_CHOICES
+
+# from django import forms
+# from helpers.models import BOOLEAN_CHOICES
 
 
 class GestionComunicacionalForm(FormBase):
-    municipio_priorizado = forms.BooleanField(
-        initial=False,
-        required=False,
-        widget=forms.CheckboxInput(
-            attrs={"class": "form-check-input", "role": "switch", "value": "False"}
-        ),
-        choices=BOOLEAN_CHOICES,
-        default=BOOLEAN_CHOICES[1],
-    )
+    # municipio_priorizado = forms.BooleanField(
+    #     initial=False,
+    #     required=False,
+    #     widget=forms.CheckboxInput(
+    #         attrs={"class": "form-check-input", "role": "switch", "value": "False"}
+    #     ),
+    #     choices=BOOLEAN_CHOICES,
+    #     default=True,
+    # )
 
     class Meta:
         model = GestionComunicacional
