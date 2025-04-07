@@ -40,10 +40,10 @@ class Asignacion(BaseModel):
         verbose_name = "Asignacion"
         verbose_name_plural = "Asignaciones"
         permissions = [
-            ("listar_asignacion", "Puede listar asignacion"),
-            ("agregar_asignacion", "Puede agregar asignacion"),
-            ("ver_asignacion", "Puede ver asignacion"),
-            ("editar_asignacion", "Puede actualizar asignacion"),
-            ("eliminar_asignacion", "Puede eliminar asignacion"),
-            ("pdf_asignacion", "Puede generar pdf de asignacion"),
+            ("listar_asignar_presupuesto", "Puede listar asignaciones"),
+            ("agregar_asignar_presupuesto", "Puede agregar asignacion"),
+            ("ver_asignar_presupuesto", "Puede ver asignacion"),
+            ("editar_asignar_presupuesto", "Puede actualizar asignacion"),
+            ("eliminar_asignar_presupuesto", "Puede eliminar asignacion"),
+            ("pdf_asignar_presupuesto", "Puede generar pdf de asignacion"),
         ]

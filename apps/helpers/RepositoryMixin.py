@@ -115,10 +115,35 @@ class Repository:
         return entity
 
     def update(self, entity, payload):
+        # for field in payload.fields:
+        #     if hasattr(entity, field):
+        #         setattr(entity, field, payload.cleaned_data[field])
+        # entity.save()
+        # return entity
+        m2m_fields = []
+        regular_fields = []
+
+        # Separar campos ManyToMany de campos regulares
         for field in payload.fields:
             if hasattr(entity, field):
-                setattr(entity, field, payload.cleaned_data[field])
+                field_obj = entity._meta.get_field(field)
+                if field_obj.many_to_many:
+                    m2m_fields.append(field)
+                else:
+                    regular_fields.append(field)
+
+        # Actualizar campos regulares
+        for field in regular_fields:
+            setattr(entity, field, payload.cleaned_data[field])
+
+        # Guardar la entidad primero para tener un ID si es nueva
         entity.save()
+
+        # Actualizar campos ManyToMany
+        for field in m2m_fields:
+            # Usar set() para asignar valores a relaciones ManyToMany
+            getattr(entity, field).set(payload.cleaned_data[field])
+
         return entity
 
     def delete(self, payload):

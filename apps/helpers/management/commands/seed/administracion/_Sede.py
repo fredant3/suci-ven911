@@ -1,4 +1,3 @@
-
 import faker.providers
 from administracion.sedes.models import Sede
 
@@ -12,7 +11,7 @@ SEDES = [
     "NORTE",
     "CENTRO",
     "ZULIA",
-    "PUNTA CARRE�A",
+    "PUNTA CARREÑA",
     "PUNTA BOLIVAR",
     "PUNTA MAGDALENA",
     "PUNTA CORDOBA",
@@ -48,4 +47,4 @@ class SedesFaker:
                 sede=entity,
                 estatus=faker.sedes_estatus_choices(),
             )
-            print(f" {sed.sede} registrado")
+            print(f"{sed.sede} registrado")

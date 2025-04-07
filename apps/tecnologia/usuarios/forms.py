@@ -10,6 +10,7 @@ from django.forms import (
 from django.contrib.auth.models import Group, Permission
 from users.auth.models import User
 from helpers.FormBase import FormBase
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class UserForm(FormBase):
@@ -57,6 +58,16 @@ class UserForm(FormBase):
         label="Permisos personalizados",
     )
 
+    password = CharField(
+        label="Contraseña",
+        widget=PasswordInput(
+            attrs={"placeholder": "Contraseña", "class": "input__input"}
+        ),
+        max_length=15,
+        required=False,
+        validators=[MinLengthValidator(6), MaxLengthValidator(15)],
+    )
+
     class Meta:
         model = User
         fields = (
@@ -75,7 +86,4 @@ class UserForm(FormBase):
             "username": TextInput(attrs={"placeholder": "Usuario"}),
             "dni": TextInput(attrs={"placeholder": "DNI"}),
             "is_active": CheckboxInput(attrs={"value": "False"}),
-            "password": PasswordInput(
-                attrs={"placeholder": "Contraseña", "class": "input__input"}
-            ),
         }

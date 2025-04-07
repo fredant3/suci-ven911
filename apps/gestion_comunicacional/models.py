@@ -90,18 +90,18 @@ class GestionComunicacional(BaseModel):
         return self.nombre_actividad + " by-" + self.created_by
 
     class Meta:
-        verbose_name = "gestion comunicacional"
-        verbose_name_plural = "gestiones comunicacionales"
+        verbose_name = "Gestion Comunicacional"
+        verbose_name_plural = "Gestiones Comunicacionales"
         permissions = [
-            ("listar_gestion comunicacional", "Puede listar gestion comunicacional"),
-            ("agregar_gestion comunicacional", "Puede agregar emergencia"),
-            ("ver_gestion comunicacional", "Puede ver emergencia"),
+            ("listar_gestion_comunicacional", "Puede listar gestion comunicacional"),
+            ("agregar_gestion_comunicacional", "Puede agregar gestion comunicacional"),
+            ("ver_gestion_comunicacional", "Puede ver gestion comunicacional"),
             (
-                "editar_gestion comunicacional",
+                "editar_gestion_comunicacional",
                 "Puede actualizar gestion comunicacional",
             ),
             (
-                "eliminar_gestion comunicacional",
+                "eliminar_gestion_comunicacional",
                 "Puede eliminar gestion comunicacional",
             ),
         ]

@@ -31,7 +31,6 @@ urlpatterns = [
         ArticuloDeleteView.as_view(),
         name="delete",
     ),
-
     path(
         "export",
         ArticuloExcelView.as_view(),

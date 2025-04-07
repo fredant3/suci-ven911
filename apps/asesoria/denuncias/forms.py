@@ -1,11 +1,5 @@
 from asesoria.denuncias.models import Denuncia
-from django.forms import (
-    TextInput,
-    CharField,
-    EmailField,
-    DateInput,
-    EmailInput,
-)
+from django.forms import TextInput, CharField, EmailField, EmailInput
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from helpers.FormBase import FormBase
 from helpers.validForm import (

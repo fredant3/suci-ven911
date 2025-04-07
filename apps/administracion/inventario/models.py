@@ -18,11 +18,11 @@ tipo_considcion = (
 
 
 class TipoArticulo(BaseModel):
-    LIST_TYPE_ARTICLE = "listar_type_articulo"
-    ADD_TYPE_ARTICLE = "agregar_type_articulo"
-    VIEW_TYPE_ARTICLE = "ver_type_articulo"
-    CHANGE_TYPE_ARTICLE = "editar_type_articulo"
-    DELETE_TYPE_ARTICLE = "eliminar_type_articulo"
+    LIST_TYPE_ARTICLE = "listar_tipo_articulo"
+    ADD_TYPE_ARTICLE = "agregar_tipo_articulo"
+    VIEW_TYPE_ARTICLE = "ver_tipo_articulo"
+    CHANGE_TYPE_ARTICLE = "editar_tipo_articulo"
+    DELETE_TYPE_ARTICLE = "eliminar_tipo_articulo"
 
     nombre = models.CharField(max_length=180)
 
@@ -35,11 +35,11 @@ class TipoArticulo(BaseModel):
         verbose_name_plural = "Tipos de Articulos"
         ordering = ["-id"]
         permissions = [
-            ("listar_type_articulo", "Puede listar tipos de articulos"),
-            ("agregar_type_articulo", "Puede agregar tipo de articulo"),
-            ("ver_type_articulo", "Puede ver tipo de articulo"),
-            ("editar_type_articulo", "Puede actualizar tipo de articulo"),
-            ("eliminar_type_articulo", "Puede eliminar tipo de articulo"),
+            ("listar_tipo_articulo", "Puede listar tipos de articulos"),
+            ("agregar_tipo_articulo", "Puede agregar tipo de articulo"),
+            ("ver_tipo_articulo", "Puede ver tipo de articulo"),
+            ("editar_tipo_articulo", "Puede actualizar tipo de articulo"),
+            ("eliminar_tipo_articulo", "Puede eliminar tipo de articulo"),
         ]
 
 
@@ -128,7 +128,7 @@ class Articulo(BaseModel):
         db_table = "administracion_articulos"
         verbose_name = "Actividad social"
         verbose_name_plural = "Actividades sociales"
-        ordering = ["-id"]
+        ordering = ["-fecha_adq"]
         permissions = [
             ("listar_articulo", "Puede listar articulos"),
             ("agregar_articulo", "Puede agregar articulo"),

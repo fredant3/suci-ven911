@@ -52,13 +52,13 @@ class RegistroFilmico(BaseModel):
         return self.camara
 
     class Meta:
-        verbose_name = "registro_filmico"
-        verbose_name_plural = "registro_filmicos"
+        verbose_name = "Registro Filmico"
+        verbose_name_plural = "Registros Filmicos"
         permissions = [
-            ("listar_registroFilmico", "Puede listar registros filmicos"),
-            ("agregar_registroFilmico", "Puede agregar registro filmico"),
-            ("ver_registroFilmico", "Puede ver registro filmico"),
-            ("editar_registroFilmico", "Puede actualizar registro filmico"),
-            ("eliminar_registroFilmico", "Puede eliminar registro filmico"),
-            ("exel_registroFilmico", "Puede exportar a exel registro filmico"),
+            ("listar_registro_filmico", "Puede listar registros filmicos"),
+            ("agregar_registro_filmico", "Puede agregar registro filmico"),
+            ("ver_registro_filmico", "Puede ver registro filmico"),
+            ("editar_registro_filmico", "Puede actualizar registro filmico"),
+            ("eliminar_registro_filmico", "Puede eliminar registro filmico"),
+            ("exel_registro_filmico", "Puede exportar a exel registro filmico"),
         ]
