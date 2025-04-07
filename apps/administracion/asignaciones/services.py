@@ -9,7 +9,7 @@ from django.db.models import Q
 class AsignacionService(CrudService):
     select = (
         "id",
-        "articulo__serial",
+        "articulo__nombre",
         "sede__sede",
         "departamento__nombre",
         "cantidad",

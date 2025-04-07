@@ -1,6 +1,6 @@
 from administracion.inventario.models import Articulo
 from helpers.FormBase import FormBase
-from django.forms import TextInput, NumberInput, IntegerField, HiddenInput
+from django.forms import TextInput, NumberInput, IntegerField
 
 
 class ArticuloForm(FormBase):
@@ -9,6 +9,7 @@ class ArticuloForm(FormBase):
     class Meta:
         model = Articulo
         fields = [
+            "nombre",
             "descripcion",
             "marca",
             "modelo",
@@ -19,6 +20,9 @@ class ArticuloForm(FormBase):
             "fecha_adq",
         ]
         widgets = {
+            "nombre": TextInput(
+                attrs={"placeholder": "Ingrese el nombre del artículo"}
+            ),
             "descripcion": TextInput(
                 attrs={"placeholder": "Ingrese la descripción del artículo"}
             ),
@@ -47,6 +51,7 @@ class ConsumibleForm(ArticuloForm):
 class MobiliarioForm(ArticuloForm):
     class Meta(ArticuloForm.Meta):
         fields = [
+            "nombre",
             "descripcion",
             "serial",
             "codigo_bn",

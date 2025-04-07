@@ -9,6 +9,7 @@ from helpers.management.commands.seed.administracion._Sede import SedesFaker
 from helpers.management.commands.seed.administracion._Averia import AveriaFake
 from helpers.management.commands.seed.potencia._Incidencias import IncidenciaFake
 from helpers.management.commands.seed.users._UserFaker import UserFaker
+from helpers.management.commands.seed.users._GruposPermisosFaker import Roles
 from helpers.management.commands.seed.emergencia._Incidencias import EmergenciaFake
 
 from helpers.management.commands.seed.rrhh._TipoSueldoFake import TipoSueldoFake
@@ -22,14 +23,20 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker("es_ES")
 
+        Roles.execute()
+
         UserFaker.admin_user()
         UserFaker.director_user()
         UserFaker.gerente_user()
         UserFaker.supervisor_user()
         UserFaker.analista_user()
 
+        # Gestion Administrativa (Inventario)
         ArticleFake.type_article()
-        ArticleFake.article(fake)
+        ArticleFake.tecnologia(fake)
+        ArticleFake.consumibles(fake)
+        ArticleFake.mobiliario(fake)
+        ArticleFake.vehiculo(fake)
 
         SedesFaker.add_sedes(fake)
         DepartamentoFaker.add_departamentos(fake)

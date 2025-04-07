@@ -50,6 +50,11 @@ class Articulo(BaseModel):
     CHANGE_ARTICLE = "editar_articulo"
     DELETE_ARTICLE = "eliminar_articulo"
 
+    nombre = models.TextField(
+        "Nombre",
+        max_length=150,
+        validators=[MaxLengthValidator(150), TextValidator()],
+    )
     descripcion = models.TextField(
         "Descripción",
         max_length=255,
@@ -114,7 +119,7 @@ class Articulo(BaseModel):
     asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
 
     def __str__(self):
-        return str(self.marca) + " - " + str(self.modelo)
+        return self.nombre
 
     def toJSON(self):
         return model_to_dict(self)

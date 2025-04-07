@@ -43,8 +43,8 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "articulo__serial",
-                "name": "articulo__serial",
+                "data": "articulo__nombre",
+                "name": "articulo__nombre",
                 "title": "Artículo",
                 "orderable": "true",
                 "searchable": "true",
