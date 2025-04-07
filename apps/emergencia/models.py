@@ -19,7 +19,7 @@ class Emergencia(BaseModel):
         "Nombre del denunciante",
         max_length=180,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(180),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -46,7 +46,7 @@ class Emergencia(BaseModel):
         "Dirección de la incidencia",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     observaciones = models.TextField(
         "Observaciones",

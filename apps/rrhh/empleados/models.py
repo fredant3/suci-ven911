@@ -83,7 +83,7 @@ class Empleado(BaseModel):
         "Dirección",
         max_length=180,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(180),
             TextValidator(),
         ],

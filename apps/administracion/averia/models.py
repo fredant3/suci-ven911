@@ -37,7 +37,7 @@ class Averia(BaseModel):
     problema = TextField(
         "Problema",
         max_length=180,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     ubicacion = TextField(
         "Ubicación",

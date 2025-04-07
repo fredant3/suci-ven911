@@ -10,7 +10,7 @@ class Proyecto(BaseModel):
         "Nombre del Proyecto",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             TextValidator(),
         ],
@@ -21,7 +21,7 @@ class Proyecto(BaseModel):
         "Situación Presupuestaria",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -31,7 +31,7 @@ class Proyecto(BaseModel):
         "Responsable Gerente",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -40,7 +40,7 @@ class Proyecto(BaseModel):
         "Responsable Técnico",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -49,7 +49,7 @@ class Proyecto(BaseModel):
         "Responsable Registrador",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -58,7 +58,7 @@ class Proyecto(BaseModel):
         "Responsable Administrativo",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -67,7 +67,7 @@ class Proyecto(BaseModel):
         "Estatus del Proyecto",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(64),
             TextValidator(),
         ],

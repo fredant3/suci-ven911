@@ -11,7 +11,7 @@ class TipoIncidencia(BaseModel):
     tipo = models.CharField(
         "Tipo de Incidencia",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
 
     class Meta:

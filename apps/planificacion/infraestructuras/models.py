@@ -21,7 +21,7 @@ class Infraestructura(BaseModel):
     infraestructura = CharField(
         "Nombre de la infraestructura",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     cantidad = IntegerField(
         "Cantidad estimada",

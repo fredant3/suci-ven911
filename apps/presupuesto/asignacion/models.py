@@ -12,13 +12,13 @@ class Asignacion(BaseModel):
     departamento = models.CharField(
         "Nombre de la dirección",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     presupuesto = models.CharField("Presupuesto asignado", max_length=64)
     objetivo = models.CharField(
         "Objetivo general anual",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     numero_partida = models.CharField(
         "Número de partida presupuestaria",

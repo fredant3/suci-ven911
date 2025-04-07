@@ -11,7 +11,7 @@ class Educacion(BaseModel):
         "Nombre del Colegio",
         max_length=120,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(120),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -19,18 +19,18 @@ class Educacion(BaseModel):
     codigo_titulo = models.CharField(
         "Código del Título",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
     titulo = models.CharField(
         "Titulo Obtenido",
         max_length=120,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
     area_conocimiento = models.CharField(
         "Área de Conocimiento",
         max_length=120,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(120),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -42,7 +42,7 @@ class Educacion(BaseModel):
         max_length=120,
         null=True,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(120), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
     empleado = models.ForeignKey(
         Empleado, on_delete=models.CASCADE, verbose_name="Empleado"

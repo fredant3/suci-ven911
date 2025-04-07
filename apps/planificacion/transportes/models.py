@@ -21,7 +21,7 @@ class Transporte(BaseModel):
     transporte = CharField(
         "Tipo de transporte",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     cantidad = IntegerField(
         "Cantidad de unidades",

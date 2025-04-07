@@ -55,7 +55,7 @@ class Incidencia(BaseModel):
     observaciones = CharField(
         "Observaciones",
         max_length=200,
-        validators=[MinLengthValidator(9), MaxLengthValidator(2800), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(2800), TextValidator()],
     )
 
     def toJSON(self):
