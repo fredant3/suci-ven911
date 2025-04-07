@@ -8,7 +8,7 @@ class DepartamentoForm(FormBase):
         model = Departamento
         fields = ["nombre"]
         labels = {
-            "nombre": "Nombre del departamento",
+            "nombre": "Nombre Del Departamento",
         }
         widgets = {
             "nombre": TextInput(

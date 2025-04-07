@@ -14,7 +14,7 @@ class Actividad(BaseModel):
     objetiv = models.CharField(
         max_length=64,
         verbose_name="Objetivos:",
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
     meta = models.CharField(max_length=64, verbose_name="Meta:", default="")
 

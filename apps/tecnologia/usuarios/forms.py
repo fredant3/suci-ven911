@@ -79,7 +79,6 @@ class UserForm(FormBase):
         labels = {
             "username": "Usuario",
             "dni": "DNI",
-            "is_active": "Activo",
             "password": "Contraseña",
         }
         widgets = {

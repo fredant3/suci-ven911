@@ -18,12 +18,8 @@ class GestionHumanaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["module"] = "Gestión Humana"
         context["submodule"] = "Inicio Gestión Humana"
         context["submoduleList"] = (
-            ("Empleados", reverse_lazy("empleados:list")),
             ("Cargos", reverse_lazy("cargos:list")),
             ("Tipos de Sueldos", reverse_lazy("tipos_sueldos:list")),
-            ("Dotaciones", reverse_lazy("dotaciones:list")),
-            ("Educación", reverse_lazy("educaciones:list")),
-            ("Familiar", reverse_lazy("familiares:list")),
             ("Contratos", reverse_lazy("contratos:list")),
         )
         return TemplateLayout.init(self, context)

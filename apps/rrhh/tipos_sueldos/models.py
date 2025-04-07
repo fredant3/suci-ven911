@@ -32,7 +32,7 @@ class TipoSueldo(BaseModel):
         max_length=50,
         blank=True,
         null=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
     estatus = models.CharField("Estado Actual", max_length=3, choices=ESTATUS_CHOICES)
 

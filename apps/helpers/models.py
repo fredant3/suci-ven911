@@ -34,6 +34,10 @@ TIPO_CONTRATOS = (
     ("E", "Externo"),
     ("O", "Otro"),
 )
+BOOLEAN_CHOICES = (
+    (True, "si"),
+    (False, "no"),
+)
 ESTRATEGIAS_METODOLOGICAS = (
     ("AT", "Acompañamineto tecnico"),
     ("S", "Supervición"),

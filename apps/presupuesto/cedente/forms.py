@@ -3,7 +3,6 @@ from presupuesto.cedente.models import Cedente
 from helpers.FormBase import FormBase
 
 
-# TODO: Validaciones
 class CedenteForm(FormBase):
     class Meta:
         model = Cedente
@@ -47,18 +46,21 @@ class CedenteForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el código general",
+                    "min": "0",
                 }
             ),
             "espefc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el código específico",
+                    "min": "0",
                 }
             ),
             "subespefc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el subcódigo específico",
+                    "min": "0",
                 }
             ),
             "denomc": forms.TextInput(
@@ -71,6 +73,8 @@ class CedenteForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el presupuesto asignado",
+                    "min": "0",
+                    "step": "1",
                 }
             ),
             "caufechac": forms.TextInput(
@@ -89,12 +93,16 @@ class CedenteForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el monto comprometido",
+                    "min": "0",
+                    "step": "1",
                 }
             ),
             "saldofc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Ingrese el saldo final",
+                    "min": "0",
+                    "step": "1",
                 }
             ),
             "direccionc": forms.TextInput(

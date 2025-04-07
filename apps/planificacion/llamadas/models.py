@@ -1,4 +1,4 @@
-from django.db.models import CharField
+from django.db.models import CharField, IntegerField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES, MONTH_CHOICES
 from helpers.validForm import PositiveIntegerValidator
@@ -8,29 +8,24 @@ from django.core.validators import MinValueValidator
 class Llamada(BaseModel):
     mes = CharField("Mes:", max_length=3, choices=MONTH_CHOICES)
     estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
-    informativa = CharField(
+    informativa = IntegerField(
         "Llamadas informativas",
-        max_length=64,
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    falsa = CharField(
+    falsa = IntegerField(
         "Llamadas falsas",
-        max_length=64,
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    realesno = CharField(
+    realesno = IntegerField(
         "Llamadas reales no atendidas",
-        max_length=64,
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    realesf = CharField(
+    realesf = IntegerField(
         "Llamadas reales finalizadas",
-        max_length=64,
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    videop = CharField(
+    videop = IntegerField(
         "Videollamadas protección",
-        max_length=64,
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
 

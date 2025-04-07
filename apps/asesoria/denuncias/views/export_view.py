@@ -1,6 +1,5 @@
 from io import BytesIO
-
-from asesoria.denuncias.models import Denuncia
+from asesoria.denuncias.models import Denuncia, ESTATUS_CHOICES
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse
 from django.views.generic import TemplateView
@@ -36,16 +35,16 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ws = wb.active
 
         # Agrega el título en la primera fila
-        ws.merge_cells("A1:P1")  # Mezcla las celdas de A1 a D1
-        ws["A1"] = "Denuncias del 911"  # Agrega el texto del título
-        ws["A1"].alignment = Alignment(
-            horizontal="center"
-        )  # Centra el texto del título
-        ws["A1"].font = Font(
-            bold=True, color="0000FF"
-        )  # Establece el texto en negrita y color azul
-        ws["A2"] = ""  # Agrega el texto del título
+        ws.merge_cells("A1:P1")
+        ws["A1"] = "Denuncias del 911"
+        ws["A1"].alignment = Alignment(horizontal="center")
+        ws["A1"].font = Font(bold=True, color="0000FF")
+        ws["A2"] = ""
 
+        # Crear mapeo de estatus
+        estatus_mapping = dict(ESTATUS_CHOICES)
+
+        # Encabezados
         ws.append(
             [
                 "Estatus",
@@ -64,8 +63,9 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "Fecha de la denuncia",
                 "Fecha del incidente",
             ]
-        )  # Reemplaza con los nombres de tus campos
-        # Obtiene las columnas y establece el ancho deseado
+        )
+
+        # Configuración de ancho de columnas
         columnas = ws.column_dimensions
         columnas["A"].width = 10
         columnas["B"].width = 15
@@ -84,10 +84,14 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columnas["O"].width = 20
         columnas["P"].width = 20
 
+        # Datos
         for dato in denuncias:
+            # Formatear el estatus usando el mapeo
+            estatus = estatus_mapping.get(dato["estatus"], dato["estatus"])
+
             ws.append(
                 [
-                    dato["estatus"],
+                    estatus,  # Estatus formateado
                     dato["ente"],
                     dato["denunciante__nombres"],
                     dato["denunciante__apellidos"],
@@ -103,7 +107,7 @@ class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     dato["fecha_denuncia"],
                     dato["fecha_incidente"],
                 ]
-            )  # Reemplaza con los campos de tu modelo
+            )
 
         # Convierte el archivo Excel en memoria a bytes
         output = BytesIO()

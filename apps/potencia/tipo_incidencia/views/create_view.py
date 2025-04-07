@@ -18,7 +18,7 @@ class TipoIncidenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateVie
         context["titlePage"] = "Potencia"
         context["indexUrl"] = reverse_lazy("potencia")
         context["module"] = "Potencia"
-        context["submodule"] = "tipo de incidencia"
+        context["submodule"] = "Tipo de Incidencia"
         context["titleForm"] = "Añadir un tipo de incidencia"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("tipoIncidencia:list")

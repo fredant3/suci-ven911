@@ -8,7 +8,7 @@ class RegistroFilmicoForm(FormBase):
         "fecha_solicitud", "Fecha de Solicitud"
     )
     fecha_culminacion = FormBase.create_date_field(
-        "fecha_culminacion", "Fecha de Culminacion"
+        "fecha_culminacion", "Fecha de Culminación"
     )
 
     class Meta:

@@ -37,7 +37,6 @@ class Denunciante(BaseModel):
     cedula = CharField(
         "Cédula del denunciante",
         max_length=15,
-        unique=True,
         validators=[
             MinLengthValidator(7),
             MaxLengthValidator(14),
@@ -159,7 +158,7 @@ class Denunciado(BaseModel):
 class Denuncia(BaseModel):
     estatus = CharField(max_length=3, choices=ESTATUS_CHOICES)
     ente = CharField(
-        "Ente relacionado",
+        "Ente Relacionado",
         max_length=50,
         blank=True,
         null=True,
@@ -172,7 +171,7 @@ class Denuncia(BaseModel):
         validators=[MinLengthValidator(6), MaxLengthValidator(400), TextValidator()],
     )
     zona = CharField(
-        "Zona del incidente",
+        "Zona del Incidente",
         max_length=150,
         blank=True,
         null=True,

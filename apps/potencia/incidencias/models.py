@@ -14,32 +14,6 @@ INCIDENCIA_CHOICES = (
     ("Interna", "Solicitud Interna"),
     ("Externa", "Solicitud Externa"),
 )
-ESTADOS_CHOICES = (
-    ("Dtto. Capital", "Distrito Capital"),
-    ("Amazonas", "Amazonas"),
-    ("Anzoátegui", "Anzoátegui"),
-    ("Apure", "Apure"),
-    ("Aragua", "Aragua"),
-    ("Barinas", "Barinas"),
-    ("Bolívar", "Bolívar"),
-    ("Carabobo", "Carabobo"),
-    ("Cojedes", "Cojedes"),
-    ("Delta Amacuro", "Delta Amacuro"),
-    ("Falcón", "Falcón"),
-    ("Guárico", "Guárico"),
-    ("Lara", "Lara"),
-    ("Mérida", "Mérida"),
-    ("Miranda", "Miranda"),
-    ("Monagas", "Monagas"),
-    ("Nva. Esparta", "Nueva Esparta"),
-    ("Portuguesa", "Portuguesa"),
-    ("Sucre", "Sucre"),
-    ("Táchira", "Táchira"),
-    ("Trujillo", "Trujillo"),
-    ("Vargas", "Vargas"),
-    ("Yaracuy", "Yaracuy"),
-    ("Zulia", "Zulia"),
-)
 
 
 class Incidencia(BaseModel):
@@ -55,7 +29,7 @@ class Incidencia(BaseModel):
     observaciones = CharField(
         "Descripción de la falla",
         max_length=200,
-        validators=[MinLengthValidator(5), MaxLengthValidator(2800), TextValidator()],
+        validators=[MinLengthValidator(3), MaxLengthValidator(200), TextValidator()],
     )
 
     def toJSON(self):

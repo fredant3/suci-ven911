@@ -20,7 +20,7 @@ class Cargo(BaseModel):
         "Nombre del Cargo",
         max_length=60,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(60),
             UnicodeAlphaSpaceValidator(),
         ],

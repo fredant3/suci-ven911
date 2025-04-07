@@ -55,10 +55,10 @@ class VehiculoForm(FormBase):
             "modelo": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: Toyota Hilux 2023"}
             ),
-            "vehiculo": forms.Select(
+            "vehiculo": forms.TextInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "Seleccione tipo de vehículo",
+                    "placeholder": "Tipo de vehiculo",
                 }
             ),
             "motivo": forms.Textarea(
@@ -73,10 +73,14 @@ class VehiculoForm(FormBase):
                     "class": "form-control",
                     "placeholder": "Ej: 15.5 (en litros)",
                     "step": "0.1",
+                    "min": "0",
                 }
             ),
             "placa": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: ABC123"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ej: ABC123",
+                }
             ),
         }
 
@@ -116,13 +120,10 @@ class VehiculoForm(FormBase):
                 self.add_error("hora", "La combinación fecha/hora no puede ser futura")
 
         # Validación de gasolina si es vehículo propio
-        if (
-            cleaned_data.get("vehiculo") == "propio"
-            and cleaned_data.get("cantigasolina", 0) <= 0
-        ):
+        if cleaned_data.get("cantigasolina", 0) <= 0:
             self.add_error(
                 "cantigasolina",
-                "Debe especificar la cantidad de gasolina para vehículos propios",
+                "Debe especificar la cantidad de gasolina para vehículos",
             )
 
         return cleaned_data

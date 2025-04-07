@@ -25,7 +25,6 @@ class ContratoForm(FormBase):
             "sede",
             "fecha_ingreso_911",
             "fecha_ingreso_apn",
-            "fasmij",
             "fecha_ingreso",
             "fecha_culminacion",
             "empleado",
@@ -45,16 +44,6 @@ class ContratoForm(FormBase):
             "empleado": "Nombre del empleado",
         }
         widgets = {}
-
-    # Validaciones booleanas optimizadas
-    def clean_comision_servicio(self):
-        return self.cleaned_data.get("comision_servicio") or False
-
-    def clean_pnb(self):
-        return self.cleaned_data.get("pnb") or False
-
-    def clean_fasmij(self):
-        return self.cleaned_data.get("fasmij") or False
 
     # Validación de fechas
     def clean(self):

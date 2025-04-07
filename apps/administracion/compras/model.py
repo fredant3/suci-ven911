@@ -2,17 +2,18 @@ from administracion.inventario.models import Articulo
 from django.db import models
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import CurrencyValidator
-from django.core.validators import MinValueValidator
+from django.core.validators import MinLengthValidator
 
 
 class Compra(BaseModel):
     articulo = models.ForeignKey(
         Articulo, on_delete=models.CASCADE, verbose_name="Artículo"
     )
-    n_orden = models.CharField(
+    n_orden = models.TextField(
         "N° de orden",
-        max_length=12,
-        validators=[MinValueValidator(1)],
+        validators=[
+            MinLengthValidator(1),
+        ],
     )
     valor_bs = models.TextField(
         "Valor en BS",

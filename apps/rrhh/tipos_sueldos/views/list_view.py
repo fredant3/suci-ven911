@@ -10,6 +10,7 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from rrhh.tipos_sueldos.services import TipoSueldoService
+from rrhh.tipos_sueldos.models import ESTATUS_CHOICES
 
 
 class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -72,3 +73,30 @@ class TipoSueldoListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = TipoSueldoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                # Convertir estatus y formatear monto
+                for item in data.get("entities", []):
+                    # Formatear estatus
+                    if "estatus" in item:
+                        item["estatus"] = estatus_mapping.get(
+                            item["estatus"], item["estatus"]
+                        )
+
+                    # Formatear monto como número (opcional)
+                    if "monto" in item:
+                        try:
+                            item["monto"] = float(item["monto"])
+                        except (ValueError, TypeError):
+                            item["monto"] = 0.0
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decodificando JSON: {e}")
+        return response

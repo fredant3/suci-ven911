@@ -9,7 +9,7 @@ from django.core.validators import (
 )
 
 
-tipo_considcion = (
+TIPO_CONDICION = (
     ("N", "Nuevo"),
     ("U", "Usado"),
     ("D", "Deteriorado"),
@@ -110,7 +110,7 @@ class Articulo(BaseModel):
     condicion = models.CharField(
         "Condición",
         max_length=1,
-        choices=tipo_considcion,
+        choices=TIPO_CONDICION,
         null=True,
         blank=True,
         default="-",

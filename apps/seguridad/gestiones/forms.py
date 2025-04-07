@@ -50,12 +50,6 @@ class GestionForm(FormBase):
             "cedula": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
             ),
-            "tipo": forms.Select(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Seleccione tipo de gestión",
-                }
-            ),
             "descripcion": forms.Textarea(
                 attrs={
                     "class": "form-control",
@@ -69,8 +63,14 @@ class GestionForm(FormBase):
                     "placeholder": "Ej: Av. Principal, Edificio X",
                 }
             ),
-            "cargo": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione un cargo"}
+            "cargo": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Cargo asignado"}
+            ),
+            "tipo": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Tipo de gestión",
+                }
             ),
         }
         labels = {"tipo": "Tipo de Gestión", "descripcion": "Descripción Detallada"}

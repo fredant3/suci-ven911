@@ -5,6 +5,7 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.cargos.models import Cargo
 from rrhh.empleados.models import Empleado
+from helpers.models import BOOLEAN_CHOICES
 
 TIPO_CONTRATOS_CHOICES = (
     ("pasante", "Pasante"),
@@ -33,8 +34,16 @@ ESTATUS_CONTRATO_CHOICES = (
 
 class Contrato(BaseModel):
     tipo = CharField("Tipo de contrato", max_length=8, choices=TIPO_CONTRATOS_CHOICES)
-    comision_servicio = BooleanField("Comision servicio", default=False)
-    pnb = BooleanField("Funcionario PNB", default=False)
+    comision_servicio = BooleanField(
+        "Comision servicio",
+        choices=BOOLEAN_CHOICES,
+        default=BOOLEAN_CHOICES[1],
+    )
+    pnb = BooleanField(
+        "Funcionario PNB",
+        choices=BOOLEAN_CHOICES,
+        default=BOOLEAN_CHOICES[1],
+    )
     departamento = ForeignKey(
         Departamento, on_delete=CASCADE, verbose_name="Departamento"
     )
@@ -42,7 +51,7 @@ class Contrato(BaseModel):
     sede = ForeignKey(Sede, on_delete=CASCADE, verbose_name="Sede")
     fecha_ingreso_911 = DateField("Fecha de ingreso al Ven-911")
     fecha_ingreso_apn = DateField("Fecha de ingreso APN")
-    fasmij = BooleanField(default=False)
+    # fasmij = BooleanField(choices=BOOLEAN_CHOICES,default=BOOLEAN_CHOICES[1],)
     fecha_ingreso = DateField("Fecha de ingreso")
     fecha_culminacion = DateField("Fecha de culminacion", null=True, blank=True)
     estatus = CharField(max_length=3, choices=ESTATUS_CONTRATO_CHOICES, default="pen")

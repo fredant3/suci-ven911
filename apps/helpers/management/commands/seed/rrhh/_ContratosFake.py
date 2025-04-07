@@ -290,7 +290,6 @@ class ContratosFake:
             fecha_ingreso_apn=faker.date_between(
                 start_date="-5y", end_date=fecha_ingreso
             ),
-            fasmij=random.choice([True, False]),
             fecha_ingreso=fecha_ingreso,
             fecha_culminacion=fecha_culminacion,
             estatus=random.choice([t[0] for t in ESTATUS_CONTRATO_CHOICES]),

@@ -5,120 +5,116 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-from rrhh.contratos.models import Contrato  # Asegúrate de importar el modelo Contrato
+from rrhh.contratos.models import (
+    Contrato,
+    TIPO_CONTRATOS_CHOICES,
+    ESTATUS_CONTRATO_CHOICES,
+)
 
 
 class ContratoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "rrhh.contratos.exel_contrato"  # Define el permiso necesario
+    # Permiso requerido para acceder a esta vista (debe coincidir con los permisos del modelo)
+    permission_required = "rrhh.contratos.exel_contrato"
 
     def get(self, request, *args, **kwargs):
-        contratos = Contrato.objects.all().values(
-            "tipo",
-            "comision_servicio",
-            "pnb",
-            "departamento__nombre",  # Asume que el modelo Departamento tiene un campo 'nombre'
-            "tipo_personal__tipo",  # Asume que el modelo TipoEmpleado tiene un campo 'tipo'
-            "cargo__cargo",  # Asume que el modelo Cargo tiene un campo 'cargo'
-            "sede__nombre",  # Asume que el modelo Sede tiene un campo 'nombre'
-            "fecha_ingreso_911",
-            "fecha_ingreso_apn",
-            "fasmij",
-            "fecha_ingreso",
-            "fecha_culminacion",
-            "empleado__nombres",  # Asume que el modelo Empleado tiene un campo 'nombres'
-            "empleado__apellidos",  # Asume que el modelo Empleado tiene un campo 'apellidos'
-        )
+        # Obtener todos los contratos de la base de datos
+        contratos = Contrato.objects.all()
 
-        # Crea un archivo Excel en memoria
+        # Crear diccionarios para mapear los valores de selección a sus representaciones legibles
+        tipo_mapping = dict(TIPO_CONTRATOS_CHOICES)  # Mapeo para tipos de contrato
+        estatus_mapping = dict(
+            ESTATUS_CONTRATO_CHOICES
+        )  # Mapeo para estatus de contrato
+        boolean_mapping = {True: "Sí", False: "No"}  # Mapeo para valores booleanos
+
+        # Crear un nuevo libro de Excel
         wb = Workbook()
-        ws = wb.active
+        ws = wb.active  # Obtener la hoja activa
 
-        # Agrega el título en la primera fila
-        ws.merge_cells("A1:M1")  # Mezcla las celdas de A1 a M1
-        ws["A1"] = "Listado de Contratos"  # Agrega el texto del título
-        ws["A1"].alignment = Alignment(
-            horizontal="center"
-        )  # Centra el texto del título
+        # Configurar el título del reporte
+        ws.merge_cells("A1:K1")  # Combinar celdas para el título
+        ws["A1"] = "Registro de Contratos"  # Texto del título
+        ws["A1"].alignment = Alignment(horizontal="center")  # Centrar el título
         ws["A1"].font = Font(
             bold=True, color="0000FF"
-        )  # Establece el texto en negrita y color azul
-        ws["A2"] = ""  # Agrega una fila vacía
+        )  # Formato del título (negrita y azul)
+        ws.append([])  # Agregar una fila vacía después del título
 
-        # Agrega los encabezados de las columnas
-        ws.append(
-            [
-                "Tipo de Contrato",
-                "Comisión de Servicio",
-                "PNB",
-                "Departamento",
-                "Tipo de Personal",
-                "Cargo",
-                "Sede",
-                "Fecha de Ingreso 911",
-                "Fecha de Ingreso APN",
-                "FASMIJ",
-                "Fecha de Ingreso",
-                "Fecha de Culminación",
-                "Empleado",
-            ]
-        )
+        # Definir los encabezados de las columnas
+        headers = [
+            "Empleado",
+            "Tipo de Contrato",
+            "Comisión de Servicio",
+            "Funcionario PNB",
+            "Departamento",
+            "Cargo Asignado",
+            "Sede",
+            "Fecha Ingreso Ven-911",
+            "Fecha Ingreso APN",
+            "Fecha Ingreso",
+            "Fecha Culminación",
+            "Estatus",
+        ]
+        ws.append(headers)  # Agregar los encabezados a la hoja
 
-        # Ajusta el ancho de las columnas
-        columnas = ws.column_dimensions
-        columnas["A"].width = 20
-        columnas["B"].width = 20
-        columnas["C"].width = 15
-        columnas["D"].width = 20
-        columnas["E"].width = 20
-        columnas["F"].width = 20
-        columnas["G"].width = 20
-        columnas["H"].width = 20
-        columnas["I"].width = 20
-        columnas["J"].width = 15
-        columnas["K"].width = 20
-        columnas["L"].width = 20
-        columnas["M"].width = 30
+        # Configurar los anchos de las columnas para mejor visualización
+        column_widths = {
+            "A": 30,  # Empleado
+            "B": 20,  # Tipo de Contrato
+            "C": 20,  # Comisión de Servicio
+            "D": 18,  # Funcionario PNB
+            "E": 25,  # Departamento
+            "F": 25,  # Cargo Asignado
+            "G": 25,  # Sede
+            "H": 20,  # Fecha Ingreso Ven-911
+            "I": 20,  # Fecha Ingreso APN
+            "J": 15,  # Fecha Ingreso
+            "K": 20,  # Fecha Culminación
+            "L": 15,  # Estatus
+        }
+        # Aplicar los anchos de columna configurados
+        for col, width in column_widths.items():
+            ws.column_dimensions[col].width = width
 
-        # Agrega los datos de los contratos
+        # Llenar las filas con los datos de los contratos
         for contrato in contratos:
             ws.append(
                 [
-                    contrato["tipo"],
-                    "Sí" if contrato["comision_servicio"] else "No",
-                    "Sí" if contrato["pnb"] else "No",
-                    contrato["departamento__nombre"],
-                    contrato["tipo_personal__tipo"],
-                    contrato["cargo__cargo"],
-                    contrato["sede__nombre"],
+                    str(
+                        contrato.empleado
+                    ),  # Nombre del empleado (usa __str__ del modelo Empleado)
+                    tipo_mapping.get(
+                        contrato.tipo, contrato.tipo
+                    ),  # Tipo de contrato (mapeado)
+                    boolean_mapping.get(
+                        contrato.comision_servicio, "No"
+                    ),  # Comisión servicio (Sí/No)
+                    boolean_mapping.get(contrato.pnb, "No"),  # Funcionario PNB (Sí/No)
                     (
-                        contrato["fecha_ingreso_911"].strftime("%Y-%m-%d")
-                        if contrato["fecha_ingreso_911"]
-                        else ""
-                    ),
+                        str(contrato.departamento) if contrato.departamento else ""
+                    ),  # Departamento
+                    str(contrato.cargo) if contrato.cargo else "",  # Cargo asignado
+                    str(contrato.sede) if contrato.sede else "",  # Sede
+                    contrato.fecha_ingreso_911,  # Fecha ingreso Ven-911
+                    contrato.fecha_ingreso_apn,  # Fecha ingreso APN
+                    contrato.fecha_ingreso,  # Fecha de ingreso
                     (
-                        contrato["fecha_ingreso_apn"].strftime("%Y-%m-%d")
-                        if contrato["fecha_ingreso_apn"]
-                        else ""
-                    ),
-                    "Sí" if contrato["fasmij"] else "No",
-                    (
-                        contrato["fecha_ingreso"].strftime("%Y-%m-%d")
-                        if contrato["fecha_ingreso"]
-                        else ""
-                    ),
-                    (
-                        contrato["fecha_culminacion"].strftime("%Y-%m-%d")
-                        if contrato["fecha_culminacion"]
-                        else ""
-                    ),
-                    f"{contrato['empleado__nombres']} {contrato['empleado__apellidos']}",
+                        contrato.fecha_culminacion if contrato.fecha_culminacion else ""
+                    ),  # Fecha culminación (maneja nulos)
+                    estatus_mapping.get(
+                        contrato.estatus, contrato.estatus
+                    ),  # Estatus del contrato (mapeado)
                 ]
             )
 
-        # Convierte el archivo Excel en memoria a bytes
+        # Guardar el libro de Excel en memoria
         output = BytesIO()
         wb.save(output)
-        output.seek(0)
+        output.seek(0)  # Rebobinar el buffer al inicio
 
-        # Devuelve el archivo Excel como respuesta
-        return FileResponse(output, as_attachment=True, filename="Contratos.xlsx")
+        # Devolver el archivo Excel como respuesta para descargar
+        return FileResponse(
+            output,
+            as_attachment=True,  # Forzar descarga
+            filename="RegistroContratos.xlsx",  # Nombre del archivo
+        )

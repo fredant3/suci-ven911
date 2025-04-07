@@ -432,8 +432,8 @@ class Uri(BaseModel):
         blank=True,
         null=True,
     )  # si es si, activar opcion si es inflamable o explosivo)
-    # inflamable = models.BooleanField()
-    # explosivo = models.BooleanField()
+    # inflamable = models.BooleanField(choices=BOOLEAN_CHOICES,default=BOOLEAN_CHOICES[1])
+    # explosivo = models.BooleanField(choices=BOOLEAN_CHOICES,default=BOOLEAN_CHOICES[1])
     observacionesSustancia = models.CharField(
         "Observaciones de la sustancia",
         max_length=100,

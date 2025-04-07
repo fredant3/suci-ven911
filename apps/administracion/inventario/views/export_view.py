@@ -7,11 +7,12 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, Border, Side
 from administracion.inventario.models import Articulo
 
+
 class ArticuloExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "administracion.listar_articulo"
 
     def get(self, request, *args, **kwargs):
-        articulos = Articulo.objects.select_related('tipo_articulo').values(
+        articulos = Articulo.objects.select_related("tipo_articulo").values(
             "descripcion",
             "marca",
             "modelo",
@@ -23,7 +24,7 @@ class ArticuloExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "asignado",
             "codigo_bn",
             "cantidad_combustible",
-            "created_at"
+            "created_at",
         )
 
         wb = Workbook()
@@ -50,7 +51,7 @@ class ArticuloExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             ("Asignado", 10),
             ("Código BN", 15),
             ("Combustible (L)", 15),
-            ("Fecha Registro", 20)
+            ("Fecha Registro", 20),
         ]
 
         for col_num, (header, width) in enumerate(headers, 1):
@@ -62,27 +63,37 @@ class ArticuloExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
         # Datos (sin el campo condicion)
         for row_num, articulo in enumerate(articulos, 3):
-            ws.append([
-                articulo["descripcion"],
-                articulo["marca"] or "-",
-                articulo["modelo"] or "-",
-                articulo["serial"] or "-",
-                articulo["placa"] or "-",
-                articulo["cantidad"],
-                articulo["tipo_articulo__nombre"],
-                articulo["fecha_adq"].strftime("%d/%m/%Y") if articulo["fecha_adq"] else "-",
-                "Sí" if articulo["asignado"] == "yes" else "No",
-                articulo["codigo_bn"] or "-",
-                articulo["cantidad_combustible"] or "-",
-                articulo["created_at"].strftime("%d/%m/%Y %H:%M") if articulo["created_at"] else "-"
-            ])
+            ws.append(
+                [
+                    articulo["descripcion"],
+                    articulo["marca"] or "-",
+                    articulo["modelo"] or "-",
+                    articulo["serial"] or "-",
+                    articulo["placa"] or "-",
+                    articulo["cantidad"],
+                    articulo["tipo_articulo__nombre"],
+                    (
+                        articulo["fecha_adq"].strftime("%d/%m/%Y")
+                        if articulo["fecha_adq"]
+                        else "-"
+                    ),
+                    "Sí" if articulo["asignado"] == "yes" else "No",
+                    articulo["codigo_bn"] or "-",
+                    articulo["cantidad_combustible"] or "-",
+                    (
+                        articulo["created_at"].strftime("%d/%m/%Y")
+                        if articulo["created_at"]
+                        else "-"
+                    ),
+                ]
+            )
 
         # Aplicar bordes
         border = Border(
-            left=Side(style='thin'),
-            right=Side(style='thin'),
-            top=Side(style='thin'),
-            bottom=Side(style='thin')
+            left=Side(style="thin"),
+            right=Side(style="thin"),
+            top=Side(style="thin"),
+            bottom=Side(style="thin"),
         )
         for row in ws.iter_rows(min_row=2, max_row=ws.max_row, max_col=len(headers)):
             for cell in row:
@@ -92,9 +103,7 @@ class ArticuloExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         output = BytesIO()
         wb.save(output)
         output.seek(0)
-        
+
         return FileResponse(
-            output,
-            as_attachment=True,
-            filename="inventario_articulos.xlsx"
+            output, as_attachment=True, filename="inventario_articulos.xlsx"
         )

@@ -17,7 +17,7 @@ class Salida(BaseModel):
         "Nombre",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -26,7 +26,7 @@ class Salida(BaseModel):
         "Apellido",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -47,12 +47,12 @@ class Salida(BaseModel):
     direccion = models.CharField(
         "Dirección",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
     cargo = models.CharField(
         "Cargo",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
     hora = models.CharField(
         "Hora de Entrada",

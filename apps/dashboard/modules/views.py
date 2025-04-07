@@ -79,7 +79,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             {
                 "title": "Gestion Comunicacional",
                 "url": "gc_info",
-                "image": "img/modules/admin.png",
+                "image": "img/modules/GC_icon.png",
             },
         ]
         return context

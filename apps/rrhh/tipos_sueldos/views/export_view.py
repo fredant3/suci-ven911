@@ -23,6 +23,23 @@ class TipoSueldoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "estatus",
         )
 
+        # Diccionarios para mapear las claves a sus valores descriptivos
+        TIPO_MAP = {
+            "ticket": "Cesta Ticket",
+            "guerra": "Bono de Guerra",
+            "discapacidad": "Prima por discapacidad",
+            "menor_12": "Prima por dependencias menores de 12",
+            "hijos_13_18": "Prima por dependencias menores de 13 a 18",
+            "hijos_discapacidad": "Prima por dependencias menores con discapacidad",
+            "profesionalismo": "Prima por Profesionalismo",
+            "minimo": "Sueldo Mínimo",
+        }
+
+        ESTATUS_MAP = {
+            "act": "Activo",
+            "sup": "Suspendido",
+        }
+
         # Crea un archivo Excel en memoria
         wb = Workbook()
         ws = wb.active
@@ -55,16 +72,20 @@ class TipoSueldoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columnas["C"].width = 30
         columnas["D"].width = 15
 
-        # Agrega los datos de los tipos de sueldos
+        # Agrega los datos de los tipos de sueldos, convirtiendo las claves a valores descriptivos
         for tipo_sueldo in tipos_sueldos:
+            tipo_descriptivo = TIPO_MAP.get(tipo_sueldo["tipo"], tipo_sueldo["tipo"])
+            estatus_descriptivo = ESTATUS_MAP.get(
+                tipo_sueldo["estatus"], tipo_sueldo["estatus"]
+            )
             ws.append(
                 [
-                    tipo_sueldo["tipo"],
+                    tipo_descriptivo,
                     float(
                         tipo_sueldo["monto"]
                     ),  # Convierte Decimal a float para evitar errores
                     tipo_sueldo["descripcion"] if tipo_sueldo["descripcion"] else "",
-                    tipo_sueldo["estatus"],
+                    estatus_descriptivo,
                 ]
             )
 

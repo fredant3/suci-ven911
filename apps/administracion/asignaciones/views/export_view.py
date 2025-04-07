@@ -66,7 +66,7 @@ class AsignacionExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     registro["descripcion"],
                     registro["observaciones"],
                     (
-                        registro["created_at"].strftime("%Y-%m-%d %H:%M")
+                        registro["created_at"].strftime("%Y-%m-%d")
                         if registro["created_at"]
                         else ""
                     ),

@@ -14,6 +14,7 @@ from helpers.models import (
     NACIONALIDAD_CHOICES,
     TIPO_SANGRE_CHOICES,
     TIPO_CONTRATOS,
+    BOOLEAN_CHOICES,
 )
 from helpers.validForm import (
     CedulaVenezolanaValidator,
@@ -36,7 +37,7 @@ ESTATUS_CHOICES = (
 class Empleado(BaseModel):
     estatus = CharField(max_length=3, choices=ESTATUS_CHOICES)
     nombres = CharField(
-        "Nombres del empleado",
+        "Nombres del Empleado",
         max_length=90,
         validators=[
             MinLengthValidator(3),
@@ -45,7 +46,7 @@ class Empleado(BaseModel):
         ],
     )
     apellidos = CharField(
-        "Apellidos del empleado",
+        "Apellidos del Empleado",
         max_length=90,
         validators=[
             MinLengthValidator(3),
@@ -55,7 +56,7 @@ class Empleado(BaseModel):
     )
     nacionalidad = CharField("Nacionalidad", max_length=2, choices=NACIONALIDAD_CHOICES)
     cedula = CharField(
-        "Cédula de identidad",
+        "Cédula de Identidad",
         max_length=15,
         unique=True,
         validators=[
@@ -64,13 +65,13 @@ class Empleado(BaseModel):
             CedulaVenezolanaValidator(),
         ],
     )
-    sexo = CharField("Genero", max_length=1, choices=SEXO_CHOICES)
-    fecha_nacimiento = DateField("Fecha de nacimiento")
-    estado_civil = CharField(max_length=1, choices=ESTADO_CIVIL_CHOICES)
-    tipo_sangre = CharField(max_length=3, choices=TIPO_SANGRE_CHOICES)
+    sexo = CharField("Género", max_length=1, choices=SEXO_CHOICES)
+    fecha_nacimiento = DateField("Fecha de Nacimiento")
+    estado_civil = CharField("Estado Civil", max_length=1, choices=ESTADO_CIVIL_CHOICES)
+    tipo_sangre = CharField("Tipo de Sangre", max_length=3, choices=TIPO_SANGRE_CHOICES)
     email = EmailField(blank=True, null=True)
     telefono = CharField(
-        "Telefono del empleado",
+        "Teléfono del Empleado",
         max_length=20,
         validators=[
             MinLengthValidator(11),
@@ -79,15 +80,16 @@ class Empleado(BaseModel):
         ],
     )
     direccion = CharField(
+        "Dirección",
         max_length=180,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(180),
             TextValidator(),
         ],
     )
-    estudia = BooleanField(default=False)
-    discapacitado = BooleanField(default=False)
+    estudia = BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
+    discapacitado = BooleanField(choices=BOOLEAN_CHOICES, default=BOOLEAN_CHOICES[1])
     tipo_contrato = CharField(max_length=3, choices=TIPO_CONTRATOS)
     usuario = OneToOneField(
         User, on_delete=CASCADE, blank=True, null=True, related_name="empleado"

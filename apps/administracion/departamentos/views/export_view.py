@@ -5,16 +5,18 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-from administracion.departamentos.models import Departamento  # Importar el modelo Departamento
+from administracion.departamentos.models import (
+    Departamento,
+)  # Importar el modelo Departamento
+
 
 class DepartamentoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "administracion.listar_departamento"  # Usar el permiso correspondiente
+    permission_required = (
+        "administracion.listar_departamento"  # Usar el permiso correspondiente
+    )
 
     def get(self, request, *args, **kwargs):
-        departamentos = Departamento.objects.all().values(
-            "nombre",
-            "created_at"
-        )
+        departamentos = Departamento.objects.all().values("nombre", "created_at")
 
         wb = Workbook()
         ws = wb.active
@@ -27,34 +29,29 @@ class DepartamentoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView
         ws.append([])  # Espacio en blanco
 
         # Encabezados
-        ws.append([
-            "Nombre del Departamento",
-            "Fecha de Creación"
-        ])
+        ws.append(["Nombre del Departamento", "Fecha de Creación"])
 
         # Ajustes de columnas
-        column_widths = {
-            'A': 30,  # Nombre
-            'B': 20   # Fecha
-        }
+        column_widths = {"A": 30, "B": 20}  # Nombre  # Fecha
         for col, width in column_widths.items():
             ws.column_dimensions[col].width = width
 
         # Datos
         for departamento in departamentos:
-            fecha = departamento["created_at"].strftime("%Y-%m-%d %H:%M") if departamento["created_at"] else ""
-            ws.append([
-                departamento["nombre"],
-                fecha
-            ])
+            fecha = (
+                departamento["created_at"].strftime("%Y-%m-%d")
+                if departamento["created_at"]
+                else ""
+            )
+            ws.append([departamento["nombre"], fecha])
 
         # Generar respuesta
         output = BytesIO()
         wb.save(output)
         output.seek(0)
-        
+
         return FileResponse(
             output,
             as_attachment=True,
-            filename="Departamentos.xlsx"  # Nombre del archivo en minúsculas
+            filename="Departamentos.xlsx",  # Nombre del archivo en minúsculas
         )

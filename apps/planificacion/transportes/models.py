@@ -1,4 +1,4 @@
-from django.db.models import CharField
+from django.db.models import CharField, IntegerField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES, MONTH_CHOICES
 from helpers.validForm import PositiveIntegerValidator, TextValidator
@@ -6,6 +6,7 @@ from django.core.validators import (
     MinValueValidator,
     MinLengthValidator,
     MaxLengthValidator,
+    MaxValueValidator,
 )
 
 
@@ -20,14 +21,13 @@ class Transporte(BaseModel):
     transporte = CharField(
         "Tipo de transporte",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    cantidad = CharField(
+    cantidad = IntegerField(
         "Cantidad de unidades",
-        max_length=64,
         validators=[
             MinValueValidator(1),
-            MaxLengthValidator(64),
+            MaxValueValidator(1000),
             PositiveIntegerValidator(),
         ],
     )

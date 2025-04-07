@@ -18,7 +18,7 @@ class Cedente(BaseModel):
         "Identificador Cedente:",
         max_length=100,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
@@ -27,7 +27,7 @@ class Cedente(BaseModel):
         "Partida Contable",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
@@ -62,7 +62,7 @@ class Cedente(BaseModel):
     denomc = models.CharField(
         "Denominación",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
     presuacorc = models.CharField("Presupuesto asignado", max_length=64)
     caufechac = models.CharField("Causado a la fecha", max_length=64)
@@ -72,7 +72,7 @@ class Cedente(BaseModel):
     direccionc = models.CharField(
         "Dirección cedente",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
 
     def toJSON(self):

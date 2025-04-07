@@ -13,7 +13,7 @@ class Vehiculo(BaseModel):
         "Nombre",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -22,7 +22,7 @@ class Vehiculo(BaseModel):
         "Apellido",
         max_length=64,
         validators=[
-            MinLengthValidator(9),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
             UnicodeAlphaSpaceValidator(),
         ],
@@ -31,17 +31,17 @@ class Vehiculo(BaseModel):
     modelo = models.CharField(
         "Modelo",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     vehiculo = models.CharField(
         "Tipo de vehiculo",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     motivo = models.CharField(
         "Motivo",
         max_length=64,
-        validators=[MinLengthValidator(9), MaxLengthValidator(64), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
     capagasolina = models.CharField("Capacidad de Gasolina", max_length=64)
     cantigasolina = models.CharField("Cantidad de Gasolina", max_length=64)

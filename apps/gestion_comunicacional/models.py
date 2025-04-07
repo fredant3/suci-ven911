@@ -5,6 +5,7 @@ from helpers.models import (
     ESTRATEGIAS_METODOLOGICAS,
     AMBITO_ACCION,
     ACTIVIDAD_PREVENTIVA,
+    BOOLEAN_CHOICES,
 )
 from django.db.models import CharField, BooleanField
 from helpers.validForm import CedulaVenezolanaValidator, TextValidator
@@ -16,19 +17,19 @@ class GestionComunicacional(BaseModel):
         "Nombre de la actividad",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     actividad_realizada = models.TextField(
         "Nombre de la actividad",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     descripcion_actividad = models.TextField(
         "descripción actividad",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     actividad_preventiva = CharField(max_length=3, choices=AMBITO_ACCION)
     estado = models.CharField(
@@ -44,25 +45,25 @@ class GestionComunicacional(BaseModel):
         "población abordada",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     equipo_social = models.TextField(
         "equipo social",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     realizado_por = models.TextField(
         "Realizado por",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     validado_por = models.TextField(
         "Validado por",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     cedula = CharField(
         "Cédula de identidad",
@@ -78,10 +79,14 @@ class GestionComunicacional(BaseModel):
         "Observaciones",
         max_length=180,
         blank=True,
-        validators=[MinLengthValidator(9), MaxLengthValidator(180), TextValidator()],
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     # Localizacion_sede soon
-    municipio_priorizado = BooleanField(default=False)
+    municipio_priorizado = BooleanField(
+        "Municipio priorizado",
+        choices=BOOLEAN_CHOICES,
+        default=BOOLEAN_CHOICES[1],
+    )
 
     def toJSON(self):
         return model_to_dict(self)
