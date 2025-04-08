@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
+
 
 ESTATUS_CHOICES = (
     ("noncontac", "No hubo contacto con el paciente"),  # Opciones:
@@ -169,32 +170,6 @@ ESTATUS_CHOICES19 = (
     ("midri", "Midriasis"),
 )
 
-ESTADOS_CHOICES = (
-    ("Dtto. Capital", "Distrito Capital"),
-    ("Amazonas", "Amazonas"),
-    ("Anzoátegui", "Anzoátegui"),
-    ("Apure", "Apure"),
-    ("Aragua", "Aragua"),
-    ("Barinas", "Barinas"),
-    ("Bolívar", "Bolívar"),
-    ("Carabobo", "Carabobo"),
-    ("Cojedes", "Cojedes"),
-    ("Delta Amacuro", "Delta Amacuro"),
-    ("Falcón", "Falcón"),
-    ("Guárico", "Guárico"),
-    ("Lara", "Lara"),
-    ("Mérida", "Mérida"),
-    ("Miranda", "Miranda"),
-    ("Monagas", "Monagas"),
-    ("Nva. Esparta", "Nueva Esparta"),
-    ("Portuguesa", "Portuguesa"),
-    ("Sucre", "Sucre"),
-    ("Táchira", "Táchira"),
-    ("Trujillo", "Trujillo"),
-    ("Vargas", "Vargas"),
-    ("Yaracuy", "Yaracuy"),
-    ("Zulia", "Zulia"),
-)
 
 GENERO_CHOICES = (
     ("Femenino", "Femenino"),
@@ -257,7 +232,10 @@ class Uri(BaseModel):
         "Cedula del paciente", max_length=10, blank=True, null=True
     )
     telefonopaciente = models.CharField(
-        "Numero de Telefono del Paciente", max_length=11, blank=True, null=True, 
+        "Numero de Telefono del Paciente",
+        max_length=11,
+        blank=True,
+        null=True,
     )
     generopaciente = models.CharField(
         "Genero del Paciente",
@@ -295,7 +273,10 @@ class Uri(BaseModel):
         "Cedula del Acompañante", max_length=10, blank=True, null=True
     )
     telefono_acompanate = models.CharField(
-        "Numero de Telefono del Acompañante", max_length=11, blank=True, null=True,
+        "Numero de Telefono del Acompañante",
+        max_length=11,
+        blank=True,
+        null=True,
     )
     genero_acompanante = models.CharField(
         "Genero del acompañante",
@@ -325,19 +306,11 @@ class Uri(BaseModel):
 
     # 4)Direccion Exacta del Evento
     # Direccion
-    estado_evento = models.CharField(
-        "Estado del Evento",
-        max_length=15,
-        choices=ESTADOS_CHOICES,
-        blank=True,
-        null=True,
-    )  # Input Select
-    municipio_evento = models.CharField(
-        "Municipio", max_length=20, blank=True, null=True
+    estado = models.CharField(
+        "Estado", name="estado", max_length=30, choices=ESTADOS_CHOICES
     )
-    parroquia_evento = models.CharField(
-        "Parroquia", max_length=20, blank=True, null=True
-    )
+    municipio = models.CharField("Municipio", name="municipio", max_length=90)
+    parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
     sector_evento = models.CharField(
         "Sector/Urbanizacion", max_length=100, blank=True, null=True
     )

@@ -1,4 +1,4 @@
-from django.forms import TextInput, Textarea
+from django.forms import TextInput, Textarea, Select
 from gestion_comunicacional.models import GestionComunicacional
 from helpers.FormBase import FormBase
 
@@ -24,6 +24,7 @@ class GestionComunicacionalForm(FormBase):
             "actividad_realizada",
             "descripcion_actividad",
             "actividad_preventiva",
+            "estado",
             "municipio",
             "parroquia",
             "estrategias_metodologicas",
@@ -58,4 +59,7 @@ class GestionComunicacionalForm(FormBase):
                     "placeholder": "Ingrese las observaciones",
                 }
             ),
+            "estado": Select(attrs={"class": "form-select mb-3"}),
+            "municipio": Select(attrs={"class": "form-select mb-3"}),
+            "parroquia": Select(attrs={"class": "form-select mb-3"}),
         }

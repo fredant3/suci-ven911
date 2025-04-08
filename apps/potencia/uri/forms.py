@@ -1,5 +1,5 @@
 from potencia.uri.models import Uri
-from django.forms import CharField
+from django.forms import CharField, Select
 from helpers.FormBase import FormBase
 from django import forms
 
@@ -254,8 +254,6 @@ class UriConsentimientoForm(FormBase):
 
 
 class UriDireccionForm(FormBase):
-    municipio_evento = CharField(max_length=20, required=False, label="Municipio")
-    parroquia_evento = CharField(max_length=20, required=False, label="Parroquia")
     sector_evento = CharField(
         max_length=100,
         required=False,
@@ -327,10 +325,10 @@ class UriDireccionForm(FormBase):
 
     class Meta:
         model = Uri
-        fields = (
-            "estado_evento",
-            "municipio_evento",
-            "parroquia_evento",
+        fields = [
+            "estado",
+            "municipio",
+            "parroquia",
             "sector_evento",
             "calle_evento",
             "casa_evento",
@@ -349,7 +347,7 @@ class UriDireccionForm(FormBase):
             "hora_sede",
             "tiempo_servicio",
             "observaciones_servicio",
-        )
+        ]
         exclude = [
             "created_at",
             "created_by",
@@ -358,6 +356,15 @@ class UriDireccionForm(FormBase):
             "deleted_at",
             "deleted_by",
         ]
+        widgets = {
+            "estado": Select(attrs={"class": "form-select mb-3", "id": "id_estado"}),
+            "municipio": Select(
+                attrs={"class": "form-select mb-3", "id": "id_municipio"}
+            ),
+            "parroquia": Select(
+                attrs={"class": "form-select mb-3", "id": "id_parroquia"}
+            ),
+        }
 
 
 class UriInfoclinicaForm(FormBase):
