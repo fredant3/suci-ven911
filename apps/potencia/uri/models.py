@@ -670,7 +670,7 @@ class Uri(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.estado
+        return self.nombrepaciente
 
     class Meta:
         verbose_name = "Unidad de repuesta inmediata"

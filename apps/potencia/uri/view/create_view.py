@@ -9,15 +9,10 @@ from potencia.uri.forms import (
     UripacienteForm,
     UriConsentimientoForm,
     UriDireccionForm,
-    UriInfoclinicaForm,
-    UriSignosVitalesForm,
-    UriReferenciasForm,
 )
-
 from templates.sneat import TemplateLayout
-
-from potencia.uri.services import UriService
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from potencia.uri.models import Uri
 
 
 class UriCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -47,13 +42,10 @@ class UriCreateApiView(CreateController, CheckPermisosMixin):
 class InfogeneralWizardView(SessionWizardView):
     template_name = "widzard/index.html"
     form_list = [
-        UriInfoGeneralForm,
-        UripacienteForm,
-        UriConsentimientoForm,
-        UriDireccionForm,
-        UriInfoclinicaForm,
-        UriSignosVitalesForm,
-        UriReferenciasForm,
+        ("general", UriInfoGeneralForm),
+        ("paciente", UripacienteForm),
+        ("consentimiento", UriConsentimientoForm),
+        ("direccion", UriDireccionForm),
     ]
 
     def get_context_data(self, **kwargs):
@@ -64,9 +56,25 @@ class InfogeneralWizardView(SessionWizardView):
         context["submodule"] = "Unidad de Respuesta Inmediata"
         return TemplateLayout.init(self, context)
 
-    def done(self, form_list, **kwargs):
-        print(form_list)
-        return HttpResponse()
+    def done(self, form_list, form_dict, **kwargs):
+        datos_generales = form_dict["general"].cleaned_data
+        datos_paciente = form_dict["paciente"].cleaned_data
+        datos_consentimiento = form_dict["consentimiento"].cleaned_data
+        datos_direccion = form_dict["direccion"].cleaned_data
+
+        registro = Uri(
+            **datos_generales,
+            **datos_paciente,
+            **datos_consentimiento,
+            **datos_direccion,
+        )
+
+        print("========================================")
+        print(registro)
+        print("========================================")
+
+        registro.save()
+        return HttpResponseRedirect("/potencia/unidad-respuesta-inmediata")
 
     # def __init__(self):
     # self.service = UriService()
