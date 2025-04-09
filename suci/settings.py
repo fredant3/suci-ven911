@@ -73,7 +73,6 @@ INSTALLED_APPS = [
     "apps.rrhh",
     "apps.seguridad",
     "apps.tecnologia",
-    "apps.auditoria",
     "crispy_forms",
     "formtools",
 ]

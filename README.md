@@ -155,7 +155,6 @@ Get-ChildItem -Recurse -Directory -Filter "migrations" | Remove-Item -Recurse -F
 ```
 python manage.py makemigrations helpers
 python manage.py makemigrations users
-python manage.py makemigrations auditoria
 python manage.py makemigrations dashboard
 python manage.py makemigrations administracion
 python manage.py makemigrations asesoria

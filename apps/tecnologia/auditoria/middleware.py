@@ -1,6 +1,6 @@
 import logging
 from user_agents import parse
-from auditoria.models import RequestLog
+from apps.tecnologia.auditoria.models import RequestLog
 
 
 class CaptureIPAndDeviceMiddleware:
@@ -31,6 +31,8 @@ class CaptureIPAndDeviceMiddleware:
                 operating_system=os,
                 browser=browser,
                 method=request.method,
+                url=request.build_absolute_uri(),
+                user=request.user if request.user.is_authenticated else None,
             )
 
         return self.get_response(request)
