@@ -9,6 +9,9 @@ from potencia.uri.forms import (
     UripacienteForm,
     UriConsentimientoForm,
     UriDireccionForm,
+    UriInfoclinicaForm,
+    UriSignosVitalesForm,
+    UriReferenciasForm,
 )
 from templates.sneat import TemplateLayout
 from django.http import HttpResponseRedirect
@@ -46,6 +49,9 @@ class InfogeneralWizardView(SessionWizardView):
         ("paciente", UripacienteForm),
         ("consentimiento", UriConsentimientoForm),
         ("direccion", UriDireccionForm),
+        ("clinica", UriInfoclinicaForm),
+        ("signos", UriSignosVitalesForm),
+        ("referencias", UriReferenciasForm),
     ]
 
     def get_context_data(self, **kwargs):
@@ -61,12 +67,18 @@ class InfogeneralWizardView(SessionWizardView):
         datos_paciente = form_dict["paciente"].cleaned_data
         datos_consentimiento = form_dict["consentimiento"].cleaned_data
         datos_direccion = form_dict["direccion"].cleaned_data
+        datos_clinica = form_dict["clinica"].cleaned_data
+        datos_signos = form_dict["signos"].cleaned_data
+        datos_referencias = form_dict["referencias"].cleaned_data
 
         registro = Uri(
             **datos_generales,
             **datos_paciente,
             **datos_consentimiento,
             **datos_direccion,
+            **datos_clinica,
+            **datos_signos,
+            **datos_referencias
         )
 
         print("========================================")
