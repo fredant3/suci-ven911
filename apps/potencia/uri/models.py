@@ -238,7 +238,7 @@ class Uri(BaseModel):
         null=True,
     )
     generopaciente = models.CharField(
-        "Genero del Paciente",
+        "Género del Paciente",
         max_length=9,
         choices=GENERO_CHOICES,
         blank=True,
