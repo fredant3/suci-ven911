@@ -307,10 +307,27 @@ class Uri(BaseModel):
     # 4)Direccion Exacta del Evento
     # Direccion
     estado = models.CharField(
-        "Estado", name="estado", max_length=30, choices=ESTADOS_CHOICES
+        "Estado",
+        name="estado",
+        max_length=30,
+        choices=ESTADOS_CHOICES,
+        blank=True,
+        null=True,
     )
-    municipio = models.CharField("Municipio", name="municipio", max_length=90)
-    parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
+    municipio = models.CharField(
+        "Municipio",
+        name="municipio",
+        max_length=90,
+        blank=True,
+        null=True,
+    )
+    parroquia = models.CharField(
+        "Parroquia",
+        name="parroquia",
+        max_length=90,
+        blank=True,
+        null=True,
+    )
     sector_evento = models.CharField(
         "Sector/Urbanizacion", max_length=100, blank=True, null=True
     )
