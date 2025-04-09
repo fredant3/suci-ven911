@@ -141,7 +141,7 @@
 
 		<li
 			class="menu-item {% if 'emergencias' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
-			<a href="{% url 'emergencias:list' %}" class="menu-link">
+			<a href="{% url 'operaciones' %}" class="menu-link">
 				<i class="menu-icon tf-icons bx bx-plus-medical"></i>
 				<div class="text-truncate" data-i18n="Email">Emergencias</div>
 			</a>

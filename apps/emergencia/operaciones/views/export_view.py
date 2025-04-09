@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, Border, Side
-from emergencia.models import Emergencia, ESTADOS_CHOICES
+from emergencia.operaciones.models import Emergencia, ESTADOS_CHOICES
 
 
 class EmergenciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):

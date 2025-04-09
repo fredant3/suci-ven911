@@ -62,19 +62,14 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/biblioteca.png",
             },
             {
-                "title": "Emergencias",
-                "url": "emergencias:list",
+                "title": "Operaciones",
+                "url": "operaciones",
                 "image": "img/modules/ambulancia.png",
             },
             {
                 "title": "Tecnología Comunicación e Información",
                 "url": "tecnologia",
                 "image": "img/modules/tecnologia.png",
-            },
-            {
-                "title": "Permisos y Usuarios",
-                "url": "user:list",
-                "image": "img/modules/admin.png",
             },
             {
                 "title": "Gestion Comunicacional",

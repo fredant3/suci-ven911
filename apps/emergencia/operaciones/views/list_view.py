@@ -10,7 +10,7 @@ from ..services import EmergenciaService
 
 
 class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "emergrncia.ver_emergencia"
+    permission_required = "operaciones.ver_emergencia"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -22,11 +22,11 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["module"] = "Emergencias"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("emergencias:create")
-        context["listApiUrl"] = reverse_lazy("api_emergencias:list")
-        context["updateUrl"] = reverse_lazy("emergencias:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("emergencias:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("emergencias:export_excel")
+        context["createUrl"] = reverse_lazy("operaciones:create")
+        context["listApiUrl"] = reverse_lazy("api_operaciones:list")
+        context["updateUrl"] = reverse_lazy("operaciones:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("operaciones:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("operaciones:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
