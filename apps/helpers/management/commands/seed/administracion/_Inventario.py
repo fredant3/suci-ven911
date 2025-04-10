@@ -4,10 +4,10 @@ import faker.providers
 from administracion.inventario.models import Articulo, TipoArticulo
 
 TIPOS_DE_ARTICULOS = [
-    "Tecnología",
-    "Consumible",
-    "Mobiliario",
-    "Vehículo",
+    "tecnologia",
+    "consumible",
+    "mobiliario",
+    "vehiculo",
 ]
 
 TIPO_CONSIDCION = ["N", "U", "D"]
@@ -40,7 +40,7 @@ class ArticleFake:
             print(f"Tipo de articulo {entity.nombre} registrado")
 
     def tecnologia(fake):
-        tipo_tecnologia, _ = TipoArticulo.objects.get_or_create(nombre="Tecnología")
+        tipo_tecnologia, _ = TipoArticulo.objects.get_or_create(nombre="tecnologia")
 
         for _ in range(25):
             articulo = Articulo.objects.create(
@@ -75,7 +75,7 @@ class ArticleFake:
             )
 
     def consumibles(fake):
-        tipo_consumible, _ = TipoArticulo.objects.get_or_create(nombre="Consumible")
+        tipo_consumible, _ = TipoArticulo.objects.get_or_create(nombre="consumible")
 
         for _ in range(25):
             articulo = Articulo.objects.create(
@@ -110,7 +110,7 @@ class ArticleFake:
             )
 
     def mobiliario(fake):
-        tipo_mobiliario, _ = TipoArticulo.objects.get_or_create(nombre="Mobiliario")
+        tipo_mobiliario, _ = TipoArticulo.objects.get_or_create(nombre="mobiliario")
 
         for _ in range(15):
             articulo = Articulo.objects.create(
@@ -145,7 +145,7 @@ class ArticleFake:
             )
 
     def vehiculo(fake):
-        tipo_vehiculo, _ = TipoArticulo.objects.get_or_create(nombre="Vehículo")
+        tipo_vehiculo, _ = TipoArticulo.objects.get_or_create(nombre="vehiculo")
 
         for _ in range(10):
             articulo = Articulo.objects.create(
