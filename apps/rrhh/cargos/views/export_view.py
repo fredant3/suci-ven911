@@ -12,7 +12,7 @@ class CargoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "rrhh.cargo.exel_cargo"  # Define el permiso necesario
 
     def get(self, request, *args, **kwargs):
-        cargos = Cargo.objects.all().values("cargo", "estatus")
+        cargos = Cargo.objects.all().values("cargo", "estatus", "created_at")
 
         # Diccionario para mapear las claves de estatus a sus valores descriptivos
         ESTATUS_MAP = {
@@ -38,7 +38,7 @@ class CargoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ws["A2"] = ""  # Agrega una fila vacía
 
         # Agrega los encabezados de las columnas
-        ws.append(["Cargo", "Estatus"])
+        ws.append(["Cargo", "Estatus", "Fecha de creación"])
 
         # Ajusta el ancho de las columnas
         columnas = ws.column_dimensions
@@ -48,7 +48,17 @@ class CargoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         # Agrega los datos de los cargos, convirtiendo la clave de estatus a su valor descriptivo
         for cargo in cargos:
             estatus_descriptivo = ESTATUS_MAP.get(cargo["estatus"], cargo["estatus"])
-            ws.append([cargo["cargo"], estatus_descriptivo])
+            ws.append(
+                [
+                    cargo["cargo"],
+                    estatus_descriptivo,
+                    (
+                        cargo["created_at"].strftime("%d/%m/%Y")
+                        if cargo["created_at"]
+                        else "N/A"
+                    ),
+                ]
+            )
 
         # Convierte el archivo Excel en memoria a bytes
         output = BytesIO()
