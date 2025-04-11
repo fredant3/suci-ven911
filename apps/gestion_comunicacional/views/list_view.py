@@ -37,7 +37,7 @@ class GestioncomunicacionalListView(
             {
                 "data": "id",
                 "name": "id",
-                "title": "#",
+                "title": "ID",
                 "orderable": "true",
                 "searchable": "true",
             },
