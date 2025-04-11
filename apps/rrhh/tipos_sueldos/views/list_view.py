@@ -10,7 +10,7 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from rrhh.tipos_sueldos.services import TipoSueldoService
-from rrhh.tipos_sueldos.models import ESTATUS_CHOICES
+from rrhh.tipos_sueldos.models import ESTATUS_CHOICES, TIPO_CHOICES
 
 
 class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -80,6 +80,7 @@ class TipoSueldoListApiView(ListController, CheckPermisosMixin):
             try:
                 data = json.loads(response.content)
                 estatus_mapping = dict(ESTATUS_CHOICES)
+                tipo_mapping = dict(TIPO_CHOICES)
 
                 # Convertir estatus y formatear monto
                 for item in data.get("entities", []):
@@ -89,12 +90,27 @@ class TipoSueldoListApiView(ListController, CheckPermisosMixin):
                             item["estatus"], item["estatus"]
                         )
 
+                    # Formatear tipo
+                    if "tipo" in item:
+                        item["tipo"] = tipo_mapping.get(item["tipo"], item["tipo"])
+
                     # Formatear monto como número (opcional)
                     if "monto" in item:
                         try:
                             item["monto"] = float(item["monto"])
                         except (ValueError, TypeError):
                             item["monto"] = 0.0
+
+                # Agregar opciones de filtro a la respuesta
+                if "meta" not in data:
+                    data["meta"] = {}
+
+                data["meta"]["filters"] = {
+                    "tipo_options": [{"value": k, "label": v} for k, v in TIPO_CHOICES],
+                    "estatus_options": [
+                        {"value": k, "label": v} for k, v in ESTATUS_CHOICES
+                    ],
+                }
 
                 response.content = json.dumps(data)
             except json.JSONDecodeError as e:
