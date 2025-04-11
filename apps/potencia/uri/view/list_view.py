@@ -9,6 +9,7 @@ from helpers.ControllerMixin import ListController
 from potencia.uri.services import UriService
 
 from templates.sneat import TemplateLayout
+from helpers.BaseModelMixin import ESTADOS_CHOICES
 
 
 class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -56,8 +57,8 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "estado_evento",
-                "name": "estado_evento",
+                "data": "estado",
+                "name": "estado",
                 "title": "Estado del Evento",
                 "orderable": "true",
                 "searchable": "true",
@@ -70,3 +71,20 @@ class UriListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = UriService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTADOS_CHOICES)
+
+                for item in data.get("entities", []):
+                    item["estado"] = estatus_mapping.get(
+                        item.get("estado", ""), item.get("estado", "")
+                    )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError:
+                pass
+        return response

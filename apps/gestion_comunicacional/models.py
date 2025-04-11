@@ -20,7 +20,7 @@ class GestionComunicacional(BaseModel):
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     actividad_realizada = models.TextField(
-        "Nombre de la actividad",
+        "Actividad Realizada",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],

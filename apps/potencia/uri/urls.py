@@ -1,5 +1,5 @@
 from django.urls import path
-from potencia.uri.view.create_view import UriCreateView, InfogeneralWizardView
+from potencia.uri.view.create_view import InfogeneralWizardView
 from potencia.uri.view.delete_view import UriDeleteView
 from potencia.uri.view.list_view import UriListView
 from potencia.uri.view.update_view import UriUpdateView
@@ -30,5 +30,4 @@ urlpatterns = [
         UriDeleteView.as_view(),
         name="delete",
     ),
-    path("prueba/", InfogeneralWizardView.as_view([])),
 ]

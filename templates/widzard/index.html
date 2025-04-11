@@ -105,3 +105,8 @@
 	</div>
 </form>
 {% endblock %}
+
+{% block page_js %}
+{{ block.super }}
+<script src="{% static 'js/venezuela.js' %}"></script>
+{% endblock %}

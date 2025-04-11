@@ -22,4 +22,9 @@ urlpatterns = [
         "api/usuarios/",
         include(("apps.tecnologia.usuarios.urls_apis", "api_user")),
     ),
+    path("auditoria/", include(("apps.tecnologia.auditoria.urls", "auditoria"))),
+    path(
+        "api/auditoria/",
+        include(("apps.tecnologia.auditoria.urls_apis", "api_auditoria")),
+    ),
 ]

@@ -5,7 +5,8 @@ from django import forms
 
 
 class UriInfoGeneralForm(FormBase):
-
+    # 1) Información General
+    # -Datos del servicio
     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atención")
     nroreporte = CharField(
         max_length=10,
@@ -77,9 +78,18 @@ class UriInfoGeneralForm(FormBase):
             "msds",
             "foto",
         )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 
 class UripacienteForm(FormBase):
+    # 2) Datos del paciente
     nombrepaciente = CharField(
         max_length=50,
         required=False,
@@ -144,10 +154,18 @@ class UripacienteForm(FormBase):
             "unidad_placa",
             "firma",
         )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 
 class UriConsentimientoForm(FormBase):
-
+    # Datos del acompañante
     nombre_acompanante = CharField(
         max_length=50,
         required=False,
@@ -225,6 +243,14 @@ class UriConsentimientoForm(FormBase):
             "telefono_testigo",
             "direccion_testigo",
         )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 
 class UriDireccionForm(FormBase):
@@ -299,7 +325,7 @@ class UriDireccionForm(FormBase):
 
     class Meta:
         model = Uri
-        fields = (
+        fields = [
             "estado",
             "municipio",
             "parroquia",
@@ -321,7 +347,15 @@ class UriDireccionForm(FormBase):
             "hora_sede",
             "tiempo_servicio",
             "observaciones_servicio",
-        )
+        ]
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
         widgets = {
             "estado": Select(attrs={"class": "form-select mb-3", "id": "id_estado"}),
             "municipio": Select(
@@ -334,6 +368,7 @@ class UriDireccionForm(FormBase):
 
 
 class UriInfoclinicaForm(FormBase):
+    # 5) Información Clínica
     observacionesSustancia = CharField(
         max_length=50,
         required=False,
@@ -441,10 +476,18 @@ class UriInfoclinicaForm(FormBase):
             "ultimaComida",
             "evento",
         )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 
 class UriSignosVitalesForm(FormBase):
-
+    # 7) Signos Vitales o Tratamiento
     horaMedicion = FormBase.create_time_field("Hora de la Medición")
     frecuenciaCardiaca = CharField(
         max_length=100,
@@ -537,10 +580,17 @@ class UriSignosVitalesForm(FormBase):
             "hora",
             "resultadoEvaluacion",
         )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
 
 
 class UriReferenciasForm(FormBase):
-
     hospitalOrigen = CharField(
         max_length=100,
         required=False,
@@ -656,3 +706,11 @@ class UriReferenciasForm(FormBase):
             "cedulaMedico",
             "selloMsds",
         )
+        exclude = [
+            "created_at",
+            "created_by",
+            "updated_at",
+            "updated_by",
+            "deleted_at",
+            "deleted_by",
+        ]
