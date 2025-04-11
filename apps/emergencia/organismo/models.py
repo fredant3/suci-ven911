@@ -1,9 +1,9 @@
-from django.db import models
+from django.db.models import CharField
 from helpers.BaseModelMixin import BaseModel
 
 
 class OrganismoCompetente(BaseModel):
-    nombre = models.CharField(max_length=255)
+    nombre = CharField(max_length=255)
 
     def __str__(self):
         return self.nombre

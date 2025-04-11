@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
@@ -13,7 +13,7 @@ from django.core.validators import (
 
 
 class Entrada(BaseModel):
-    name = models.CharField(
+    name = CharField(
         "Nombre",
         max_length=64,
         validators=[
@@ -22,7 +22,7 @@ class Entrada(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    apellido = models.CharField(
+    apellido = CharField(
         "Apellido",
         max_length=64,
         validators=[
@@ -31,8 +31,8 @@ class Entrada(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    cedula = models.CharField("Cédula", max_length=64)
-    telefono = models.CharField(
+    cedula = CharField("Cédula", max_length=64)
+    telefono = CharField(
         "Teléfono",
         max_length=20,
         blank=True,
@@ -43,8 +43,8 @@ class Entrada(BaseModel):
             PhoneNumberValidator(),
         ],
     )
-    fecha = models.DateField("Fecha")
-    direccion = models.CharField(
+    fecha = DateField("Fecha")
+    direccion = CharField(
         "Dirección",
         max_length=64,
         validators=[
@@ -53,8 +53,8 @@ class Entrada(BaseModel):
             TextValidator(),
         ],
     )
-    cargo = models.CharField("Cargo", max_length=64)
-    hora = models.CharField("Hora de Entrada", max_length=64)
+    cargo = CharField("Cargo", max_length=64)
+    hora = CharField("Hora de Entrada", max_length=64)
 
     def toJSON(self):
         return model_to_dict(self)

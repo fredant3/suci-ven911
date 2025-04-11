@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
@@ -14,7 +14,7 @@ from django.core.validators import (
 
 
 class Receptor(BaseModel):
-    idr = models.CharField(
+    idr = CharField(
         "Identificador Receptor",
         max_length=100,
         validators=[
@@ -23,7 +23,7 @@ class Receptor(BaseModel):
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
     )
-    partidar = models.CharField(
+    partidar = CharField(
         "Partida Contable",
         max_length=64,
         validators=[
@@ -32,7 +32,7 @@ class Receptor(BaseModel):
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
     )
-    generalr = models.CharField(
+    generalr = CharField(
         "General",
         max_length=64,
         validators=[
@@ -42,7 +42,7 @@ class Receptor(BaseModel):
             PositiveIntegerValidator(),
         ],
     )
-    espefr = models.CharField(
+    espefr = CharField(
         "Específicaciones",
         max_length=64,
         validators=[
@@ -52,7 +52,7 @@ class Receptor(BaseModel):
             PositiveIntegerValidator(),
         ],
     )
-    subespefr = models.CharField(
+    subespefr = CharField(
         "Sub-Especialidad",
         max_length=64,
         validators=[
@@ -62,7 +62,7 @@ class Receptor(BaseModel):
             PositiveIntegerValidator(),
         ],
     )
-    denomr = models.CharField(
+    denomr = CharField(
         "Denomincación",
         max_length=64,
         validators=[
@@ -71,11 +71,11 @@ class Receptor(BaseModel):
             TextValidator(),
         ],
     )
-    presuacorr = models.CharField(
+    presuacorr = CharField(
         "Presupuesto acordado",
         max_length=64,
     )
-    caufechar = models.CharField(
+    caufechar = CharField(
         "Causado a la fecha",
         max_length=64,
         validators=[
@@ -84,19 +84,19 @@ class Receptor(BaseModel):
             TextValidator(),
         ],
     )
-    dispr = models.CharField(
+    dispr = CharField(
         "Disponible a causar",
         max_length=64,
     )
-    montocr = models.CharField(
+    montocr = CharField(
         "Monto a ceder",
         max_length=64,
     )
-    saldofr = models.CharField(
+    saldofr = CharField(
         "Saldo final",
         max_length=64,
     )
-    direccionr = models.CharField(
+    direccionr = CharField(
         "Dirección cedente",
         max_length=64,
         validators=[

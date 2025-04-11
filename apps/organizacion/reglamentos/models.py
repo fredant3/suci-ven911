@@ -1,4 +1,8 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    FileField,
+    DateField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator
@@ -25,15 +29,15 @@ ESTATUS_CHOICES = (("bor", "Borrador"), ("rev", "Revision"), ("pub", "Publicado"
 
 
 class Reglamento(BaseModel):
-    name = models.CharField(
+    name = CharField(
         "Nombre de Reglamento:",
         max_length=64,
         validators=[MinLengthValidator(3), MaxLengthValidator(64), TextValidator()],
     )
-    file = models.FileField("Archivo", upload_to="reglamentos/")
-    date = models.DateField("Fecha", blank=True)
-    progre = models.CharField("Progreso:", max_length=64, choices=PROGRESS_CHOICES)
-    estado = models.CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
+    file = FileField("Archivo", upload_to="reglamentos/")
+    date = DateField("Fecha", blank=True)
+    progre = CharField("Progreso:", max_length=64, choices=PROGRESS_CHOICES)
+    estado = CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
 
     def toJSON(self):
         return model_to_dict(self)

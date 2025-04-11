@@ -1,9 +1,9 @@
-from django.db import models
+from django.db.models import CharField
 from helpers.BaseModelMixin import BaseModel
 
 
 class TipoIncidencia(BaseModel):
-    nombre_incidencia = models.CharField(max_length=120)
+    nombre_incidencia = CharField(max_length=120)
 
     def __str__(self):
         return self.nombre_incidencia

@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import UnicodeAlphaSpaceValidator
 from django.core.validators import (
@@ -8,7 +8,7 @@ from django.core.validators import (
 
 
 class Departamento(BaseModel):
-    nombre = models.CharField(
+    nombre = CharField(
         "Departamento",
         max_length=30,
         validators=[

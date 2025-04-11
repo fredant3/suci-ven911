@@ -1,4 +1,7 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    DateField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator
@@ -9,14 +12,14 @@ from django.core.validators import (
 
 
 class Objetivo(BaseModel):
-    fechai = models.DateField(verbose_name="Fecha de Inicio")
-    fechaf = models.DateField(verbose_name="Fecha Final")
-    objetiv = models.CharField(
+    fechai = DateField(verbose_name="Fecha de Inicio")
+    fechaf = DateField(verbose_name="Fecha Final")
+    objetiv = CharField(
         max_length=64,
         verbose_name="Objetivos:",
         validators=[MinLengthValidator(3), MaxLengthValidator(64), TextValidator()],
     )
-    meta = models.CharField(max_length=64, verbose_name="Meta:", default="")
+    meta = CharField(max_length=64, verbose_name="Meta:", default="")
 
     def toJSON(self):
         return model_to_dict(self)

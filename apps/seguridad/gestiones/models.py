@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
@@ -9,7 +9,7 @@ from django.core.validators import (
 
 
 class Gestion(BaseModel):
-    name = models.CharField(
+    name = CharField(
         "Nombre",
         max_length=64,
         validators=[
@@ -18,7 +18,7 @@ class Gestion(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    apellido = models.CharField(
+    apellido = CharField(
         "Apellido",
         max_length=64,
         validators=[
@@ -27,32 +27,32 @@ class Gestion(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    cedula = models.CharField(
+    cedula = CharField(
         "Cédula",
         max_length=64,
     )
-    tipo = models.CharField(
+    tipo = CharField(
         "Tipo de Gestión",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    descripcion = models.CharField(
+    descripcion = CharField(
         "Descripción",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    fecha = models.DateField("Fecha")
-    direccion = models.CharField(
+    fecha = DateField("Fecha")
+    direccion = CharField(
         "Dirección",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    cargo = models.CharField(
+    cargo = CharField(
         "Cargo",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    hora = models.CharField(
+    hora = CharField(
         "Hora de Entrada",
         max_length=64,
     )

@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
@@ -9,18 +9,18 @@ from django.core.validators import (
 
 
 class Asignacion(BaseModel):
-    departamento = models.CharField(
+    departamento = CharField(
         "Nombre de la dirección",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    presupuesto = models.CharField("Presupuesto asignado", max_length=64)
-    objetivo = models.CharField(
+    presupuesto = CharField("Presupuesto asignado", max_length=64)
+    objetivo = CharField(
         "Objetivo general anual",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    numero_partida = models.CharField(
+    numero_partida = CharField(
         "Número de partida presupuestaria",
         max_length=10,
         validators=[
