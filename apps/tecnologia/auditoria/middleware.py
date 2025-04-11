@@ -1,6 +1,6 @@
 import logging
 from user_agents import parse
-from apps.tecnologia.auditoria.models import RequestLog
+from tecnologia.auditoria.models import RequestLog
 
 
 class CaptureIPAndDeviceMiddleware:

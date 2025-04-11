@@ -1,10 +1,10 @@
 from helpers.CrudMixin import CrudService
-from tecnologia.auditoria.repositories import UserRepository
+from tecnologia.auditoria.repositories import AuditoriaRepository
 
 
-class UserService(CrudService):
+class AuditoriaService(CrudService):
     def __init__(self):
-        self.repository = UserRepository()
+        self.repository = AuditoriaRepository()
 
     def get_all_with_related_info(self, draw, start, length, search=None):
         users, empleados_map = self.repository.get_all_with_related()

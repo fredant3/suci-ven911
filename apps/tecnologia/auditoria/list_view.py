@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
-from tecnologia.usuarios.services import AuditoriaService
+from tecnologia.auditoria.services import AuditoriaService
 
 
 class AuditoriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,10 +20,8 @@ class AuditoriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Tecnología"
-        context["submodule"] = "Auditogía"
+        context["submodule"] = "Auditoría"
         context["listApiUrl"] = reverse_lazy("api_user:list")
-        context["updateUrl"] = reverse_lazy("user:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("user:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
