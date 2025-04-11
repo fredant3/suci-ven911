@@ -1,6 +1,7 @@
 import django.core.validators
 import django.db.models.deletion
 import helpers.validForm
+from django.conf import settings
 from django.db import migrations, models
 
 
@@ -9,187 +10,1158 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('administracion', '0001_initial'),
+        ("administracion", "0001_initial"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TipoIncidencia',
+            name="Cargo",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(max_length=6, verbose_name='Creado por')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Creado el')),
-                ('updated_by', models.CharField(max_length=6, verbose_name='Actualizado por')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Actualizado el')),
-                ('deleted_by', models.CharField(blank=True, max_length=6, null=True, verbose_name='Eliminado por')),
-                ('deleted_at', models.DateTimeField(blank=True, null=True, verbose_name='Eliminado el')),
-                ('tipo', models.CharField(max_length=120, validators=[django.core.validators.MinLengthValidator(4), django.core.validators.MaxLengthValidator(120), helpers.validForm.TextValidator()], verbose_name='Tipo de Incidencia')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "cargo",
+                    models.CharField(
+                        max_length=60,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(60),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Nombre del Cargo",
+                    ),
+                ),
+                (
+                    "estatus",
+                    models.CharField(
+                        choices=[
+                            ("act", "Activo"),
+                            ("ina", "Inactivo"),
+                            ("inv", "Invalido"),
+                            ("cer", "Cerrado"),
+                        ],
+                        max_length=3,
+                        verbose_name="Estado del Cargo",
+                    ),
+                ),
             ],
             options={
-                'permissions': [('listar_tipo_incidencia', 'Puede listar tipo incidencia'), ('agregar_tipo_incidencia', 'Puede agregar tipo incidencia'), ('ver_tipo_incidencia', 'Puede ver tipo incidencia'), ('editar_tipo_incidencia', 'Puede actualizar tipo incidencia'), ('eliminar_tipo_incidencia', 'Puede eliminar tipo incidencia')],
+                "verbose_name": "Cargo",
+                "verbose_name_plural": "Cargos",
+                "permissions": [
+                    ("listar_cargo", "Puede listar cargos"),
+                    ("agregar_cargo", "Puede agregar cargo"),
+                    ("ver_cargo", "Puede ver cargo"),
+                    ("editar_cargo", "Puede actualizar cargo"),
+                    ("eliminar_cargo", "Puede eliminar cargo"),
+                    ("exel_cargo", "Puede exportar cargo a excel"),
+                ],
             },
         ),
         migrations.CreateModel(
-            name='Uri',
+            name="TipoSueldo",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(max_length=6, verbose_name='Creado por')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Creado el')),
-                ('updated_by', models.CharField(max_length=6, verbose_name='Actualizado por')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Actualizado el')),
-                ('deleted_by', models.CharField(blank=True, max_length=6, null=True, verbose_name='Eliminado por')),
-                ('deleted_at', models.DateTimeField(blank=True, null=True, verbose_name='Eliminado el')),
-                ('fecha_atencion', models.DateField(blank=True, max_length=10, null=True, verbose_name='Fecha de Atencion')),
-                ('nroreporte', models.CharField(blank=True, max_length=10, null=True, verbose_name='Numero de Reporte')),
-                ('placa', models.CharField(blank=True, max_length=10, null=True, verbose_name='Placa')),
-                ('institucion', models.CharField(blank=True, max_length=300, null=True, verbose_name='Institucion')),
-                ('tipounidad', models.CharField(blank=True, max_length=10, null=True, verbose_name='Tipo de Unidad')),
-                ('num_interna', models.CharField(blank=True, max_length=10, null=True, verbose_name='Numeracion Interna')),
-                ('contacto', models.CharField(blank=True, choices=[('noncontac', 'No hubo contacto con el paciente'), ('contac', 'Si hubo contacto con el paciente')], max_length=9, null=True, verbose_name='¿Hubo contacto con el paciente?')),
-                ('centroAsistencial', models.CharField(blank=True, max_length=50, null=True, verbose_name='Centro Asistencial')),
-                ('servicioAsistencial', models.CharField(blank=True, max_length=50, null=True, verbose_name='Servicio Asistencial')),
-                ('medico_receptor', models.CharField(blank=True, max_length=50, null=True, verbose_name='Medico Receptor')),
-                ('msds', models.CharField(blank=True, max_length=50, null=True, verbose_name='MS/DS')),
-                ('foto', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='¿Hubo registro fotografico?')),
-                ('nombrepaciente', models.CharField(blank=True, max_length=50, null=True, verbose_name='Nombre y apellido del Paciente')),
-                ('cedulapaciente', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cedula del paciente')),
-                ('telefonopaciente', models.CharField(blank=True, max_length=11, null=True, verbose_name='Numero de Telefono del Paciente')),
-                ('generopaciente', models.CharField(blank=True, choices=[('Femenino', 'Femenino'), ('Masculino', 'Masculino')], max_length=9, null=True, verbose_name='Género del Paciente')),
-                ('direccionpaciente', models.CharField(blank=True, max_length=300, null=True, verbose_name='Direccion del Paciente')),
-                ('organismo', models.CharField(blank=True, max_length=20, null=True, verbose_name='Nombre del Organismo')),
-                ('jefedecomision', models.CharField(blank=True, max_length=50, null=True, verbose_name='Jefe de Comision')),
-                ('unidad_placa', models.CharField(blank=True, max_length=20, null=True, verbose_name='Unidad/Placa')),
-                ('firma', models.CharField(blank=True, max_length=20, null=True, verbose_name='Firma')),
-                ('nombre_acompanante', models.CharField(blank=True, max_length=50, null=True, verbose_name='Nombre del Acompañante')),
-                ('parentezco_acompanante', models.CharField(blank=True, max_length=10, null=True, verbose_name='Parentesco del Acompañante')),
-                ('cedula_acompanante', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cedula del Acompañante')),
-                ('telefono_acompanate', models.CharField(blank=True, max_length=11, null=True, verbose_name='Numero de Telefono del Acompañante')),
-                ('genero_acompanante', models.CharField(blank=True, choices=[('Femenino', 'Femenino'), ('Masculino', 'Masculino')], max_length=9, null=True, verbose_name='Genero del acompañante')),
-                ('direccion_acompanante', models.CharField(blank=True, max_length=300, null=True, verbose_name='Direccion del acompañante')),
-                ('nombre_testigo', models.CharField(blank=True, max_length=50, null=True, verbose_name='Nombre y Apellido del Testigo')),
-                ('edad_testigo', models.IntegerField(blank=True, null=True, verbose_name='Edad del Testigo')),
-                ('cedula_testigo', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cedula del testigo')),
-                ('telefono_testigo', models.CharField(blank=True, max_length=11, null=True, verbose_name='Numero de Telefono del Testigo')),
-                ('direccion_testigo', models.CharField(blank=True, max_length=300, null=True, verbose_name='Direccion del Testigo')),
-                ('estado', models.CharField(blank=True, choices=[('1', 'Amazonas'), ('2', 'Anzoátegui'), ('3', 'Apure'), ('4', 'Aragua'), ('5', 'Barinas'), ('6', 'Bolívar'), ('7', 'Carabobo'), ('8', 'Cojedes'), ('9', 'Delta Amacuro'), ('10', 'Falcón'), ('11', 'Guárico'), ('12', 'Lara'), ('13', 'Mérida'), ('14', 'Miranda'), ('15', 'Monagas'), ('16', 'Nueva Esparta'), ('17', 'Portuguesa'), ('18', 'Sucre'), ('19', 'Táchira'), ('20', 'Trujillo'), ('21', 'Vargas'), ('22', 'Yaracuy'), ('23', 'Zulia'), ('24', 'Distrito Capital')], max_length=30, null=True, verbose_name='Estado')),
-                ('municipio', models.CharField(blank=True, max_length=90, null=True, verbose_name='Municipio')),
-                ('parroquia', models.CharField(blank=True, max_length=90, null=True, verbose_name='Parroquia')),
-                ('sector_evento', models.CharField(blank=True, max_length=100, null=True, verbose_name='Sector/Urbanizacion')),
-                ('calle_evento', models.CharField(blank=True, max_length=100, null=True, verbose_name='Calle/Avenida/Carrera')),
-                ('casa_evento', models.CharField(blank=True, max_length=20, null=True, verbose_name='Edif/ Casa')),
-                ('piso_evento', models.CharField(blank=True, max_length=20, null=True, verbose_name='Piso y Apto')),
-                ('referencia_evento', models.CharField(blank=True, max_length=100, null=True, verbose_name='Punto de Referencia')),
-                ('eje_evento', models.CharField(blank=True, max_length=30, null=True, verbose_name='Eje')),
-                ('lugar_atencion', models.CharField(blank=True, choices=[('casa', 'Hogar'), ('escue', 'Escuela'), ('calle', 'Via Publica'), ('work', 'Trabajo')], max_length=9, null=True, verbose_name='Lugar de Atención')),
-                ('modo_traslado', models.CharField(blank=True, choices=[('ambula', 'Ambulancia'), ('Vehi', 'Vehiculo Particular'), ('noasist', 'No Asistencial'), ('organ', 'Organismo')], max_length=9, null=True, verbose_name='Modo de Traslado')),
-                ('via_reporte', models.CharField(blank=True, choices=[('rs', 'RRSS'), ('rad', 'Radio'), ('casu', 'Casual'), ('telef', 'Telefonico'), ('otr', 'Otro')], max_length=9, null=True, verbose_name='Vía del Reporte')),
-                ('servicio_tipo', models.CharField(blank=True, choices=[('guardr', 'Guardia de Rutina'), ('guardp', 'Guardia de Prevencion'), ('interhosp', 'Alta/Residencia/Interhospitalario'), ('apoy', 'Apoyo'), ('otr', 'Otro')], max_length=9, null=True, verbose_name='Tipo de Servicio')),
-                ('hora_alarma', models.TimeField(blank=True, null=True, verbose_name='Hora de Alarma')),
-                ('hora_salida', models.TimeField(blank=True, null=True, verbose_name='Hora de Salida')),
-                ('hora_llegada', models.TimeField(blank=True, null=True, verbose_name='Hora de Llegada')),
-                ('hospital', models.CharField(blank=True, max_length=50, null=True, verbose_name='Llegada al Hospital')),
-                ('transferencia_emergencia', models.CharField(blank=True, max_length=50, null=True, verbose_name='Transferencia al Servicio de Emergencia')),
-                ('hora_sede', models.TimeField(blank=True, null=True, verbose_name='Hora de Retorno a la Sede')),
-                ('tiempo_servicio', models.CharField(blank=True, max_length=50, null=True, verbose_name='Tiempo de Servicio')),
-                ('observaciones_servicio', models.CharField(blank=True, max_length=150, null=True, verbose_name='Observaciones del Servicios')),
-                ('accidenteVehicular', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Accidente Vehicular')),
-                ('enfrentamientoArmado', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Enfrentamiento Armado')),
-                ('traumaVehiculo', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Trauma con Vehiculo')),
-                ('viajaba', models.CharField(blank=True, choices=[('conduc', 'Conductor'), ('tripul', 'Tripulante')], max_length=9, null=True, verbose_name='Viajaba como')),
-                ('sustanciaPeligrosa', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Sustancia Peligrosa')),
-                ('observacionesSustancia', models.CharField(blank=True, max_length=100, null=True, verbose_name='Observaciones de la sustancia')),
-                ('traumaNoIntencional', models.CharField(blank=True, choices=[('caipie', 'Caida de Propio Pie'), ('caialtu', 'Caida de Altura'), ('quemad', 'Quemadura'), ('morde', 'Mordedura'), ('otr', 'Otros')], max_length=9, null=True, verbose_name='Trauma no Intencional')),
-                ('emergenciaMedica', models.CharField(blank=True, choices=[('aler', 'Alergias'), ('cefa', 'Cefalea'), ('tension', 'Hipo/Hipertensión'), ('gine', 'Gineco-obstetrica'), ('conoci', 'Perdida de Conocimiento'), ('disne', 'Disnea/Dificultad Respiratoria'), ('dolo', 'Dolor'), ('emes', 'Emesis'), ('intox', 'Intoxicaciones'), ('shock', 'Shock no traumatico'), ('inme', 'Inmersión'), ('sca', 'SCA'), ('parad', 'Parada Cardio Respiratoria'), ('convul', 'Convulsiones'), ('hemor', 'Hemorragias no traumaticas'), ('otro', 'Otros')], max_length=9, null=True, verbose_name='Emergencias Médicas no Traumáticas')),
-                ('hemorragia', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Hemorragias')),
-                ('presion', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Presión Directa')),
-                ('empaquetado', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Empaquetado de la Herida')),
-                ('torniquete', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Torniquete')),
-                ('evaluacion', models.CharField(blank=True, choices=[('conscie', 'Consciente'), ('inconsc', 'Inconsciente'), ('viaperme', 'V. A. Permeable'), ('vianope', 'V. A. No Permeable'), ('ovac', 'OVACE'), ('liquid', 'Liquidos/Fluidos'), ('ruido', 'Ruidos en V. A.'), ('rme1', 'Necesita RME')], max_length=9, null=True, verbose_name='Evaluación')),
-                ('intervencion', models.CharField(blank=True, choices=[('freme', 'Frente-Menton'), ('tracc', 'Tracción Mandibular'), ('succ', 'Succión'), ('rme2', 'RME'), ('cof', 'COF'), ('cnf', 'CNF'), ('dgs', 'DSG/TET'), ('vaq', 'VAQ')], max_length=9, null=True, verbose_name='Intervenciones')),
-                ('resultado', models.CharField(blank=True, choices=[('vaperme', 'V. A. Permeabilizada'), ('vadeso', 'V. A. Desobstruida'), ('movesp', 'Mov. Esp. Restrigida'), ('vaisla', 'V. A. Aislada/Asegurada')], max_length=9, null=True, verbose_name='Resultados')),
-                ('descripcion_adic', models.CharField(blank=True, max_length=100, null=True, verbose_name='Descripción Adicional')),
-                ('evaluacionResp', models.CharField(blank=True, choices=[('resp', 'Respira/FR'), ('noresp', 'No Respira'), ('Expsim', 'Expansión Simetrica'), ('expasi', 'Expansión Asimétrica'), ('esresp', 'Esfuerzo Resp. Visible'), ('heris', 'Herida Succionante'), ('estig', 'Estigma de Trauma'), ('desvit', 'Desviación Traqueal'), ('ingur', 'Ingurgitación Yugular'), ('crepo', 'Crepitantes (óseos)'), ('dolo', 'Dolor'), ('enfi', 'Enfisema S.C'), ('reso', 'Resonancia'), ('hipere', 'Hiper-resonancia'), ('mati', 'Matidez'), ('murmu', 'Murmullo Vesicular'), ('ronc', 'Roncus'), ('sibi', 'Sibilancias'), ('crepi', 'Crepitantes'), ('aboli', 'Abolición/Disminución RR')], max_length=20, null=True, verbose_name='Evaluación')),
-                ('intervencionResp', models.CharField(blank=True, choices=[('ventb', 'Venta. Boca-Barr-Boca'), ('ventco', 'Venta. Con BVM'), ('ventim', 'Ventilación Mecánica'), ('valv', 'Valvula de una vía'), ('parch', 'Parche Oclusivo'), ('descom', 'Descomp. por Aguja'), ('oxige', 'Oxigenoterapia'), ('disp', 'Dispositivo'), ('lpm', 'LPM'), ('otr', 'Otro')], max_length=20, null=True, verbose_name='Intervención')),
-                ('resultadoResp', models.CharField(blank=True, choices=[('venties', 'Ventila espontáneamente'), ('ventia', 'Ventila con Asistencia'), ('neumot', 'Neumotorax resuelto (Abierto o a tensión)'), ('aliv', 'Alivio de la disnea (de origen no traumático)')], max_length=20, null=True, verbose_name='Resultado')),
-                ('descripcion_adic_resp', models.CharField(blank=True, max_length=100, null=True, verbose_name='Descripción Adicional')),
-                ('colorPiel', models.CharField(blank=True, choices=[('pali', 'Pálido'), ('norm', 'Normal')], max_length=9, null=True, verbose_name='Color de la Piel')),
-                ('temperaturaPiel', models.CharField(blank=True, choices=[('fria', 'Fría'), ('tibi', 'Tibia')], max_length=9, null=True, verbose_name='Temperatura de la Piel')),
-                ('humedadPiel', models.CharField(blank=True, choices=[('sec', 'Seca'), ('hume', 'Húmeda')], max_length=9, null=True, verbose_name='Humedad de la Piel')),
-                ('pulso', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Pulsos distales')),
-                ('otrasHerida', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Otras hemorro/heridas')),
-                ('fractura', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Fracturas')),
-                ('maniobraPelvis', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Maniobra de Pelvis')),
-                ('ecgO', models.IntegerField(blank=True, null=True)),
-                ('ecgV', models.IntegerField(blank=True, null=True)),
-                ('ecgM', models.IntegerField(blank=True, null=True)),
-                ('ecgTotal', models.IntegerField(blank=True, null=True)),
-                ('reaccionPupilar', models.CharField(blank=True, choices=[('isoc', 'Isocórica'), ('anis', 'Anisocoria'), ('mios', 'Miosis'), ('midri', 'Midriasis')], max_length=9, null=True, verbose_name='Reacción Pupilar')),
-                ('hipotermia', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='Hipotermia')),
-                ('signosSintomas', models.CharField(blank=True, max_length=100, null=True, verbose_name='Signos y Sintomas')),
-                ('alergias', models.CharField(blank=True, max_length=100, null=True, verbose_name='Alergias')),
-                ('medicamentos', models.CharField(blank=True, max_length=100, null=True, verbose_name='Medicamentos')),
-                ('preexistencias', models.CharField(blank=True, max_length=100, null=True, verbose_name='Preexistencias')),
-                ('ultimaComida', models.CharField(blank=True, max_length=100, null=True, verbose_name='Última comida')),
-                ('evento', models.CharField(blank=True, max_length=100, null=True, verbose_name='Evento')),
-                ('horaMedicion', models.TimeField(blank=True, null=True, verbose_name='Hora de Medición')),
-                ('frecuenciaCardiaca', models.CharField(blank=True, max_length=100, null=True, verbose_name='Frecuencia Cardiaca')),
-                ('frecuenciaRespiratoria', models.CharField(blank=True, max_length=100, null=True, verbose_name='Frecuencia Respiratoria')),
-                ('presionArterial', models.CharField(blank=True, max_length=100, null=True, verbose_name='Presión Arterial')),
-                ('spo2', models.CharField(blank=True, max_length=100, null=True, verbose_name='SPO2')),
-                ('temperatura', models.CharField(blank=True, max_length=100, null=True, verbose_name='Temperatura')),
-                ('llenadoCapilar', models.CharField(blank=True, max_length=100, null=True, verbose_name='Llenado Capilar')),
-                ('glicemiaCapilar', models.CharField(blank=True, max_length=100, null=True, verbose_name='Glicemia Capilar')),
-                ('escalaGlasgow', models.CharField(blank=True, max_length=100, null=True, verbose_name='Escala Glasgow')),
-                ('medicamento', models.CharField(blank=True, max_length=100, null=True, verbose_name='Medicamento')),
-                ('dosis', models.CharField(blank=True, max_length=100, null=True, verbose_name='Dosis')),
-                ('hora', models.TimeField(blank=True, null=True, verbose_name='Hora')),
-                ('resultadoEvaluacion', models.CharField(blank=True, max_length=500, null=True, verbose_name='Resultados de la Evaluación Fisica Cefalo Caudal')),
-                ('trasladoIncial', models.CharField(blank=True, choices=[('positivo', 'Si'), ('negativo', 'No')], max_length=9, null=True, verbose_name='¿El paciente fue referido del centro asistencial al que fue trasladado inicialmente?')),
-                ('hospitalOrigen', models.CharField(blank=True, max_length=100, null=True, verbose_name='Hospital Origen')),
-                ('medicoRefiere', models.CharField(blank=True, max_length=100, null=True, verbose_name='Medico que refiere')),
-                ('horaSalidaHosp', models.TimeField(blank=True, null=True, verbose_name='Hora de Salida')),
-                ('hospitalDestino', models.CharField(blank=True, max_length=100, null=True, verbose_name='Hospital que recibe')),
-                ('horaLlegadaHosp', models.TimeField(blank=True, null=True, verbose_name='Hora de llegada')),
-                ('causa', models.CharField(blank=True, max_length=100, null=True, verbose_name='Ingreses las causas')),
-                ('tecnicoEmergencia', models.CharField(blank=True, max_length=50, null=True, verbose_name='Técnico de emergencias médicas')),
-                ('cedulaTecnico', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cédula del Técnico de emergencias médicas')),
-                ('tercerTripulante', models.CharField(blank=True, max_length=50, null=True, verbose_name='Tercer Tripulante')),
-                ('cedulaTripulante', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cédula del tercer tripulante')),
-                ('conductorUnidad', models.CharField(blank=True, max_length=50, null=True, verbose_name='Conductor de la unidad')),
-                ('cedulaConductor', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cedula del conductor de la unidad')),
-                ('supervisorGuardia', models.CharField(blank=True, max_length=50, null=True, verbose_name='Supervisor de Guardia')),
-                ('cedulaSupervisor', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cédula del Supervisor de Guardia')),
-                ('medicoGuardia', models.CharField(blank=True, max_length=50, null=True, verbose_name='Médico de Guardia')),
-                ('cedulaMedico', models.CharField(blank=True, max_length=10, null=True, verbose_name='Cédula del Médico de Guardia')),
-                ('selloMsds', models.CharField(blank=True, max_length=25, null=True, verbose_name='Sellos/MSDS')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "tipo",
+                    models.CharField(
+                        choices=[
+                            ("ticket", "Cesta Ticket"),
+                            ("guerra", "Bono de Guerra"),
+                            ("discapacidad", "Prima por discapacidad"),
+                            ("menor_12", "Prima por dependecias menores de 12"),
+                            ("hijos_13_18", "Prima por dependecias menores de 13 a 18"),
+                            (
+                                "hijos_discapacidad",
+                                "Prima por dependecias menores con discapacidad",
+                            ),
+                            ("profesionalismo", "Prima por Profesionalismo"),
+                            ("minimo", "Sueldo Minimo"),
+                        ],
+                        max_length=21,
+                        verbose_name="Tipo de Sueldo",
+                    ),
+                ),
+                (
+                    "monto",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=10, verbose_name="Monto Asignado"
+                    ),
+                ),
+                (
+                    "descripcion",
+                    models.CharField(
+                        blank=True,
+                        max_length=50,
+                        null=True,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(255),
+                            helpers.validForm.TextValidator(),
+                        ],
+                        verbose_name="Descripción Detallada",
+                    ),
+                ),
+                (
+                    "estatus",
+                    models.CharField(
+                        choices=[("act", "Activo"), ("sup", "Suspendido")],
+                        max_length=3,
+                        verbose_name="Estado Actual",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Unidad de repuesta inmediata',
-                'verbose_name_plural': 'Unidades de repuestas inmediatas',
-                'permissions': [('listar_uri', 'Puede listar uri'), ('agregar_uri', 'Puede agregar uri'), ('ver_uri', 'Puede ver uri'), ('editar_uri', 'Puede actualizar uri'), ('eliminar_uri', 'Puede eliminar uri')],
+                "verbose_name": "tipo de empleado",
+                "verbose_name_plural": "tipos de empleados",
+                "permissions": [
+                    ("listar_tipo_sueldos", "Listar tipos de sueldos"),
+                    ("agregar_tipo_sueldo", "Agregar tipos de sueldos"),
+                    ("ver_tipo_sueldo", "Ver tipos de sueldos"),
+                    ("modificar_tipo_sueldo", "Modificar tipos de sueldos"),
+                    ("eliminar_tipo_sueldo", "Eliminar tipos de sueldos"),
+                    ("exel_tipo_sueldo", "Exportar tipos de sueldos a excel"),
+                ],
             },
         ),
         migrations.CreateModel(
-            name='Incidencia',
+            name="Empleado",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_by', models.CharField(max_length=6, verbose_name='Creado por')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Creado el')),
-                ('updated_by', models.CharField(max_length=6, verbose_name='Actualizado por')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Actualizado el')),
-                ('deleted_by', models.CharField(blank=True, max_length=6, null=True, verbose_name='Eliminado por')),
-                ('deleted_at', models.DateTimeField(blank=True, null=True, verbose_name='Eliminado el')),
-                ('estado', models.CharField(choices=[('1', 'Amazonas'), ('2', 'Anzoátegui'), ('3', 'Apure'), ('4', 'Aragua'), ('5', 'Barinas'), ('6', 'Bolívar'), ('7', 'Carabobo'), ('8', 'Cojedes'), ('9', 'Delta Amacuro'), ('10', 'Falcón'), ('11', 'Guárico'), ('12', 'Lara'), ('13', 'Mérida'), ('14', 'Miranda'), ('15', 'Monagas'), ('16', 'Nueva Esparta'), ('17', 'Portuguesa'), ('18', 'Sucre'), ('19', 'Táchira'), ('20', 'Trujillo'), ('21', 'Vargas'), ('22', 'Yaracuy'), ('23', 'Zulia'), ('24', 'Distrito Capital')], max_length=15, verbose_name='Estado')),
-                ('tipo_solicitud', models.CharField(choices=[('Interna', 'Solicitud Interna'), ('Externa', 'Solicitud Externa')], max_length=10, verbose_name='Tipo de Solicitud')),
-                ('observaciones', models.CharField(max_length=200, validators=[django.core.validators.MinLengthValidator(3), django.core.validators.MaxLengthValidator(200), helpers.validForm.TextValidator()], verbose_name='Descripción de la falla')),
-                ('departamento', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='administracion.departamento')),
-                ('sede', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='administracion.sede')),
-                ('tipo_incidencia', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='potencia.tipoincidencia', verbose_name='Tipo de incidencia')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "estatus",
+                    models.CharField(
+                        choices=[
+                            ("act", "Activo"),
+                            ("vac", "En vacaciones"),
+                            ("sus", "Suspendido"),
+                            ("des", "Se despedio"),
+                            ("ren", "Ha renunciado"),
+                        ],
+                        max_length=3,
+                    ),
+                ),
+                (
+                    "nombres",
+                    models.CharField(
+                        max_length=90,
+                        validators=[
+                            django.core.validators.MinLengthValidator(3),
+                            django.core.validators.MaxLengthValidator(90),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Nombres del Empleado",
+                    ),
+                ),
+                (
+                    "apellidos",
+                    models.CharField(
+                        max_length=90,
+                        validators=[
+                            django.core.validators.MinLengthValidator(3),
+                            django.core.validators.MaxLengthValidator(90),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Apellidos del Empleado",
+                    ),
+                ),
+                (
+                    "nacionalidad",
+                    models.CharField(
+                        choices=[("ve", "Venezolano"), ("ex", "Extranjero")],
+                        max_length=2,
+                        verbose_name="Nacionalidad",
+                    ),
+                ),
+                (
+                    "cedula",
+                    models.CharField(
+                        max_length=15,
+                        unique=True,
+                        validators=[
+                            django.core.validators.MinLengthValidator(7),
+                            django.core.validators.MaxLengthValidator(14),
+                            helpers.validForm.CedulaVenezolanaValidator(),
+                        ],
+                        verbose_name="Cédula de Identidad",
+                    ),
+                ),
+                (
+                    "sexo",
+                    models.CharField(
+                        choices=[("f", "Femenino"), ("m", "Masculino")],
+                        max_length=1,
+                        verbose_name="Género",
+                    ),
+                ),
+                (
+                    "fecha_nacimiento",
+                    models.DateField(verbose_name="Fecha de Nacimiento"),
+                ),
+                (
+                    "estado_civil",
+                    models.CharField(
+                        choices=[
+                            ("s", "Soltero"),
+                            ("c", "Casado"),
+                            ("d", "Divorviado"),
+                            ("v", "Viudo"),
+                        ],
+                        max_length=1,
+                        verbose_name="Estado Civil",
+                    ),
+                ),
+                (
+                    "tipo_sangre",
+                    models.CharField(
+                        choices=[
+                            ("a+", "A+ (Rh positivo)"),
+                            ("a-", "A- (Rh negativo)"),
+                            ("b+", "B+ (Rh positivo)"),
+                            ("b-", "B- (Rh negativo)"),
+                            ("ab+", "AB+ (Rh positivo)"),
+                            ("ab-", "AB- (Rh negativo)"),
+                            ("o+", "O+ (Rh positivo)"),
+                            ("o-", "O- (Rh negativo)"),
+                        ],
+                        max_length=3,
+                        verbose_name="Tipo de Sangre",
+                    ),
+                ),
+                ("email", models.EmailField(blank=True, max_length=254, null=True)),
+                (
+                    "telefono",
+                    models.CharField(
+                        max_length=20,
+                        validators=[
+                            django.core.validators.MinLengthValidator(11),
+                            django.core.validators.MaxLengthValidator(20),
+                            helpers.validForm.PhoneNumberValidator(),
+                        ],
+                        verbose_name="Teléfono del Empleado",
+                    ),
+                ),
+                (
+                    "direccion",
+                    models.CharField(
+                        max_length=180,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(180),
+                            helpers.validForm.TextValidator(),
+                        ],
+                        verbose_name="Dirección",
+                    ),
+                ),
+                (
+                    "estudia",
+                    models.BooleanField(
+                        choices=[(True, "si"), (False, "no")], default=(False, "no")
+                    ),
+                ),
+                (
+                    "discapacitado",
+                    models.BooleanField(
+                        choices=[(True, "si"), (False, "no")], default=(False, "no")
+                    ),
+                ),
+                (
+                    "tipo_contrato",
+                    models.CharField(
+                        choices=[
+                            ("Fi", "Fijo"),
+                            ("Te", "Temporal"),
+                            ("I", "Indefinido"),
+                            ("HP", "Por Horas"),
+                            ("P", "Practicante"),
+                            ("pro", "Por Proyecto"),
+                            ("Tar", "Por Tarea"),
+                            ("In", "Interno"),
+                            ("E", "Externo"),
+                            ("O", "Otro"),
+                        ],
+                        max_length=3,
+                    ),
+                ),
+                (
+                    "usuario",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="empleado",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Incidencia',
-                'verbose_name_plural': 'Incidencias',
-                'permissions': [('listar_incidencia', 'Puede listar incidencia'), ('agregar_incidencia', 'Puede agregar incidencia'), ('ver_incidencia', 'Puede ver incidencia'), ('editar_incidencia', 'Puede actualizar incidencia'), ('eliminar_incidencia', 'Puede eliminar incidencia')],
+                "verbose_name": "empleado",
+                "verbose_name_plural": "empleados",
+                "permissions": [
+                    ("listar_empleado", "Puede listar empleados"),
+                    ("agregar_empleado", "Puede agregar empleado"),
+                    ("ver_empleado", "Puede ver empleado"),
+                    ("editar_empleado", "Puede actualizar empleado"),
+                    ("eliminar_empleado", "Puede eliminar empleado"),
+                    ("exel_empleado", "Puede exportar empleado a excel"),
+                ],
+            },
+        ),
+        migrations.CreateModel(
+            name="Educacion",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "colegio",
+                    models.CharField(
+                        max_length=120,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(120),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Nombre del Colegio",
+                    ),
+                ),
+                (
+                    "codigo_titulo",
+                    models.CharField(
+                        max_length=120,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(120),
+                            helpers.validForm.TextValidator(),
+                        ],
+                        verbose_name="Código del Título",
+                    ),
+                ),
+                (
+                    "titulo",
+                    models.CharField(
+                        max_length=120,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(120),
+                            helpers.validForm.TextValidator(),
+                        ],
+                        verbose_name="Titulo Obtenido",
+                    ),
+                ),
+                (
+                    "area_conocimiento",
+                    models.CharField(
+                        max_length=120,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(120),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Área de Conocimiento",
+                    ),
+                ),
+                ("fecha_inicio", models.DateField(verbose_name="Fecha de inicio")),
+                (
+                    "fecha_culminacion",
+                    models.DateField(verbose_name="Fecha de culminacion"),
+                ),
+                (
+                    "enlace_certificado",
+                    models.CharField(
+                        blank=True,
+                        max_length=120,
+                        null=True,
+                        validators=[
+                            django.core.validators.MinLengthValidator(4),
+                            django.core.validators.MaxLengthValidator(120),
+                            helpers.validForm.TextValidator(),
+                        ],
+                        verbose_name="Enlace al Certificado",
+                    ),
+                ),
+                (
+                    "empleado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="rrhh.empleado",
+                        verbose_name="Empleado",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "educacion",
+                "verbose_name_plural": "educaciones",
+                "permissions": [
+                    ("listar_educacion", "Puede listar educacion"),
+                    ("agregar_educacion", "Puede agregar educacion"),
+                    ("ver_educacion", "Puede ver educacion"),
+                    ("editar_educacion", "Puede actualizar educacion"),
+                    ("eliminar_educacion", "Puede eliminar educacion"),
+                    ("exel_educacion", "Puede exportar educacion a excel"),
+                ],
+            },
+        ),
+        migrations.CreateModel(
+            name="Dotacion",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "camisa",
+                    models.CharField(
+                        choices=[
+                            ("XS", "Extra Pequena"),
+                            ("S", "Pequena"),
+                            ("M", "Mediana"),
+                            ("L", "Grande"),
+                            ("XL", "Extra Grande"),
+                        ],
+                        max_length=2,
+                        verbose_name="Talla de Camisa",
+                    ),
+                ),
+                (
+                    "pantalon",
+                    models.CharField(
+                        choices=[
+                            ("8", "Extra Pequena (Dama)"),
+                            ("10", "Pequena (Dama)"),
+                            ("12", "Mediana (Dama)"),
+                            ("14", "Grande (Dama)"),
+                            ("16", "Extra Grande (Dama)"),
+                            ("18", "Super Grande (Dama)"),
+                            ("20", "Gigante (Dama)"),
+                            ("28", "Extra Pequena (Caballero)"),
+                            ("30", "Pequena (Caballero)"),
+                            ("32", "Mediana (Caballero)"),
+                            ("34", "Grande (Caballero)"),
+                            ("36", "Extra Grande (Caballero)"),
+                            ("38", "Super Grande (Caballero)"),
+                            ("40", "Gigante (Caballero)"),
+                            ("42", "Extra Gigante (Caballero)"),
+                        ],
+                        max_length=2,
+                        verbose_name="Talla de Pantalón",
+                    ),
+                ),
+                (
+                    "zapato",
+                    models.CharField(
+                        choices=[
+                            ("33", "Talla 33"),
+                            ("34", "Talla 34"),
+                            ("35", "Talla 35"),
+                            ("36", "Talla 36"),
+                            ("37", "Talla 37"),
+                            ("38", "Talla 38"),
+                            ("39", "Talla 39"),
+                            ("40", "Talla 40"),
+                            ("41", "Talla 41"),
+                            ("42", "Talla 42"),
+                            ("43", "Talla 43"),
+                            ("44", "Talla 44"),
+                            ("45", "Talla 45"),
+                            ("46", "Talla 46"),
+                        ],
+                        max_length=2,
+                        verbose_name="Talla de Zapato",
+                    ),
+                ),
+                (
+                    "empleado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="rrhh.empleado",
+                        verbose_name="Empleado",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "dotacion",
+                "verbose_name_plural": "dotaciones",
+                "permissions": [
+                    ("listar_dotacion", "Puede listar dotacion"),
+                    ("agregar_dotacion", "Puede agregar dotacion"),
+                    ("ver_dotacion", "Puede ver dotacion"),
+                    ("editar_dotacion", "Puede actualizar dotacion"),
+                    ("eliminar_dotacion", "Puede eliminar dotacion"),
+                    ("exel_dotacion", "Puede exportar dotacion a excel"),
+                ],
+            },
+        ),
+        migrations.CreateModel(
+            name="Contrato",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "tipo",
+                    models.CharField(
+                        choices=[
+                            ("pasante", "Pasante"),
+                            ("prueba", "Periodo de Prueba"),
+                            ("contrato", "Contratado"),
+                            ("fijo", "Personal Fijo"),
+                        ],
+                        max_length=8,
+                        verbose_name="Tipo de contrato",
+                    ),
+                ),
+                (
+                    "comision_servicio",
+                    models.BooleanField(
+                        choices=[(True, "si"), (False, "no")],
+                        default=(False, "no"),
+                        verbose_name="Comision servicio",
+                    ),
+                ),
+                (
+                    "pnb",
+                    models.BooleanField(
+                        choices=[(True, "si"), (False, "no")],
+                        default=(False, "no"),
+                        verbose_name="Funcionario PNB",
+                    ),
+                ),
+                (
+                    "fecha_ingreso_911",
+                    models.DateField(verbose_name="Fecha de ingreso al Ven-911"),
+                ),
+                (
+                    "fecha_ingreso_apn",
+                    models.DateField(verbose_name="Fecha de ingreso APN"),
+                ),
+                ("fecha_ingreso", models.DateField(verbose_name="Fecha de ingreso")),
+                (
+                    "fecha_culminacion",
+                    models.DateField(
+                        blank=True, null=True, verbose_name="Fecha de culminacion"
+                    ),
+                ),
+                (
+                    "estatus",
+                    models.CharField(
+                        choices=[
+                            ("act", "Activo"),
+                            ("pen", "Pendiente de Inicio"),
+                            ("sus", "Suspendido"),
+                            ("ter", "Terminado"),
+                            ("ren", "Renuncia Voluntaria"),
+                            ("des", "Despido"),
+                            ("fin", "Finalizado por Término de Contrato"),
+                            ("inc", "Incapacitado"),
+                            ("lic", "En Licencia"),
+                            ("vac", "En Vacaciones"),
+                            ("aju", "Ajuste de Contrato"),
+                            ("ces", "Cesado"),
+                            ("ret", "Jubilado/Retirado"),
+                            ("fal", "Fallecido"),
+                        ],
+                        default="pen",
+                        max_length=3,
+                    ),
+                ),
+                (
+                    "cargo",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="rrhh.cargo",
+                        verbose_name="Cargo asignado",
+                    ),
+                ),
+                (
+                    "departamento",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="administracion.departamento",
+                        verbose_name="Departamento",
+                    ),
+                ),
+                (
+                    "sede",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="administracion.sede",
+                        verbose_name="Sede",
+                    ),
+                ),
+                (
+                    "empleado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="contratos",
+                        to="rrhh.empleado",
+                        verbose_name="Nombre del empleado",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "contrato",
+                "verbose_name_plural": "contratos",
+                "permissions": [
+                    ("listar_contrato", "Puede listar contratos"),
+                    ("agregar_contrato", "Puede agregar contrato"),
+                    ("ver_contrato", "Puede ver contrato"),
+                    ("editar_contrato", "Puede actualizar contrato"),
+                    ("eliminar_contrato", "Puede eliminar contrato"),
+                    ("exel_contrato", "Puede exportar contrato a excel"),
+                ],
+            },
+        ),
+        migrations.CreateModel(
+            name="Familiar",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "parentezco",
+                    models.CharField(
+                        choices=[
+                            ("hermano", "Hermana|Hermano"),
+                            ("pareja", "Conyugue"),
+                            ("mama", "Madre"),
+                            ("papa", "Padre"),
+                            ("hijo", "Hija|Hijo"),
+                        ],
+                        max_length=7,
+                        verbose_name="Parentezco",
+                    ),
+                ),
+                (
+                    "tipo_hijo",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("menor_12", "Hijo menor de 12"),
+                            ("hijos_13_18", "Hijo entre 13 y 18"),
+                            ("mayor_18", "Hijo mayor de 18"),
+                        ],
+                        max_length=11,
+                        null=True,
+                        verbose_name="Tipo de Hijo",
+                    ),
+                ),
+                (
+                    "discapacidad",
+                    models.BooleanField(
+                        choices=[(True, "si"), (False, "no")],
+                        default=(False, "no"),
+                        verbose_name="Discapacidad",
+                    ),
+                ),
+                (
+                    "nombres",
+                    models.CharField(
+                        max_length=90,
+                        validators=[
+                            django.core.validators.MinLengthValidator(3),
+                            django.core.validators.MaxLengthValidator(90),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Nombres del Familiar",
+                    ),
+                ),
+                (
+                    "apellidos",
+                    models.CharField(
+                        max_length=90,
+                        validators=[
+                            django.core.validators.MinLengthValidator(3),
+                            django.core.validators.MaxLengthValidator(90),
+                            helpers.validForm.UnicodeAlphaSpaceValidator(),
+                        ],
+                        verbose_name="Apellidos del Familiar",
+                    ),
+                ),
+                (
+                    "cedula",
+                    models.CharField(
+                        max_length=15,
+                        unique=True,
+                        validators=[
+                            django.core.validators.MinLengthValidator(7),
+                            django.core.validators.MaxLengthValidator(14),
+                            helpers.validForm.CedulaVenezolanaValidator(),
+                        ],
+                        verbose_name="Cédula de Identidad",
+                    ),
+                ),
+                (
+                    "fecha_nacimiento",
+                    models.DateField(verbose_name="Fecha de nacimiento"),
+                ),
+                (
+                    "sexo",
+                    models.CharField(
+                        choices=[("f", "Femenino"), ("m", "Masculino")],
+                        max_length=1,
+                        verbose_name="Género",
+                    ),
+                ),
+                (
+                    "estado_civil",
+                    models.CharField(
+                        choices=[
+                            ("s", "Soltero"),
+                            ("c", "Casado"),
+                            ("d", "Divorviado"),
+                            ("v", "Viudo"),
+                        ],
+                        max_length=1,
+                        verbose_name="Estado civil",
+                    ),
+                ),
+                (
+                    "observacion",
+                    models.CharField(
+                        blank=True,
+                        max_length=150,
+                        null=True,
+                        validators=[
+                            django.core.validators.MinLengthValidator(5),
+                            django.core.validators.MaxLengthValidator(150),
+                            helpers.validForm.TextValidator(),
+                        ],
+                        verbose_name="Observaciones",
+                    ),
+                ),
+                (
+                    "empleado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="rrhh.empleado",
+                        verbose_name="Empleado",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "familiar",
+                "verbose_name_plural": "familiares",
+                "permissions": [
+                    ("listar_familiares", "Listar familiares"),
+                    ("agregar_familiar", "Agregar familiares"),
+                    ("ver_familiar", "Ver familiares"),
+                    ("modificar_familiar", "Modificar familiares"),
+                    ("eliminar_familiar", "Eliminar familiares"),
+                    ("exel_familiar", "Exportar familiares a excel"),
+                ],
+            },
+        ),
+        migrations.CreateModel(
+            name="Sueldo",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                (
+                    "estatus",
+                    models.CharField(
+                        choices=[
+                            ("pendiente", "Por Pagar"),
+                            ("pagado", "Pago completado"),
+                            ("suspendido", "Suspendido"),
+                        ],
+                        max_length=10,
+                    ),
+                ),
+                ("fecha_pago", models.DateField()),
+                ("monto", models.DecimalField(decimal_places=2, max_digits=10)),
+                (
+                    "empleado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="rrhh.empleado"
+                    ),
+                ),
+                (
+                    "tipo_sueldo",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="rrhh.tiposueldo",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "sueldo",
+                "verbose_name_plural": "sueldos",
+                "permissions": [
+                    ("listar_sueldos", "Listar sueldos"),
+                    ("agregar_sueldo", "Agregar sueldos"),
+                    ("ver_sueldo", "Ver sueldos"),
+                    ("modificar_sueldo", "Modificar sueldos"),
+                    ("eliminar_sueldo", "Eliminar sueldos"),
+                    ("exel_sueldo", "Exportar sueldos a excel"),
+                ],
+            },
+        ),
+        migrations.CreateModel(
+            name="SueldoEmpleado",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=6, verbose_name="Creado por"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Creado el"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=6, verbose_name="Actualizado por"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Actualizado el"),
+                ),
+                (
+                    "deleted_by",
+                    models.CharField(
+                        blank=True,
+                        max_length=6,
+                        null=True,
+                        verbose_name="Eliminado por",
+                    ),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Eliminado el"
+                    ),
+                ),
+                ("fecha_pago", models.DateField()),
+                ("monto", models.DecimalField(decimal_places=2, max_digits=10)),
+                (
+                    "sueldo",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="rrhh.sueldo"
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "detalles del sueldo",
+                "verbose_name_plural": "destalles de los sueldos",
+                "permissions": [
+                    ("listar_sueldos", "Listar sueldos"),
+                    ("agregar_sueldo", "Agregar sueldos"),
+                    ("ver_sueldo", "Ver sueldos"),
+                    ("modificar_sueldo", "Modificar sueldos"),
+                    ("eliminar_sueldo", "Eliminar sueldos"),
+                    ("exel_sueldo", "Exportar sueldos a excel"),
+                ],
             },
         ),
     ]
