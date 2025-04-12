@@ -19,6 +19,7 @@ class Cargo(BaseModel):
     cargo = CharField(
         "Nombre del Cargo",
         max_length=60,
+        unique=True,
         validators=[
             MinLengthValidator(4),
             MaxLengthValidator(60),
