@@ -1,4 +1,10 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    DateField,
+    ForeignKey,
+    CASCADE,
+    DecimalField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.empleados.models import Empleado
@@ -12,11 +18,11 @@ ESTATUS_CHOICES = (
 
 
 class Sueldo(BaseModel):
-    tipo_sueldo = models.ForeignKey(TipoSueldo, on_delete=models.CASCADE)
-    estatus = models.CharField(max_length=10, choices=ESTATUS_CHOICES)
-    fecha_pago = models.DateField()
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
-    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    tipo_sueldo = ForeignKey(TipoSueldo, on_delete=CASCADE)
+    estatus = CharField(max_length=10, choices=ESTATUS_CHOICES)
+    fecha_pago = DateField()
+    monto = DecimalField(max_digits=10, decimal_places=2)
+    empleado = ForeignKey(Empleado, on_delete=CASCADE)
 
     def toJSON(self):
         return model_to_dict(self)
@@ -38,9 +44,9 @@ class Sueldo(BaseModel):
 
 
 class SueldoEmpleado(BaseModel):
-    sueldo = models.ForeignKey(Sueldo, on_delete=models.CASCADE)
-    fecha_pago = models.DateField()
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
+    sueldo = ForeignKey(Sueldo, on_delete=CASCADE)
+    fecha_pago = DateField()
+    monto = DecimalField(max_digits=10, decimal_places=2)
 
     def toJSON(self):
         return model_to_dict(self)

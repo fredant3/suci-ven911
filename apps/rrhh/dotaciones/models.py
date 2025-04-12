@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.empleados.models import Empleado
@@ -46,18 +46,12 @@ TALLA_ZAPATO_CHOICES = (
 
 
 class Dotacion(BaseModel):
-    camisa = models.CharField(
-        "Talla de Camisa", max_length=2, choices=TALLA_CAMISA_CHOICES
-    )
-    pantalon = models.CharField(
+    camisa = CharField("Talla de Camisa", max_length=2, choices=TALLA_CAMISA_CHOICES)
+    pantalon = CharField(
         "Talla de Pantalón", max_length=2, choices=TALLA_PANTALON_CHOICES
     )
-    zapato = models.CharField(
-        "Talla de Zapato", max_length=2, choices=TALLA_ZAPATO_CHOICES
-    )
-    empleado = models.ForeignKey(
-        Empleado, on_delete=models.CASCADE, verbose_name="Empleado"
-    )
+    zapato = CharField("Talla de Zapato", max_length=2, choices=TALLA_ZAPATO_CHOICES)
+    empleado = ForeignKey(Empleado, on_delete=CASCADE, verbose_name="Empleado")
 
     def toJSON(self):
         return model_to_dict(self)

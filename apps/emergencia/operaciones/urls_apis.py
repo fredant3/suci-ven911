@@ -1,8 +1,8 @@
 from django.urls import path
-from emergencia.views.create_view import EmergenciaCreateApiView
-from emergencia.views.delete_view import EmergenciaDeleteApiView
-from emergencia.views.list_view import EmergenciaListApiView
-from emergencia.views.update_view import EmergenciaUpdateApiView
+from emergencia.operaciones.views.create_view import EmergenciaCreateApiView
+from emergencia.operaciones.views.delete_view import EmergenciaDeleteApiView
+from emergencia.operaciones.views.list_view import EmergenciaListApiView
+from emergencia.operaciones.views.update_view import EmergenciaUpdateApiView
 
 urlpatterns = [
     path(

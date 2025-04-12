@@ -1,4 +1,9 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    TextField,
+    ForeignKey,
+    CASCADE,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 from emergencia.incidencias.models import TipoIncidencia
@@ -15,7 +20,7 @@ from django.core.validators import (
 
 
 class Emergencia(BaseModel):
-    denunciante = models.CharField(
+    denunciante = CharField(
         "Nombre del denunciante",
         max_length=180,
         validators=[
@@ -24,7 +29,7 @@ class Emergencia(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    telefono_denunciante = models.CharField(
+    telefono_denunciante = CharField(
         "Teléfono del denunciante",
         max_length=20,
         blank=True,
@@ -35,27 +40,25 @@ class Emergencia(BaseModel):
             PhoneNumberValidator(),
         ],
     )
-    estado = models.CharField(
-        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
-    )
-    municipio = models.CharField("Municipio", name="municipio", max_length=90)
-    parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
-    organismo = models.ForeignKey(OrganismoCompetente, on_delete=models.CASCADE)
-    incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
-    direccion_incidencia = models.TextField(
+    estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
+    municipio = CharField("Municipio", name="municipio", max_length=90)
+    parroquia = CharField("Parroquia", name="parroquia", max_length=90)
+    organismo = ForeignKey(OrganismoCompetente, on_delete=CASCADE)
+    incidencia = ForeignKey(TipoIncidencia, on_delete=CASCADE)
+    direccion_incidencia = TextField(
         "Dirección de la incidencia",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    observaciones = models.TextField(
+    observaciones = TextField(
         "Observaciones",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(3), MaxLengthValidator(180), TextValidator()],
     )
     # Localizacion_sede soon
-    telefono_cuadrante_paz = models.CharField(
+    telefono_cuadrante_paz = CharField(
         "Teléfono del Cuadrente de Paz",
         max_length=20,
         blank=True,

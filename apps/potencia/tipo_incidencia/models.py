@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator
 from django.core.validators import (
@@ -8,7 +8,7 @@ from django.core.validators import (
 
 
 class TipoIncidencia(BaseModel):
-    tipo = models.CharField(
+    tipo = CharField(
         "Tipo de Incidencia",
         max_length=120,
         validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],

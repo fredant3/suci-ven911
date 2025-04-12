@@ -1,4 +1,8 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    TextField,
+    DateField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator
@@ -15,35 +19,35 @@ ESTATUS_CHOICES = (
 
 
 class RegistroFilmico(BaseModel):
-    estatus = models.CharField(max_length=3, choices=ESTATUS_CHOICES)
-    camara = models.CharField(
+    estatus = CharField(max_length=3, choices=ESTATUS_CHOICES)
+    camara = CharField(
         "Cámara",
         max_length=50,
         blank=True,
         null=True,
         validators=[MinLengthValidator(2), MaxLengthValidator(50), TextValidator()],
     )
-    motivo_solicitud = models.TextField(
+    motivo_solicitud = TextField(
         "Motivo de Solicitud",
         max_length=400,
         validators=[MinLengthValidator(3), MaxLengthValidator(400), TextValidator()],
     )
-    ente_solicita = models.CharField(
+    ente_solicita = CharField(
         "Ente que Solicita",
         max_length=50,
         blank=True,
         null=True,
         validators=[MinLengthValidator(2), MaxLengthValidator(50), TextValidator()],
     )
-    direccion = models.CharField(
+    direccion = CharField(
         "Dirección",
         max_length=150,
         blank=True,
         null=True,
         validators=[MinLengthValidator(3), MaxLengthValidator(150), TextValidator()],
     )
-    fecha_solicitud = models.DateField(blank=True, null=True)
-    fecha_culminacion = models.DateField(blank=True, null=True)
+    fecha_solicitud = DateField(blank=True, null=True)
+    fecha_culminacion = DateField(blank=True, null=True)
 
     def toJSON(self):
         return model_to_dict(self)

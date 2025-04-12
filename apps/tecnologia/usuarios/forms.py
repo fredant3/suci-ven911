@@ -6,11 +6,14 @@ from django.forms import (
     ModelMultipleChoiceField,
     TextInput,
     PasswordInput,
+    ChoiceField,
+    Select,
 )
 from django.contrib.auth.models import Group, Permission
 from users.auth.models import User
 from helpers.FormBase import FormBase
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from helpers.models import BOOLEAN_CHOICES
 
 
 class UserForm(FormBase):
@@ -31,9 +34,10 @@ class UserForm(FormBase):
             content_type__app_label__in=["auth", "admin", "sessions", "contenttypes"]
         )
 
-    is_active = BooleanField(
-        required=False,
-        widget=CheckboxInput(attrs={"value": "False"}),
+    is_active = ChoiceField(
+        choices=BOOLEAN_CHOICES,
+        widget=Select,
+        label="Activo",
     )
 
     nombre_empleado = CharField(
@@ -84,5 +88,4 @@ class UserForm(FormBase):
         widgets = {
             "username": TextInput(attrs={"placeholder": "Usuario"}),
             "dni": TextInput(attrs={"placeholder": "DNI"}),
-            "is_active": CheckboxInput(attrs={"value": "False"}),
         }

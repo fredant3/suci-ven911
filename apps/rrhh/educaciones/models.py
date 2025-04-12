@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, DateField, ForeignKey, CASCADE
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.empleados.models import Empleado
@@ -7,7 +7,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Educacion(BaseModel):
-    colegio = models.CharField(
+    colegio = CharField(
         "Nombre del Colegio",
         max_length=120,
         validators=[
@@ -16,17 +16,17 @@ class Educacion(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    codigo_titulo = models.CharField(
+    codigo_titulo = CharField(
         "Código del Título",
         max_length=120,
         validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
-    titulo = models.CharField(
+    titulo = CharField(
         "Titulo Obtenido",
         max_length=120,
         validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
-    area_conocimiento = models.CharField(
+    area_conocimiento = CharField(
         "Área de Conocimiento",
         max_length=120,
         validators=[
@@ -35,18 +35,16 @@ class Educacion(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    fecha_inicio = models.DateField("Fecha de inicio")
-    fecha_culminacion = models.DateField("Fecha de culminacion")
-    enlace_certificado = models.CharField(
+    fecha_inicio = DateField("Fecha de inicio")
+    fecha_culminacion = DateField("Fecha de culminacion")
+    enlace_certificado = CharField(
         "Enlace al Certificado",
         max_length=120,
         null=True,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(120), TextValidator()],
     )
-    empleado = models.ForeignKey(
-        Empleado, on_delete=models.CASCADE, verbose_name="Empleado"
-    )
+    empleado = ForeignKey(Empleado, on_delete=CASCADE, verbose_name="Empleado")
 
     def toJSON(self):
         return model_to_dict(self)

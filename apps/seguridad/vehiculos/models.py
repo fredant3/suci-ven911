@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
@@ -9,7 +9,7 @@ from django.core.validators import (
 
 
 class Vehiculo(BaseModel):
-    nombre = models.CharField(
+    nombre = CharField(
         "Nombre",
         max_length=64,
         validators=[
@@ -18,7 +18,7 @@ class Vehiculo(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    apellido = models.CharField(
+    apellido = CharField(
         "Apellido",
         max_length=64,
         validators=[
@@ -27,27 +27,27 @@ class Vehiculo(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    cedula = models.CharField("Cédula de identidad", max_length=64)
-    modelo = models.CharField(
+    cedula = CharField("Cédula de identidad", max_length=64)
+    modelo = CharField(
         "Modelo",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    vehiculo = models.CharField(
+    vehiculo = CharField(
         "Tipo de vehiculo",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    motivo = models.CharField(
+    motivo = CharField(
         "Motivo",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    capagasolina = models.CharField("Capacidad de Gasolina", max_length=64)
-    cantigasolina = models.CharField("Cantidad de Gasolina", max_length=64)
-    placa = models.CharField("Placa", max_length=64)
-    fecha = models.DateField("Fecha")
-    hora = models.CharField("Hora", max_length=64)
+    capagasolina = CharField("Capacidad de Gasolina", max_length=64)
+    cantigasolina = CharField("Cantidad de Gasolina", max_length=64)
+    placa = CharField("Placa", max_length=64)
+    fecha = DateField("Fecha")
+    hora = CharField("Hora", max_length=64)
 
     def toJSON(self):
         return model_to_dict(self)

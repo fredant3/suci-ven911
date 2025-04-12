@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
@@ -14,7 +14,7 @@ from django.core.validators import (
 
 
 class Cedente(BaseModel):
-    idc = models.CharField(
+    idc = CharField(
         "Identificador Cedente:",
         max_length=100,
         validators=[
@@ -23,7 +23,7 @@ class Cedente(BaseModel):
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
     )
-    partidac = models.CharField(
+    partidac = CharField(
         "Partida Contable",
         max_length=64,
         validators=[
@@ -32,7 +32,7 @@ class Cedente(BaseModel):
             UnicodeAlphaSpaceValidator(extra_chars="-"),
         ],
     )
-    generalc = models.CharField(
+    generalc = CharField(
         "General",
         max_length=64,
         validators=[
@@ -41,7 +41,7 @@ class Cedente(BaseModel):
             PositiveIntegerValidator(),
         ],
     )
-    espefc = models.CharField(
+    espefc = CharField(
         "Específicaciones",
         max_length=64,
         validators=[
@@ -50,7 +50,7 @@ class Cedente(BaseModel):
             PositiveIntegerValidator(),
         ],
     )
-    subespefc = models.CharField(
+    subespefc = CharField(
         "Sub-Especialidad",
         max_length=64,
         validators=[
@@ -59,17 +59,17 @@ class Cedente(BaseModel):
             PositiveIntegerValidator(),
         ],
     )
-    denomc = models.CharField(
+    denomc = CharField(
         "Denominación",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    presuacorc = models.CharField("Presupuesto asignado", max_length=64)
-    caufechac = models.CharField("Causado a la fecha", max_length=64)
-    dispc = models.CharField("Disponible a causar", max_length=64)
-    montocc = models.CharField("Monto comprometido", max_length=64)
-    saldofc = models.CharField("Saldo final", max_length=64)
-    direccionc = models.CharField(
+    presuacorc = CharField("Presupuesto asignado", max_length=64)
+    caufechac = CharField("Causado a la fecha", max_length=64)
+    dispc = CharField("Disponible a causar", max_length=64)
+    montocc = CharField("Monto comprometido", max_length=64)
+    saldofc = CharField("Saldo final", max_length=64)
+    direccionc = CharField(
         "Dirección cedente",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],

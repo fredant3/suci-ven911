@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, TextField, BooleanField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 from helpers.models import (
@@ -13,53 +13,51 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class GestionComunicacional(BaseModel):
-    nombre_actividad = models.TextField(
+    nombre_actividad = TextField(
         "Nombre de la actividad",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    actividad_realizada = models.TextField(
+    actividad_realizada = TextField(
         "Actividad Realizada",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    descripcion_actividad = models.TextField(
+    descripcion_actividad = TextField(
         "descripción actividad",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
     actividad_preventiva = CharField(max_length=3, choices=AMBITO_ACCION)
-    estado = models.CharField(
-        "Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES
-    )
-    municipio = models.CharField("Municipio", name="municipio", max_length=90)
-    parroquia = models.CharField("Parroquia", name="parroquia", max_length=90)
+    estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
+    municipio = CharField("Municipio", name="municipio", max_length=90)
+    parroquia = CharField("Parroquia", name="parroquia", max_length=90)
     estrategias_metodologicas = CharField(
         max_length=2, choices=ESTRATEGIAS_METODOLOGICAS
     )
     ambito_accion = CharField(max_length=2, choices=ACTIVIDAD_PREVENTIVA)
-    poblacion_abordada = models.TextField(
+    poblacion_abordada = TextField(
         "población abordada",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    equipo_social = models.TextField(
+    equipo_social = TextField(
         "equipo social",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    realizado_por = models.TextField(
+    realizado_por = TextField(
         "Realizado por",
         max_length=180,
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    validado_por = models.TextField(
+    validado_por = TextField(
         "Validado por",
         max_length=180,
         blank=True,
@@ -75,7 +73,7 @@ class GestionComunicacional(BaseModel):
             CedulaVenezolanaValidator(),
         ],
     )
-    observaciones = models.TextField(
+    observaciones = TextField(
         "Observaciones",
         max_length=180,
         blank=True,

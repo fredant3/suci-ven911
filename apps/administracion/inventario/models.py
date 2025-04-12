@@ -1,4 +1,11 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    TextField,
+    IntegerField,
+    ForeignKey,
+    CASCADE,
+    DateField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, YES_NO_CHOICES
 from helpers.validForm import PositiveIntegerValidator, TextValidator
@@ -24,7 +31,7 @@ class TipoArticulo(BaseModel):
     CHANGE_TYPE_ARTICLE = "editar_tipo_articulo"
     DELETE_TYPE_ARTICLE = "eliminar_tipo_articulo"
 
-    nombre = models.CharField(max_length=180)
+    nombre = CharField(max_length=180)
 
     def toJSON(self):
         return model_to_dict(self)
@@ -50,64 +57,64 @@ class Articulo(BaseModel):
     CHANGE_ARTICLE = "editar_articulo"
     DELETE_ARTICLE = "eliminar_articulo"
 
-    nombre = models.TextField(
+    nombre = TextField(
         "Nombre",
         max_length=150,
         validators=[MaxLengthValidator(150), TextValidator()],
     )
-    descripcion = models.TextField(
+    descripcion = TextField(
         "Descripción",
         max_length=255,
         validators=[MinLengthValidator(5), MaxLengthValidator(255), TextValidator()],
     )
-    marca = models.CharField(
+    marca = CharField(
         "Marca",
         max_length=120,
         validators=[MinLengthValidator(2), MaxLengthValidator(120), TextValidator()],
         blank=True,
         null=True,
     )
-    modelo = models.CharField(
+    modelo = CharField(
         "Modelo",
         max_length=120,
         validators=[MinLengthValidator(2), MaxLengthValidator(120), TextValidator()],
         blank=True,
         null=True,
     )
-    serial = models.CharField(
+    serial = CharField(
         "Serial",
         max_length=30,
         blank=True,
         null=True,
         validators=[MinLengthValidator(7), MaxLengthValidator(30), TextValidator()],
     )
-    placa = models.CharField(
+    placa = CharField(
         "Placa",
         max_length=10,
         blank=True,
         null=True,
         validators=[MinLengthValidator(7), MaxLengthValidator(10), TextValidator()],
     )
-    cantidad_combustible = models.IntegerField(
+    cantidad_combustible = IntegerField(
         "Cantidad de combustible máx. (En litros)",
         blank=True,
         null=True,
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    codigo_bn = models.CharField(
+    codigo_bn = CharField(
         "Código BN",
         max_length=30,
         blank=True,
         null=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(30), TextValidator()],
     )
-    cantidad = models.IntegerField(
+    cantidad = IntegerField(
         "Cantidad",
         validators=[MinValueValidator(1), PositiveIntegerValidator()],
         help_text="La cantidad debe ser un número entero positivo.",
     )
-    tipo_articulo = models.ForeignKey(TipoArticulo, on_delete=models.CASCADE)
-    condicion = models.CharField(
+    tipo_articulo = ForeignKey(TipoArticulo, on_delete=CASCADE)
+    condicion = CharField(
         "Condición",
         max_length=1,
         choices=TIPO_CONDICION,
@@ -115,8 +122,8 @@ class Articulo(BaseModel):
         blank=True,
         default="-",
     )
-    fecha_adq = models.DateField("Fecha de adquisición")
-    asignado = models.CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
+    fecha_adq = DateField("Fecha de adquisición")
+    asignado = CharField(max_length=8, choices=YES_NO_CHOICES, default="no")
 
     def __str__(self):
         return self.nombre

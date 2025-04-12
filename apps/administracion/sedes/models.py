@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator
@@ -15,12 +15,12 @@ ESTATUS_CHOICES = (
 
 
 class Sede(BaseModel):
-    sede = models.CharField(
+    sede = CharField(
         "Sede",
         max_length=30,
         validators=[MinLengthValidator(6), MaxLengthValidator(30), TextValidator()],
     )
-    estatus = models.CharField("Estatus", max_length=3, choices=ESTATUS_CHOICES)
+    estatus = CharField("Estatus", max_length=3, choices=ESTATUS_CHOICES)
 
     def toJSON(self):
         return model_to_dict(self)

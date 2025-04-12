@@ -1,9 +1,12 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    FileField,
+    DateField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import PositiveIntegerValidator, TextValidator
+from helpers.validForm import TextValidator
 from django.core.validators import (
-    MinValueValidator,
     MinLengthValidator,
     MaxLengthValidator,
 )
@@ -26,17 +29,15 @@ ESTATUS_CHOICES = (("bor", "Borrador"), ("rev", "Revision"), ("pub", "Publicado"
 
 
 class Normativa(BaseModel):
-    name = models.CharField(
+    name = CharField(
         "Nombre de Normativa",
         max_length=64,
         validators=[MinLengthValidator(3), MaxLengthValidator(64), TextValidator()],
     )
-    file = models.FileField("Archivo", upload_to="normativas/")
-    date = models.DateField("Fecha", blank=True)
-    progre = models.CharField(
-        "Progreso:", max_length=3, choices=PROGRESS_CHOICES, default="0"
-    )
-    estado = models.CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
+    file = FileField("Archivo", upload_to="normativas/")
+    date = DateField("Fecha", blank=True)
+    progre = CharField("Progreso:", max_length=3, choices=PROGRESS_CHOICES, default="0")
+    estado = CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
 
     def toJSON(self):
         return model_to_dict(self)

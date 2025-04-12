@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import UnicodeAlphaSpaceValidator
@@ -16,7 +16,7 @@ ESTATUS_CHOICES = (
 
 
 class Cargo(BaseModel):
-    cargo = models.CharField(
+    cargo = CharField(
         "Nombre del Cargo",
         max_length=60,
         validators=[
@@ -25,9 +25,7 @@ class Cargo(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    estatus = models.CharField(
-        "Estado del Cargo", max_length=3, choices=ESTATUS_CHOICES
-    )
+    estatus = CharField("Estado del Cargo", max_length=3, choices=ESTATUS_CHOICES)
 
     def toJSON(self):
         return model_to_dict(self)

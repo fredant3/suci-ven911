@@ -1,5 +1,5 @@
 from django.forms import TextInput, Textarea, Select
-from emergencia.models import Emergencia
+from emergencia.operaciones.models import Emergencia
 from helpers.FormBase import FormBase
 
 

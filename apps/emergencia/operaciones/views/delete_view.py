@@ -1,9 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
-from emergencia.forms import EmergenciaForm
-from emergencia.models import Emergencia
-from emergencia.services import EmergenciaService
+from emergencia.operaciones.forms import EmergenciaForm
+from emergencia.operaciones.models import Emergencia
+from emergencia.operaciones.services import EmergenciaService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
 
@@ -22,9 +22,9 @@ class EmergenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Emergencias"
         context["titleForm"] = "Eliminar emergencia"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("emergencias:list")
+        context["listUrl"] = reverse_lazy("operaciones:list")
         context["urlDelete"] = reverse_lazy(
-            "api_emergencias:delete", args=[self.kwargs.get("pk")]
+            "api_operaciones:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
