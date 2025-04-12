@@ -1,25 +1,16 @@
 from django import forms
 from .models import Sueldo
 from helpers.FormBase import FormBase
-from helpers.validForm import (
-    validate_general_text,
-    validate_codigo_bn,
-    validate_url,
-    validate_decimal_number,
-)
 
 
 class SueldoForm(FormBase):
-    fecha_inicio = FormBase.create_date_field(
-        "fecha_inicio", title="Fecha de Inicio", attrs={"placeholder": "DD/MM/AAAA"}
-    )
+    fecha_inicio = FormBase.create_date_field("fecha_inicio", title="Fecha de Inicio")
     fecha_culminacion = FormBase.create_date_field(
-        "fecha_culminacion",
-        title="Fecha de Culminación",
-        attrs={"placeholder": "DD/MM/AAAA"},
+        "fecha_culminacion", title="Fecha de Culminación"
     )
 
     class Meta:
+
         model = Sueldo
         fields = (
             "colegio",
@@ -72,40 +63,6 @@ class SueldoForm(FormBase):
                 attrs={"class": "form-control", "placeholder": "Seleccione un empleado"}
             ),
         }
-
-    def clean_codigo_titulo(self):
-        data = self.cleaned_data.get("codigo_titulo")
-        validate_codigo_bn(
-            data, "El código del título solo permite letras, números y guiones"
-        )
-        return data
-
-    def clean_enlace_certificado(self):
-        data = self.cleaned_data.get("enlace_certificado")
-        validate_url(
-            data,
-            "Ingrese una URL válida para el certificado (ej: https://ejemplo.com/certificado.pdf)",
-        )
-        return data
-
-    def clean_colegio(self):
-        data = self.cleaned_data.get("colegio")
-        validate_general_text(
-            data,
-            "El nombre del colegio solo permite caracteres alfanuméricos y símbolos comunes",
-        )
-        return data
-
-    def clean_titulo(self):
-        data = self.cleaned_data.get("titulo")
-        validate_general_text(data, "El título contiene caracteres no permitidos")
-        return data
-
-    def clean_personal(self):
-        data = self.cleaned_data.get("personal")
-        if not data or not data.pk:
-            raise forms.ValidationError("Seleccione un empleado válido")
-        return data
 
     def clean(self):
         cleaned_data = super().clean()
