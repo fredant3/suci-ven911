@@ -167,4 +167,5 @@ python manage.py makemigrations presupuesto
 python manage.py makemigrations rrhh
 python manage.py makemigrations seguridad
 python manage.py makemigrations tecnologia
+python manage.py makemigrations gestion_comunicacional
 ```

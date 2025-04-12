@@ -7,7 +7,7 @@ from gestion_comunicacional.views.update_view import GestioncomunicacionalUpdate
 urlpatterns = [
     path(
         "",
-        GestioncomunicacionalDeleteApiView.as_view(),
+        GestioncomunicacionalListApiView.as_view(),
         name="list",
     ),
     path(
@@ -17,12 +17,12 @@ urlpatterns = [
     ),
     path(
         "<int:pk>/update",
-        GestioncomunicacionalListApiView.as_view(),
+        GestioncomunicacionalUpdateApiView.as_view(),
         name="update",
     ),
     path(
         "<int:pk>/delete",
-        GestioncomunicacionalUpdateApiView.as_view(),
+        GestioncomunicacionalDeleteApiView.as_view(),
         name="delete",
     ),
 ]

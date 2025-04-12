@@ -20,7 +20,7 @@ class GestioncomunicacionalListView(
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Gestion comunicacional"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("gc_info")
         context["module"] = "Gestion comunicacional"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"

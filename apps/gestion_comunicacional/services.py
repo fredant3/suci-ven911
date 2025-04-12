@@ -8,14 +8,6 @@ from gestion_comunicacional.repositories import GestioncomunicacionalRepository
 
 class GestioncomunicacionalService(CrudService):
 
-    select = (
-        "id",
-        "nombre__actividad",
-        "actividad__realizada",
-        "descripcion__actividad",
-        "created_by",
-    )
-
     def __init__(self):
         self.repository = GestioncomunicacionalRepository()
 
@@ -24,9 +16,9 @@ class GestioncomunicacionalService(CrudService):
 
         if search:
             query &= (
-                Q(gestioncomunicacional__nombre_actividad__icontains=search)
-                | Q(gestioncomunicacional__actividad_realizada__icontains=search)
-                | Q(gestioncomunicacional__descripcion_actividad__icontains=search)
+                Q(nombre_actividad__icontains=search)
+                | Q(descripcion_actividad__icontains=search)
+                | Q(actividad_realizada__icontains=search)
             )
 
         return query
