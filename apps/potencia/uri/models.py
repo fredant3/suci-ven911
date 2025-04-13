@@ -183,6 +183,7 @@ GENERO_CHOICES = (
 
 
 class Uri(BaseModel):
+        
     # 1) Informacion General
     # -Datos del servicio
     fecha_atencion = DateField(
@@ -193,6 +194,9 @@ class Uri(BaseModel):
     institucion = CharField("Institucion", max_length=300, blank=True, null=True)
     tipounidad = CharField("Tipo de Unidad", max_length=10, blank=True, null=True)
     num_interna = CharField("Numeracion Interna", max_length=10, blank=True, null=True)
+
+    
+
     # Informacion Legal
     contacto = CharField(
         "¿Hubo contacto con el paciente?",
@@ -362,7 +366,7 @@ class Uri(BaseModel):
 
     # Cronologia del Servicio
 
-    hora_alarma = TimeField("Hora de Alarma", blank=True, null=True)
+    hora_alarma = TimeField("Hora de Alarma", blank=False, null=False)
     hora_salida = TimeField("Hora de Salida", blank=True, null=True)
     hora_llegada = TimeField("Hora de Llegada", blank=True, null=True)
     hospital = CharField("Llegada al Hospital", max_length=50, blank=True, null=True)

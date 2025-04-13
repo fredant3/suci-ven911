@@ -20,9 +20,9 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Potencia"
+        context["titlePage"] = "URI"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Potencia"
+        context["module"] = "URI"
         context["submodule"] = "Unidad de Respuesta Inmediata"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("uri:create")
