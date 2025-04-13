@@ -31,14 +31,14 @@ class GestionComunicacional(BaseModel):
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    actividad_preventiva = CharField(max_length=3, choices=AMBITO_ACCION)
+    actividad_preventiva = CharField(max_length=2, choices=ACTIVIDAD_PREVENTIVA)
     estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
     municipio = CharField("Municipio", name="municipio", max_length=90)
     parroquia = CharField("Parroquia", name="parroquia", max_length=90)
     estrategias_metodologicas = CharField(
         max_length=2, choices=ESTRATEGIAS_METODOLOGICAS
     )
-    ambito_accion = CharField(max_length=2, choices=ACTIVIDAD_PREVENTIVA)
+    ambito_accion = CharField("Ambito de acción", max_length=3, choices=AMBITO_ACCION)
     poblacion_abordada = TextField(
         "población abordada",
         max_length=180,

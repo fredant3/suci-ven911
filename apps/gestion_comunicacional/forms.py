@@ -44,14 +44,27 @@ class GestionComunicacionalForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "nombre de la actividad": TextInput(
+            "nombre_actividad": TextInput(
                 attrs={
-                    "placeholder": "Ejem. Vuelvan caras",
+                    "class": "form-control",
+                    "placeholder": "Ejem. vuelvan caras",
                 }
             ),
-            "poblacion abordada": Textarea(
+            "descripcion_actividad": TextInput(
                 attrs={
-                    "placeholder": "Ejem. 5 de Julio",
+                    "class": "form-control",
+                    "placeholder": "Descripción de la actividad",
+                }
+            ),
+            "poblacion_abordada": TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "nombre de la población abordada",
+                }
+            ),
+            "actividad_realizada": Textarea(
+                attrs={
+                    "placeholder": "Ejem. MICRO-CONVERSATORIO",
                 }
             ),
             "observaciones": Textarea(
@@ -62,4 +75,7 @@ class GestionComunicacionalForm(FormBase):
             "estado": Select(attrs={"class": "form-select mb-3"}),
             "municipio": Select(attrs={"class": "form-select mb-3"}),
             "parroquia": Select(attrs={"class": "form-select mb-3"}),
+            "cedula": TextInput(
+                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
+            ),
         }
