@@ -24,9 +24,6 @@ class Objetivo(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return self.ente
-
     class Meta:
         verbose_name = "objetivo"
         verbose_name_plural = "objetivos"

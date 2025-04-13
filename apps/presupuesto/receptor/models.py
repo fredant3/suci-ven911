@@ -20,7 +20,7 @@ class Receptor(BaseModel):
         validators=[
             MinLengthValidator(3),
             MaxLengthValidator(100),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            TextValidator(),
         ],
     )
     partidar = CharField(
@@ -29,37 +29,31 @@ class Receptor(BaseModel):
         validators=[
             MinLengthValidator(3),
             MaxLengthValidator(64),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            TextValidator(),
         ],
     )
     generalr = CharField(
         "General",
         max_length=64,
         validators=[
-            MinValueValidator(100),
             MinLengthValidator(3),
             MaxLengthValidator(64),
-            PositiveIntegerValidator(),
         ],
     )
     espefr = CharField(
         "Específicaciones",
         max_length=64,
         validators=[
-            MinValueValidator(100),
             MinLengthValidator(3),
             MaxLengthValidator(64),
-            PositiveIntegerValidator(),
         ],
     )
     subespefr = CharField(
         "Sub-Especialidad",
         max_length=64,
         validators=[
-            MinValueValidator(100),
             MinLengthValidator(3),
             MaxLengthValidator(64),
-            PositiveIntegerValidator(),
         ],
     )
     denomr = CharField(

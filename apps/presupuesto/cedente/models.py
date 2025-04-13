@@ -3,14 +3,8 @@ from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
     TextValidator,
-    UnicodeAlphaSpaceValidator,
-    PositiveIntegerValidator,
 )
-from django.core.validators import (
-    MinValueValidator,
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Cedente(BaseModel):
@@ -20,7 +14,7 @@ class Cedente(BaseModel):
         validators=[
             MinLengthValidator(4),
             MaxLengthValidator(255),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            TextValidator(extra_chars="-"),
         ],
     )
     partidac = CharField(
@@ -29,34 +23,31 @@ class Cedente(BaseModel):
         validators=[
             MinLengthValidator(4),
             MaxLengthValidator(255),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            TextValidator(extra_chars="-"),
         ],
     )
     generalc = CharField(
         "General",
         max_length=64,
         validators=[
-            MinValueValidator(1),
+            MinLengthValidator(4),
             MaxLengthValidator(255),
-            PositiveIntegerValidator(),
         ],
     )
     espefc = CharField(
         "Específicaciones",
         max_length=64,
         validators=[
-            MinValueValidator(1),
+            MinLengthValidator(1),
             MaxLengthValidator(255),
-            PositiveIntegerValidator(),
         ],
     )
     subespefc = CharField(
         "Sub-Especialidad",
         max_length=64,
         validators=[
-            MinValueValidator(1),
+            MinLengthValidator(1),
             MaxLengthValidator(255),
-            PositiveIntegerValidator(),
         ],
     )
     denomc = CharField(
@@ -64,7 +55,11 @@ class Cedente(BaseModel):
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    presuacorc = CharField("Presupuesto asignado", max_length=64)
+    presuacorc = CharField(
+        "Presupuesto asignado",
+        max_length=64,
+        validators=[MinLengthValidator(0)],
+    )
     caufechac = CharField("Causado a la fecha", max_length=64)
     dispc = CharField("Disponible a causar", max_length=64)
     montocc = CharField("Monto comprometido", max_length=64)

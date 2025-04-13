@@ -25,9 +25,9 @@ class UriCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Potencia"
+        context["titlePage"] = "URI"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Potencia"
+        context["module"] = "URI"
         context["submodule"] = "Unidad de Respuesta Inmediata"
         context["titleForm"] = "Añadir registro"
         context["tag"] = "Registrar"
