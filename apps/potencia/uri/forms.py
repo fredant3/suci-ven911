@@ -268,9 +268,9 @@ class UriDireccionForm(FormBase):
     )
 
     # Cronología del servicio
-    hora_alarma = FormBase.create_time_field("Hora de Alarma")
-    hora_salida = FormBase.create_time_field("Hora de Salida")
-    hora_llegada = FormBase.create_time_field("Hora de Llegada")
+    hora_alarma = FormBase.create_time_field("hora_alarma", "Hora de Alarma")
+    hora_salida = FormBase.create_time_field("hora_salida", "Hora de Salida")
+    hora_llegada = FormBase.create_time_field("hora_llegada", "Hora de Llegada")
     hospital = CharField(
         max_length=50,
         required=False,
@@ -283,7 +283,7 @@ class UriDireccionForm(FormBase):
         label="Transferencia al Servicio de Emergencia",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese transferencia"}),
     )
-    hora_sede = FormBase.create_time_field("Hora de Retorno a la Sede")
+    hora_sede = FormBase.create_time_field("hora_sede", "Hora de Retorno a la Sede")
     tiempo_servicio = CharField(
         max_length=50,
         required=False,
@@ -445,7 +445,7 @@ class UriInfoclinicaForm(FormBase):
 
 class UriSignosVitalesForm(FormBase):
 
-    horaMedicion = FormBase.create_time_field("Hora de la Medición")
+    horaMedicion = FormBase.create_time_field("horamedicion", "Hora de la Medición")
     frecuenciaCardiaca = CharField(
         max_length=100,
         required=False,
@@ -510,7 +510,7 @@ class UriSignosVitalesForm(FormBase):
         label="Dosis",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese dosis"}),
     )
-    hora = FormBase.create_time_field("Hora")
+    hora = FormBase.create_time_field("hora", "Hora")
     resultadoEvaluacion = CharField(
         max_length=500,
         required=False,
@@ -553,14 +553,14 @@ class UriReferenciasForm(FormBase):
         label="Médico que Refiere",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese médico que refiere"}),
     )
-    horaSalidaHosp = FormBase.create_time_field("Hora de Salida")
+    horaSalidaHosp = FormBase.create_time_field("horaSalidaHosp", "Hora de Salida")
     hospitalDestino = CharField(
         max_length=100,
         required=False,
         label="Hospital de Destino",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese hospital destino"}),
     )
-    horaLlegadaHosp = FormBase.create_time_field("Hora de Llegada")
+    horaLlegadaHosp = FormBase.create_time_field("horaLlegadaHosp", "Hora de Llegada")
     causa = CharField(
         max_length=100,
         required=False,
