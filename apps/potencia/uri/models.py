@@ -195,7 +195,6 @@ class Uri(BaseModel):
     tipounidad = CharField("Tipo de Unidad", max_length=10, blank=True, null=True)
     num_interna = CharField("Numeracion Interna", max_length=10, blank=True, null=True)
 
-    
 
     # Informacion Legal
     contacto = CharField(
