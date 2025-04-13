@@ -58,7 +58,7 @@ class ContratoCreateApiView(CreateController, CheckPermisosMixin):
 
 
 class rrhhWizardView(SessionWizardView):
-    template_name = "widzard/index.html"
+    template_name = "widzard/indexrrhh.html"
     form_list = [
         ("empleado", EmpleadoForm),
         ("educacion", EducacionForm),
