@@ -9,14 +9,6 @@ from crispy_forms.layout import Layout, Fieldset, HTML
 
 class UriInfoGeneralForm(FormBase):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Fieldset("Basic Information", "fecha_atencion", "nroreporte"),
-            HTML("<h4 class='mt-4'>Vehicle Details</h4>"),  # ← Custom HTML title
-            Fieldset("", "placa", "tipounidad"),
-        )
     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atención")
     nroreporte = CharField(
         max_length=10,
@@ -46,7 +38,6 @@ class UriInfoGeneralForm(FormBase):
         label="Numeración Interna",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la numeración interna"}),
     )
-
 
     # Centro Asistencial Recibido
     centroAsistencial = CharField(
