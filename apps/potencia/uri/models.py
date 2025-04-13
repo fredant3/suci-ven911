@@ -325,7 +325,7 @@ class Uri(BaseModel):
     calle_evento = CharField(
         "Calle/Avenida/Carrera", max_length=100, blank=True, null=True
     )
-    casa_evento = CharField("Edif/ Casa", max_length=20, blank=True, null=True)
+    casa_evento = CharField("Edif/ Casa", max_length=100, blank=True, null=True)
     piso_evento = CharField("Piso y Apto", max_length=20, blank=True, null=True)
     referencia_evento = CharField(
         "Punto de Referencia", max_length=100, blank=True, null=True
