@@ -5,60 +5,44 @@ from django import forms
 
 
 class UriInfoGeneralForm(FormBase):
-
     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atención")
     nroreporte = CharField(
         max_length=10,
         required=False,
         label="Número de Reporte",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el número de reporte"}),
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese el número de reporte",
+            }
+        ),
     )
     placa = CharField(
         max_length=10,
         required=False,
         label="Placa",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la placa"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese la placa"}
+        ),
     )
     institucion = CharField(
         max_length=300,
         required=False,
         label="Institución",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la institución"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese la institución"}
+        ),
     )
     num_interna = CharField(
         max_length=10,
         required=False,
         label="Numeración Interna",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la numeración interna"}),
-    )
-
-    # Centro Asistencial Recibido
-    centroAsistencial = CharField(
-        max_length=50,
-        required=False,
-        label="Centro Asistencial",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el centro asistencial"}),
-    )
-    servicioAsistencial = CharField(
-        max_length=50,
-        required=False,
-        label="Servicio Asistencial",
         widget=forms.TextInput(
-            attrs={"placeholder": "Ingrese el servicio asistencial"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese la numeración interna",
+            }
         ),
-    )
-    medico_receptor = CharField(
-        max_length=50,
-        required=False,
-        label="Médico Receptor",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el médico receptor"}),
-    )
-
-    msds = CharField(
-        max_length=50,
-        required=False,
-        label="MS/DS",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese MS/DS"}),
     )
 
     class Meta:
@@ -71,10 +55,6 @@ class UriInfoGeneralForm(FormBase):
             "tipounidad",
             "num_interna",
             "contacto",
-            "centroAsistencial",
-            "servicioAsistencial",
-            "medico_receptor",
-            "msds",
             "foto",
         )
 
@@ -655,4 +635,54 @@ class UriReferenciasForm(FormBase):
             "medicoGuardia",
             "cedulaMedico",
             "selloMsds",
+        )
+
+
+class UriCentroAsistencialForm(FormBase):
+    centroAsistencial = CharField(
+        max_length=50,
+        required=False,
+        label="Centro Asistencial",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese el centro asistencial",
+            }
+        ),
+    )
+    servicioAsistencial = CharField(
+        max_length=50,
+        required=False,
+        label="Servicio Asistencial",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese el servicio asistencial",
+            }
+        ),
+    )
+    medico_receptor = CharField(
+        max_length=50,
+        required=False,
+        label="Médico Receptor",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese el médico receptor"}
+        ),
+    )
+    msds = CharField(
+        max_length=50,
+        required=False,
+        label="MS/DS",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese MS/DS"}
+        ),
+    )
+
+    class Meta:
+        model = Uri
+        fields = (
+            "centroAsistencial",
+            "servicioAsistencial",
+            "medico_receptor",
+            "msds",
         )
