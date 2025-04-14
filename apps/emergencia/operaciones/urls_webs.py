@@ -12,5 +12,5 @@ urlpatterns = [
     path("<int:pk>/read", EmergenciaListView.as_view(), name="read"),
     path("<int:pk>/update", EmergenciaUpdateView.as_view(), name="update"),
     path("<int:pk>/delete", EmergenciaDeleteView.as_view(), name="delete"),
-    path("export", EmergenciaExcelView.as_view(), name="export_excel",),
+    path("export", EmergenciaExcelView.as_view(), name="export_excel"),
 ]
