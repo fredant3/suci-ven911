@@ -10,23 +10,23 @@ class Llamada(BaseModel):
     estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
     informativa = IntegerField(
         "Llamadas informativas",
-        validators=[MinValueValidator(1), PositiveIntegerValidator()],
+        validators=[MinValueValidator(0), PositiveIntegerValidator()],
     )
     falsa = IntegerField(
         "Llamadas falsas",
-        validators=[MinValueValidator(1), PositiveIntegerValidator()],
+        validators=[MinValueValidator(0), PositiveIntegerValidator()],
     )
     realesno = IntegerField(
         "Llamadas reales no atendidas",
-        validators=[MinValueValidator(1), PositiveIntegerValidator()],
+        validators=[MinValueValidator(0), PositiveIntegerValidator()],
     )
     realesf = IntegerField(
         "Llamadas reales finalizadas",
-        validators=[MinValueValidator(1), PositiveIntegerValidator()],
+        validators=[MinValueValidator(0), PositiveIntegerValidator()],
     )
     videop = IntegerField(
         "Videollamadas protección",
-        validators=[MinValueValidator(1), PositiveIntegerValidator()],
+        validators=[MinValueValidator(0), PositiveIntegerValidator()],
     )
 
     def toJSON(self):

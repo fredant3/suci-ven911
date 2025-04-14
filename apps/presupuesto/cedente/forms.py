@@ -4,6 +4,10 @@ from helpers.FormBase import FormBase
 
 
 class CedenteForm(FormBase):
+    caufechac = FormBase.create_date_field(
+        "caufechac",
+    )
+
     class Meta:
         model = Cedente
         fields = (
@@ -33,82 +37,85 @@ class CedenteForm(FormBase):
             "idc": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el ID",
+                    "placeholder": "Ej: CED-001 (mín. 4 caracteres)",
+                    "maxlength": "100",
                 }
             ),
             "partidac": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese la partida contable",
+                    "placeholder": "Ej: PC-2023-001 (mín. 4 caracteres)",
+                    "maxlength": "64",
                 }
             ),
             "generalc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el código general",
-                    "min": "0",
+                    "placeholder": "Número entre 1 y 255",
+                    "min": "1",
+                    "max": "255",
                 }
             ),
             "espefc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el código específico",
-                    "min": "0",
+                    "placeholder": "Número entre 1 y 255",
+                    "min": "1",
+                    "max": "255",
                 }
             ),
             "subespefc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el subcódigo específico",
-                    "min": "0",
+                    "placeholder": "Número entre 1 y 255",
+                    "min": "1",
+                    "max": "255",
                 }
             ),
             "denomc": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese la denominación",
+                    "placeholder": "Ej: Proyecto de Infraestructura (mín. 4 caracteres)",
+                    "maxlength": "255",
                 }
             ),
             "presuacorc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el presupuesto asignado",
+                    "placeholder": "Ej: 50000.00 (solo números positivos)",
                     "min": "0",
-                    "step": "1",
+                    "step": "0.01",
                 }
             ),
-            "caufechac": forms.TextInput(
+            "dispc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese la fecha de compromiso",
-                }
-            ),
-            "dispc": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese la disposición",
+                    "placeholder": "Ej: 25000.00 (solo números positivos)",
+                    "min": "0",
+                    "step": "0.01",
                 }
             ),
             "montocc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el monto comprometido",
+                    "placeholder": "Ej: 10000.00 (solo números positivos)",
                     "min": "0",
-                    "step": "1",
+                    "step": "0.01",
                 }
             ),
             "saldofc": forms.NumberInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el saldo final",
+                    "placeholder": "Ej: 15000.00 (solo números positivos)",
                     "min": "0",
-                    "step": "1",
+                    "step": "0.01",
                 }
             ),
             "direccionc": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese la dirección",
+                    "placeholder": "Ej: Av. Principal, Edificio Municipal",
+                    "maxlength": "255",
                 }
             ),
         }

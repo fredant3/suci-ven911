@@ -1,20 +1,14 @@
+from django.utils import timezone
+from django import forms
 from helpers.FormBase import FormBase
 from seguridad.vehiculos.models import Vehiculo
-from django import forms
-from django.utils import timezone
 from helpers.validForm import validate_cedula, validate_decimal_number
 from datetime import datetime
 
 
 class VehiculoForm(FormBase):
-    fecha = FormBase.create_date_field(
-        "fecha",
-        title="Fecha de registro",
-    )
-    hora = FormBase.create_time_field(
-        "hora",
-        title="Hora de registro",
-    )
+    fecha = FormBase.create_date_field("fecha", title="Fecha de registro")
+    hora = FormBase.create_time_field("hora", title="Hora de registro")
 
     class Meta:
         model = Vehiculo
@@ -56,10 +50,7 @@ class VehiculoForm(FormBase):
                 attrs={"class": "form-control", "placeholder": "Ej: Toyota Hilux 2023"}
             ),
             "vehiculo": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Tipo de vehiculo",
-                }
+                attrs={"class": "form-control", "placeholder": "Tipo de vehiculo"}
             ),
             "motivo": forms.Textarea(
                 attrs={
@@ -77,10 +68,7 @@ class VehiculoForm(FormBase):
                 }
             ),
             "placa": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Ej: ABC123",
-                }
+                attrs={"class": "form-control", "placeholder": "Ej: ABC123"}
             ),
         }
 
@@ -110,20 +98,24 @@ class VehiculoForm(FormBase):
 
     def clean(self):
         cleaned_data = super().clean()
-        # Validación combinada de fecha y hora
         fecha = cleaned_data.get("fecha")
         hora = cleaned_data.get("hora")
 
         if fecha and hora:
-            registro_datetime = datetime.combine(fecha, hora)
+            # Convertir a datetime con zona horaria
+            registro_datetime = timezone.make_aware(
+                datetime.combine(fecha, hora), timezone.get_current_timezone()
+            )
+
             if registro_datetime > timezone.now():
                 self.add_error("hora", "La combinación fecha/hora no puede ser futura")
 
-        # Validación de gasolina si es vehículo propio
-        if cleaned_data.get("cantigasolina", 0) <= 0:
+        # Validación de gasolina
+        cantigasolina = cleaned_data.get("cantigasolina", 0)
+        if cantigasolina is not None and float(cantigasolina) <= 0:
             self.add_error(
                 "cantigasolina",
-                "Debe especificar la cantidad de gasolina para vehículos",
+                "Debe especificar una cantidad válida de gasolina (mayor a 0)",
             )
 
         return cleaned_data

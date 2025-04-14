@@ -29,16 +29,18 @@
 	{% if step == 1 %}
 	Información General del Servicio (Paso {{ step }} de {{ wizard.steps.count }})
 	{% elif step == 2 %}
-	Datos del Paciente (Paso {{ step }} de {{ wizard.steps.count }})
+	Centro Asistencial (Paso {{ step }} de {{ wizard.steps.count }})
 	{% elif step == 3 %}
-	Datos de Acompañantes y Testigos (Paso {{ step }} de {{ wizard.steps.count }})
+	Datos del Paciente (Paso {{ step }} de {{ wizard.steps.count }})
 	{% elif step == 4 %}
-	Dirección del Evento (Paso {{ step }} de {{ wizard.steps.count }})
+	Datos de Acompañantes y Testigos (Paso {{ step }} de {{ wizard.steps.count }})
 	{% elif step == 5 %}
-	Información Clínica (Paso {{ step }} de {{ wizard.steps.count }})
+	Dirección del Evento (Paso {{ step }} de {{ wizard.steps.count }})
 	{% elif step == 6 %}
-	Signos Vitales y Tratamiento (Paso {{ step }} de {{ wizard.steps.count }})
+	Información Clínica (Paso {{ step }} de {{ wizard.steps.count }})
 	{% elif step == 7 %}
+	Signos Vitales y Tratamiento (Paso {{ step }} de {{ wizard.steps.count }})
+	{% elif step == 8 %}
 	Referencias y Contrareferencias (Paso {{ step }} de {{ wizard.steps.count }})
 	{% else %}
 	Paso {{ step }} de {{ wizard.steps.count }}

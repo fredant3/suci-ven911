@@ -1,7 +1,6 @@
 from django import forms
 from planificacion.actividades.models import Actividad
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_decimal_number
 
 
 class ActividadForm(FormBase):
@@ -27,24 +26,17 @@ class ActividadForm(FormBase):
         ]
         labels = {"objetiv": "Objetivo", "meta": "Meta"}
         widgets = {
-            "objetiv": forms.Textarea(
+            "objetiv": forms.TextInput(
                 attrs={
                     "placeholder": "Objetivo de la actividad",
                 }
             ),
-            "meta": forms.Textarea(
+            "meta": forms.TextInput(
                 attrs={
                     "placeholder": "Meta de la actividad",
                 }
             ),
         }
-
-    def clean_meta(self):
-        meta = self.cleaned_data.get("meta")
-        validate_decimal_number(
-            str(meta), "La meta debe ser un número positivo con hasta dos decimales."
-        )
-        return meta
 
     def clean(self):
         cleaned_data = super().clean()

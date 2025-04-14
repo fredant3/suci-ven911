@@ -3,6 +3,7 @@ from planificacion.infraestructuras.views.create_view import InfraestructuraCrea
 from planificacion.infraestructuras.views.delete_view import InfraestructuraDeleteView
 from planificacion.infraestructuras.views.list_view import InfraestructuraListView
 from planificacion.infraestructuras.views.update_view import InfraestructuraUpdateView
+from planificacion.infraestructuras.views.export_view import InfraestructuraExcelView
 
 urlpatterns = [
     path(
@@ -29,5 +30,10 @@ urlpatterns = [
         "<int:pk>/delete",
         InfraestructuraDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export_excel",
+        InfraestructuraExcelView.as_view(),
+        name="export_excel",
     ),
 ]

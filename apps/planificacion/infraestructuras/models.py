@@ -35,9 +35,6 @@ class Infraestructura(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return self.ente
-
     class Meta:
         verbose_name = "infraestructura"
         verbose_name_plural = "infraestructuras"

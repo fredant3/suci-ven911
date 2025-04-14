@@ -43,7 +43,10 @@ class FormBase(forms.ModelForm):
         )
 
     @staticmethod
-    def create_time_field(field_name, title=None):
+    def create_time_field(
+        field_name,
+        title=None,
+    ):
         return forms.TimeField(
             widget=forms.TextInput(attrs={"type": "time"}),
             # input_formats=["%H:%M"],
