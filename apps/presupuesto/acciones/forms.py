@@ -1,7 +1,6 @@
 from django import forms
 from presupuesto.models import Accion
 from helpers.FormBase import FormBase
-from helpers.validForm import validate_decimal_number
 
 
 class AccionForm(FormBase):
@@ -74,14 +73,21 @@ class AccionForm(FormBase):
                     "placeholder": "Ingrese el estatus",
                 }
             ),
+            "monto": forms.NumberInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el monto",
+                    "step": "0.01",
+                    "min": "0",
+                }
+            ),
+            "situacion_presupuestaria": forms.TextInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese la situacion presupuestaria",
+                }
+            ),
         }
-
-    def clean_monto(self):
-        monto = self.cleaned_data.get("monto")
-        validate_decimal_number(
-            str(monto), "El monto debe ser un valor positivo con hasta dos decimales"
-        )
-        return monto
 
     def clean(self):
         cleaned_data = super().clean()

@@ -30,6 +30,7 @@ class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
         context["listApiUrl"] = reverse_lazy("api_infraestructuras:list")
         context["updateUrl"] = reverse_lazy("infraestructuras:update", args=[0])
         context["deleteUrl"] = reverse_lazy("infraestructuras:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("infraestructuras:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

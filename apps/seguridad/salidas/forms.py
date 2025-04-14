@@ -2,7 +2,6 @@ from helpers.FormBase import FormBase
 from seguridad.salidas.models import Salida
 from django import forms
 from django.utils import timezone
-from helpers.validForm import validate_cedula
 from datetime import datetime
 
 
@@ -64,10 +63,10 @@ class SalidaForm(FormBase):
             ),
         }
 
-    def clean_cedula(self):
-        data = self.cleaned_data.get("cedula")
-        validate_cedula(data, "Formato de cédula inválido. Use: V-12345678")
-        return data
+    # def clean_cedula(self):
+    #     data = self.cleaned_data.get("cedula")
+    #     validate_cedula(data, "Formato de cédula inválido. Use: V-12345678")
+    #     return data
 
     def clean_fecha(self):
         data = self.cleaned_data.get("fecha")
@@ -83,9 +82,10 @@ class SalidaForm(FormBase):
 
     def clean(self):
         cleaned_data = super().clean()
-        # Validación adicional para registrar salidas coherentes
         if cleaned_data.get("fecha") and cleaned_data.get("hora"):
-            fecha_hora = datetime.combine(cleaned_data["fecha"], cleaned_data["hora"])
+            fecha_hora = timezone.make_aware(
+                datetime.combine(cleaned_data["fecha"], cleaned_data["hora"])
+            )
             if fecha_hora > timezone.now():
                 self.add_error(None, "La combinación fecha y hora no puede ser futura")
         return cleaned_data

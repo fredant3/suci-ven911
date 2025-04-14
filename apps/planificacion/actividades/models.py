@@ -24,9 +24,6 @@ class Actividad(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return self.ente
-
     class Meta:
         verbose_name = "actividad"
         verbose_name_plural = "actividades"

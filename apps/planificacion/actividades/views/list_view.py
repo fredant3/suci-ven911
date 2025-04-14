@@ -29,6 +29,7 @@ class ActividadListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_actividades:list")
         context["updateUrl"] = reverse_lazy("actividades:update", args=[0])
         context["deleteUrl"] = reverse_lazy("actividades:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("actividades:export")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

@@ -8,25 +8,33 @@ from crispy_forms.layout import Layout, Fieldset, HTML
 
 
 class UriInfoGeneralForm(FormBase):
-
     fecha_atencion = FormBase.create_date_field("fecha_atencion", "Fecha de Atención")
     nroreporte = CharField(
         max_length=10,
         required=False,
         label="Número de Reporte",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el número de reporte"}),
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese el número de reporte",
+            }
+        ),
     )
     placa = CharField(
         max_length=10,
         required=False,
         label="Placa",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la placa"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese la placa"}
+        ),
     )
     institucion = CharField(
         max_length=300,
         required=False,
         label="Institución",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la institución"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese la institución"}
+        ),
     )
     tipounidad = CharField(max_length=10,
         required=False,
@@ -36,36 +44,12 @@ class UriInfoGeneralForm(FormBase):
         max_length=10,
         required=False,
         label="Numeración Interna",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese la numeración interna"}),
-    )
-
-    # Centro Asistencial Recibido
-    centroAsistencial = CharField(
-        max_length=50,
-        required=False,
-        label="Centro Asistencial",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el centro asistencial"}),
-    )
-    servicioAsistencial = CharField(
-        max_length=50,
-        required=False,
-        label="Servicio Asistencial",
         widget=forms.TextInput(
-            attrs={"placeholder": "Ingrese el servicio asistencial"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese la numeración interna",
+            }
         ),
-    )
-    medico_receptor = CharField(
-        max_length=50,
-        required=False,
-        label="Médico Receptor",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese el médico receptor"}),
-    )
-
-    msds = CharField(
-        max_length=50,
-        required=False,
-        label="MS/DS",
-        widget=forms.TextInput(attrs={"placeholder": "Ingrese MS/DS"}),
     )
 
     class Meta:
@@ -78,10 +62,6 @@ class UriInfoGeneralForm(FormBase):
             "tipounidad",
             "num_interna",
             "contacto",
-            "centroAsistencial",
-            "servicioAsistencial",
-            "medico_receptor",
-            "msds",
             "foto",
         )
 
@@ -275,9 +255,9 @@ class UriDireccionForm(FormBase):
     )
 
     # Cronología del servicio
-    hora_alarma = FormBase.create_time_field("Hora de Alarma")
-    hora_salida = FormBase.create_time_field("Hora de Salida")
-    hora_llegada = FormBase.create_time_field("Hora de Llegada")
+    hora_alarma = FormBase.create_time_field("hora_alarma", "Hora de Alarma")
+    hora_salida = FormBase.create_time_field("hora_salida", "Hora de Salida")
+    hora_llegada = FormBase.create_time_field("hora_llegada", "Hora de Llegada")
     hospital = CharField(
         max_length=50,
         required=False,
@@ -290,7 +270,7 @@ class UriDireccionForm(FormBase):
         label="Transferencia al Servicio de Emergencia",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese transferencia"}),
     )
-    hora_sede = FormBase.create_time_field("Hora de Retorno a la Sede")
+    hora_sede = FormBase.create_time_field("hora_sede", "Hora de Retorno a la Sede")
     tiempo_servicio = CharField(
         max_length=50,
         required=False,
@@ -452,7 +432,7 @@ class UriInfoclinicaForm(FormBase):
 
 class UriSignosVitalesForm(FormBase):
 
-    horaMedicion = FormBase.create_time_field("Hora de la Medición")
+    horaMedicion = FormBase.create_time_field("horamedicion", "Hora de la Medición")
     frecuenciaCardiaca = CharField(
         max_length=100,
         required=False,
@@ -517,7 +497,7 @@ class UriSignosVitalesForm(FormBase):
         label="Dosis",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese dosis"}),
     )
-    hora = FormBase.create_time_field("Hora")
+    hora = FormBase.create_time_field("hora", "Hora")
     resultadoEvaluacion = CharField(
         max_length=500,
         required=False,
@@ -560,14 +540,14 @@ class UriReferenciasForm(FormBase):
         label="Médico que Refiere",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese médico que refiere"}),
     )
-    horaSalidaHosp = FormBase.create_time_field("Hora de Salida")
+    horaSalidaHosp = FormBase.create_time_field("horaSalidaHosp", "Hora de Salida")
     hospitalDestino = CharField(
         max_length=100,
         required=False,
         label="Hospital de Destino",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese hospital destino"}),
     )
-    horaLlegadaHosp = FormBase.create_time_field("Hora de Llegada")
+    horaLlegadaHosp = FormBase.create_time_field("horaLlegadaHosp", "Hora de Llegada")
     causa = CharField(
         max_length=100,
         required=False,
@@ -662,4 +642,54 @@ class UriReferenciasForm(FormBase):
             "medicoGuardia",
             "cedulaMedico",
             "selloMsds",
+        )
+
+
+class UriCentroAsistencialForm(FormBase):
+    centroAsistencial = CharField(
+        max_length=50,
+        required=False,
+        label="Centro Asistencial",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese el centro asistencial",
+            }
+        ),
+    )
+    servicioAsistencial = CharField(
+        max_length=50,
+        required=False,
+        label="Servicio Asistencial",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ingrese el servicio asistencial",
+            }
+        ),
+    )
+    medico_receptor = CharField(
+        max_length=50,
+        required=False,
+        label="Médico Receptor",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese el médico receptor"}
+        ),
+    )
+    msds = CharField(
+        max_length=50,
+        required=False,
+        label="MS/DS",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ingrese MS/DS"}
+        ),
+    )
+
+    class Meta:
+        model = Uri
+        fields = (
+            "centroAsistencial",
+            "servicioAsistencial",
+            "medico_receptor",
+            "msds",
         )

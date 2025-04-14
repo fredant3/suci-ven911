@@ -35,9 +35,6 @@ class Transporte(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return self.ente
-
     class Meta:
         verbose_name = "transporte"
         verbose_name_plural = "transportes"

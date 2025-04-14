@@ -53,7 +53,7 @@ class PositiveIntegerValidator:
                 params={"type": type(value).__name__, "value": value},
             )
 
-        if value <= 0:
+        if value < 0:
             raise ValidationError(
                 self.messages["not_positive"],
                 code="not_positive",

@@ -1,4 +1,4 @@
-from django.db.models import CharField, DateField
+from django.db.models import CharField, DateField, TimeField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
@@ -54,10 +54,7 @@ class Salida(BaseModel):
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
     )
-    hora = CharField(
-        "Hora de Entrada",
-        max_length=64,
-    )
+    hora = TimeField("Hora de Entrada")
 
     def toJSON(self):
         return model_to_dict(self)
