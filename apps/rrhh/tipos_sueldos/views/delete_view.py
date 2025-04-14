@@ -6,20 +6,20 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import TipoSueldoForm
-from ..models import TipoSueldo
-from ..services import TipoSueldoService
+from rrhh.tipos_sueldos.forms import TipoSueldoForm
+from rrhh.tipos_sueldos.models import TipoSueldo
+from rrhh.tipos_sueldos.services import TipoSueldoService
 
 
 class TipoSueldoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.eliminar_tipo_sueldo"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Tipos de Sueldos"
         context["titleForm"] = "Eliminar tipo de empleado"
         context["tag"] = "Eliminar"
@@ -35,7 +35,7 @@ class TipoSueldoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class TipoSueldoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.eliminar_tipo_sueldo"
     form_class = TipoSueldoForm
 
     def __init__(self):

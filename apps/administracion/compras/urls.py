@@ -2,6 +2,8 @@ from administracion.compras.views.create_view import CompraCreateView
 from administracion.compras.views.delete_view import CompraDeleteView
 from administracion.compras.views.list_view import ComprasListView
 from administracion.compras.views.update_view import CompraUpdateView
+from administracion.compras.views.export_view import CompraExcelView
+
 from django.urls import path
 
 urlpatterns = [
@@ -29,5 +31,10 @@ urlpatterns = [
         "<int:pk>/delete",
         CompraDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export",
+        CompraExcelView.as_view(),
+        name="export_excel",
     ),
 ]

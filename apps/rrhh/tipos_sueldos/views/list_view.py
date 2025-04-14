@@ -9,26 +9,28 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import TipoSueldoService
+from rrhh.tipos_sueldos.services import TipoSueldoService
+from rrhh.tipos_sueldos.models import ESTATUS_CHOICES, TIPO_CHOICES
 
 
 class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.listar_tipo_sueldo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Tipos de Sueldos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("tipos_sueldos:create")
         context["listApiUrl"] = reverse_lazy("api_tipos_sueldos:list")
         context["updateUrl"] = reverse_lazy("tipos_sueldos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("tipos_sueldos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_tipos_sueldos:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -43,65 +45,23 @@ class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cedula",
-                "name": "cedula",
-                "title": "Cédula",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
                 "data": "tipo",
                 "name": "tipo",
-                "title": "Tipo de Incidente",
+                "title": "Tipo",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
+                "data": "monto",
+                "name": "monto",
+                "title": "Monto",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
+                "data": "estatus",
+                "name": "estatus",
+                "title": "Estatus",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -109,7 +69,50 @@ class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class TipoSueldoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.listar_tipo_sueldo"
 
     def __init__(self):
         self.service = TipoSueldoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+                tipo_mapping = dict(TIPO_CHOICES)
+
+                # Convertir estatus y formatear monto
+                for item in data.get("entities", []):
+                    # Formatear estatus
+                    if "estatus" in item:
+                        item["estatus"] = estatus_mapping.get(
+                            item["estatus"], item["estatus"]
+                        )
+
+                    # Formatear tipo
+                    if "tipo" in item:
+                        item["tipo"] = tipo_mapping.get(item["tipo"], item["tipo"])
+
+                    # Formatear monto como número (opcional)
+                    if "monto" in item:
+                        try:
+                            item["monto"] = float(item["monto"])
+                        except (ValueError, TypeError):
+                            item["monto"] = 0.0
+
+                # Agregar opciones de filtro a la respuesta
+                if "meta" not in data:
+                    data["meta"] = {}
+
+                data["meta"]["filters"] = {
+                    "tipo_options": [{"value": k, "label": v} for k, v in TIPO_CHOICES],
+                    "estatus_options": [
+                        {"value": k, "label": v} for k, v in ESTATUS_CHOICES
+                    ],
+                }
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decodificando JSON: {e}")
+        return response

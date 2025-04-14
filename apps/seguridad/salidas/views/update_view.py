@@ -6,21 +6,21 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import SalidaForm
-from ..models import Salida
-from ..services import SalidaService
+from seguridad.salidas.forms import SalidaForm
+from seguridad.salidas.models import Salida
+from seguridad.salidas.services import SalidaService
 
 
 class SalidaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "seguridad.salidas.editar_salida"
     form_class = SalidaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Salidas"
         context["titleForm"] = "Actualizar salida"
         context["tag"] = "Editar"
@@ -37,7 +37,7 @@ class SalidaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class SalidaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.salidas.editar_salida"
     form_class = SalidaForm
 
     def __init__(self):

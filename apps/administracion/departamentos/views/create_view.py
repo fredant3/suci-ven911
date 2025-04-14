@@ -10,17 +10,17 @@ from templates.sneat import TemplateLayout
 
 
 class DepartamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "administracion.departamentos.agregar_departamento"
     form_class = DepartamentoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Departamentos"
-        context["titleForm"] = "Añadir un departamento"
+        context["titleForm"] = "Registrar Nuevo Departamento"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("departamentos:list")
         context["urlForm"] = reverse_lazy("api_departamentos:create")
@@ -29,7 +29,7 @@ class DepartamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView)
 
 
 class DepartamentoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.departamentos.agregar_departamento"
     form_class = DepartamentoForm
 
     def __init__(self):

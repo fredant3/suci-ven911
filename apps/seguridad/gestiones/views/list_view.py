@@ -9,11 +9,11 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import GestionService
+from seguridad.gestiones.services import GestionService
 
 
 class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.listar_gestion"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -21,8 +21,8 @@ class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Gestions"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("gestiones:create")
@@ -109,7 +109,7 @@ class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class GestionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.listar_gestion"
 
     def __init__(self):
         self.service = GestionService()

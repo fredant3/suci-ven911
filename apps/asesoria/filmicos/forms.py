@@ -1,9 +1,16 @@
 from asesoria.filmicos.models import RegistroFilmico
-from django import forms
-from django.forms.fields import DateTimeInput
+from helpers.FormBase import FormBase
+from django.forms import TextInput
 
 
-class RegistroFilmicoForm(forms.ModelForm):
+class RegistroFilmicoForm(FormBase):
+    fecha_solicitud = FormBase.create_date_field(
+        "fecha_solicitud", "Fecha de Solicitud"
+    )
+    fecha_culminacion = FormBase.create_date_field(
+        "fecha_culminacion", "Fecha de Culminación"
+    )
+
     class Meta:
         model = RegistroFilmico
         fields = [
@@ -25,6 +32,12 @@ class RegistroFilmicoForm(forms.ModelForm):
             "deleted_by",
         ]
         widgets = {
-            "fecha_solicitud": DateTimeInput(attrs={"type": "date"}),
-            "fecha_culminacion": DateTimeInput(attrs={"type": "date"}),
+            "direccion": TextInput(attrs={"placeholder": "Ingrese la dirección"}),
+            "camara": TextInput(attrs={"placeholder": "Ingrese la cámara"}),
+            "motivo_solicitud": TextInput(
+                attrs={"placeholder": "Ingrese el motivo de la solicitud"}
+            ),
+            "ente_solicita": TextInput(
+                attrs={"placeholder": "Ingrese el ente que solicita"}
+            ),
         }

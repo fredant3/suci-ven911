@@ -9,26 +9,28 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import SedeService
+from administracion.sedes.services import SedeService
+from administracion.sedes.models import ESTATUS_CHOICES
 
 
 class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.sedes.listar_sede"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Sedes"
-        context["createBtn"] = "Añadir"
+        context["createBtn"] = "Agregar sede"
         context["createUrl"] = reverse_lazy("sedes:create")
         context["listApiUrl"] = reverse_lazy("api_sedes:list")
         context["updateUrl"] = reverse_lazy("sedes:update", args=[0])
         context["deleteUrl"] = reverse_lazy("sedes:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("sedes:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -60,7 +62,24 @@ class SedeListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class SedeListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.sedes.listar_sede"
 
     def __init__(self):
         self.service = SedeService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                for item in data.get("entities", []):
+                    item["estatus"] = estatus_mapping.get(
+                        item.get("estatus", ""), item.get("estatus", "")
+                    )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError:
+                pass
+        return response

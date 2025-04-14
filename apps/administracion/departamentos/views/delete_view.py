@@ -11,16 +11,16 @@ from templates.sneat import TemplateLayout
 
 
 class DepartamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "administracion.departamentos.eliminar_departamento"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administrasion"
+        context["module"] = "Administración"
         context["submodule"] = "Departamentos"
-        context["titleForm"] = "Eliminar departamento"
+        context["titleForm"] = "Confirmar eliminación"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("departamentos:list")
         context["urlDelete"] = reverse_lazy(
@@ -34,7 +34,7 @@ class DepartamentoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView)
 
 
 class DepartamentoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.departamentos.eliminar_departamento"
     form_class = DepartamentoForm
 
     def __init__(self):

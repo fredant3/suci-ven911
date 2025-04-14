@@ -12,22 +12,23 @@ from templates.sneat import TemplateLayout
 
 
 class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.asignaciones.ver_asignacion"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Asignacion"
-        context["createBtn"] = "Añadir"
+        context["module"] = "Administración"
+        context["submodule"] = "Asignaciones"
+        context["createBtn"] = "Nueva asignación"
         context["createUrl"] = reverse_lazy("asignaciones:create")
         context["listApiUrl"] = reverse_lazy("api_asignaciones:list")
         context["updateUrl"] = reverse_lazy("asignaciones:update", args=[0])
         context["deleteUrl"] = reverse_lazy("asignaciones:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("asignaciones:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -42,8 +43,8 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "articulo__serial",
-                "name": "articulo__serial",
+                "data": "articulo__nombre",
+                "name": "articulo__nombre",
                 "title": "Artículo",
                 "orderable": "true",
                 "searchable": "true",
@@ -94,7 +95,7 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class AsignacionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.asignaciones.ver_asignacion"
 
     def __init__(self):
         self.service = AsignacionService()

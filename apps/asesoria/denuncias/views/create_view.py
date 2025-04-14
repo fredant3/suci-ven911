@@ -10,14 +10,14 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.agregar_denuncia"
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Denuncias"
         context["titleForm"] = "Añadir denuncia"
@@ -29,7 +29,7 @@ class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class DenunciaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.agregar_denuncia"
     form_class = DenunciaForm
 
     def __init__(self):

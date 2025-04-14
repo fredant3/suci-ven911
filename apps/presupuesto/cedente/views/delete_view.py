@@ -6,19 +6,19 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CedenteForm
-from ..models import Cedente
-from ..services import CedenteService
+from presupuesto.cedente.forms import CedenteForm
+from presupuesto.cedente.models import Cedente
+from presupuesto.cedente.services import CedenteService
 
 
 class CedenteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.eliminar_cedente"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Cedentes"
         context["titleForm"] = "Eliminar cedente"
@@ -35,7 +35,7 @@ class CedenteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class CedenteDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.eliminar_cedente"
     form_class = CedenteForm
 
     def __init__(self):

@@ -1,4 +1,6 @@
-const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
+const setTBody = ({ url, columns, withActions, updateUrl, deleteUrl }) => {
+  withActions = withActions ? withActions : 'True';
+
   $("#data-table").DataTable({
     resposive: true,
     autoWidth: false,
@@ -16,8 +18,8 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
       // accepts: "application/json; charset=utf-8",
     },
     // columns: columns,
-    columns: getColumns(columns),
-    columnDefs: getcolumnDefs(updateUrl, deleteUrl),
+    columns: getColumns(withActions, columns),
+    columnDefs: getcolumnDefs(withActions, updateUrl, deleteUrl),
     initComplete: function (settings, json) {
       // console.info('Datos cargados.', { settings, json })
     },
@@ -25,18 +27,27 @@ const setTBody = ({ url, columns, updateUrl, deleteUrl }) => {
   });
 };
 
-function getcolumnDefs (updateUrl, deleteUrl) {
-  if (updateUrl && deleteUrl) {
+function getcolumnDefs (withActions, updateUrl, deleteUrl) {
+  if (withActions == 'False') return;
+
+  if (updateUrl || deleteUrl) {
     return [
       {
         targets: [-1],
         class: "text-center",
         orderable: false,
         render: function (data, type, row) {
-          let buttons = `
-            <a href="${updateUrl.replace("0",row.id)}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
-            <a href="${deleteUrl.replace("0",row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
-          `;
+          let buttons = '';
+
+          if (updateUrl) {
+            buttons += `<a href="${updateUrl.replace("0", row.id)}" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>`;
+          }
+          
+          if (deleteUrl) {
+            console.info('HEY deleteUrl');
+            buttons += `<a href="${deleteUrl.replace("0", row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>`; 
+          }
+
           return buttons;
         },
       },
@@ -46,11 +57,12 @@ function getcolumnDefs (updateUrl, deleteUrl) {
   return []
 }
 
-function getColumns (stringColumns) {
+function getColumns (withActions, stringColumns) {
   if (typeof stringColumns === "string")
     stringColumns = stringColumns.split("|").map((item) => ({ data: item }));
 
-  stringColumns.push({ data: "" });
+  if (withActions == 'True') stringColumns.push({ data: "" });
+
   return stringColumns;
 }
 

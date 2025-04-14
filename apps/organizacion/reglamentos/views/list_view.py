@@ -9,11 +9,12 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import ReglamentoService
+from organizacion.reglamentos.services import ReglamentoService
+from organizacion.reglamentos.models import ESTATUS_CHOICES
 
 
 class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.ver_reglamento"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -50,13 +51,6 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "user",
-                "name": "user",
-                "title": "Usuario",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "date",
                 "name": "date",
                 "title": "Fecha",
@@ -81,7 +75,50 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ReglamentoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.ver_reglamento"
 
     def __init__(self):
         self.service = ReglamentoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                for item in data.get("entities", []):
+                    # Convert status code to readable value
+                    if "estado" in item:
+                        item["estado"] = estatus_mapping.get(
+                            item["estado"], item["estado"]
+                        )
+
+                    # Format progress as percentage with bar
+                    if "progre" in item:
+                        try:
+                            progress = int(item["progre"])
+                            item["progre"] = {
+                                "value": progress,
+                                "display": f"{progress}%",
+                                "class": "success" if progress == 100 else "primary",
+                            }
+                        except (ValueError, TypeError):
+                            item["progre"] = {
+                                "value": 0,
+                                "display": "N/A",
+                                "class": "secondary",
+                            }
+
+                    # Format date (remove time if present)
+                    if "date" in item and item["date"]:
+                        item["date"] = (
+                            item["date"][:10]
+                            if isinstance(item["date"], str)
+                            else item["date"].strftime("%Y-%m-%d")
+                        )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+        return response

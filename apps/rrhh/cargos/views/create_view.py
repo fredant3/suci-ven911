@@ -6,20 +6,20 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CargoForm
-from ..services import CargoService
+from rrhh.cargos.forms import CargoForm
+from rrhh.cargos.services import CargoService
 
 
 class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.agregar_cargo"
     form_class = CargoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Cargos"
         context["titleForm"] = "Añadir una cargo nueva"
         context["tag"] = "Registrar"
@@ -30,7 +30,7 @@ class CargoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class CargoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.agregar_cargo"
     form_class = CargoForm
 
     def __init__(self):

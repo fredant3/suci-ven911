@@ -11,17 +11,17 @@ from templates.sneat import TemplateLayout
 
 
 class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.asignaciones.editar_asignacion"
     form_class = AsignacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Asignacion"
-        context["titleForm"] = "Actualizar"
+        context["module"] = "Administración"
+        context["submodule"] = "Asignaciones"
+        context["titleForm"] = "Actualizar asignación"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("asignaciones:list")
         context["urlForm"] = reverse_lazy(
@@ -36,7 +36,7 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AsignacionUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.asignaciones.editar_asignacion"
     form_class = AsignacionForm
 
     def __init__(self):

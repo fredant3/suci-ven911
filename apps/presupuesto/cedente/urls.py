@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views.create_view import CedenteCreateView
-from .views.delete_view import CedenteDeleteView
-from .views.list_view import CedenteListView
-from .views.update_view import CedenteUpdateView
+from presupuesto.cedente.views.create_view import CedenteCreateView
+from presupuesto.cedente.views.delete_view import CedenteDeleteView
+from presupuesto.cedente.views.list_view import CedenteListView
+from presupuesto.cedente.views.update_view import CedenteUpdateView
 
 urlpatterns = [
     path(

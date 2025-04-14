@@ -1,14 +1,19 @@
 from administracion.departamentos.models import Departamento
-from django import forms
+from helpers.FormBase import FormBase
+from django.forms import TextInput
 
 
-class DepartamentoForm(forms.ModelForm):
+class DepartamentoForm(FormBase):
     class Meta:
         model = Departamento
-        fields = [
-            "nombre",
-        ]
+        fields = ["nombre"]
         labels = {
-            "nombre": "Nombre",
+            "nombre": "Nombre Del Departamento",
         }
-        widgets = {}
+        widgets = {
+            "nombre": TextInput(
+                attrs={
+                    "placeholder": "Ingrese el nombre del departamento (3-30 caracteres)",
+                }
+            ),
+        }

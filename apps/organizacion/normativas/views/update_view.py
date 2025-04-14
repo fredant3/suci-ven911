@@ -6,13 +6,13 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import NormativaForm
-from ..models import Normativa
-from ..services import NormativaService
+from organizacion.normativas.forms import NormativaForm
+from organizacion.normativas.models import Normativa
+from organizacion.normativas.services import NormativaService
 
 
 class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "organizacion.normativas.editar_normativa"
     form_class = NormativaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -38,7 +38,7 @@ class NormativaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class NormativaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.normativas.editar_normativa"
     form_class = NormativaForm
 
     def __init__(self):

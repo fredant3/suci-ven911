@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Asignacion
+from presupuesto.asignacion.models import Asignacion
 
 
 class AsignacionRepository(Repository):

@@ -11,20 +11,20 @@ from templates.sneat import TemplateLayout
 
 
 class CompraDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "administracion.compras.eliminar_compra"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administrasion"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Administrasion"
-        context["submodule"] = "compra"
-        context["titleForm"] = "Eliminar Compra"
+        context["titlePage"] = "Administración"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administración"
+        context["submodule"] = "Compras"
+        context["titleForm"] = "Confirmar eliminación"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("compra:list")
+        context["listUrl"] = reverse_lazy("compras:list")
         context["urlDelete"] = reverse_lazy(
-            "api_compra:delete", args=[self.kwargs.get("pk")]
+            "api_compras:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
@@ -34,7 +34,7 @@ class CompraDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class CompraDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.compras.eliminar_compra"
     form_class = CompraForm
 
     def __init__(self):

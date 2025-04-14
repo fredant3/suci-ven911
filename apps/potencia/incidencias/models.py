@@ -1,24 +1,36 @@
 from administracion.departamentos.models import Departamento
 from administracion.sedes.models import Sede
-from django.db import models
+from django.db.models import CASCADE, CharField, ForeignKey
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
+from potencia.tipo_incidencia.models import TipoIncidencia
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
-
-class TipoIncidencia(BaseModel):
-    tipo = models.CharField(max_length=120)
-
-    def __str__(self):
-        return self.tipo
+INCIDENCIA_CHOICES = (
+    ("Interna", "Solicitud Interna"),
+    ("Externa", "Solicitud Externa"),
+)
 
 
 class Incidencia(BaseModel):
-    sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
-    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    estado = models.CharField("Estado", max_length=120)
-    tipo_incidencia = models.ForeignKey(TipoIncidencia, on_delete=models.CASCADE)
-    tipo_solicitud = models.CharField(max_length=80, verbose_name="Tipo Solicitud")
-    observaciones = models.CharField(max_length=200)
+    sede = ForeignKey(Sede, on_delete=CASCADE)
+    departamento = ForeignKey(Departamento, on_delete=CASCADE)
+    tipo_incidencia = ForeignKey(
+        TipoIncidencia, on_delete=CASCADE, verbose_name="Tipo de incidencia"
+    )
+    estado = CharField("Estado", max_length=15, choices=ESTADOS_CHOICES)
+    tipo_solicitud = CharField(
+        "Tipo de Solicitud", max_length=10, choices=INCIDENCIA_CHOICES
+    )
+    observaciones = CharField(
+        "Descripción de la falla",
+        max_length=200,
+        validators=[MinLengthValidator(3), MaxLengthValidator(200), TextValidator()],
+    )
 
     def toJSON(self):
         return model_to_dict(self)
@@ -29,3 +41,10 @@ class Incidencia(BaseModel):
     class Meta:
         verbose_name = "Incidencia"
         verbose_name_plural = "Incidencias"
+        permissions = [
+            ("listar_incidencia", "Puede listar incidencia"),
+            ("agregar_incidencia", "Puede agregar incidencia"),
+            ("ver_incidencia", "Puede ver incidencia"),
+            ("editar_incidencia", "Puede actualizar incidencia"),
+            ("eliminar_incidencia", "Puede eliminar incidencia"),
+        ]

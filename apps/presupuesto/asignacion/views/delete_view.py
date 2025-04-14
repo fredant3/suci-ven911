@@ -6,26 +6,26 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AsignacionForm
-from ..models import Asignacion
-from ..services import AsignacionService
+from presupuesto.asignacion.forms import AsignacionForm
+from presupuesto.asignacion.models import Asignacion
+from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.eliminar_asignacion"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Asignaciones"
         context["titleForm"] = "Eliminar asignacion"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("asignaciones:list")
+        context["listUrl"] = reverse_lazy("presupuesto_asignaciones:list")
         context["urlDelete"] = reverse_lazy(
-            "api_asignaciones:delete", args=[self.kwargs.get("pk")]
+            "api_presupuesto_asignaciones:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 
@@ -35,7 +35,7 @@ class AsignacionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class AsignacionDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.eliminar_asignacion"
     form_class = AsignacionForm
 
     def __init__(self):

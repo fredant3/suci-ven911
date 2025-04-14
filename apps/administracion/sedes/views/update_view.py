@@ -6,24 +6,23 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import SedeForm
-from ..models import Sede
-from ..services import SedeService
+from administracion.sedes.forms import SedeForm
+from administracion.sedes.models import Sede
+from administracion.sedes.services import SedeService
 
 
 class SedeUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.sedes.editar_sede"
     form_class = SedeForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Administración"
+        context["module"] = "Administración"
         context["submodule"] = "Sedes"
         context["titleForm"] = "Actualizar sede"
-        context["tag"] = "Editar"
+        context["tag"] = "Editar sede"
         context["listUrl"] = reverse_lazy("sedes:list")
         context["urlForm"] = reverse_lazy(
             "api_sedes:update", args=[self.kwargs.get("pk")]
@@ -37,7 +36,7 @@ class SedeUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class SedeUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.sedes.editar_sede"
     form_class = SedeForm
 
     def __init__(self):

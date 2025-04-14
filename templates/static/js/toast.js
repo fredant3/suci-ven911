@@ -12,26 +12,30 @@ function toast (title, message, date = 'Hace un momento') {
 }
 
 function toastSecondary (title, message, date = 'Hace un momento') {
-  $('#toast').removeClass('bg-primary').addClass(`bg-secondary`)
+  changeClass(`bg-secondary`)
   prepare(title, message, date)
 }
 
 function toastInfo (title, message, date = 'Hace un momento') {
-  $('#toast').removeClass('bg-primary').addClass(`bg-info`)
+  changeClass(`bg-info`)
   prepare(title, message, date)
 }
 
 function toastSuccess (title, message, date = 'Hace un momento') {
-  $('#toast').removeClass('bg-primary').addClass(`bg-success`)
+  changeClass(`bg-success`)
   prepare(title, message, date)
 }
 
 function toastWarning (title, message, date = 'Hace un momento') {
-  $('#toast').removeClass('bg-primary').addClass(`bg-warning`)
+  changeClass(`bg-warning`)
   prepare(title, message, date)
 }
 
 function toastError (title, message, date = 'Hace un momento') {
-  $('#toast').removeClass('bg-primary').addClass(`bg-danger`)
+  changeClass(`bg-danger`)
   prepare(title, message, date)
+}
+
+function changeClass (className) {
+  $('#toast').removeClass('bg-primary bg-secondary bg-info bg-success bg-warning bg-danger').addClass(className)
 }

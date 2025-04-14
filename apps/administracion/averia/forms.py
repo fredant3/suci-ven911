@@ -1,8 +1,9 @@
 from administracion.averia.models import Averia
-from django import forms
+from helpers.FormBase import FormBase
+from django.forms import TextInput
 
 
-class AveriaForm(forms.ModelForm):
+class AveriaForm(FormBase):
     class Meta:
         model = Averia
         fields = [
@@ -13,12 +14,19 @@ class AveriaForm(forms.ModelForm):
             "serial",
             "codigo_bn",
         ]
-        labels = {
-            "problema": "Problema",
-            "tipo_averia": "Tipo de avería",
-            "departamento": "Departamento",
-            "ubicacion": "Ubicación",
-            "serial": "Serial",
-            "codigo_bn": "Código BN",
+        widgets = {
+            "problema": TextInput(
+                attrs={"placeholder": "Describa el problema (mínimo 9 caracteres)"}
+            ),
+            "ubicacion": TextInput(
+                attrs={
+                    "placeholder": "Ingrese la ubicación exacta (mínimo 9 caracteres)"
+                }
+            ),
+            "serial": TextInput(
+                attrs={"placeholder": "Ingrese el número de serie (6-30 caracteres)"}
+            ),
+            "codigo_bn": TextInput(
+                attrs={"placeholder": "Ingrese el código BN (6-30 caracteres)"}
+            ),
         }
-        widgets = {}

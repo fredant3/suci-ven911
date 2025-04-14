@@ -1,7 +1,6 @@
 import os
 from importlib import import_module, util
 from pprint import pprint
-
 from django.conf import settings
 
 

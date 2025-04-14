@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import TipoSueldoRepository
+from rrhh.tipos_sueldos.repositories import TipoSueldoRepository
 
 
 class TipoSueldoService(CrudService):

@@ -6,20 +6,20 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AccionForm
-from ..models import Accion
-from ..services import AccionService
+from presupuesto.acciones.forms import AccionForm
+from presupuesto.acciones.models import Accion
+from presupuesto.acciones.services import AccionService
 
 
 class AccionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.editar_accion"
     form_class = AccionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Acciones"
         context["titleForm"] = "Actualizar accion"
@@ -37,7 +37,7 @@ class AccionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AccionUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.editar_accion"
     form_class = AccionForm
 
     def __init__(self):

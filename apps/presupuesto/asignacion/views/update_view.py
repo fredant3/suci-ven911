@@ -6,27 +6,27 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AsignacionForm
-from ..models import Asignacion
-from ..services import AsignacionService
+from presupuesto.asignacion.forms import AsignacionForm
+from presupuesto.asignacion.models import Asignacion
+from presupuesto.asignacion.services import AsignacionService
 
 
 class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.editar_asignacion"
     form_class = AsignacionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Asignaciones"
         context["titleForm"] = "Actualizar accion"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("acciones:list")
+        context["listUrl"] = reverse_lazy("presupuesto_asignaciones:list")
         context["urlForm"] = reverse_lazy(
-            "api_acciones:update", args=[self.kwargs.get("pk")]
+            "api_presupuesto_asignaciones:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
@@ -37,7 +37,7 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AsignacionUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.asignacion.editar_asignacion"
     form_class = AsignacionForm
 
     def __init__(self):

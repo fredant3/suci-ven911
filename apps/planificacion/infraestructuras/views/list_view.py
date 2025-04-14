@@ -9,11 +9,12 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import InfraestructuraService
+from planificacion.infraestructuras.services import InfraestructuraService
+from helpers.BaseModelMixin import ESTADOS_CHOICES, MONTH_CHOICES
 
 
 class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.listar_infraestructuras"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -21,7 +22,7 @@ class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("planificacion")
         context["module"] = "Planificación"
         context["submodule"] = "Infraestructuras"
         context["createBtn"] = "Añadir"
@@ -29,7 +30,6 @@ class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
         context["listApiUrl"] = reverse_lazy("api_infraestructuras:list")
         context["updateUrl"] = reverse_lazy("infraestructuras:update", args=[0])
         context["deleteUrl"] = reverse_lazy("infraestructuras:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_infraestructuras:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -75,7 +75,40 @@ class InfraestructuraListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
 
 
 class InfraestructuraListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.infraestructuras.listar_infraestructuras"
 
     def __init__(self):
         self.service = InfraestructuraService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+
+                # Create mappings for choices
+                estado_mapping = dict(ESTADOS_CHOICES)
+                mes_mapping = dict(MONTH_CHOICES)
+
+                for item in data.get("entities", []):
+                    # Convert estado code to full name
+                    if "estado" in item:
+                        item["estado"] = estado_mapping.get(
+                            item["estado"], item["estado"]
+                        )
+
+                    # Convert month code to full name
+                    if "mes" in item:
+                        item["mes"] = mes_mapping.get(item["mes"], item["mes"])
+
+                    # Ensure cantidad is a number
+                    if "cantidad" in item:
+                        try:
+                            item["cantidad"] = int(item["cantidad"])
+                        except (ValueError, TypeError):
+                            item["cantidad"] = 0
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+        return response

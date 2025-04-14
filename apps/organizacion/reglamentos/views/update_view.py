@@ -5,14 +5,15 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
+from django.views.generic import UpdateView
 
-from ..forms import ReglamentoForm
-from ..models import Reglamento
-from ..services import ReglamentoService
+from organizacion.reglamentos.forms import ReglamentoForm
+from organizacion.reglamentos.models import Reglamento
+from organizacion.reglamentos.services import ReglamentoService
 
 
 class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.editar_reglamento"
     form_class = ReglamentoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +38,7 @@ class ReglamentoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ReglamentoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "organizacion.reglamentos.editar_reglamento"
     form_class = ReglamentoForm
 
     def __init__(self):

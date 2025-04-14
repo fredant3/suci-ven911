@@ -1,5 +1,4 @@
 function form_errors(errors) {
-  console.error(errors);
   $.each(errors, function (key, value) {
     const input = $(`#id_${key}`);
     input.addClass("is-invalid");
@@ -25,3 +24,4 @@ function form_errors(errors) {
     false
   );
 })();
+

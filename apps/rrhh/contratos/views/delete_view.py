@@ -12,14 +12,14 @@ from ..services import ContratoService
 
 
 class ContratoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.contratos.eliminar_contrato"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Contratos"
         context["titleForm"] = "Eliminar contrato"
         context["tag"] = "Eliminar"
@@ -35,7 +35,7 @@ class ContratoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ContratoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.contratos.eliminar_contrato"
     form_class = ContratoForm
 
     def __init__(self):

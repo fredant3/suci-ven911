@@ -6,20 +6,20 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CargoForm
-from ..models import Cargo
-from ..services import CargoService
+from rrhh.cargos.forms import CargoForm
+from rrhh.cargos.models import Cargo
+from rrhh.cargos.services import CargoService
 
 
 class CargoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.eliminar_cargo"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Huamana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Huamana"
         context["submodule"] = "Cargos"
         context["titleForm"] = "Eliminar cargo"
         context["tag"] = "Eliminar"
@@ -35,7 +35,7 @@ class CargoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class CargoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.eliminar_cargo"
     form_class = CargoForm
 
     def __init__(self):

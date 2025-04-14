@@ -1,36 +1,119 @@
 from asesoria.denuncias.models import Denuncia
-from django.forms import CharField, EmailField, ModelForm
-from django.forms.fields import DateTimeInput
+from django.forms import TextInput, CharField, EmailField, EmailInput
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from helpers.FormBase import FormBase
+from helpers.validForm import (
+    TextValidator,
+    PhoneNumberValidator,
+    CedulaVenezolanaValidator,
+    validate_email,
+)
 
 
-class DenunciaForm(ModelForm):
-    nombres_denunciante = CharField(max_length=120, label="Nombre del denunciante")
-    apellidos_denunciante = CharField(max_length=120, label="Apellido del denunciante")
-    cedula_denunciante = CharField(max_length=12, label="Cédula del denunciante")
-    telefono_denunciante = CharField(max_length=15, label="Teléfono del denunciante")
-    email_denunciante = EmailField(
-        max_length=60, required=False, label="Correo electrónico del denunciante"
+class DenunciaForm(FormBase):
+    nombres_denunciante = CharField(
+        label="Nombre del Denunciante",
+        widget=TextInput(attrs={"placeholder": "Ingrese el nombre del denunciante"}),
+        max_length=120,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
-    direccion_denunciante = CharField(max_length=180, label="Dirección del denunciante")
+    apellidos_denunciante = CharField(
+        label="Apellido Del Denunciante",
+        widget=TextInput(attrs={"placeholder": "Ingrese el apellido del denunciante"}),
+        max_length=120,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
+    )
+    cedula_denunciante = CharField(
+        label="Cédula del Denunciante",
+        widget=TextInput(attrs={"placeholder": "Ingrese la cédula del denunciante"}),
+        max_length=15,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
+    )
+    telefono_denunciante = CharField(
+        label="Teléfono del Denunciante",
+        widget=TextInput(attrs={"placeholder": "Ingrese el teléfono del denunciante"}),
+        max_length=20,
+        required=False,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
+    )
+    email_denunciante = EmailField(
+        label="Correo electrónico del Denunciante",
+        widget=EmailInput(
+            attrs={"placeholder": "Ingrese el correo electrónico del denunciante"}
+        ),
+        max_length=60,
+        required=False,
+        validators=[validate_email],
+    )
+    direccion_denunciante = CharField(
+        label="Dirección del Denunciante",
+        widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciante"}),
+        max_length=180,
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
+    )
 
     nombres_denunciado = CharField(
-        max_length=120, required=False, label="Nombre del denunciado"
+        label="Nombre del Denunciado",
+        widget=TextInput(attrs={"placeholder": "Ingrese el nombre del denunciado"}),
+        max_length=120,
+        required=False,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     apellidos_denunciado = CharField(
-        max_length=120, required=False, label="Apellido del denunciado"
+        label="Apellido del Denunciado",
+        widget=TextInput(attrs={"placeholder": "Ingrese el apellido del denunciado"}),
+        max_length=120,
+        required=False,
+        validators=[MinLengthValidator(3), MaxLengthValidator(120), TextValidator()],
     )
     cedula_denunciado = CharField(
-        max_length=12, required=False, label="Cédula del denunciado"
+        label="Cédula del Denunciado",
+        widget=TextInput(attrs={"placeholder": "Ingrese la cédula del denunciado"}),
+        max_length=15,
+        required=False,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
     )
     telefono_denunciado = CharField(
-        max_length=15, required=False, label="Teléfono del denunciado"
+        label="Teléfono del Denunciado",
+        widget=TextInput(attrs={"placeholder": "Ingrese el teléfono del denunciado"}),
+        max_length=20,
+        required=False,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
     )
     email_denunciado = EmailField(
-        max_length=60, required=False, label="Correo electrónico del denunciado"
+        label="Correo electrónico del Denunciado",
+        widget=EmailInput(
+            attrs={"placeholder": "Ingrese el correo electrónico del denunciado"}
+        ),
+        max_length=60,
+        required=False,
+        validators=[validate_email],
     )
     direccion_denunciado = CharField(
-        max_length=180, required=False, label="Dirección del denunciado"
+        label="Dirección del Denunciado",
+        widget=TextInput(attrs={"placeholder": "Ingrese la dirección del denunciado"}),
+        max_length=180,
+        required=False,
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
+    fecha_denuncia = FormBase.create_date_field("fecha_denuncia")
+    fecha_incidente = FormBase.create_date_field("fecha_incidente")
 
     class Meta:
         model = Denuncia
@@ -54,6 +137,13 @@ class DenunciaForm(ModelForm):
             "fecha_denuncia",
             "fecha_incidente",
         ]
+        widgets = {
+            "ente": TextInput(attrs={"placeholder": "Ingrese el ente relacionado"}),
+            "zona": TextInput(attrs={"placeholder": "Ingrese la zona del incidente"}),
+            "motivo": TextInput(
+                attrs={"placeholder": "Ingrese el motivo de la denuncia"}
+            ),
+        }
         exclude = [
             "created_at",
             "created_by",
@@ -63,7 +153,3 @@ class DenunciaForm(ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "fecha_denuncia": DateTimeInput(attrs={"type": "date"}),
-            "fecha_incidente": DateTimeInput(attrs={"type": "date"}),
-        }

@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Cargo
+from rrhh.cargos.models import Cargo
 
 
 class CargoRepository(Repository):

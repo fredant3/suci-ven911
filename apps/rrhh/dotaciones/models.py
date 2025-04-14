@@ -1,4 +1,4 @@
-from django.db import models
+from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from rrhh.empleados.models import Empleado
@@ -46,17 +46,24 @@ TALLA_ZAPATO_CHOICES = (
 
 
 class Dotacion(BaseModel):
-    camisa = models.CharField(max_length=2, choices=TALLA_CAMISA_CHOICES)
-    pantalon = models.CharField(max_length=2, choices=TALLA_PANTALON_CHOICES)
-    zapato = models.CharField(max_length=2, choices=TALLA_ZAPATO_CHOICES)
-    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    camisa = CharField("Talla de Camisa", max_length=2, choices=TALLA_CAMISA_CHOICES)
+    pantalon = CharField(
+        "Talla de Pantalón", max_length=2, choices=TALLA_PANTALON_CHOICES
+    )
+    zapato = CharField("Talla de Zapato", max_length=2, choices=TALLA_ZAPATO_CHOICES)
+    empleado = ForeignKey(Empleado, on_delete=CASCADE, verbose_name="Empleado")
 
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return "{0} {1}".format(self.name, self.apellido)
-
     class Meta:
         verbose_name = "dotacion"
         verbose_name_plural = "dotaciones"
+        permissions = [
+            ("listar_dotacion", "Puede listar dotacion"),
+            ("agregar_dotacion", "Puede agregar dotacion"),
+            ("ver_dotacion", "Puede ver dotacion"),
+            ("editar_dotacion", "Puede actualizar dotacion"),
+            ("eliminar_dotacion", "Puede eliminar dotacion"),
+            ("exel_dotacion", "Puede exportar dotacion a excel"),
+        ]

@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views.create_view import CargoCreateView
-from .views.delete_view import CargoDeleteView
-from .views.list_view import CargoListView
-from .views.update_view import CargoUpdateView
+from rrhh.cargos.views.create_view import CargoCreateView
+from rrhh.cargos.views.delete_view import CargoDeleteView
+from rrhh.cargos.views.list_view import CargoListView
+from rrhh.cargos.views.update_view import CargoUpdateView
+from rrhh.cargos.views.export_view import CargoExcelView
 
 urlpatterns = [
     path(
@@ -30,5 +31,10 @@ urlpatterns = [
         "<int:pk>/delete",
         CargoDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        CargoExcelView.as_view(),
+        name="export_excel",
     ),
 ]

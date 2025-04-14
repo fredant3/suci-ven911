@@ -9,19 +9,19 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import ProyectoService
+from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
-    url_redirect = reverse_lazy("modules:index")
+    permission_required = "presupuesto.proyecto.listar_proyecto"
+    url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Proyectos"
         context["createBtn"] = "Añadir"
@@ -117,7 +117,7 @@ class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ProyectoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.listar_proyecto"
 
     def __init__(self):
         self.service = ProyectoService()

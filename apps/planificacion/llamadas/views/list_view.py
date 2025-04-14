@@ -10,10 +10,11 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from ..services import LlamadaService
+from helpers.BaseModelMixin import ESTADOS_CHOICES, MONTH_CHOICES
 
 
 class LlamadaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.listar_llamadas"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -21,7 +22,7 @@ class LlamadaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("planificacion")
         context["module"] = "Planificación"
         context["submodule"] = "Llamadas"
         context["createBtn"] = "Añadir"
@@ -43,66 +44,92 @@ class LlamadaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "nombres_d",
-                "name": "nombres_d",
-                "title": "Nombre del Llamadante",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "apellidos_d",
-                "name": "apellidos_d",
-                "title": "Apellido del Llamadante",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cedula_d",
-                "name": "cedula_d",
-                "title": "Cédula del Llamadante",
-                "orderable": "false",
+                "data": "mes",
+                "name": "mes",
+                "title": "Mes",
+                "orderable": "true",
                 "searchable": "true",
             },
             {
-                "data": "fecha_llamada",
-                "name": "fecha_llamada",
-                "title": "Fecha",
-                "orderable": "false",
+                "data": "estado",
+                "name": "estado",
+                "title": "Estado",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "informativa",
+                "name": "informativa",
+                "title": "Llamadas Informativas",
+                "orderable": "true",
                 "searchable": "false",
             },
             {
-                "data": "telefono",
-                "name": "telefono",
-                "title": "Teléfono",
-                "orderable": "false",
+                "data": "falsa",
+                "name": "falsa",
+                "title": "Llamadas Falsas",
+                "orderable": "true",
                 "searchable": "false",
             },
             {
-                "data": "email",
-                "name": "email",
-                "title": "Correo",
-                "orderable": "false",
+                "data": "realesno",
+                "name": "realesno",
+                "title": "Reales No Atendidas",
+                "orderable": "true",
                 "searchable": "false",
             },
             {
-                "data": "motivo",
-                "name": "motivo",
-                "title": "Motivo",
-                "orderable": "false",
+                "data": "realesf",
+                "name": "realesf",
+                "title": "Reales Finalizadas",
+                "orderable": "true",
+                "searchable": "false",
+            },
+            {
+                "data": "videop",
+                "name": "videop",
+                "title": "Videollamadas",
+                "orderable": "true",
                 "searchable": "false",
             },
         ]
 
 
 class LlamadaListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.llamadas.listar_llamadas"
 
     def __init__(self):
         self.service = LlamadaService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+
+                # Create mappings for choices
+                estado_mapping = dict(ESTADOS_CHOICES)
+                mes_mapping = dict(MONTH_CHOICES)
+
+                for item in data.get("entities", []):
+                    # Convert estado code to full name
+                    if "estado" in item:
+                        item["estado"] = estado_mapping.get(
+                            item["estado"], item["estado"]
+                        )
+
+                    # Convert month code to full name
+                    if "mes" in item:
+                        item["mes"] = mes_mapping.get(item["mes"], item["mes"])
+
+                    # Ensure cantidad is a number
+                    if "cantidad" in item:
+                        try:
+                            item["cantidad"] = int(item["cantidad"])
+                        except (ValueError, TypeError):
+                            item["cantidad"] = 0
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+        return response

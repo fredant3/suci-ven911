@@ -10,14 +10,14 @@ from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "asesoria.filmicos.agregar_registroFilmico"
     form_class = RegistroFilmicoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Registro Filmico"
         context["titleForm"] = "Añadir un registro filmico"
@@ -29,7 +29,7 @@ class RegistroFilmicoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateVi
 
 
 class RegistroFilmicoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.filmicos.agregar_registroFilmico"
     form_class = RegistroFilmicoForm
 
     def __init__(self):

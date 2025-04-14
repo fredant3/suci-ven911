@@ -11,18 +11,18 @@ from templates.sneat import TemplateLayout
 
 
 class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.compras.editar_compra"
     form_class = CompraForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "administracion"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Administracion"
-        context["submodule"] = "compra"
-        context["titleForm"] = "Actualizar"
-        context["tag"] = "Editar"
+        context["titlePage"] = "Administración"
+        context["indexUrl"] = reverse_lazy("administracion")
+        context["module"] = "Administración"
+        context["submodule"] = "Compras"
+        context["titleForm"] = "Editar compra"
+        context["tag"] = "Guardar cambios"
         context["listUrl"] = reverse_lazy("compras:list")
         context["urlForm"] = reverse_lazy(
             "api_compras:update", args=[self.kwargs.get("pk")]
@@ -36,7 +36,7 @@ class CompraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class ComprasUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.compras.editar_compra"
     form_class = CompraForm
 
     def __init__(self):

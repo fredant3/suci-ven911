@@ -1,16 +1,17 @@
-from django import forms
-from django.forms.fields import DateTimeInput
 from organizacion.reglamentos.models import Reglamento
+from helpers.FormBase import FormBase
+from django import forms
 
 
-class ReglamentoForm(forms.ModelForm):
-    estado = forms.BooleanField(
-        required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
-    )
+class ReglamentoForm(FormBase):
+    date = FormBase.create_date_field("date", title="Fecha de publicación")
 
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        return estado if estado is not None else False
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
+
+        if instance:
+            self.fields.pop("file")
 
     class Meta:
         model = Reglamento
@@ -30,5 +31,28 @@ class ReglamentoForm(forms.ModelForm):
             "deleted_by",
         ]
         widgets = {
-            "date": DateTimeInput(attrs={"type": "date"}),
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el nombre del reglamento",
+                }
+            ),
+            "file": forms.FileInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Seleccione el archivo",
+                }
+            ),
+            "progre": forms.Select(
+                attrs={
+                    "class": "form-select mb-3",
+                    "placeholder": "Seleccione el progreso",
+                }
+            ),
+            "estado": forms.Select(
+                attrs={
+                    "class": "form-select mb-3",
+                    "placeholder": "Seleccione el estado",
+                }
+            ),
         }

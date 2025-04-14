@@ -1,9 +1,9 @@
-from django import forms
+from helpers.FormBase import FormBase
+from administracion.sedes.models import Sede
+from django.forms import TextInput
 
-from .models import Sede
 
-
-class SedeForm(forms.ModelForm):
+class SedeForm(FormBase):
     class Meta:
         model = Sede
         fields = (
@@ -19,3 +19,10 @@ class SedeForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
+        labels = {
+            "sede": "Sede",
+            "estatus": "Estatus",
+        }
+        widgets = {
+            "sede": TextInput(attrs={"placeholder": "Ingrese el nombre de la sede"}),
+        }

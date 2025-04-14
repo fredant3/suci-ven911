@@ -420,7 +420,32 @@
 
   // Order Statistics Chart
   // --------------------------------------------------------------------
-  const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
+  var options = {
+    series: [{
+    data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+  }],
+    chart: {
+    type: 'bar',
+    height: 350
+  },
+  plotOptions: {
+    bar: {
+      borderRadius: 4,
+      borderRadiusApplication: 'end',
+      horizontal: true,
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  xaxis: {
+    categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+      'United States', 'China', 'Germany'
+    ],
+  }
+  };
+
+  const chartOrderStatistics = document.querySelector('#orderStatisticsCharts'),
     orderChartConfig = {
       chart: {
         height: 165,
@@ -491,6 +516,11 @@
         }
       }
     };
+    console.info(document.querySelector('#orderStatisticsChart'))
+    
+    const chart = new ApexCharts(document.querySelector('#orderStatisticsChart'), options);
+    chart.render();
+
   if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
     const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
     statisticsChart.render();

@@ -12,29 +12,30 @@ from templates.sneat import TemplateLayout
 
 
 class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.inventario.listar_articulo"
     url_redirect = reverse_lazy("administracion")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Artiulo"
+        context["module"] = "Administración"
+        context["submodule"] = "Artículos"
         context["createUrl"] = reverse_lazy("articulos:create", args=[0])
         context["listApiUrl"] = reverse_lazy("api_articulos:list")
         context["updateUrl"] = reverse_lazy("articulos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("articulos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("articulos:export_excel")
         context["heads"] = columns
         context["isSelect"] = True
-        context["selectTitle"] = "Añadir articulo"
+        context["selectTitle"] = "Registrar nuevo artículo"
         context["selectOptions"] = (
-            ("tecnologia", "Tecnologia"),
+            ("tecnologia", "Tecnología"),
             ("consumible", "Consumible"),
             ("mobiliario", "Mobiliario"),
-            ("vehiculo", "Vehiculo"),
+            ("vehiculo", "Vehículo"),
         )
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -51,7 +52,7 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "tipo_articulo__nombre",
                 "name": "tipo_articulo__nombre",
-                "title": "Tipo Articulo",
+                "title": "Tipo de artículo",
                 "orderable": "true",
                 "searchable": "false",
             },
@@ -76,11 +77,25 @@ class ArticuloListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
+            {
+                "data": "codigo_bn",
+                "name": "codigo_bn",
+                "title": "Código de bienes",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "serial",
+                "name": "serial",
+                "title": "Serial",
+                "orderable": "false",
+                "searchable": "false",
+            },
         ]
 
 
 class ArticuloListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.inventario.listar_articulo"
 
     def __init__(self):
         self.service = ArticuloService()

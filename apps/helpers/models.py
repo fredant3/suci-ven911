@@ -2,7 +2,7 @@ NACIONALIDAD_CHOICES = (
     ("ve", "Venezolano"),
     ("ex", "Extranjero"),
 )
-GENERO_CHOICES = (
+SEXO_CHOICES = (
     ("f", "Femenino"),
     ("m", "Masculino"),
 )
@@ -21,4 +21,38 @@ TIPO_SANGRE_CHOICES = (
     ("ab-", "AB- (Rh negativo)"),
     ("o+", "O+ (Rh positivo)"),
     ("o-", "O- (Rh negativo)"),
+)
+TIPO_CONTRATOS = (
+    ("Fi", "Fijo"),
+    ("Te", "Temporal"),
+    ("I", "Indefinido"),
+    ("HP", "Por Horas"),
+    ("P", "Practicante"),
+    ("pro", "Por Proyecto"),
+    ("Tar", "Por Tarea"),
+    ("In", "Interno"),
+    ("E", "Externo"),
+    ("O", "Otro"),
+)
+BOOLEAN_CHOICES = (
+    (True, "si"),
+    (False, "no"),
+)
+ESTRATEGIAS_METODOLOGICAS = (
+    ("AT", "Acompañamineto tecnico"),
+    ("S", "Supervición"),
+    ("C", "Capacitacion"),
+)
+AMBITO_ACCION = (
+    ("Ed", "Educativo"),
+    ("D", "Deportivo"),
+    ("R", "Recreativo"),
+    ("C", "Cultural"),
+    ("A", "Alimentación"),
+    ("Sa", "Salud"),
+    ("AJS", "Asesoria juridica y social"),
+)
+ACTIVIDAD_PREVENTIVA = (
+    ("I", "Individual"),
+    ("Fp", "Frente preventivo"),
 )

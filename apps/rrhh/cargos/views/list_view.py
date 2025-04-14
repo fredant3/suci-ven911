@@ -9,26 +9,28 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import CargoService
+from rrhh.cargos.services import CargoService
+from rrhh.cargos.models import ESTATUS_CHOICES
 
 
 class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "rrhh.cargos.listar_cargo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Cargos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("cargos:create")
         context["listApiUrl"] = reverse_lazy("api_cargos:list")
         context["updateUrl"] = reverse_lazy("cargos:update", args=[0])
         context["deleteUrl"] = reverse_lazy("cargos:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_cargos:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -43,65 +45,16 @@ class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cedula",
-                "name": "cedula",
-                "title": "Cédula",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "cargo",
                 "name": "cargo",
                 "title": "Cargo",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "estatus",
+                "name": "estatus",
+                "title": "Estatus",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -109,7 +62,26 @@ class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class CargoListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.cargos.listar_cargo"
 
     def __init__(self):
         self.service = CargoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                estatus_mapping = dict(ESTATUS_CHOICES)
+
+                # Convertir estatus a su valor legible
+                for item in data.get("entities", []):
+                    if "estatus" in item:
+                        item["estatus"] = estatus_mapping.get(
+                            item["estatus"], item["estatus"]
+                        )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decodificando JSON: {e}")
+        return response

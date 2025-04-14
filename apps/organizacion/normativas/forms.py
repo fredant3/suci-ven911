@@ -1,16 +1,17 @@
 from django import forms
-from django.forms.fields import DateTimeInput
 from organizacion.normativas.models import Normativa
+from helpers.FormBase import FormBase
 
 
-class NormativaForm(forms.ModelForm):
-    estado = forms.BooleanField(
-        required=False, widget=forms.CheckboxInput(attrs={"value": "True"})
-    )
+class NormativaForm(FormBase):
+    date = FormBase.create_date_field("date", "Fecha de publicación")
 
-    def clean_estado(self):
-        estado = self.cleaned_data.get("estado")
-        return estado if estado is not None else False
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+        super().__init__(*args, **kwargs)
+
+        if instance:
+            self.fields.pop("file")
 
     class Meta:
         model = Normativa
@@ -21,6 +22,20 @@ class NormativaForm(forms.ModelForm):
             "progre",
             "estado",
         ]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el nombre de la normativa",
+                }
+            ),
+            "file": forms.FileInput(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Seleccione el archivo",
+                }
+            ),
+        }
         exclude = [
             "created_at",
             "created_by",
@@ -29,6 +44,3 @@ class NormativaForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "date": DateTimeInput(attrs={"type": "date"}),
-        }

@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views.create_view import FamiliarCreateApiView
-from .views.delete_view import FamiliarDeleteApiView
-from .views.list_view import FamiliarListApiView
-from .views.update_view import FamiliarUpdateApiView
+from rrhh.familiares.views.create_view import FamiliarCreateApiView
+from rrhh.familiares.views.delete_view import FamiliarDeleteApiView
+from rrhh.familiares.views.list_view import FamiliarListApiView
+from rrhh.familiares.views.update_view import FamiliarUpdateApiView
+from rrhh.familiares.views.export_view import FamiliarExcelView
 
 urlpatterns = [
     path(
@@ -25,5 +26,10 @@ urlpatterns = [
         "<int:pk>/delete",
         FamiliarDeleteApiView.as_view(),
         name="delete",
+    ),
+    path(
+        "export/excel",
+        FamiliarExcelView.as_view(),
+        name="export_excel",
     ),
 ]

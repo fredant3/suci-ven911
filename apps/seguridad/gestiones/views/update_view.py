@@ -6,21 +6,21 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import GestionForm
-from ..models import Gestion
-from ..services import GestionService
+from seguridad.gestiones.forms import GestionForm
+from seguridad.gestiones.models import Gestion
+from seguridad.gestiones.services import GestionService
 
 
 class GestionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.editar_gestion"
     form_class = GestionForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["indexUrl"] = reverse_lazy("seguridad")
+        context["module"] = "Seguridad"
         context["submodule"] = "Gestions"
         context["titleForm"] = "Actualizar gestion"
         context["tag"] = "Editar"
@@ -37,7 +37,7 @@ class GestionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class GestionUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "seguridad.gestiones.editar_gestion"
     form_class = GestionForm
 
     def __init__(self):

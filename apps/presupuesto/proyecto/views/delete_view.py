@@ -6,19 +6,19 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ProyectoForm
-from ..models import Proyecto
-from ..services import ProyectoService
+from presupuesto.proyecto.forms import ProyectoForm
+from presupuesto.proyecto.models import Proyecto
+from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.eliminar_proyecto"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Proyectos"
         context["titleForm"] = "Eliminar proyecto"
@@ -35,7 +35,7 @@ class ProyectoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ProyectoDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.eliminar_proyecto"
     form_class = ProyectoForm
 
     def __init__(self):

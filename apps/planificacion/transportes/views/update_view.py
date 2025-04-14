@@ -12,7 +12,7 @@ from ..services import TransporteService
 
 
 class TransporteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "planificacion.transportes.editar_transporte"
     form_class = TransporteForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -37,7 +37,7 @@ class TransporteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class TransporteUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.transportes.editar_transporte"
     form_class = TransporteForm
 
     def __init__(self):

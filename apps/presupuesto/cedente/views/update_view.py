@@ -6,20 +6,20 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import CedenteForm
-from ..models import Cedente
-from ..services import CedenteService
+from presupuesto.cedente.forms import CedenteForm
+from presupuesto.cedente.models import Cedente
+from presupuesto.cedente.services import CedenteService
 
 
 class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.editar_cedente"
     form_class = CedenteForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Cedentes"
         context["titleForm"] = "Actualizar cedente"
@@ -37,7 +37,7 @@ class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class CedenteUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.cedente.editar_cedente"
     form_class = CedenteForm
 
     def __init__(self):

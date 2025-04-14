@@ -6,19 +6,19 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import AccionForm
-from ..models import Accion
-from ..services import AccionService
+from presupuesto.acciones.forms import AccionForm
+from presupuesto.acciones.models import Accion
+from presupuesto.acciones.services import AccionService
 
 
 class AccionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.eliminar_accion"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Acciones"
         context["titleForm"] = "Eliminar accion"
@@ -35,7 +35,7 @@ class AccionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class AccionDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.eliminar_accion"
     form_class = AccionForm
 
     def __init__(self):

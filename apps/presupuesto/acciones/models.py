@@ -1,34 +1,64 @@
-from django.db import models
+from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Accion(BaseModel):
-    nombrep = models.CharField(max_length=64, verbose_name="Nombre del Proyecto:")
-    fechai = models.DateField(verbose_name="Fecha de Inicio")
-    fechac = models.DateField(verbose_name="Fecha de Culminación")
-    situacionp = models.CharField(
-        max_length=64, verbose_name="Situación Presupuestaria:"
+    proyecto = CharField("Nombre del Proyecto:", max_length=64)
+    fecha_inicio = DateField("Fecha de Inicio")
+    fecha_culminacion = DateField("Fecha de Culminación")
+    situacion_presupuestaria = CharField(
+        "Situación Presupuestaria:",
+        max_length=64,
+        validators=[
+            MinLengthValidator(6),
+            MaxLengthValidator(64),
+            UnicodeAlphaSpaceValidator(),
+        ],
     )
-    montoproyecto = models.CharField(
-        max_length=64, verbose_name="Monto Total del Proyecto:"
+    monto = CharField("Monto asignado:", max_length=64)
+    responsable_gerente = CharField(
+        "Responsable Gerente:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
     )
-    responsableg = models.CharField(max_length=64, verbose_name="Responsable Gerente:")
-    responsablet = models.CharField(max_length=64, verbose_name="Responsable Técnico:")
-    responsabler = models.CharField(
-        max_length=64, verbose_name="Responsable Registrador:"
+    responsable_tecnico = CharField(
+        "Responsable Técnico:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
     )
-    responsablea = models.CharField(
-        max_length=64, verbose_name="Responsable Administrativo:"
+    responsable_registrador = CharField(
+        "Responsable Registrador:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
     )
-    estatus = models.CharField(max_length=64, verbose_name="Estatus del Proyecto:")
+    responsable_administrativo = CharField(
+        "Responsable Administrativo:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
+    )
+    estatus = CharField(
+        "Estatus del Proyecto:",
+        max_length=64,
+        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
+    )
 
     def toJSON(self):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.nombrep
+        return self.proyecto
 
     class Meta:
-        verbose_name = "accion"
-        verbose_name_plural = "acciones"
+        verbose_name = "Accion"
+        verbose_name_plural = "Acciones"
+        permissions = [
+            ("listar_accion", "Puede listar acciones"),
+            ("agregar_accion", "Puede agregar accion"),
+            ("ver_accion", "Puede ver accion"),
+            ("editar_accion", "Puede actualizar accion"),
+            ("eliminar_accion", "Puede eliminar accion"),
+            ("pdf_accion", "Puede generar pdf de accion"),
+        ]

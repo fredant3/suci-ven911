@@ -1,9 +1,9 @@
 from administracion.asignaciones.models import Asignacion
-from administracion.inventario.models import Articulo
-from django import forms
+from django.forms import TextInput, NumberInput
+from helpers.FormBase import FormBase
 
 
-class AsignacionForm(forms.ModelForm):
+class AsignacionForm(FormBase):
     class Meta:
         model = Asignacion
         fields = [
@@ -23,15 +23,23 @@ class AsignacionForm(forms.ModelForm):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "articulo": forms.Select(),
+            "cantidad": NumberInput(
+                attrs={
+                    "placeholder": "Ingrese la cantidad (número entero positivo)",
+                    "step": "1",
+                    "min": "1",
+                }
+            ),
+            "descripcion": TextInput(
+                attrs={"placeholder": "Ingrese una descripción (mínimo 10 caracteres)"}
+            ),
+            "observaciones": TextInput(
+                attrs={"placeholder": "Ingrese observaciones (mínimo 10 caracteres)"}
+            ),
         }
 
-    def __init__(self, *args, **kwargs):
-        super(AsignacionForm, self).__init__(*args, **kwargs)
-        self.fields["articulo"].queryset = Articulo.objects.filter(asignado=False)
 
-
-class AsignacionUpdateForm(forms.ModelForm):
+class AsignacionUpdateForm(FormBase):
     class Meta:
         model = Asignacion
         fields = [
@@ -43,7 +51,7 @@ class AsignacionUpdateForm(forms.ModelForm):
             "observaciones",
         ]
         labels = {
-            "articulo": "Artículo (Solo lectura)",
+            "articulo": "Artículo (solo lectura)",
             "sede": "Sede",
             "departamento": "Departamento",
             "cantidad": "Cantidad",
@@ -51,7 +59,17 @@ class AsignacionUpdateForm(forms.ModelForm):
             "observaciones": "Observaciones",
         }
         widgets = {
-            "articulo": forms.Select(
-                attrs={"style": "pointer-events: none;", "readonly": "readonly"}
+            "cantidad": NumberInput(
+                attrs={
+                    "placeholder": "Ingrese la cantidad (número entero positivo)",
+                    "step": "1",
+                    "min": "1",
+                }
+            ),
+            "descripcion": TextInput(
+                attrs={"placeholder": "Ingrese una descripción (mínimo 10 caracteres)"}
+            ),
+            "observaciones": TextInput(
+                attrs={"placeholder": "Ingrese observaciones (mínimo 10 caracteres)"}
             ),
         }

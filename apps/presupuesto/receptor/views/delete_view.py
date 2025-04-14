@@ -6,19 +6,19 @@ from helpers.ControllerMixin import DeleteController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ReceptorForm
-from ..models import Receptor
-from ..services import ReceptorService
+from presupuesto.receptor.forms import ReceptorForm
+from presupuesto.receptor.models import Receptor
+from presupuesto.receptor.services import ReceptorService
 
 
 class ReceptorDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.eliminar_receptor"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Receptores"
         context["titleForm"] = "Eliminar receptor"
@@ -35,7 +35,7 @@ class ReceptorDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class ReceptorDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.receptor.eliminar_receptor"
     form_class = ReceptorForm
 
     def __init__(self):

@@ -11,13 +11,13 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.eliminar_denuncia"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Denuncias"
         context["titleForm"] = "Eliminar denuncia"
@@ -34,7 +34,7 @@ class DenunciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class DenunciaDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "asesoria.denuncias.eliminar_denuncia"
     form_class = DenunciaForm
 
     def __init__(self):

@@ -1,6 +1,5 @@
 from helpers.RepositoryMixin import Repository
-
-from .models import Normativa
+from organizacion.normativas.models import Normativa
 
 
 class NormativaRepository(Repository):

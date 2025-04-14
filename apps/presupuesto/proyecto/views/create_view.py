@@ -6,19 +6,19 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import ProyectoForm
-from ..services import ProyectoService
+from presupuesto.proyecto.forms import ProyectoForm
+from presupuesto.proyecto.services import ProyectoService
 
 
 class ProyectoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.agregar_proyecto"
     form_class = ProyectoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Proyectos"
         context["titleForm"] = "Añadir un proyecto"
@@ -30,7 +30,7 @@ class ProyectoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ProyectoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.agregar_proyecto"
     form_class = ProyectoForm
 
     def __init__(self):

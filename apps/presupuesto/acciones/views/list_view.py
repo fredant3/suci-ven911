@@ -9,19 +9,19 @@ from helpers.ControllerMixin import ListController
 
 from templates.sneat import TemplateLayout
 
-from ..services import AccionService
+from presupuesto.acciones.services import AccionService
 
 
 class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
-    url_redirect = reverse_lazy("modules:index")
+    permission_required = "presupuesto.acciones.listar_accion"
+    url_redirect = reverse_lazy("presupuesto")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Acciones"
         context["createBtn"] = "Añadir"
@@ -44,64 +44,64 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "nombrep",
-                "name": "nombrep",
+                "data": "proyecto",
+                "name": "proyecto",
                 "title": "Nombre",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fechai",
-                "name": "fechai",
+                "data": "fecha_inicio",
+                "name": "fecha_inicio",
                 "title": "Inicio",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "fechac",
-                "name": "fechac",
+                "data": "fecha_culminacion",
+                "name": "fecha_culminacion",
                 "title": "Culminación",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "situacionp",
-                "name": "situacionp",
+                "data": "situacion_presupuestaria",
+                "name": "situacion_presupuestaria",
                 "title": "Situación Presupuestaria",
                 "orderable": "false",
                 "searchable": "true",
             },
             {
-                "data": "montoproyecto",
-                "name": "montoproyecto",
+                "data": "monto",
+                "name": "monto",
                 "title": "Monto Total del Proyecto",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsableg",
-                "name": "responsableg",
+                "data": "responsable_gerente",
+                "name": "responsable_gerente",
                 "title": "Gerente Responsable",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsablet",
-                "name": "responsablet",
+                "data": "responsable_tecnico",
+                "name": "responsable_tecnico",
                 "title": "Técnico Responsable",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsabler",
-                "name": "responsabler",
+                "data": "responsable_registrador",
+                "name": "responsable_registrador",
                 "title": "Registrador Responsable",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "responsablea",
-                "name": "responsablea",
+                "data": "responsable_administrativo",
+                "name": "responsable_administrativo",
                 "title": "Responsable Administrativo",
                 "orderable": "false",
                 "searchable": "false",
@@ -117,7 +117,7 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class AccionListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "presupuesto.acciones.listar_accion"
 
     def __init__(self):
         self.service = AccionService()

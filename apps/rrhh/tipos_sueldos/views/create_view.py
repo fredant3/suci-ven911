@@ -6,22 +6,22 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import TipoSueldoForm
-from ..services import TipoSueldoService
+from rrhh.tipos_sueldos.forms import TipoSueldoForm
+from rrhh.tipos_sueldos.services import TipoSueldoService
 
 
 class TipoSueldoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.agregar_tipo_sueldo"
     form_class = TipoSueldoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Tipos de Sueldos"
-        context["titleForm"] = "Añadir una tipo de empleado nueva"
+        context["titleForm"] = "Añadir un tipo de empleado nuevo"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("tipos_sueldos:list")
         context["urlForm"] = reverse_lazy("api_tipos_sueldos:create")
@@ -30,7 +30,7 @@ class TipoSueldoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class TipoSueldoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.eliminar_tipo_sueldo"
     form_class = TipoSueldoForm
 
     def __init__(self):

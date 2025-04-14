@@ -1,8 +1,9 @@
-from django import forms
 from potencia.incidencias.models import Incidencia
+from helpers.FormBase import FormBase
+from django import forms
 
 
-class IncidenciaForm(forms.ModelForm):
+class IncidenciaForm(FormBase):
     class Meta:
         model = Incidencia
         fields = (
@@ -22,3 +23,41 @@ class IncidenciaForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
+        widgets = {
+            "estado": forms.Select(
+                attrs={
+                    "class": "form-select mb-3",
+                    "placeholder": "Seleccione el estado",
+                }
+            ),
+            "sede": forms.Select(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el nombre de la sede",
+                }
+            ),
+            "departamento": forms.Select(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el departamento",
+                }
+            ),
+            "tipo_incidencia": forms.Select(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el tipo de incidencia",
+                }
+            ),
+            "observaciones": forms.Textarea(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Describe la falla",
+                }
+            ),
+            "tipo_solicitud": forms.Select(
+                attrs={
+                    "class": "form-control mb-3",
+                    "placeholder": "Ingrese el tipo de solicitud",
+                }
+            ),
+        }

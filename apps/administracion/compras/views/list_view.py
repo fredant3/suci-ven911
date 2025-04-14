@@ -12,22 +12,23 @@ from templates.sneat import TemplateLayout
 
 
 class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "administracion.compras.ver_compra"
     url_redirect = reverse_lazy("administracion")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Compra"
-        context["createBtn"] = "Añadir"
+        context["module"] = "Administración"
+        context["submodule"] = "Compras"
+        context["createBtn"] = "Nueva compra"
         context["createUrl"] = reverse_lazy("compras:create")
         context["listApiUrl"] = reverse_lazy("api_compras:list")
         context["updateUrl"] = reverse_lazy("compras:update", args=[0])
         context["deleteUrl"] = reverse_lazy("compras:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("compras:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -37,56 +38,28 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "id",
                 "name": "id",
-                "title": "#",
+                "title": "ID",
                 "orderable": "true",
                 "searchable": "false",
             },
             {
-                "data": "problema",
-                "name": "problema",
-                "title": "Problema",
+                "data": "articulo__marca",
+                "name": "articulo__marca",
+                "title": "Articulo",
                 "orderable": "true",
                 "searchable": "true",
             },
             {
-                "data": "tipo_compra",
-                "name": "tipo_compra",
-                "title": "Tipo de compra",
+                "data": "n_orden",
+                "name": "n_orden",
+                "title": "N° de orden",
                 "orderable": "true",
                 "searchable": "false",
             },
             {
-                "data": "departamento",
-                "name": "departamento",
-                "title": "Departamento",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "ubicacion",
-                "name": "ubicacion",
-                "title": "Ubicación",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "serial",
-                "name": "serial",
-                "title": "Serial",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "codigo_bn",
-                "name": "codigo_bn",
-                "title": "Código BN",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "user",
-                "name": "creadopor",
-                "title": "Creado por",
+                "data": "valor_bs",
+                "name": "valor_bs",
+                "title": "Valor (Bs.)",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -94,7 +67,7 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class CompraListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.compras.ver_compra"
 
     def __init__(self):
         self.service = CompraService()

@@ -21,10 +21,29 @@ class ListController(LoginRequiredMixin, ListView):
         )
         search = self.request.GET.get("search[value]") or None
 
+        columns = []
+        i = 0
+        while True:
+            searchable = self.request.GET.get(f"columns[{i}][searchable]")
+            if searchable is False or searchable == "false" or searchable is None:
+                break
+
+            col_name = self.request.GET.get(f"columns[{i}][name]")
+            if not col_name:
+                break
+
+            col_search = self.request.GET.get(f"columns[{i}][search][value]")
+            if col_search:
+                columns.append({"name": col_name, "search": col_search})
+
+            i += 1
+
         orderBy = self.request.GET.get("order[0][name]") or None
         orderAsc = self.request.GET.get("order[0][dir]") or None
 
-        return self.service.getAll(draw, start, length, search, orderBy, orderAsc)
+        return self.service.getAll(
+            draw, start, length, search, orderBy, orderAsc, (""), columns
+        )
 
     def get(self, request, *args, **kwargs):
         data = {}
@@ -48,15 +67,26 @@ class CreateController(LoginRequiredMixin, CreateView):
                 self.service.creator(self.get_form(), request, *arg, **kwargs)
                 return JsonResponse({"message": "Se ha registrado con éxito."})
             except ValidationError as e:
-                return JsonResponse(
-                    {
-                        "errors": (
-                            json.loads(e.message.replace("'", '"'))
-                            if isinstance(e.message, str)
-                            else e.message
-                        )
-                    }
-                )
+                try:
+                    return JsonResponse(
+                        {
+                            "errors": (
+                                json.loads(e.message.replace("'", '"'))
+                                if isinstance(e.message, str)
+                                else e.message
+                            )
+                        }
+                    )
+                except Exception:
+                    return JsonResponse(
+                        {
+                            "errors": (
+                                json.loads(e.message)
+                                if isinstance(e.message, str)
+                                else e.message
+                            )
+                        }
+                    )
 
     class Meta:
         abstract = True
@@ -74,7 +104,7 @@ class UpdateController(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.object = self.get_object()
-        except Exception as e:
+        except Exception:
             return HttpResponseRedirect(self.get_url_redirect())
 
         if self.request.method.upper() == "PUT":
@@ -90,7 +120,6 @@ class UpdateController(LoginRequiredMixin, UpdateView):
                 data.updated_by = self.request.user.username
                 return data
             except ObjectDoesNotExist:
-                print(f"REDIRECT ObjectDoesNotExist {ObjectDoesNotExist}")
                 error(self.request, "El recurso no se ha encontrado")
         else:
             error(self.request, "No se proporcionó ningún recurso válido")

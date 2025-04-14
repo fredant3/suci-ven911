@@ -4,7 +4,7 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 
 
 class ProyectoPDFView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "presupuesto.proyecto.pdf_proyecto"
 
     def get(self, request, *args, **kwargs):
         pass

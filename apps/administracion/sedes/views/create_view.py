@@ -6,23 +6,23 @@ from helpers.ControllerMixin import CreateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import SedeForm
-from ..services import SedeService
+from administracion.sedes.forms import SedeForm
+from administracion.sedes.services import SedeService
 
 
 class SedeCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = ""
+    permission_required = "administracion.sedes.agregar_sede"
     form_class = SedeForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
+        context["module"] = "Administración"
         context["submodule"] = "Sedes"
-        context["titleForm"] = "Añadir una sede"
-        context["tag"] = "Registrar"
+        context["titleForm"] = "Agregar Sede"
+        context["tag"] = "Registrar sede"
         context["listUrl"] = reverse_lazy("sedes:list")
         context["urlForm"] = reverse_lazy("api_sedes:create")
         context["methodForm"] = "POST"
@@ -30,7 +30,7 @@ class SedeCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class SedeCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.sedes.agregar_sede"
     form_class = SedeForm
 
     def __init__(self):

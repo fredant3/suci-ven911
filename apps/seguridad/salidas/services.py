@@ -1,6 +1,6 @@
 from helpers.CrudMixin import CrudService
 
-from .repositories import SalidaRepository
+from seguridad.salidas.repositories import SalidaRepository
 
 
 class SalidaService(CrudService):

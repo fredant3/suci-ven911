@@ -1,17 +1,60 @@
-from django.db import models
+from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import (
+    UnicodeAlphaSpaceValidator,
+    TextValidator,
+    PhoneNumberValidator,
+)
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Entrada(BaseModel):
-    name = models.CharField(max_length=64, verbose_name="Nombre:", default="")
-    apellido = models.CharField(max_length=64, verbose_name="Apellido:", default="")
-    cedula = models.CharField(max_length=64, verbose_name="Cédula:", default="")
-    telefono = models.CharField(max_length=64, verbose_name="Teléfono:", default="")
-    fecha = models.DateField(verbose_name="Fecha")
-    direccion = models.CharField(max_length=64, verbose_name="Dirección:", default="")
-    cargo = models.CharField(max_length=64, verbose_name="Cargo:", default="")
-    hora = models.CharField(max_length=64, verbose_name="Hora de Entrada:", default="")
+    name = CharField(
+        "Nombre",
+        max_length=64,
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(64),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    apellido = CharField(
+        "Apellido",
+        max_length=64,
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(64),
+            UnicodeAlphaSpaceValidator(),
+        ],
+    )
+    cedula = CharField("Cédula", max_length=64)
+    telefono = CharField(
+        "Teléfono",
+        max_length=20,
+        blank=True,
+        null=True,
+        validators=[
+            MinLengthValidator(11),
+            MaxLengthValidator(20),
+            PhoneNumberValidator(),
+        ],
+    )
+    fecha = DateField("Fecha")
+    direccion = CharField(
+        "Dirección",
+        max_length=64,
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(64),
+            TextValidator(),
+        ],
+    )
+    cargo = CharField("Cargo", max_length=64)
+    hora = CharField("Hora de Entrada", max_length=64)
 
     def toJSON(self):
         return model_to_dict(self)
@@ -22,3 +65,10 @@ class Entrada(BaseModel):
     class Meta:
         verbose_name = "entrada"
         verbose_name_plural = "entradas"
+        permissions = [
+            ("listar_entradas", "Listar entradas"),
+            ("agregar_entrada", "Agregar entrada"),
+            ("ver_entrada", "Ver entrada"),
+            ("modificar_entrada", "Modificar entrada"),
+            ("eliminar_entrada", "Eliminar entrada"),
+        ]

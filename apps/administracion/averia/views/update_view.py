@@ -11,18 +11,18 @@ from templates.sneat import TemplateLayout
 
 
 class AveriaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "administracion.averia.editar_averia"
     form_class = AveriaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "administracion"
+        context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administracion"
-        context["submodule"] = "Averia"
-        context["titleForm"] = "Actualizar"
-        context["tag"] = "Editar"
+        context["module"] = "Administración"
+        context["submodule"] = "Averías"
+        context["titleForm"] = "Editar avería"
+        context["tag"] = "Guardar cambios"
         context["listUrl"] = reverse_lazy("averias:list")
         context["urlForm"] = reverse_lazy(
             "api_averias:update", args=[self.kwargs.get("pk")]
@@ -36,7 +36,7 @@ class AveriaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class AveriaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "administracion.averia.editar_averia"
     form_class = AveriaForm
 
     def __init__(self):

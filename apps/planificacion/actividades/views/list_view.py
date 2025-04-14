@@ -13,7 +13,7 @@ from ..services import ActividadService
 
 
 class ActividadListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = ""
+    permission_required = "planificacion.actividades.ver_actividad"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -21,7 +21,7 @@ class ActividadListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("planificacion")
         context["module"] = "Planificación"
         context["submodule"] = "Actividades"
         context["createBtn"] = "Añadir"
@@ -74,7 +74,7 @@ class ActividadListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class ActividadListApiView(ListController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "planificacion.actividades.ver_actividad"
 
     def __init__(self):
         self.service = ActividadService()

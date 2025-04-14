@@ -1,17 +1,43 @@
-from django.db import models
+from django.db.models import (
+    CharField,
+    FileField,
+    DateField,
+)
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
+
+PROGRESS_CHOICES = (
+    ("0", "0%"),
+    ("10", "10%"),
+    ("20", "20%"),
+    ("30", "30%"),
+    ("40", "40%"),
+    ("50", "50%"),
+    ("60", "60%"),
+    ("70", "70%"),
+    ("80", "80%"),
+    ("90", "90%"),
+    ("100", "100%"),
+)
+
+ESTATUS_CHOICES = (("bor", "Borrador"), ("rev", "Revision"), ("pub", "Publicado"))
 
 
 class Normativa(BaseModel):
-    name = models.CharField(
-        max_length=64, verbose_name="Nombre de Normativa:", default=""
+    name = CharField(
+        "Nombre de Normativa",
+        max_length=64,
+        validators=[MinLengthValidator(3), MaxLengthValidator(64), TextValidator()],
     )
-    file = models.FileField(upload_to="normativas/", verbose_name="Archivo", default="")
-    user = models.CharField(max_length=64, verbose_name="Usuario", default="")
-    date = models.DateField(verbose_name="Fecha", blank=True)
-    progre = models.CharField(max_length=64, verbose_name="Progreso:", default="")
-    estado = models.BooleanField(default=False)
+    file = FileField("Archivo", upload_to="normativas/")
+    date = DateField("Fecha", blank=True)
+    progre = CharField("Progreso:", max_length=3, choices=PROGRESS_CHOICES, default="0")
+    estado = CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
 
     def toJSON(self):
         return model_to_dict(self)
@@ -22,3 +48,10 @@ class Normativa(BaseModel):
     class Meta:
         verbose_name = "normativa"
         verbose_name_plural = "normativas"
+        permissions = [
+            ("listar_normativa", "Puede listar normativas"),
+            ("agregar_normativa", "Puede agregar normativa"),
+            ("ver_normativa", "Puede ver normativa"),
+            ("editar_normativa", "Puede actualizar normativa"),
+            ("eliminar_normativa", "Puede eliminar normativa"),
+        ]

@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import Familiar
+from rrhh.familiares.models import Familiar
 
 
 class FamiliarRepository(Repository):

@@ -6,23 +6,23 @@ from helpers.ControllerMixin import UpdateController
 
 from templates.sneat import TemplateLayout
 
-from ..forms import TipoSueldoForm
-from ..models import TipoSueldo
-from ..services import TipoSueldoService
+from rrhh.tipos_sueldos.forms import TipoSueldoForm
+from rrhh.tipos_sueldos.models import TipoSueldo
+from rrhh.tipos_sueldos.services import TipoSueldoService
 
 
 class TipoSueldoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.editar_tipo_sueldo"
     form_class = TipoSueldoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Tipos de Sueldos"
-        context["titleForm"] = "Actualizar tipo de empleado"
+        context["titlePage"] = "Gestión Humana"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
+        context["submodule"] = "Tipos de sueldos"
+        context["titleForm"] = "Actualizar tipo de sueldo"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("tipos_sueldos:list")
         context["urlForm"] = reverse_lazy(
@@ -37,7 +37,7 @@ class TipoSueldoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class TipoSueldoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = ""
+    permission_required = "rrhh.tipos_sueldos.editar_tipo_sueldo"
     form_class = TipoSueldoForm
 
     def __init__(self):

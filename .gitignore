@@ -167,3 +167,4 @@ noxfile_config.json
 *.swo
 *.swn
 *.todo
+start.bat

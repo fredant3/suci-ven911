@@ -1,26 +1,53 @@
-from django.db import models
+from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
+from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
+from django.core.validators import (
+    MinLengthValidator,
+    MaxLengthValidator,
+)
 
 
 class Vehiculo(BaseModel):
-    nombre = models.CharField(max_length=64, verbose_name="Nombre:", default="")
-    apellido = models.CharField(max_length=64, verbose_name="Apellido:", default="")
-    cedula = models.CharField(max_length=64, verbose_name="Cédula:", default="")
-    modelo = models.CharField(max_length=64, verbose_name="Modelo:", default="")
-    vehiculo = models.CharField(
-        max_length=64, verbose_name="Tipo de vehiculo:", default=""
+    nombre = CharField(
+        "Nombre",
+        max_length=64,
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
     )
-    motivo = models.CharField(max_length=64, verbose_name="Motivo:", default="")
-    capagasolina = models.CharField(
-        max_length=64, verbose_name="Capacidad de Gasolina:", default=""
+    apellido = CharField(
+        "Apellido",
+        max_length=64,
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(255),
+            UnicodeAlphaSpaceValidator(),
+        ],
     )
-    cantigasolina = models.CharField(
-        max_length=64, verbose_name="Capacidad de Gasolina:", default=""
+    cedula = CharField("Cédula de identidad", max_length=64)
+    modelo = CharField(
+        "Modelo",
+        max_length=64,
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    placa = models.CharField(max_length=64, verbose_name="Placa:", default="")
-    fecha = models.DateField(verbose_name="Fecha")
-    hora = models.CharField(max_length=64, verbose_name="Hora:", default="")
+    vehiculo = CharField(
+        "Tipo de vehiculo",
+        max_length=64,
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
+    )
+    motivo = CharField(
+        "Motivo",
+        max_length=64,
+        validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
+    )
+    capagasolina = CharField("Capacidad de Gasolina", max_length=64)
+    cantigasolina = CharField("Cantidad de Gasolina", max_length=64)
+    placa = CharField("Placa", max_length=64)
+    fecha = DateField("Fecha")
+    hora = CharField("Hora", max_length=64)
 
     def toJSON(self):
         return model_to_dict(self)
@@ -31,3 +58,10 @@ class Vehiculo(BaseModel):
     class Meta:
         verbose_name = "vehiculo"
         verbose_name_plural = "vehiculos"
+        permissions = [
+            ("listar_vehiculos", "Listar vehiculos"),
+            ("agregar_vehiculo", "Agregar vehiculo"),
+            ("ver_vehiculo", "Ver vehiculo"),
+            ("modificar_vehiculo", "Modificar vehiculo"),
+            ("eliminar_vehiculo", "Eliminar vehiculo"),
+        ]

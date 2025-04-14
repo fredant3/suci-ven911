@@ -1,149 +1,80 @@
 from administracion.inventario.models import Articulo
-from django import forms
+from helpers.FormBase import FormBase
+from django.forms import TextInput, NumberInput, IntegerField
 
 
-class ArticuloForm(forms.ModelForm):
+class ArticuloForm(FormBase):
+    fecha_adq = FormBase.create_date_field("fecha_adq", "Fecha Adquisición")
+
     class Meta:
         model = Articulo
         fields = [
+            "nombre",
             "descripcion",
             "marca",
             "modelo",
             "serial",
+            "codigo_bn",
+            "cantidad",
+            "condicion",
+            "fecha_adq",
+        ]
+        widgets = {
+            "nombre": TextInput(
+                attrs={"placeholder": "Ingrese el nombre del artículo"}
+            ),
+            "descripcion": TextInput(
+                attrs={"placeholder": "Ingrese la descripción del artículo"}
+            ),
+            "marca": TextInput(attrs={"placeholder": "Ingrese la marca del artículo"}),
+            "modelo": TextInput(
+                attrs={"placeholder": "Ingrese el modelo del artículo"}
+            ),
+            "serial": TextInput(attrs={"placeholder": "Ingrese el número de serie"}),
+            "codigo_bn": TextInput(
+                attrs={"placeholder": "Ingrese el código de bienes nacionales"}
+            ),
+            "cantidad": NumberInput(
+                attrs={"placeholder": "Ingrese la cantidad disponible", "min": 1}
+            ),
+        }
+
+
+class TecnologiaForm(ArticuloForm):
+    pass
+
+
+class ConsumibleForm(ArticuloForm):
+    pass
+
+
+class MobiliarioForm(ArticuloForm):
+    class Meta(ArticuloForm.Meta):
+        fields = [
+            "nombre",
+            "descripcion",
+            "serial",
+            "codigo_bn",
+            "cantidad",
+            "condicion",
+            "fecha_adq",
+        ]
+
+
+class VehiculoForm(ArticuloForm):
+    placa = IntegerField(
+        label="Placa",
+        widget=TextInput(attrs={"placeholder": "Ingrese la placa del vehículo"}),
+    )
+    cantidad_combustible = IntegerField(
+        label="Cantidad de combustible",
+        widget=NumberInput(
+            attrs={"placeholder": "Ingrese la cantidad de combustible", "min": 0}
+        ),
+    )
+
+    class Meta(ArticuloForm.Meta):
+        fields = ArticuloForm.Meta.fields + [
             "placa",
             "cantidad_combustible",
-            "codigo_bn",
-            "cantidad",
-            "condicion",
-            "fecha_adq",
-            # "tipo_articulo",
         ]
-        labels = {
-            "descripcion": "Descripción",
-            "marca": "Marca",
-            "modelo": "Modelo",
-            "serial": "Serial",
-            "placa": "Placa",
-            "cantidad_combustible": "Cantidad de combustible máx. En litros",
-            "codigo_bn": "Código BN",
-            "cantidad": "Cantidad",
-            "condicion": "Condición",
-            "fecha_adq": "Fecha de adquisición",
-            # "tipo_articulo": "Tipo de artículo",
-        }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
-
-
-class TecnologiaForm(forms.ModelForm):
-    class Meta:
-        model = Articulo
-        fields = [
-            "descripcion",
-            "marca",
-            "modelo",
-            "serial",
-            "codigo_bn",
-            "cantidad",
-            "condicion",
-            "fecha_adq",
-        ]
-        labels = {
-            "descripcion": "Descripción",
-            "marca": "Marca",
-            "modelo": "Modelo",
-            "serial": "Serial",
-            "codigo_bn": "Código BN",
-            "cantidad": "Cantidad",
-            "condicion": "Condición",
-            "fecha_adq": "Fecha de adquisición",
-        }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
-
-
-class ConsumibleForm(forms.ModelForm):
-    class Meta:
-        model = Articulo
-        fields = ["descripcion", "marca", "serial", "cantidad", "fecha_adq"]
-        labels = {
-            "descripcion": "Descripción",
-            "marca": "Marca",
-            "serial": "Serial",
-            "cantidad": "Cantidad",
-            "fecha_adq": "Fecha de adquisición",
-        }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
-
-
-class MobiliarioForm(forms.ModelForm):
-    class Meta:
-        model = Articulo
-        fields = [
-            "descripcion",
-            "serial",
-            "codigo_bn",
-            "cantidad",
-            "condicion",
-            "fecha_adq",
-        ]
-        labels = {
-            "descripcion": "Descripción",
-            "serial": "Serial",
-            "codigo_bn": "Código BN",
-            "cantidad": "Cantidad",
-            "condicion": "Condición",
-            "fecha_adq": "Fecha de adquisición",
-        }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }
-
-
-class VehiculoForm(forms.ModelForm):
-    class Meta:
-        model = Articulo
-        fields = [
-            "descripcion",
-            "marca",
-            "modelo",
-            "placa",
-            "cantidad_combustible",
-            "codigo_bn",
-            "cantidad",
-            "condicion",
-            "fecha_adq",
-        ]
-        labels = {
-            "descripcion": "Descripción",
-            "marca": "Marca",
-            "modelo": "Modelo",
-            "placa": "Placa",
-            "cantidad_combustible": "Cantidad de combustible máx. En litros",
-            "codigo_bn": "Código BN",
-            "cantidad": "Cantidad",
-            "condicion": "Condición",
-            "fecha_adq": "Fecha de adquisición",
-        }
-        widgets = {
-            "fecha_adq": forms.DateInput(
-                format=("%Y-%m-%d"),
-                attrs={"placeholder": "Selecciona una fecha", "type": "date"},
-            ),
-        }

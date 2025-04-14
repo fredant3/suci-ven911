@@ -22,6 +22,12 @@ class ServiceUtilMixin:
     def relationship(self, payload, *arg, **kwargs):
         return payload
 
+    def media(self, data, file):
+        return data
+
+    def remove_media(self, data):
+        pass
+
     def before_create(self, data):
         return data
 
@@ -57,7 +63,10 @@ class ServiceUtilMixin:
         for item in payload:
             data.append(item)
 
-        records_total = entities.count()
+        try:
+            records_total = entities.count()
+        except Exception:
+            records_total = len(entities)
 
         response["draw"] = draw
         response["entities"] = data

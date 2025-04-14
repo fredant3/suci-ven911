@@ -1,6 +1,6 @@
 from helpers.RepositoryMixin import Repository
 
-from .models import TipoSueldo
+from rrhh.tipos_sueldos.models import TipoSueldo
 
 
 class TipoSueldoRepository(Repository):

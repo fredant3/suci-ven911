@@ -1,31 +1,44 @@
-from django.db import models
+from django.db.models import CharField, IntegerField
 from django.forms import model_to_dict
-from helpers.BaseModelMixin import BaseModel
+from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES, MONTH_CHOICES
+from helpers.validForm import PositiveIntegerValidator
+from django.core.validators import MinValueValidator
 
 
 class Llamada(BaseModel):
-    mes = models.CharField(max_length=64, verbose_name="Mes:", default="")
-    estado = models.CharField("Estado", max_length=120)
-    informativa = models.CharField(
-        max_length=64, verbose_name="Informativa:", default=""
+    mes = CharField("Mes:", max_length=3, choices=MONTH_CHOICES)
+    estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
+    informativa = IntegerField(
+        "Llamadas informativas",
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    falsa = models.CharField(max_length=64, verbose_name="Falsa:", default="")
-    realesno = models.CharField(
-        max_length=64, verbose_name="Reales no Efectivas:", default=""
+    falsa = IntegerField(
+        "Llamadas falsas",
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    realesf = models.CharField(
-        max_length=64, verbose_name="Reales Efectivas:", default=""
+    realesno = IntegerField(
+        "Llamadas reales no atendidas",
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
-    videop = models.CharField(
-        max_length=64, verbose_name="Video Protección:", default=""
+    realesf = IntegerField(
+        "Llamadas reales finalizadas",
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
+    )
+    videop = IntegerField(
+        "Videollamadas protección",
+        validators=[MinValueValidator(1), PositiveIntegerValidator()],
     )
 
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return self.ente
-
     class Meta:
         verbose_name = "llamada"
         verbose_name_plural = "llamadas"
+        permissions = [
+            ("listar_llamada", "Puede listar llamada"),
+            ("agregar_llamada", "Puede agregar llamada"),
+            ("ver_llamada", "Puede ver llamada"),
+            ("editar_llamada", "Puede actualizar llamada"),
+            ("eliminar_llamada", "Puede eliminar llamada"),
+        ]
