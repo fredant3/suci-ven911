@@ -2,7 +2,7 @@ from django.urls import path
 
 from presupuesto.cedente.views.create_view import CedenteCreateApiView
 from presupuesto.cedente.views.delete_view import CedenteDeleteApiView
-from presupuesto.cedente.views.export_view import CedentePDFView
+from presupuesto.cedente.views.export_view import CedenteExcelView
 from presupuesto.cedente.views.list_view import CedenteListApiView
 from presupuesto.cedente.views.update_view import CedenteUpdateApiView
 
@@ -28,8 +28,8 @@ urlpatterns = [
         name="delete",
     ),
     path(
-        "export/pdf",
-        CedentePDFView.as_view(),
-        name="export_pdf",
+        "export",
+        CedenteExcelView.as_view(),
+        name="export_excel",
     ),
 ]

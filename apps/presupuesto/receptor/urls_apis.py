@@ -2,7 +2,7 @@ from django.urls import path
 
 from presupuesto.receptor.views.create_view import ReceptorCreateApiView
 from presupuesto.receptor.views.delete_view import ReceptorDeleteApiView
-from presupuesto.receptor.views.export_view import ReceptorPDFView
+from presupuesto.receptor.views.export_view import ReceptorExcelView
 from presupuesto.receptor.views.list_view import ReceptorListApiView
 from presupuesto.receptor.views.update_view import ReceptorUpdateApiView
 
@@ -28,8 +28,8 @@ urlpatterns = [
         name="delete",
     ),
     path(
-        "export/pdf",
-        ReceptorPDFView.as_view(),
-        name="export_pdf",
+        "export",
+        ReceptorExcelView.as_view(),
+        name="export_excel",
     ),
 ]
