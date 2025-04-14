@@ -4,6 +4,7 @@ from presupuesto.asignacion.views.create_view import AsignacionCreateView
 from presupuesto.asignacion.views.delete_view import AsignacionDeleteView
 from presupuesto.asignacion.views.list_view import AsignacionListView
 from presupuesto.asignacion.views.update_view import AsignacionUpdateView
+from presupuesto.asignacion.views.export_view import AsignacionExcelView
 
 urlpatterns = [
     path(
@@ -30,5 +31,10 @@ urlpatterns = [
         "<int:pk>/delete",
         AsignacionDeleteView.as_view(),
         name="delete",
+    ),
+    path(
+        "export",
+        AsignacionExcelView.as_view(),
+        name="export_excel",
     ),
 ]
