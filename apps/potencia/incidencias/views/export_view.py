@@ -4,108 +4,122 @@ from django.http import FileResponse
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
-from openpyxl.styles import Alignment, Font, Border, Side
-from administracion.sedes.models import Sede
-from administracion.departamentos.models import Departamento
-from potencia.tipo_incidencia.models import TipoIncidencia
-from potencia.incidencias.models import Incidencia, ESTADOS_CHOICES, INCIDENCIA_CHOICES
+from openpyxl.styles import Alignment, Font
+from potencia.incidencias.models import Incidencia
+
+ESTADOS_CHOICES = {
+    "1": "Amazonas",
+    "2": "Anzoátegui",
+    "3": "Apure",
+    "4": "Aragua",
+    "5": "Barinas",
+    "6": "Bolívar",
+    "7": "Carabobo",
+    "8": "Cojedes",
+    "9": "Delta Amacuro",
+    "10": "Falcón",
+    "11": "Guárico",
+    "12": "Lara",
+    "13": "Mérida",
+    "14": "Miranda",
+    "15": "Monagas",
+    "16": "Nueva Esparta",
+    "17": "Portuguesa",
+    "18": "Sucre",
+    "19": "Táchira",
+    "20": "Trujillo",
+    "21": "Vargas",
+    "22": "Yaracuy",
+    "23": "Zulia",
+    "24": "Distrito Capital",
+}
 
 
 class IncidenciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "incidencia.listar_incidencia"
+    permission_required = "potencia.listar_incidencia"
 
     def get(self, request, *args, **kwargs):
-        # Consulta optimizada con select_related para relaciones
-        incidencias = Incidencia.objects.select_related(
-            "sede", "departamento", "tipo_incidencia"
-        ).values(
-            "id",
-            "sede__sede",
-            "departamento__nombre",
-            "tipo_incidencia__tipo",
-            "estado",
-            "tipo_solicitud",
-            "observaciones",
-            "created_at",
-            "updated_at",
+        # Obtener todas las incidencias con los campos necesarios
+        incidencias = (
+            Incidencia.objects.all()
+            .select_related("sede", "departamento", "tipo_incidencia")
+            .values(
+                "sede__sede",
+                "departamento__nombre",
+                "tipo_incidencia__tipo",
+                "estado",
+                "tipo_solicitud",
+                "observaciones",
+                "created_at",
+            )
         )
 
+        # Crear el libro de Excel
         wb = Workbook()
         ws = wb.active
-        ws.title = "Reporte de Incidencias"
 
-        # Configuración del título (ajustado a 9 columnas)
-        ws.merge_cells("A1:I1")
-        title_cell = ws["A1"]
-        title_cell.value = "REGISTRO DE INCIDENCIAS"
-        title_cell.alignment = Alignment(horizontal="center")
-        title_cell.font = Font(bold=True, size=14, color="0047AB")
+        # Configurar el título del reporte
+        ws.merge_cells("A1:G1")
+        ws["A1"] = "Reporte de Incidencias"
+        ws["A1"].alignment = Alignment(horizontal="center")
+        ws["A1"].font = Font(bold=True, color="0000FF")
+        ws.append([])  # Espacio en blanco
 
-        # Encabezados actualizados
-        headers = [
-            ("ID", 10),
-            ("Sede", 25),
-            ("Departamento", 25),
-            ("Tipo Incidencia", 25),
-            ("Estado", 15),
-            ("Tipo Solicitud", 20),
-            ("Observaciones", 40),
-            ("Fecha Creación", 20),
-            ("Fecha Actualización", 20),
-        ]
+        # Encabezados de columnas
+        ws.append(
+            [
+                "Sede",
+                "Departamento",
+                "Tipo de Incidencia",
+                "Estado",
+                "Tipo de Solicitud",
+                "Observaciones",
+                "Fecha Creación",
+            ]
+        )
 
-        # Configurar columnas
-        for col_num, (header, width) in enumerate(headers, 1):
-            col_letter = chr(64 + col_num)
-            ws.column_dimensions[col_letter].width = width
-            cell = ws.cell(row=2, column=col_num, value=header)
-            cell.font = Font(bold=True)
-            cell.alignment = Alignment(horizontal="center")
+        # Configurar anchos de columnas
+        column_widths = {
+            "A": 20,  # Sede
+            "B": 20,  # Departamento
+            "C": 20,  # Tipo de Incidencia
+            "D": 15,  # Estado
+            "E": 20,  # Tipo de Solicitud
+            "F": 40,  # Observaciones
+            "G": 15,  # Fecha Creación
+        }
 
-        # Mapeo de estados y tipos de solicitud
-        estados_map = dict(ESTADOS_CHOICES)
-        solicitud_map = dict(INCIDENCIA_CHOICES)
+        for col, width in column_widths.items():
+            ws.column_dimensions[col].width = width
 
-        # Llenar datos
-        for row_num, incidencia in enumerate(incidencias, 3):
+        # Llenar con datos
+        for incidencia in incidencias:
+            estado_codigo = incidencia["estado"]
+            estado_nombre = ESTADOS_CHOICES.get(estado_codigo, estado_codigo)
+
             ws.append(
                 [
-                    incidencia["id"],
-                    incidencia["sede__nombre"],
+                    incidencia["sede__sede"],
                     incidencia["departamento__nombre"],
-                    incidencia["tipo_incidencia__nombre"],
-                    estados_map.get(incidencia["estado"], "Desconocido"),
-                    solicitud_map.get(incidencia["tipo_solicitud"], "Desconocido"),
-                    incidencia["observaciones"] or "N/A",
+                    incidencia["tipo_incidencia__tipo"],
+                    estado_nombre,
+                    incidencia["tipo_solicitud"],
+                    incidencia["observaciones"],
                     (
-                        incidencia["created_at"].strftime("%d/%m/%Y %H:%M")
+                        incidencia["created_at"].strftime("%Y-%m-%d")
                         if incidencia["created_at"]
-                        else "N/A"
-                    ),
-                    (
-                        incidencia["updated_at"].strftime("%d/%m/%Y %H:%M")
-                        if incidencia["updated_at"]
-                        else "N/A"
+                        else ""
                     ),
                 ]
             )
 
-        # Aplicar bordes
-        border = Border(
-            left=Side(style="thin"),
-            right=Side(style="thin"),
-            top=Side(style="thin"),
-            bottom=Side(style="thin"),
-        )
-        for row in ws.iter_rows(min_row=2, max_row=ws.max_row, max_col=len(headers)):
-            for cell in row:
-                cell.border = border
-
-        # Generar archivo
+        # Preparar la respuesta
         output = BytesIO()
         wb.save(output)
         output.seek(0)
 
         return FileResponse(
-            output, as_attachment=True, filename="reporte_incidencias.xlsx"
+            output,
+            as_attachment=True,
+            filename="Incidencias.xlsx",
         )

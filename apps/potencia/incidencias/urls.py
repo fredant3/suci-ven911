@@ -31,8 +31,9 @@ urlpatterns = [
         IncidenciaDeleteView.as_view(),
         name="delete",
     ),
-    path
-        ("export",
+    path(
+        "export",
         IncidenciaExcelView.as_view(),
-        name="export_excel",),
+        name="export_excel",
+    ),
 ]
