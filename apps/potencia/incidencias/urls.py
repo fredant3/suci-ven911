@@ -3,6 +3,7 @@ from potencia.incidencias.views.create_view import IncidenciaCreateView
 from potencia.incidencias.views.delete_view import IncidenciaDeleteView
 from potencia.incidencias.views.list_view import IncidenciaListView
 from potencia.incidencias.views.update_view import IncidenciaUpdateView
+from potencia.incidencias.views.export_view import IncidenciaExcelView
 
 urlpatterns = [
     path(
@@ -30,4 +31,8 @@ urlpatterns = [
         IncidenciaDeleteView.as_view(),
         name="delete",
     ),
+    path
+        ("export",
+        IncidenciaExcelView.as_view(),
+        name="export_excel",),
 ]

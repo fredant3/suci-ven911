@@ -28,6 +28,7 @@ class TipoIncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVie
         context["listApiUrl"] = reverse_lazy("api_tipoIncidencia:list")
         context["updateUrl"] = reverse_lazy("tipoIncidencia:update", args=[0])
         context["deleteUrl"] = reverse_lazy("tipoIncidencia:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("api_tipoIncidencia:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
