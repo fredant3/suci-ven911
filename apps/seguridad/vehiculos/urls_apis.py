@@ -1,9 +1,9 @@
 from django.urls import path
-
 from seguridad.vehiculos.views.create_view import VehiculoCreateApiView
 from seguridad.vehiculos.views.delete_view import VehiculoDeleteApiView
 from seguridad.vehiculos.views.list_view import VehiculoListApiView
 from seguridad.vehiculos.views.update_view import VehiculoUpdateApiView
+from seguridad.vehiculos.views.export_view import VehiculoExcelView
 
 urlpatterns = [
     path(
@@ -26,4 +26,8 @@ urlpatterns = [
         VehiculoDeleteApiView.as_view(),
         name="delete",
     ),
+    path
+    ("export",
+    VehiculoExcelView.as_view(),
+    name="export_excel"),
 ]

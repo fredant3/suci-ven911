@@ -1,12 +1,12 @@
 from django.forms import TextInput, Textarea, Select
-from gestion_comunicacional.models import GestionComunicacional
+from gestion_comunicacional.frente_preventivo.models import FrentePreventivo
 from helpers.FormBase import FormBase
 
 # from django import forms
 # from helpers.models import BOOLEAN_CHOICES
 
 
-class GestionComunicacionalForm(FormBase):
+class FrentePreventivoForm(FormBase):
     # municipio_priorizado = forms.BooleanField(
     #     initial=False,
     #     required=False,
@@ -18,21 +18,12 @@ class GestionComunicacionalForm(FormBase):
     # )
 
     class Meta:
-        model = GestionComunicacional
+        model = FrentePreventivo
         fields = [
-            "nombre_actividad",
-            "actividad_realizada",
-            "descripcion_actividad",
-            "actividad_preventiva",
-            "estado",
-            "municipio",
-            "parroquia",
-            "estrategias_metodologicas",
-            "ambito_accion",
-            "poblacion_abordada",
-            "municipio_priorizado",
-            "equipo_social",
-            "cedula",
+            "donde_desarrollo",
+            "personas_beneficiadas",
+            "tipo_actividad",
+            "fecha_realizo",
             "observaciones",
         ]
         exclude = [
@@ -44,38 +35,27 @@ class GestionComunicacionalForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "nombre_actividad": TextInput(
+            "donde_desarrollo": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Ejem. vuelvan caras",
                 }
             ),
-            "descripcion_actividad": TextInput(
+            "personas_beneficiadas": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Descripción de la actividad",
                 }
             ),
-            "poblacion_abordada": TextInput(
+            "tipo_actividad": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "nombre de la población abordada",
-                }
-            ),
-            "actividad_realizada": Textarea(
-                attrs={
-                    "placeholder": "Ejem. MICRO-CONVERSATORIO",
                 }
             ),
             "observaciones": Textarea(
                 attrs={
                     "placeholder": "Ingrese las observaciones",
                 }
-            ),
-            "estado": Select(attrs={"class": "form-select mb-3"}),
-            "municipio": Select(attrs={"class": "form-select mb-3"}),
-            "parroquia": Select(attrs={"class": "form-select mb-3"}),
-            "cedula": TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
             ),
         }

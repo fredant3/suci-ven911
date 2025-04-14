@@ -2,6 +2,9 @@ from potencia.uri.models import Uri
 from django.forms import CharField, Select
 from helpers.FormBase import FormBase
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, HTML
+
 
 
 class UriInfoGeneralForm(FormBase):
@@ -32,6 +35,10 @@ class UriInfoGeneralForm(FormBase):
         widget=forms.TextInput(
             attrs={"class": "form-control", "placeholder": "Ingrese la institución"}
         ),
+    )
+    tipounidad = CharField(max_length=10,
+        required=False,
+        label="Unidad", 
     )
     num_interna = CharField(
         max_length=10,
@@ -73,7 +80,7 @@ class UripacienteForm(FormBase):
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la cédula"}),
     )
     telefonopaciente = CharField(
-        max_length=10,
+        max_length=11,
         required=False,
         label="Número de Teléfono del Paciente",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el teléfono"}),
@@ -147,7 +154,7 @@ class UriConsentimientoForm(FormBase):
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la cédula"}),
     )
     telefono_acompanate = CharField(
-        max_length=10,
+        max_length=11,
         required=False,
         label="Teléfono del Acompañante",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el teléfono"}),
@@ -178,7 +185,7 @@ class UriConsentimientoForm(FormBase):
         widget=forms.TextInput(attrs={"placeholder": "Ingrese la cédula"}),
     )
     telefono_testigo = CharField(
-        max_length=10,
+        max_length=11,
         required=False,
         label="Teléfono del Testigo",
         widget=forms.TextInput(attrs={"placeholder": "Ingrese el teléfono"}),
@@ -302,7 +309,7 @@ class UriDireccionForm(FormBase):
             "tiempo_servicio",
             "observaciones_servicio",
         )
-        widgets = {
+        widgets = { 
             "estado": Select(attrs={"class": "form-select mb-3", "id": "id_estado"}),
             "municipio": Select(
                 attrs={"class": "form-select mb-3", "id": "id_municipio"}

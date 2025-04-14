@@ -1,5 +1,5 @@
 from django.urls import path
-
+from rrhh.contratos.views.create_view import rrhhWizardView
 from rrhh.contratos.views.create_view import ContratoCreateView
 from rrhh.contratos.views.delete_view import ContratoDeleteView
 from rrhh.contratos.views.list_view import ContratoListView
@@ -11,6 +11,11 @@ urlpatterns = [
         "",
         ContratoListView.as_view(),
         name="list",
+    ),
+    path(
+        "create",
+        rrhhWizardView.as_view(),
+        name="create",
     ),
     path(
         "create",

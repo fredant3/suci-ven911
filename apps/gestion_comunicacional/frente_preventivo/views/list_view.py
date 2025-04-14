@@ -6,28 +6,26 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
-from gestion_comunicacional.services import GestioncomunicacionalService
+from gestion_comunicacional.frente_preventivo.services import FrentePreventivoService
 
 
-class GestioncomunicacionalListView(
-    LoginRequiredMixin, CheckPermisosMixin, TemplateView
-):
-    permission_required = "gestioncomuicacional.ver_gestioncomunicacional"
+class FrentePreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+    permission_required = "frentepreventivo.ver_frentepreventivo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestion comunicacional"
+        context["titlePage"] = "Frente Preventivo"
         context["indexUrl"] = reverse_lazy("gc_info")
-        context["module"] = "Gestion comunicacional"
+        context["module"] = "Frente Preventivo"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("gestioncomunicacional:create")
-        context["listApiUrl"] = reverse_lazy("api_gestioncomunicacional:list")
-        context["updateUrl"] = reverse_lazy("gestioncomunicacional:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("gestioncomunicacional:delete", args=[0])
+        context["createUrl"] = reverse_lazy("frentepreventivo:create")
+        context["listApiUrl"] = reverse_lazy("api_frentepreventivo:list")
+        context["updateUrl"] = reverse_lazy("frentepreventivo:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("frentepreventivo:delete", args=[0])
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -42,31 +40,31 @@ class GestioncomunicacionalListView(
                 "searchable": "true",
             },
             {
-                "data": "nombre_actividad",
-                "name": "nombre_actividad",
-                "title": "Nombre de la actividad",
+                "data": "donde_desarrollo",
+                "name": "donde_desarrollo",
+                "title": "Donde se desarrollo",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "actividad_realizada",
-                "name": "actividad_realizada",
-                "title": "Actividad Realizada",
+                "data": "personas_beneficiadas",
+                "name": "personas_beneficiadas",
+                "title": "Personas beneficiadas",
                 "orderable": "false",
                 "searchable": "false",
             },
             {
-                "data": "descripcion_actividad",
-                "name": "descripcion_actividad",
-                "title": "descripción actividad",
+                "data": "tipo_actividad",
+                "name": "tipo_actividad",
+                "title": "Tipo de actividad",
                 "orderable": "false",
                 "searchable": "false",
             },
         ]
 
 
-class GestioncomunicacionalListApiView(ListController, CheckPermisosMixin):
-    permission_required = "gestioncomunicacional.ver_gestioncomunicacional"
+class FrentePreventivoListApiView(ListController, CheckPermisosMixin):
+    permission_required = "frentepreventivo.ver_frentepreventivo"
 
     def __init__(self):
-        self.service = GestioncomunicacionalService()
+        self.service = FrentePreventivoService()

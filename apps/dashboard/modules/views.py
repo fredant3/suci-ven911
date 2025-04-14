@@ -29,7 +29,7 @@ class Modules(LoginRequiredMixin, TemplateView):
             {
                 "title": "Unidad de Respuesta Inmediata",
                 "url": "uri:list",
-                "image": "img/modules/ambulancia.png",
+                "image": "img/modules/ambulancias.png",
             },
             {
                 "title": "Potencia",

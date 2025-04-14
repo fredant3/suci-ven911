@@ -56,3 +56,20 @@ ACTIVIDAD_PREVENTIVA = (
     ("I", "Individual"),
     ("Fp", "Frente preventivo"),
 )
+TIPO_ACTIVIDAD = (
+    ("Ed", "Educativo"),
+    ("D", "Deportivo"),
+    ("R", "Recreativo"),
+    ("C", "Cultural"),
+    ("A", "Alimentación"),
+    ("Sa", "Salud"),
+    ("AJS", "Asesoria juridica y social"),
+    ("Cur", "Curso"),
+    ("ta", "Taller"),
+)
+DESARROLLO = (
+    ("Es", "Escuela"),
+    ("Pla", "Plaza"),
+    ("C", "Calles"),
+    ("Av", "Avenida"),
+)
