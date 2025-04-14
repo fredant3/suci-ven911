@@ -30,6 +30,7 @@ class LlamadaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_llamadas:list")
         context["updateUrl"] = reverse_lazy("llamadas:update", args=[0])
         context["deleteUrl"] = reverse_lazy("llamadas:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("llamadas:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
