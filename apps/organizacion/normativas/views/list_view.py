@@ -9,7 +9,7 @@ from helpers.ControllerMixin import ListController
 from organizacion.normativas.services import NormativaService
 
 from templates.sneat import TemplateLayout
-from organizacion.normativas.models import ESTATUS_CHOICES
+from organizacion.normativas.models import ESTATUS_CHOICES, PROGRESS_CHOICES
 
 
 class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -85,6 +85,7 @@ class NormativaListApiView(ListController, CheckPermisosMixin):
             try:
                 data = json.loads(response.content)
                 estatus_mapping = dict(ESTATUS_CHOICES)
+                progress_mapping = dict(PROGRESS_CHOICES)  # Mapeo de progreso
 
                 # Convertir estatus y formatear otros campos
                 for item in data.get("entities", []):
@@ -92,6 +93,12 @@ class NormativaListApiView(ListController, CheckPermisosMixin):
                     if "estado" in item:
                         item["estado"] = estatus_mapping.get(
                             item["estado"], item["estado"]
+                        )
+
+                    # Formatear progreso
+                    if "progre" in item:
+                        item["progre"] = progress_mapping.get(
+                            item["progre"], item["progre"]
                         )
 
                     # Formatear fecha (si existe)
