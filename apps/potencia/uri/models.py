@@ -7,12 +7,6 @@ from django.db.models import (
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 
-
-ESTATUS_CHOICES = (
-    ("noncontac", "No hubo contacto con el paciente"),  # Opciones:
-    ("contac", "Si hubo contacto con el paciente"),  # Opciones:
-)
-
 ESTATUS_CHOICES2 = (
     ("positivo", "Si"),
     ("negativo", "No"),
@@ -175,15 +169,53 @@ ESTATUS_CHOICES19 = (
     ("midri", "Midriasis"),
 )
 
-
 GENERO_CHOICES = (
     ("Femenino", "Femenino"),
     ("Masculino", "Masculino"),
 )
 
+CONTACTO_CHOICES = (
+    ("paciensig", "Paciente ingresa con signos vitales"),
+    ("atendtra", "Atendido en el sitio sin traslado"),
+    ("pacienfal", "Paciente fallece durante el traslado"),
+    ("paciensin", "Paciente fallece antes de llegar la unidad"),
+)
+
+NOCONTACTO_CHOICES = (
+    ("sinlesion", "No habia lesionados"),
+    ("pacientras", "Paciente trasladado antes de llegar la unidad"),
+)
+
+ACCIDENVEHI_CHOICES = (
+    ("noapli", "No aplica"),
+    ("colisi", "Colisión"),
+    ("choque", "Choque"),
+    ("volca", "Volcamiento"),
+    ("arrolla", "Arrollamiento"),
+    ("embarra", "Embarracamiento"),
+    ("otro", "Otro"),
+)
+
+ARMA_CHOICES = (
+    ("noapli", "No aplica"),
+    ("blanca", "Blanca"),
+    ("fuego", "Fuego"),
+    ("biolo", "Biológica"),
+    ("Química", "Química"),
+    ("otro", "Otro"),
+)
+
+TRAUMAVE_CHOICES = (
+    ("noapli", "No aplica"),
+    ("automo", "Automóvil"),
+    ("moto", "Moto"),
+    ("maquinar", "Maquinaría"),
+    ("otro", "Otro"),
+)
+
 
 class Uri(BaseModel):
-        
+
     # 1) Informacion General
     # -Datos del servicio
     fecha_atencion = DateField(
@@ -195,27 +227,44 @@ class Uri(BaseModel):
     tipounidad = CharField("Tipo de Unidad", max_length=10, blank=True, null=True)
     num_interna = CharField("Numeracion Interna", max_length=10, blank=True, null=True)
 
-
     # Informacion Legal
-    contacto = CharField(
-        "¿Hubo contacto con el paciente?",
-        max_length=9,
-        choices=ESTATUS_CHOICES,
+    contactopaciente = CharField(
+        "Descripción del Servicio donde hubo contacto con el paciente",
+        max_length=50,
+        choices=CONTACTO_CHOICES,
         blank=True,
         null=True,
     )
 
-    # Centro Asistencial Recibido
-    centroAsistencial = CharField(
-        "Centro Asistencial", max_length=50, blank=True, null=True
+    contactonopaciente = CharField(
+        "Descripción del Servicio donde no hubo contacto con el paciente",
+        max_length=50,
+        choices=NOCONTACTO_CHOICES,
+        blank=True,
+        null=True,
     )
-    servicioAsistencial = CharField(
-        "Servicio Asistencial", max_length=50, blank=True, null=True
-    )
-    medico_receptor = CharField("Medico Receptor", max_length=50, blank=True, null=True)
-    msds = CharField("MS/DS", max_length=50, blank=True, null=True)
 
-    # Registro Visuales
+    ambulatorio = CharField(
+        "Ambulatorio/Hospital/Clínica",
+        max_length=30,
+        blank=True,
+        null=True,
+        help_text="Datos del Centro Asistencial donde fue recibido el paciente",
+    )
+
+    servicioAsistencial = CharField(
+        "Servicio",
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text="Datos del Centro Asistencial donde fue recibido el paciente",
+    )
+
+    medico_receptor = CharField(
+        "Medico que recibe", max_length=50, blank=True, null=True
+    )
+    msds = CharField("MSDS", max_length=50, blank=True, null=True)
+
     foto = CharField(
         "¿Hubo registro fotografico?",
         max_length=9,
@@ -226,8 +275,13 @@ class Uri(BaseModel):
     # 2)Datos del paciente
     # Datos del paciente
     nombrepaciente = CharField(
-        "Nombre y apellido del Paciente", max_length=50, blank=True, null=True
+        "Nombres del Paciente", max_length=50, blank=True, null=True
     )
+
+    apellidopaciente = CharField(
+        "Apellidos del Paciente", max_length=50, blank=True, null=True
+    )
+
     cedulapaciente = CharField(
         "Cedula del paciente", max_length=10, blank=True, null=True
     )
@@ -260,6 +314,10 @@ class Uri(BaseModel):
     nombre_acompanante = CharField(
         "Nombre del Acompañante", max_length=50, blank=True, null=True
     )
+
+    apellido_acompanante = CharField(
+        "Apellido del Acompañante", max_length=50, blank=True, null=True
+    )
     parentezco_acompanante = CharField(
         "Parentesco del Acompañante", max_length=10, blank=True, null=True
     )
@@ -285,7 +343,11 @@ class Uri(BaseModel):
 
     # Datos del testigo
     nombre_testigo = CharField(
-        "Nombre y Apellido del Testigo", max_length=50, blank=True, null=True
+        "Nombre del Testigo", max_length=50, blank=True, null=True
+    )
+
+    apellido_testigo = CharField(
+        "Apellido del Testigo", max_length=50, blank=True, null=True
     )
     edad_testigo = IntegerField("Edad del Testigo", blank=True, null=True)
     cedula_testigo = CharField(
@@ -333,7 +395,6 @@ class Uri(BaseModel):
     referencia_evento = CharField(
         "Punto de Referencia", max_length=100, blank=True, null=True
     )
-    eje_evento = CharField("Eje", max_length=30, blank=True, null=True)
 
     lugar_atencion = CharField(
         "Lugar de Atención",
@@ -384,25 +445,27 @@ class Uri(BaseModel):
     # Trauma
     accidenteVehicular = CharField(
         "Accidente Vehicular",
-        max_length=9,
-        choices=ESTATUS_CHOICES2,
+        max_length=10,
+        choices=ACCIDENVEHI_CHOICES,
         blank=True,
         null=True,
     )  # opciones: (colision, volcamiento, Embarracamiento, Choque, Arrollamiento, otro )
     enfrentamientoArmado = CharField(
         "Enfrentamiento Armado",
-        max_length=9,
-        choices=ESTATUS_CHOICES2,
+        max_length=10,
+        choices=ARMA_CHOICES,
         blank=True,
         null=True,
+        help_text="Tipo de Arma",
     )  # si es si, activar opciones "Tipo de Arma" (Blanca, Fuego, Biologica, Quimica, Otro)
     # tipoArma=ForeignKey(Tipo_arma, on_delete=CASCADE, blank=True, null=True)
     traumaVehiculo = CharField(
         "Trauma con Vehiculo",
         max_length=9,
-        choices=ESTATUS_CHOICES2,
+        choices=TRAUMAVE_CHOICES,
         blank=True,
         null=True,
+        help_text="Tipo de Vehículo",
     )  # si es si, activar opciones "Tipo de Vehiculo" (Automovil/Carro, Moto, Maquinaria, Otro)
     viajaba = CharField(
         "Viajaba como", max_length=9, choices=ESTATUS_CHOICES7, blank=True, null=True
@@ -582,7 +645,7 @@ class Uri(BaseModel):
     # Tratamiento (opcion para añadir/ adicionar)
     medicamento = CharField("Medicamento", max_length=100, blank=True, null=True)
     dosis = CharField("Dosis", max_length=100, blank=True, null=True)
-    hora = TimeField("Hora", blank=True, null=True)
+    hora = CharField("Hora", max_length=8, blank=True, null=True)
     resultadoEvaluacion = CharField(
         "Resultados de la Evaluación Fisica Cefalo Caudal",
         max_length=500,
@@ -603,11 +666,15 @@ class Uri(BaseModel):
     medicoRefiere = CharField(
         "Medico que refiere", max_length=100, blank=True, null=True
     )
-    horaSalidaHosp = TimeField("Hora de Salida", blank=True, null=True)
+    horaSalidaHosp = CharField(
+        "Hora de Salida al Hospital", max_length=8, blank=True, null=True
+    )
     hospitalDestino = CharField(
         "Hospital que recibe", max_length=100, blank=True, null=True
     )
-    horaLlegadaHosp = TimeField("Hora de llegada", blank=True, null=True)
+    horaLlegadaHosp = CharField(
+        "Hora de llegada al Hospital", max_length=8, blank=True, null=True
+    )
     causa = CharField("Ingreses las causas", max_length=100, blank=True, null=True)
     tecnicoEmergencia = CharField(
         "Técnico de emergencias médicas", max_length=50, blank=True, null=True

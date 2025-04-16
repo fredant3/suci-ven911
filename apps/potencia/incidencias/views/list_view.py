@@ -21,7 +21,7 @@ class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Potencia"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("potencia")
         context["module"] = "Potencia"
         context["submodule"] = "Incidencias"
         context["createBtn"] = "Añadir"

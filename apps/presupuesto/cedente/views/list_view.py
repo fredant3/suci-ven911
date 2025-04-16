@@ -29,7 +29,7 @@ class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_cedentes:list")
         context["updateUrl"] = reverse_lazy("cedentes:update", args=[0])
         context["deleteUrl"] = reverse_lazy("cedentes:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_cedentes:export_pdf")
+        context["exportExcelUrl"] = reverse_lazy("api_cedentes:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

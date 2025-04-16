@@ -2,7 +2,6 @@ from django.urls import path
 
 from presupuesto.asignacion.views.create_view import AsignacionCreateApiView
 from presupuesto.asignacion.views.delete_view import AsignacionDeleteApiView
-from presupuesto.asignacion.views.export_view import AsignacionPDFView
 from presupuesto.asignacion.views.list_view import AsignacionListApiView
 from presupuesto.asignacion.views.update_view import AsignacionUpdateApiView
 
@@ -26,10 +25,5 @@ urlpatterns = [
         "<int:pk>/delete",
         AsignacionDeleteApiView.as_view(),
         name="delete",
-    ),
-    path(
-        "export/pdf",
-        AsignacionPDFView.as_view(),
-        name="export_pdf",
     ),
 ]

@@ -18,10 +18,10 @@ class AuditoriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tecnología"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("tecnologia")
         context["module"] = "Tecnología"
         context["submodule"] = "Auditoría"
-        context["listApiUrl"] = reverse_lazy("api_user:list")
+        context["listApiUrl"] = reverse_lazy("api_auditoria:list")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
