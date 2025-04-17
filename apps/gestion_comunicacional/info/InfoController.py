@@ -31,6 +31,7 @@ class InfoController(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
         context["submoduleList"] = (
             ("Gestion Comunicacional", reverse_lazy("gestioncomunicacional:list")),
+            ("Frente Preventivo", reverse_lazy("frentepreventivo:list")),
             # ("Averia", reverse_lazy("averias:list")),
         )
         return TemplateLayout.init(self, context)

@@ -12,13 +12,22 @@ urlpatterns = [
         "api/gestion-comunicacional/",
         include(("apps.gestion_comunicacional.urls_apis", "api_gestioncomunicacional")),
     ),
-    path("", InfoController.as_view(), name="gc_info"),
     path(
-        "gestion-comunicacional/",
-        include(("apps.gestion_comunicacional.urls_webs", "GestionComunicacional")),
+        "frente-preventivo/",
+        include(
+            (
+                "apps.gestion_comunicacional.frente_preventivo.urls_webs",
+                "frentepreventivo",
+            )
+        ),
     ),
     path(
-        "api/gestion-comunicacional/",
-        include(("apps.gestion_comunicacional.urls_apis", "api_GestionComunicacional")),
+        "api/frente-preventivo/",
+        include(
+            (
+                "apps.gestion_comunicacional.frente_preventivo.urls_apis",
+                "api_frentepreventivo",
+            )
+        ),
     ),
 ]

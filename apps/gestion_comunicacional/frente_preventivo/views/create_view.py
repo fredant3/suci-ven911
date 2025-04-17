@@ -2,13 +2,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from gestion_comunicacional.frente_preventivo.forms import FrentePreventivoForm
-from gestion_comunicacional.frente_preventivo.forms import FrentePreventivoService
+from gestion_comunicacional.frente_preventivo.forms import FrentepreventivoService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
 from templates.sneat import TemplateLayout
 
 
-class FrentePreventivoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
+class FrentepreventivoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = "frentepreventivo.agregar_frentepreventivo"
     form_class = FrentePreventivoForm
     template_name = "sneat/layout/partials/form/layout.html"
@@ -27,9 +27,9 @@ class FrentePreventivoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateV
         return TemplateLayout.init(self, context)
 
 
-class FrentePreventivoCreateApiView(CreateController, CheckPermisosMixin):
+class FrentepreventivoCreateApiView(CreateController, CheckPermisosMixin):
     permission_required = "frentepreventivo.agregar_frentepreventivo"
     form_class = FrentePreventivoForm
 
     def __init__(self):
-        self.service = FrentePreventivoService()
+        self.service = FrentepreventivoService()

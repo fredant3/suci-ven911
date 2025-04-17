@@ -6,10 +6,10 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
-from gestion_comunicacional.frente_preventivo.services import FrentePreventivoService
+from gestion_comunicacional.frente_preventivo.services import FrentepreventivoService
 
 
-class FrentePreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class FrentepreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "frentepreventivo.ver_frentepreventivo"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
@@ -63,8 +63,8 @@ class FrentePreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
         ]
 
 
-class FrentePreventivoListApiView(ListController, CheckPermisosMixin):
+class FrentepreventivoListApiView(ListController, CheckPermisosMixin):
     permission_required = "frentepreventivo.ver_frentepreventivo"
 
     def __init__(self):
-        self.service = FrentePreventivoService()
+        self.service = FrentepreventivoService()
