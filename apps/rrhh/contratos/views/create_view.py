@@ -15,8 +15,6 @@ from rrhh.dotaciones.forms import DotacionForm
 from templates.sneat import TemplateLayout
 from django.http import HttpResponseRedirect
 
-from ..services import ContratoService
-
 from rrhh.empleados.models import Empleado
 from rrhh.contratos.models import Contrato
 from rrhh.educaciones.models import Educacion
@@ -24,6 +22,7 @@ from rrhh.familiares.models import Familiar
 from rrhh.dotaciones.models import Dotacion
 
 # from sueldos.models import Sueldo
+from users.auth.models import User
 
 
 class ContratoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -84,7 +83,20 @@ class rrhhWizardView(SessionWizardView):
         datos_contrato = form_dict["contrato"].cleaned_data
         # datos_sueldo = form_dict["sueldo"].cleaned_data
 
-        empleado = Empleado(**datos_empleado).save()
+        print("========================================")
+        print(datos_empleado)
+        print("========================================")
+
+        user = User.objects.create_user(
+            username=datos_empleado["cedula"],
+            dni=datos_empleado["cedula"],
+            password="SUCI-ven911",
+            is_staff=True,
+            is_active=True,
+            is_superuser=True,
+        )
+
+        empleado = Empleado(**datos_empleado, usuario=user).save()
         educacion = Educacion(**datos_educacion, empleado=empleado).save()
         familiar = Familiar(**datos_familiar, empleado=empleado).save()
         dotacion = Dotacion(**datos_dotacion, empleado=empleado).save()
