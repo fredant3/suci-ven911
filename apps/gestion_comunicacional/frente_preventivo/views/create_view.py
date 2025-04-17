@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from gestion_comunicacional.frente_preventivo.forms import FrentePreventivoForm
-from gestion_comunicacional.frente_preventivo.forms import FrentepreventivoService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
 from templates.sneat import TemplateLayout
