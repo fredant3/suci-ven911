@@ -17,9 +17,9 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Emergencias"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Emergencias"
+        context["titlePage"] = "Operaciones"
+        context["indexUrl"] = reverse_lazy("operaciones")
+        context["module"] = "Operaciones"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("operaciones:create")

@@ -16,11 +16,11 @@ class EmergenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Emergencias"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Emergencias"
-        context["submodule"] = "Emergencias"
-        context["titleForm"] = "Eliminar emergencia"
+        context["titlePage"] = "Operaciones"
+        context["indexUrl"] = reverse_lazy("operaciones")
+        context["module"] = "Operaciones"
+        context["submodule"] = "Eliminar Emergencia"
+        context["titleForm"] = "Eliminar Emergencia"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("operaciones:list")
         context["urlDelete"] = reverse_lazy(

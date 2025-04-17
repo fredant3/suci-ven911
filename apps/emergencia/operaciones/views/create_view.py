@@ -15,11 +15,11 @@ class EmergenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Emergencias"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Emergencias"
-        context["submodule"] = "Emergencias"
-        context["titleForm"] = "Añadir una emergencia"
+        context["titlePage"] = "Operaciones"
+        context["indexUrl"] = reverse_lazy("operaciones")
+        context["module"] = "Operaciones"
+        context["submodule"] = "Agregar Emergencias"
+        context["titleForm"] = "Añadir una Emergencia"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("operaciones:list")
         context["urlForm"] = reverse_lazy("api_operaciones:create")
