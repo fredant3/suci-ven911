@@ -16,10 +16,10 @@ class FrentepreventivoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteV
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Frentepreventivo"
+        context["titlePage"] = "Frente preventivo"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Frentepreventivo"
-        context["submodule"] = "Frentepreventivo"
+        context["module"] = "Gestion Comunicacional"
+        context["submodule"] = "Frente preventivo"
         context["titleForm"] = "Eliminar frente preventivo"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("frentepreventivo:list")

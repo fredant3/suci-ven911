@@ -19,7 +19,7 @@ class FrentepreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Frente Preventivo"
         context["indexUrl"] = reverse_lazy("gc_info")
-        context["module"] = "Frente Preventivo"
+        context["module"] = "Gestion Comunicacional"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("frentepreventivo:create")

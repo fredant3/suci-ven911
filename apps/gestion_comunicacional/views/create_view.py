@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 class GestioncomunicacionalCreateView(
     LoginRequiredMixin, CheckPermisosMixin, CreateView
 ):
-    permission_required = "gestioncomunicacional.agregar_gestioscomunicacional"
+    permission_required = "gestioncomunicacional.agregar_gestion_comunicacional"
     form_class = GestionComunicacionalForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -23,8 +23,8 @@ class GestioncomunicacionalCreateView(
         context["submodule"] = "Gestion Comunicacional"
         context["titleForm"] = "Añadir una Actividad"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("GestionComunicacional:list")
-        context["urlForm"] = reverse_lazy("api_GestionComunicacional:create")
+        context["listUrl"] = reverse_lazy("gestioncomunicacional:list")
+        context["urlForm"] = reverse_lazy("api_gestioncomunicacional:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
