@@ -23,7 +23,7 @@ class ArticuloCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administración"
-        context["submodule"] = "Artículos"
+        context["submodule"] = "Inventario"
         context["titleForm"] = (
             f"Registrar nuevo artículo - {str(self.kwargs.get('type')).capitalize()}"
         )

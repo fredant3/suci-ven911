@@ -51,4 +51,12 @@ urlpatterns = [
         "api/sedes/",
         include(("apps.administracion.sedes.urls_apis", "api_sedes")),
     ),
+    path(
+        "tipo_averia/",
+        include(("apps.administracion.tipo_averia.urls", "tipo_averias")),
+    ),
+    path(
+        "api/tipo_averia/",
+        include(("apps.administracion.tipo_averia.urls_apis", "api_tipo_averias")),
+    ),
 ]
