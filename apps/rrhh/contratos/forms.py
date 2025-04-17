@@ -27,7 +27,6 @@ class ContratoForm(FormBase):
             "fecha_ingreso_apn",
             "fecha_ingreso",
             "fecha_culminacion",
-            "empleado",
         )
         exclude = [
             "created_at",

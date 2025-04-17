@@ -10,7 +10,6 @@ class DotacionForm(FormBase):
             "camisa",
             "pantalon",
             "zapato",
-            "empleado",
         )
         exclude = [
             "created_at",

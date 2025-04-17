@@ -77,31 +77,26 @@ class rrhhWizardView(SessionWizardView):
         return TemplateLayout.init(self, context)
 
     def done(self, form_list, form_dict, **kwargs):
+        # Obtener datos de todos los formularios
         datos_empleado = form_dict["empleado"].cleaned_data
         datos_educacion = form_dict["educacion"].cleaned_data
         datos_familiar = form_dict["familiar"].cleaned_data
         datos_dotacion = form_dict["dotacion"].cleaned_data
         datos_contrato = form_dict["contrato"].cleaned_data
-        # datos_sueldo = form_dict["sueldo"].cleaned_data
 
-        empleado = Empleado(**datos_empleado).save()
-        educacion = Educacion(**datos_educacion, empleado=empleado).save()
-        familiar = Familiar(**datos_familiar, empleado=empleado).save()
-        dotacion = Dotacion(**datos_dotacion, empleado=empleado).save()
-        contrato = Contrato(**datos_contrato, empleado=empleado).save()
-        # sueldo = Sueldo(**datos_sueldo, empleado=empleado).save()
+        # 1. Crear y guardar el empleado
+        empleado = Empleado.objects.create(
+            **datos_empleado
+        )  # Usa create para obtener la instancia
 
-        print("========================================")
-        print(
-            empleado,
-            educacion,
-            familiar,
-            dotacion,
-            contrato,
-        )
-        print("========================================")
+        # 2. Asignar el empleado a los demás modelos
+        educacion = Educacion.objects.create(**datos_educacion, empleado=empleado)
+        familiar = Familiar.objects.create(**datos_familiar, empleado=empleado)
+        dotacion = Dotacion.objects.create(**datos_dotacion, empleado=empleado)
+        contrato = Contrato.objects.create(**datos_contrato, empleado=empleado)
 
-        return HttpResponseRedirect("/rrhh/contratos")
+        # Redirigir a la lista de contratos
+        return HttpResponseRedirect("/gestion-humana/contratos")
 
 
 # def __init__(self):
