@@ -61,14 +61,13 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
-                        {
+            {
                 "data": "organismo__nombre",
                 "name": "organismo__nombre",
                 "title": "Organismo Competente",
                 "orderable": "false",
                 "searchable": "false",
             },
-              
             {
                 "data": "created_by",
                 "name": "created_by",

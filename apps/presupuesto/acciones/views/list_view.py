@@ -29,7 +29,7 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_acciones:list")
         context["updateUrl"] = reverse_lazy("acciones:update", args=[0])
         context["deleteUrl"] = reverse_lazy("acciones:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("api_acciones:export_pdf")
+        context["exportExcelUrl"] = reverse_lazy("acciones:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

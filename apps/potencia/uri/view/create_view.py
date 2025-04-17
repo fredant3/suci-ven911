@@ -6,13 +6,13 @@ from helpers.ControllerMixin import CreateController
 from formtools.wizard.views import SessionWizardView
 from potencia.uri.forms import (
     UriInfoGeneralForm,
+    UriInfolegalForm,
     UripacienteForm,
     UriConsentimientoForm,
     UriDireccionForm,
     UriInfoclinicaForm,
     UriSignosVitalesForm,
     UriReferenciasForm,
-    UriCentroAsistencialForm,
 )
 from templates.sneat import TemplateLayout
 from django.http import HttpResponseRedirect
@@ -47,7 +47,7 @@ class InfogeneralWizardView(SessionWizardView):
     template_name = "widzard/index.html"
     form_list = [
         ("general", UriInfoGeneralForm),
-        ("centro", UriCentroAsistencialForm),
+        ("legal", UriInfolegalForm),
         ("paciente", UripacienteForm),
         ("consentimiento", UriConsentimientoForm),
         ("direccion", UriDireccionForm),
@@ -66,7 +66,7 @@ class InfogeneralWizardView(SessionWizardView):
 
     def done(self, form_list, form_dict, **kwargs):
         datos_generales = form_dict["general"].cleaned_data
-        datos_centro = form_dict["centro"].cleaned_data
+        datos_legal = form_dict["legal"].cleaned_data
         datos_paciente = form_dict["paciente"].cleaned_data
         datos_consentimiento = form_dict["consentimiento"].cleaned_data
         datos_direccion = form_dict["direccion"].cleaned_data
@@ -76,7 +76,7 @@ class InfogeneralWizardView(SessionWizardView):
 
         registro = Uri(
             **datos_generales,
-            **datos_centro,
+            **datos_legal,
             **datos_paciente,
             **datos_consentimiento,
             **datos_direccion,
