@@ -23,7 +23,6 @@ class EducacionForm(FormBase):
             "fecha_inicio",
             "fecha_culminacion",
             "enlace_certificado",
-            "empleado",
         )
         exclude = [
             "created_at",
@@ -61,9 +60,6 @@ class EducacionForm(FormBase):
                     "class": "form-control",
                     "placeholder": "https://ejemplo.com/certificado.pdf",
                 }
-            ),
-            "empleado": forms.Select(
-                attrs={"class": "form-control", "placeholder": "Seleccione un empleado"}
             ),
         }
 

@@ -22,7 +22,6 @@ class FamiliarForm(FormBase):
             "fecha_nacimiento",
             "sexo",
             "estado_civil",
-            "empleado",
             "observacion",
         )
         exclude = [
