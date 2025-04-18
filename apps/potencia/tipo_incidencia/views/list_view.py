@@ -22,7 +22,7 @@ class TipoIncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVie
         context["titlePage"] = "Potencia"
         context["indexUrl"] = reverse_lazy("potencia")
         context["module"] = "Potencia"
-        context["submodule"] = "Tipo de Incidencia"
+        context["submodule"] = "Tipos de Incidencias"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("tipoIncidencia:create")
         context["listApiUrl"] = reverse_lazy("api_tipoIncidencia:list")

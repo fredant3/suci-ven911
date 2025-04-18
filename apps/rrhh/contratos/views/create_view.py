@@ -81,10 +81,9 @@ class rrhhWizardView(SessionWizardView):
         datos_familiar = form_dict["familiar"].cleaned_data
         datos_dotacion = form_dict["dotacion"].cleaned_data
         datos_contrato = form_dict["contrato"].cleaned_data
-        # datos_sueldo = form_dict["sueldo"].cleaned_data
 
         print("========================================")
-        print(datos_empleado)
+        print(form_dict)
         print("========================================")
 
         user = User.objects.create_user(
@@ -96,24 +95,14 @@ class rrhhWizardView(SessionWizardView):
             is_superuser=True,
         )
 
-        empleado = Empleado(**datos_empleado, usuario=user).save()
-        educacion = Educacion(**datos_educacion, empleado=empleado).save()
-        familiar = Familiar(**datos_familiar, empleado=empleado).save()
-        dotacion = Dotacion(**datos_dotacion, empleado=empleado).save()
-        contrato = Contrato(**datos_contrato, empleado=empleado).save()
-        # sueldo = Sueldo(**datos_sueldo, empleado=empleado).save()
+        empleado = Empleado.objects.create(**datos_empleado, usuario=user)
+        Educacion.objects.create(**datos_educacion, empleado=empleado)
+        Familiar.objects.create(**datos_familiar, empleado=empleado)
+        Dotacion.objects.create(**datos_dotacion, empleado=empleado)
+        Contrato.objects.create(**datos_contrato, empleado=empleado)
 
-        print("========================================")
-        print(
-            empleado,
-            educacion,
-            familiar,
-            dotacion,
-            contrato,
-        )
-        print("========================================")
-
-        return HttpResponseRedirect("/rrhh/contratos")
+        # Redirigir a la lista de contratos
+        return HttpResponseRedirect("/gestion-humana/contratos")
 
 
 # def __init__(self):
