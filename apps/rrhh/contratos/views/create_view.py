@@ -15,8 +15,6 @@ from rrhh.dotaciones.forms import DotacionForm
 from templates.sneat import TemplateLayout
 from django.http import HttpResponseRedirect
 
-from ..services import ContratoService
-
 from rrhh.empleados.models import Empleado
 from rrhh.contratos.models import Contrato
 from rrhh.educaciones.models import Educacion
@@ -24,6 +22,7 @@ from rrhh.familiares.models import Familiar
 from rrhh.dotaciones.models import Dotacion
 
 # from sueldos.models import Sueldo
+from users.auth.models import User
 
 
 class ContratoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -77,23 +76,30 @@ class rrhhWizardView(SessionWizardView):
         return TemplateLayout.init(self, context)
 
     def done(self, form_list, form_dict, **kwargs):
-        # Obtener datos de todos los formularios
         datos_empleado = form_dict["empleado"].cleaned_data
         datos_educacion = form_dict["educacion"].cleaned_data
         datos_familiar = form_dict["familiar"].cleaned_data
         datos_dotacion = form_dict["dotacion"].cleaned_data
         datos_contrato = form_dict["contrato"].cleaned_data
 
-        # 1. Crear y guardar el empleado
-        empleado = Empleado.objects.create(
-            **datos_empleado
-        )  # Usa create para obtener la instancia
+        print("========================================")
+        print(form_dict)
+        print("========================================")
 
-        # 2. Asignar el empleado a los demás modelos
-        educacion = Educacion.objects.create(**datos_educacion, empleado=empleado)
-        familiar = Familiar.objects.create(**datos_familiar, empleado=empleado)
-        dotacion = Dotacion.objects.create(**datos_dotacion, empleado=empleado)
-        contrato = Contrato.objects.create(**datos_contrato, empleado=empleado)
+        user = User.objects.create_user(
+            username=datos_empleado["cedula"],
+            dni=datos_empleado["cedula"],
+            password="SUCI-ven911",
+            is_staff=True,
+            is_active=True,
+            is_superuser=True,
+        )
+
+        empleado = Empleado.objects.create(**datos_empleado, usuario=user)
+        Educacion.objects.create(**datos_educacion, empleado=empleado)
+        Familiar.objects.create(**datos_familiar, empleado=empleado)
+        Dotacion.objects.create(**datos_dotacion, empleado=empleado)
+        Contrato.objects.create(**datos_contrato, empleado=empleado)
 
         # Redirigir a la lista de contratos
         return HttpResponseRedirect("/gestion-humana/contratos")
