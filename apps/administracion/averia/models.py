@@ -40,6 +40,12 @@ class Averia(BaseModel):
         max_length=30,
         validators=[MinLengthValidator(6), MaxLengthValidator(30), TextValidator()],
     )
+    observaciones = TextField(
+        "Observaciones",
+        max_length=180,
+        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
+        null=True,
+    )
 
     class Meta:
         permissions = [

@@ -14,6 +14,7 @@ class AveriaService(CrudService):
         "ubicacion",
         "serial",
         "codigo_bn",
+        "observaciones",
     )
 
     def __init__(self):

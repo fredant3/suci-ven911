@@ -13,6 +13,7 @@ class AveriaForm(FormBase):
             "ubicacion",
             "serial",
             "codigo_bn",
+            "observaciones",
         ]
         widgets = {
             "problema": TextInput(
@@ -28,5 +29,8 @@ class AveriaForm(FormBase):
             ),
             "codigo_bn": TextInput(
                 attrs={"placeholder": "Ingrese el código BN (6-30 caracteres)"}
+            ),
+            "observaciones": TextInput(
+                attrs={"placeholder": "Ingrese observaciones (mínimo 10 caracteres)"}
             ),
         }
