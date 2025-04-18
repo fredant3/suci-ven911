@@ -178,7 +178,7 @@
 		</li>
 
 		<li
-			class="menu-item {% if 'planificacion' == request.resolver_match.url_name or 'objetivos' in request.resolver_match.namespaces or 'actividades' in request.resolver_match.namespaces or 'llamadas' in request.resolver_match.namespaces or 'infraestructuras' in request.resolver_match.namespaces or 'transportes' in request.resolver_match.namespaces %}active open{% endif %}">
+			class="menu-item {% if 'planificacion' == request.resolver_match.url_name or 'objetivos' in request.resolver_match.namespaces or 'actividades' in request.resolver_match.namespaces or 'infraestructuras' in request.resolver_match.namespaces or 'transportes' in request.resolver_match.namespaces %}active open{% endif %}">
 
 			<a href="javascript:void(0);" class="menu-link menu-toggle">
 				<i class="menu-icon tf-icons bx bx-spreadsheet"></i>
@@ -199,12 +199,6 @@
 				<li class="menu-item {% if 'actividades' == request.resolver_match.url_name %}active{% endif %}">
 					<a href="{% url 'actividades:list' %}" class="menu-link">
 						<div class="text-truncate" data-i18n="Without menu">Actividades</div>
-					</a>
-				</li>
-
-				<li class="menu-item {% if 'llamadas' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'llamadas:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Llamadas</div>
 					</a>
 				</li>
 

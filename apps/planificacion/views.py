@@ -20,7 +20,6 @@ class PlanificacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["submoduleList"] = (
             ("Objetivos", reverse_lazy("objetivos:list")),
             ("Actividades", reverse_lazy("actividades:list")),
-            # ("Llamadas", reverse_lazy("llamadas:list")),
             ("Infraestructuras", reverse_lazy("infraestructuras:list")),
             ("Transportes", reverse_lazy("transportes:list")),
         )
