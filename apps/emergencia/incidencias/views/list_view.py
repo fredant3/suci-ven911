@@ -1,0 +1,49 @@
+import json
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
+from django.views.generic import TemplateView
+from helpers.CheckPermisosMixin import CheckPermisosMixin
+from helpers.ControllerMixin import ListController
+from templates.sneat import TemplateLayout
+from ..services import TipoIncidenciaService
+
+class IncidenciasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+    permission_required = "operaciones.ver_emergencia"
+    url_redirect = reverse_lazy("modules:index")
+    template_name = "sneat/layout/partials/data-table/layout.html"
+
+    def get_context_data(self, **kwargs):
+        columns = self.getColumns()  
+        context = super().get_context_data(**kwargs)
+        context["titlePage"] = "Tipos de Incidencias"
+        context["indexUrl"] = reverse_lazy("operaciones")
+        context["module"] = "Tipos de Incidencias"
+        context["submodule"] = "Inicio"
+        context["createBtn"] = "Añadir"
+        context["createUrl"] = reverse_lazy("incidencias:create")
+        context["listApiUrl"] = reverse_lazy("api_incidencias:list")
+        context["updateUrl"] = reverse_lazy("incidencias:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("incidencias:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("incidencias:export_excel")
+        context["heads"] = columns
+        context["columns"] = mark_safe(json.dumps(columns))
+        return TemplateLayout.init(self, context)
+
+    def getColumns(self):  
+        return [
+            {
+                "data": "id",
+                "title": "ID"
+            },
+            {
+                "data": "nombre_incidencia",
+                "title": "Tipo de Incidencia"
+            }
+        ]
+
+class IncidenciasListApiView(ListController, CheckPermisosMixin):
+    permission_required = "emergrncia.ver_emergencia"
+
+    def __init__(self):
+        self.service = TipoIncidenciaService()

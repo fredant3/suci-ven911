@@ -11,6 +11,7 @@ class EmergenciaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     url_redirect = reverse_lazy("modules:index")
     template_name = "dashborad/index.html"
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Operaciones"
@@ -31,7 +32,7 @@ class EmergenciaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
         context["submoduleList"] = (
             ("Operaciones", reverse_lazy("operaciones:list")),
-            # ("Incidencias", reverse_lazy("incidencias:list")),
+            ("Incidencias", reverse_lazy("incidencias:list")),
             # ("Organismos", reverse_lazy("organismos:list")),
         )
         return TemplateLayout.init(self, context)
