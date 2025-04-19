@@ -8,6 +8,7 @@ class UriService(CrudService):
         "id",
         "fecha_atencion",
         "nombrepaciente",
+        "apellidopaciente",
         "estado",
     }
 

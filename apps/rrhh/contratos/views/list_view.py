@@ -20,9 +20,9 @@ class ContratoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestion Humana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestion Humana"
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Contratos"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("contratos:create")
