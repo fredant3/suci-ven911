@@ -1,4 +1,5 @@
-from administracion.averia.repositories import AveriaRepository, TipoAveriaRepository
+from administracion.averia.repositories import AveriaRepository
+from administracion.tipo_averia.repositories import TipoAveriaRepository
 from administracion.departamentos.repositories import DepartamentoRepository
 from helpers.CrudMixin import CrudService
 from django.db.models import Q
@@ -13,6 +14,7 @@ class AveriaService(CrudService):
         "ubicacion",
         "serial",
         "codigo_bn",
+        "observaciones",
     )
 
     def __init__(self):

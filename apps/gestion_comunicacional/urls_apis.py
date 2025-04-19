@@ -1,5 +1,5 @@
 from django.urls import path
-from gestion_comunicacional.views.create_view import GestioncomunicacionalCreateView
+from gestion_comunicacional.views.create_view import GestioncomunicacoinalCreateApiView
 from gestion_comunicacional.views.delete_view import GestioncomunicacionalDeleteApiView
 from gestion_comunicacional.views.list_view import GestioncomunicacionalListApiView
 from gestion_comunicacional.views.update_view import GestioncomunicacionalUpdateApiView
@@ -12,7 +12,7 @@ urlpatterns = [
     ),
     path(
         "create",
-        GestioncomunicacionalCreateView.as_view(),
+        GestioncomunicacoinalCreateApiView.as_view(),
         name="create",
     ),
     path(

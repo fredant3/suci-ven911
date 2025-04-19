@@ -18,10 +18,10 @@ class GestioncomunicacionalDeleteView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestioncomunicacional"
+        context["titlePage"] = "Gestion comunicacional"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Gestioncomunicacional"
-        context["submodule"] = "Gestioncomunicacional"
+        context["module"] = "Gestion comunicacional"
+        context["submodule"] = "Gestion comunicacional"
         context["titleForm"] = "Eliminar gestioncomunicacional"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("gestioncomunicacional:list")

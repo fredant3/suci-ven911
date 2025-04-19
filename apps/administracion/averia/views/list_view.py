@@ -82,6 +82,13 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
+            {
+                "data": "observaciones",
+                "name": "observaciones",
+                "title": "Observaciones",
+                "orderable": "false",
+                "searchable": "false",
+            },
         ]
 
 

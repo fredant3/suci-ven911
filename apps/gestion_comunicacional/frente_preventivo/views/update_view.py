@@ -8,10 +8,10 @@ from templates.sneat import TemplateLayout
 
 from gestion_comunicacional.frente_preventivo.forms import FrentePreventivoForm
 from gestion_comunicacional.frente_preventivo.models import FrentePreventivo
-from gestion_comunicacional.frente_preventivo.services import FrentePreventivoService
+from gestion_comunicacional.frente_preventivo.services import FrentepreventivoService
 
 
-class FrentePreventivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+class FrentepreventivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = "frentepreventivo.actualizar_frentepreventivo"
     form_class = FrentePreventivoForm
     template_name = "sneat/layout/partials/form/layout.html"
@@ -20,13 +20,13 @@ class FrentePreventivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateV
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Frente Preventivo"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Frente Preventivo"
+        context["module"] = "Gestion Comunicacional"
         context["submodule"] = "Frente Preventivo"
-        context["titleForm"] = "Actualizar frente preventivo"
+        context["titleForm"] = "Actualizar frentepreventivo"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("frente preventivo:list")
+        context["listUrl"] = reverse_lazy("frentepreventivo:list")
         context["urlForm"] = reverse_lazy(
-            "api_frente preventivo:update", args=[self.kwargs.get("pk")]
+            "api_frentepreventivo:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
@@ -36,9 +36,9 @@ class FrentePreventivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateV
         return FrentePreventivo.objects.filter(pk=id)
 
 
-class FrentePreventivoUpdateApiView(UpdateController, CheckPermisosMixin):
+class FrentepreventivoUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = "frentepreventivo.actualizar_frentepreventivo"
     form_class = FrentePreventivoForm
 
     def __init__(self):
-        self.service = FrentePreventivoService()
+        self.service = FrentepreventivoService()

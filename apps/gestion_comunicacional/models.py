@@ -10,6 +10,9 @@ from helpers.models import (
 from django.db.models import CharField, BooleanField
 from helpers.validForm import CedulaVenezolanaValidator, TextValidator
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from gestion_comunicacional.frente_preventivo.models import FrentePreventivo
+
+__all__ = [FrentePreventivo]
 
 
 class GestionComunicacional(BaseModel):

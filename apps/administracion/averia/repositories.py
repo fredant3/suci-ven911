@@ -1,10 +1,5 @@
-from administracion.averia.models import Averia, TipoAveria
+from administracion.averia.models import Averia
 from helpers.RepositoryMixin import Repository
-
-
-class TipoAveriaRepository(Repository):
-    def __init__(self):
-        self.entity = TipoAveria
 
 
 class AveriaRepository(Repository):

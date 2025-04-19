@@ -1,36 +1,36 @@
 from django.urls import path
 from gestion_comunicacional.frente_preventivo.views.create_view import (
-    FrentePreventivoCreateApiView,
+    FrentepreventivoCreateApiView,
 )
 from gestion_comunicacional.frente_preventivo.views.delete_view import (
-    FrentePreventivoDeleteApiView,
+    FrentepreventivoDeleteApiView,
 )
 from gestion_comunicacional.frente_preventivo.views.list_view import (
-    FrentePreventivoListApiView,
+    FrentepreventivoListApiView,
 )
 from gestion_comunicacional.frente_preventivo.views.update_view import (
-    FrentePreventivoUpdateApiView,
+    FrentepreventivoUpdateApiView,
 )
 
 urlpatterns = [
     path(
         "",
-        FrentePreventivoListApiView.as_view(),
+        FrentepreventivoListApiView.as_view(),
         name="list",
     ),
     path(
         "create",
-        FrentePreventivoCreateApiView.as_view(),
+        FrentepreventivoCreateApiView.as_view(),
         name="create",
     ),
     path(
         "<int:pk>/update",
-        FrentePreventivoUpdateApiView.as_view(),
+        FrentepreventivoUpdateApiView.as_view(),
         name="update",
     ),
     path(
         "<int:pk>/delete",
-        FrentePreventivoDeleteApiView.as_view(),
+        FrentepreventivoDeleteApiView.as_view(),
         name="delete",
     ),
 ]

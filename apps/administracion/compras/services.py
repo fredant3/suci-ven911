@@ -7,7 +7,7 @@ from django.db.models import Q
 class CompraService(CrudService):
     select = (
         "id",
-        "articulo__marca",
+        "articulo__nombre",
         "n_orden",
         "valor_bs",
     )

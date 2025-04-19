@@ -8,9 +8,22 @@ from potencia.uri.services import UriService
 
 from templates.sneat import TemplateLayout
 
+from ..forms import (
+    UriInfoGeneralForm,
+    UriInfolegalForm,
+    UripacienteForm,
+    UriConsentimientoForm,
+    UriDireccionForm,
+    UriInfoclinicaForm,
+    UriSignosVitalesForm,
+    UriReferenciasForm,
+)
+
 
 class UriUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = "potencia.uri.editar_uri"
+    form_class = UripacienteForm
+
     template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
@@ -35,6 +48,7 @@ class UriUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 class UriUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = "potencia.uri.editar_uri"
+    form_class = UripacienteForm
 
     def __init__(self):
         self.service = UriService()

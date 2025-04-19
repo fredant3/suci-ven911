@@ -43,8 +43,8 @@ class ComprasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "articulo__marca",
-                "name": "articulo__marca",
+                "data": "articulo__nombre",
+                "name": "articulo__nombre",
                 "title": "Articulo",
                 "orderable": "true",
                 "searchable": "true",

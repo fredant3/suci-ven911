@@ -178,7 +178,7 @@
 		</li>
 
 		<li
-			class="menu-item {% if 'planificacion' == request.resolver_match.url_name or 'objetivos' in request.resolver_match.namespaces or 'actividades' in request.resolver_match.namespaces or 'llamadas' in request.resolver_match.namespaces or 'infraestructuras' in request.resolver_match.namespaces or 'transportes' in request.resolver_match.namespaces %}active open{% endif %}">
+			class="menu-item {% if 'planificacion' == request.resolver_match.url_name or 'objetivos' in request.resolver_match.namespaces or 'actividades' in request.resolver_match.namespaces or 'infraestructuras' in request.resolver_match.namespaces or 'transportes' in request.resolver_match.namespaces %}active open{% endif %}">
 
 			<a href="javascript:void(0);" class="menu-link menu-toggle">
 				<i class="menu-icon tf-icons bx bx-spreadsheet"></i>
@@ -199,12 +199,6 @@
 				<li class="menu-item {% if 'actividades' == request.resolver_match.url_name %}active{% endif %}">
 					<a href="{% url 'actividades:list' %}" class="menu-link">
 						<div class="text-truncate" data-i18n="Without menu">Actividades</div>
-					</a>
-				</li>
-
-				<li class="menu-item {% if 'llamadas' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'llamadas:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Llamadas</div>
 					</a>
 				</li>
 
@@ -366,7 +360,6 @@
 
 		<li
 			class="menu-item {% if 'tecnologia' == request.resolver_match.url_name or 'grupos' in request.resolver_match.namespaces or 'usuarios' in request.resolver_match.namespaces or 'tecnologia' == request.resolver_match.url_name %}active open{% endif %}">
-
 			<a href="javascript:void(0);" class="menu-link menu-toggle">
 				<i class="menu-icon tf-icons bx bx-cog"></i>
 				<div class="text-truncate" data-i18n="Layouts">Tecnología</div>
@@ -377,21 +370,10 @@
 						<div class="text-truncate" data-i18n="Without menu">Inicio</div>
 					</a>
 				</li>
-				<li class="menu-item {% if 'grupos' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'grupos:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Grupos</div>
-					</a>
-				</li>
-
-				<li class="menu-item {% if 'user' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'user:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Usuarios</div>
-					</a>
-				</li>
-
-				<li class="menu-item {% if '' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'tecnologia:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Inventario</div>
+				<li
+					class="menu-item {% if 'auditoria' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'auditoria:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without navbar">Auditoría</div>
 					</a>
 				</li>
 				<li
@@ -400,10 +382,19 @@
 						<div class="text-truncate" data-i18n="Without navbar">Averías</div>
 					</a>
 				</li>
-				<li
-					class="menu-item {% if 'auditoria' in request.resolver_match.namespaces and 'list' in request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'auditoria:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without navbar">Auditoría</div>
+				<li class="menu-item {% if 'grupos' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'grupos:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Grupos</div>
+					</a>
+				</li>
+				<li class="menu-item {% if '' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'tecnologia:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Inventario</div>
+					</a>
+				</li>
+				<li class="menu-item {% if 'user' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'user:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Usuarios</div>
 					</a>
 				</li>
 			</ul>

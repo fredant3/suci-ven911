@@ -20,11 +20,6 @@ urlpatterns = [
         "api/actividades/",
         include(("apps.planificacion.actividades.urls_apis", "api_actividades")),
     ),
-    path("llamadas/", include(("apps.planificacion.llamadas.urls", "llamadas"))),
-    path(
-        "api/llamadas/",
-        include(("apps.planificacion.llamadas.urls_apis", "api_llamadas")),
-    ),
     path(
         "infraestructuras/",
         include(("apps.planificacion.infraestructuras.urls", "infraestructuras")),

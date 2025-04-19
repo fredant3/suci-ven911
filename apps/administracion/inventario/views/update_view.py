@@ -24,7 +24,7 @@ class ArticuloUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administración"
-        context["submodule"] = "Artículos"
+        context["submodule"] = "Inventario"
         context["titleForm"] = f"Editar artículo - {self.kwargs['type'].capitalize()}"
         context["tag"] = "Guardar cambios"
         context["listUrl"] = reverse_lazy("articulos:list")

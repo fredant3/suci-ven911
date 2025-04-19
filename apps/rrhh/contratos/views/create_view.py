@@ -15,8 +15,6 @@ from rrhh.dotaciones.forms import DotacionForm
 from templates.sneat import TemplateLayout
 from django.http import HttpResponseRedirect
 
-from ..services import ContratoService
-
 from rrhh.empleados.models import Empleado
 from rrhh.contratos.models import Contrato
 from rrhh.educaciones.models import Educacion
@@ -24,6 +22,7 @@ from rrhh.familiares.models import Familiar
 from rrhh.dotaciones.models import Dotacion
 
 # from sueldos.models import Sueldo
+from users.auth.models import User
 
 
 class ContratoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
@@ -33,9 +32,9 @@ class ContratoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Huamana"
+        context["titlePage"] = "Gestión Humana"
         context["indexUrl"] = reverse_lazy("gestion_humana")
-        context["module"] = "Gestión Huamana"
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Contratos"
         context["titleForm"] = "Añadir una contrato nueva"
         context["tag"] = "Registrar"
@@ -82,26 +81,28 @@ class rrhhWizardView(SessionWizardView):
         datos_familiar = form_dict["familiar"].cleaned_data
         datos_dotacion = form_dict["dotacion"].cleaned_data
         datos_contrato = form_dict["contrato"].cleaned_data
-        # datos_sueldo = form_dict["sueldo"].cleaned_data
-
-        empleado = Empleado(**datos_empleado).save()
-        educacion = Educacion(**datos_educacion, empleado=empleado).save()
-        familiar = Familiar(**datos_familiar, empleado=empleado).save()
-        dotacion = Dotacion(**datos_dotacion, empleado=empleado).save()
-        contrato = Contrato(**datos_contrato, empleado=empleado).save()
-        # sueldo = Sueldo(**datos_sueldo, empleado=empleado).save()
 
         print("========================================")
-        print(
-            empleado,
-            educacion,
-            familiar,
-            dotacion,
-            contrato,
+        print(form_dict)
+        print("========================================")
+
+        user = User.objects.create_user(
+            username=datos_empleado["cedula"],
+            dni=datos_empleado["cedula"],
+            password="SUCI-ven911",
+            is_staff=True,
+            is_active=True,
+            is_superuser=True,
         )
-        print("========================================")
 
-        return HttpResponseRedirect("/rrhh/contratos")
+        empleado = Empleado.objects.create(**datos_empleado, usuario=user)
+        Educacion.objects.create(**datos_educacion, empleado=empleado)
+        Familiar.objects.create(**datos_familiar, empleado=empleado)
+        Dotacion.objects.create(**datos_dotacion, empleado=empleado)
+        Contrato.objects.create(**datos_contrato, empleado=empleado)
+
+        # Redirigir a la lista de contratos
+        return HttpResponseRedirect("/gestion-humana/contratos")
 
 
 # def __init__(self):

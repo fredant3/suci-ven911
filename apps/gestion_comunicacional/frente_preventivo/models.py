@@ -18,7 +18,7 @@ class FrentePreventivo(BaseModel):
         blank=True,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    tipo_actividad = CharField(max_length=2, choices=TIPO_ACTIVIDAD)
+    tipo_actividad = CharField(max_length=3, choices=TIPO_ACTIVIDAD)
     fecha_realizo = DateField("Fecha de realización")
     observaciones = TextField(
         "Observaciones",

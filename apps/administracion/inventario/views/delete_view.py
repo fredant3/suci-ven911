@@ -19,7 +19,7 @@ class ArticuloDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Administración"
         context["indexUrl"] = reverse_lazy("administracion")
         context["module"] = "Administración"
-        context["submodule"] = "Artículos"
+        context["submodule"] = "Inventario"
         context["titleForm"] = "Confirmar eliminación de artículo"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("articulos:list")
