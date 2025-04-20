@@ -24,9 +24,9 @@ class IncidenciasUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["submodule"] = "Actualizar Emergencias"
         context["titleForm"] = "Actualizar Emergancia"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("incidencias:list")
+        context["listUrl"] = reverse_lazy("operaciones_incidencias:list")
         context["urlForm"] = reverse_lazy(
-            "api_incidencias:update", args=[self.kwargs.get("pk")]
+            "api_operaciones_incidencias:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)

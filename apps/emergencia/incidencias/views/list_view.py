@@ -8,39 +8,35 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from ..services import TipoIncidenciaService
 
+
 class IncidenciasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "operaciones.ver_emergencia"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
-        columns = self.getColumns()  
+        columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipos de Incidencias"
         context["indexUrl"] = reverse_lazy("operaciones")
         context["module"] = "Tipos de Incidencias"
         context["submodule"] = "Inicio"
         context["createBtn"] = "Añadir"
-        context["createUrl"] = reverse_lazy("incidencias:create")
-        context["listApiUrl"] = reverse_lazy("api_incidencias:list")
-        context["updateUrl"] = reverse_lazy("incidencias:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("incidencias:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("incidencias:export_excel")
+        context["createUrl"] = reverse_lazy("operaciones_incidencias:create")
+        context["listApiUrl"] = reverse_lazy("api_operaciones_incidencias:list")
+        context["updateUrl"] = reverse_lazy("operaciones_incidencias:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("operaciones_incidencias:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("operaciones_incidencias:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
 
-    def getColumns(self):  
+    def getColumns(self):
         return [
-            {
-                "data": "id",
-                "title": "ID"
-            },
-            {
-                "data": "nombre_incidencia",
-                "title": "Tipo de Incidencia"
-            }
+            {"data": "id", "title": "ID"},
+            {"data": "nombre_incidencia", "title": "Tipo de Incidencia"},
         ]
+
 
 class IncidenciasListApiView(ListController, CheckPermisosMixin):
     permission_required = "emergrncia.ver_emergencia"

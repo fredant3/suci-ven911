@@ -21,8 +21,8 @@ class IncidenciasCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["submodule"] = "Agregar Tipos de Incidencias"
         context["titleForm"] = "Añadir un Tipo de Incidencis"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("incidencias:list")
-        context["urlForm"] = reverse_lazy("api_incidencias:create")
+        context["listUrl"] = reverse_lazy("operaciones_incidencias:list")
+        context["urlForm"] = reverse_lazy("api_operaciones_incidencias:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
