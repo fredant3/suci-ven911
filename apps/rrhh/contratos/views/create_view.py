@@ -10,7 +10,6 @@ from rrhh.educaciones.forms import EducacionForm
 from rrhh.familiares.forms import FamiliarForm
 from rrhh.dotaciones.forms import DotacionForm
 
-# rrhh.sueldos.forms import SueldoForm
 
 from templates.sneat import TemplateLayout
 from django.http import HttpResponseRedirect
@@ -21,7 +20,6 @@ from rrhh.educaciones.models import Educacion
 from rrhh.familiares.models import Familiar
 from rrhh.dotaciones.models import Dotacion
 
-# from sueldos.models import Sueldo
 from users.auth.models import User
 
 
@@ -52,7 +50,6 @@ class ContratoCreateApiView(CreateController, CheckPermisosMixin):
         FamiliarForm,
         DotacionForm,
         ContratoForm,
-        # SueldoForm, no guarda sueldo, modelo mal organizado
     ]
 
 
@@ -82,10 +79,6 @@ class rrhhWizardView(SessionWizardView):
         datos_dotacion = form_dict["dotacion"].cleaned_data
         datos_contrato = form_dict["contrato"].cleaned_data
 
-        print("========================================")
-        print(form_dict)
-        print("========================================")
-
         user = User.objects.create_user(
             username=datos_empleado["cedula"],
             dni=datos_empleado["cedula"],
@@ -101,9 +94,4 @@ class rrhhWizardView(SessionWizardView):
         Dotacion.objects.create(**datos_dotacion, empleado=empleado)
         Contrato.objects.create(**datos_contrato, empleado=empleado)
 
-        # Redirigir a la lista de contratos
         return HttpResponseRedirect("/gestion-humana/contratos")
-
-
-# def __init__(self):
-# self.service = ContratoService()
