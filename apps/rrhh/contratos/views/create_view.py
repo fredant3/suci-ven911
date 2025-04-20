@@ -85,9 +85,9 @@ class rrhhWizardView(SessionWizardView):
                 username=datos_empleado["cedula"],
                 dni=datos_empleado["cedula"],
                 password=datos_empleado["cedula"],
-                is_staff=True,
-                is_active=True,
-                is_superuser=True,
+                is_staff=False,
+                is_active=False,
+                is_superuser=False,
             )
 
         empleado = Empleado.objects.create(**datos_empleado, usuario=user)

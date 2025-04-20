@@ -34,6 +34,13 @@ class UserForm(FormBase):
             content_type__app_label__in=["auth", "admin", "sessions", "contenttypes"]
         )
 
+    def clean_password(self):
+        # Si el campo de contraseña está vacío y es una actualización, mantener la existente
+        password = self.cleaned_data.get("password")
+        if not password and self.instance.pk:
+            return self.instance.password  # Mantener la contraseña actual
+        return password
+
     is_active = ChoiceField(
         choices=BOOLEAN_CHOICES,
         widget=Select,

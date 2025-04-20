@@ -21,6 +21,7 @@ class UserService(CrudService):
             user_data = {
                 "id": user.id,
                 "username": user.username,
+                "password": user.password,
                 "dni": user.dni,
                 "is_active": "Activo" if user.is_active else "Inactivo",
                 "empleado_nombre": "No asignado",
