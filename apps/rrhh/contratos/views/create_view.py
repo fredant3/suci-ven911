@@ -79,14 +79,16 @@ class rrhhWizardView(SessionWizardView):
         datos_dotacion = form_dict["dotacion"].cleaned_data
         datos_contrato = form_dict["contrato"].cleaned_data
 
-        user = User.objects.create_user(
-            username=datos_empleado["cedula"],
-            dni=datos_empleado["cedula"],
-            password="SUCI-ven911",
-            is_staff=True,
-            is_active=True,
-            is_superuser=True,
-        )
+        user = User.objects.filter(dni=datos_empleado["cedula"]).first()
+        if user is None:
+            user = User.objects.create_user(
+                username=datos_empleado["cedula"],
+                dni=datos_empleado["cedula"],
+                password=datos_empleado["cedula"],
+                is_staff=True,
+                is_active=True,
+                is_superuser=True,
+            )
 
         empleado = Empleado.objects.create(**datos_empleado, usuario=user)
         Educacion.objects.create(**datos_educacion, empleado=empleado)
