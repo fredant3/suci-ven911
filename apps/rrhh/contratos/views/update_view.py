@@ -1,39 +1,132 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView
+from formtools.wizard.views import SessionWizardView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
-from helpers.ControllerMixin import UpdateController
-
 from templates.sneat import TemplateLayout
+from django.http import HttpResponseRedirect
 
-from ..forms import ContratoForm
-from ..models import Contrato
-from ..services import ContratoService
+from rrhh.empleados.models import Empleado
+from rrhh.contratos.models import Contrato
+from rrhh.educaciones.models import Educacion
+from rrhh.familiares.models import Familiar
+from rrhh.dotaciones.models import Dotacion
+
+from rrhh.contratos.forms import ContratoForm
+from rrhh.empleados.forms import EmpleadoForm
+from rrhh.educaciones.forms import EducacionForm
+from rrhh.familiares.forms import FamiliarForm
+from rrhh.dotaciones.forms import DotacionForm
+
+from helpers.ControllerMixin import UpdateController
+from rrhh.contratos.services import ContratoService
 
 
-class ContratoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+class ContratoUpdateWizardView(
+    LoginRequiredMixin, CheckPermisosMixin, SessionWizardView
+):
     permission_required = "rrhh.contratos.editar_contrato"
-    form_class = ContratoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "widzard/indexrrhh.html"
+    form_list = [
+        ("empleado", EmpleadoForm),
+        ("educacion", EducacionForm),
+        ("familiar", FamiliarForm),
+        ("dotacion", DotacionForm),
+        ("contrato", ContratoForm),
+    ]
+
+    def get_object_dict(self):
+        contract_id = self.kwargs.get("pk")
+        contract = Contrato.objects.get(pk=contract_id)
+        employee = contract.empleado
+
+        education = Educacion.objects.filter(empleado=employee).first()
+        family = Familiar.objects.filter(empleado=employee).first()
+        dotacion = Dotacion.objects.filter(empleado=employee).first()
+
+        return {
+            "contract": contract,
+            "employee": employee,
+            "education": education,
+            "family": family,
+            "dotacion": dotacion,
+        }
+
+    def get_form_instance(self, step):
+        objects = self.get_object_dict()
+
+        if step == "empleado":
+            return objects["employee"]
+        elif step == "educacion":
+            return objects["education"] or Educacion(empleado=objects["employee"])
+        elif step == "familiar":
+            return objects["family"] or Familiar(empleado=objects["employee"])
+        elif step == "dotacion":
+            return objects["dotacion"] or Dotacion(empleado=objects["employee"])
+        elif step == "contrato":
+            return objects["contract"]
+        return None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestión Humana"
+        context["titlePage"] = "Actualizar Contrato"
         context["indexUrl"] = reverse_lazy("gestion_humana")
         context["module"] = "Gestión Humana"
-        context["submodule"] = "Contratos"
-        context["titleForm"] = "Actualizar contrato"
-        context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("contratos:list")
-        context["urlForm"] = reverse_lazy(
-            "api_contratos:update", args=[self.kwargs.get("pk")]
-        )
-        context["methodForm"] = "PUT"
+        context["submodule"] = "Contrato"
+        context["action"] = "update"
+        context["contract_id"] = self.kwargs.get("pk")
         return TemplateLayout.init(self, context)
 
-    def get_queryset(self):
-        id = self.kwargs.get("pk")
-        return Contrato.objects.filter(pk=id)
+    def done(self, form_list, form_dict, **kwargs):
+        objects = self.get_object_dict()
+
+        employee_form = form_dict["empleado"]
+        if employee_form.has_changed():
+            employee_data = employee_form.cleaned_data
+        for field, value in employee_data.items():
+            setattr(objects["employee"], field, value)
+        objects["employee"].save()
+
+        if hasattr(objects["employee"], "usuario") and objects["employee"].usuario:
+            user = objects["employee"].usuario
+            if "cedula" in employee_data:
+                user.username = employee_data["cedula"]
+                user.dni = employee_data["cedula"]
+            user.save()
+
+        education_form = form_dict["educacion"]
+        education_data = education_form.cleaned_data
+        if objects["education"]:
+            for field, value in education_data.items():
+                setattr(objects["education"], field, value)
+            objects["education"].save()
+        else:
+            Educacion.objects.create(**education_data, empleado=objects["employee"])
+
+        family_form = form_dict["familiar"]
+        family_data = family_form.cleaned_data
+        if objects["family"]:
+            for field, value in family_data.items():
+                setattr(objects["family"], field, value)
+            objects["family"].save()
+        else:
+            Familiar.objects.create(**family_data, empleado=objects["employee"])
+
+        dotacion_form = form_dict["dotacion"]
+        dotacion_data = dotacion_form.cleaned_data
+        if objects["dotacion"]:
+            for field, value in dotacion_data.items():
+                setattr(objects["dotacion"], field, value)
+            objects["dotacion"].save()
+        else:
+            Dotacion.objects.create(**dotacion_data, empleado=objects["employee"])
+
+        contract_form = form_dict["contrato"]
+        if contract_form.has_changed():
+            for field, value in contract_form.cleaned_data.items():
+                setattr(objects["contract"], field, value)
+            objects["contract"].save()
+
+        return HttpResponseRedirect(reverse_lazy("contratos:list"))
 
 
 class ContratoUpdateApiView(UpdateController, CheckPermisosMixin):

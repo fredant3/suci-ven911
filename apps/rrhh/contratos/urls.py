@@ -3,7 +3,7 @@ from rrhh.contratos.views.create_view import rrhhWizardView
 from rrhh.contratos.views.create_view import ContratoCreateView
 from rrhh.contratos.views.delete_view import ContratoDeleteView
 from rrhh.contratos.views.list_view import ContratoListView
-from rrhh.contratos.views.update_view import ContratoUpdateView
+from rrhh.contratos.views.update_view import ContratoUpdateWizardView
 from rrhh.contratos.views.export_view import ContratoExcelView
 
 urlpatterns = [
@@ -29,7 +29,7 @@ urlpatterns = [
     ),
     path(
         "<int:pk>/update",
-        ContratoUpdateView.as_view(),
+        ContratoUpdateWizardView.as_view(),
         name="update",
     ),
     path(

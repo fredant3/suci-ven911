@@ -67,8 +67,8 @@ class rrhhWizardView(SessionWizardView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Contrato"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "rrhh"
+        context["indexUrl"] = reverse_lazy("gestion_humana")
+        context["module"] = "Gestión Humana"
         context["submodule"] = "Contrato"
         return TemplateLayout.init(self, context)
 
