@@ -27,7 +27,9 @@ TIPO_HIJO = (
 
 
 class Familiar(BaseModel):
-    parentezco = CharField("Parentezco", max_length=7, choices=PARENTEZCO)
+    parentezco = CharField(
+        "Parentezco", max_length=7, choices=PARENTEZCO, blank=True, null=True
+    )
     tipo_hijo = CharField(
         "Tipo de Hijo", max_length=11, choices=TIPO_HIJO, null=True, blank=True
     )
@@ -35,6 +37,8 @@ class Familiar(BaseModel):
         "Discapacidad",
         choices=BOOLEAN_CHOICES,
         default=BOOLEAN_CHOICES[1],
+        blank=True,
+        null=True,
     )
     nombres = CharField(
         "Nombres del Familiar",
@@ -44,6 +48,8 @@ class Familiar(BaseModel):
             MaxLengthValidator(90),
             UnicodeAlphaSpaceValidator(),
         ],
+        blank=True,
+        null=True,
     )
     apellidos = CharField(
         "Apellidos del Familiar",
@@ -53,6 +59,8 @@ class Familiar(BaseModel):
             MaxLengthValidator(90),
             UnicodeAlphaSpaceValidator(),
         ],
+        blank=True,
+        null=True,
     )
     cedula = CharField(
         "Cédula de Identidad",
@@ -63,11 +71,23 @@ class Familiar(BaseModel):
             MaxLengthValidator(14),
             CedulaVenezolanaValidator(),
         ],
+        blank=True,
+        null=True,
     )
-    fecha_nacimiento = DateField("Fecha de nacimiento")
-    sexo = CharField("Género", max_length=1, choices=SEXO_CHOICES)
-    estado_civil = CharField("Estado civil", max_length=1, choices=ESTADO_CIVIL_CHOICES)
-    empleado = ForeignKey(Empleado, on_delete=CASCADE, verbose_name="Empleado")
+    fecha_nacimiento = DateField("Fecha de nacimiento", blank=True, null=True)
+    sexo = CharField(
+        "Género", max_length=1, choices=SEXO_CHOICES, blank=True, null=True
+    )
+    estado_civil = CharField(
+        "Estado civil",
+        max_length=1,
+        choices=ESTADO_CIVIL_CHOICES,
+        blank=True,
+        null=True,
+    )
+    empleado = ForeignKey(
+        Empleado, on_delete=CASCADE, verbose_name="Empleado", blank=True, null=True
+    )
     observacion = CharField(
         "Observaciones",
         max_length=150,
