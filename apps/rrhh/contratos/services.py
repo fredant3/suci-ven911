@@ -6,6 +6,15 @@ from administracion.departamentos.repositories import DepartamentoRepository
 from administracion.sedes.repositories import SedeRepository
 from rrhh.cargos.repositories import CargoRepository
 
+from django.db import transaction
+from django.core.exceptions import ValidationError
+from users.auth.models import User
+from rrhh.empleados.models import Empleado
+from rrhh.educaciones.models import Educacion
+from rrhh.familiares.models import Familiar
+from rrhh.dotaciones.models import Dotacion
+import datetime
+
 
 class ContratoService(CrudService):
     select = (
@@ -42,3 +51,17 @@ class ContratoService(CrudService):
         payload["sede"] = self.search_sede(payload.get("sede"))
 
         return payload
+
+    def destroyer(self, payload):
+        deleted_at = {
+            "deleted_by": payload.deleted_by,
+            "updated_by": payload.updated_by,
+            "deleted_at": datetime.datetime.now(),
+            "updated_at": datetime.datetime.now(),
+        }
+        Empleado.objects.filter(id=payload.empleado.id).update(**deleted_at)
+        User.objects.filter(dni=payload.empleado.cedula).update(is_active=False)
+        Educacion.objects.filter(id=payload.empleado.id).update(**deleted_at)
+        Familiar.objects.filter(id=payload.empleado.id).update(**deleted_at)
+        Dotacion.objects.filter(id=payload.empleado.id).update(**deleted_at)
+        return self.repository.delete(payload)

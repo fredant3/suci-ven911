@@ -9,6 +9,8 @@ from templates.sneat import TemplateLayout
 from ..forms import ContratoForm
 from ..models import Contrato
 from ..services import ContratoService
+from django.contrib.messages import error
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ContratoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
