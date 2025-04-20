@@ -2,7 +2,7 @@ from django.urls import path
 from potencia.uri.view.create_view import InfogeneralWizardView
 from potencia.uri.view.delete_view import UriDeleteView
 from potencia.uri.view.list_view import UriListView
-from potencia.uri.view.update_view import UriUpdateView
+from potencia.uri.view.update_view import UriUpdateWizardView
 
 urlpatterns = [
     path(
@@ -22,7 +22,7 @@ urlpatterns = [
     ),
     path(
         "<int:pk>/update",
-        UriUpdateView.as_view(),
+        UriUpdateWizardView.as_view(),
         name="update",
     ),
     path(
