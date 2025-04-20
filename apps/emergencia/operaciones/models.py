@@ -7,7 +7,7 @@ from django.db.models import (
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel, ESTADOS_CHOICES
 from emergencia.incidencias.models import TipoIncidencia
-from emergencia.organismo.models import OrganismoCompetente
+from emergencia.organismo.models import Organismo
 from helpers.validForm import (
     UnicodeAlphaSpaceValidator,
     TextValidator,
@@ -43,7 +43,7 @@ class Emergencia(BaseModel):
     estado = CharField("Estado", name="estado", max_length=2, choices=ESTADOS_CHOICES)
     municipio = CharField("Municipio", name="municipio", max_length=90)
     parroquia = CharField("Parroquia", name="parroquia", max_length=90)
-    organismo = ForeignKey(OrganismoCompetente, on_delete=CASCADE)
+    organismo = ForeignKey(Organismo, on_delete=CASCADE)
     incidencia = ForeignKey(TipoIncidencia, on_delete=CASCADE)
     direccion_incidencia = TextField(
         "Dirección de la incidencia",

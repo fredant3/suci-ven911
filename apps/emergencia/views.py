@@ -32,7 +32,7 @@ class EmergenciaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
         context["submoduleList"] = (
             ("Operaciones", reverse_lazy("operaciones:list")),
-            ("Incidencias", reverse_lazy("incidencias:list")),
-            # ("Organismos", reverse_lazy("organismos:list")),
+            ("Incidencias", reverse_lazy("operaciones_incidencias:list")),
+            ("Organismos", reverse_lazy("organismo:list")),
         )
         return TemplateLayout.init(self, context)

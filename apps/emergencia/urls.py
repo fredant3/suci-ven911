@@ -23,4 +23,15 @@ urlpatterns = [
             ("apps.emergencia.incidencias.urls_apis", "api_operaciones_incidencias")
         ),
     ),
+    # Rutas para organismo
+        path(
+        "organismo/",
+        include(("apps.emergencia.organismo.urls_webs", "organismo")),
+    ),
+    path(
+        "api/organismo/",
+        include(
+            ("apps.emergencia.organismo.urls_apis", "api_organismo")
+        ),
+    ),
 ]

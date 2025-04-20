@@ -2,7 +2,7 @@ from django.db.models import CharField
 from helpers.BaseModelMixin import BaseModel
 
 
-class OrganismoCompetente(BaseModel):
+class Organismo(BaseModel):
     nombre = CharField(max_length=255)
 
     def __str__(self):
@@ -10,9 +10,9 @@ class OrganismoCompetente(BaseModel):
 
     class Meta:
         permissions = [
-            ("listar_organismo_emergencia", "Puede listar tipo incidencia"),
-            ("agregar_organismo_emergencia", "Puede agregar tipo incidencia"),
-            ("ver_organismo_emergencia", "Puede ver tipo incidencia"),
-            ("editar_organismo_emergencia", "Puede actualizar tipo incidencia"),
-            ("eliminar_organismo_emergencia", "Puede eliminar tipo incidencia"),
+            ("listar_organismo_emergencia", "Puede listar tipo organismo"),
+            ("agregar_organismo_emergencia", "Puede agregar tipo organismo"),
+            ("ver_organismo_emergencia", "Puede ver tipo organismo"),
+            ("editar_organismo_emergencia", "Puede actualizar tipo organismo"),
+            ("eliminar_organismo_emergencia", "Puede eliminar tipo organismo"),
         ]

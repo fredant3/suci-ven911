@@ -1,5 +1,5 @@
 from emergencia.incidencias.models import TipoIncidencia
-from emergencia.organismo.models import OrganismoCompetente
+from emergencia.organismo.models import Organismo
 
 
 TIPOS_DE_INCIDENCIAS = ["Robo", "Asesinato", "Violencia", "Estafa"]
@@ -16,5 +16,5 @@ class EmergenciaFake:
 
     def organismo():
         for field in TIPOS_DE_ORGANISMO:
-            model = OrganismoCompetente.objects.create(nombre=field)
+            model = Organismo.objects.create(nombre=field)
             print(f"Tipo Incidencia {model.nombre} registrado")
