@@ -16,7 +16,7 @@ class TecnologiaService(CrudService):
         return query
 
     def getAll(
-        self, draw, start, length, search=None, orderBy=None, orderAsc=None, select=("")
+        self, draw, start, length, search=None, orderBy=None, orderAsc=None, select=(""), columns=[],
     ):
         select = select if select else self.select
         search = self.criteria(search)
