@@ -16,6 +16,7 @@ class FrentePreventivoForm(FormBase):
     #     choices=BOOLEAN_CHOICES,
     #     default=True,
     # )
+    fecha_realizo = FormBase.create_date_field("fecha_realizo", "Fecha de realización")
 
     class Meta:
         model = FrentePreventivo
