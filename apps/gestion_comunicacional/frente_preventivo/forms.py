@@ -36,22 +36,10 @@ class FrentePreventivoForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "donde_desarrollo": TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Ejem. vuelvan caras",
-                }
-            ),
             "personas_beneficiadas": TextInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Descripción de la actividad",
-                }
-            ),
-            "tipo_actividad": TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "nombre de la población abordada",
                 }
             ),
             "observaciones": Textarea(
