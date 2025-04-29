@@ -5,7 +5,7 @@ from django.db.models import (
 )
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator
+from helpers.validForm import TextValidator, Validate_pdf
 from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
@@ -34,7 +34,7 @@ class Normativa(BaseModel):
         max_length=64,
         validators=[MinLengthValidator(3), MaxLengthValidator(64), TextValidator()],
     )
-    file = FileField("Archivo", upload_to="normativas/")
+    file = FileField("Archivo", upload_to="normativas/", validators=[Validate_pdf])
     date = DateField("Fecha", blank=True)
     progre = CharField("Progreso:", max_length=3, choices=PROGRESS_CHOICES, default="0")
     estado = CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")

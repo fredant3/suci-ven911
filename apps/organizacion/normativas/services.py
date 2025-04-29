@@ -1,6 +1,8 @@
 from helpers.CrudMixin import CrudService
 from organizacion.normativas.repositories import NormativaRepository
 from django.db.models import Q
+import os
+from django.conf import settings
 
 
 class NormativaService(CrudService):
@@ -17,7 +19,14 @@ class NormativaService(CrudService):
         read = self.reader(data.id)
         file = read.file
         if file:
-            self.repository.remove_media(file.path)
+            try:
+                file_path = os.path.join(settings.MEDIA_ROOT, file.name)
+                if os.path.exists(file_path) and file_path.startswith(
+                    settings.MEDIA_ROOT
+                ):
+                    self.repository.remove_media(file.name)
+            except Exception as e:
+                print(f"Error al eliminar archivo: {e}")
 
     def criteria(self, search, columns):
         query = Q()

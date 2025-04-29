@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
+import os
 
 
 # Valida que el valor sea un número de cédula válido (solo números y guiones).
@@ -533,3 +534,10 @@ class CurrencyValidator:
             and (self.max_decimal == other.max_decimal)
             and (self.messages == other.messages)
         )
+
+
+def Validate_pdf(value):
+    ext = os.path.splitext(value.name)[1]  # Obtiene la extensión del archivo
+    valid_extensions = [".pdf"]
+    if not ext.lower() in valid_extensions:
+        raise ValidationError("Solo se permiten archivos PDF.")

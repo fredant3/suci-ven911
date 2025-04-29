@@ -33,6 +33,7 @@ class NormativaForm(FormBase):
                 attrs={
                     "class": "form-control mb-3",
                     "placeholder": "Seleccione el archivo",
+                    "accept": ".pdf",
                 }
             ),
         }
