@@ -6,8 +6,9 @@ services:
       - .:/app
     ports:
       - "${RUNSERVER_PORT}:${RUNSERVER_PORT}"
-    environment:
-      - DEBUG=${DEBUG}
+    env_file:
+      - .env
+     
     depends_on:
       - db
 
