@@ -90,7 +90,7 @@ class InfogeneralWizardView(SessionWizardView):
         print("========================================")
 
         registro.save()
-        return HttpResponseRedirect("/potencia/unidad-respuesta-inmediata")
+        return HttpResponseRedirect("//uri")
 
     # def __init__(self):
     # self.service = UriService()

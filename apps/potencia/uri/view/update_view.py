@@ -63,7 +63,7 @@ class UriUpdateWizardView(LoginRequiredMixin, CheckPermisosMixin, SessionWizardV
                 setattr(uri, field, value)
 
         uri.save()
-        return HttpResponseRedirect("/potencia/unidad-respuesta-inmediata")
+        return HttpResponseRedirect("/uri/unidad-respuesta-inmediata")
 
 
 class UriUpdateApiView(UpdateController, CheckPermisosMixin):
