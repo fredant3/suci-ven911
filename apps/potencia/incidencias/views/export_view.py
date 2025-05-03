@@ -6,33 +6,9 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
 from potencia.incidencias.models import Incidencia
+from helpers.BaseModelMixin import ESTADOS_CHOICES
 
-ESTADOS_CHOICES = {
-    "1": "Amazonas",
-    "2": "Anzoátegui",
-    "3": "Apure",
-    "4": "Aragua",
-    "5": "Barinas",
-    "6": "Bolívar",
-    "7": "Carabobo",
-    "8": "Cojedes",
-    "9": "Delta Amacuro",
-    "10": "Falcón",
-    "11": "Guárico",
-    "12": "Lara",
-    "13": "Mérida",
-    "14": "Miranda",
-    "15": "Monagas",
-    "16": "Nueva Esparta",
-    "17": "Portuguesa",
-    "18": "Sucre",
-    "19": "Táchira",
-    "20": "Trujillo",
-    "21": "Vargas",
-    "22": "Yaracuy",
-    "23": "Zulia",
-    "24": "Distrito Capital",
-}
+ESTADOS_CHOICES = dict(ESTADOS_CHOICES)
 
 
 class IncidenciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
