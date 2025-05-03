@@ -2,6 +2,7 @@ from helpers.CrudMixin import CrudService
 from tecnologia.usuarios.repositories import UserRepository
 
 
+# TODO: Al cambiar la contraseña mediante el formulario de usuario, esta se guarda en texto plano sin encriptar.
 class UserService(CrudService):
     def __init__(self):
         self.repository = UserRepository()
