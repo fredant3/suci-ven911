@@ -19,7 +19,7 @@ class CompraExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             Compra.objects.select_related("articulo")
             .all()
             .values(
-                "articulo__descripcion",
+                "articulo__nombre",
                 "n_orden",
                 "valor_bs",
                 "created_at",  # Usamos el campo created_at de BaseModel
