@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
+import os
 
 
 # Valida que el valor sea un número de cédula válido (solo números y guiones).
@@ -390,32 +391,22 @@ class CurrencyValidator:
     """
 
     messages = {
-        "invalid": _(
-            "Formato de moneda inválido. Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"
-        ),
-        "invalid_format": _("El formato debe ser: %(expected_format)s"),
-        "negative": _("El valor no puede ser negativo."),
-        "max_decimal": _("No puede tener más de %(max)d decimales."),
+        "invalid": "Formato de moneda inválido. Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €",
+        "invalid_format": "El formato debe ser: %(expected_format)s",
+        "negative": "El valor no puede ser negativo.",
+        "max_decimal": "No puede tener más de %(max)d decimales.",
     }
 
-    # Expresiones regulares para diferentes formatos de moneda
     CURRENCY_PATTERNS = {
-        "bs": r"^(Bs\.?)\s*(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?)$",  # Bolívares
-        "usd": r"^(\$|USD\s*)(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)$",  # Dólares
-        "eur": r"^(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?)\s*(€|EUR)?$",  # Euros
-        "general": r"^(\d{1,3}(?:[.,\s]\d{3})*(?:[.,]\d{1,2})?)$",  # Formato general
+        "bs": r"^(Bs\.?)\s*(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?)$",
+        "usd": r"^(\$|USD\s*)(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)$",
+        "eur": r"^(\d{1,3}(?:[\.\s]\d{3})*(?:,\d{1,2})?)\s*(€|EUR)?$",
+        "general": r"^(\d{1,3}(?:[.,\s]\d{3})*(?:[.,]\d{1,2})?)$",
     }
 
     def __init__(
         self, currency_type=None, allow_negative=False, max_decimal=2, message=None
     ):
-        """
-        Args:
-            currency_type (str): Tipo de moneda específico ('bs', 'usd', 'eur' o None para cualquiera)
-            allow_negative (bool): Si permite valores negativos
-            max_decimal (int): Máximo número de decimales permitidos
-            message (str): Mensaje personalizado para el error 'invalid'
-        """
         self.currency_type = currency_type.lower() if currency_type else None
         self.allow_negative = allow_negative
         self.max_decimal = max_decimal
@@ -426,37 +417,25 @@ class CurrencyValidator:
 
     def __call__(self, value):
         if isinstance(value, (int, float)):
-            # Si es un número, validamos directamente
             self._validate_numeric(value)
             return
 
         str_value = str(value).strip()
 
-        # Verificar si es negativo
         if not self.allow_negative and "-" in str_value:
-            raise ValidationError(
-                self.messages["negative"],
-                code="negative",
-            )
+            raise ValidationError(self.messages["negative"], code="negative")
 
-        # Limpiar múltiples espacios
         str_value = re.sub(r"\s+", " ", str_value)
 
-        # Validar según el tipo de moneda específico o probar todos los formatos
         if self.currency_type:
             self._validate_specific_currency(str_value)
         else:
             self._validate_general_currency(str_value)
 
     def _validate_numeric(self, value):
-        """Valida valores numéricos directamente"""
         if not self.allow_negative and value < 0:
-            raise ValidationError(
-                self.messages["negative"],
-                code="negative",
-            )
+            raise ValidationError(self.messages["negative"], code="negative")
 
-        # Verificar decimales para valores numéricos
         if isinstance(value, float):
             decimal_part = str(value).split(".")[1]
             if len(decimal_part) > self.max_decimal:
@@ -467,7 +446,6 @@ class CurrencyValidator:
                 )
 
     def _validate_specific_currency(self, value):
-        """Valida un tipo de moneda específico"""
         pattern = self.CURRENCY_PATTERNS.get(self.currency_type)
 
         if not pattern or not re.match(pattern, value, flags=re.IGNORECASE):
@@ -476,7 +454,6 @@ class CurrencyValidator:
                 "usd": "$1,234.56 o USD 1,234.56",
                 "eur": "1.234,56 € o 1 234,56 EUR",
             }
-
             raise ValidationError(
                 self.messages["invalid_format"],
                 code="invalid_format",
@@ -485,40 +462,52 @@ class CurrencyValidator:
                 },
             )
 
-        # Validar decimales
-        self._validate_decimal_part(value)
+        self._validate_decimal_part(value, self.currency_type)
 
     def _validate_general_currency(self, value):
-        """Valida cualquier formato de moneda reconocido"""
         matched = False
-
         for pattern in self.CURRENCY_PATTERNS.values():
             if re.match(pattern, value, flags=re.IGNORECASE):
                 matched = True
                 break
 
-        if not matched:
-            # Intentar con formato numérico simple
-            if not re.match(r"^-?\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?$", value):
-                raise ValidationError(
-                    self.messages["invalid"],
-                    code="invalid",
-                )
+        if not matched and not re.match(
+            r"^-?\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?$", value
+        ):
+            raise ValidationError(self.messages["invalid"], code="invalid")
 
-        # Validar decimales
-        self._validate_decimal_part(value)
+        # Determinar el tipo de moneda para validar decimales correctamente
+        currency_type = None
+        if re.match(self.CURRENCY_PATTERNS["bs"], value, re.IGNORECASE):
+            currency_type = "bs"
+        elif re.match(self.CURRENCY_PATTERNS["usd"], value, re.IGNORECASE):
+            currency_type = "usd"
+        elif re.match(self.CURRENCY_PATTERNS["eur"], value, re.IGNORECASE):
+            currency_type = "eur"
 
-    def _validate_decimal_part(self, value):
-        """Valida la parte decimal del valor"""
-        # Encontrar el separador decimal (puede ser . o ,)
-        decimal_sep = "," if "," in value else "." if "." in value else None
+        self._validate_decimal_part(value, currency_type)
+
+    def _validate_decimal_part(self, value, currency_type=None):
+        # Determinar el separador decimal basado en el tipo de moneda
+        if currency_type == "usd":
+            # Para USD, el punto es decimal y la coma es miles
+            decimal_sep = "." if "." in value else None
+        elif currency_type in ("bs", "eur"):
+            # Para BS y EUR, la coma es decimal y el punto es miles
+            decimal_sep = "," if "," in value else None
+        else:
+            # Para formato general, tomar el último separador
+            last_dot = value.rfind(".")
+            last_comma = value.rfind(",")
+            decimal_sep = (
+                "." if last_dot > last_comma else "," if last_comma > last_dot else None
+            )
 
         if decimal_sep:
-            # Extraer parte decimal
             decimal_part = value.split(decimal_sep)[-1]
-            decimal_part = re.sub(r"[^\d]", "", decimal_part)
+            decimal_digits = re.sub(r"[^\d]", "", decimal_part)
 
-            if len(decimal_part) > self.max_decimal:
+            if len(decimal_digits) > self.max_decimal:
                 raise ValidationError(
                     self.messages["max_decimal"],
                     code="max_decimal",
@@ -533,3 +522,10 @@ class CurrencyValidator:
             and (self.max_decimal == other.max_decimal)
             and (self.messages == other.messages)
         )
+
+
+def Validate_pdf(value):
+    ext = os.path.splitext(value.name)[1]  # Obtiene la extensión del archivo
+    valid_extensions = [".pdf"]
+    if not ext.lower() in valid_extensions:
+        raise ValidationError("Solo se permiten archivos PDF.")
