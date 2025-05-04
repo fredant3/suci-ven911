@@ -17,10 +17,10 @@ class DenunciaService(CrudService):
         ("direccion", "direccion_denunciante"),
     ]
     denunciado_fields = [
-        ("nombres", "nombres_denunciante"),
-        ("apellidos", "apellidos_denunciante"),
-        ("cedula", "cedula_denunciante"),
-        ("telefono", "telefono_denunciante"),
+        ("nombres", "nombres_denunciado"),
+        ("apellidos", "apellidos_denunciado"),
+        ("cedula", "cedula_denunciado"),
+        ("telefono", "telefono_denunciado"),
         ("email", "email_denunciado"),
     ]
 
