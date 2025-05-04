@@ -34,8 +34,6 @@ class ContratoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
 
-    # corregir el buscador de gestion humana
-
     def getColumns(self):
         return [
             {
