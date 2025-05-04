@@ -21,7 +21,6 @@ from potencia.uri.forms import (
 )
 
 
-# TODO: probar
 class UriUpdateWizardView(LoginRequiredMixin, CheckPermisosMixin, SessionWizardView):
     permission_required = "potencia.uri.editar_uri"
     template_name = "widzard/index.html"

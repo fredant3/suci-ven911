@@ -10,15 +10,13 @@ urlpatterns = [
     ),
     path(
         "asignaciones/",
-        include(
-            ("apps.presupuesto.asignacion.urls", "presupuesto_asignaciones")
-        ),  # TODO: Revisar el modulo asignaciones (presupuesto | administracion)
+        include(("apps.presupuesto.asignacion.urls", "presupuesto_asignaciones")),
     ),
     path(
         "api/asignaciones/",
         include(
             ("apps.presupuesto.asignacion.urls_apis", "api_presupuesto_asignaciones")
-        ),  # TODO: Revisar el modulo asignaciones (presupuesto | administracion)
+        ),
     ),
     path("cedentes/", include(("apps.presupuesto.cedente.urls", "cedentes"))),
     path(
