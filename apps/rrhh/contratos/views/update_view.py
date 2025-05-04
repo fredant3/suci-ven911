@@ -79,20 +79,22 @@ class ContratoUpdateWizardView(
     def done(self, form_list, form_dict, **kwargs):
         objects = self.get_object_dict()
 
+        # Procesar empleado
         employee_form = form_dict["empleado"]
+        employee_data = employee_form.cleaned_data
         if employee_form.has_changed():
-            employee_data = employee_form.cleaned_data
-        for field, value in employee_data.items():
-            setattr(objects["employee"], field, value)
-        objects["employee"].save()
+            for field, value in employee_data.items():
+                setattr(objects["employee"], field, value)
+            objects["employee"].save()
 
-        if hasattr(objects["employee"], "usuario") and objects["employee"].usuario:
-            user = objects["employee"].usuario
-            if "cedula" in employee_data:
-                user.username = employee_data["cedula"]
-                user.dni = employee_data["cedula"]
-            user.save()
+            if hasattr(objects["employee"], "usuario") and objects["employee"].usuario:
+                user = objects["employee"].usuario
+                if "cedula" in employee_data:
+                    user.username = employee_data["cedula"]
+                    user.dni = employee_data["cedula"]
+                user.save()
 
+        # Procesar educación
         education_form = form_dict["educacion"]
         education_data = education_form.cleaned_data
         if objects["education"]:
@@ -102,6 +104,7 @@ class ContratoUpdateWizardView(
         else:
             Educacion.objects.create(**education_data, empleado=objects["employee"])
 
+        # Procesar familiar
         family_form = form_dict["familiar"]
         family_data = family_form.cleaned_data
         if objects["family"]:
@@ -111,6 +114,7 @@ class ContratoUpdateWizardView(
         else:
             Familiar.objects.create(**family_data, empleado=objects["employee"])
 
+        # Procesar dotación
         dotacion_form = form_dict["dotacion"]
         dotacion_data = dotacion_form.cleaned_data
         if objects["dotacion"]:
@@ -120,9 +124,11 @@ class ContratoUpdateWizardView(
         else:
             Dotacion.objects.create(**dotacion_data, empleado=objects["employee"])
 
+        # Procesar contrato
         contract_form = form_dict["contrato"]
         if contract_form.has_changed():
-            for field, value in contract_form.cleaned_data.items():
+            contract_data = contract_form.cleaned_data
+            for field, value in contract_data.items():
                 setattr(objects["contract"], field, value)
             objects["contract"].save()
 
