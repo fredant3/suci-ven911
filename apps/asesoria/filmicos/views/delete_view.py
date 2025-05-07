@@ -18,8 +18,8 @@ class RegistroFilmicoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteVi
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Registro Filmico"
-        context["titleForm"] = "Eliminar registro filmico"
+        context["submodule"] = "Registro Fílmico"
+        context["titleForm"] = "Eliminar registro fílmico"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("filmicos:list")
         context["urlDelete"] = reverse_lazy(

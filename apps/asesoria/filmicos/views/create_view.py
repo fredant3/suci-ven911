@@ -19,8 +19,8 @@ class RegistroFilmicoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateVi
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Registro Filmico"
-        context["titleForm"] = "Añadir un registro filmico"
+        context["submodule"] = "Registro Fílmico"
+        context["titleForm"] = "Añadir un registro fílmico"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("filmicos:list")
         context["urlForm"] = reverse_lazy("api_filmicos:create")

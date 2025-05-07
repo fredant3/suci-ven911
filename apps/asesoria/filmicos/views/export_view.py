@@ -24,7 +24,7 @@ class RegistroFilmicoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
 
         # Agrega el título en la primera fila
         ws.merge_cells("A1:G1")
-        ws["A1"] = "Registros Filmicos del 911"
+        ws["A1"] = "Registros Fílmicos del 911"
         ws["A1"].alignment = Alignment(horizontal="center")
         ws["A1"].font = Font(bold=True, color="0000FF")
         ws["A2"] = ""
