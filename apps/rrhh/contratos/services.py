@@ -6,14 +6,15 @@ from administracion.departamentos.repositories import DepartamentoRepository
 from administracion.sedes.repositories import SedeRepository
 from rrhh.cargos.repositories import CargoRepository
 
-from django.db import transaction
-from django.core.exceptions import ValidationError
 from users.auth.models import User
 from rrhh.empleados.models import Empleado
 from rrhh.educaciones.models import Educacion
 from rrhh.familiares.models import Familiar
 from rrhh.dotaciones.models import Dotacion
 import datetime
+
+from django.db.models import Q
+from rrhh.contratos.models import TIPO_CONTRATOS_CHOICES
 
 
 class ContratoService(CrudService):
@@ -51,6 +52,26 @@ class ContratoService(CrudService):
         payload["sede"] = self.search_sede(payload.get("sede"))
 
         return payload
+
+    def criteria(self, search, arg=None):
+        query = Q()
+
+        if search:
+            tipo_codes = [
+                code
+                for code, name in TIPO_CONTRATOS_CHOICES
+                if search.lower() in name.lower() or search.lower() == code.lower()
+            ]
+
+            query &= (
+                Q(empleado__nombres__icontains=search)
+                | Q(empleado__cedula__icontains=search)
+                | Q(tipo__in=tipo_codes)
+                | Q(tipo__icontains=search)
+                | Q(cargo__cargo__icontains=search)
+            )
+
+        return query
 
     def destroyer(self, payload):
         deleted_at = {

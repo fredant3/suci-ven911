@@ -20,8 +20,8 @@ class RegistroFilmicoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateVi
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Registro Filmico"
-        context["titleForm"] = "Actualizar Registro Filmico"
+        context["submodule"] = "Registro Fílmico"
+        context["titleForm"] = "Actualizar Registro Fílmico"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("filmicos:list")
         context["urlForm"] = reverse_lazy(

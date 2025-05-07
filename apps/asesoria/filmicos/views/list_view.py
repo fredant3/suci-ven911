@@ -23,7 +23,7 @@ class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("asesoria")
         context["module"] = "Asesoría jurídica"
-        context["submodule"] = "Registro Filmico"
+        context["submodule"] = "Registro Fílmico"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("filmicos:create")
         context["listApiUrl"] = reverse_lazy("api_filmicos:list")
