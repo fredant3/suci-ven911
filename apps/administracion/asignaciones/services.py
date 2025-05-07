@@ -53,3 +53,27 @@ class AsignacionService(CrudService):
             )
 
         return query
+
+    def before_create(self, data):
+        articulo_id = (
+            data["articulo"].id if hasattr(data["articulo"], "id") else data["articulo"]
+        )
+
+        articulo = self.repositoryArticle.getById(articulo_id)
+
+        try:
+            cantidad_asignar = int(data["cantidad"])
+        except (ValueError, TypeError):
+            raise ValueError("La cantidad debe ser un número válido")
+
+        if cantidad_asignar > articulo.cantidad:
+            raise ValueError("No hay suficiente cantidad de este artículo")
+
+        from django.db import transaction
+
+        with transaction.atomic():
+            articulo.cantidad -= cantidad_asignar
+            articulo.save()
+            data["articulo"] = articulo
+
+        return data
