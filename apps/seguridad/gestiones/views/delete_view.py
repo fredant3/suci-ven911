@@ -20,7 +20,7 @@ class GestionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("seguridad")
         context["module"] = "Seguridad"
-        context["submodule"] = "Gestions"
+        context["submodule"] = "Gestiones"
         context["titleForm"] = "Eliminar gestion"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("gestiones:list")

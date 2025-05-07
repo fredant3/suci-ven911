@@ -21,7 +21,7 @@ class GestionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("seguridad")
         context["module"] = "Seguridad"
-        context["submodule"] = "Gestions"
+        context["submodule"] = "Gestiones"
         context["titleForm"] = "Actualizar gestion"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("gestiones:list")

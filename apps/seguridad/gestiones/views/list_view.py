@@ -23,7 +23,7 @@ class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("seguridad")
         context["module"] = "Seguridad"
-        context["submodule"] = "Gestions"
+        context["submodule"] = "Gestiones"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("gestiones:create")
         context["listApiUrl"] = reverse_lazy("api_gestiones:list")

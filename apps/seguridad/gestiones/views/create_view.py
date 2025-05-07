@@ -20,7 +20,7 @@ class GestionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titlePage"] = "Asesoría jurídica"
         context["indexUrl"] = reverse_lazy("seguridad")
         context["module"] = "Seguridad"
-        context["submodule"] = "Gestions"
+        context["submodule"] = "Gestiones"
         context["titleForm"] = "Añadir una gestion nueva"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("gestiones:list")
