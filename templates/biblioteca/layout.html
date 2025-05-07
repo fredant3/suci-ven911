@@ -7,7 +7,7 @@
 {% block breadcrumbs %}
 {% if submodule %}
 <span class="text-muted fw-light">
-  <a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /
+	<a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /
 </span>
 <span class="">{{ submodule }}</span>
 {% else %}
@@ -16,94 +16,56 @@
 {% endblock %}
 
 {% block content %}
-  <div class=''>
-    <div class="container flex"><div class="subcontainer"></div></div>
+<div class="container-xxl flex-grow-1 container-p-y">
+	<!-- Botones principales generados dinámicamente -->
+	<div class="row mb-4">
+		{% for button in buttons %}
+		<div class="col-md-6 mb-3">
+			<a href="{{ button.url }}" class="btn {{ button.class }} w-100 py-3">
+				<i class="{{ button.icon }} me-2"></i>
+				{{ button.name }}
+				{% if button.description %}
+				<small class="d-block mt-1">{{ button.description }}</small>
+				{% endif %}
+			</a>
+		</div>
+		{% endfor %}
+	</div>
 
-    <template data-card-template>
-      <div class='img-container'>
-        <div class="img-subcontainer"><img src="" class='book-img' id=""></div>
-
-        <div class="content flex">
-          <h3 class='title' data-title>Wilder Girls</h3>
-
-          <div class='wrapper flex'>
-            <p class='default'>- by </p>
-            <p class="author" data-author>Rory Power</p>
-          </div>
-
-          <p class='genre' data-genre>Fiction</p>
-        </div>
-      </div>
-    </template>
-  </div>
-  {% comment %} <div id="biblioteca-wrapper"></div> {% endcomment %}
+	<!-- Contenido dinámico -->
+	<div class="row">
+		<div class="col-12">
+			{% if submodule %}
+			{% block biblioteca_content %}
+			<!-- Aquí se cargará el contenido específico de cada sección -->
+			{% endblock %}
+			{% else %}
+			<!-- Vista de inicio de Biblioteca -->
+			<div class="card">
+				<div class="card-body text-center py-5">
+					<h4 class="mb-3">Bienvenido a la Biblioteca</h4>
+					<p class="text-muted">Seleccione una opción del menú superior</p>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
 {% endblock %}
 
 {% block page_css %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static  'css/biblioteca.css' %}">
+<link rel="stylesheet" href="{% static 'css/biblioteca.css' %}">
 {% endblock %}
 
 {% block page_js %}
+{{ block.super }}
 <script src="{% static 'js/ajax-setup.js' %}"></script>
-<script src="{% static 'js/biblioteca/carousel.js' %}"></script>
+{% if not submodule %}
 <script>
-$(document).ready(function () {
-  $('#normativas-cards').empty();
-  $('#reglamentos-cards').empty();
-
-  const submodules = JSON.parse('{{ submodules|escapejs }}')
-  
-  submodules.forEach(submodule => {
-    const url = submodule.api
-    const modules = submodule.url
-    const submoduleName = submodule.name.toLowerCase()
-
-    $.ajax({
-      url,
-      type: 'GET',
-      dataType: 'json'
-    })
-      .done(function (data) {
-        showHtml (data.entities)
-        $('#biblioteca-wrapper').append(`
-          <div class="border rounded biblioteca-wrapper my-1">
-            <div class="d-flex align-items-center">
-              <h5 class="card-title text-uppercase py-2 px-5">${submoduleName}</h5>
-              ${modules ? `<a href="${modules}" class="card-link text-end">Ver Todo</a>` : ''}
-            </div>
-            <div id="${submoduleName}-cards" class="d-flex flex-wrap justify-content-between gap-2 p-2 mb-2"></div>
-          </div>
-        `)
-        
-        $.each(data.entities, function(index, card) {
-          const cardHtml = `<div class="col-auto">
-            <div class="card h-100 align-items-center bibliotecas">
-              <div class="card-body align-self-start">
-                <h5 class="card-title">${card.name}</h5>
-                <h6 class="card-subtitle text-uppercase">${submoduleName}</h6>
-              </div>
-              <img class="img-fluid img-fluid-custom" src="{% static 'img/biblioteca_book.svg' %}" alt="Card image cap" />
-              <div class="card-body d-flex flex-column w-100">
-                <p class="card-text text-center">${card.date}</p>
-                <a href="javascript:void(0);" class="card-link text-end">Descargar</a>
-              </div>
-            </div>
-          </div>`
-
-          $(`#${submoduleName}-cards`).append(cardHtml);
-        })
-
-        if (data.error || !data.entities.length) {
-          $(`#${submoduleName}-cards`).removeClass('justify-content-between');
-          $(`#${submoduleName}-cards`).addClass('justify-content-center h-228 align-content-center');
-          const cardHtml = `<h6 class="card-subtitle text-uppercase">No hay informacion para mostrar.</h6>`
-
-          $(`#${submoduleName}-cards`).append(cardHtml);
-        }
-      })
-      .fail((jqXHR, textStatus, errorThrown) => console.error)
-  })
-});
+	$(document).ready(function () {
+		// Código para la vista principal si es necesario
+	});
 </script>
+{% endif %}
 {% endblock %}

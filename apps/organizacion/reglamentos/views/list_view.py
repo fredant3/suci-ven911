@@ -10,7 +10,7 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 from organizacion.reglamentos.services import ReglamentoService
-from organizacion.reglamentos.models import ESTATUS_CHOICES
+from organizacion.reglamentos.models import ESTATUS_CHOICES, PROGRESS_CHOICES
 
 
 class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -86,31 +86,19 @@ class ReglamentoListApiView(ListController, CheckPermisosMixin):
             try:
                 data = json.loads(response.content)
                 estatus_mapping = dict(ESTATUS_CHOICES)
+                progress_mapping = dict(PROGRESS_CHOICES)
 
                 for item in data.get("entities", []):
-                    # Convert status code to readable value
                     if "estado" in item:
                         item["estado"] = estatus_mapping.get(
                             item["estado"], item["estado"]
                         )
 
-                    # Format progress as percentage with bar
                     if "progre" in item:
-                        try:
-                            progress = int(item["progre"])
-                            item["progre"] = {
-                                "value": progress,
-                                "display": f"{progress}%",
-                                "class": "success" if progress == 100 else "primary",
-                            }
-                        except (ValueError, TypeError):
-                            item["progre"] = {
-                                "value": 0,
-                                "display": "N/A",
-                                "class": "secondary",
-                            }
+                        item["progre"] = progress_mapping.get(
+                            item["progre"], item["progre"]
+                        )
 
-                    # Format date (remove time if present)
                     if "date" in item and item["date"]:
                         item["date"] = (
                             item["date"][:10]

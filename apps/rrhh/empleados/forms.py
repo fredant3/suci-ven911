@@ -1,8 +1,4 @@
-from django.forms import (
-    TextInput,
-    EmailInput,
-    ValidationError,
-)
+from django.forms import TextInput, EmailInput, ValidationError, NumberInput
 from rrhh.empleados.models import Empleado
 from helpers.FormBase import FormBase
 from helpers.validForm import validate_email
@@ -56,7 +52,7 @@ class EmpleadoForm(FormBase):
                     "placeholder": "Ingrese los apellidos completos",
                 }
             ),
-            "cedula": TextInput(
+            "cedula": NumberInput(
                 attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
             ),
             "email": EmailInput(

@@ -14,6 +14,7 @@ from users.auth.models import User
 from helpers.FormBase import FormBase
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from helpers.models import BOOLEAN_CHOICES
+from django.contrib.auth.hashers import make_password
 
 
 class UserForm(FormBase):
@@ -35,11 +36,10 @@ class UserForm(FormBase):
         )
 
     def clean_password(self):
-        # Si el campo de contraseña está vacío y es una actualización, mantener la existente
         password = self.cleaned_data.get("password")
         if not password and self.instance.pk:
-            return self.instance.password  # Mantener la contraseña actual
-        return password
+            return self.instance.password
+        return make_password(password)
 
     is_active = ChoiceField(
         choices=BOOLEAN_CHOICES,

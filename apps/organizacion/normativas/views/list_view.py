@@ -85,25 +85,21 @@ class NormativaListApiView(ListController, CheckPermisosMixin):
             try:
                 data = json.loads(response.content)
                 estatus_mapping = dict(ESTATUS_CHOICES)
-                progress_mapping = dict(PROGRESS_CHOICES)  # Mapeo de progreso
+                progress_mapping = dict(PROGRESS_CHOICES)
 
-                # Convertir estatus y formatear otros campos
                 for item in data.get("entities", []):
-                    # Formatear estatus
                     if "estado" in item:
                         item["estado"] = estatus_mapping.get(
                             item["estado"], item["estado"]
                         )
 
-                    # Formatear progreso
                     if "progre" in item:
                         item["progre"] = progress_mapping.get(
                             item["progre"], item["progre"]
                         )
 
-                    # Formatear fecha (si existe)
                     if "date" in item and item["date"]:
-                        item["date"] = item["date"][:10]  # Solo fecha sin hora
+                        item["date"] = item["date"][:10]
 
                 response.content = json.dumps(data)
             except json.JSONDecodeError as e:

@@ -4,12 +4,12 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
-from organizacion.normativas.services import NormativaService
+from organizacion.reglamentos.services import ReglamentoService
 
 from templates.sneat import TemplateLayout
 
 
-class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class ReglamentosListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("bibliotecas")
     template_name = "biblioteca/list.html"
@@ -19,22 +19,22 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("bibliotecas")
         context["titlePage"] = "Biblioteca"
         context["module"] = "Biblioteca"
-        context["submodule"] = "Normativas"
+        context["submodule"] = "Reglamentos"
         context["submodules"] = json.dumps(
             (
                 {
                     "api": "{0}?order[0][name]=date&order[0][dir]=desc&columns[0][searchable]=true&columns[0][name]=estado&columns[0]".format(
-                        str(reverse_lazy("api_biblioteca_normativas:list"))
+                        str(reverse_lazy("api_biblioteca_reglamentos:list"))
                     ),
-                    "name": "Normativas",
+                    "name": "Reglamentos",
                 },
             )
         )
         return TemplateLayout.init(self, context)
 
 
-class NormativaListApiView(ListController, CheckPermisosMixin):
+class ReglamentosListApiView(ListController, CheckPermisosMixin):
     permission_required = ""
 
     def __init__(self):
-        self.service = NormativaService()
+        self.service = ReglamentoService()

@@ -76,13 +76,6 @@ class OrganizacionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "file",
-                "name": "file",
-                "title": "Archivo",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "date",
                 "name": "date",
                 "title": "Fecha",

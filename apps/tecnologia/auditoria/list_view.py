@@ -22,6 +22,7 @@ class AuditoriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["module"] = "Tecnología"
         context["submodule"] = "Auditoría"
         context["listApiUrl"] = reverse_lazy("api_auditoria:list")
+        context["withActions"] = False
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
