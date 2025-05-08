@@ -51,17 +51,44 @@ class DenunciaService(CrudService):
 
         return payload
 
-    def update_denunciante(self, entity, data):
-        data = self.change_key_update(self.denunciante_fields, data)
+    def update_denunciante(self, entity, form_data):
+        data = self.change_key_update(self.denunciante_fields, form_data)
         return self.repository_denunciante.update(entity, data)
 
-    def update_denunciado(self, entity, data):
-        data = self.change_key_update(self.denunciado_fields, data)
+    def update_denunciado(self, entity, form_data):
+        data = self.change_key_update(self.denunciado_fields, form_data)
         return self.repository_denunciado.update(entity, data)
 
-    def before_update(self, entity, data):
-        self.update_denunciante(entity.denunciante, data)
-        self.update_denunciado(entity.denunciado, data)
+    def before_update(self, entity, form):
+        # Actualizar denunciante
+        self.update_denunciante(entity.denunciante, form.cleaned_data)
+
+        # Actualizar denunciado
+        denunciado_data = {
+            "nombres": form.cleaned_data.get("nombres_denunciado"),
+            "apellidos": form.cleaned_data.get("apellidos_denunciado"),
+            "cedula": form.cleaned_data.get("cedula_denunciado"),
+            "telefono": form.cleaned_data.get("telefono_denunciado"),
+            "email": form.cleaned_data.get("email_denunciado"),
+            "direccion": form.cleaned_data.get("direccion_denunciado"),
+        }
+
+        # Solo actualizar si hay datos para el denunciado
+        if any(denunciado_data.values()):
+            self.update_denunciado(entity.denunciado, form.cleaned_data)
+
+        # Actualizar campos directos de la denuncia
+        entity.estatus = form.cleaned_data.get("estatus", entity.estatus)
+        entity.ente = form.cleaned_data.get("ente", entity.ente)
+        entity.motivo = form.cleaned_data.get("motivo", entity.motivo)
+        entity.zona = form.cleaned_data.get("zona", entity.zona)
+        entity.fecha_denuncia = form.cleaned_data.get(
+            "fecha_denuncia", entity.fecha_denuncia
+        )
+        entity.fecha_incidente = form.cleaned_data.get(
+            "fecha_incidente", entity.fecha_incidente
+        )
+        entity.save()
 
     def criteria(self, search, arg=None):
         query = Q()

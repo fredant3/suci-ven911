@@ -11,12 +11,11 @@ class ServiceUtilMixin:
 
         return payload
 
-    def change_key_update(self, fields, data):
-        for field, key in fields:
-            if field not in data.fields:
-                data.fields[field] = data.fields[key]
-                data.cleaned_data[field] = data.cleaned_data[key]
-
+    def change_key_update(self, fields, form_data):
+        data = {}
+        for model_field, form_field in fields:
+            if form_field in form_data:
+                data[model_field] = form_data[form_field]
         return data
 
     def relationship(self, payload, *arg, **kwargs):

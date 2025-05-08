@@ -115,11 +115,15 @@ class Repository:
         return entity
 
     def update(self, entity, payload):
-        # for field in payload.fields:
-        #     if hasattr(entity, field):
-        #         setattr(entity, field, payload.cleaned_data[field])
-        # entity.save()
-        # return entity
+        # Si payload es un diccionario (datos ya procesados)
+        if isinstance(payload, dict):
+            for field, value in payload.items():
+                if hasattr(entity, field):
+                    setattr(entity, field, value)
+            entity.save()
+            return entity
+
+        # Si payload es un formulario (comportamiento original)
         m2m_fields = []
         regular_fields = []
 
@@ -141,7 +145,6 @@ class Repository:
 
         # Actualizar campos ManyToMany
         for field in m2m_fields:
-            # Usar set() para asignar valores a relaciones ManyToMany
             getattr(entity, field).set(payload.cleaned_data[field])
 
         return entity
