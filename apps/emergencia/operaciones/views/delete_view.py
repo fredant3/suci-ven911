@@ -19,8 +19,8 @@ class EmergenciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Operaciones"
         context["indexUrl"] = reverse_lazy("operaciones")
         context["module"] = "Operaciones"
-        context["submodule"] = "Eliminar Emergencia"
-        context["titleForm"] = "Eliminar Emergencia"
+        context["submodule"] = "Operaciones"
+        context["titleForm"] = "Eliminar"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("operaciones:list")
         context["urlDelete"] = reverse_lazy(

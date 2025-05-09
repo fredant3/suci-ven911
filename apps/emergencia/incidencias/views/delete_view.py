@@ -18,9 +18,9 @@ class IncidenciasDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipos de Incidencias"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipos de Incidencias"
-        context["submodule"] = "Eliminar Tipo de Incidencias"
-        context["titleForm"] = "Eliminar Tipo de Incidencias"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipo de Incidencias"
+        context["titleForm"] = "Eliminar"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("operaciones_incidencias:list")
         context["urlDelete"] = reverse_lazy(

@@ -19,7 +19,7 @@ class InfraestructuraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateVi
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Asesoría jurídica"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("planificacion")
         context["module"] = "Asesoría jurídica"
         context["submodule"] = "Infraestructuras"
         context["titleForm"] = "Actualizar infraestructura"

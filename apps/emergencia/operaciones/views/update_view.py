@@ -21,8 +21,8 @@ class EmergenciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Operaciones"
         context["indexUrl"] = reverse_lazy("operaciones")
         context["module"] = "Operaciones"
-        context["submodule"] = "Actualizar Emergencias"
-        context["titleForm"] = "Actualizar Emergancia"
+        context["submodule"] = "operaciones"
+        context["titleForm"] = "Actualizar"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("operaciones:list")
         context["urlForm"] = reverse_lazy(

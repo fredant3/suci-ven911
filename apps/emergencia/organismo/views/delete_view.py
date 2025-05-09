@@ -18,9 +18,9 @@ class OrganismoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipos de Organismo"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipos de Organismo"
-        context["submodule"] = "Eliminar Tipo de Organismo"
-        context["titleForm"] = "Eliminar Tipo de Organismo"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipo de Organismo"
+        context["titleForm"] = "Eliminar"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("organismo:list")
         context["urlDelete"] = reverse_lazy(

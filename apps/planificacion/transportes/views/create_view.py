@@ -17,7 +17,7 @@ class TransporteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("planificacion")
         context["module"] = "Planificación"
         context["submodule"] = "Transportes"
         context["titleForm"] = "Añadir una transporte"

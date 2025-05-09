@@ -19,8 +19,8 @@ class IncidenciasListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipos de Incidencias"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipos de Incidencias"
-        context["submodule"] = "Inicio"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipos de Incidencias"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("operaciones_incidencias:create")
         context["listApiUrl"] = reverse_lazy("api_operaciones_incidencias:list")

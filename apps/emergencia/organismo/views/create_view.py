@@ -17,9 +17,9 @@ class OrganismoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipo Organismo"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipo Organismo"
-        context["submodule"] = "Agregar Tipos de Organismo"
-        context["titleForm"] = "Añadir Organismo Competente"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipos de Organismo"
+        context["titleForm"] = "Añadir"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("organismo:list")
         context["urlForm"] = reverse_lazy("api_organismo:create")

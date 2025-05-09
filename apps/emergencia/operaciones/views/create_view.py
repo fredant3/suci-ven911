@@ -18,8 +18,8 @@ class EmergenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["titlePage"] = "Operaciones"
         context["indexUrl"] = reverse_lazy("operaciones")
         context["module"] = "Operaciones"
-        context["submodule"] = "Agregar Emergencias"
-        context["titleForm"] = "Añadir una Emergencia"
+        context["submodule"] = "Operaciones"
+        context["titleForm"] = "Añadir"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("operaciones:list")
         context["urlForm"] = reverse_lazy("api_operaciones:create")

@@ -20,7 +20,7 @@ class EmergenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Operaciones"
         context["indexUrl"] = reverse_lazy("operaciones")
         context["module"] = "Operaciones"
-        context["submodule"] = "Inicio"
+        context["submodule"] = "Operaciones"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("operaciones:create")
         context["listApiUrl"] = reverse_lazy("api_operaciones:list")

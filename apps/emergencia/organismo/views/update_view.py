@@ -20,9 +20,9 @@ class OrganismoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipos de Incidencias"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipos de Incidencias"
-        context["submodule"] = "Actualizar Emergencias"
-        context["titleForm"] = "Actualizar Emergancia"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipos de Organismos"
+        context["titleForm"] = "Actualizar"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("organismo:list")
         context["urlForm"] = reverse_lazy(

@@ -19,7 +19,7 @@ class UserListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tecnología"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("tecnologia")
         context["module"] = "Tecnología"
         context["submodule"] = "Usuario"
         context["listApiUrl"] = reverse_lazy("api_user:list")

@@ -19,8 +19,8 @@ class OrganismoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipos de Organismo"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipos de Organismo"
-        context["submodule"] = "Inicio"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipos de Organismo"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("organismo:create")
         context["listApiUrl"] = reverse_lazy("api_organismo:list")

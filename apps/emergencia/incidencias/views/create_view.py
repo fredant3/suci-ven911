@@ -17,9 +17,9 @@ class IncidenciasCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tipo Incidencias"
         context["indexUrl"] = reverse_lazy("operaciones")
-        context["module"] = "Tipo Incidencias"
-        context["submodule"] = "Agregar Tipos de Incidencias"
-        context["titleForm"] = "Añadir un Tipo de Incidencis"
+        context["module"] = "Operaciones"
+        context["submodule"] = "Tipos de Incidencias"
+        context["titleForm"] = "Registrar"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("operaciones_incidencias:list")
         context["urlForm"] = reverse_lazy("api_operaciones_incidencias:create")
