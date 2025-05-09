@@ -30,7 +30,7 @@ ESTATUS_CHOICES5 = (
     ("rs", "RRSS"),
     ("rad", "Radio"),
     ("casu", "Casual"),
-    ("telef", "Telefonico"),
+    ("Telefónico", "Telefónico"),
     ("otr", "Otro"),
 )
 
@@ -413,7 +413,11 @@ class Uri(BaseModel):
     )
 
     via_reporte = CharField(
-        "Vía del Reporte", max_length=9, choices=ESTATUS_CHOICES5, blank=True, null=True
+        "Vía del Reporte",
+        max_length=12,
+        choices=ESTATUS_CHOICES5,
+        blank=True,
+        null=True,
     )
 
     servicio_tipo = CharField(

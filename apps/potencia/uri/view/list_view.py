@@ -44,6 +44,13 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
+                "data": "nroreporte",
+                "name": "nroreporte",
+                "title": "Nro. de Reporte",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
                 "data": "fecha_atencion",
                 "name": "fecha_atencion",
                 "title": "Fecha de Atencion",
@@ -68,6 +75,13 @@ class UriListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "data": "estado",
                 "name": "estado",
                 "title": "Estado del Evento",
+                "orderable": "true",
+                "searchable": "true",
+            },
+            {
+                "data": "via_reporte",
+                "name": "via_reporte",
+                "title": "Vía del Reporte",
                 "orderable": "true",
                 "searchable": "true",
             },
