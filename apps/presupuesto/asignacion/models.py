@@ -1,7 +1,7 @@
 from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from helpers.validForm import TextValidator
 from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
@@ -26,7 +26,7 @@ class Asignacion(BaseModel):
         validators=[
             MinLengthValidator(2),
             MaxLengthValidator(10),
-            UnicodeAlphaSpaceValidator(extra_chars="-"),
+            TextValidator(extra_chars="-"),
         ],
     )
 
