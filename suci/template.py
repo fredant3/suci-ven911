@@ -5,7 +5,7 @@
 # Theme Variables
 # ? Personalize template by changing theme variables (For ex: Name, URL Version etc...)
 THEME_VARIABLES = {
-    "creator_name": "UNEXCA - I30131",
+    "creator_name": "UNEXCA - I30142",
     "template_name": "SUCI",
     "template_suffix": "Ven911",
     "template_version": "1.0.0",
