@@ -18,7 +18,7 @@ class GestioncomunicacionalCreateView(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Gestion Comunicacional"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("gc_info")
         context["module"] = "Gestion Comunicacional"
         context["submodule"] = "Gestion Comunicacional"
         context["titleForm"] = "Añadir una Actividad"

@@ -20,10 +20,10 @@ class GestioncomunicacionalUpdateView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Gestioncomunicacional"
-        context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Gestioncomunicacional"
-        context["submodule"] = "Gestioncomunicacional"
+        context["titlePage"] = "Gestion comunicacional"
+        context["indexUrl"] = reverse_lazy("gc_info")
+        context["module"] = "Gestion comunicacional"
+        context["submodule"] = "Gestion comunicacional"
         context["titleForm"] = "Actualizar gestioncomunicacional"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("gestioncomunicacional:list")
