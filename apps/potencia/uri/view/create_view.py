@@ -59,7 +59,7 @@ class InfogeneralWizardView(SessionWizardView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "URI"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("uri:list")
         context["module"] = "URI"
         context["submodule"] = "Unidad de Respuesta Inmediata"
         return TemplateLayout.init(self, context)
