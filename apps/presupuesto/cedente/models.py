@@ -4,7 +4,7 @@ from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
     TextValidator,
 )
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinLengthValidator
 
 
 class Cedente(BaseModel):
@@ -13,7 +13,6 @@ class Cedente(BaseModel):
         max_length=100,
         validators=[
             MinLengthValidator(4),
-            MaxLengthValidator(255),
             TextValidator(extra_chars="-"),
         ],
     )
@@ -22,7 +21,6 @@ class Cedente(BaseModel):
         max_length=64,
         validators=[
             MinLengthValidator(4),
-            MaxLengthValidator(255),
             TextValidator(extra_chars="-"),
         ],
     )
@@ -31,7 +29,6 @@ class Cedente(BaseModel):
         max_length=64,
         validators=[
             MinLengthValidator(4),
-            MaxLengthValidator(255),
         ],
     )
     espefc = CharField(
@@ -39,7 +36,6 @@ class Cedente(BaseModel):
         max_length=64,
         validators=[
             MinLengthValidator(1),
-            MaxLengthValidator(255),
         ],
     )
     subespefc = CharField(
@@ -47,13 +43,12 @@ class Cedente(BaseModel):
         max_length=64,
         validators=[
             MinLengthValidator(1),
-            MaxLengthValidator(255),
         ],
     )
     denomc = CharField(
         "Denominación",
         max_length=64,
-        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), TextValidator()],
     )
     presuacorc = CharField(
         "Presupuesto asignado",
@@ -67,7 +62,7 @@ class Cedente(BaseModel):
     direccionc = CharField(
         "Dirección cedente",
         max_length=64,
-        validators=[MinLengthValidator(4), MaxLengthValidator(255), TextValidator()],
+        validators=[MinLengthValidator(4), TextValidator()],
     )
 
     def toJSON(self):

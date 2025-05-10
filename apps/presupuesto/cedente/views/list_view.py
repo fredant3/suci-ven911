@@ -23,7 +23,7 @@ class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Cedentes"
+        context["submodule"] = "Traspaso"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("cedentes:create")
         context["listApiUrl"] = reverse_lazy("api_cedentes:list")

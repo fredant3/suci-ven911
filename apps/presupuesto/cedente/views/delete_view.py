@@ -20,8 +20,8 @@ class CedenteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Cedentes"
-        context["titleForm"] = "Eliminar cedente"
+        context["submodule"] = "Traspaso"
+        context["titleForm"] = "Eliminar traspaso"
         context["tag"] = "Eliminar"
         context["listUrl"] = reverse_lazy("cedentes:list")
         context["urlDelete"] = reverse_lazy(

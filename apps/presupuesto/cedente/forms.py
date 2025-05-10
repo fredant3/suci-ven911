@@ -4,9 +4,7 @@ from helpers.FormBase import FormBase
 
 
 class CedenteForm(FormBase):
-    caufechac = FormBase.create_date_field(
-        "caufechac",
-    )
+    caufechac = FormBase.create_date_field("caufechac", "Causado a la fecha")
 
     class Meta:
         model = Cedente
@@ -53,7 +51,6 @@ class CedenteForm(FormBase):
                     "class": "form-control mb-3",
                     "placeholder": "Número entre 1 y 255",
                     "min": "1",
-                    "max": "255",
                 }
             ),
             "espefc": forms.NumberInput(
@@ -61,7 +58,6 @@ class CedenteForm(FormBase):
                     "class": "form-control mb-3",
                     "placeholder": "Número entre 1 y 255",
                     "min": "1",
-                    "max": "255",
                 }
             ),
             "subespefc": forms.NumberInput(
@@ -69,7 +65,6 @@ class CedenteForm(FormBase):
                     "class": "form-control mb-3",
                     "placeholder": "Número entre 1 y 255",
                     "min": "1",
-                    "max": "255",
                 }
             ),
             "denomc": forms.TextInput(
@@ -119,3 +114,9 @@ class CedenteForm(FormBase):
                 }
             ),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+        return instance
