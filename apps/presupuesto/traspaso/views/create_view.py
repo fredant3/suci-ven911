@@ -42,9 +42,7 @@ class TraspasoCreateApiView(CreateController, CheckPermisosMixin):
         self.service = TraspasoService()
 
 
-class TraspasoReceptorWizardView(
-    LoginRequiredMixin, CheckPermisosMixin, SessionWizardView
-):
+class TraspasoWizardView(LoginRequiredMixin, CheckPermisosMixin, SessionWizardView):
     permission_required = "presupuesto.traspaso.agregar_cedente"
     template_name = "widzard/indextraspaso.html"
     form_list = [
@@ -59,6 +57,10 @@ class TraspasoReceptorWizardView(
         context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Traspaso"
+        context["titleForm"] = "Añadir Traspaso"
+        context["tag"] = "Registrar"
+        context["listUrl"] = reverse_lazy("traspasos:list")
+
         return TemplateLayout.init(self, context)
 
     def done(self, form_list, form_dict, **kwargs):

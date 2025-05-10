@@ -15,7 +15,7 @@ PROYECTOS_ACCIONES = (
 class Traspaso(BaseModel):
 
     proyecto_acciones = CharField(
-        "Proyecto o Acción",
+        "Proyecto o Acciones Centralizadas",
         max_length=64,
         choices=PROYECTOS_ACCIONES,
         validators=[

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from presupuesto.traspaso.views.create_view import TraspasoReceptorWizardView
+from presupuesto.traspaso.views.create_view import TraspasoWizardView
 from presupuesto.traspaso.views.delete_view import TraspasoDeleteView
 from presupuesto.traspaso.views.list_view import TraspasoListView
 from presupuesto.traspaso.views.update_view import TraspasoUpdateView
@@ -13,7 +13,7 @@ urlpatterns = [
     ),
     path(
         "create",
-        TraspasoReceptorWizardView.as_view(),
+        TraspasoWizardView.as_view(),
         name="create",
     ),
     path(
