@@ -33,4 +33,9 @@ urlpatterns = [
         "api/receptores/",
         include(("apps.presupuesto.receptor.urls_apis", "api_receptores")),
     ),
+    path("traspasos/", include(("apps.presupuesto.traspaso.urls", "traspasos"))),
+    path(
+        "api/traspasos/",
+        include(("apps.presupuesto.traspaso.urls_apis", "api_traspasos")),
+    ),
 ]
