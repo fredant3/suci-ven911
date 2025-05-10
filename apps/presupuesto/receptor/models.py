@@ -1,19 +1,21 @@
-from django.db.models import CharField
+from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
-    PositiveIntegerValidator,
     TextValidator,
-    UnicodeAlphaSpaceValidator,
 )
 from django.core.validators import (
-    MinValueValidator,
     MinLengthValidator,
     MaxLengthValidator,
 )
+from presupuesto.cedente.models import Cedente
 
 
 class Receptor(BaseModel):
+    cedente = ForeignKey(
+        Cedente, on_delete=CASCADE, related_name="receptores", null=True
+    )
+
     idr = CharField(
         "Identificador Receptor",
         max_length=100,

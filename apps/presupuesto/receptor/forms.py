@@ -5,6 +5,8 @@ from helpers.validForm import validate_decimal_number
 
 
 class ReceptorForm(FormBase):
+    caufechar = FormBase.create_date_field("caufechar", "Causado a la fecha")
+
     class Meta:
         model = Receptor
         fields = (
@@ -78,12 +80,6 @@ class ReceptorForm(FormBase):
                     "step": "0.01",
                 }
             ),
-            "caufechar": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese la fecha de compromiso",
-                }
-            ),
             "dispr": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
@@ -134,3 +130,9 @@ class ReceptorForm(FormBase):
             str(data), "El saldo final debe ser un valor con 2 decimales"
         )
         return data
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+        return instance
