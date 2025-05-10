@@ -21,8 +21,8 @@ class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Traspaso"
-        context["titleForm"] = "Actualizar traspaso"
+        context["submodule"] = "Cedentes"
+        context["titleForm"] = "Actualizar cedente"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("cedentes:list")
         context["urlForm"] = reverse_lazy(
