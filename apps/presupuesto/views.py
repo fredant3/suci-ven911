@@ -21,7 +21,7 @@ class PresupuestoView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             ("Acciones", reverse_lazy("acciones:list")),
             ("Asignaciones", reverse_lazy("presupuesto_asignaciones:list")),
             ("Traspaso", reverse_lazy("cedentes:list")),
-            # ("Proyectos", reverse_lazy("proyectos:list")),
+            ("Partida", reverse_lazy("partida:list")),
             # ("Receptores", reverse_lazy("receptores:list")),
         )
         return TemplateLayout.init(self, context)
