@@ -54,11 +54,6 @@ class Accion(BaseModel):
         max_length=64,
         validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
     )
-    estatus = CharField(
-        "Estatus del Proyecto:",
-        max_length=64,
-        validators=[MinLengthValidator(6), MaxLengthValidator(64), TextValidator()],
-    )
 
     def toJSON(self):
         return model_to_dict(self)

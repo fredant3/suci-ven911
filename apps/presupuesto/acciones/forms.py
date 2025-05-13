@@ -21,7 +21,6 @@ class AccionForm(FormBase):
             "responsable_tecnico",
             "responsable_registrador",
             "responsable_administrativo",
-            "estatus",
         )
         exclude = [
             "created_at",

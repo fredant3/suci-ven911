@@ -108,13 +108,6 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
-            {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
-                "orderable": "false",
-                "searchable": "false",
-            },
         ]
 
 

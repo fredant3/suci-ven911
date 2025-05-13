@@ -44,7 +44,6 @@ class AccionExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "responsable_tecnico",
             "responsable_registrador",
             "responsable_administrativo",
-            "estatus",
             "created_at",
         )
 
@@ -86,7 +85,6 @@ class AccionExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             "G": 25,  # Responsable Técnico
             "H": 25,  # Responsable Registrador
             "I": 25,  # Responsable Administrativo
-            "J": 20,  # Estatus
             "K": 15,  # Fecha Creación
         }
 
@@ -119,7 +117,6 @@ class AccionExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     accion["responsable_tecnico"],
                     accion["responsable_registrador"],
                     accion["responsable_administrativo"],
-                    accion["estatus"],
                     (
                         accion["created_at"].strftime("%Y-%m-%d")
                         if accion["created_at"]
