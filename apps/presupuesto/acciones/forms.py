@@ -12,7 +12,7 @@ class AccionForm(FormBase):
     class Meta:
         model = Accion
         fields = (
-            "proyecto",
+            "proyecto_acciones",
             "fecha_inicio",
             "fecha_culminacion",
             "situacion_presupuestaria",
@@ -36,12 +36,6 @@ class AccionForm(FormBase):
             "fecha_inicio": forms.DateInput(attrs={"class": "form-control datepicker"}),
             "fecha_culminacion": forms.DateInput(
                 attrs={"class": "form-control datepicker"}
-            ),
-            "proyecto": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el nombre del proyecto",
-                }
             ),
             "responsable_gerente": forms.TextInput(
                 attrs={

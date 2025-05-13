@@ -4,9 +4,24 @@ from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
+PROYECTOS_ACCIONES = (
+    ("proyecto", "Proyecto"),
+    ("accion", "Acciones Centralizadas"),
+)
+
 
 class Accion(BaseModel):
-    proyecto = CharField("Nombre del Proyecto:", max_length=64)
+    proyecto_acciones = CharField(
+        "Proyecto o Acciones Centralizadas",
+        max_length=64,
+        choices=PROYECTOS_ACCIONES,
+        null=True,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(64),
+            TextValidator(),
+        ],
+    )
     fecha_inicio = DateField("Fecha de Inicio")
     fecha_culminacion = DateField("Fecha de Culminación")
     situacion_presupuestaria = CharField(
@@ -48,8 +63,8 @@ class Accion(BaseModel):
     def toJSON(self):
         return model_to_dict(self)
 
-    def __str__(self):
-        return self.proyecto
+    def __str__(self) -> str:
+        return self.proyecto_acciones
 
     class Meta:
         verbose_name = "Accion"
