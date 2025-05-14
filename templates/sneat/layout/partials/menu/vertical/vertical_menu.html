@@ -399,5 +399,31 @@
 				</li>
 			</ul>
 		</li>
+
+
+		<li
+			class="menu-item {% if 'gestioncomunicacional' in request.resolver_match.namespaces or 'frentepreventivo' in request.resolver_match.namespaces %}active open{% endif %}">
+			<a href="javascript:void(0);" class="menu-link menu-toggle">
+				<i class="menu-icon tf-icons bx bx-receipt"></i>
+				<div class="text-truncate" data-i18n="Layouts">Gestión Comunicacional</div>
+			</a>
+			<ul class="menu-sub">
+				<li class="menu-item {% if 'gc_info' == request.resolver_match.url_name %}active{% endif %}">
+					<a href="{% url 'gc_info' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Inicio</div>
+					</a>
+				</li>
+				<li class="menu-item {% if 'gestioncomunicacional' in request.resolver_match.namespaces %}active{% endif %}">
+					<a href="{% url 'gestioncomunicacional:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without menu">Gestión Comunicacional</div>
+					</a>
+				</li>
+				<li class="menu-item {% if 'frentepreventivo' in request.resolver_match.namespaces %}active{% endif %}">
+					<a href="{% url 'frentepreventivo:list' %}" class="menu-link">
+						<div class="text-truncate" data-i18n="Without navbar">Frente Preventivo</div>
+					</a>
+				</li>
+			</ul>
+		</li>
 	</ul>
 </aside>
