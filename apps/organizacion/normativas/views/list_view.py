@@ -20,9 +20,9 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Organizacion"
+        context["titlePage"] = "Organización"
         context["indexUrl"] = reverse_lazy("organizacion")
-        context["module"] = "Organizacion"
+        context["module"] = "Organización"
         context["submodule"] = "Normativas"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("normativas:create")
