@@ -75,11 +75,6 @@ class GestionForm(FormBase):
         }
         labels = {"tipo": "Tipo de Gestión", "descripcion": "Descripción Detallada"}
 
-    def clean_cedula(self):
-        data = self.cleaned_data.get("cedula")
-        validate_cedula(data, "Formato de cédula inválido. Use: V-12345678")
-        return data
-
     def clean_fecha(self):
         data = self.cleaned_data.get("fecha")
         if data and data > timezone.now().date():
