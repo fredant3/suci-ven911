@@ -35,9 +35,7 @@ class DenunciaService(CrudService):
         return self.repository_denunciante.create(payload)
 
     def create_denunciado(self, data):
-        print("\n\n\n\n\n", data, "\n\n\n\n\n")
         payload = self.change_key_create(self.denunciado_fields, data)
-        print("\n\n\n\n\n", payload, "\n\n\n\n\n")
         return self.repository_denunciado.create(payload)
 
     def before_create(self, data):
