@@ -6,88 +6,112 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, Border, Side
 from presupuesto.cedente.models import Cedente
+from presupuesto.receptor.models import Receptor
 
 
-class CedenteExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "cedente.listar_cedente"
 
     def get(self, request, *args, **kwargs):
-        # Query with all financial fields
-        cedentes = Cedente.objects.filter(deleted_at__isnull=True).values(
-            "idc",
-            "partidac",
-            "generalc",
-            "espefc",
-            "subespefc",
-            "denomc",
-            "presuacorc",
-            "caufechac",
-            "dispc",
-            "montocc",
-            "saldofc",
-            "direccionc",
-            "created_at"
+        # Obtener datos de cedentes y sus receptores relacionados
+        cedentes = Cedente.objects.filter(deleted_at__isnull=True).prefetch_related(
+            "cedente"
         )
 
         wb = Workbook()
         ws = wb.active
-        ws.title = "Registro de Cedentes"
+        ws.title = "Traspasos Presupuestarios"
 
-        # Title configuration (13 columns)
-        ws.merge_cells("A1:M1")
+        # Configurar título
+        ws.merge_cells("A1:O1")
         title_cell = ws["A1"]
-        title_cell.value = "REGISTRO DE CEDENTES PRESUPUESTARIOS"
+        title_cell.value = (
+            "REGISTRO DE TRASPASOS PRESUPUESTARIOS (CEDENTES Y RECEPTORES)"
+        )
         title_cell.alignment = Alignment(horizontal="center")
         title_cell.font = Font(bold=True, size=14, color="0047AB")
 
-        # Financial headers with optimized widths
+        # Encabezados combinados
         headers = [
+            # Cedente
             ("ID Cedente", 15),
-            ("Partida Contable", 20),
-            ("General", 15),
-            ("Especificación", 20),
-            ("Sub-Especialidad", 20),
-            ("Denominación", 25),
-            ("Presupuesto Asignado", 20),
-            ("Causado a Fecha", 20),
-            ("Disponible", 15),
-            ("Monto Comprometido", 20),
-            ("Saldo Final", 15),
-            ("Dirección Cedente", 25),
-            ("Fecha Registro", 20)
+            ("Partida C.", 15),
+            ("General C.", 15),
+            ("Espec. C.", 15),
+            ("Sub-Esp. C.", 15),
+            ("Denominación C.", 25),
+            ("Presupuesto C.", 15),
+            ("Causado C.", 15),
+            ("Disponible C.", 15),
+            ("Monto C.", 15),
+            ("Saldo C.", 15),
+            # Receptor
+            ("ID Receptor", 15),
+            ("Partida R.", 15),
+            ("Monto a Ceder", 15),
+            ("Saldo R.", 15),
+            ("Fecha Traspaso", 20),
         ]
 
-        # Configure columns with financial emphasis
+        # Configurar columnas
         for col_num, (header, width) in enumerate(headers, 1):
-            col_letter = chr(64 + col_num) if col_num <= 26 else 'A' + chr(64 + col_num - 26)
+            col_letter = (
+                chr(64 + col_num) if col_num <= 26 else "A" + chr(64 + col_num - 26)
+            )
             ws.column_dimensions[col_letter].width = width
             cell = ws.cell(row=2, column=col_num, value=header)
             cell.font = Font(bold=True)
             cell.alignment = Alignment(horizontal="center")
-            # Highlight financial headers
-            if header in ["Presupuesto Asignado", "Causado a Fecha", "Disponible", 
-                         "Monto Comprometido", "Saldo Final"]:
+            if any(
+                x in header
+                for x in ["Presupuesto", "Causado", "Disponible", "Monto", "Saldo"]
+            ):
                 cell.font = Font(bold=True, color="0047AB")
 
-        # Fill financial data
-        for row_num, cedente in enumerate(cedentes, 3):
-            ws.append([
-                cedente["idc"],
-                cedente["partidac"],
-                cedente["generalc"],
-                cedente["espefc"],
-                cedente["subespefc"],
-                cedente["denomc"],
-                cedente["presuacorc"],
-                cedente["caufechac"],
-                cedente["dispc"],
-                cedente["montocc"],
-                cedente["saldofc"],
-                cedente["direccionc"],
-                cedente["created_at"].strftime("%d/%m/%Y %H:%M") if cedente["created_at"] else "N/A"
-            ])
+        # Llenar datos combinados
+        row_num = 3
+        for cedente in cedentes:
+            # Datos del cedente
+            cedente_data = [
+                cedente.idc,
+                cedente.partidac,
+                cedente.generalc,
+                cedente.espefc,
+                cedente.subespefc,
+                cedente.denomc,
+                cedente.presuacorc,
+                cedente.caufechac,
+                cedente.dispc,
+                cedente.montocc,
+                cedente.saldofc,
+            ]
 
-        # Apply professional borders
+            # Obtener receptores relacionados usando el related_name correcto
+            receptores = Receptor.objects.filter(cedente=cedente)
+
+            if receptores.exists():
+                for receptor in receptores:
+                    # Combinar datos del cedente con cada receptor
+                    row_data = cedente_data + [
+                        receptor.idr,
+                        receptor.partidar,
+                        receptor.montocr,
+                        receptor.saldofr,
+                        (
+                            receptor.created_at.strftime("%d/%m/%Y %H:%M")
+                            if receptor.created_at
+                            else "N/A"
+                        ),
+                    ]
+                    ws.append(row_data)
+            else:
+                # Si no hay receptores, mostrar solo datos del cedente
+                row_data = cedente_data + ["", "", "", ""]
+                ws.append(row_data)
+
+            row_num += 1
+
+        # Aplicar bordes
         border = Border(
             left=Side(style="thin"),
             right=Side(style="thin"),
@@ -98,13 +122,11 @@ class CedenteExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             for cell in row:
                 cell.border = border
 
-        # Generate financial report
+        # Generar reporte
         output = BytesIO()
         wb.save(output)
         output.seek(0)
 
         return FileResponse(
-            output,
-            as_attachment=True,
-            filename="reporte_cedentes.xlsx"
+            output, as_attachment=True, filename="reporte_traspasos_combinados.xlsx"
         )

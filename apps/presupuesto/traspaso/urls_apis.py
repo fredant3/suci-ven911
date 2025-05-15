@@ -1,8 +1,7 @@
 from django.urls import path
-
+from presupuesto.traspaso.views.export_view import TraspasoExcelView
 from presupuesto.traspaso.views.create_view import TraspasoCreateApiView
 from presupuesto.traspaso.views.delete_view import TraspasoDeleteApiView
-from presupuesto.traspaso.views.export_view import CedenteExcelView
 from presupuesto.traspaso.views.list_view import TraspasoListApiView
 from presupuesto.traspaso.views.update_view import TraspasoUpdateApiView
 
@@ -29,7 +28,7 @@ urlpatterns = [
     ),
     path(
         "export",
-        CedenteExcelView.as_view(),
+        TraspasoExcelView.as_view(),
         name="export_excel",
     ),
 ]

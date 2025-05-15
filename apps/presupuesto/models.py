@@ -3,6 +3,11 @@ from presupuesto.asignacion.models import Asignacion
 from presupuesto.cedente.models import Cedente
 from presupuesto.proyecto.models import Proyecto
 from presupuesto.receptor.models import Receptor
-from presupuesto.traspaso.models import Traspaso
 
-__all__ = ["Accion", "Asignacion", "Cedente", "Proyecto", "Receptor", "Traspaso"]
+__all__ = [
+    "Accion",
+    "Asignacion",
+    "Cedente",
+    "Proyecto",
+    "Receptor",
+]
