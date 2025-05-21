@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
@@ -74,39 +75,24 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class ReglamentoListApiView(ListController, CheckPermisosMixin):
+class ReglamentoListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "organizacion.reglamentos.ver_reglamento"
+    field_mappings = {"estado": ESTATUS_CHOICES, "progre": PROGRESS_CHOICES}
 
     def __init__(self):
         self.service = ReglamentoService()
 
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTATUS_CHOICES)
-                progress_mapping = dict(PROGRESS_CHOICES)
+    def _map_fields(self, data):
+        # First handle the choice field mappings via the mixin
+        data = super()._map_fields(data)
 
-                for item in data.get("entities", []):
-                    if "estado" in item:
-                        item["estado"] = estatus_mapping.get(
-                            item["estado"], item["estado"]
-                        )
-
-                    if "progre" in item:
-                        item["progre"] = progress_mapping.get(
-                            item["progre"], item["progre"]
-                        )
-
-                    if "date" in item and item["date"]:
-                        item["date"] = (
-                            item["date"][:10]
-                            if isinstance(item["date"], str)
-                            else item["date"].strftime("%Y-%m-%d")
-                        )
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError as e:
-                print(f"Error decoding JSON: {e}")
-        return response
+        if "entities" in data:
+            for item in data["entities"]:
+                # Handle date formatting (both string and datetime objects)
+                if "date" in item and item["date"]:
+                    if isinstance(item["date"], str):
+                        item["date"] = item["date"][:10]
+                    else:
+                        # Assuming it's a datetime object if not string
+                        item["date"] = item["date"].strftime("%Y-%m-%d")
+        return data

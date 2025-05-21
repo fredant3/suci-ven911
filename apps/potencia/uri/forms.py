@@ -39,6 +39,9 @@ class UriInfoGeneralForm(FormBase):
         max_length=10,
         required=False,
         label="Unidad",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Unidad"}
+        ),
     )
     num_interna = CharField(
         max_length=10,
@@ -70,22 +73,35 @@ class UriInfolegalForm(FormBase):
         required=False,
         label="Ambulatorio/Hospital/Clínica",
         help_text="Datos del Centro Asistencial donde fue recibido el paciente",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Ambulatorio/Hospital/Clínica",
+            }
+        ),
     )
 
     servicioAsistencial = CharField(
         max_length=50,
         required=False,
         label="Servicio",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Servicio"}
+        ),
     )
     medico_receptor = CharField(
         max_length=50,
         required=False,
         label="Medico que recibe",
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Medico que recibe"}
+        ),
     )
     msds = CharField(
         max_length=50,
         required=False,
         label="MSDS",
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "MSDS"}),
     )
 
     class Meta:

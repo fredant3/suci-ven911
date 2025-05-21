@@ -2,6 +2,7 @@ from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
+    CurrencyValidator,
     TextValidator,
 )
 from django.core.validators import (
@@ -68,6 +69,7 @@ class Receptor(BaseModel):
     presuacorr = CharField(
         "Presupuesto acordado",
         max_length=64,
+        validators=[CurrencyValidator()],
     )
     caufechar = CharField(
         "Causado a la fecha",
@@ -81,14 +83,17 @@ class Receptor(BaseModel):
     dispr = CharField(
         "Disponible a causar",
         max_length=64,
+        validators=[CurrencyValidator()],
     )
     montocr = CharField(
         "Monto a ceder",
         max_length=64,
+        validators=[CurrencyValidator()],
     )
     saldofr = CharField(
         "Saldo final",
         max_length=64,
+        validators=[CurrencyValidator()],
     )
     direccionr = CharField(
         "Dirección cedente",

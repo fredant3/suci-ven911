@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from potencia.incidencias.services import IncidenciaService
@@ -81,25 +82,9 @@ class IncidenciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class IncidenciaListApiView(ListController, CheckPermisosMixin):
+class IncidenciaListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "potencia.incidencias.listar_incidencias"
+    field_mappings = {"estado": ESTADOS_CHOICES}
 
     def __init__(self):
         self.service = IncidenciaService()
-
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTADOS_CHOICES)
-
-                for item in data.get("entities", []):
-                    item["estado"] = estatus_mapping.get(
-                        item.get("estado", ""), item.get("estado", "")
-                    )
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError:
-                pass
-        return response

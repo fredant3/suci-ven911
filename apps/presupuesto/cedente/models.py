@@ -2,6 +2,7 @@ from django.db.models import CharField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
+    CurrencyValidator,
     TextValidator,
 )
 from django.core.validators import MinLengthValidator
@@ -54,12 +55,20 @@ class Cedente(BaseModel):
     presuacorc = CharField(
         "Presupuesto asignado",
         max_length=64,
-        validators=[MinLengthValidator(0)],
+        validators=[CurrencyValidator()],
     )
     caufechac = CharField("Causado a la fecha", max_length=64)
     dispc = CharField("Disponible a causar", max_length=64)
-    montocc = CharField("Monto comprometido", max_length=64)
-    saldofc = CharField("Saldo final", max_length=64)
+    montocc = CharField(
+        "Monto comprometido",
+        max_length=64,
+        validators=[CurrencyValidator()],
+    )
+    saldofc = CharField(
+        "Saldo final",
+        max_length=64,
+        validators=[CurrencyValidator()],
+    )
     direccionc = CharField(
         "Dirección cedente",
         max_length=64,

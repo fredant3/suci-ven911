@@ -1,7 +1,7 @@
-from django.db.models import CharField, DecimalField
+from django.db.models import CharField, TextField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator
+from helpers.validForm import CurrencyValidator, TextValidator
 from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
@@ -26,7 +26,10 @@ ESTATUS_CHOICES = (
 
 class TipoSueldo(BaseModel):
     tipo = CharField("Tipo de Sueldo", max_length=21, choices=TIPO_CHOICES)
-    monto = DecimalField("Monto Asignado", max_digits=10, decimal_places=2)
+    monto = TextField(
+        "Monto Asignado",
+        validators=[CurrencyValidator()],
+    )
     descripcion = CharField(
         "Descripción Detallada",
         max_length=50,

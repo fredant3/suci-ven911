@@ -74,37 +74,17 @@ class CedenteForm(FormBase):
                     "maxlength": "255",
                 }
             ),
-            "presuacorc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ej: 50000.00 (solo números positivos)",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "presuacorc": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
-            "dispc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ej: 25000.00 (solo números positivos)",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "dispc": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
-            "montocc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ej: 10000.00 (solo números positivos)",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "montocc": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
-            "saldofc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ej: 15000.00 (solo números positivos)",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "saldofc": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
             "direccionc": forms.TextInput(
                 attrs={

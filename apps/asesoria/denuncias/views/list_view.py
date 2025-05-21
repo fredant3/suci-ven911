@@ -1,5 +1,6 @@
 import json
 
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from asesoria.denuncias.services import DenunciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -81,25 +82,9 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class DenunciaListApiView(ListController, CheckPermisosMixin):
+class DenunciaListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "asesoria.denuncias.listar_denuncia"
+    field_mappings = {"estatus": ESTATUS_CHOICES}
 
     def __init__(self):
         self.service = DenunciaService()
-
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTATUS_CHOICES)
-
-                for item in data.get("entities", []):
-                    item["estatus"] = estatus_mapping.get(
-                        item.get("estatus", ""), item.get("estatus", "")
-                    )
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError:
-                pass
-        return response
