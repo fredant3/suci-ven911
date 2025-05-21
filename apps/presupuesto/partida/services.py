@@ -1,7 +1,7 @@
 from helpers.CrudMixin import CrudService
-
 from presupuesto.partida.repositories import PartidaRepository
 from django.db.models import Q
+from django.core.exceptions import ValidationError
 
 
 class PartidaService(CrudService):
@@ -10,8 +10,6 @@ class PartidaService(CrudService):
 
     def criteria(self, search, arg=None):
         query = Q()
-
         if search:
-            query &= Q(codigo__icontains=search)
-
+            query &= Q(codigo__icontains=search) | Q(titulo__icontains=search)
         return query

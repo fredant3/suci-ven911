@@ -4,38 +4,20 @@ from helpers.FormBase import FormBase
 
 
 class PartidaForm(FormBase):
-
     class Meta:
         model = Partida
-        fields = (
-            "codigo",
-            "titulo",
-        )
-        exclude = [
-            "created_at",
-            "created_by",
-            "updated_at",
-            "updated_by",
-            "deleted",
-            "deleted_at",
-            "deleted_by",
-        ]
+        fields = ("codigo", "titulo")
         widgets = {
             "codigo": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese codigo",
+                    "placeholder": "Ingrese código (mínimo 6 caracteres)",
                 }
             ),
             "titulo": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Ingrese el titulo",
+                    "placeholder": "Ingrese título (mínimo 6 caracteres)",
                 }
             ),
         }
-
-    def clean(self):
-        cleaned_data = super().clean()
-
-        return cleaned_data

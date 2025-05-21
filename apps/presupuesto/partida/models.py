@@ -9,6 +9,7 @@ class Partida(BaseModel):
     codigo = CharField(
         "Código:",
         max_length=64,
+        unique=True,
         validators=[
             MinLengthValidator(6),
             MaxLengthValidator(64),
