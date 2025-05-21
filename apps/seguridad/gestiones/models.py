@@ -1,7 +1,11 @@
 from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import UnicodeAlphaSpaceValidator, TextValidator
+from helpers.validForm import (
+    CedulaVenezolanaValidator,
+    UnicodeAlphaSpaceValidator,
+    TextValidator,
+)
 from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
@@ -29,7 +33,12 @@ class Gestion(BaseModel):
     )
     cedula = CharField(
         "Cédula",
-        max_length=64,
+        max_length=14,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
     )
     tipo = CharField(
         "Tipo de Gestión",

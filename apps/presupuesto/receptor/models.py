@@ -1,6 +1,5 @@
 from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
-from presupuesto.traspaso.models import Traspaso
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
     TextValidator,
@@ -13,9 +12,7 @@ from presupuesto.cedente.models import Cedente
 
 
 class Receptor(BaseModel):
-    traspaso = ForeignKey(
-        Traspaso, on_delete=CASCADE, related_name="receptores", null=True
-    )
+    cedente = ForeignKey(Cedente, on_delete=CASCADE, related_name="cedente", null=True)
 
     idr = CharField(
         "Identificador Receptor",

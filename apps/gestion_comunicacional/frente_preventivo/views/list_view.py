@@ -7,6 +7,10 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from gestion_comunicacional.frente_preventivo.services import FrentepreventivoService
+from helpers.models import (
+    TIPO_ACTIVIDAD,
+    DESARROLLO,
+)
 
 
 class FrentepreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -20,7 +24,7 @@ class FrentepreventivoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateV
         context["titlePage"] = "Frente Preventivo"
         context["indexUrl"] = reverse_lazy("gc_info")
         context["module"] = "Gestion Comunicacional"
-        context["submodule"] = "Inicio"
+        context["submodule"] = "Frente Preventivo"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("frentepreventivo:create")
         context["listApiUrl"] = reverse_lazy("api_frentepreventivo:list")
@@ -68,3 +72,28 @@ class FrentepreventivoListApiView(ListController, CheckPermisosMixin):
 
     def __init__(self):
         self.service = FrentepreventivoService()
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        if response.status_code == 200 and response.content:
+            try:
+                data = json.loads(response.content)
+                tipo_actividad_mapping = dict(TIPO_ACTIVIDAD)
+                desarrollo_mapping = dict(DESARROLLO)
+
+                for item in data.get("entities", []):
+                    # Mapear tipo_actividad
+                    item["tipo_actividad"] = tipo_actividad_mapping.get(
+                        item.get("tipo_actividad", ""), item.get("tipo_actividad", "")
+                    )
+
+                    # Mapear donde_desarrollo
+                    item["donde_desarrollo"] = desarrollo_mapping.get(
+                        item.get("donde_desarrollo", ""),
+                        item.get("donde_desarrollo", ""),
+                    )
+
+                response.content = json.dumps(data)
+            except json.JSONDecodeError:
+                pass
+        return response

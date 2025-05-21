@@ -12,6 +12,6 @@ class AccionService(CrudService):
         query = Q()
 
         if search:
-            query &= Q(proyecto__icontains=search)
+            query &= Q(proyecto_acciones__icontains=search)
 
         return query

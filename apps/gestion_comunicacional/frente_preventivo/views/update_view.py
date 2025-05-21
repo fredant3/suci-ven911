@@ -19,7 +19,7 @@ class FrentepreventivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateV
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Frente Preventivo"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("gc_info")
         context["module"] = "Gestion Comunicacional"
         context["submodule"] = "Frente Preventivo"
         context["titleForm"] = "Actualizar frentepreventivo"

@@ -3,7 +3,7 @@ from presupuesto.asignacion.models import Asignacion
 from presupuesto.cedente.models import Cedente
 from presupuesto.proyecto.models import Proyecto
 from presupuesto.receptor.models import Receptor
-from presupuesto.traspaso.models import Traspaso
+
 from presupuesto.partida.models import Partida
 
 __all__ = [

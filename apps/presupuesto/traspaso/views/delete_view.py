@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
-from presupuesto.traspaso.forms import TraspasoForm
-from presupuesto.traspaso.services import TraspasoService
+from presupuesto.cedente.forms import CedenteForm
+from presupuesto.cedente.services import CedenteService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
 
@@ -36,7 +36,7 @@ class TraspasoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 class TraspasoDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = "presupuesto.traspaso.eliminar_traspaso"
-    form_class = TraspasoForm
+    form_class = CedenteForm
 
     def __init__(self):
-        self.service = TraspasoService()
+        self.service = CedenteService()

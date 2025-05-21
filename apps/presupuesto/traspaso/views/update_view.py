@@ -1,19 +1,45 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView
-from presupuesto.traspaso.models import Traspaso
-from presupuesto.traspaso.forms import TraspasoForm
-from presupuesto.traspaso.services import TraspasoService
-from helpers.CheckPermisosMixin import CheckPermisosMixin
+from formtools.wizard.views import SessionWizardView
 from helpers.ControllerMixin import UpdateController
-
+from helpers.CheckPermisosMixin import CheckPermisosMixin
 from templates.sneat import TemplateLayout
+from django.http import HttpResponseRedirect
+
+from presupuesto.cedente.models import Cedente
+from presupuesto.receptor.models import Receptor
+from presupuesto.cedente.forms import CedenteForm
+from presupuesto.receptor.forms import ReceptorForm
 
 
-class TraspasoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
+class TraspasoUpdateWizardView(
+    LoginRequiredMixin, CheckPermisosMixin, SessionWizardView
+):
     permission_required = "presupuesto.traspaso.editar_traspaso"
-    form_class = TraspasoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "widzard/indextraspaso.html"
+    form_list = [
+        ("cedente", CedenteForm),
+        ("receptor", ReceptorForm),
+    ]
+
+    def get_object_dict(self):
+        cedente_id = self.kwargs.get("pk")
+        cedente = Cedente.objects.get(pk=cedente_id)
+        receptor = Receptor.objects.filter(cedente=cedente).first()
+
+        return {
+            "cedente": cedente,
+            "receptor": receptor,
+        }
+
+    def get_form_instance(self, step):
+        objects = self.get_object_dict()
+
+        if step == "cedente":
+            return objects["cedente"]
+        elif step == "receptor":
+            return objects["receptor"] or Receptor(cedente=objects["cedente"])
+        return None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,23 +47,36 @@ class TraspasoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["indexUrl"] = reverse_lazy("presupuesto")
         context["module"] = "Presupuesto"
         context["submodule"] = "Traspaso"
-        context["titleForm"] = "Actualizar traspaso"
+        context["titleForm"] = "Actualizar Traspaso"
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("traspasos:list")
-        context["urlForm"] = reverse_lazy(
-            "api_traspasos:update", kwargs={"pk": self.kwargs.get("pk")}
-        )
-        context["methodForm"] = "PUT"
+        context["action"] = "update"
         return TemplateLayout.init(self, context)
 
-    def get_queryset(self):
-        id = self.kwargs.get("pk")
-        return Traspaso.objects.filter(pk=id)
+    def done(self, form_list, form_dict, **kwargs):
+        objects = self.get_object_dict()
+
+        # Update Cedente
+        cedente_form = form_dict["cedente"]
+        if cedente_form.has_changed():
+            cedente_data = cedente_form.cleaned_data
+            for field, value in cedente_data.items():
+                setattr(objects["cedente"], field, value)
+            objects["cedente"].save()
+
+        # Update or create Receptor
+        receptor_form = form_dict["receptor"]
+        receptor_data = receptor_form.cleaned_data
+        if objects["receptor"]:
+            for field, value in receptor_data.items():
+                setattr(objects["receptor"], field, value)
+            objects["receptor"].save()
+        else:
+            Receptor.objects.create(**receptor_data, cedente=objects["cedente"])
+
+        return HttpResponseRedirect(reverse_lazy("traspasos:list"))
 
 
 class TraspasoUpdateApiView(UpdateController, CheckPermisosMixin):
     permission_required = "presupuesto.traspaso.editar_traspaso"
-    form_class = TraspasoForm
-
-    def __init__(self):
-        self.service = TraspasoService()
+    form_class = CedenteForm

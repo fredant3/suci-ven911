@@ -1,6 +1,5 @@
-from django.db.models import CharField, ForeignKey, CASCADE
+from django.db.models import CharField
 from django.forms import model_to_dict
-from presupuesto.traspaso.models import Traspaso
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
     TextValidator,
@@ -9,12 +8,10 @@ from django.core.validators import MinLengthValidator
 
 
 class Cedente(BaseModel):
-    traspaso = ForeignKey(
-        Traspaso, on_delete=CASCADE, related_name="cedentes", null=True
-    )
+
     idc = CharField(
         "Identificador Cedente:",
-        max_length=100,
+        max_length=64,
         validators=[
             MinLengthValidator(4),
             TextValidator(extra_chars="-"),

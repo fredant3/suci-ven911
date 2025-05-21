@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
-from presupuesto.traspaso.services import TraspasoService
+from presupuesto.cedente.services import CedenteService
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
@@ -43,11 +43,88 @@ class TraspasoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "proyecto_acciones",
-                "name": "proyecto_acciones",
-                "title": "Proyecto o Acción",
+                "data": "idc",
+                "name": "idc",
+                "title": "Identificador",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "partidac",
+                "name": "partidac",
+                "title": "Partida",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "generalc",
+                "name": "generalc",
+                "title": "General",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "espefc",
+                "name": "espefc",
+                "title": "Específicaciones",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "subespefc",
+                "name": "subespefc",
+                "title": "Sub-Especialidad",
                 "orderable": "false",
                 "searchable": "true",
+            },
+            {
+                "data": "denomc",
+                "name": "denomc",
+                "title": "Denomincación",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "presuacorc",
+                "name": "presuacorc",
+                "title": "Presupuesto acordado",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "caufechac",
+                "name": "caufechac",
+                "title": "Causado a la fecha",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "dispc",
+                "name": "dispc",
+                "title": "Disponible a causar",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "montocc",
+                "name": "montocc",
+                "title": "Monto a ceder",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "saldofc",
+                "name": "saldofc",
+                "title": "Saldo final",
+                "orderable": "false",
+                "searchable": "false",
+            },
+            {
+                "data": "direccionc",
+                "name": "direccionc",
+                "title": "Dirección cedente",
+                "orderable": "false",
+                "searchable": "false",
             },
         ]
 
@@ -56,4 +133,4 @@ class TraspasoListApiView(ListController, CheckPermisosMixin):
     permission_required = "presupuesto.traspaso.listar_traspaso"
 
     def __init__(self):
-        self.service = TraspasoService()
+        self.service = CedenteService()

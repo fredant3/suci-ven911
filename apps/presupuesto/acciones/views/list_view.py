@@ -4,6 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from presupuesto.acciones.models import PROYECTOS_ACCIONES
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
@@ -44,9 +46,9 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "proyecto",
-                "name": "proyecto",
-                "title": "Nombre",
+                "data": "proyecto_acciones",
+                "name": "proyecto_acciones",
+                "title": "Proyecto o Acciones Centralizadas",
                 "orderable": "false",
                 "searchable": "false",
             },
@@ -106,18 +108,12 @@ class AccionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "orderable": "false",
                 "searchable": "false",
             },
-            {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
-                "orderable": "false",
-                "searchable": "false",
-            },
         ]
 
 
-class AccionListApiView(ListController, CheckPermisosMixin):
+class AccionListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "presupuesto.acciones.listar_accion"
+    field_mappings = {"proyecto_acciones": PROYECTOS_ACCIONES}
 
     def __init__(self):
         self.service = AccionService()

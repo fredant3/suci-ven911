@@ -22,7 +22,7 @@ class GestioncomunicacionalListView(
         context["titlePage"] = "Gestion comunicacional"
         context["indexUrl"] = reverse_lazy("gc_info")
         context["module"] = "Gestion comunicacional"
-        context["submodule"] = "Inicio"
+        context["submodule"] = "Gestion comunicacional"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("gestioncomunicacional:create")
         context["listApiUrl"] = reverse_lazy("api_gestioncomunicacional:list")

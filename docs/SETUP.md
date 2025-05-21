@@ -4,7 +4,7 @@
 ### Python
 - Windows: [Descargar el instalador de Python](https://www.python.org/downloads/)
 - Linux/Unix: Python suele venir preinstalado
-- Versión recomendada: Python 3.10 o superior
+- Versión recomendada: Python 3.13 o superior
 
 ### Base de Datos
 - PostgreSQL 16 o superior
