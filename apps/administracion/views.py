@@ -17,19 +17,7 @@ class AdministracionView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Administración"
         context["submodule"] = "Administración"
-        context["data"] = [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        context["labels"] = [
-            "South Korea",
-            "Canada",
-            "United Kingdom",
-            "Netherlands",
-            "Italy",
-            "France",
-            "Japan",
-            "United States",
-            "China",
-            "Germany",
-        ]
+
         context["submoduleList"] = (
             ("Asignaciones", reverse_lazy("asignaciones:list")),
             ("Averia", reverse_lazy("averias:list")),
