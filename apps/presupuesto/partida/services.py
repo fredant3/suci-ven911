@@ -1,7 +1,6 @@
 from helpers.CrudMixin import CrudService
 from presupuesto.partida.repositories import PartidaRepository
 from django.db.models import Q
-from django.core.exceptions import ValidationError
 
 
 class PartidaService(CrudService):
