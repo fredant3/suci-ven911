@@ -11,7 +11,6 @@ class AveriaService(CrudService):
         "problema",
         "tipo_averia__nombre",
         "departamento__nombre",
-        "ubicacion",
         "serial",
         "codigo_bn",
         "observaciones",

@@ -7,6 +7,7 @@ from django.core.validators import (
     MaxLengthValidator,
 )
 from administracion.tipo_averia.models import TipoAveria
+from helpers.BaseModelMixin import BaseModel, DEP_AVERIA
 
 
 class Averia(BaseModel):
@@ -21,11 +22,7 @@ class Averia(BaseModel):
         max_length=180,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
     )
-    ubicacion = TextField(
-        "Ubicación",
-        max_length=180,
-        validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
-    )
+
     serial = CharField(
         "Serial",
         max_length=30,
@@ -45,6 +42,9 @@ class Averia(BaseModel):
         max_length=180,
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
         null=True,
+    )
+    d_averia = CharField(
+        "Depertamento que reporta Averia", max_length=2, choices=DEP_AVERIA
     )
 
     class Meta:
