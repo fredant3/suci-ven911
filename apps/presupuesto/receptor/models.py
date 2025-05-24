@@ -1,5 +1,6 @@
 from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
+from presupuesto.partida.models import Partida
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
     CurrencyValidator,
@@ -13,7 +14,8 @@ from presupuesto.cedente.models import Cedente
 
 
 class Receptor(BaseModel):
-    cedente = ForeignKey(Cedente, on_delete=CASCADE, related_name="cedente", null=True)
+    cedente = ForeignKey(Cedente, on_delete=CASCADE, null=True)
+    partida = ForeignKey(Partida, on_delete=CASCADE, null=True)
 
     idr = CharField(
         "Identificador Receptor",

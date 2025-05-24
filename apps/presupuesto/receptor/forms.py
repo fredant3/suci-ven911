@@ -10,6 +10,7 @@ class ReceptorForm(FormBase):
     class Meta:
         model = Receptor
         fields = (
+            "partida",
             "idr",
             "partidar",
             "generalr",
