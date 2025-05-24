@@ -13,7 +13,7 @@ from asesoria.filmicos.models import ESTATUS_CHOICES
 
 
 class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria.filmicos.listar_registroFilmico"
+    permission_required = "asesoria.listar_registro_filmico"
     url_redirect = reverse_lazy("asesoría")
     template_name = "sneat/layout/partials/data-table/layout.html"
 

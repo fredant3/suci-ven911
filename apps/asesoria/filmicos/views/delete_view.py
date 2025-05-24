@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = "asesoria.filmicos.eliminar_registroFilmico"
+    permission_required = "asesoria.eliminar_registro_filmico"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):

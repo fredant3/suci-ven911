@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "asesoria.filmicos.agregar_registroFilmico"
+    permission_required = "asesoria.agregar_registro_filmico"
     form_class = RegistroFilmicoForm
     template_name = "sneat/layout/partials/form/layout.html"
 

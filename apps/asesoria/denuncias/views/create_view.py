@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "asesoria.denuncias.agregar_denuncia"
+    permission_required = "asesoria.agregar_denuncia"
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 

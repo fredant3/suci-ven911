@@ -9,7 +9,7 @@ from openpyxl.styles import Alignment, Font
 
 
 class DenunciaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria.denuncias.exel_denuncia"
+    permission_required = "asesoria.exel_denuncia"
 
     def get(self, request, *args, **kwargs):
         denuncias = Denuncia.objects.all().values(

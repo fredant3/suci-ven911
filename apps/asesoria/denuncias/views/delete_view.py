@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = "asesoria.denuncias.eliminar_denuncia"
+    permission_required = "asesoria.eliminar_denuncia"
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):

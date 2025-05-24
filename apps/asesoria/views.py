@@ -5,9 +5,13 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 
 from templates.sneat import TemplateLayout
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Permission
+from asesoria.denuncias.models import Denuncia
+
 
 class AsesoriaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria_index"
+    permission_required = ("asesoria.ver_denuncia", "asesoria.ver_registro_filmico")
     url_redirect = reverse_lazy("modules:index")
     template_name = "dashborad/index.html"
 
@@ -21,4 +25,10 @@ class AsesoriaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             ("Denuncias", reverse_lazy("denuncias:list")),
             ("Fílmicos", reverse_lazy("filmicos:list")),
         )
+
+        content_type = ContentType.objects.get_for_model(Denuncia)
+        permissions = Permission.objects.filter(content_type=content_type)
+        for perm in permissions:
+            print(perm.name, perm.codename)
+
         return TemplateLayout.init(self, context)

@@ -13,7 +13,7 @@ from asesoria.denuncias.models import ESTATUS_CHOICES
 
 
 class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria.denuncias.listar_denuncia"
+    permission_required = "asesoria.listar_denuncia"
     url_redirect = reverse_lazy("asesoría")
     template_name = "sneat/layout/partials/data-table/layout.html"
 

@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = "asesoria.filmicos.editar_registroFilmico"
+    permission_required = "asesoria.ver_registro_filmico"
     form_class = RegistroFilmicoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
