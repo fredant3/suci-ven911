@@ -519,7 +519,7 @@ class CurrencyValidator:
 
 
 def Validate_pdf(value):
-    ext = os.path.splitext(value.name)[1]  # Obtiene la extensión del archivo
+    ext = os.path.splitext(value.name)[1]
     valid_extensions = [".pdf"]
     if not ext.lower() in valid_extensions:
         raise ValidationError("Solo se permiten archivos PDF.")
@@ -543,7 +543,6 @@ class PartidaCodeValidator:
     def __call__(self, value):
         value_str = str(value)
 
-        # Verifica el formato exacto: 3-2-2-2 dígitos separados solo por guiones
         if not re.match(r"^\d{3}-\d{2}-\d{2}-\d{2}$", value_str):
             raise ValidationError(
                 self.messages["invalid"],
@@ -551,7 +550,6 @@ class PartidaCodeValidator:
                 params={"value": value},
             )
 
-        # Verifica la longitud de cada grupo (opcional, ya que la regex ya lo hace)
         groups = value_str.split("-")
         expected_lengths = [3, 2, 2, 2]
 
