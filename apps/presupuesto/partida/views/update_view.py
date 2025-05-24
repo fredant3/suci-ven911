@@ -18,15 +18,15 @@ class PartidaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Partida"
-        context["indexUrl"] = reverse_lazy("partida")
-        context["module"] = "Partida"
-        context["submodule"] = "Partidas"
-        context["titleForm"] = "Actualizar accion"
+        context["titlePage"] = "Presupuesto"
+        context["indexUrl"] = reverse_lazy("presupuesto")
+        context["module"] = "Presupuesto"
+        context["submodule"] = "Partida"
+        context["titleForm"] = "Actualizar partida"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("partidas:list")
+        context["listUrl"] = reverse_lazy("partida:list")
         context["urlForm"] = reverse_lazy(
-            "api_partidas:update", args=[self.kwargs.get("pk")]
+            "api_partida:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)
