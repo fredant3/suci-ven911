@@ -30,7 +30,14 @@ class CheckPermisosMixin(object):
         return redirect(self.get_url_redirect())
 
 
-AppNames = Literal["asesoria", "administracion"]
+AppNames = Literal[
+    "asesoria",
+    "gestion_humana",
+    "administracion",
+    "uri",
+    "potencia",
+    "presupuesto",
+]
 
 
 class Permisos:

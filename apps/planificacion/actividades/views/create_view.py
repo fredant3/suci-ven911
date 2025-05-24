@@ -5,12 +5,11 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
 from planificacion.actividades.forms import ActividadForm
 from planificacion.actividades.services import ActividadService
-
 from templates.sneat import TemplateLayout
 
 
 class ActividadCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "planificacion.actividades.agregar_actividad"
+    permission_required = "planificacion.agregar_actividad"
     form_class = ActividadForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +28,7 @@ class ActividadCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class ActividadCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = "planificacion.actividades.agregar_actividad"
+    permission_required = "planificacion.agregar_actividad"
     form_class = ActividadForm
 
     def __init__(self):
