@@ -13,10 +13,10 @@ class tecnologiaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Tecnologia"
+        context["titlePage"] = "Tecnología"
         context["indexUrl"] = reverse_lazy("modules:index")
-        context["module"] = "Tecnologia"
-        context["submodule"] = "Tecnologia"
+        context["module"] = "Tecnología"
+        context["submodule"] = "Tecnología"
         context["submoduleList"] = (
             ("Auditoria", reverse_lazy("auditoria:list")),
             ("Averia", reverse_lazy("averias:list")),

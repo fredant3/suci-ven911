@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
@@ -68,51 +69,33 @@ class TipoSueldoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class TipoSueldoListApiView(ListController, CheckPermisosMixin):
+class TipoSueldoListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "rrhh.tipos_sueldos.listar_tipo_sueldo"
+    field_mappings = {"estatus": ESTATUS_CHOICES, "tipo": TIPO_CHOICES}
 
     def __init__(self):
         self.service = TipoSueldoService()
 
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTATUS_CHOICES)
-                tipo_mapping = dict(TIPO_CHOICES)
+    def _map_fields(self, data):
+        # First handle the choice field mappings via the mixin
+        data = super()._map_fields(data)
 
-                # Convertir estatus y formatear monto
-                for item in data.get("entities", []):
-                    # Formatear estatus
-                    if "estatus" in item:
-                        item["estatus"] = estatus_mapping.get(
-                            item["estatus"], item["estatus"]
-                        )
+        if "entities" in data:
+            for item in data["entities"]:
+                # Additional field formatting can be added here if needed
+                pass
 
-                    # Formatear tipo
-                    if "tipo" in item:
-                        item["tipo"] = tipo_mapping.get(item["tipo"], item["tipo"])
+        # Add filter options to response metadata
+        if "meta" not in data:
+            data["meta"] = {}
 
-                    # Formatear monto como número (opcional)
-                    if "monto" in item:
-                        try:
-                            item["monto"] = float(item["monto"])
-                        except (ValueError, TypeError):
-                            item["monto"] = 0.0
+        data["meta"]["filters"] = {
+            "tipo_options": self._choices_to_options(TIPO_CHOICES),
+            "estatus_options": self._choices_to_options(ESTATUS_CHOICES),
+        }
 
-                # Agregar opciones de filtro a la respuesta
-                if "meta" not in data:
-                    data["meta"] = {}
+        return data
 
-                data["meta"]["filters"] = {
-                    "tipo_options": [{"value": k, "label": v} for k, v in TIPO_CHOICES],
-                    "estatus_options": [
-                        {"value": k, "label": v} for k, v in ESTATUS_CHOICES
-                    ],
-                }
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError as e:
-                print(f"Error decodificando JSON: {e}")
-        return response
+    def _choices_to_options(self, choices):
+        """Convert Django choices to frontend options format"""
+        return [{"value": k, "label": v} for k, v in choices]

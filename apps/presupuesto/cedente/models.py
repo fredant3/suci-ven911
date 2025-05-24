@@ -1,7 +1,9 @@
-from django.db.models import CharField
+from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
+from presupuesto.partida.models import Partida
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
+    CurrencyValidator,
     TextValidator,
 )
 from django.core.validators import MinLengthValidator
@@ -9,43 +11,8 @@ from django.core.validators import MinLengthValidator
 
 class Cedente(BaseModel):
 
-    idc = CharField(
-        "Identificador Cedente:",
-        max_length=64,
-        validators=[
-            MinLengthValidator(4),
-            TextValidator(extra_chars="-"),
-        ],
-    )
-    partidac = CharField(
-        "Partida Contable",
-        max_length=64,
-        validators=[
-            MinLengthValidator(4),
-            TextValidator(extra_chars="-"),
-        ],
-    )
-    generalc = CharField(
-        "General",
-        max_length=64,
-        validators=[
-            MinLengthValidator(4),
-        ],
-    )
-    espefc = CharField(
-        "Específicaciones",
-        max_length=64,
-        validators=[
-            MinLengthValidator(1),
-        ],
-    )
-    subespefc = CharField(
-        "Sub-Especialidad",
-        max_length=64,
-        validators=[
-            MinLengthValidator(1),
-        ],
-    )
+    partida = ForeignKey(Partida, on_delete=CASCADE, null=True)
+
     denomc = CharField(
         "Denominación",
         max_length=64,
@@ -54,12 +21,20 @@ class Cedente(BaseModel):
     presuacorc = CharField(
         "Presupuesto asignado",
         max_length=64,
-        validators=[MinLengthValidator(0)],
+        validators=[CurrencyValidator()],
     )
     caufechac = CharField("Causado a la fecha", max_length=64)
     dispc = CharField("Disponible a causar", max_length=64)
-    montocc = CharField("Monto comprometido", max_length=64)
-    saldofc = CharField("Saldo final", max_length=64)
+    montocc = CharField(
+        "Monto comprometido",
+        max_length=64,
+        validators=[CurrencyValidator()],
+    )
+    saldofc = CharField(
+        "Saldo final",
+        max_length=64,
+        validators=[CurrencyValidator()],
+    )
     direccionc = CharField(
         "Dirección cedente",
         max_length=64,
@@ -70,7 +45,7 @@ class Cedente(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return "{0} {1}".format(self.partidac, self.generalc)
+        return self.generalc
 
     class Meta:
         verbose_name = "Cedente"

@@ -38,4 +38,9 @@ urlpatterns = [
         "api/traspasos/",
         include(("apps.presupuesto.traspaso.urls_apis", "api_traspasos")),
     ),
+    path("partida/", include(("apps.presupuesto.partida.urls", "partida"))),
+    path(
+        "api/partida/",
+        include(("apps.presupuesto.partida.urls_apis", "api_partida")),
+    ),
 ]

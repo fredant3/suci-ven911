@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from organizacion.normativas.services import NormativaService
@@ -73,35 +74,19 @@ class NormativaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class NormativaListApiView(ListController, CheckPermisosMixin):
+class NormativaListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "organizacion.normativas.ver_normativa"
+    field_mappings = {"estado": ESTATUS_CHOICES, "progre": PROGRESS_CHOICES}
 
     def __init__(self):
         self.service = NormativaService()
 
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTATUS_CHOICES)
-                progress_mapping = dict(PROGRESS_CHOICES)
+    def _map_fields(self, data):
+        data = super()._map_fields(data)
 
-                for item in data.get("entities", []):
-                    if "estado" in item:
-                        item["estado"] = estatus_mapping.get(
-                            item["estado"], item["estado"]
-                        )
-
-                    if "progre" in item:
-                        item["progre"] = progress_mapping.get(
-                            item["progre"], item["progre"]
-                        )
-
-                    if "date" in item and item["date"]:
-                        item["date"] = item["date"][:10]
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError as e:
-                print(f"Error decodificando JSON: {e}")
-        return response
+        if "entities" in data:
+            for item in data["entities"]:
+                # Format date if present
+                if "date" in item and item["date"]:
+                    item["date"] = item["date"][:10]
+        return data

@@ -20,7 +20,7 @@ class TecnologiaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         self.form_class = define_type_form(self.kwargs)
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Tecnología"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("tecnologia")
         context["module"] = "Tecnología"
         context["submodule"] = "Actualizar inventario"
         context["titleForm"] = f"Actualizar articulo tipo {self.kwargs['type']}"

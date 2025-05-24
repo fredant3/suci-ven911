@@ -201,20 +201,6 @@
 						<div class="text-truncate" data-i18n="Without menu">Actividades</div>
 					</a>
 				</li>
-
-				<li
-					class="menu-item {% if 'infraestructuras' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'infraestructuras:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Infraestructuras</div>
-					</a>
-				</li>
-
-				<li
-					class="menu-item {% if 'transportes' in request.resolver_match.namespaces and 'list' == request.resolver_match.url_name %}active{% endif %}">
-					<a href="{% url 'transportes:list' %}" class="menu-link">
-						<div class="text-truncate" data-i18n="Without menu">Transportes</div>
-					</a>
-				</li>
 			</ul>
 		</li>
 

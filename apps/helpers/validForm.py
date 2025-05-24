@@ -519,7 +519,46 @@ class CurrencyValidator:
 
 
 def Validate_pdf(value):
-    ext = os.path.splitext(value.name)[1]  # Obtiene la extensión del archivo
+    ext = os.path.splitext(value.name)[1]
     valid_extensions = [".pdf"]
     if not ext.lower() in valid_extensions:
         raise ValidationError("Solo se permiten archivos PDF.")
+
+
+@deconstructible
+class PartidaCodeValidator:
+    messages = {
+        "invalid": _(
+            "El formato del código debe ser exactamente '000-00-00-00' (4 grupos separados por guiones)."
+        ),
+        "invalid_group_length": _(
+            "Los grupos deben tener 3, 2, 2 y 2 dígitos respectivamente."
+        ),
+    }
+
+    def __init__(self, message=None):
+        if message:
+            self.messages["invalid"] = message
+
+    def __call__(self, value):
+        value_str = str(value)
+
+        if not re.match(r"^\d{3}-\d{2}-\d{2}-\d{2}$", value_str):
+            raise ValidationError(
+                self.messages["invalid"],
+                code="invalid",
+                params={"value": value},
+            )
+
+        groups = value_str.split("-")
+        expected_lengths = [3, 2, 2, 2]
+
+        if any(len(group) != expected_lengths[i] for i, group in enumerate(groups)):
+            raise ValidationError(
+                self.messages["invalid_group_length"],
+                code="invalid_group_length",
+                params={"value": value},
+            )
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and (self.messages == other.messages)

@@ -1,5 +1,6 @@
 import json
 
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from asesoria.filmicos.services import RegistroFilmicoService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -81,27 +82,11 @@ class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
         ]
 
 
-class RegistroFilmicoListApiView(ListController, CheckPermisosMixin):
+class RegistroFilmicoListApiView(
+    GetValueChoicesMixin, ListController, CheckPermisosMixin
+):
     permission_required = "asesoria.filmicos.listar_registroFilmico"
+    field_mappings = {"estatus": ESTATUS_CHOICES}
 
     def __init__(self):
         self.service = RegistroFilmicoService()
-
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTATUS_CHOICES)
-
-                # Convertir estatus a su valor legible
-                for item in data.get("entities", []):
-                    if "estatus" in item:
-                        item["estatus"] = estatus_mapping.get(
-                            item["estatus"], item["estatus"]
-                        )
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError:
-                pass  # Manejar error si el contenido no es JSON válido
-        return response

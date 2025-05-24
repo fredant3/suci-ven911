@@ -16,7 +16,7 @@ class AsesoriaView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Asesoría"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Asesoría"
-        context["submodule"] = "Inicio Asesoría"
+        context["submodule"] = "Asesoría Jurídica"
         context["submoduleList"] = (
             ("Denuncias", reverse_lazy("denuncias:list")),
             ("Fílmicos", reverse_lazy("filmicos:list")),

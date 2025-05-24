@@ -16,19 +16,7 @@ class InfoController(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Gestion Comunicacional"
         context["submodule"] = "Gestion Comunicacional"
-        context["data"] = [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        context["labels"] = [
-            "South Korea",
-            "Canada",
-            "United Kingdom",
-            "Netherlands",
-            "Italy",
-            "France",
-            "Japan",
-            "United States",
-            "China",
-            "Germany",
-        ]
+
         context["submoduleList"] = (
             ("Gestion Comunicacional", reverse_lazy("gestioncomunicacional:list")),
             ("Frente Preventivo", reverse_lazy("frentepreventivo:list")),

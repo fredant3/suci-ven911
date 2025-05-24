@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
+from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 
@@ -61,27 +62,9 @@ class CargoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class CargoListApiView(ListController, CheckPermisosMixin):
+class CargoListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
     permission_required = "rrhh.cargos.listar_cargo"
+    field_mappings = {"estatus": ESTATUS_CHOICES}
 
     def __init__(self):
         self.service = CargoService()
-
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if response.status_code == 200 and response.content:
-            try:
-                data = json.loads(response.content)
-                estatus_mapping = dict(ESTATUS_CHOICES)
-
-                # Convertir estatus a su valor legible
-                for item in data.get("entities", []):
-                    if "estatus" in item:
-                        item["estatus"] = estatus_mapping.get(
-                            item["estatus"], item["estatus"]
-                        )
-
-                response.content = json.dumps(data)
-            except json.JSONDecodeError as e:
-                print(f"Error decodificando JSON: {e}")
-        return response

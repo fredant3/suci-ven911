@@ -37,7 +37,7 @@ class Reglamento(BaseModel):
     file = FileField("Archivo", upload_to="reglamentos/", validators=[Validate_pdf])
     date = DateField("Fecha", blank=True)
     progre = CharField("Progreso:", max_length=64, choices=PROGRESS_CHOICES)
-    estado = CharField(max_length=3, choices=ESTATUS_CHOICES, default="bor")
+    estado = CharField("Estatus", max_length=3, choices=ESTATUS_CHOICES, default="bor")
 
     def toJSON(self):
         return model_to_dict(self)

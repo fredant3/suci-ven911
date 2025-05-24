@@ -222,7 +222,12 @@ class Uri(BaseModel):
         "Fecha de Atencion", max_length=10, blank=True, null=True
     )
     nroreporte = CharField("Numero de Reporte", max_length=10, blank=True, null=True)
-    placa = CharField("Placa", max_length=10, blank=True, null=True)
+    placa = CharField(
+        "Placa",
+        max_length=10,
+        blank=True,
+        null=True,
+    )
     institucion = CharField("Institucion", max_length=300, blank=True, null=True)
     tipounidad = CharField("Tipo de Unidad", max_length=10, blank=True, null=True)
     num_interna = CharField("Numeracion Interna", max_length=10, blank=True, null=True)

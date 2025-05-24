@@ -10,11 +10,7 @@ class ReceptorForm(FormBase):
     class Meta:
         model = Receptor
         fields = (
-            "idr",
-            "partidar",
-            "generalr",
-            "espefr",
-            "subespefr",
+            "partida",
             "denomr",
             "presuacorr",
             "caufechar",
@@ -72,35 +68,17 @@ class ReceptorForm(FormBase):
                     "placeholder": "Ingrese la denominación",
                 }
             ),
-            "presuacorr": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el presupuesto asignado",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "presuacorr": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
             "dispr": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese la disposición",
-                }
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
-            "montocr": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el monto comprometido",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "montocr": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
-            "saldofr": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el saldo final",
-                    "min": "0",
-                    "step": "0.01",
-                }
+            "saldofr": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
             "direccionr": forms.TextInput(
                 attrs={
@@ -109,27 +87,6 @@ class ReceptorForm(FormBase):
                 }
             ),
         }
-
-    def clean_presuacorr(self):
-        data = self.cleaned_data.get("presuacorr")
-        validate_decimal_number(
-            str(data), "El presupuesto debe ser un valor positivo con 2 decimales"
-        )
-        return data
-
-    def clean_montocr(self):
-        data = self.cleaned_data.get("montocr")
-        validate_decimal_number(
-            str(data), "El monto comprometido debe ser un valor con 2 decimales"
-        )
-        return data
-
-    def clean_saldofr(self):
-        data = self.cleaned_data.get("saldofr")
-        validate_decimal_number(
-            str(data), "El saldo final debe ser un valor con 2 decimales"
-        )
-        return data
 
     def save(self, commit=True):
         instance = super().save(commit=False)
