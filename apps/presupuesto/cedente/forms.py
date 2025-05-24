@@ -9,6 +9,7 @@ class CedenteForm(FormBase):
     class Meta:
         model = Cedente
         fields = (
+            "partida",
             "idc",
             "partidac",
             "generalc",

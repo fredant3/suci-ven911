@@ -16,7 +16,7 @@ class PresupuestoView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Inicio Presupuesto"
+        context["submodule"] = "Presupuesto"
         context["submoduleList"] = (
             ("Acciones", reverse_lazy("acciones:list")),
             ("Asignaciones", reverse_lazy("presupuesto_asignaciones:list")),

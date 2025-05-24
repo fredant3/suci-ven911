@@ -523,3 +523,38 @@ def Validate_pdf(value):
     valid_extensions = [".pdf"]
     if not ext.lower() in valid_extensions:
         raise ValidationError("Solo se permiten archivos PDF.")
+
+
+@deconstructible
+class PartidaCodeValidator:
+    messages = {
+        "invalid": _(
+            "El formato del código debe ser: '000 00 00 00' (4 grupos de números separados por espacios o guiones)."
+        ),
+        "invalid_length": _("Cada grupo debe tener entre 1 y 3 dígitos."),
+    }
+
+    def __init__(self, message=None):
+        if message:
+            self.messages["invalid"] = message
+
+    def __call__(self, value):
+        # Permite espacios o guiones como separadores
+        if not re.match(r"^\d{1,3}([\s-]\d{1,3}){3}$", str(value)):
+            raise ValidationError(
+                self.messages["invalid"],
+                code="invalid",
+                params={"value": value},
+            )
+
+        # Verifica que cada grupo tenga entre 1 y 3 dígitos
+        groups = re.split(r"[\s-]", str(value))
+        if any(len(group) < 1 or len(group) > 3 for group in groups):
+            raise ValidationError(
+                self.messages["invalid_length"],
+                code="invalid_length",
+                params={"value": value},
+            )
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and (self.messages == other.messages)

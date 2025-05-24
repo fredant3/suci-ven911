@@ -1,5 +1,6 @@
-from django.db.models import CharField
+from django.db.models import CharField, ForeignKey, CASCADE
 from django.forms import model_to_dict
+from presupuesto.partida.models import Partida
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
     CurrencyValidator,
@@ -9,6 +10,8 @@ from django.core.validators import MinLengthValidator
 
 
 class Cedente(BaseModel):
+
+    partida = ForeignKey(Partida, on_delete=CASCADE, null=True)
 
     idc = CharField(
         "Identificador Cedente:",

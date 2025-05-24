@@ -1,7 +1,10 @@
 from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from helpers.validForm import (
+    PartidaCodeValidator,
+    TextValidator,
+)
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
@@ -9,10 +12,11 @@ class Partida(BaseModel):
     codigo = CharField(
         "Código:",
         max_length=64,
+        unique=True,
         validators=[
             MinLengthValidator(6),
             MaxLengthValidator(64),
-            TextValidator(),
+            PartidaCodeValidator(),
         ],
     )
     titulo = CharField(
