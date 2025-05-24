@@ -7,7 +7,7 @@ class UserService(CrudService):
         self.repository = UserRepository()
 
     def get_all_with_related_info(self, draw, start, length, search=None):
-        users, empleados_map = self.repository.get_all_with_related()
+        users, empleados_map = self.repository.get_all_with_related(search)
         result = []
 
         for user in users:

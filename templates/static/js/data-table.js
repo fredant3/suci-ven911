@@ -44,7 +44,6 @@ function getcolumnDefs (withActions, updateUrl, deleteUrl) {
           }
           
           if (deleteUrl) {
-            console.info('HEY deleteUrl');
             buttons += `<a href="${deleteUrl.replace("0", row.id)}" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>`; 
           }
 
