@@ -57,13 +57,6 @@ class TraspasoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "true",
             },
             {
-                "data": "partidac",
-                "name": "partidac",
-                "title": "Partida",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
                 "data": "presuacorc",
                 "name": "presuacorc",
                 "title": "Presupuesto acordado",
@@ -111,13 +104,6 @@ class TraspasoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "title": "Receptor Partida Título",
                 "orderable": "true",
                 "searchable": "true",
-            },
-            {
-                "data": "receptor__partidar",
-                "name": "receptor__partidar",
-                "title": "Partida Receptor",
-                "orderable": "false",
-                "searchable": "false",
             },
             {
                 "data": "receptor__presuacorr",

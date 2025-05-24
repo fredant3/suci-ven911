@@ -11,11 +11,6 @@ class ReceptorForm(FormBase):
         model = Receptor
         fields = (
             "partida",
-            "idr",
-            "partidar",
-            "generalr",
-            "espefr",
-            "subespefr",
             "denomr",
             "presuacorr",
             "caufechar",

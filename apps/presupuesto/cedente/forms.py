@@ -10,11 +10,6 @@ class CedenteForm(FormBase):
         model = Cedente
         fields = (
             "partida",
-            "idc",
-            "partidac",
-            "generalc",
-            "espefc",
-            "subespefc",
             "denomc",
             "presuacorc",
             "caufechac",

@@ -17,48 +17,6 @@ class Receptor(BaseModel):
     cedente = ForeignKey(Cedente, on_delete=CASCADE, null=True)
     partida = ForeignKey(Partida, on_delete=CASCADE, null=True)
 
-    idr = CharField(
-        "Identificador Receptor",
-        max_length=100,
-        validators=[
-            MinLengthValidator(3),
-            MaxLengthValidator(100),
-            TextValidator(),
-        ],
-    )
-    partidar = CharField(
-        "Partida Contable",
-        max_length=64,
-        validators=[
-            MinLengthValidator(3),
-            MaxLengthValidator(64),
-            TextValidator(),
-        ],
-    )
-    generalr = CharField(
-        "General",
-        max_length=64,
-        validators=[
-            MinLengthValidator(3),
-            MaxLengthValidator(64),
-        ],
-    )
-    espefr = CharField(
-        "Específicaciones",
-        max_length=64,
-        validators=[
-            MinLengthValidator(3),
-            MaxLengthValidator(64),
-        ],
-    )
-    subespefr = CharField(
-        "Sub-Especialidad",
-        max_length=64,
-        validators=[
-            MinLengthValidator(3),
-            MaxLengthValidator(64),
-        ],
-    )
     denomr = CharField(
         "Denomincación",
         max_length=64,
@@ -111,7 +69,7 @@ class Receptor(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return "{0} {1}".format(self.partidar, self.generalr)
+        return self.generalr
 
     class Meta:
         verbose_name = "Receptor"
