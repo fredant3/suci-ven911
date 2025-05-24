@@ -62,13 +62,6 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "ubicacion",
-                "name": "ubicacion",
-                "title": "Ubicación",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
                 "data": "serial",
                 "name": "serial",
                 "title": "Número de serie",
@@ -83,9 +76,9 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "observaciones",
-                "name": "observaciones",
-                "title": "Observaciones",
+                "data": "d_averia",
+                "name": "d_averia",
+                "title": "Departamento Averia",
                 "orderable": "false",
                 "searchable": "false",
             },

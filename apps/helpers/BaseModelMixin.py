@@ -46,6 +46,22 @@ MONTH_CHOICES = (
     ("dic", "Diciembre"),
 )
 
+DEP_AVERIA = (
+    ("1", "Asesoría Jurídica"),
+    ("2", "Gestión Humana"),
+    ("3", "Gestión Administrativa"),
+    ("4", "Unidad de Respuesta Inmediata"),
+    ("5", "Potencia"),
+    ("6", "Organización"),
+    ("7", "Presupuestos"),
+    ("8", "Planificación"),
+    ("9", "Protección y Seguridad Integral"),
+    ("10", "Biblioteca de Manuales"),
+    ("11", "Operaciones"),
+    ("12", "Tecnología Comunicación e Información"),
+    ("13", "Gestion Comunicacional"),
+)
+
 
 class BaseModelManager(models.Manager):
     def get_queryset(self):
