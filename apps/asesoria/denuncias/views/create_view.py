@@ -5,12 +5,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
-
 from templates.sneat import TemplateLayout
+from asesoria.denuncias.models import Denuncia
 
 
 class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "asesoria.agregar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_AGREGAR
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class DenunciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
 
 
 class DenunciaCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = "asesoria.denuncias.agregar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_AGREGAR
     form_class = DenunciaForm
 
     def __init__(self):

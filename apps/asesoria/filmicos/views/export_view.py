@@ -9,7 +9,7 @@ from openpyxl.styles import Alignment, Font
 
 
 class RegistroFilmicoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria.exel_registro_filmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_EXEL
 
     def get(self, request, *args, **kwargs):
         # Filtra los datos del modelo para generar el archivo Excel

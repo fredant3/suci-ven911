@@ -55,7 +55,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "organizacion",
                 "image": "img/modules/organizacion.png",
                 "user_has_access": Permisos.check_permissions(
-                    self.request.user, "asesoria"
+                    self.request.user, "no implementado"
                 ),
             },
             {
@@ -71,7 +71,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "planificacion",
                 "image": "img/modules/planificacion.png",
                 "user_has_access": Permisos.check_permissions(
-                    self.request.user, "asesoria"
+                    self.request.user, "planificacion"
                 ),
             },
             {
@@ -79,7 +79,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "seguridad",
                 "image": "img/modules/seguridad.png",
                 "user_has_access": Permisos.check_permissions(
-                    self.request.user, "asesoria"
+                    self.request.user, "seguridad"
                 ),
             },
             {
@@ -87,7 +87,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "bibliotecas",
                 "image": "img/modules/biblioteca.png",
                 "user_has_access": Permisos.check_permissions(
-                    self.request.user, "asesoria"
+                    self.request.user, "no implementado"
                 ),
             },
             {
@@ -95,7 +95,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "operaciones",
                 "image": "img/modules/ambulancia.png",
                 "user_has_access": Permisos.check_permissions(
-                    self.request.user, "asesoria"
+                    self.request.user, "operaciones"
                 ),
             },
             {
@@ -103,7 +103,7 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "tecnologia",
                 "image": "img/modules/tecnologia.png",
                 "user_has_access": Permisos.check_permissions(
-                    self.request.user, "asesoria"
+                    self.request.user, "no implementado"
                 ),
             },
             {

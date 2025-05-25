@@ -6,12 +6,11 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
-
 from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = "asesoria.ver_registro_filmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_EDITAR
     form_class = RegistroFilmicoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -36,7 +35,7 @@ class RegistroFilmicoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateVi
 
 
 class RegistroFilmicoUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = "asesoria.filmicos.editar_registroFilmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_EDITAR
     form_class = RegistroFilmicoForm
 
     def __init__(self):

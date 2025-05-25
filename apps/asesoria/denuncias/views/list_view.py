@@ -1,5 +1,4 @@
 import json
-
 from asesoria.denuncias.services import DenunciaService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -7,13 +6,13 @@ from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
-
+from asesoria.denuncias.models import Denuncia
 from templates.sneat import TemplateLayout
 from asesoria.denuncias.models import ESTATUS_CHOICES
 
 
 class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria.listar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_LISTAR
     url_redirect = reverse_lazy("asesoría")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -82,7 +81,7 @@ class DenunciaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
 
 class DenunciaListApiView(ListController, CheckPermisosMixin):
-    permission_required = "asesoria.denuncias.listar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_LISTAR
 
     def __init__(self):
         self.service = DenunciaService()

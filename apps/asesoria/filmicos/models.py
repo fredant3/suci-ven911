@@ -1,15 +1,8 @@
-from django.db.models import (
-    CharField,
-    TextField,
-    DateField,
-)
+from django.db.models import CharField, TextField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import TextValidator
-from django.core.validators import (
-    MinLengthValidator,
-    MaxLengthValidator,
-)
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 ESTATUS_CHOICES = (
     ("reg", "Registrado"),
@@ -55,14 +48,23 @@ class RegistroFilmico(BaseModel):
     def __str__(self):
         return self.camara
 
+    PERMISSIONS_ASESORIA_REGISTRO_FILMICO_AGREGAR = "asesoria.agregar_registro_filmico"
+    PERMISSIONS_ASESORIA_REGISTRO_FILMICO_EDITAR = "asesoria.editar_registro_filmico"
+    PERMISSIONS_ASESORIA_REGISTRO_FILMICO_ELIMINAR = (
+        "asesoria.eliminar_registro_filmico"
+    )
+    PERMISSIONS_ASESORIA_REGISTRO_FILMICO_EXEL = "asesoria.exel_registro_filmico"
+    PERMISSIONS_ASESORIA_REGISTRO_FILMICO_LISTAR = "asesoria.listar_registro_filmico"
+    PERMISSIONS_ASESORIA_REGISTRO_FILMICO_VER = "asesoria.ver_registro_filmico"
+
     class Meta:
         verbose_name = "Registro Filmico"
         verbose_name_plural = "Registros Filmicos"
         permissions = [
-            ("listar_registro_filmico", "Puede listar registros filmicos"),
             ("agregar_registro_filmico", "Puede agregar registro filmico"),
-            ("ver_registro_filmico", "Puede ver registro filmico"),
             ("editar_registro_filmico", "Puede actualizar registro filmico"),
             ("eliminar_registro_filmico", "Puede eliminar registro filmico"),
             ("exel_registro_filmico", "Puede exportar a exel registro filmico"),
+            ("listar_registro_filmico", "Puede listar registros filmicos"),
+            ("ver_registro_filmico", "Puede ver registro filmico"),
         ]

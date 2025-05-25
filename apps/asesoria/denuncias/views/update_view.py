@@ -11,7 +11,7 @@ from templates.sneat import TemplateLayout
 
 
 class DenunciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
-    permission_required = "asesoria.editar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_EDITAR
     form_class = DenunciaForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -63,7 +63,7 @@ class DenunciaUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
 
 
 class DenunciaUpdateApiView(UpdateController, CheckPermisosMixin):
-    permission_required = "asesoria.denuncias.editar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_EDITAR
     form_class = DenunciaForm
 
     def __init__(self):

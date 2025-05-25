@@ -1,6 +1,7 @@
 import json
 
 from asesoria.filmicos.services import RegistroFilmicoService
+from asesoria.filmicos.models import RegistroFilmico
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -13,7 +14,7 @@ from asesoria.filmicos.models import ESTATUS_CHOICES
 
 
 class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "asesoria.listar_registro_filmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_LISTAR
     url_redirect = reverse_lazy("asesoría")
     template_name = "sneat/layout/partials/data-table/layout.html"
 
@@ -82,7 +83,7 @@ class RegistroFilmicoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVi
 
 
 class RegistroFilmicoListApiView(ListController, CheckPermisosMixin):
-    permission_required = "asesoria.filmicos.listar_registroFilmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_LISTAR
 
     def __init__(self):
         self.service = RegistroFilmicoService()

@@ -186,6 +186,13 @@ class Denuncia(BaseModel):
     def __str__(self):
         return self.ente
 
+    PERMISSIONS_ASESORIA_DENUNCIA_AGREGAR = "asesoria.agregar_denuncia"
+    PERMISSIONS_ASESORIA_DENUNCIA_EDITAR = "asesoria.editar_denuncia"
+    PERMISSIONS_ASESORIA_DENUNCIA_ELIMINAR = "asesoria.eliminar_denuncia"
+    PERMISSIONS_ASESORIA_DENUNCIA_EXEL = "asesoria.exel_denuncia"
+    PERMISSIONS_ASESORIA_DENUNCIA_LISTAR = "asesoria.listar_denuncia"
+    PERMISSIONS_ASESORIA_DENUNCIA_VER = "asesoria.ver_denuncia"
+
     class Meta:
         verbose_name = "Denuncia"
         verbose_name_plural = "Denuncias"

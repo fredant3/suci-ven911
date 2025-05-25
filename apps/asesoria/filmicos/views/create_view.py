@@ -5,12 +5,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
-
+from asesoria.filmicos.models import RegistroFilmico
 from templates.sneat import TemplateLayout
 
 
 class RegistroFilmicoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
-    permission_required = "asesoria.agregar_registro_filmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_AGREGAR
     form_class = RegistroFilmicoForm
     template_name = "sneat/layout/partials/form/layout.html"
 
@@ -29,7 +29,7 @@ class RegistroFilmicoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateVi
 
 
 class RegistroFilmicoCreateApiView(CreateController, CheckPermisosMixin):
-    permission_required = "asesoria.filmicos.agregar_registroFilmico"
+    permission_required = RegistroFilmico.PERMISSIONS_ASESORIA_REGISTRO_FILMICO_AGREGAR
     form_class = RegistroFilmicoForm
 
     def __init__(self):

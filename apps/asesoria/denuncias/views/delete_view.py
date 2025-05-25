@@ -6,12 +6,11 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import DeleteController
-
 from templates.sneat import TemplateLayout
 
 
 class DenunciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
-    permission_required = "asesoria.eliminar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_ELIMINAR
     template_name = "sneat/layout/partials/form/delete-layout.html"
 
     def get_context_data(self, **kwargs):
@@ -34,7 +33,7 @@ class DenunciaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
 
 
 class DenunciaDeleteApiView(DeleteController, CheckPermisosMixin):
-    permission_required = "asesoria.denuncias.eliminar_denuncia"
+    permission_required = Denuncia.PERMISSIONS_ASESORIA_DENUNCIA_ELIMINAR
     form_class = DenunciaForm
 
     def __init__(self):
