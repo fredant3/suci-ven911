@@ -13,43 +13,6 @@ class Cedente(BaseModel):
 
     partida = ForeignKey(Partida, on_delete=CASCADE, null=True)
 
-    idc = CharField(
-        "Identificador Cedente:",
-        max_length=64,
-        validators=[
-            MinLengthValidator(4),
-            TextValidator(extra_chars="-"),
-        ],
-    )
-    partidac = CharField(
-        "Partida Contable",
-        max_length=64,
-        validators=[
-            MinLengthValidator(4),
-            TextValidator(extra_chars="-"),
-        ],
-    )
-    generalc = CharField(
-        "General",
-        max_length=64,
-        validators=[
-            MinLengthValidator(4),
-        ],
-    )
-    espefc = CharField(
-        "Específicaciones",
-        max_length=64,
-        validators=[
-            MinLengthValidator(1),
-        ],
-    )
-    subespefc = CharField(
-        "Sub-Especialidad",
-        max_length=64,
-        validators=[
-            MinLengthValidator(1),
-        ],
-    )
     denomc = CharField(
         "Denominación",
         max_length=64,
@@ -82,7 +45,7 @@ class Cedente(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return "{0} {1}".format(self.partidac, self.generalc)
+        return self.generalc
 
     class Meta:
         verbose_name = "Cedente"

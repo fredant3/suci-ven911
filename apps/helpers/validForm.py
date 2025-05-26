@@ -519,7 +519,7 @@ class CurrencyValidator:
 
 
 def Validate_pdf(value):
-    ext = os.path.splitext(value.name)[1]  # Obtiene la extensión del archivo
+    ext = os.path.splitext(value.name)[1]
     valid_extensions = [".pdf"]
     if not ext.lower() in valid_extensions:
         raise ValidationError("Solo se permiten archivos PDF.")
@@ -529,9 +529,11 @@ def Validate_pdf(value):
 class PartidaCodeValidator:
     messages = {
         "invalid": _(
-            "El formato del código debe ser: '000 00 00 00' (4 grupos de números separados por espacios o guiones)."
+            "El formato del código debe ser exactamente '000-00-00-00' (4 grupos separados por guiones)."
         ),
-        "invalid_length": _("Cada grupo debe tener entre 1 y 3 dígitos."),
+        "invalid_group_length": _(
+            "Los grupos deben tener 3, 2, 2 y 2 dígitos respectivamente."
+        ),
     }
 
     def __init__(self, message=None):
@@ -539,20 +541,22 @@ class PartidaCodeValidator:
             self.messages["invalid"] = message
 
     def __call__(self, value):
-        # Permite espacios o guiones como separadores
-        if not re.match(r"^\d{1,3}([\s-]\d{1,3}){3}$", str(value)):
+        value_str = str(value)
+
+        if not re.match(r"^\d{3}-\d{2}-\d{2}-\d{2}$", value_str):
             raise ValidationError(
                 self.messages["invalid"],
                 code="invalid",
                 params={"value": value},
             )
 
-        # Verifica que cada grupo tenga entre 1 y 3 dígitos
-        groups = re.split(r"[\s-]", str(value))
-        if any(len(group) < 1 or len(group) > 3 for group in groups):
+        groups = value_str.split("-")
+        expected_lengths = [3, 2, 2, 2]
+
+        if any(len(group) != expected_lengths[i] for i, group in enumerate(groups)):
             raise ValidationError(
-                self.messages["invalid_length"],
-                code="invalid_length",
+                self.messages["invalid_group_length"],
+                code="invalid_group_length",
                 params={"value": value},
             )
 

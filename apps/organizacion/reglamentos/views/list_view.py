@@ -68,7 +68,7 @@ class ReglamentoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             {
                 "data": "estado",
                 "name": "estado",
-                "title": "Estado",
+                "title": "Estatus",
                 "orderable": "false",
                 "searchable": "false",
             },

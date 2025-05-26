@@ -11,7 +11,7 @@ class PartidaForm(FormBase):
             "codigo": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
-                    "placeholder": "Formato: 000 00 00 00 o 000-00-00-00 (4 grupos de números separados por espacios o guiones)",
+                    "placeholder": "Formato: 000-00-00-00 (4 grupos de números separados por espacios o guiones)",
                 }
             ),
             "titulo": forms.TextInput(
