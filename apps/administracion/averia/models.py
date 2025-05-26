@@ -47,7 +47,6 @@ class Averia(BaseModel):
         "Depertamento que reporta Averia",
         max_length=13,
         choices=DEP_AVERIA,
-        default="Desconocido",
     )
 
     class Meta:

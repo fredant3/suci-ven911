@@ -13,7 +13,7 @@ class AveriaService(CrudService):
         "departamento__nombre",
         "serial",
         "codigo_bn",
-        "observaciones",
+        "d_averia",
     )
 
     def __init__(self):
