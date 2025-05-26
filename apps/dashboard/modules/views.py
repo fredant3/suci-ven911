@@ -76,5 +76,10 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "url": "gc_info",
                 "image": "img/modules/GC_icon.png",
             },
+            {
+                "title": "Reporte Averias",
+                "url": "reporte_averia:list",
+                "image": "img/modules/averia.png",
+            },
         ]
         return context
