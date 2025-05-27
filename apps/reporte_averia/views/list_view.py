@@ -4,14 +4,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
-from helpers.BaseModelMixin import DEP_AVERIA
-from helpers.GetValueChoicesMixin import GetValueChoicesMixin
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 
-class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class Reporte_AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = "administracion.averia.listar_averia"
     url_redirect = reverse_lazy("modules:index")
     template_name = "sneat/layout/partials/data-table/layout.html"
@@ -87,9 +85,8 @@ class AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ]
 
 
-class AveriaListApiView(GetValueChoicesMixin, ListController, CheckPermisosMixin):
+class Reporte_AveriaListApiView(ListController, CheckPermisosMixin):
     permission_required = "administracion.averia.listar_averia"
-    field_mappings = {"d_averia": DEP_AVERIA}
 
     def __init__(self):
         self.service = AveriaService()

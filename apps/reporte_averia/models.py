@@ -10,7 +10,7 @@ from administracion.tipo_averia.models import TipoAveria
 from helpers.BaseModelMixin import BaseModel, DEP_AVERIA
 
 
-class Averia(BaseModel):
+class Reporte_Averia(BaseModel):
     tipo_averia = ForeignKey(
         TipoAveria, on_delete=CASCADE, verbose_name="Tipo de avería"
     )
@@ -44,9 +44,7 @@ class Averia(BaseModel):
         null=True,
     )
     d_averia = CharField(
-        "Depertamento que reporta Averia",
-        max_length=13,
-        choices=DEP_AVERIA,
+        "Depertamento que reporta Averia", max_length=2, choices=DEP_AVERIA
     )
 
     class Meta:
@@ -57,7 +55,7 @@ class Averia(BaseModel):
             ("editar_averia", "Puede editar avería"),
             ("eliminar_averia", "Puede eliminar avería"),
         ]
-        db_table = "administracion_averia"
+        db_table = "reporte_averia"
         verbose_name = "Avería"
         verbose_name_plural = "Averías"
         ordering = ["-created_at"]

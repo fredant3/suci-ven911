@@ -529,10 +529,10 @@ def Validate_pdf(value):
 class PartidaCodeValidator:
     messages = {
         "invalid": _(
-            "El formato del código debe ser exactamente '000-00-00-00' (4 grupos separados por guiones)."
+            "El formato del código debe ser exactamente '0.00.00.00.00' (1 dígito y 3 grupos de 2 dígitos separados por puntos)."
         ),
         "invalid_group_length": _(
-            "Los grupos deben tener 3, 2, 2 y 2 dígitos respectivamente."
+            "Los grupos deben tener 1, 2, 2 y 2 dígitos respectivamente."
         ),
     }
 
@@ -543,15 +543,15 @@ class PartidaCodeValidator:
     def __call__(self, value):
         value_str = str(value)
 
-        if not re.match(r"^\d{3}-\d{2}-\d{2}-\d{2}$", value_str):
+        if not re.match(r"^\d\.\d{2}\.\d{2}\.\d{2}\.\d{2}$", value_str):
             raise ValidationError(
                 self.messages["invalid"],
                 code="invalid",
                 params={"value": value},
             )
 
-        groups = value_str.split("-")
-        expected_lengths = [3, 2, 2, 2]
+        groups = value_str.split(".")
+        expected_lengths = [1, 2, 2, 2, 2]
 
         if any(len(group) != expected_lengths[i] for i, group in enumerate(groups)):
             raise ValidationError(

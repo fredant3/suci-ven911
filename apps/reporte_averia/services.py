@@ -5,7 +5,7 @@ from helpers.CrudMixin import CrudService
 from django.db.models import Q
 
 
-class AveriaService(CrudService):
+class Reporte_AveriaService(CrudService):
     select = (
         "id",
         "problema",
@@ -13,7 +13,7 @@ class AveriaService(CrudService):
         "departamento__nombre",
         "serial",
         "codigo_bn",
-        "d_averia",
+        "observaciones",
     )
 
     def __init__(self):

@@ -29,7 +29,7 @@ class Partida(BaseModel):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.codigo
+        return f"{self.codigo} - {self.titulo}"
 
     class Meta:
         verbose_name = "Partida"
