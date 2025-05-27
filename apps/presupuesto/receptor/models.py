@@ -56,7 +56,7 @@ class Receptor(BaseModel):
         validators=[CurrencyValidator()],
     )
     direccionr = CharField(
-        "Dirección cedente",
+        "Dirección receptor",
         max_length=64,
         validators=[
             MinLengthValidator(3),

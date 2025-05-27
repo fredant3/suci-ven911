@@ -6,7 +6,6 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, Border, Side
 from presupuesto.cedente.models import Cedente
-from presupuesto.receptor.models import Receptor
 
 
 class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
@@ -14,8 +13,10 @@ class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         # Obtener datos de cedentes y sus receptores relacionados
-        cedentes = Cedente.objects.filter(deleted_at__isnull=True).prefetch_related(
-            "cedente"
+        cedentes = (
+            Cedente.objects.filter(deleted_at__isnull=True)
+            .select_related("partida")
+            .prefetch_related("receptor_set")
         )
 
         wb = Workbook()
@@ -23,7 +24,7 @@ class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         ws.title = "Traspasos Presupuestarios"
 
         # Configurar título
-        ws.merge_cells("A1:O1")
+        ws.merge_cells("A1:H1")
         title_cell = ws["A1"]
         title_cell.value = (
             "REGISTRO DE TRASPASOS PRESUPUESTARIOS (CEDENTES Y RECEPTORES)"
@@ -34,20 +35,18 @@ class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         # Encabezados combinados
         headers = [
             # Cedente
-            ("ID Cedente", 15),
-            ("Partida C.", 15),
-            ("General C.", 15),
-            ("Espec. C.", 15),
-            ("Sub-Esp. C.", 15),
-            ("Denominación C.", 25),
+            ("ID", 10),
+            ("Partida C.", 25),
+            ("Denominación C.", 30),
             ("Presupuesto C.", 15),
             ("Causado C.", 15),
             ("Disponible C.", 15),
             ("Monto C.", 15),
             ("Saldo C.", 15),
             # Receptor
-            ("ID Receptor", 15),
-            ("Partida R.", 15),
+            ("ID Receptor", 10),
+            ("Partida R.", 25),
+            ("Denominación R.", 30),
             ("Monto a Ceder", 15),
             ("Saldo R.", 15),
             ("Fecha Traspaso", 20),
@@ -72,12 +71,15 @@ class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         row_num = 3
         for cedente in cedentes:
             # Datos del cedente
+            partida_cedente = (
+                f"{cedente.partida.codigo} - {cedente.partida.titulo}"
+                if cedente.partida
+                else "N/A"
+            )
+
             cedente_data = [
-                cedente.idc,
-                cedente.partidac,
-                cedente.generalc,
-                cedente.espefc,
-                cedente.subespefc,
+                cedente.id,
+                partida_cedente,
                 cedente.denomc,
                 cedente.presuacorc,
                 cedente.caufechac,
@@ -86,19 +88,26 @@ class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 cedente.saldofc,
             ]
 
-            # Obtener receptores relacionados usando el related_name correcto
-            receptores = Receptor.objects.filter(cedente=cedente)
+            # Obtener receptores relacionados
+            receptores = cedente.receptor_set.all()
 
             if receptores.exists():
                 for receptor in receptores:
+                    partida_receptor = (
+                        f"{receptor.partida.codigo} - {receptor.partida.titulo}"
+                        if receptor.partida
+                        else "N/A"
+                    )
+
                     # Combinar datos del cedente con cada receptor
                     row_data = cedente_data + [
-                        receptor.idr,
-                        receptor.partidar,
+                        receptor.id,
+                        partida_receptor,
+                        receptor.denomr,
                         receptor.montocr,
                         receptor.saldofr,
                         (
-                            receptor.created_at.strftime("%d/%m/%Y %H:%M")
+                            receptor.created_at.strftime("%d/%m/%Y")
                             if receptor.created_at
                             else "N/A"
                         ),
@@ -106,7 +115,7 @@ class TraspasoExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                     ws.append(row_data)
             else:
                 # Si no hay receptores, mostrar solo datos del cedente
-                row_data = cedente_data + ["", "", "", ""]
+                row_data = cedente_data + ["", "", "", "", ""]
                 ws.append(row_data)
 
             row_num += 1

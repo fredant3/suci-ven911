@@ -28,41 +28,6 @@ class CedenteForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "idc": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ej: CED-001 (mín. 4 caracteres)",
-                    "maxlength": "100",
-                }
-            ),
-            "partidac": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ej: PC-2023-001 (mín. 4 caracteres)",
-                    "maxlength": "64",
-                }
-            ),
-            "generalc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Número entre 1 y 255",
-                    "min": "1",
-                }
-            ),
-            "espefc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Número entre 1 y 255",
-                    "min": "1",
-                }
-            ),
-            "subespefc": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Número entre 1 y 255",
-                    "min": "1",
-                }
-            ),
             "denomc": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",

@@ -29,39 +29,6 @@ class ReceptorForm(FormBase):
             "deleted_by",
         ]
         widgets = {
-            "idr": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el ID",
-                }
-            ),
-            "partidar": forms.TextInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese la partida contable",
-                }
-            ),
-            "generalr": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el código general",
-                    "min": "0",
-                }
-            ),
-            "espefr": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el código específico",
-                    "min": "0",
-                }
-            ),
-            "subespefr": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el subcódigo específico",
-                    "min": "0",
-                }
-            ),
             "denomr": forms.TextInput(
                 attrs={
                     "class": "form-control mb-3",
