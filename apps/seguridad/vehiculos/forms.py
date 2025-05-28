@@ -90,12 +90,6 @@ class VehiculoForm(FormBase):
             raise forms.ValidationError("La fecha no puede ser futura")
         return data
 
-    def clean_hora(self):
-        data = self.cleaned_data.get("hora")
-        if data and data > timezone.now().time():
-            raise forms.ValidationError("La hora no puede ser futura")
-        return data
-
     def clean(self):
         cleaned_data = super().clean()
         fecha = cleaned_data.get("fecha")
