@@ -1,7 +1,11 @@
 from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator, UnicodeAlphaSpaceValidator
+from helpers.validForm import (
+    CurrencyValidator,
+    TextValidator,
+    UnicodeAlphaSpaceValidator,
+)
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 PROYECTOS_ACCIONES = (
@@ -33,7 +37,11 @@ class Accion(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    monto = CharField("Monto asignado:", max_length=64)
+    monto = CharField(
+        "Monto asignado:",
+        max_length=64,
+        validators=[CurrencyValidator()],
+    )
     responsable_gerente = CharField(
         "Responsable Gerente:",
         max_length=64,

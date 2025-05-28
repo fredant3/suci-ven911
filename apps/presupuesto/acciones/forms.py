@@ -66,13 +66,8 @@ class AccionForm(FormBase):
                     "placeholder": "Ingrese el estatus",
                 }
             ),
-            "monto": forms.NumberInput(
-                attrs={
-                    "class": "form-control mb-3",
-                    "placeholder": "Ingrese el monto",
-                    "step": "0.01",
-                    "min": "0",
-                }
+            "monto": forms.TextInput(
+                attrs={"placeholder": "Ej: Bs. 1.234,56 / $1,234.56 / 1.234,56 €"}
             ),
             "situacion_presupuestaria": forms.TextInput(
                 attrs={
