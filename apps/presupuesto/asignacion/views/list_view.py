@@ -29,7 +29,9 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["listApiUrl"] = reverse_lazy("api_presupuesto_asignaciones:list")
         context["updateUrl"] = reverse_lazy("presupuesto_asignaciones:update", args=[0])
         context["deleteUrl"] = reverse_lazy("presupuesto_asignaciones:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("presupuesto_asignaciones:export_excel")
+        context["exportExcelUrl"] = reverse_lazy(
+            "presupuesto_asignaciones:export_excel"
+        )
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -65,9 +67,16 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
                 "searchable": "false",
             },
             {
-                "data": "numero_partida",
-                "name": "numero_partida",
-                "title": "Número de partida",
+                "data": "partida__codigo",
+                "name": "partida__codigo",
+                "title": "Partida Código",
+                "orderable": "false",
+                "searchable": "true",
+            },
+            {
+                "data": "partida__titulo",
+                "name": "partida__titulo",
+                "title": "Partida Título",
                 "orderable": "false",
                 "searchable": "true",
             },

@@ -1,7 +1,8 @@
-from django.db.models import CharField
+from django.db.models import CharField, CASCADE, ForeignKey
 from django.forms import model_to_dict
+from presupuesto.partida.models import Partida
 from helpers.BaseModelMixin import BaseModel
-from helpers.validForm import TextValidator
+from helpers.validForm import CurrencyValidator, TextValidator
 from django.core.validators import (
     MinLengthValidator,
     MaxLengthValidator,
@@ -9,32 +10,29 @@ from django.core.validators import (
 
 
 class Asignacion(BaseModel):
+    partida = ForeignKey(Partida, on_delete=CASCADE, null=True)
+
     departamento = CharField(
         "Nombre de la dirección",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
     )
-    presupuesto = CharField("Presupuesto asignado", max_length=64)
+    presupuesto = CharField(
+        "Presupuesto asignado",
+        max_length=64,
+        validators=[CurrencyValidator()],
+    )
     objetivo = CharField(
         "Objetivo general anual",
         max_length=64,
         validators=[MinLengthValidator(4), MaxLengthValidator(64), TextValidator()],
-    )
-    numero_partida = CharField(
-        "Número de partida presupuestaria",
-        max_length=10,
-        validators=[
-            MinLengthValidator(2),
-            MaxLengthValidator(10),
-            TextValidator(extra_chars="-"),
-        ],
     )
 
     def toJSON(self):
         return model_to_dict(self)
 
     def __str__(self):
-        return self.numero_partida
+        return self.departamento
 
     class Meta:
         verbose_name = "Asignacion"
