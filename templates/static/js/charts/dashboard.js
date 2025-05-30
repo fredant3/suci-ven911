@@ -12,10 +12,11 @@
   axisColor = config.colors.axisColor;
   borderColor = config.colors.borderColor;
 
-  // BARRA
+  // Gráfico 1: Barras (Incidencias)
   // --------------------------------------------------------------------
-  const optionsBar = {
+  const optionsBarIncidencia = {
     series: [{
+      name: 'Emergencias',
       data: data
     }],
     chart: {
@@ -34,79 +35,44 @@
     },
     xaxis: {
       categories: labels
-    }
+    },
+    colors: [config.colors.primary]
   };
-  const chartBarStatistics = document.querySelector('#idFirstStatisticsChart')
-  if (typeof chartBarStatistics !== undefined && chartBarStatistics !== null) {
-    const chart = new ApexCharts(chartBarStatistics, optionsBar);
-    chart.render();
-  }
 
-  // TORTA
+  // Gráfico 2: Torta (Estados)
   // --------------------------------------------------------------------
   const pieChartConfig = {
     chart: {
-      height: 165,
-      width: 130,
+      height: 350,
       type: 'donut'
     },
-    labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-    series: [85, 15, 50, 50],
-    colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
+    labels: labelsTorta,
+    series: dataTorta,
+    colors: colorsTorta,
     stroke: {
-      width: 5,
+      width: 2,
       colors: [cardColor]
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
       formatter: function (val, opt) {
-        return parseInt(val) + '%';
+          return opt.w.globals.labels[opt.seriesIndex] + ': ' + parseInt(val) + '%';
       }
     },
     legend: {
-      show: false
-    },
-    grid: {
-      padding: {
-        top: 0,
-        bottom: 0,
-        right: 15
-      }
-    },
-    states: {
-      hover: {
-        filter: { type: 'none' }
-      },
-      active: {
-        filter: { type: 'none' }
-      }
+      position: 'right'
     },
     plotOptions: {
       pie: {
         donut: {
-          size: '75%',
+          size: '65%',
           labels: {
             show: true,
-            value: {
-              fontSize: '1.5rem',
-              fontFamily: 'Public Sans',
-              color: headingColor,
-              offsetY: -15,
-              formatter: function (val) {
-                return parseInt(val) + '%';
-              }
-            },
-            name: {
-              offsetY: 20,
-              fontFamily: 'Public Sans'
-            },
             total: {
               show: true,
-              fontSize: '0.8125rem',
-              color: axisColor,
-              label: 'Weekly',
+              label: 'Total',
               formatter: function (w) {
-                return '38%';
+                return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
               }
             }
           }
@@ -114,10 +80,59 @@
       }
     }
   };
-  const chartPieStatistics = document.querySelector('#idSecondStatisticsChart')
 
-  if (typeof chartPieStatistics !== undefined && chartPieStatistics !== null) {
-    const statisticsChart = new ApexCharts(chartPieStatistics, pieChartConfig);
-    statisticsChart.render();
+  // Gráfico 3: Barras (Organismos)
+  // --------------------------------------------------------------------
+  const optionsBarOrganismos = {
+    series: [{
+      name: 'Emergencias',
+      data: dataOrganismos
+    }],
+    chart: {
+      type: 'bar',
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 4,
+        columnWidth: '45%',
+        distributed: true,
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      categories: labelsOrganismos,
+      labels: {
+        style: {
+          fontSize: '12px'
+        }
+      }
+    },
+    colors: colorsOrganismos,
+    tooltip: {
+      y: {
+        formatter: function(val) {
+          return val + " emergencias";
+        }
+      }
+    }
+  };
+
+  // Renderizar gráficos
+  const chartBarIncidencia = document.querySelector('#idFirstStatisticsChart');
+  if (chartBarIncidencia) {
+    new ApexCharts(chartBarIncidencia, optionsBarIncidencia).render();
+  }
+
+  const chartPieEstados = document.querySelector('#idSecondStatisticsChart');
+  if (chartPieEstados) {
+    new ApexCharts(chartPieEstados, pieChartConfig).render();
+  }
+
+  const chartBarOrganismos = document.querySelector('#idThirdStatisticsChart');
+  if (chartBarOrganismos) {
+    new ApexCharts(chartBarOrganismos, optionsBarOrganismos).render();
   }
 })();
