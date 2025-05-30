@@ -76,6 +76,6 @@ class GestionComunicacionalForm(FormBase):
             "municipio": Select(attrs={"class": "form-select mb-3"}),
             "parroquia": Select(attrs={"class": "form-select mb-3"}),
             "cedula": TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
+                attrs={"class": "form-control", "placeholder": "Ej: 12345678"}
             ),
         }

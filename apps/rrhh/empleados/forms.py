@@ -53,7 +53,7 @@ class EmpleadoForm(FormBase):
                 }
             ),
             "cedula": NumberInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
+                attrs={"class": "form-control", "placeholder": "Ej: 12345678"}
             ),
             "email": EmailInput(
                 attrs={"class": "form-control", "placeholder": "ejemplo@correo.com"}

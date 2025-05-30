@@ -47,7 +47,7 @@ class SalidaForm(FormBase):
                 attrs={"class": "form-control", "placeholder": "Ingrese los apellidos"}
             ),
             "cedula": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
+                attrs={"class": "form-control", "placeholder": "Ej: 12345678"}
             ),
             "telefono": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: 0412-1234567"}

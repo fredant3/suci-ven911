@@ -48,7 +48,7 @@ class GestionForm(FormBase):
                 attrs={"class": "form-control", "placeholder": "Ingrese los apellidos"}
             ),
             "cedula": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
+                attrs={"class": "form-control", "placeholder": "Ej: 12345678"}
             ),
             "descripcion": forms.Textarea(
                 attrs={

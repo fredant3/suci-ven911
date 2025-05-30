@@ -2,6 +2,7 @@ from django.db.models import CharField, DateField
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 from helpers.validForm import (
+    CedulaVenezolanaValidator,
     UnicodeAlphaSpaceValidator,
     TextValidator,
     PhoneNumberValidator,
@@ -31,7 +32,15 @@ class Entrada(BaseModel):
             UnicodeAlphaSpaceValidator(),
         ],
     )
-    cedula = CharField("Cédula", max_length=64)
+    cedula = CharField(
+        "Cédula",
+        max_length=14,
+        validators=[
+            MinLengthValidator(7),
+            MaxLengthValidator(14),
+            CedulaVenezolanaValidator(),
+        ],
+    )
     telefono = CharField(
         "Teléfono",
         max_length=20,

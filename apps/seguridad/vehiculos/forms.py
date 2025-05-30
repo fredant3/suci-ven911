@@ -20,6 +20,7 @@ class VehiculoForm(FormBase):
             "vehiculo",
             "motivo",
             "cantigasolina",
+            "capagasolina",
             "placa",
             "fecha",
             "hora",
@@ -44,7 +45,7 @@ class VehiculoForm(FormBase):
                 attrs={"class": "form-control", "placeholder": "Ingrese los apellidos"}
             ),
             "cedula": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Ej: V-12345678"}
+                attrs={"class": "form-control", "placeholder": "Ej: 12345678"}
             ),
             "modelo": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Ej: Toyota Hilux 2023"}
@@ -57,6 +58,12 @@ class VehiculoForm(FormBase):
                     "class": "form-control",
                     "placeholder": "Describa el motivo del registro",
                     "rows": 3,
+                }
+            ),
+            "capagasolina": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Capacidad del tanque (en litros)",
                 }
             ),
             "cantigasolina": forms.NumberInput(
