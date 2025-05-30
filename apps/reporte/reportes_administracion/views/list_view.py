@@ -1,5 +1,7 @@
 import json
-from administracion.averia.services import AveriaService
+
+# from administracion.averia.services import AveriaService
+from apps.reporte.reportes_administracion.services import ReportesAdministracionService
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -9,24 +11,26 @@ from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 
 
-class Reporte_AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
-    permission_required = "administracion.averia.listar_averia"
-    url_redirect = reverse_lazy("modules:index")
+class ReportesAdministracionListView(
+    LoginRequiredMixin, CheckPermisosMixin, TemplateView
+):
+    permission_required = "reporte.reportesadministracion.listar_reportesadministracion"
+
     template_name = "sneat/layout/partials/data-table/layout.html"
 
     def get_context_data(self, **kwargs):
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
-        context["titlePage"] = "Administración"
-        context["indexUrl"] = reverse_lazy("administracion")
-        context["module"] = "Administración"
-        context["submodule"] = "Averías"
+        context["titlePage"] = "Reporte"
+        context["indexUrl"] = reverse_lazy("reporte")
+        context["module"] = "Reporte"
+        context["submodule"] = "Reportes_Administracion"
         context["createBtn"] = "Nueva avería"
-        context["createUrl"] = reverse_lazy("averias:create")
-        context["listApiUrl"] = reverse_lazy("api_averias:list")
-        context["updateUrl"] = reverse_lazy("averias:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("averias:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("averias:export_excel")
+        context["createUrl"] = reverse_lazy("reportes_administracion:create")
+        context["listApiUrl"] = reverse_lazy("api_reporteadministracion:list")
+        context["updateUrl"] = reverse_lazy("Reportes_Administracion:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("Reportes_Administracion:delete", args=[0])
+        context["exportExcelUrl"] = reverse_lazy("Reportes_Administracion:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)
@@ -76,8 +80,8 @@ class Reporte_AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVie
                 "searchable": "false",
             },
             {
-                "data": "d_averia",
-                "name": "d_averia",
+                "data": "quien_reporta",
+                "name": "quien_reporta",
                 "title": "Departamento Averia",
                 "orderable": "false",
                 "searchable": "false",
@@ -85,8 +89,8 @@ class Reporte_AveriaListView(LoginRequiredMixin, CheckPermisosMixin, TemplateVie
         ]
 
 
-class Reporte_AveriaListApiView(ListController, CheckPermisosMixin):
-    permission_required = "administracion.averia.listar_averia"
+class ReportesAdministracionListApiView(ListController, CheckPermisosMixin):
+    permission_required = "reporte.reportesadministracion.listar_reportesadministracion"
 
     def __init__(self):
-        self.service = AveriaService()
+        self.service = ReportesAdministracionService()

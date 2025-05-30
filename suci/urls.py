@@ -23,6 +23,6 @@ urlpatterns += [
     path("gestion-comunicacional/", include(("apps.gestion_comunicacional.urls"))),
     path("seguridad/", include(("apps.seguridad.urls"))),
     path("tecnologia/", include(("apps.tecnologia.urls"))),
-    path("reporte_averia/", include(("apps.reporte_averia.urls", "reporte_averia"))),
+    path("reporte/", include(("apps.reporte.urls"))),
     path("", RedirectView.as_view(url="dashboard", permanent=True)),
 ]

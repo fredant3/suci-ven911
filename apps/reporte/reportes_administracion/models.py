@@ -10,7 +10,7 @@ from administracion.tipo_averia.models import TipoAveria
 from helpers.BaseModelMixin import BaseModel, DEP_AVERIA
 
 
-class Reporte_Averia(BaseModel):
+class ReportesAdministracion(BaseModel):
     tipo_averia = ForeignKey(
         TipoAveria, on_delete=CASCADE, verbose_name="Tipo de avería"
     )
@@ -43,21 +43,21 @@ class Reporte_Averia(BaseModel):
         validators=[MinLengthValidator(4), MaxLengthValidator(180), TextValidator()],
         null=True,
     )
-    d_averia = CharField(
+    quien_reporta = CharField(
         "Depertamento que reporta Averia", max_length=2, choices=DEP_AVERIA
     )
 
     class Meta:
         permissions = [
-            ("listar_averia", "Puede listar averías"),
-            ("agregar_averia", "Puede agregar avería"),
-            ("ver_averia", "Puede ver avería"),
-            ("editar_averia", "Puede editar avería"),
-            ("eliminar_averia", "Puede eliminar avería"),
+            ("listar_reporteadministracion", "Puede listar reporte"),
+            ("agregar_reporteadministracion", "Puede agregar reporte"),
+            ("ver_reporteadministracion", "Puede ver reporte"),
+            ("editar_reporteadministracion", "Puede editar reporte"),
+            ("eliminar_reporteadministracion", "Puede eliminar reporte"),
         ]
-        db_table = "reporte_averia"
-        verbose_name = "Avería"
-        verbose_name_plural = "Averías"
+        db_table = "reportes_administracion"
+        verbose_name = "Reporte Administración"
+        verbose_name_plural = "Reportes administraciones"
         ordering = ["-created_at"]
 
     def __str__(self):

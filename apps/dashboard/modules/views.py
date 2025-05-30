@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-
+from django.urls import reverse_lazy
 from templates.sneat import TemplateLayout
 
 
@@ -77,8 +77,8 @@ class Modules(LoginRequiredMixin, TemplateView):
                 "image": "img/modules/GC_icon.png",
             },
             {
-                "title": "Reporte Averias",
-                "url": "reporte_averia:list",
+                "title": "Reportes",
+                "url": ("index"),
                 "image": "img/modules/averia.png",
             },
         ]

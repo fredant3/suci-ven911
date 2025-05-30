@@ -5,16 +5,20 @@ from django.views.generic import TemplateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-from administracion.averia.models import Averia  # Importar el modelo Averia
+
+# from administracion.averia.models import Averia  # Importar el modelo Averia
+from apps.reporte.reportes_administracion.models import ReportesAdministracion
 
 
-class AveriaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
+class ReportesAdministracionExcelView(
+    LoginRequiredMixin, CheckPermisosMixin, TemplateView
+):
     permission_required = (
-        "administracion.listar_averia"  # Usar el permiso correspondiente
+        "reporte.listar_reportesadministracion"  # Usar el permiso correspondiente
     )
 
     def get(self, request, *args, **kwargs):
-        averias = Averia.objects.all().values(
+        reportesadministracion = ReportesAdministracion.objects.all().values(
             "tipo_averia__nombre",  # Campos del modelo con relaciones
             "departamento__nombre",
             "problema",
@@ -61,20 +65,20 @@ class AveriaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
             ws.column_dimensions[col].width = width
 
         # Datos
-        for averia in averias:
+        for reportesadministracion in ReportesAdministracion:
             fecha = (
-                averia["created_at"].strftime("%Y-%m-%d")
-                if averia["created_at"]
+                reportesadministracion["created_at"].strftime("%Y-%m-%d")
+                if reportesadministracion["created_at"]
                 else ""
             )
             ws.append(
                 [
-                    averia["tipo_averia__nombre"],
-                    averia["departamento__nombre"],
-                    averia["problema"],
-                    averia["ubicacion"],
-                    averia["serial"],
-                    averia["codigo_bn"],
+                    reportesadministracion["tipo_averia__nombre"],
+                    reportesadministracion["departamento__nombre"],
+                    reportesadministracion["problema"],
+                    reportesadministracion["ubicacion"],
+                    reportesadministracion["serial"],
+                    reportesadministracion["codigo_bn"],
                     fecha,
                 ]
             )
@@ -87,5 +91,5 @@ class AveriaExcelView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         return FileResponse(
             output,
             as_attachment=True,
-            filename="averias.xlsx",  # Nombre del archivo en minúsculas
+            filename="reporte_administracion.xlsx",  # Nombre del archivo en minúsculas
         )

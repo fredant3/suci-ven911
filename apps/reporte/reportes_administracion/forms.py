@@ -1,11 +1,12 @@
-from administracion.averia.models import Averia
+# from administracion.averia.models import Averia
+from apps.reporte.reportes_administracion.models import ReportesAdministracion
 from helpers.FormBase import FormBase
 from django.forms import TextInput, Select
 
 
-class Reporte_AveriaForm(FormBase):
+class ReportesAdministracionForm(FormBase):
     class Meta:
-        model = Averia
+        model = ReportesAdministracion
         fields = [
             "problema",
             "tipo_averia",
@@ -13,7 +14,7 @@ class Reporte_AveriaForm(FormBase):
             "serial",
             "codigo_bn",
             "observaciones",
-            "d_averia",
+            "quien_reporta",
         ]
         widgets = {
             "problema": TextInput(
@@ -28,5 +29,5 @@ class Reporte_AveriaForm(FormBase):
             "observaciones": TextInput(
                 attrs={"placeholder": "Ingrese observaciones (mínimo 10 caracteres)"}
             ),
-            "d_averia": Select(attrs={"class": "form-select mb-13"}),
+            "quien_reporta": Select(attrs={"class": "form-select mb-13"}),
         }

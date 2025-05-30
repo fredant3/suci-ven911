@@ -1,11 +1,14 @@
-from administracion.averia.repositories import AveriaRepository
+# from administracion.averia.repositories import AveriaRepository
+from apps.reporte.reportes_administracion.repositories import (
+    ReportesAdministracionRepository,
+)
 from administracion.tipo_averia.repositories import TipoAveriaRepository
 from administracion.departamentos.repositories import DepartamentoRepository
 from helpers.CrudMixin import CrudService
 from django.db.models import Q
 
 
-class Reporte_AveriaService(CrudService):
+class ReportesAdministracionService(CrudService):
     select = (
         "id",
         "problema",
@@ -17,7 +20,7 @@ class Reporte_AveriaService(CrudService):
     )
 
     def __init__(self):
-        self.repository = AveriaRepository()
+        self.repository = ReportesAdministracionRepository()
         self.tipo_averia_repository = TipoAveriaRepository()
         self.departamento_repository = DepartamentoRepository()
 
