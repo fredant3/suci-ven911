@@ -18,7 +18,7 @@ class IncidenciaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Potencia"
-        context["indexUrl"] = reverse_lazy("modules:index")
+        context["indexUrl"] = reverse_lazy("potencia")
         context["module"] = "Potencia"
         context["submodule"] = "Incidencias"
         context["titleForm"] = "Añadir una incidencia"
