@@ -1,14 +1,14 @@
 services:
   web:
     build: .
-    command: python manage.py migrate &&python manage.py runserver 0.0.0.0:${RUNSERVER_PORT}
+    command: python manage.py runserver 0.0.0.0:${RUNSERVER_PORT}
     volumes:
       - .:/app
     ports:
-      - '${RUNSERVER_PORT}:${RUNSERVER_PORT}'
+      - "${RUNSERVER_PORT}:${RUNSERVER_PORT}"
     env_file:
       - .env
-
+     
     depends_on:
       - db
 
@@ -19,7 +19,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - '${DB_PORT}:5432'
+      - "${DB_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
