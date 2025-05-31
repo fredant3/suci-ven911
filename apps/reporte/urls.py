@@ -6,7 +6,7 @@ urlpatterns = [
     path(
         "reportes_administracion/",
         include(
-            ("apps.reporte.reportes_administracion.urls", "reportesadministracion")
+            ("apps.reporte.reportes_administracion.urls", "reportes_administracion")
         ),
     ),
     path(
@@ -14,7 +14,7 @@ urlpatterns = [
         include(
             (
                 "apps.reporte.reportes_administracion.urls_apis",
-                "api_reportesadministracion",
+                "api_reportes_administracion",
             )
         ),
     ),

@@ -22,15 +22,15 @@ class ReportesAdministracionListView(
         columns = self.getColumns()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Reporte"
-        context["indexUrl"] = reverse_lazy("reporte")
+        context["indexUrl"] = reverse_lazy("index")
         context["module"] = "Reporte"
-        context["submodule"] = "Reportes_Administracion"
+        context["submodule"] = "reportes_administracion"
         context["createBtn"] = "Nueva avería"
         context["createUrl"] = reverse_lazy("reportes_administracion:create")
-        context["listApiUrl"] = reverse_lazy("api_reporteadministracion:list")
-        context["updateUrl"] = reverse_lazy("Reportes_Administracion:update", args=[0])
-        context["deleteUrl"] = reverse_lazy("Reportes_Administracion:delete", args=[0])
-        context["exportExcelUrl"] = reverse_lazy("Reportes_Administracion:export_excel")
+        context["listApiUrl"] = reverse_lazy("api_reportes_administracion:list")
+        context["updateUrl"] = reverse_lazy("reportes_administracion:update", args=[0])
+        context["deleteUrl"] = reverse_lazy("reportes_administracion:delete", args=[0])
+        # context["exportExcelUrl"] = reverse_lazy("reportes_administracion:export_excel")
         context["heads"] = columns
         context["columns"] = mark_safe(json.dumps(columns))
         return TemplateLayout.init(self, context)

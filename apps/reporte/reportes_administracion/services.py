@@ -17,6 +17,7 @@ class ReportesAdministracionService(CrudService):
         "serial",
         "codigo_bn",
         "observaciones",
+        "quien_reporta",
     )
 
     def __init__(self):

@@ -22,13 +22,13 @@ class ReportesAdministracionCreateView(
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Reporte"
-        context["indexUrl"] = reverse_lazy("reporte")
+        context["indexUrl"] = reverse_lazy("reporte:index")
         context["module"] = "Reporte"
         context["submodule"] = "reportes_administracion"
         context["titleForm"] = "Registrar un nuevo reporte"
         context["tag"] = "Registrar"
         context["listUrl"] = reverse_lazy("reportes_administracion:list")
-        context["urlForm"] = reverse_lazy("api_reportesadministracion:create")
+        context["urlForm"] = reverse_lazy("api_reportes_administracion:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 
