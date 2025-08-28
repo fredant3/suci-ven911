@@ -5,7 +5,7 @@
 # Theme Variables
 # ? Personalize template by changing theme variables (For ex: Name, URL Version etc...)
 THEME_VARIABLES = {
-    "creator_name": "UNEXCA - I30142",
+    "creator_name": "Freddy Moreno para el IUGT Ven911",
     "template_name": "SUCI",
     "template_suffix": "Ven911",
     "template_version": "1.0.0",
@@ -15,7 +15,6 @@ THEME_VARIABLES = {
     "support": "https://github.com/erickjpl/suci-ven911/blob/main/ISSUES.md",
     "documentation": "https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/django-introduction.html",
     "changelog": "https://github.com/erickjpl/suci-ven911/blob/main/CHANGELOG.md",
-    "git_repository": "https://github.com/erickjpl/suci-ven911",
     "license_url": "https://github.com/erickjpl/suci-ven911/blob/main/README.md",
     "breadcrumbs_dashboard_modules_index": "SUCI",
 }
